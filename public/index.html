@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-app.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.4/firebase-database.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCTzqSB0g2r_E9SOUNOzd6_Q29wQXBpHTs",
+        authDomain: "huddlec-4205b.firebaseapp.com",
+        databaseURL: "https://huddlec-4205b.firebaseio.com",
+        projectId: "huddlec-4205b",
+        storageBucket: "huddlec-4205b.appspot.com",
+        messagingSenderId: "980818700684"
+      };
+      firebase.initializeApp(config);
+    </script>
     <meta charset="utf-8">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
