@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import { store, persistor } from '../../redux/store'
-import LoadingScreen from '../loading/LoadingScreen';
-import LoginScreen from '../login/LoginScreen'
+import AuthView from '../auth/AuthView';
+import HomeView from '../home/HomeView'
 
 export default class AppNavigator extends React.Component {
     render() {
@@ -14,8 +14,8 @@ export default class AppNavigator extends React.Component {
                 <PersistGate loading={null} persistor={persistor}>
                     <BrowserRouter>
                         <div>
-                            <Route exact component={LoadingScreen}/>
-                            <Route path="/" component={LoginScreen}/>
+                            <Route exact path="/" component={AuthView}/>
+                            <Route path="/home" component={HomeView}/>
                         </div>
                     </BrowserRouter>
                 </PersistGate>
