@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class AddRoleView extends React.Component{
+class DetailView extends React.Component{
     render() {
+        if (!this.props.roleId) return null
         return (
             <div style={styles.container}>
 
@@ -13,9 +14,7 @@ class AddRoleView extends React.Component{
 
 const styles = {
     container: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: 'red',
+        flex: 1,
     }
 }
 
@@ -24,4 +23,4 @@ export default connect(
         roles: state.library.roles,
         roleId: state.library.roleId,
     })
-)(AddRoleView)
+)(DetailView)

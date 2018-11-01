@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { toggleAddRoleView } from '../LibraryReducer'
+
 class SideBarView extends React.Component{
     render() {
         return (
@@ -12,7 +14,7 @@ class SideBarView extends React.Component{
                 <div style={styles.list}>
 
                 </div>
-                <div style={styles.footer}>
+                <div style={styles.footer} onClick={this.props.toggleAddRoleView}>
 
                 </div>
             </div>
@@ -47,5 +49,8 @@ export default connect(
     state => ({
         roles: state.library.roles,
         roleId: state.library.roleId,
-    })
+    }),
+    {
+        toggleAddRoleView,
+    }
 )(SideBarView)

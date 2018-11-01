@@ -1,9 +1,9 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
 import './styles.css'
-import SideBarView from './components/SideBarView';
-import DetailView from './components/DetailView';
-import AddRoleView from './components/AddRoleView';
+
+import SideBarView from './screen/SideBarView';
+import DetailView from './screen/DetailView';
+import AddRoleView from './screen/AddRoleView';
 
 class LibraryView extends React.Component{
     render() {
@@ -11,8 +11,8 @@ class LibraryView extends React.Component{
             <div className="home-view">
                 <SideBarView/>
                 <div style={{ flex: 0.75 }}>
-                    <Route exact path="/" component={DetailView}/>
-                    <Route path="/addrole" component={AddRoleView}/>
+                    <DetailView/>
+                    <AddRoleView/>
                 </div>
             </div>
         )
