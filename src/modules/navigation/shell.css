@@ -1,0 +1,39 @@
+.shell-button {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-app-region: no-drag;
+}
+
+.shell-icon {
+    font-size: 16px;
+    color: #fff;
+    align-self: center;
+}
+
+.shell-button:hover {
+    background-color: rgba(42,44,47,1);
+}
+
+.shell-button-red {
+    width: 30px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-app-region: no-drag;
+}
+
+.shell-button-red:hover {
+    background-color: #db4757;
+}
+
+.window {
+  height: 20px;
+  -webkit-app-region: drag;
+  background-color: rgba(32, 34, 37, 1);
+  display: flex;
+  flex-direction: row;
+}

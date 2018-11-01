@@ -29,7 +29,7 @@ const styles = {
     container: {
         width: '150px',
         flexDirection: 'column',
-        backgroundColor: 'rgba(47, 49, 54)',
+        backgroundColor: 'rgba(47, 49, 54, 1)',
     },
     header: {
         height: heights.header,
