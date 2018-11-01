@@ -1,18 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { showRoleInfo } from '../LibraryReducer'
+
 class ListView extends React.Component{
     _renderItem = (item) => {
         return (
-            <div style={styles.item}>
+            <div style={styles.item} onClick={this._onClick.bind(this, item)}>
                 <div style={styles.title}>{item.roleName}</div>
                 <div style={styles.desc}>{item.roleDesc}</div>
             </div>
         )
     }
 
+    _onClick = (item) => {
+        this.props.showRoleInfo(item)
+    }
+
     render() {
-        return (this.props.roles.map(this._renderItem))
+        return (
+            this.props.roles.length ?
+                this.props.roles.map(this._renderItem)
+                :null
+        )
     }
 }
 
@@ -49,5 +59,8 @@ const styles = {
 export default connect(
     state => ({
         roles: state.library.roles,
-    })
+    }),
+    {
+        showRoleInfo,
+    }
 )(ListView)

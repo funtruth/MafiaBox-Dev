@@ -31,3 +31,27 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+
+.cute-button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Arial;
+    color: #fff;
+    cursor: pointer;
+}
+
+.scrollable-y {
+    overflow-y: scroll;
+}
+
+.palette-blue {
+    background-color: #039be5;
+}
+.palette-yellow {
+    background-color: #eaa005;
+}
+.palette-red {
+    background-color: #db4757;
+}

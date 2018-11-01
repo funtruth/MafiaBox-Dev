@@ -4,6 +4,19 @@ import { connect } from 'react-redux'
 import { updateRoleInfo } from '../LibraryReducer'
 
 class InputItem extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: props.roleInfo && props.roleInfo[props.name],
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            value: newProps.roleInfo[newProps.name]
+        })
+    }
+
     _onChange = e => {
         this.props.updateRoleInfo(this.props.name, e.target.value)
     }
@@ -19,6 +32,7 @@ class InputItem extends React.Component{
                     placeholder={this.props.placeholder}
                     type="text"
                     onInput={this._onChange}
+                    value={this.state.value}
                 />
             </div>
         )
@@ -39,7 +53,9 @@ const styles = {
 }
 
 export default connect(
-    null,
+    state => ({
+        roleInfo: state.library.roleInfo,
+    }),
     {
         updateRoleInfo,
     }
