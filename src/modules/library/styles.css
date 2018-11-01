@@ -25,3 +25,9 @@
 .add-role-input:focus {
     outline: none;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

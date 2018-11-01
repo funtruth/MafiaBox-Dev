@@ -2,8 +2,8 @@ import React from 'react'
 import './styles.css'
 
 import SideBarView from './screen/SideBarView';
-import DetailView from './screen/DetailView';
-import AddRoleView from './screen/AddRoleView';
+import EditRoleView from './screen/EditRoleView';
+import TemplateView from './screen/TemplateView';
 
 class LibraryView extends React.Component{
     render() {
@@ -11,8 +11,8 @@ class LibraryView extends React.Component{
             <div className="home-view">
                 <SideBarView/>
                 <div style={{ flex: 0.75 }}>
-                    <DetailView/>
-                    <AddRoleView/>
+                    <EditRoleView/>
+                    <TemplateView/>
                 </div>
             </div>
         )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-class DetailView extends React.Component{
+class TemplateView extends React.Component{
     render() {
         if (!this.props.roleId) return null
         return (
@@ -23,4 +23,4 @@ export default connect(
         roles: state.library.roles,
         roleId: state.library.roleId,
     })
-)(DetailView)
+)(TemplateView)

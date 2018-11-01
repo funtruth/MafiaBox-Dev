@@ -5,18 +5,18 @@ const initialState = {
     //viewing, updating, creating
     roleId: null,
 
-    showAddRoleView: false,
+    showEditRoleView: false,
 
-    newRoleInfo: {}
+    roleInfo: {}
 }
 
-const TOGGLE_ADD_ROLE_VIEW = 'library/toggle-add-role-view'
+const TOGGLE_EDIT_ROLE_VIEW = 'library/toggle-add-role-view'
 const UPDATE_ROLE_INFO = 'library-update-role-info'
 
-export function toggleAddRoleView() {
+export function toggleEditRoleView() {
     return (dispatch) => {
         dispatch({
-            type: TOGGLE_ADD_ROLE_VIEW
+            type: TOGGLE_EDIT_ROLE_VIEW
         })
     }
 }
@@ -34,10 +34,10 @@ export function updateRoleInfo(key, value) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case TOGGLE_ADD_ROLE_VIEW:
-            return { ...state, showAddRoleView: !state.showAddRoleView }
+        case TOGGLE_EDIT_ROLE_VIEW:
+            return { ...state, showEditRoleView: !state.showEditRoleView }
         case UPDATE_ROLE_INFO:
-            return { ...state, newRoleInfo: { ...state.newRoleInfo, [action.payload.key]: action.payload.value }}
+            return { ...state, roleInfo: { ...state.roleInfo, [action.payload.key]: action.payload.value }}
         default:
             return state;
     }
