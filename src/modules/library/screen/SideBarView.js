@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { toggleEditRoleView } from '../LibraryReducer'
+import ListView from '../components/ListView';
+
+import { heights } from '../dim'
 
 class SideBarView extends React.Component{
     render() {
@@ -12,7 +15,7 @@ class SideBarView extends React.Component{
                 </div>
 
                 <div style={styles.list}>
-
+                    <ListView/>
                 </div>
                 <div style={styles.footer} onClick={this.props.toggleEditRoleView}>
 
@@ -24,22 +27,22 @@ class SideBarView extends React.Component{
 
 const styles = {
     container: {
-        flex: 0.25,
+        width: '150px',
         flexDirection: 'column',
         backgroundColor: 'rgba(47, 49, 54)',
     },
     header: {
-        height: '15%',
+        height: heights.header,
         width: '100%',
         backgroundColor: 'rgba(40, 43, 48)',
     },
     list: {
-        height: '75%',
+        height: heights.list,
         width: '100%',
         backgroundColor: 'rgba(47, 49, 54)',
     },
     footer: {
-        height: '10%',
+        height: heights.footer,
         width: '100%',
         backgroundColor: 'rgba(40, 43, 48)',
     }

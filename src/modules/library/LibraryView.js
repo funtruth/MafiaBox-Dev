@@ -10,7 +10,7 @@ class LibraryView extends React.Component{
         return (
             <div className="home-view">
                 <SideBarView/>
-                <div style={{ flex: 0.75 }}>
+                <div style={{ width: '100%' }}>
                     <EditRoleView/>
                     <TemplateView/>
                 </div>

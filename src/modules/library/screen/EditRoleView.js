@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import EditRoleHeader from '../components/EditRoleHeader'
 import InputItem from '../components/InputItem'
 import PropertyItem from '../components/PropertyItem';
 
@@ -60,6 +61,7 @@ class EditRoleView extends React.Component{
         if (!this.props.showEditRoleView) return null
         return (
             <div style={styles.container}>
+                <EditRoleHeader/>
                 <InputItem name="roleId" label="Unique Role ID" placeholder="1234"/>
                 <InputItem name="roleName" label="Role Name" placeholder="Docter, Detective ..."/>
                 <InputItem name="roleDesc" label="Role Description" placeholder="Summary of rules ..."/>
