@@ -27,7 +27,7 @@ class SideBarView extends React.Component{
 
 const styles = {
     container: {
-        width: '150px',
+        width: '200px',
         flexDirection: 'column',
         backgroundColor: 'rgba(47, 49, 54, 1)',
     },
