@@ -4,15 +4,14 @@ import { connect } from 'react-redux'
 import { updateRoleInfo } from '../LibraryReducer'
 
 class PropertyItem extends React.Component{
-    _renderItem = (item, index) => {
+    _renderItem = (item) => {
         const { roleInfo, name } = this.props
         const active = roleInfo && name && item.key === roleInfo[name]
         const style = {
-            ...styles.tag,
             backgroundColor: active ? item.color : 'hsla(0,0%,100%,.1)',
         }
         return (
-            <div style={style} onClick={this._onClick.bind(this, item.key)}>
+            <div className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>
                 {item.label}
             </div>
         )
@@ -42,19 +41,6 @@ class PropertyItem extends React.Component{
 const styles = {
     item: {
         padding: 4,
-    },
-    tag: {
-        marginBottom: 4,
-        marginRight: 8,
-        borderRadius: 4,
-        padding: 6,
-        paddingLeft: 16,
-        paddingRight: 16,
-        fontSize: 15,
-        fontWeight: '500',
-        fontFamily: 'Arial',
-        color: '#fff',
-        cursor: 'pointer'
     },
     text: {
         fontSize: 14,

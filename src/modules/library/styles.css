@@ -32,21 +32,6 @@
     flex-wrap: wrap;
 }
 
-.cute-button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial;
-    color: #fff;
-    cursor: pointer;
-    background-color: rgba(40, 43, 48,1);
-}
-
-.cute-button:hover {
-    background-color: hsla(0,0%,100%,.1);
-}
-
 .scrollable-y {
     overflow: auto;
     transition: color 0.3s;
