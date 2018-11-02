@@ -40,12 +40,18 @@
     font-family: Arial;
     color: #fff;
     cursor: pointer;
+    background-color: rgba(40, 43, 48,1);
+}
+
+.cute-button:hover {
+    background-color: hsla(0,0%,100%,.1);
 }
 
 .scrollable-y {
     overflow: auto;
     transition: color 0.3s;
     color: rgba(47, 49, 54);
+    background-color: rgba(47, 49, 54);
 }
 
 .scrollable-y:hover {
@@ -64,12 +70,34 @@
 	box-shadow: inset 0 0 0 10px;
 }
 
-.palette-blue {
-    background-color: #039be5;
+.footer {
+    background-color: hsla(0,0%,100%,.1);
+    margin-top: auto; margin-bottom: 12px;
+    margin-left: 12px; margin-right: 12px;
+
+    padding: 8px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: Arial;
+    color: #fff;
+    cursor: pointer;
+
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.palette-yellow {
-    background-color: #eaa005;
+
+.add-role-icon {
+    font-size: 18px;
+    color: #fff;
+    align-self: center;
+    margin-right: 8px;
 }
-.palette-red {
-    background-color: #db4757;
+
+.option-icon {
+    font-size: 16px;
+    color: #fff;
+    margin-right: 6px;
 }

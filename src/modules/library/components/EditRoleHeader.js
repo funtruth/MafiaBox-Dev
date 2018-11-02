@@ -19,14 +19,17 @@ class EditRoleHeader extends React.Component{
     render() {
         return (
             <div className="row" style={styles.item}>
-                <div className="cute-button palette-blue" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
+                <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
+                    <i class="option-icon ion-ios-save"></i>
                     {'Save'}
                 </div>
-                <div className="cute-button palette-yellow" style={{ marginRight: 8 }} onClick={this._onReset}>
-                    {'Reset'}
+                <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onReset}>
+                    <i class="option-icon ion-md-refresh"></i>
+                    {'Discard Changes'}
                 </div>
-                <div className="cute-button palette-red" onClick={this._onDelete}>
-                    {'Delete'}
+                <div className="cute-button" onClick={this._onDelete}>
+                    <i class="option-icon ion-ios-trash"></i>
+                    {'Delete Role'}
                 </div>
             </div>
         )

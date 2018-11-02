@@ -1,0 +1,17 @@
+.palette-blue {
+    background-color: #039be5;
+}
+.palette-yellow {
+    background-color: #eaa005;
+}
+.palette-red {
+    background-color: #db4757;
+}
+
+.light-grey {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.background-grey {
+    background-color: rgba(54, 57, 64, 1);
+}

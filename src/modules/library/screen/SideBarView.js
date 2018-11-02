@@ -17,8 +17,9 @@ class SideBarView extends React.Component{
                 <div className="scrollable-y" style={styles.list}>
                     <ListView/>
                 </div>
-                <div style={styles.footer} onClick={this.props.toggleEditRoleView}>
-
+                <div className="footer" onClick={this.props.toggleEditRoleView}>
+                    <i class="add-role-icon ion-md-person-add"></i>
+                    {'CREATE ROLE'}
                 </div>
             </div>
         )
@@ -28,24 +29,14 @@ class SideBarView extends React.Component{
 const styles = {
     container: {
         width: '200px',
+        display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'rgba(47, 49, 54, 1)',
     },
     header: {
         height: heights.header,
-        width: '100%',
         backgroundColor: 'rgba(40, 43, 48)',
     },
-    list: {
-        height: heights.list,
-        width: '100%',
-        backgroundColor: 'rgba(47, 49, 54)',
-    },
-    footer: {
-        height: heights.footer,
-        width: '100%',
-        backgroundColor: 'rgba(40, 43, 48)',
-    }
 }
 
 export default connect(

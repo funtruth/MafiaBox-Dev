@@ -13,7 +13,7 @@ class InputItem extends React.Component{
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            value: newProps.roleInfo[newProps.name]
+            value: newProps.roleInfo[this.props.name]
         })
     }
 
