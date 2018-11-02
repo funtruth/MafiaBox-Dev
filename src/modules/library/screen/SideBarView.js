@@ -1,12 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { toggleEditRoleView } from '../LibraryReducer'
+import { createNewRole } from '../LibraryReducer'
 import ListView from '../components/ListView';
 
 import { heights } from '../dim'
 
 class SideBarView extends React.Component{
+    _onCreateRole = () => {
+        this.props.createNewRole()
+    }
+
     render() {
         return (
             <div style={styles.container}>
@@ -17,7 +21,7 @@ class SideBarView extends React.Component{
                 <div className="scrollable-y" style={styles.list}>
                     <ListView/>
                 </div>
-                <div className="footer" onClick={this.props.toggleEditRoleView}>
+                <div className="footer" onClick={this._onCreateRole}>
                     <i class="add-role-icon ion-md-person-add"></i>
                     {'CREATE ROLE'}
                 </div>
@@ -45,6 +49,6 @@ export default connect(
         roleId: state.library.roleId,
     }),
     {
-        toggleEditRoleView,
+        createNewRole,
     }
 )(SideBarView)

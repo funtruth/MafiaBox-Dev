@@ -1,24 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { saveRoleInfo } from '../LibraryReducer'
+import { saveRoleInfoLocally } from '../LibraryReducer'
+import { showModalByKey } from '../../modal/ModalReducer'
+
+import { modalType } from '../../modal/modalConfig'
 
 class EditRoleHeader extends React.Component{
     _onSave = () => {
-        this.props.saveRoleInfo()
+        this.props.saveRoleInfoLocally(this.props.roleInfoWorkspace)
     }
 
     _onReset = () => {
-
+        this.props.showModalByKey(modalType.discardChanges)
     }
 
     _onDelete = () => {
-        
+        this.props.showModalByKey(modalType.deleteRole)
     }
 
     render() {
         return (
-            <div className="row" style={styles.item}>
+            <div className="row">
                 <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
                     <i class="option-icon ion-ios-save"></i>
                     {'Save'}
@@ -36,22 +39,13 @@ class EditRoleHeader extends React.Component{
     }
 }
 
-const styles = {
-    item: {
-        padding: 4,
-    },
-    text: {
-        fontSize: 14,
-        fontWeight: '500',
-        marginBottom: 4,
-        fontFamily: 'Arial',
-        color: '#f6f6f7',
-    },
-}
-
 export default connect(
-    null,
+    state => ({
+        roleInfoCopy: state.library.roleInfoCopy,
+        roleInfoWorkspace: state.library.roleInfoWorkspace,
+    }),
     {
-        saveRoleInfo,
+        saveRoleInfoLocally,
+        showModalByKey,
     }
 )(EditRoleHeader)

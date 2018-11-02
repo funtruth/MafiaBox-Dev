@@ -7,13 +7,13 @@ class InputItem extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            value: props.roleInfo && props.roleInfo[props.name],
+            value: props.roleInfoWorkspace && (props.roleInfoWorkspace[props.name] || ''),
         }
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            value: newProps.roleInfo[this.props.name]
+            value: newProps.roleInfoWorkspace[this.props.name] || ''
         })
     }
 
@@ -54,7 +54,7 @@ const styles = {
 
 export default connect(
     state => ({
-        roleInfo: state.library.roleInfo,
+        roleInfoWorkspace: state.library.roleInfoWorkspace,
     }),
     {
         updateRoleInfo,

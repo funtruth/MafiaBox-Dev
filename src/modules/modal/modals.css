@@ -25,3 +25,10 @@
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
 }
+
+.delete-role {
+    height: 200px;
+    width: 360px;
+    border-radius: 4px;
+    background-color: rgba(54, 57, 64);
+}

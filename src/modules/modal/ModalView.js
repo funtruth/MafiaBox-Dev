@@ -6,7 +6,7 @@ import { showModalByKey } from './ModalReducer'
 
 import { modalType } from './modalConfig'
 
-import CloseWindow from './CloseWindow'
+import CloseWindow from './keys/CloseWindow'
 
 class ModalView extends React.Component {
     _renderModal(key) {

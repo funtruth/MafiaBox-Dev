@@ -75,7 +75,7 @@ class EditRoleView extends React.Component{
 const styles = {
     container: {
         flex: 1,
-        padding: 10,
+        padding: 8,
     }
 }
 

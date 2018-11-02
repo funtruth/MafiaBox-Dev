@@ -6,11 +6,15 @@ import { showRoleInfo } from '../LibraryReducer'
 
 class ListView extends React.Component{
     _renderItem = (item) => {
-        let selected = item.roleId === this.props.roleId
+        const { roles, roleInfoWorkspace } = this.props
+        if (!item) return null
+        let roleInfo = roles[item]
+        let selected = item === roleInfoWorkspace.roleId
+
         return (
             <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{item.roleName}</div>
-                <div style={styles.desc}>{item.roleDesc}</div>
+                <div style={styles.title}>{roleInfo.roleName}</div>
+                <div style={styles.desc}>{roleInfo.roleDesc}</div>
             </div>
         )
     }
@@ -21,8 +25,8 @@ class ListView extends React.Component{
 
     render() {
         return (
-            this.props.roles.length ?
-                this.props.roles.map(this._renderItem)
+            this.props.history.length ?
+                this.props.history.map(this._renderItem)
                 :null
         )
     }
@@ -53,8 +57,9 @@ const styles = {
 
 export default connect(
     state => ({
-        roleId: state.library.roleId,
+        history: state.library.history,
         roles: state.library.roles,
+        roleInfoWorkspace: state.library.roleInfoWorkspace,
     }),
     {
         showRoleInfo,

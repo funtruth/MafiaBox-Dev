@@ -5,8 +5,8 @@ import { updateRoleInfo } from '../LibraryReducer'
 
 class PropertyItem extends React.Component{
     _renderItem = (item) => {
-        const { roleInfo, name } = this.props
-        const active = roleInfo && name && item.key === roleInfo[name]
+        const { roleInfoWorkspace, name } = this.props
+        const active = roleInfoWorkspace && name && item.key === roleInfoWorkspace[name]
         const style = {
             backgroundColor: active ? item.color : 'hsla(0,0%,100%,.1)',
         }
@@ -53,7 +53,7 @@ const styles = {
 
 export default connect(
     state => ({
-        roleInfo: state.library.roleInfo,
+        roleInfoWorkspace: state.library.roleInfoWorkspace,
     }),
     {
         updateRoleInfo,

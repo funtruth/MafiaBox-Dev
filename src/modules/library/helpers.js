@@ -6,7 +6,7 @@ export function saveRoleInfo(newInfo, roles) {
     return [ newInfo, ...rolesNoDupes ]
 }
 
-export function cleanRoles(roles) {
-    let rolesWithKeys = _.filter(roles, i => i.roleId)
-    return rolesWithKeys
+export function updateHistory(history, key) {
+    let r = _.filter(history, i => i !== key)
+    return [ key, ...r ]
 }
