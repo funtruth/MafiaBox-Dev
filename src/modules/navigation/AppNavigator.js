@@ -6,16 +6,18 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from '../../redux/store'
 import Shell from './Shell'
 import LibraryView from '../library/LibraryView'
+import ModalView from '../modal/ModalView'
 
 export default class AppNavigator extends React.Component {
     render() {
         return (
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
+                    <Shell/>
                     <BrowserRouter>
                         <div>
-                            <Shell/>
                             <Route exact path="/" component={LibraryView}/>
+                            <ModalView/>
                         </div>
                     </BrowserRouter>
                 </PersistGate>

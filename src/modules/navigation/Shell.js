@@ -1,5 +1,11 @@
 import React from 'react'
 import './shell.css'
+import { connect } from 'react-redux'
+
+import { showModalByKey } from '../modal/ModalReducer'
+
+import { modalType } from '../modal/modalConfig'
+
 const remote = window.require('electron').remote;
 
 class Shell extends React.Component {
@@ -18,8 +24,9 @@ class Shell extends React.Component {
     }
 
     _onClose = () => {
-      const window = remote.getCurrentWindow();
-      window.close();
+      this.props.showModalByKey(modalType.closeWindow)
+      /*const window = remote.getCurrentWindow();
+      window.close();*/
     }
 
     render() {
@@ -40,4 +47,9 @@ class Shell extends React.Component {
     }
 }
 
-export default Shell
+export default connect(
+  null,
+  {
+    showModalByKey,
+  }
+)(Shell)
