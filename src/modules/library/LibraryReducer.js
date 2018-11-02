@@ -1,4 +1,5 @@
 import firebase from '../../services/firebase'
+import * as helpers from './helpers'
 
 const initialState = {
     roles: [],
@@ -68,7 +69,7 @@ export default (state = initialState, action) => {
         case UPDATE_ROLE_INFO:
             return { ...state, roleInfo: { ...state.roleInfo, [action.payload.key]: action.payload.value }}
         case SAVE_ROLE_INFO_LOCALLY:
-            return { ...state, roles: [ action.payload, ...state.roles ]}
+            return { ...state, roles: helpers.saveRoleInfo(action.payload, state.roles) }
         default:
             return state;
     }
