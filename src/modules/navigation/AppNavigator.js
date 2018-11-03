@@ -18,7 +18,7 @@ export default class AppNavigator extends React.Component {
                     <Shell/>
                     <BrowserRouter>
                         <div>
-                            <Route exact path="/" component={LibraryView}/>
+                            <Route path="/" component={LibraryView}/>
                             <ModalView/>
                         </div>
                     </BrowserRouter>

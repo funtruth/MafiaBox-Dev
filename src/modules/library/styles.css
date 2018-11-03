@@ -62,13 +62,12 @@
 
     padding: 8px 8px;
     border-radius: 4px;
-    font-size: 11px;
+    font-size: 15px;
     font-weight: 500;
     font-family: Arial;
     color: #fff;
     cursor: pointer;
 
-    letter-spacing: 1.5px;
     display: flex;
     align-items: center;
     justify-content: center;

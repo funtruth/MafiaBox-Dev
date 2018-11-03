@@ -2,10 +2,12 @@ import React from 'react'
 import './styles.css'
 import { connect } from 'react-redux'
 import firebase from '../../services/firebase'
+import { Route } from 'react-router-dom'
 
 import SideBarView from './screen/SideBarView';
+import EditRoleHeader from './components/EditRoleHeader'
+import StoryView from '../story/StoryView';
 import EditRoleView from './screen/EditRoleView';
-import TemplateView from './screen/TemplateView';
 
 class LibraryView extends React.Component{
     componentDidMount() {
@@ -19,8 +21,11 @@ class LibraryView extends React.Component{
             <div className="home-view">
                 <SideBarView/>
                 <div style={{ width: '100%' }}>
-                    <EditRoleView/>
-                    <TemplateView/>
+                    <EditRoleHeader/>
+                    <div>
+                        <Route exact path="/home" component={StoryView}/>
+                        <Route exact path="/home/edit" component={EditRoleView}/>
+                    </div>
                 </div>
             </div>
         )
@@ -30,5 +35,6 @@ class LibraryView extends React.Component{
 export default connect(
     null,
     {
+
     }
 )(LibraryView)

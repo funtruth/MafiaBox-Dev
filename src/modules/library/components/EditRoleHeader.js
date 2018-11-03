@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { saveRoleInfoLocally } from '../LibraryReducer'
 import { showModalByKey } from '../../modal/ModalReducer'
@@ -21,7 +22,13 @@ class EditRoleHeader extends React.Component{
 
     render() {
         return (
-            <div className="row">
+            <div className="row" style={{ padding: 8}}>
+                <Link to="/home"> 
+                    <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }}>
+                        <i class="option-icon ion-ios-undo"></i>
+                        {'Go Back'}
+                    </div>
+                </Link>
                 <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
                     <i class="option-icon ion-ios-save"></i>
                     {'Save'}

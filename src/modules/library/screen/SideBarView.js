@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 import { createNewRole } from '../LibraryReducer'
 import ListView from '../components/ListView';
@@ -7,8 +8,13 @@ import ListView from '../components/ListView';
 import { heights } from '../dim'
 
 class SideBarView extends React.Component{
+    state = {
+        redirect: false
+    }
     _onCreateRole = () => {
-        this.props.createNewRole()
+        this.setState({
+            redirect: true
+        })
     }
 
     render() {
@@ -20,10 +26,6 @@ class SideBarView extends React.Component{
 
                 <div className="scrollable-y">
                     <ListView/>
-                </div>
-                <div className="footer" onClick={this._onCreateRole}>
-                    <i class="add-role-icon ion-md-person-add"></i>
-                    {'CREATE ROLE'}
                 </div>
             </div>
         )
