@@ -1,10 +1,11 @@
 import React from 'react'
-import './items.css'
 import { connect } from 'react-redux'
 
-import { showRoleInfo } from '../LibraryReducer'
+import { showRoleInfo } from '../roles/RoleReducer'
 
-class ListView extends React.Component{
+import { heights } from '../common/dim'
+
+class SideBarView extends React.Component{
     _renderItem = (item) => {
         const { roles, roleInfoWorkspace } = this.props
         if (!item) return null
@@ -25,14 +26,32 @@ class ListView extends React.Component{
 
     render() {
         return (
-            this.props.history.length ?
-                this.props.history.map(this._renderItem)
-                :null
+            <div style={styles.container}>
+                <div style={styles.header}>
+
+                </div>
+
+                <div className="scrollable-y">
+                    {this.props.history.length ?
+                        this.props.history.map(this._renderItem)
+                    :null}
+                </div>
+            </div>
         )
     }
 }
 
 const styles = {
+    container: {
+        width: '200px',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'rgba(47, 49, 54, 1)',
+    },
+    header: {
+        height: heights.header,
+        backgroundColor: 'rgba(40, 43, 48)',
+    },
     title: {
         fontSize: 14,
         lineHeight: 1.3,
@@ -57,11 +76,11 @@ const styles = {
 
 export default connect(
     state => ({
-        history: state.library.history,
-        roles: state.library.roles,
-        roleInfoWorkspace: state.library.roleInfoWorkspace,
+        history: state.roles.history,
+        roles: state.roles.roles,
+        roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
         showRoleInfo,
     }
-)(ListView)
+)(SideBarView)

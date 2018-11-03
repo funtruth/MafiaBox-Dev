@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import InputItem from '../components/InputItem'
-import PropertyItem from '../components/PropertyItem';
+import InputItem from './components/InputItem'
+import PropertyItem from './components/PropertyItem';
 
 const roleTeamTypeData = [
     {
@@ -55,9 +54,8 @@ const roleActionTypeData = [
     },
 ]
 
-class EditRoleView extends React.Component{
+class RoleView extends React.Component{
     render() {
-        if (!this.props.showEditRoleView) return null
         return (
             <div style={styles.container}>
                 <InputItem name="roleId" label="Unique Role ID" placeholder="1234"/>
@@ -77,8 +75,4 @@ const styles = {
     }
 }
 
-export default connect(
-    state => ({
-        showEditRoleView: state.library.showEditRoleView,
-    })
-)(EditRoleView)
+export default RoleView

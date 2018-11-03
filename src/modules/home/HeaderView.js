@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { saveRoleInfoLocally } from '../LibraryReducer'
-import { showModalByKey } from '../../modal/ModalReducer'
+import { saveRoleInfoLocally } from '../roles/RoleReducer'
+import { showModalByKey } from '../modal/ModalReducer'
 
-import { modalType } from '../../modal/modalConfig'
+import { modalType } from '../modal/modalConfig'
 
-class EditRoleHeader extends React.Component{
+class HeaderView extends React.Component{
     _onSave = () => {
         this.props.saveRoleInfoLocally(this.props.roleInfoWorkspace)
     }
@@ -48,11 +48,11 @@ class EditRoleHeader extends React.Component{
 
 export default connect(
     state => ({
-        roleInfoCopy: state.library.roleInfoCopy,
-        roleInfoWorkspace: state.library.roleInfoWorkspace,
+        roleInfoCopy: state.roles.roleInfoCopy,
+        roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
         saveRoleInfoLocally,
         showModalByKey,
     }
-)(EditRoleHeader)
+)(HeaderView)

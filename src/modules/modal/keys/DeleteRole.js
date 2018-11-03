@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { deleteRole } from '../../library/LibraryReducer'
+import { deleteRole } from '../../roles/RoleReducer'
 import { showModalByKey } from '../ModalReducer'
 
 class CloseWindow extends React.Component {
@@ -41,7 +41,7 @@ class CloseWindow extends React.Component {
 
 export default connect(
     state => ({
-        roleInfoWorkspace: state.library.roleInfoWorkspace,
+        roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
         deleteRole,

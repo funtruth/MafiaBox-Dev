@@ -1,9 +1,6 @@
 import * as helpers from './helpers'
 
 const initialState = {
-    //to be removed
-    showEditRoleView: false,
-
     //new data architecture
     history: [],
 
@@ -13,11 +10,11 @@ const initialState = {
     roleInfoWorkspace: {},
 }
 
-const CREATE_NEW_ROLE = 'library/create-new-role'
-const SHOW_ROLE_INFO = 'library/show-role-info'
-const UPDATE_ROLE_INFO = 'library/update-role-info'
-const SAVE_ROLE_INFO_LOCALLY = 'library/-save-role-info-locally'
-const DELETE_ROLE = 'library/delete-role'
+const CREATE_NEW_ROLE = 'roles/create-new-role'
+const SHOW_ROLE_INFO = 'roles/show-role-info'
+const UPDATE_ROLE_INFO = 'roles/update-role-info'
+const SAVE_ROLE_INFO_LOCALLY = 'roles/-save-role-info-locally'
+const DELETE_ROLE = 'roles/delete-role'
 
 export function createNewRole() {
     return (dispatch) => {

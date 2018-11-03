@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateRoleInfo } from '../LibraryReducer'
+import { updateRoleInfo } from '../RoleReducer'
 
 class InputItem extends React.Component{
     constructor(props) {
@@ -54,7 +54,7 @@ const styles = {
 
 export default connect(
     state => ({
-        roleInfoWorkspace: state.library.roleInfoWorkspace,
+        roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
         updateRoleInfo,

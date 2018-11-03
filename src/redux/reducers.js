@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 
 import UserReducer from '../modules/user/UserReducer'
-import LibraryReducer from '../modules/library/LibraryReducer'
+import RoleReducer from '../modules/roles/RoleReducer'
 import ModalReducer from '../modules/modal/ModalReducer'
 
 const reducers = {
     user: UserReducer,
-    library: LibraryReducer,
+    roles: RoleReducer,
     modal: ModalReducer,
 }
 
