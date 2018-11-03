@@ -19,16 +19,31 @@
     to   { opacity: 1; }
 }
 
-.close-window {
-    height: 200px;
-    width: 360px;
-    border-radius: 4px;
-    background-color: rgba(54, 57, 64);
+.modal-title {
+    padding: 4px 4px;
+    font-size: 16px;
+    font-weight: 520;
+    letter-spacing: 0.6px;
+    font-family: Arial;
+    color: #fff;
 }
 
-.delete-role {
-    height: 200px;
-    width: 360px;
+.modal-subtitle {
+    padding: 4px 4px;
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: 0.2px;
+    font-weight: 400;
+    font-family: Arial;
+    color: #d6d6d6;
+    align-items: flex-end;
+}
+
+.modal-options {
+    padding: 16px 16px;
+}
+
+.modal-child {
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
 }

@@ -18,7 +18,7 @@ class SideBarView extends React.Component{
 
                 </div>
 
-                <div className="scrollable-y" style={styles.list}>
+                <div className="scrollable-y">
                     <ListView/>
                 </div>
                 <div className="footer" onClick={this._onCreateRole}>

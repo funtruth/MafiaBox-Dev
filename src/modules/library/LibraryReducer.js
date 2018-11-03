@@ -1,13 +1,8 @@
 import * as helpers from './helpers'
 
 const initialState = {
-    //viewing, updating, creating
-    roleId: null,
-
     //to be removed
     showEditRoleView: false,
-
-    roleInfo: {},
 
     //new data architecture
     history: [],
@@ -18,12 +13,11 @@ const initialState = {
     roleInfoWorkspace: {},
 }
 
-const TOGGLE_EDIT_ROLE_VIEW = 'library/toggle-add-role-view'
+const CREATE_NEW_ROLE = 'library/create-new-role'
 const SHOW_ROLE_INFO = 'library/show-role-info'
 const UPDATE_ROLE_INFO = 'library/update-role-info'
 const SAVE_ROLE_INFO_LOCALLY = 'library/-save-role-info-locally'
-
-const CREATE_NEW_ROLE = 'library/create-new-role'
+const DELETE_ROLE = 'library/delete-role'
 
 export function createNewRole() {
     return (dispatch) => {
@@ -62,11 +56,16 @@ export function saveRoleInfoLocally(roleInfo) {
     }
 }
 
+export function deleteRole() {
+    return (dispatch) => {
+        dispatch({
+            type: DELETE_ROLE
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
-        case TOGGLE_EDIT_ROLE_VIEW:
-            return { ...state, showEditRoleView: !state.showEditRoleView }
-
         case CREATE_NEW_ROLE:
             return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {}, showEditRoleView: true }
         case SHOW_ROLE_INFO:
@@ -76,6 +75,8 @@ export default (state = initialState, action) => {
         case SAVE_ROLE_INFO_LOCALLY:
             return { ...state, roles: { ...state.roles, [action.payload.roleId]: action.payload },
                 history: helpers.updateHistory(state.history, action.payload.roleId) }
+        case DELETE_ROLE:   
+            return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {}, ...helpers.deleteRole(state) }
         default:
             return state;
     }
