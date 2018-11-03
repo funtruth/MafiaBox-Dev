@@ -20,7 +20,7 @@
 }
 
 .modal-title {
-    padding: 4px 4px;
+    padding: 2px 4px;
     font-size: 16px;
     font-weight: 520;
     letter-spacing: 0.6px;
@@ -30,7 +30,7 @@
 
 .modal-subtitle {
     padding: 4px 4px;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.4;
     letter-spacing: 0.2px;
     font-weight: 400;
@@ -46,4 +46,5 @@
 .modal-child {
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
+    overflow: hidden;
 }

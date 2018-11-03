@@ -1,4 +1,5 @@
 import React from 'react'
+import './story.css'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 

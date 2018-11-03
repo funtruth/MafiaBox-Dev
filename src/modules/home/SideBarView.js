@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { showRoleInfo } from '../roles/RoleReducer'
 
@@ -13,10 +14,12 @@ class SideBarView extends React.Component{
         let selected = item === roleInfoWorkspace.roleId
 
         return (
-            <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{roleInfo.roleName}</div>
-                <div style={styles.desc}>{roleInfo.roleDesc}</div>
-            </div>
+            <Link to="/home/edit">
+                <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
+                    <div style={styles.title}>{roleInfo.roleName}</div>
+                    <div style={styles.desc}>{roleInfo.roleDesc}</div>
+                </div>
+            </Link>
         )
     }
 

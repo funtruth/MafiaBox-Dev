@@ -1,0 +1,16 @@
+.footer {
+    background-color: hsla(0,0%,100%,.1);
+    margin-top: auto;
+
+    padding: 8px 8px;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: Arial;
+    color: #fff;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

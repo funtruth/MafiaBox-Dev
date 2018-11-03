@@ -71,7 +71,6 @@ class RoleView extends React.Component{
 const styles = {
     container: {
         flex: 1,
-        padding: 8,
     }
 }
 

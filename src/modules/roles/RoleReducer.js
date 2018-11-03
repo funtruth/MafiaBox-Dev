@@ -10,16 +10,16 @@ const initialState = {
     roleInfoWorkspace: {},
 }
 
-const CREATE_NEW_ROLE = 'roles/create-new-role'
+const CLEAR_ROLE_INFO = 'roles/clear-role-info'
 const SHOW_ROLE_INFO = 'roles/show-role-info'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
 const SAVE_ROLE_INFO_LOCALLY = 'roles/-save-role-info-locally'
 const DELETE_ROLE = 'roles/delete-role'
 
-export function createNewRole() {
+export function clearRoleInfo() {
     return (dispatch) => {
         dispatch({
-            type: CREATE_NEW_ROLE,
+            type: CLEAR_ROLE_INFO,
         })
     } 
 }
@@ -63,10 +63,10 @@ export function deleteRole() {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case CREATE_NEW_ROLE:
-            return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {}, showEditRoleView: true }
+        case CLEAR_ROLE_INFO:
+            return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {} }
         case SHOW_ROLE_INFO:
-            return { ...state, roleInfoCopy: state.roles[action.payload], roleInfoWorkspace: state.roles[action.payload], showEditRoleView: true }
+            return { ...state, roleInfoCopy: state.roles[action.payload], roleInfoWorkspace: state.roles[action.payload] }
         case UPDATE_ROLE_INFO:
             return { ...state, roleInfoWorkspace: { ...state.roleInfoWorkspace, [action.payload.key]: action.payload.value }}
         case SAVE_ROLE_INFO_LOCALLY:

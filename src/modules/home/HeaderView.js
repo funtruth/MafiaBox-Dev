@@ -1,13 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
-import { saveRoleInfoLocally } from '../roles/RoleReducer'
+import { clearRoleInfo, saveRoleInfoLocally } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 
 import { modalType } from '../modal/modalConfig'
 
 class HeaderView extends React.Component{
+    componentWillReceiveProps(newProps) {
+        let path = newProps.location.pathname
+        let paths = path.split('/')
+        console.log(paths)
+    }
+
+    _goBack = () => {
+        this.props.clearRoleInfo()
+    }
+
     _onSave = () => {
         this.props.saveRoleInfoLocally(this.props.roleInfoWorkspace)
     }
@@ -24,7 +34,7 @@ class HeaderView extends React.Component{
         return (
             <div className="row" style={{ padding: 8}}>
                 <Link to="/home"> 
-                    <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }}>
+                    <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._goBack}>
                         <i class="option-icon ion-ios-undo"></i>
                         {'Go Back'}
                     </div>
@@ -46,13 +56,14 @@ class HeaderView extends React.Component{
     }
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         roleInfoCopy: state.roles.roleInfoCopy,
         roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
+        clearRoleInfo,
         saveRoleInfoLocally,
         showModalByKey,
     }
-)(HeaderView)
+)(HeaderView))

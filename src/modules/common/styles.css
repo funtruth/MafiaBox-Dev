@@ -24,25 +24,6 @@
     flex-wrap: wrap;
 }
 
-
-.footer {
-    background-color: hsla(0,0%,100%,.1);
-    margin-top: auto; margin-bottom: 12px;
-    margin-left: 12px; margin-right: 12px;
-
-    padding: 8px 8px;
-    border-radius: 4px;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: Arial;
-    color: #fff;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .add-role-icon {
     font-size: 18px;
     color: #fff;
