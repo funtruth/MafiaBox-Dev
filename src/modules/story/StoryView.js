@@ -3,17 +3,22 @@ import './story.css'
 import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
+import { reorderStories, moveStory } from './StoryReducer'
+
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
     userSelect: 'none',
-  
-    // change background colour if dragging
-    background: isDragging ? 'rgba(84, 87, 93, 1)' : 'rgba(66, 70, 77, 1)',
   
     // styles we need to apply on draggables
     ...draggableStyle,
     ...styles.itemStyle,
     cursor: 'pointer',
+});
+
+const getListStyle = isDraggingOver => ({
+    background: isDraggingOver ? 'lightred' : 'lightyellow',
+    display: 'flex',
+    overflow: 'auto',
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -39,31 +44,26 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 };
 
 class StoryView extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: ['Doctor', 'Hunter'],
-            items2: ['Sicker', 'Mafia', 'Evil Guy'],
-        };
-
-        this.id2List = {
-            droppable: 'items',
-            droppable2: 'items2'
-        };
-
-        this.getList = id => this.state[this.id2List[id]];
-
-        this.onDragEnd = result => {
-            const { source, destination } = result;
+    onDragEnd = result => {
+        const { source, destination } = result;
     
-            // dropped outside the list
-            if (!destination) {
-                return;
-            }
+        // dropped outside the list
+        if (!destination) {
+            return;
+        }
+
+        if (source.droppableId === 'board') {
+            const items = reorder(
+                this.props.stories,
+                source.index,
+                destination.index
+            );
     
+            this.props.reorderStories(items)
+        } else {
             if (source.droppableId === destination.droppableId) {
                 const items = reorder(
-                    this.getList(source.droppableId),
+                    this.props.storyData[source.droppableId],
                     source.index,
                     destination.index
                 );
@@ -77,83 +77,91 @@ class StoryView extends React.Component{
                 this.setState(state);
             } else {
                 const result = move(
-                    this.getList(source.droppableId),
-                    this.getList(destination.droppableId),
+                    this.props.storyData[source.droppableId],
+                    this.props.storyData[destination.droppableId],
                     source,
                     destination
                 );
     
-                this.setState({
-                    items: result.droppable,
-                    items2: result.droppable2
-                });
+                this.props.moveStory(result)
             }
-        };
+        }
+
+        
     }
 
     render() {
+        if (!this.props.storyData) return null
         return (
             <div style={styles.container}>
-                <div className="row">
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Droppable droppableId="droppable">
+                <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
+                    <Droppable droppableId="board" direction="horizontal" type="HELLO">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
-                            style={{ width: 200 }}
+                            style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            <div className="story-tag">{this.props.stories[0].tag}</div>
-                            {this.state.items.map((item, index) => (
-                                <Draggable key={item} draggableId={item} index={index}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
-                                    >
-                                    {item}
-                                    </div>
-                                )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                    </Droppable>
-                    <Droppable droppableId="droppable2">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={{ width: 200 }}
-                        >
-                            <div className="story-tag">{this.props.stories[1].tag}</div>
-                            {this.state.items2.map((item, index) => (
-                                <Draggable key={item} draggableId={item} index={index}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
-                                    >
-                                    {item}
-                                    </div>
-                                )}
-                                </Draggable>
+                            {this.props.stories.map((item, index) => (
+                                <div>
+                                    <Draggable key={item} draggableId={item} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}
+                                        >
+                                        <div className="story-tag">{item}</div>
+                                        <div
+                                            style={styles.listStyle}
+                                        >
+                                            <Droppable droppableId={item}>
+                                            {(provided, snapshot) => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    style={[
+                                                        getListStyle(snapshot.isDraggingOver),
+                                                        styles.listStyle,
+                                                    ]}
+                                                >
+                                                    {this.props.storyData[item].map((item, index) => (
+                                                        <div>
+                                                            <Draggable key={item} draggableId={item} index={index}>
+                                                            {(provided, snapshot) => (
+                                                                <div
+                                                                    ref={provided.innerRef}
+                                                                    {...provided.draggableProps}
+                                                                    {...provided.dragHandleProps}
+                                                                    style={getItemStyle(
+                                                                        snapshot.isDragging,
+                                                                        provided.draggableProps.style
+                                                                    )}
+                                                                >
+                                                                <div className="story-tag">{item}</div>
+                                                                </div>
+                                                            )}
+                                                            </Draggable>
+                                                        </div>
+                                                    ))}
+                                                    {provided.placeholder}
+                                                </div>
+                                            )}
+                                            </Droppable>
+                                        </div>
+                                        </div>
+                                    )}
+                                    </Draggable>
+                                    
+                                </div>
                             ))}
                             {provided.placeholder}
                         </div>
                     )}
                     </Droppable>
                 </DragDropContext>
-                </div>
             </div>
         )
     }
@@ -165,13 +173,21 @@ const styles = {
     },
     itemStyle: {
         padding: '10px 12px',
-        borderRadius: 4,
         marginBottom: 8,
         color: '#fff',
         fontSize: 14,
         lineHeight: 1.2,
         fontFamily: 'Arial',
-        fontWeight: '500'
+        fontWeight: '500',
+
+        width: 200,
+    },
+    listStyle: {
+        minHeight: 200,
+    },
+    vertical: {
+        display: 'flex',
+        flexDirection: 'column',
     }
 }
 
@@ -179,5 +195,10 @@ export default connect(
     state => ({
         history: state.roles.history,
         stories: state.story.stories,
-    })
+        storyData: state.story.storyData,
+    }),
+    {
+        reorderStories,
+        moveStory,
+    }
 )(StoryView)
