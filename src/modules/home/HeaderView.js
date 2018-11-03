@@ -39,6 +39,12 @@ class HeaderView extends React.Component{
                         {'Go Back'}
                     </div>
                 </Link>
+                <Link to="/home/edit"> 
+                    <div className="cute-button" style={{ marginRight: 8 }}>
+                        <i class="option-icon ion-ios-add-circle"></i>
+                        {'Add Role'}
+                    </div>
+                </Link>
                 <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
                     <i class="option-icon ion-ios-save"></i>
                     {'Save'}
