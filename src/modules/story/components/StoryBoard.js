@@ -1,0 +1,152 @@
+import React from 'react'
+import { connect } from 'react-redux'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
+import { reorderStories, moveStory } from '../StoryReducer'
+
+import StoryList from './StoryList'
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: 'none',
+  
+    // styles we need to apply on draggables
+    ...draggableStyle,
+    ...styles.itemStyle,
+    cursor: 'pointer',
+});
+
+const getListStyle = isDraggingOver => ({
+    background: isDraggingOver ? 'lightred' : 'lightyellow',
+    display: 'flex',
+    overflow: 'auto',
+});
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+  
+    return result;
+};
+
+const move = (source, destination, droppableSource, droppableDestination) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
+
+    destClone.splice(droppableDestination.index, 0, removed);
+
+    const result = {};
+    result[droppableSource.droppableId] = sourceClone;
+    result[droppableDestination.droppableId] = destClone;
+
+    return result;
+};
+
+class StoryBoard extends React.Component{
+    onDragEnd = result => {
+        const { source, destination } = result;
+    
+        // dropped outside the list
+        if (!destination) {
+            return;
+        }
+
+        if (source.droppableId === 'board') {
+            const items = reorder(
+                this.props.stories,
+                source.index,
+                destination.index
+            );
+    
+            this.props.reorderStories(items)
+        } else {
+            if (source.droppableId === destination.droppableId) {
+                const items = reorder(
+                    this.props.storyData[source.droppableId],
+                    source.index,
+                    destination.index
+                );
+    
+                let state = { items };
+    
+                if (source.droppableId === 'droppable2') {
+                    state = { items2: items };
+                }
+    
+                this.setState(state);
+            } else {
+                const result = move(
+                    this.props.storyData[source.droppableId],
+                    this.props.storyData[destination.droppableId],
+                    source,
+                    destination
+                );
+    
+                this.props.moveStory(result)
+            }
+        }
+    }
+
+    render() {
+        return (
+            <DragDropContext onDragEnd={this.onDragEnd.bind(this)}>
+                <Droppable droppableId="board" direction="horizontal" type="COLUMN">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                        >
+                            {this.props.stories.map((item, index) => (
+                                <Draggable key={item} draggableId={item} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}
+                                        >
+                                        <div className="story-tag">{item}</div>
+                                        <StoryList item={item}/>
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </DragDropContext>
+        )
+    }
+}
+
+const styles = {
+    container: {
+        flex: 1,
+    },
+    itemStyle: {
+        padding: '10px 12px',
+        color: '#fff',
+        fontSize: 14,
+        lineHeight: 1.2,
+        fontFamily: 'Arial',
+        fontWeight: '500',
+    },
+}
+
+export default connect(
+    state => ({
+        history: state.roles.history,
+        stories: state.story.stories,
+        storyData: state.story.storyData,
+    }),
+    {
+        reorderStories,
+        moveStory,
+    }
+)(StoryBoard)
