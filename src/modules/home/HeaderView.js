@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
-import { clearRoleInfo, createNewRole, saveRoleInfoLocally } from '../roles/RoleReducer'
+import { clearRoleInfo, createNewRole, saveRoleInfo } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 
 import { modalType } from '../modal/modalConfig'
@@ -23,7 +23,12 @@ class HeaderView extends React.Component{
     }
 
     _onSave = () => {
-        this.props.saveRoleInfoLocally(this.props.roleInfoWorkspace)
+        const { roleInfoWorkspace } = this.props
+        if (roleInfoWorkspace.roleName && roleInfoWorkspace.roleName.trim()) {
+            this.props.saveRoleInfo(this.props.roleInfoWorkspace)
+        } else {
+            this.props.showModalByKey(modalType.saveRoleAs)
+        }
     }
 
     _onReset = () => {
@@ -74,7 +79,7 @@ export default withRouter(connect(
     {
         clearRoleInfo,
         createNewRole,
-        saveRoleInfoLocally,
+        saveRoleInfo,
         showModalByKey,
     }
 )(HeaderView))

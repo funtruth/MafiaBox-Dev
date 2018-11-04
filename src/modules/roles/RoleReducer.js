@@ -1,12 +1,85 @@
 import * as helpers from './helpers'
+import { itemType } from './types'
 
 const initialState = {
-    //new data architecture
-    history: [],
+    fields: [
+        {
+            key: 'roleId',
+            title: 'Unique Role Id',
+            type: itemType.blurInput,
+        },
+        {
+            key: 'roleName',
+            title: 'Name of Role',
+            placeholder: 'Doctor, Detective ...',
+            type: itemType.input,
+        },
+        {
+            key: 'roleDesc',
+            title: 'Role Description',
+            placeholder: 'Describe what the role does ...',
+            type: itemType.input,
+        },
+        {
+            key: 'roleTeamType',
+            title: 'Unique Role Id',
+            type: itemType.tag,
+            data: [
+                {
+                    key: 1,
+                    label: 'Mafia',
+                    color: 'rgba(235,87,87,1)',
+                },
+                {
+                    key: 2,
+                    label: 'Town',
+                    color: 'rgba(18,184,134,1)',
+                }
+            ]
+        },
+        {
+            key: 'roleActionType',
+            title: 'Action Target',
+            type: itemType.tag,
+            data: [
+                {
+                    key: 1,
+                    label: 'Anyone',
+                },
+                {
+                    key: 2,
+                    label: 'Town',
+                },
+                {
+                    key: 3,
+                    label: 'Mafia',
+                },
+                {
+                    key: 4,
+                    label: 'Town',
+                },
+                {
+                    key: 5,
+                    label: 'Alive',
+                },
+                {
+                    key: 6,
+                    label: 'Dead',
+                },
+                {
+                    key: 7,
+                    label: 'Multiple',
+                },
+            ]
+        },
+    ],
 
     roles: {},
+    history: [],
 
-    roleInfoDefaults: {},
+    roleInfoDefaults: {
+        roleStoryKey: 'inProgress',
+    },
     roleInfoCopy: {},
     roleInfoWorkspace: {},
 
@@ -17,7 +90,7 @@ const CLEAR_ROLE_INFO = 'roles/clear-role-info'
 const SHOW_ROLE_INFO = 'roles/show-role-info'
 const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
-const SAVE_ROLE_INFO_LOCALLY = 'roles/-save-role-info-locally'
+const SAVE_ROLE_INFO = 'roles/-save-role-info'
 const DELETE_ROLE = 'roles/delete-role'
 
 export function clearRoleInfo() {
@@ -67,10 +140,10 @@ export function updateRoleInfo(key, value) {
     }
 }
 
-export function saveRoleInfoLocally(roleInfo) {
+export function saveRoleInfo(roleInfo) {
     return (dispatch) => {
         dispatch({
-            type: SAVE_ROLE_INFO_LOCALLY,
+            type: SAVE_ROLE_INFO,
             payload: roleInfo,
         })
     }
@@ -94,7 +167,7 @@ export default (state = initialState, action) => {
             return { ...state, roleInfoCopy: action.payload, roleInfoWorkspace: action.payload }
         case UPDATE_ROLE_INFO:
             return { ...state, roleInfoWorkspace: { ...state.roleInfoWorkspace, [action.payload.key]: action.payload.value }}
-        case SAVE_ROLE_INFO_LOCALLY:
+        case SAVE_ROLE_INFO:
             return { ...state, roles: { ...state.roles, [action.payload.roleId]: action.payload },
                 history: helpers.updateHistory(state.history, action.payload.roleId) }
         case DELETE_ROLE:   

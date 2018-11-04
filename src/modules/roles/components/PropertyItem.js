@@ -8,7 +8,7 @@ class PropertyItem extends React.Component{
         const { roleInfoWorkspace, name } = this.props
         const active = roleInfoWorkspace && name && item.key === roleInfoWorkspace[name]
         const style = {
-            backgroundColor: active ? item.color : 'hsla(0,0%,100%,.1)',
+            backgroundColor: active ? (item.color || 'rgba(40, 43, 48,1)') : 'hsla(0,0%,100%,.1)',
         }
         return (
             <div className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>

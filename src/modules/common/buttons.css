@@ -11,6 +11,17 @@
     text-decoration: underline;
 }
 
+.modal-button {
+    padding: 12px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Arial;
+    color: #fff;
+    cursor: pointer;
+    background-color: rgb(66, 70, 80);
+}
+
 .delete-button {
     padding: 12px 16px;
     border-radius: 4px;
