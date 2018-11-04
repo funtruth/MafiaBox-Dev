@@ -21,8 +21,6 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     render() {
         const { item, storyData } = this.props
-        if (!storyData) return null
-
         return (
             <div style={styles.listStyle}>
                 <Droppable droppableId={item}>
@@ -74,6 +72,7 @@ const styles = {
     },
     listStyle: {
         backgroundColor: 'red',
+        pointerEvents: 'auto',
     },
 }
 

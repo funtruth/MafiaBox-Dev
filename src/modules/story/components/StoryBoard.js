@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { reorderStories, moveStory } from '../StoryReducer'
+import { reorderBoard, reorderItem, relocateItem } from '../StoryReducer'
 
 import StoryList from './StoryList'
 
@@ -13,13 +13,13 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     // styles we need to apply on draggables
     ...draggableStyle,
     ...styles.itemStyle,
-    cursor: 'pointer',
 });
 
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightred' : 'lightyellow',
     display: 'flex',
     overflow: 'auto',
+    minHeight: 200,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -54,13 +54,15 @@ class StoryBoard extends React.Component{
         }
 
         if (source.droppableId === 'board') {
+            if (source.index === destination.index) return
+            
             const items = reorder(
                 this.props.stories,
                 source.index,
                 destination.index
             );
     
-            this.props.reorderStories(items)
+            this.props.reorderBoard(items)
         } else {
             if (source.droppableId === destination.droppableId) {
                 const items = reorder(
@@ -68,14 +70,8 @@ class StoryBoard extends React.Component{
                     source.index,
                     destination.index
                 );
-    
-                let state = { items };
-    
-                if (source.droppableId === 'droppable2') {
-                    state = { items2: items };
-                }
-    
-                this.setState(state);
+                
+                this.props.reorderItem(source.droppableId, items)
             } else {
                 const result = move(
                     this.props.storyData[source.droppableId],
@@ -84,7 +80,7 @@ class StoryBoard extends React.Component{
                     destination
                 );
     
-                this.props.moveStory(result)
+                this.props.relocateItem(result)
             }
         }
     }
@@ -110,8 +106,10 @@ class StoryBoard extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                        <div className="story-tag">{item}</div>
-                                        <StoryList item={item}/>
+                                            <div className="story-tag">
+                                                {item}
+                                            </div>
+                                            <StoryList item={item}/>
                                         </div>
                                     )}
                                 </Draggable>
@@ -136,6 +134,8 @@ const styles = {
         lineHeight: 1.2,
         fontFamily: 'Arial',
         fontWeight: '500',
+        cursor: 'pointer',
+        pointerEvents: 'none',
     },
 }
 
@@ -146,7 +146,8 @@ export default connect(
         storyData: state.story.storyData,
     }),
     {
-        reorderStories,
-        moveStory,
+        reorderBoard,
+        reorderItem,
+        relocateItem,
     }
 )(StoryBoard)

@@ -21,4 +21,5 @@
     color: #fff;
     background-color: rgba(40, 43, 48,1);
     font-size: 14px;
+    pointer-events: auto;
 }
