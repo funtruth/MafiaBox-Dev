@@ -1,6 +1,8 @@
 import * as helpers from './helpers'
 import { itemType } from './types'
 
+import { addRoleToStory } from '../story/StoryReducer'
+
 const initialState = {
     fields: [
         {
@@ -118,6 +120,8 @@ export function createNewRole() {
         while(roles[uid]) {
             uid = helpers.genUID(gameKey)
         }
+
+        dispatch(addRoleToStory(uid, roleInfoDefaults.roleStoryKey))
 
         dispatch({
             type: CREATE_NEW_ROLE,

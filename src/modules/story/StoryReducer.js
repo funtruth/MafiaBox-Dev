@@ -21,8 +21,8 @@ const initialState = {
     ],
 
     storyData: {
-        inProgress: ['Doctor', 'Hunter'],
-        complete: ['Venom', 'Striker', 'Mafia'],
+        inProgress: [],
+        complete: [],
         live: [],
     }
 }
@@ -30,6 +30,8 @@ const initialState = {
 const REORDER_BOARD = 'story/reorder-board'
 const REORDER_ITEM = 'story/reorder-item'
 const RELOCATE_ITEM = 'story/relocate-item'
+
+const ADD_ROLE_TO_STORY = 'story/add-role-to-story'
 
 export function reorderBoard(items) {
     return (dispatch) => {
@@ -67,6 +69,22 @@ export function relocateItem(result) {
     } 
 }
 
+export function addRoleToStory(roleId, storyKey) {
+    return (dispatch, getState) => {
+        let storyClone = getState().story.storyData[storyKey]
+        
+        storyClone.unshift(roleId)
+
+        dispatch({
+            type: ADD_ROLE_TO_STORY,
+            payload: {
+                storyKey,
+                storyClone
+            }
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case REORDER_BOARD:
@@ -75,6 +93,9 @@ export default (state = initialState, action) => {
             return { ...state, storyData: { ...state.storyData, [action.payload.key]: action.payload.items } }
         case RELOCATE_ITEM:
             return { ...state, storyData: action.payload }
+
+        case ADD_ROLE_TO_STORY:
+            return { ...state, storyData: { ...state.storyData, [action.payload.storyKey]: action.payload.storyClone }}
         default:
             return state;
     }
