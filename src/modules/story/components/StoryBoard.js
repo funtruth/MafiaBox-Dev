@@ -5,6 +5,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { reorderBoard, reorderItem, relocateItem } from '../StoryReducer'
 
 import StoryList from './StoryList'
+import StoryTitle from './StoryTitle';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -16,10 +17,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightred' : 'lightyellow',
-    display: 'flex',
-    overflow: 'auto',
-    minHeight: 200,
+    ...styles.listStyle,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -47,7 +45,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 class StoryBoard extends React.Component{
     onDragEnd = result => {
         const { source, destination } = result;
-    
+        
         // dropped outside the list
         if (!destination) {
             return;
@@ -106,9 +104,7 @@ class StoryBoard extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                            <div className="story-tag">
-                                                {item}
-                                            </div>
+                                            <StoryTitle item={item}/>
                                             <StoryList item={item}/>
                                         </div>
                                     )}
@@ -124,11 +120,7 @@ class StoryBoard extends React.Component{
 }
 
 const styles = {
-    container: {
-        flex: 1,
-    },
     itemStyle: {
-        padding: '10px 12px',
         color: '#fff',
         fontSize: 14,
         lineHeight: 1.2,
@@ -136,7 +128,14 @@ const styles = {
         fontWeight: '500',
         cursor: 'pointer',
         pointerEvents: 'none',
+        width: 220,
+        marginRight: 10,
     },
+    listStyle: {
+        display: 'flex',
+        overflow: 'auto',
+        minHeight: 400,
+    }
 }
 
 export default connect(

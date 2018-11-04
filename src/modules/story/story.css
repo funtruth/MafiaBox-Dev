@@ -15,10 +15,20 @@
     justify-content: center;
 }
 
+.story-title {
+    padding: 2px 0px;
+    color: #d6d6d6;
+    font-size: 14px;
+    pointer-events: auto;
+    margin-bottom: 6px;
+    display: flex;
+    flex-direction: row;
+}
+
 .story-tag {
-    padding: 6px 10px;
+    padding: 12px 10px;
     border-radius: 4px;
-    color: #fff;
+    color: #d6d6d6;
     background-color: rgba(40, 43, 48,1);
     font-size: 14px;
     pointer-events: auto;

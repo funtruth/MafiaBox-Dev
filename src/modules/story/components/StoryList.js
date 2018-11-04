@@ -9,28 +9,22 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     // styles we need to apply on draggables
     ...draggableStyle,
     ...styles.itemStyle,
-    cursor: 'pointer',
 });
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightred' : 'lightyellow',
-    display: 'flex',
-    overflow: 'auto',
+    ...styles.listStyle,
 });
 
 class StoryList extends React.Component{
-    render() {
+    render() {  
         const { item, storyData } = this.props
         return (
             <div style={styles.listStyle}>
-                <Droppable droppableId={item}>
+                <Droppable droppableId={item} type="ITEM">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
-                            style={[
-                                getListStyle(snapshot.isDraggingOver),
-                                styles.listStyle,
-                            ]}
+                            style={getListStyle(snapshot.isDraggingOver)}
                         >
                             {storyData[item].map((item, index) => (
                                 <Draggable key={item} draggableId={item} index={index}>
@@ -44,7 +38,7 @@ class StoryList extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                        <div className="story-tag">{item}</div>
+                                            <div className="story-tag">{item}</div>
                                         </div>
                                     )}
                                 </Draggable>
@@ -67,12 +61,17 @@ const styles = {
         fontSize: 14,
         lineHeight: 1.2,
         fontFamily: 'Arial',
-        fontWeight: '500',
-        width: 200,
+        fontWeight: '550',
+        cursor: 'pointer',
+        borderRadius: '4px',
+        boxShadow: 'rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px',
+        marginBottom: 6,
     },
     listStyle: {
-        backgroundColor: 'red',
-        pointerEvents: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
+        minHeight: 250,
     },
 }
 
