@@ -6,7 +6,7 @@ class StoryTitle extends React.Component{
 
         return (
             <div className="story-title">
-                <div className="black-grey" style={styles.title}>{item}</div>
+                <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
 
             </div>
         )
@@ -16,7 +16,7 @@ class StoryTitle extends React.Component{
 const styles = {
     title: {
         borderRadius: 2,
-        padding: '4px 10px',
+        padding: '2px 10px',
     }
 }
 

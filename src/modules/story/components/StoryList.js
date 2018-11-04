@@ -18,15 +18,21 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     render() {  
         const { item, storyData } = this.props
+        const isEmpty = storyData[item.key].length === 0
+
         return (
             <div style={styles.listStyle}>
-                <Droppable droppableId={item} type="ITEM">
+                <Droppable droppableId={item.key} type="ITEM">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {storyData[item].map((item, index) => (
+                            {isEmpty?
+                            <div className="story-empty">
+                                {`There is nothing here yet.`}
+                            </div>:
+                            storyData[item.key].map((item, index) => (
                                 <Draggable key={item} draggableId={item} index={index}>
                                     {(provided, snapshot) => (
                                         <div

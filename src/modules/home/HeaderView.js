@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
-import { clearRoleInfo, saveRoleInfoLocally } from '../roles/RoleReducer'
+import { clearRoleInfo, createNewRole, saveRoleInfoLocally } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 
 import { modalType } from '../modal/modalConfig'
@@ -16,6 +16,10 @@ class HeaderView extends React.Component{
 
     _goBack = () => {
         this.props.clearRoleInfo()
+    }
+
+    _onCreate = () => {
+        this.props.createNewRole()
     }
 
     _onSave = () => {
@@ -40,7 +44,7 @@ class HeaderView extends React.Component{
                     </div>
                 </Link>
                 <Link to="/home/edit"> 
-                    <div className="cute-button" style={{ marginRight: 8 }}>
+                    <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onCreate}>
                         <i class="option-icon ion-ios-add-circle"></i>
                         {'Add Role'}
                     </div>
@@ -69,6 +73,7 @@ export default withRouter(connect(
     }),
     {
         clearRoleInfo,
+        createNewRole,
         saveRoleInfoLocally,
         showModalByKey,
     }

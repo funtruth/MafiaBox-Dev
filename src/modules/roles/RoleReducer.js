@@ -6,12 +6,16 @@ const initialState = {
 
     roles: {},
 
+    roleInfoDefaults: {},
     roleInfoCopy: {},
     roleInfoWorkspace: {},
+
+    gameKey: 'MAF',
 }
 
 const CLEAR_ROLE_INFO = 'roles/clear-role-info'
 const SHOW_ROLE_INFO = 'roles/show-role-info'
+const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
 const SAVE_ROLE_INFO_LOCALLY = 'roles/-save-role-info-locally'
 const DELETE_ROLE = 'roles/delete-role'
@@ -29,6 +33,25 @@ export function showRoleInfo(roleId) {
         dispatch({
             type: SHOW_ROLE_INFO,
             payload: roleId
+        })
+    }
+}
+
+export function createNewRole() {
+    return(dispatch, getState) => {
+        const { roles, roleInfoDefaults, gameKey } = getState().roles
+
+        let uid = helpers.genUID(gameKey)
+        while(roles[uid]) {
+            uid = helpers.genUID(gameKey)
+        }
+
+        dispatch({
+            type: CREATE_NEW_ROLE,
+            payload: {
+                ...roleInfoDefaults,
+                roleId: uid,
+            }
         })
     }
 }
@@ -67,6 +90,8 @@ export default (state = initialState, action) => {
             return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {} }
         case SHOW_ROLE_INFO:
             return { ...state, roleInfoCopy: state.roles[action.payload], roleInfoWorkspace: state.roles[action.payload] }
+        case CREATE_NEW_ROLE:
+            return { ...state, roleInfoCopy: action.payload, roleInfoWorkspace: action.payload }
         case UPDATE_ROLE_INFO:
             return { ...state, roleInfoWorkspace: { ...state.roleInfoWorkspace, [action.payload.key]: action.payload.value }}
         case SAVE_ROLE_INFO_LOCALLY:

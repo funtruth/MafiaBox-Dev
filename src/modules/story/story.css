@@ -17,7 +17,7 @@
 
 .story-title {
     padding: 2px 0px;
-    color: #d6d6d6;
+    color: #fff;
     font-size: 14px;
     pointer-events: auto;
     margin-bottom: 6px;
@@ -32,4 +32,10 @@
     background-color: rgba(40, 43, 48,1);
     font-size: 14px;
     pointer-events: auto;
+}
+
+.story-empty {
+    color: #919191;
+    font-size: 13px;
+    padding: 8px 2px;
 }

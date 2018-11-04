@@ -1,9 +1,29 @@
 const initialState = {
-    stories: ['inProgress', 'complete'],
+    stories: [
+        {
+            key: 'inProgress',
+            title: 'In Progress',
+            palette: 'palette-yellow',
+            default: true,
+        },
+        {
+            key: 'complete',
+            title: 'Complete',
+            palette: 'palette-blue',
+            default: true,
+        },
+        {
+            key: 'live',
+            title: 'Live',
+            palette: 'palette-green',
+            default: true,
+        }
+    ],
 
     storyData: {
         inProgress: ['Doctor', 'Hunter'],
-        complete: ['Venom', 'Striker', 'Mafia']
+        complete: ['Venom', 'Striker', 'Mafia'],
+        live: [],
     }
 }
 

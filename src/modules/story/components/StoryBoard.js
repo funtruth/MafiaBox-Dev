@@ -93,7 +93,7 @@ class StoryBoard extends React.Component{
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
                             {this.props.stories.map((item, index) => (
-                                <Draggable key={item} draggableId={item} index={index}>
+                                <Draggable key={item.key} draggableId={item.key} index={index}>
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}

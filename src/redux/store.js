@@ -9,6 +9,7 @@ const persistConfig = {
     timeout: 1000,
     key: 'root',
     storage,
+    //blacklist: ['roles']
 }
   
 const persistedReducer = persistReducer(persistConfig, reducers)
