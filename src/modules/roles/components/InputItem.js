@@ -7,17 +7,21 @@ class InputItem extends React.Component{
     }
 
     render() {
+        const { label, placeholder, value, name } = this.props
+        const autoFocus = name === 'roleName'
+
         return (
             <div style={styles.item}>
                 <div style={styles.text}>
-                    {this.props.label}
+                    {label}
                 </div>
                 <input
                     className="add-role-input"
-                    placeholder={this.props.placeholder}
+                    placeholder={placeholder}
                     type="text"
                     onInput={this._onChange}
-                    value={this.props.value}
+                    value={value}
+                    autoFocus={autoFocus}
                 />
             </div>
         )

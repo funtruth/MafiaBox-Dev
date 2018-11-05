@@ -25,6 +25,23 @@ class HeaderView extends React.Component{
         }
     }
 
+    _getPathTitle(key) {
+        switch(key) {
+            case 'home':
+                return 'Storyboard'
+            default:
+                return this.props.roles[key].roleName
+        }
+    }
+
+    _onPathClick = (paths, index) => {
+        let newPaths = paths.slice(0, index + 1).join('/')
+
+        this.setState({
+            redirect: newPaths
+        })
+    }
+
     _getHeader(path) {
         let paths = path.split('/')
         let leftBtns = [], rightBtns = []
@@ -32,18 +49,18 @@ class HeaderView extends React.Component{
         if (paths[1] === 'home') {
             if (paths[2]) {
                 leftBtns = [
-                    { key: 'back', title: 'Go Back', icon: 'ion-ios-undo' }
+                    { key: 'back', icon: 'ion-ios-undo' },
                 ]
                 rightBtns = [
                     { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
                 ]
             } else {
                 leftBtns = [
-                    { key: 'create', title: 'New Role', icon: 'ion-ios-add-circle' },
-                    { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
+                    { key: 'back', icon: 'ion-ios-undo' },
                 ]
                 rightBtns = [
-                    { key: 'discard', title: 'Discard Changes', icon: 'ion-md-refresh' },
+                    { key: 'create', title: 'New Role', icon: 'ion-ios-add-circle' },
+                    { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                 ]
             }
         }
@@ -61,8 +78,6 @@ class HeaderView extends React.Component{
                 return this._onBack()
             case 'create':
                 return this._onCreate()
-            case 'discard':
-                return this._onReset()
             case 'delete':
                 return this._onDelete()
             default:
@@ -70,8 +85,12 @@ class HeaderView extends React.Component{
     }
 
     _onBack = () => {
+        let paths = this.props.location.pathname.split('/')
+        paths.pop()
+        paths = paths.join('/')
+
         this.setState({
-            redirect: '/home'
+            redirect: paths
         })
     }
 
@@ -89,10 +108,6 @@ class HeaderView extends React.Component{
         this.props.createNewRole(uid)
     }
 
-    _onReset = () => {
-        this.props.showModalByKey(modalType.discardChanges)
-    }
-
     _onDelete = () => {
         this.props.showModalByKey(modalType.deleteRole)
     }
@@ -108,9 +123,28 @@ class HeaderView extends React.Component{
 
     _renderItem = (item, index) => {
         return (
-            <div className="cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
+            <div className="row cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
                 <i class={`option-icon ${item.icon}`}></i>
-                {item.title}
+                {item.title && <div style={{ marginLeft: 6 }}>{item.title}</div>}
+            </div>
+        )
+    }
+
+    _renderPath() {
+        const { pathname } = this.props.location
+        let paths = pathname.split('/')
+
+        return (
+            <div className="row" style={{ marginRight: 'auto' }}>
+                {paths.map((item, index) => (
+                    <div className="row-centered path-view">
+                        {index > 1 ? <div className="path-separator">{'/'}</div>
+                        :<div style={{width: 4}}/>}
+                        {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
+                            {this._getPathTitle(item)}
+                        </div>}
+                    </div>
+                ))}
             </div>
         )
     }
@@ -120,7 +154,7 @@ class HeaderView extends React.Component{
             <div className="row header">
                 {this._redirect()}
                 {this.state.leftBtns.map(this._renderItem)}
-                <div style={{ marginLeft: 'auto' }}/>
+                {this._renderPath()}
                 {this.state.rightBtns.map(this._renderItem)}
             </div>
         )

@@ -4,6 +4,14 @@
     flex-wrap: wrap;
 }
 
+.row-centered {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
 .add-role-icon {
     font-size: 18px;
     color: #fff;

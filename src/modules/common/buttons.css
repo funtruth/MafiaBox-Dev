@@ -1,8 +1,6 @@
 .underline-button {
     padding: 12px 26px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 14px Arial;
     color: #fff;
     cursor: pointer;
 }
@@ -14,9 +12,7 @@
 .modal-button {
     padding: 12px 16px;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 14px Arial;
     color: #fff;
     cursor: pointer;
     background-color: rgb(66, 70, 80);
@@ -25,9 +21,7 @@
 .delete-button {
     padding: 12px 16px;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 14px Arial;
     color: #fff;
     cursor: pointer;
     background-color: #db4757;
@@ -40,14 +34,35 @@
 .cute-button {
     padding: 6px 12px;
     border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 14px Arial;
     color: #fff;
     cursor: pointer;
     background-color: rgba(40, 43, 48,1);
 }
 
 .cute-button:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.path-view {
+    font: 400 15px Arial;
+}
+
+.path-separator {
+    padding: 0px 5px;
+    color: #969696;
+}
+
+.path-button {
+    padding: 6px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.path-button:hover {
     background-color: hsla(0,0%,100%,.1);
 }
