@@ -43,7 +43,7 @@ class HeaderView extends React.Component{
         return (
             <div className="row" style={{ padding: 8}}>
                 <Link to="/home"> 
-                    <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._goBack}>
+                    <div className="cute-button" style={{ marginRight: 8 }} onClick={this._goBack}>
                         <i class="option-icon ion-ios-undo"></i>
                         {'Go Back'}
                     </div>

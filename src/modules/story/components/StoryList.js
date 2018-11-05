@@ -21,7 +21,6 @@ class StoryList extends React.Component{
         const isEmpty = storyData[item.key].length === 0
 
         return (
-            <div style={styles.listStyle}>
                 <Droppable droppableId={item.key} type="ITEM">
                     {(provided, snapshot) => (
                         <div
@@ -53,7 +52,6 @@ class StoryList extends React.Component{
                         </div>
                     )}
                 </Droppable>
-            </div>
         )
     }
 }
