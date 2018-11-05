@@ -8,18 +8,43 @@ import InputItem from './components/InputItem'
 import BlurInputItem from './components/BlurInputItem'
 import PropertyItem from './components/PropertyItem';
 
+import { updateRoleInfo } from './RoleReducer'
+
 class RoleView extends React.Component{
     _renderItem = (item) => {
+        let FieldComponent
         switch(item.type) {
             case itemType.input:
-                return <InputItem name={item.key} label={item.title} placeholder={item.placeholder}/>
+                FieldComponent = InputItem
+                break
             case itemType.blurInput:
-                return <BlurInputItem name={item.key} label={item.title}/>
+                FieldComponent = BlurInputItem
+                break
             case itemType.tag:
-                return <PropertyItem name={item.key} label={item.title} data={item.data}/>
+                FieldComponent = PropertyItem
+                break
             default:
-                return null
+                FieldComponent = null
+                break
         }
+
+        let roleId = this.props.match.params.roleId
+        if (!roleId) return null
+        let roleInfo = this.props.roles[roleId]
+        if (!roleInfo) return null
+        let value = roleInfo[item.key]
+
+        return (
+            <FieldComponent
+                name={item.key}
+                label={item.title}
+                placeholder={item.placeholder}
+                data={item.data}
+                roleId={roleId}
+                value={value}
+                updateRoleInfo={this.props.updateRoleInfo}
+            />
+        )
     }
 
     render() {
@@ -40,5 +65,9 @@ const styles = {
 export default connect(
     state => ({
         fields: state.roles.fields,
-    })
+        roles: state.roles.roles,
+    }),
+    {
+        updateRoleInfo,
+    }
 )(RoleView)

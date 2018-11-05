@@ -1,24 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { updateRoleInfo } from '../RoleReducer'
 
 class InputItem extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            value: props.roleInfoWorkspace && (props.roleInfoWorkspace[props.name] || ''),
-        }
-    }
-
-    componentWillReceiveProps(newProps) {
-        this.setState({
-            value: newProps.roleInfoWorkspace[this.props.name] || ''
-        })
-    }
-
     _onChange = e => {
-        this.props.updateRoleInfo(this.props.name, e.target.value)
+        const { roleId, name } = this.props
+        this.props.updateRoleInfo(roleId, name, e.target.value)
     }
 
     render() {
@@ -32,7 +17,7 @@ class InputItem extends React.Component{
                     placeholder={this.props.placeholder}
                     type="text"
                     onInput={this._onChange}
-                    value={this.state.value}
+                    value={this.props.value}
                 />
             </div>
         )
@@ -52,11 +37,4 @@ const styles = {
     }
 }
 
-export default connect(
-    state => ({
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
-    }),
-    {
-        updateRoleInfo,
-    }
-)(InputItem)
+export default InputItem

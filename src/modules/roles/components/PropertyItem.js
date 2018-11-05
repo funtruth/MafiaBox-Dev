@@ -1,12 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { updateRoleInfo } from '../RoleReducer'
 
 class PropertyItem extends React.Component{
     _renderItem = (item) => {
-        const { roleInfoWorkspace, name } = this.props
-        const active = roleInfoWorkspace && name && item.key === roleInfoWorkspace[name]
+        const { value, name } = this.props
+        const active = name && item.key === value
         const style = {
             backgroundColor: active ? (item.color || 'rgba(40, 43, 48,1)') : 'hsla(0,0%,100%,.1)',
         }
@@ -18,7 +15,8 @@ class PropertyItem extends React.Component{
     }
 
     _onClick = key => {
-        this.props.updateRoleInfo(this.props.name, key)
+        const { roleId, name } = this.props
+        this.props.updateRoleInfo(roleId, name, key)
     }
 
     render() {
@@ -51,11 +49,4 @@ const styles = {
     },
 }
 
-export default connect(
-    state => ({
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
-    }),
-    {
-        updateRoleInfo,
-    }
-)(PropertyItem)
+export default PropertyItem

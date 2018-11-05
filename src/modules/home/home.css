@@ -6,6 +6,10 @@
     width: 100vw;
 }
 
+.header {
+    padding: 8px;
+}
+
 .scrollable-y {
     overflow: auto;
     transition: color 0.3s;

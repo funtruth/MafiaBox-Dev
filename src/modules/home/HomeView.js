@@ -11,12 +11,12 @@ class HomeView extends React.Component{
     render() {
         return (
             <div className="home-view">
-                <SideBarView/>
+                <SideBarView location={this.props.location}/>
                 <div style={{ width: '100%' }}>
                     <HeaderView location={this.props.location}/>
                     <div style={{ padding: 8, paddingTop: 0 }}>
                         <Route exact path="/home" component={StoryView}/>
-                        <Route exact path="/home/edit" component={RoleView}/>
+                        <Route exact path="/home/:roleId" component={RoleView}/>
                     </div>
                 </div>
             </div>

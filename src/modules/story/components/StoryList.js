@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -16,42 +17,63 @@ const getListStyle = isDraggingOver => ({
 });
 
 class StoryList extends React.Component{
+    state = {
+        redirect: false
+    }
+
+    _onClick = (item) => {
+        this.setState({
+            redirect: item
+        })
+    }
+
+    _redirect() {
+        if (!this.state.redirect) return null
+        return (
+            <Redirect to={{
+                pathname: `/home/${this.state.redirect}`,
+            }}/>
+        )
+    }
+
     render() {  
         const { item, storyData } = this.props
         const isEmpty = storyData[item.key].length === 0
 
         return (
-                <Droppable droppableId={item.key} type="ITEM">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
-                            {isEmpty?
-                            <div className="story-empty">
-                                {`There is nothing here yet.`}
-                            </div>:
-                            storyData[item.key].map((item, index) => (
-                                <Draggable key={item} draggableId={item} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            <div className="story-tag">{item}</div>
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
+            <Droppable droppableId={item.key} type="ITEM">
+                {(provided, snapshot) => (
+                    <div
+                        ref={provided.innerRef}
+                        style={getListStyle(snapshot.isDraggingOver)}
+                    >
+                        {this._redirect()}
+                        {isEmpty?
+                        <div className="story-empty">
+                            {`There is nothing here yet.`}
+                        </div>:
+                        storyData[item.key].map((item, index) => (
+                            <Draggable key={item} draggableId={item} index={index}>
+                                {(provided, snapshot) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        style={getItemStyle(
+                                            snapshot.isDragging,
+                                            provided.draggableProps.style
+                                        )}
+                                        onClick={this._onClick.bind(this, item)}
+                                    >
+                                        <div className="story-tag">{item}</div>
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
         )
     }
 }

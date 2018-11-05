@@ -7,17 +7,11 @@ import StoryBoard from './components/StoryBoard'
 class StoryView extends React.Component{
     render() {
         return (
-            <div style={styles.container}>
+            <div className="story-view">
                 <StoryBoard/>
             </div>
         )
     }
-}
-
-const styles = {
-    container: {
-        flex: 1,
-    },
 }
 
 export default connect(

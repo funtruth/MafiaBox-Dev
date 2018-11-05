@@ -1,20 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class BlurInputItem extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            value: props.roleInfoWorkspace && (props.roleInfoWorkspace[props.name] || ''),
-        }
-    }
-
-    componentWillReceiveProps(newProps) {
-        this.setState({
-            value: newProps.roleInfoWorkspace[this.props.name] || ''
-        })
-    }
-
     render() {
         return (
             <div style={styles.item}>
@@ -22,7 +8,7 @@ class BlurInputItem extends React.Component{
                     {this.props.label}
                 </div>
                 <div className="blur-item">
-                    {this.state.value}
+                    {this.props.value}
                 </div>
             </div>
         )
@@ -42,8 +28,4 @@ const styles = {
     }
 }
 
-export default connect(
-    state => ({
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
-    }),
-)(BlurInputItem)
+export default BlurInputItem

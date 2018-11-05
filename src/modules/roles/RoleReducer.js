@@ -88,20 +88,13 @@ const initialState = {
     gameKey: 'MAF',
 }
 
-const CLEAR_ROLE_INFO = 'roles/clear-role-info'
 const SHOW_ROLE_INFO = 'roles/show-role-info'
 const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
 const SAVE_ROLE_INFO = 'roles/-save-role-info'
 const DELETE_ROLE = 'roles/delete-role'
 
-export function clearRoleInfo() {
-    return (dispatch) => {
-        dispatch({
-            type: CLEAR_ROLE_INFO,
-        })
-    } 
-}
+const PUSH_TO_HISTORY = 'roles/push-to-history'
 
 export function showRoleInfo(roleId) {
     return (dispatch) => {
@@ -112,14 +105,9 @@ export function showRoleInfo(roleId) {
     }
 }
 
-export function createNewRole() {
+export function createNewRole(uid) {
     return(dispatch, getState) => {
-        const { roles, roleInfoDefaults, gameKey } = getState().roles
-
-        let uid = helpers.genUID(gameKey)
-        while(roles[uid]) {
-            uid = helpers.genUID(gameKey)
-        }
+        const { roleInfoDefaults } = getState().roles
 
         dispatch(addRoleToStory(uid, roleInfoDefaults.roleStoryKey))
 
@@ -133,12 +121,22 @@ export function createNewRole() {
     }
 }
 
-export function updateRoleInfo(key, value) {
-    return (dispatch) => {
+export function updateRoleInfo(roleId, field, value) {
+    return (dispatch, getState) => {
+        const { history } = getState().roles
+
+        if (roleId !== history[0]) {
+            let historyClone = helpers.updateHistory(history, roleId)
+            dispatch({
+                type: PUSH_TO_HISTORY,
+                payload: historyClone
+            })
+        }
+
         dispatch({
             type: UPDATE_ROLE_INFO,
             payload: {
-                key, value
+                roleId, field, value
             }
         })
     }
@@ -153,29 +151,34 @@ export function saveRoleInfo(roleInfo) {
     }
 }
 
-export function deleteRole() {
-    return (dispatch) => {
+export function deleteRole(roleId) {
+    return (dispatch, getState) => {
+        let rolesClone = getState().roles
+        delete rolesClone[roleId]
+
         dispatch({
-            type: DELETE_ROLE
+            type: DELETE_ROLE,
+            payload: rolesClone
         })
     }
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case CLEAR_ROLE_INFO:
-            return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {} }
         case SHOW_ROLE_INFO:
             return { ...state, roleInfoCopy: state.roles[action.payload], roleInfoWorkspace: state.roles[action.payload] }
         case CREATE_NEW_ROLE:
-            return { ...state, roleInfoCopy: action.payload, roleInfoWorkspace: action.payload }
+            return { ...state, roles : { ...state.roles, [action.payload.roleId]: action.payload } }
         case UPDATE_ROLE_INFO:
-            return { ...state, roleInfoWorkspace: { ...state.roleInfoWorkspace, [action.payload.key]: action.payload.value }}
+            return { ...state, roles: { ...state.roles,
+                [action.payload.roleId]: { ...state.roles[action.payload.roleId], [action.payload.field]: action.payload.value } } }
         case SAVE_ROLE_INFO:
             return { ...state, roles: { ...state.roles, [action.payload.roleId]: action.payload },
                 history: helpers.updateHistory(state.history, action.payload.roleId) }
+        case PUSH_TO_HISTORY:
+            return { ...state, history: action.payload }
         case DELETE_ROLE:   
-            return { ...state, roleInfoCopy: {}, roleInfoWorkspace: {}, ...helpers.deleteRole(state) }
+            return { ...state, roles: action.payload }
         default:
             return state;
     }

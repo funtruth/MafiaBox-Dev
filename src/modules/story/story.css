@@ -1,3 +1,25 @@
+.story-view {
+    height: 84vh;
+    overflow: auto;
+    transition: color 0.3s;
+    color: rgba(54, 57, 64, 1);
+}
+
+.story-view:hover {
+    color: rgba(32, 34, 37, 1);
+}
+
+.story-view::-webkit-scrollbar {
+    width: 16px;
+}
+
+.story-view::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+    background: rgba(32, 34, 37, 1);
+    border-radius: 8px;
+    border: 4px rgba(54, 57, 64, 1) solid;
+	box-shadow: inset 0 0 0 10px;
+}
 .footer {
     background-color: hsla(0,0%,100%,.1);
     margin-top: auto;

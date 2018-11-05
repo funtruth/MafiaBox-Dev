@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import { showRoleInfo } from '../roles/RoleReducer'
 
@@ -8,13 +8,16 @@ import { heights } from '../common/dim'
 
 class SideBarView extends React.Component{
     _renderItem = (item) => {
-        const { roles, roleInfoWorkspace } = this.props
+        const { roles, location } = this.props
         if (!item) return null
+
         let roleInfo = roles[item]
-        let selected = item === roleInfoWorkspace.roleId
+        let path = location.pathname
+        let paths = path.split('/')
+        let selected = item === paths[paths.length - 1]
 
         return (
-            <Link to="/home/edit">
+            <Link to={`/home/${item}`}>
                 <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
                     <div style={styles.title}>{roleInfo.roleName}</div>
                     <div style={styles.desc}>{roleInfo.roleDesc}</div>
@@ -77,13 +80,12 @@ const styles = {
     },
 }
 
-export default connect(
+export default withRouter(connect(
     state => ({
         history: state.roles.history,
         roles: state.roles.roles,
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
     }),
     {
         showRoleInfo,
     }
-)(SideBarView)
+)(SideBarView))

@@ -5,19 +5,6 @@ export function updateHistory(history, key) {
     return [ key, ...r ]
 }
 
-export function deleteRole(state) {
-    let roleId = state.roleInfoWorkspace.roleId
-    let history = _.filter(state.history, i => i !== roleId)
-    let roles = state.roles
-
-    delete roles[roleId]
-
-    return {
-        history,
-        roles,
-    }
-}
-
 export function genUID(key) {
     return `${key}-xxxxxxxx`.replace(/[xy]/g, function(c) {
         // eslint-disable-next-line

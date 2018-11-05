@@ -1,34 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { Redirect, withRouter, Link } from 'react-router-dom'
 
-import { clearRoleInfo, createNewRole, saveRoleInfo } from '../roles/RoleReducer'
+import { createNewRole } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
+import * as helpers from '../roles/helpers'
 
 import { modalType } from '../modal/modalConfig'
 
 class HeaderView extends React.Component{
+    state = {
+        redirect: false
+    }
+    
     componentWillReceiveProps(newProps) {
         let path = newProps.location.pathname
         let paths = path.split('/')
         console.log(paths)
     }
 
-    _goBack = () => {
-        this.props.clearRoleInfo()
-    }
-
     _onCreate = () => {
-        this.props.createNewRole()
-    }
+        const { gameKey, roles } = this.props
 
-    _onSave = () => {
-        const { roleInfoWorkspace } = this.props
-        if (roleInfoWorkspace.roleName && roleInfoWorkspace.roleName.trim()) {
-            this.props.saveRoleInfo(this.props.roleInfoWorkspace)
-        } else {
-            this.props.showModalByKey(modalType.saveRoleAs)
+        let uid = helpers.genUID(gameKey)
+        while(roles[uid]) {
+            uid = helpers.genUID(gameKey)
         }
+
+        this.setState({
+            redirect: uid
+        })
+        this.props.createNewRole(uid)
     }
 
     _onReset = () => {
@@ -39,9 +41,19 @@ class HeaderView extends React.Component{
         this.props.showModalByKey(modalType.deleteRole)
     }
 
+    _redirect() {
+        if (!this.state.redirect) return null
+        return (
+            <Redirect to={{
+                pathname: `/home/${this.state.redirect}`,
+            }}/>
+        )
+    }
+
     render() {
         return (
-            <div className="row" style={{ padding: 8}}>
+            <div className="row header">
+                {this._redirect()}
                 <Link to="/home"> 
                     <div className="cute-button" style={{ marginRight: 8 }} onClick={this._goBack}>
                         <i class="option-icon ion-ios-undo"></i>
@@ -54,11 +66,8 @@ class HeaderView extends React.Component{
                         {'Add Role'}
                     </div>
                 </Link>
-                <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onSave}>
-                    <i class="option-icon ion-ios-save"></i>
-                    {'Save'}
-                </div>
-                <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onReset}>
+                
+                <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onReset}>
                     <i class="option-icon ion-md-refresh"></i>
                     {'Discard Changes'}
                 </div>
@@ -73,13 +82,11 @@ class HeaderView extends React.Component{
 
 export default withRouter(connect(
     state => ({
-        roleInfoCopy: state.roles.roleInfoCopy,
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
+        gameKey: state.roles.gameKey,
+        roles: state.roles.roles,
     }),
     {
-        clearRoleInfo,
         createNewRole,
-        saveRoleInfo,
         showModalByKey,
     }
 )(HeaderView))
