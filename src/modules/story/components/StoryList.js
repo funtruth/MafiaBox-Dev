@@ -21,10 +21,12 @@ class StoryList extends React.Component{
         redirect: false
     }
 
-    _onClick = (item) => {
-        this.setState({
-            redirect: item
-        })
+    _onClick = (item, snapshot) => {
+        if (!snapshot.isDragging){
+            this.setState({
+                redirect: item
+            })
+        }
     }
 
     _redirect() {
@@ -56,6 +58,7 @@ class StoryList extends React.Component{
                             <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
+                                        onClick={this._onClick.bind(this, item, snapshot)}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
@@ -63,7 +66,6 @@ class StoryList extends React.Component{
                                             snapshot.isDragging,
                                             provided.draggableProps.style
                                         )}
-                                        onClick={this._onClick.bind(this, item)}
                                     >
                                         <div className="story-tag">{item}</div>
                                     </div>

@@ -88,22 +88,12 @@ const initialState = {
     gameKey: 'MAF',
 }
 
-const SHOW_ROLE_INFO = 'roles/show-role-info'
 const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
 const SAVE_ROLE_INFO = 'roles/-save-role-info'
 const DELETE_ROLE = 'roles/delete-role'
 
 const PUSH_TO_HISTORY = 'roles/push-to-history'
-
-export function showRoleInfo(roleId) {
-    return (dispatch) => {
-        dispatch({
-            type: SHOW_ROLE_INFO,
-            payload: roleId
-        })
-    }
-}
 
 export function createNewRole(uid) {
     return(dispatch, getState) => {
@@ -165,8 +155,6 @@ export function deleteRole(roleId) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case SHOW_ROLE_INFO:
-            return { ...state, roleInfoCopy: state.roles[action.payload], roleInfoWorkspace: state.roles[action.payload] }
         case CREATE_NEW_ROLE:
             return { ...state, roles : { ...state.roles, [action.payload.roleId]: action.payload } }
         case UPDATE_ROLE_INFO:

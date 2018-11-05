@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
-
-import { showRoleInfo } from '../roles/RoleReducer'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import { heights } from '../common/dim'
 
 class SideBarView extends React.Component{
+    state = {
+        redirect: false
+    }
+
     _renderItem = (item) => {
         const { roles, location } = this.props
         if (!item) return null
@@ -17,22 +19,30 @@ class SideBarView extends React.Component{
         let selected = item === paths[paths.length - 1]
 
         return (
-            <Link to={`/home/${item}`}>
-                <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                    <div style={styles.title}>{roleInfo.roleName}</div>
-                    <div style={styles.desc}>{roleInfo.roleDesc}</div>
-                </div>
-            </Link>
+            <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
+                <div style={styles.title}>{roleInfo.roleName}</div>
+                <div style={styles.desc}>{roleInfo.roleDesc}</div>
+            </div>
         )
     }
 
     _onClick = (item) => {
-        this.props.showRoleInfo(item)
+        this.setState({
+            redirect: item
+        })
+    }
+
+    _redirect() {
+        if (!this.state.redirect) return null
+        return (
+            <Redirect to={`home/${this.state.redirect}`}/>
+        )
     }
 
     render() {
         return (
             <div style={styles.container}>
+                {this._redirect()}
                 <div style={styles.header}>
 
                 </div>
@@ -85,7 +95,4 @@ export default withRouter(connect(
         history: state.roles.history,
         roles: state.roles.roles,
     }),
-    {
-        showRoleInfo,
-    }
 )(SideBarView))
