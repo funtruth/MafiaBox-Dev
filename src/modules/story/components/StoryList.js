@@ -24,7 +24,7 @@ class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
             this.setState({
-                redirect: item
+                redirect: `/home/${item}`
             })
         }
     }
@@ -33,7 +33,7 @@ class StoryList extends React.Component{
         if (!this.state.redirect) return null
         return (
             <Redirect to={{
-                pathname: `/home/${this.state.redirect}`,
+                pathname: this.state.redirect,
             }}/>
         )
     }

@@ -28,14 +28,18 @@ class SideBarView extends React.Component{
 
     _onClick = (item) => {
         this.setState({
-            redirect: item
+            redirect: `/home/${item}`
         })
     }
 
     _redirect() {
         if (!this.state.redirect) return null
+        //hack for now
+        this.setState({
+            redirect: false
+        })
         return (
-            <Redirect to={`home/${this.state.redirect}`}/>
+            <Redirect to={this.state.redirect}/>
         )
     }
 

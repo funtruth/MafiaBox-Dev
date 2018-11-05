@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter, Link } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 
 import { createNewRole } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
@@ -9,14 +9,67 @@ import * as helpers from '../roles/helpers'
 import { modalType } from '../modal/modalConfig'
 
 class HeaderView extends React.Component{
-    state = {
-        redirect: false
+    constructor(props) {
+        super(props)
+        this.state = {
+            redirect: false,
+            ...this._getHeader(props.location.pathname)
+        }
     }
     
     componentWillReceiveProps(newProps) {
-        let path = newProps.location.pathname
+        if (newProps.location.pathname !== this.props.location.pathname){ 
+            this.setState(
+                this._getHeader(newProps.location.pathname)
+            )
+        }
+    }
+
+    _getHeader(path) {
         let paths = path.split('/')
-        console.log(paths)
+        let leftBtns = [], rightBtns = []
+        
+        if (paths[1] === 'home') {
+            if (paths[2]) {
+                leftBtns = [
+                    { key: 'back', title: 'Go Back', icon: 'ion-ios-undo' }
+                ]
+            } else {
+                leftBtns = [
+                    { key: 'create', title: 'Add Role', icon: 'ion-ios-add-circle' },
+                ]
+                rightBtns = [
+                    { key: 'discard', title: 'Discard Changes', icon: 'ion-md-refresh' },
+                    { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
+                ]
+            }
+        }
+
+        return {
+            redirect: path,
+            leftBtns,
+            rightBtns
+        }
+    }
+
+    _onClick = (key) => {
+        switch(key) {
+            case 'back':
+                return this._onBack()
+            case 'create':
+                return this._onCreate()
+            case 'discard':
+                return this._onReset()
+            case 'delete':
+                return this._onDelete()
+            default:
+        }
+    }
+
+    _onBack = () => {
+        this.setState({
+            redirect: '/home'
+        })
     }
 
     _onCreate = () => {
@@ -28,7 +81,7 @@ class HeaderView extends React.Component{
         }
 
         this.setState({
-            redirect: uid
+            redirect: `/home/${uid}`
         })
         this.props.createNewRole(uid)
     }
@@ -45,8 +98,17 @@ class HeaderView extends React.Component{
         if (!this.state.redirect) return null
         return (
             <Redirect to={{
-                pathname: `/home/${this.state.redirect}`,
+                pathname: this.state.redirect
             }}/>
+        )
+    }
+
+    _renderItem = (item) => {
+        return (
+            <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onClick.bind(this, item.key)}>
+                <i class={`option-icon ${item.icon}`}></i>
+                {item.title}
+            </div>
         )
     }
 
@@ -54,27 +116,9 @@ class HeaderView extends React.Component{
         return (
             <div className="row header">
                 {this._redirect()}
-                <Link to="/home"> 
-                    <div className="cute-button" style={{ marginRight: 8 }} onClick={this._goBack}>
-                        <i class="option-icon ion-ios-undo"></i>
-                        {'Go Back'}
-                    </div>
-                </Link>
-                <Link to="/home/edit"> 
-                    <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onCreate}>
-                        <i class="option-icon ion-ios-add-circle"></i>
-                        {'Add Role'}
-                    </div>
-                </Link>
-                
-                <div className="cute-button" style={{ marginLeft: 'auto', marginRight: 8 }} onClick={this._onReset}>
-                    <i class="option-icon ion-md-refresh"></i>
-                    {'Discard Changes'}
-                </div>
-                <div className="cute-button" onClick={this._onDelete}>
-                    <i class="option-icon ion-ios-trash"></i>
-                    {'Delete Role'}
-                </div>
+                {this.state.leftBtns.map(this._renderItem)}
+                <div style={{ marginLeft: 'auto' }}/>
+                {this.state.rightBtns.map(this._renderItem)}
             </div>
         )
     }
