@@ -34,13 +34,16 @@ class HeaderView extends React.Component{
                 leftBtns = [
                     { key: 'back', title: 'Go Back', icon: 'ion-ios-undo' }
                 ]
+                rightBtns = [
+                    { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
+                ]
             } else {
                 leftBtns = [
-                    { key: 'create', title: 'Add Role', icon: 'ion-ios-add-circle' },
+                    { key: 'create', title: 'New Role', icon: 'ion-ios-add-circle' },
+                    { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                 ]
                 rightBtns = [
                     { key: 'discard', title: 'Discard Changes', icon: 'ion-md-refresh' },
-                    { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
                 ]
             }
         }
@@ -103,9 +106,9 @@ class HeaderView extends React.Component{
         )
     }
 
-    _renderItem = (item) => {
+    _renderItem = (item, index) => {
         return (
-            <div className="cute-button" style={{ marginRight: 8 }} onClick={this._onClick.bind(this, item.key)}>
+            <div className="cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
                 <i class={`option-icon ${item.icon}`}></i>
                 {item.title}
             </div>

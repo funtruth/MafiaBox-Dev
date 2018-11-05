@@ -1,6 +1,5 @@
 import React from 'react'
 import './story.css'
-import { connect } from 'react-redux'
 
 import StoryBoard from './components/StoryBoard'
 
@@ -14,9 +13,4 @@ class StoryView extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-    }),
-    {
-    }
-)(StoryView)
+export default StoryView

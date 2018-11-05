@@ -1,5 +1,5 @@
 .story-view {
-    height: 84vh;
+    height: calc(100vh - 74px);
     overflow: auto;
     transition: color 0.3s;
     color: rgba(54, 57, 64, 1);
