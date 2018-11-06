@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { deleteRole } from '../../roles/RoleReducer'
 import { showModalByKey } from '../ModalReducer'
+import { navigate } from '../../navigation/NavReducer'
 
 class CloseWindow extends React.Component {
     _onCancel = () => {
@@ -10,20 +11,22 @@ class CloseWindow extends React.Component {
     }
 
     _onDelete = () => {
-        this.props.deleteRole()
+        this.props.deleteRole(this.props.modalParams.roleId)
         this.props.showModalByKey()
+        this.props.navigate('/home')
     }
 
     render() {
-        const { roleInfoWorkspace } = this.props
+        const { modalParams } = this.props
+        
         return (
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Delete "${roleInfoWorkspace.roleName}"?`}
+                        {`Delete "${modalParams.roleName}"?`}
                     </div>
                     <div className="modal-subtitle">
-                        {`Are you sure you want to delete ${roleInfoWorkspace.roleName}?`}
+                        {`Are you sure you want to delete ${modalParams.roleName}?`}
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
@@ -41,10 +44,11 @@ class CloseWindow extends React.Component {
 
 export default connect(
     state => ({
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
+        modalParams: state.modal.modalParams,
     }),
     {
         deleteRole,
         showModalByKey,
+        navigate,
     }
 )(CloseWindow)

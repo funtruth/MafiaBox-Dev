@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
-import { createNewRole } from '../roles/RoleReducer'
+import { createNewRole, deleteRole } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
+import { navigate } from '../navigation/NavReducer'
 import * as helpers from '../roles/helpers'
 
 import { modalType } from '../modal/modalConfig'
@@ -12,7 +13,6 @@ class HeaderView extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            redirect: false,
             ...this._getHeader(props.location.pathname)
         }
     }
@@ -30,16 +30,13 @@ class HeaderView extends React.Component{
             case 'home':
                 return 'Storyboard'
             default:
-                return this.props.roles[key].roleName
+                return (this.props.roles[key] && this.props.roles[key].roleName) || 'New Role'
         }
     }
 
     _onPathClick = (paths, index) => {
-        let newPaths = paths.slice(0, index + 1).join('/')
-
-        this.setState({
-            redirect: newPaths
-        })
+        let newPath = paths.slice(0, index + 1).join('/')
+        this.props.navigate(newPath)
     }
 
     _getHeader(path) {
@@ -66,7 +63,6 @@ class HeaderView extends React.Component{
         }
 
         return {
-            redirect: path,
             leftBtns,
             rightBtns
         }
@@ -88,10 +84,7 @@ class HeaderView extends React.Component{
         let paths = this.props.location.pathname.split('/')
         paths.pop()
         paths = paths.join('/')
-
-        this.setState({
-            redirect: paths
-        })
+        this.props.navigate(paths)
     }
 
     _onCreate = () => {
@@ -102,23 +95,23 @@ class HeaderView extends React.Component{
             uid = helpers.genUID(gameKey)
         }
 
-        this.setState({
-            redirect: `/home/${uid}`
-        })
+        this.props.navigate(`/home/${uid}`)
         this.props.createNewRole(uid)
     }
 
     _onDelete = () => {
-        this.props.showModalByKey(modalType.deleteRole)
-    }
+        let paths = this.props.location.pathname.split('/')
+        let roleId = paths.pop()
+        let roleName = this.props.roles[roleId] && this.props.roles[roleId].roleName
 
-    _redirect() {
-        if (!this.state.redirect) return null
-        return (
-            <Redirect to={{
-                pathname: this.state.redirect
-            }}/>
-        )
+        if (!roleName) {
+            this.props.deleteRole(roleId)
+            this.props.navigate('/home')
+        } else {
+            this.props.showModalByKey(modalType.deleteRole,
+                { roleId, roleName: this.props.roles[roleId].roleName }
+            )
+        }
     }
 
     _renderItem = (item, index) => {
@@ -139,7 +132,7 @@ class HeaderView extends React.Component{
                 {paths.map((item, index) => (
                     <div className="row-centered path-view">
                         {index > 1 ? <div className="path-separator">{'/'}</div>
-                        :<div style={{width: 4}}/>}
+                        :<div style={{width: 2}}/>}
                         {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
                             {this._getPathTitle(item)}
                         </div>}
@@ -152,7 +145,6 @@ class HeaderView extends React.Component{
     render() {
         return (
             <div className="row header">
-                {this._redirect()}
                 {this.state.leftBtns.map(this._renderItem)}
                 {this._renderPath()}
                 {this.state.rightBtns.map(this._renderItem)}
@@ -168,6 +160,8 @@ export default withRouter(connect(
     }),
     {
         createNewRole,
+        deleteRole,
         showModalByKey,
+        navigate,
     }
 )(HeaderView))

@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+
+import { navigate } from '../../navigation/NavReducer'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -17,25 +18,10 @@ const getListStyle = isDraggingOver => ({
 });
 
 class StoryList extends React.Component{
-    state = {
-        redirect: false
-    }
-
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.setState({
-                redirect: `/home/${item}`
-            })
+            this.props.navigate(`/home/${item}`)
         }
-    }
-
-    _redirect() {
-        if (!this.state.redirect) return null
-        return (
-            <Redirect to={{
-                pathname: this.state.redirect,
-            }}/>
-        )
     }
 
     render() {  
@@ -49,7 +35,6 @@ class StoryList extends React.Component{
                         ref={provided.innerRef}
                         style={getListStyle(snapshot.isDraggingOver)}
                     >
-                        {this._redirect()}
                         {isEmpty?
                         <div className="story-empty">
                             {`There is nothing here yet.`}
@@ -107,4 +92,7 @@ export default connect(
     state => ({
         storyData: state.story.storyData,
     }),
+    {
+        navigate,
+    }
 )(StoryList)

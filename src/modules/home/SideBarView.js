@@ -9,11 +9,21 @@ class SideBarView extends React.Component{
         redirect: false
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.path !== this.props.path) {
+            this.setState({
+                redirect: newProps.path
+            })
+        }
+    }
+
     _renderItem = (item) => {
         const { roles, location } = this.props
         if (!item) return null
 
         let roleInfo = roles[item]
+        if (!roleInfo) return null
+            
         let path = location.pathname
         let paths = path.split('/')
         let selected = item === paths[paths.length - 1]
@@ -98,5 +108,7 @@ export default withRouter(connect(
     state => ({
         history: state.roles.history,
         roles: state.roles.roles,
+
+        path: state.nav.path,
     }),
 )(SideBarView))

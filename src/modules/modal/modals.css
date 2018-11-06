@@ -44,7 +44,15 @@
 }
 
 .modal-child {
+    animation: scalein 0.25s;
+    -webkit-animation: scalein 0.25s;
+
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
     overflow: hidden;
+}
+
+@keyframes scalein {
+    from { transform: scale(0.8); }
+    to   { transform: scale(1); }
 }

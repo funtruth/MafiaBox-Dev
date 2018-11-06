@@ -34,6 +34,7 @@ class ModalView extends React.Component {
     render() {
         const { modalKey } = this.props
         if (!modalKey) return null
+        
         return (
             <div className="modal" onClick={this._onClose}>
                 <div className="modal-child">
