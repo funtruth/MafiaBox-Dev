@@ -36,17 +36,18 @@ class SaveRoleAs extends React.Component {
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Save role as?`}
+                        {`New Story`}
                     </div>
                     <div className="modal-subtitle">
-                        {`You must choose a name for your role.`}
+                        {`Choose a name for your new story.`}
                     </div>
                     <input
                         className="add-role-input"
-                        placeholder="Doctor, Detective ..."
+                        placeholder="Ideas, Expansions ..."
                         style={{ marginTop: 5 }}
                         onInput={this._onChange}
                         value={this.state.value}
+                        autoFocus
                     />
                 </div>
                 <div className="row dark-grey modal-options">
@@ -54,7 +55,7 @@ class SaveRoleAs extends React.Component {
                         {`Cancel`}
                     </div>
                     <div className="modal-button" onClick={this._onSave}>
-                        {`Save as`}
+                        {`Done`}
                     </div>
                 </div>
             </div>

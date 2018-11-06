@@ -1,7 +1,7 @@
 .story-view {
     height: calc(100vh - 76px);
     width: calc(100vw - 208px);
-    padding: 8px 2px 2px 8px;
+    padding: 0px 2px 2px 8px;
     overflow: auto;
     transition: color 0.3s;
     color: rgba(54, 57, 64, 1);
@@ -41,7 +41,7 @@
 }
 
 .story-title {
-    padding: 2px 0px;
+    padding: 2px 2px;
     color: #fff;
     font-size: 14px;
     pointer-events: auto;

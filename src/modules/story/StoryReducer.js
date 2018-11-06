@@ -5,18 +5,21 @@ const initialState = {
             title: 'In Progress',
             palette: 'palette-yellow',
             default: true,
+            data: [],
         },
         {
             key: 'complete',
             title: 'Complete',
             palette: 'palette-blue',
             default: true,
+            data: [],
         },
         {
             key: 'live',
             title: 'Live',
             palette: 'palette-green',
             default: true,
+            data: [],
         }
     ],
 
@@ -31,6 +34,7 @@ const REORDER_BOARD = 'story/reorder-board'
 const REORDER_ITEM = 'story/reorder-item'
 const RELOCATE_ITEM = 'story/relocate-item'
 
+const ADD_NEW_STORY = 'story/add-new-story'
 const ADD_ROLE_TO_STORY = 'story/add-role-to-story'
 
 export function reorderBoard(items) {
@@ -94,6 +98,7 @@ export default (state = initialState, action) => {
         case RELOCATE_ITEM:
             return { ...state, storyData: action.payload }
 
+        case ADD_NEW_STORY:
         case ADD_ROLE_TO_STORY:
             return { ...state, storyData: { ...state.storyData, [action.payload.storyKey]: action.payload.storyClone }}
         default:

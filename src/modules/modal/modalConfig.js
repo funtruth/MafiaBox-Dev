@@ -4,4 +4,5 @@ export const modalType = {
     saveRoleAs: 'modalType/save-role-as',
     dontSave: 'modalType/dont-save',
     discardChanges: 'modalType/discard-changes',
+    addNewStory: 'modalType/add-new-story',
 }

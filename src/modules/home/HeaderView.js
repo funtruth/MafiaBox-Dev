@@ -70,17 +70,15 @@ class HeaderView extends React.Component{
         switch(key) {
             case 'back':
             case 'done':
-                return this._onBack()
+                return this.props.goBack()
             case 'create':
                 return this._onCreate()
+            case 'createStory':
+                return this.props.showModalByKey(modalType.addNewStory)
             case 'delete':
                 return this._onDelete()
             default:
         }
-    }
-
-    _onBack = () => {
-        this.props.goBack()
     }
 
     _onCreate = () => {

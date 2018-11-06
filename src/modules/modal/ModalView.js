@@ -8,7 +8,7 @@ import { modalType } from './modalConfig'
 
 import CloseWindow from './keys/CloseWindow'
 import DeleteRole from './keys/DeleteRole';
-import SaveRoleAs from './keys/SaveRoleAs';
+import AddNewStory from './keys/AddNewStory'
 
 class ModalView extends React.Component {
     _renderModal(key) {
@@ -17,8 +17,8 @@ class ModalView extends React.Component {
                 return <CloseWindow/>
             case modalType.deleteRole:
                 return <DeleteRole/>
-            case modalType.saveRoleAs:
-                return <SaveRoleAs/>
+            case modalType.addNewStory:
+                return <AddNewStory/>
             default:
                 return null
         }
