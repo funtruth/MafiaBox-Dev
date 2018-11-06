@@ -25,7 +25,7 @@ class StoryList extends React.Component{
     }
 
     render() {  
-        const { item, storyData } = this.props
+        const { item, roles, storyData } = this.props
         const isEmpty = storyData[item.key].length === 0
 
         return (
@@ -40,7 +40,7 @@ class StoryList extends React.Component{
                             {`There is nothing here yet.`}
                         </div>:
                         storyData[item.key].map((item, index) => (
-                            <Draggable key={item} draggableId={item} index={index}>
+                            roles[item] && <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
                                         onClick={this._onClick.bind(this, item, snapshot)}
@@ -52,7 +52,9 @@ class StoryList extends React.Component{
                                             provided.draggableProps.style
                                         )}
                                     >
-                                        <div className="story-tag">{item}</div>
+                                        <div className="story-tag">
+                                            {(roles[item] && roles[item].roleName) || 'Untitled'}
+                                        </div>
                                     </div>
                                 )}
                             </Draggable>
@@ -91,6 +93,7 @@ const styles = {
 export default connect(
     state => ({
         storyData: state.story.storyData,
+        roles: state.roles.roles,
     }),
     {
         navigate,

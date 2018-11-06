@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 
+import { navigate } from '../navigation/NavReducer'
+
 import { heights } from '../common/dim'
 
 class SideBarView extends React.Component{
@@ -30,24 +32,23 @@ class SideBarView extends React.Component{
 
         return (
             <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{roleInfo.roleName}</div>
+                <div style={styles.title}>{roleInfo.roleName || 'Untitled'}</div>
                 <div style={styles.desc}>{roleInfo.roleDesc}</div>
             </div>
         )
     }
 
     _onClick = (item) => {
-        this.setState({
-            redirect: `/home/${item}`
-        })
+        this.props.navigate(`/home/${item}`)
     }
 
     _redirect() {
         if (!this.state.redirect) return null
-        //hack for now
+        
         this.setState({
             redirect: false
         })
+
         return (
             <Redirect to={this.state.redirect}/>
         )
@@ -57,8 +58,8 @@ class SideBarView extends React.Component{
         return (
             <div style={styles.container}>
                 {this._redirect()}
-                <div style={styles.header}>
 
+                <div style={styles.header}>
                 </div>
 
                 <div className="scrollable-y">
@@ -111,4 +112,7 @@ export default withRouter(connect(
 
         path: state.nav.path,
     }),
+    {
+        navigate,
+    }
 )(SideBarView))

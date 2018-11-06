@@ -143,7 +143,7 @@ export function saveRoleInfo(roleInfo) {
 
 export function deleteRole(roleId) {
     return (dispatch, getState) => {
-        let rolesClone = getState().roles
+        let rolesClone = getState().roles.roles
         delete rolesClone[roleId]
 
         dispatch({

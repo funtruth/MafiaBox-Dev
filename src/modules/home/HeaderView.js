@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 
 import { createNewRole, deleteRole } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
-import { navigate } from '../navigation/NavReducer'
+import { navigate, goBack } from '../navigation/NavReducer'
 import * as helpers from '../roles/helpers'
 
 import { modalType } from '../modal/modalConfig'
@@ -30,7 +30,7 @@ class HeaderView extends React.Component{
             case 'home':
                 return 'Storyboard'
             default:
-                return (this.props.roles[key] && this.props.roles[key].roleName) || 'New Role'
+                return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
         }
     }
 
@@ -49,6 +49,7 @@ class HeaderView extends React.Component{
                     { key: 'back', icon: 'ion-ios-undo' },
                 ]
                 rightBtns = [
+                    { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
                     { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
                 ]
             } else {
@@ -71,6 +72,7 @@ class HeaderView extends React.Component{
     _onClick = (key) => {
         switch(key) {
             case 'back':
+            case 'done':
                 return this._onBack()
             case 'create':
                 return this._onCreate()
@@ -81,10 +83,7 @@ class HeaderView extends React.Component{
     }
 
     _onBack = () => {
-        let paths = this.props.location.pathname.split('/')
-        paths.pop()
-        paths = paths.join('/')
-        this.props.navigate(paths)
+        this.props.goBack()
     }
 
     _onCreate = () => {
@@ -163,5 +162,6 @@ export default withRouter(connect(
         deleteRole,
         showModalByKey,
         navigate,
+        goBack,
     }
 )(HeaderView))
