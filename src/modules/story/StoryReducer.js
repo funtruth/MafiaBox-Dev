@@ -1,3 +1,5 @@
+import * as helpers from '../roles/helpers'
+
 const initialState = {
     stories: [
         {
@@ -5,21 +7,18 @@ const initialState = {
             title: 'In Progress',
             palette: 'palette-yellow',
             default: true,
-            data: [],
         },
         {
             key: 'complete',
             title: 'Complete',
             palette: 'palette-blue',
             default: true,
-            data: [],
         },
         {
             key: 'live',
             title: 'Live',
             palette: 'palette-green',
             default: true,
-            data: [],
         }
     ],
 
@@ -73,6 +72,33 @@ export function relocateItem(result) {
     } 
 }
 
+export function addNewStory(text) {
+    return (dispatch, getState) => {
+        const { storyData } = getState().story
+        let textNoSpace = text.replace(/\s/g, '').toLowerCase()
+        let textUID = helpers.genUID(textNoSpace)
+
+        while(storyData[textUID]) {
+            textUID = helpers.genUID(textNoSpace)
+        }
+
+        let story = {
+            key: textUID,
+            title: text,
+            palette: 'light-grey',
+            default: false,
+        }
+
+        dispatch({
+            type: ADD_NEW_STORY,
+            payload: {
+                uid: textUID,
+                story,
+            }
+        })
+    }
+}
+
 export function addRoleToStory(roleId, storyKey) {
     return (dispatch, getState) => {
         let storyClone = getState().story.storyData[storyKey]
@@ -99,6 +125,8 @@ export default (state = initialState, action) => {
             return { ...state, storyData: action.payload }
 
         case ADD_NEW_STORY:
+            return { ...state, stories: [ ...state.stories, action.payload.story ],
+                storyData: { ...state.storyData, [action.payload.uid]: [] } }
         case ADD_ROLE_TO_STORY:
             return { ...state, storyData: { ...state.storyData, [action.payload.storyKey]: action.payload.storyClone }}
         default:

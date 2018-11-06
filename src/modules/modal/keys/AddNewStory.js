@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showModalByKey } from '../ModalReducer'
+import { addNewStory } from '../../story/StoryReducer'
 
 class SaveRoleAs extends React.Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class SaveRoleAs extends React.Component {
         const { value } = this.state
 
         if (value && value.trim()) {
+            this.props.addNewStory(value)
             this.props.showModalByKey()
         } else {
             //highlight red.
@@ -66,6 +68,7 @@ class SaveRoleAs extends React.Component {
 export default connect(
     null,
     {
+        addNewStory,
         showModalByKey,
     }
 )(SaveRoleAs)

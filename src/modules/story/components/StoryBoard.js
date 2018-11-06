@@ -105,8 +105,8 @@ class StoryBoard extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                            <StoryTitle item={item}/>
-                                            <StoryList item={item}/>
+                                            <StoryTitle item={item} dragging={snapshot.isDragging}/>
+                                            <StoryList item={item} dragging={snapshot.isDragging}/>
                                         </div>
                                     )}
                                 </Draggable>
@@ -130,7 +130,7 @@ const styles = {
         cursor: 'pointer',
         pointerEvents: 'none',
         minWidth: 180,
-        marginRight: 10,
+        marginRight: 12,
     },
     listStyle: {
         display: 'flex',
