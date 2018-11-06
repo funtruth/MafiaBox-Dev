@@ -123,10 +123,8 @@ class StoryBoard extends React.Component{
 const styles = {
     itemStyle: {
         color: '#fff',
-        fontSize: 14,
         lineHeight: 1.2,
-        fontFamily: 'Arial',
-        fontWeight: '500',
+        font: '500 14px Arial',
         cursor: 'pointer',
         pointerEvents: 'none',
         minWidth: 180,

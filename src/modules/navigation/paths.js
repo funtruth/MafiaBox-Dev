@@ -1,19 +1,22 @@
 export const pathKey = {
-    board: 'board',
     defaults: 'defaults',
+    board: 'board',
     flow: 'flow',
+    test: 'test',
 }
 
 export const pathToLabel = {
+    defaults: 'Rolecard',
     board: 'Storyboard',
-    defaults: 'Role Card',
     flow: 'Gameflow',
+    test: 'Testhub',
 }
 
 export const pathToSublabel = {
-    board: 'Organize your roles',
     defaults: 'Create a role template',
+    board: 'Organize your roles',
     flow: 'Set up game phases',
+    test: 'Test a game phase',
 }
 
-export const sideBarList = ['board', 'defaults', 'flow']
+export const sideBarList = ['defaults', 'board', 'flow', 'test']

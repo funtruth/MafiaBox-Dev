@@ -10,12 +10,12 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   
     // styles we need to apply on draggables
     ...draggableStyle,
-    ...styles.itemStyle,
 });
 
 const getListStyle = isDraggingOver => ({
     ...styles.listStyle,
 });
+
 
 class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
@@ -43,6 +43,7 @@ class StoryList extends React.Component{
                             roles[item] && <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
+                                        className="story-tag"
                                         onClick={this._onClick.bind(this, item, snapshot)}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
@@ -52,9 +53,7 @@ class StoryList extends React.Component{
                                             provided.draggableProps.style
                                         )}
                                     >
-                                        <div className="story-tag">
-                                            {(roles[item] && roles[item].roleName) || 'Untitled'}
-                                        </div>
+                                        {(roles[item] && roles[item].roleName) || 'Untitled'}
                                     </div>
                                 )}
                             </Draggable>
@@ -70,17 +69,6 @@ class StoryList extends React.Component{
 const styles = {
     container: {
         flex: 1,
-    },
-    itemStyle: {
-        color: '#fff',
-        fontSize: 14,
-        lineHeight: 1.2,
-        fontFamily: 'Arial',
-        fontWeight: '550',
-        cursor: 'pointer',
-        borderRadius: '4px',
-        boxShadow: 'rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px',
-        marginBottom: 6,
     },
     listStyle: {
         display: 'flex',

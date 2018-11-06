@@ -56,8 +56,12 @@
     border-radius: 4px;
     color: #d6d6d6;
     background-color: rgba(40, 43, 48,1);
-    font-size: 14px;
+    font: 550 14px Arial;
     pointer-events: auto;
+    cursor: pointer;
+    line-height: 1.2;
+    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
+    margin-bottom: 8px;
 }
 
 .story-empty {

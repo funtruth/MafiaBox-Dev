@@ -38,14 +38,14 @@ class AddNewField extends React.Component {
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`New Story`}
+                        {`New Field`}
                     </div>
                     <div className="modal-subtitle">
-                        {`Choose a name for your new story.`}
+                        {`Choose a label for your new field.`}
                     </div>
                     <input
                         className="add-role-input"
-                        placeholder="Ideas, Expansions ..."
+                        placeholder="Name, Action ..."
                         style={{ marginTop: 5 }}
                         onInput={this._onChange}
                         value={this.state.value}
