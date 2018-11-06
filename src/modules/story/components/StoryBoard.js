@@ -89,6 +89,7 @@ class StoryBoard extends React.Component{
                 <Droppable droppableId="board" direction="horizontal" type="COLUMN">
                     {(provided, snapshot) => (
                         <div
+                            className="scrollable-x"
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
@@ -128,19 +129,18 @@ const styles = {
         fontWeight: '500',
         cursor: 'pointer',
         pointerEvents: 'none',
-        width: 220,
+        minWidth: 180,
         marginRight: 10,
     },
     listStyle: {
         display: 'flex',
         overflow: 'auto',
-        minHeight: 400,
+        minHeight: 'calc(100vh - 76px)',
     }
 }
 
 export default connect(
     state => ({
-        history: state.roles.history,
         stories: state.story.stories,
         storyData: state.story.storyData,
     }),

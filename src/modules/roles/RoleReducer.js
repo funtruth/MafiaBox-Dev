@@ -1,4 +1,3 @@
-import * as helpers from './helpers'
 import { itemType } from './types'
 
 import { addRoleToStory } from '../story/StoryReducer'
@@ -77,23 +76,17 @@ const initialState = {
     ],
 
     roles: {},
-    history: [],
 
     roleInfoDefaults: {
         roleStoryKey: 'inProgress',
     },
-    roleInfoCopy: {},
-    roleInfoWorkspace: {},
 
     gameKey: 'MAF',
 }
 
 const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
-const SAVE_ROLE_INFO = 'roles/-save-role-info'
 const DELETE_ROLE = 'roles/delete-role'
-
-const PUSH_TO_HISTORY = 'roles/push-to-history'
 
 export function createNewRole(uid) {
     return(dispatch, getState) => {
@@ -112,31 +105,14 @@ export function createNewRole(uid) {
 }
 
 export function updateRoleInfo(roleId, field, value) {
-    return (dispatch, getState) => {
-        const { history } = getState().roles
-
-        if (roleId !== history[0]) {
-            let historyClone = helpers.updateHistory(history, roleId)
-            dispatch({
-                type: PUSH_TO_HISTORY,
-                payload: historyClone
-            })
-        }
-
+    return (dispatch) => {
         dispatch({
             type: UPDATE_ROLE_INFO,
             payload: {
-                roleId, field, value
+                roleId,
+                field,
+                value
             }
-        })
-    }
-}
-
-export function saveRoleInfo(roleInfo) {
-    return (dispatch) => {
-        dispatch({
-            type: SAVE_ROLE_INFO,
-            payload: roleInfo,
         })
     }
 }
@@ -160,11 +136,6 @@ export default (state = initialState, action) => {
         case UPDATE_ROLE_INFO:
             return { ...state, roles: { ...state.roles,
                 [action.payload.roleId]: { ...state.roles[action.payload.roleId], [action.payload.field]: action.payload.value } } }
-        case SAVE_ROLE_INFO:
-            return { ...state, roles: { ...state.roles, [action.payload.roleId]: action.payload },
-                history: helpers.updateHistory(state.history, action.payload.roleId) }
-        case PUSH_TO_HISTORY:
-            return { ...state, history: action.payload }
         case DELETE_ROLE:   
             return { ...state, roles: action.payload }
         default:

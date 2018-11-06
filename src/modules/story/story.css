@@ -1,7 +1,7 @@
 .story-view {
-    height: calc(100vh - 82px);
+    height: calc(100vh - 76px);
     width: calc(100vw - 208px);
-    padding: 8px;
+    padding: 8px 2px 2px 8px;
     overflow: auto;
     transition: color 0.3s;
     color: rgba(54, 57, 64, 1);
@@ -63,4 +63,26 @@
     color: #919191;
     font-size: 13px;
     padding: 8px 2px;
+}
+
+.scrollable-x {
+    overflow: auto;
+    transition: color 0.3s;
+    color: rgba(47, 49, 54);
+}
+
+.scrollable-x:hover {
+    color: rgba(32, 34, 37, 1);
+}
+
+.scrollable-x::-webkit-scrollbar {
+    height: 16px;
+}
+
+.scrollable-x::-webkit-scrollbar-thumb {
+	background-clip: content-box;
+    background: rgba(32, 34, 37, 1);
+    border-radius: 8px;
+    border: 4px rgba(54, 57, 64, 1) solid;
+	box-shadow: inset 0 0 0 10px;
 }

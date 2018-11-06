@@ -5,6 +5,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 import { navigate } from '../navigation/NavReducer'
 
 import { heights } from '../common/dim'
+import { pathToLabel, pathToSublabel, sideBarList } from '../navigation/paths'
 
 class SideBarView extends React.Component{
     state = {
@@ -20,26 +21,21 @@ class SideBarView extends React.Component{
     }
 
     _renderItem = (item) => {
-        const { roles, location } = this.props
-        if (!item) return null
-
-        let roleInfo = roles[item]
-        if (!roleInfo) return null
-            
+        const { location } = this.props
         let path = location.pathname
         let paths = path.split('/')
-        let selected = item === paths[paths.length - 1]
+        let selected = item === paths[1]
 
         return (
             <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{roleInfo.roleName || 'Untitled'}</div>
-                <div style={styles.desc}>{roleInfo.roleDesc}</div>
+                <div style={styles.title}>{pathToLabel[item]}</div>
+                <div style={styles.desc}>{pathToSublabel[item]}</div>
             </div>
         )
     }
 
     _onClick = (item) => {
-        this.props.navigate(`/board/${item}`)
+        this.props.navigate(`/${item}`)
     }
 
     _redirect() {
@@ -63,9 +59,7 @@ class SideBarView extends React.Component{
                 </div>
 
                 <div className="scrollable-y">
-                    {this.props.history.length ?
-                        this.props.history.map(this._renderItem)
-                    :null}
+                    {sideBarList.map(this._renderItem)}
                 </div>
             </div>
         )
@@ -78,8 +72,9 @@ const styles = {
         backgroundColor: 'rgba(40, 43, 48)',
     },
     title: {
-        fontSize: 14,
+        fontSize: 15,
         lineHeight: 1.3,
+        letterSpacing: 0.3,
         fontWeight: '500',
         fontFamily: 'Arial',
         color: '#f6f6f7',   
@@ -101,9 +96,6 @@ const styles = {
 
 export default withRouter(connect(
     state => ({
-        history: state.roles.history,
-        roles: state.roles.roles,
-
         path: state.nav.path,
     }),
     {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { saveRoleInfo } from '../../roles/RoleReducer'
 import { showModalByKey } from '../ModalReducer'
 
 class SaveRoleAs extends React.Component {
@@ -18,11 +17,8 @@ class SaveRoleAs extends React.Component {
 
     _onSave = () => {
         const { value } = this.state
-        const { roleInfoWorkspace } = this.props
 
         if (value && value.trim()) {
-            let roleInfo = { ...roleInfoWorkspace, roleName: value }
-            this.props.saveRoleInfo(roleInfo)
             this.props.showModalByKey()
         } else {
             //highlight red.
@@ -67,11 +63,8 @@ class SaveRoleAs extends React.Component {
 }
 
 export default connect(
-    state => ({
-        roleInfoWorkspace: state.roles.roleInfoWorkspace,
-    }),
+    null,
     {
-        saveRoleInfo,
         showModalByKey,
     }
 )(SaveRoleAs)
