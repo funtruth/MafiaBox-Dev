@@ -8,6 +8,7 @@ import HeaderView from './HeaderView';
 import StoryView from '../story/StoryView';
 import RoleView from '../roles/RoleView';
 import FlowView from '../flow/FlowView'
+import RoleCardView from '../roleCard/RoleCardView';
 
 class HomeView extends React.Component{
     render() {
@@ -19,6 +20,7 @@ class HomeView extends React.Component{
                     <div>
                         <Route exact path="/board" component={StoryView}/>
                         <Route exact path="/board/:roleId" component={RoleView}/>
+                        <Route exact path="/defaults" component={RoleCardView}/>
                         <Route exact path="/flow" component={FlowView}/>
                     </div>
                 </div>

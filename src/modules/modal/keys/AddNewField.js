@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showModalByKey } from '../ModalReducer'
 import { addNewStory } from '../../story/StoryReducer'
 
-class AddNewStory extends React.Component {
+class AddNewField extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -71,4 +71,4 @@ export default connect(
         addNewStory,
         showModalByKey,
     }
-)(AddNewStory)
+)(AddNewField)

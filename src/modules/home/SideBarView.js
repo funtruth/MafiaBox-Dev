@@ -72,7 +72,7 @@ const styles = {
         backgroundColor: 'rgba(40, 43, 48)',
     },
     title: {
-        fontSize: 15,
+        fontSize: 13,
         lineHeight: 1.3,
         letterSpacing: 0.3,
         fontWeight: '500',
@@ -83,7 +83,7 @@ const styles = {
         textOverflow: 'ellipsis',
     },
     desc: {
-        fontSize: 12,
+        fontSize: 11,
         lineHeight: 1.3,
         fontWeight: '500',
         fontFamily: 'Arial',

@@ -23,7 +23,7 @@ const initialState = {
         },
         {
             key: 'roleTeamType',
-            title: 'Unique Role Id',
+            title: 'Role Alliance',
             type: itemType.tag,
             data: [
                 {
@@ -77,10 +77,6 @@ const initialState = {
 
     roles: {},
 
-    roleInfoDefaults: {
-        roleStoryKey: 'inProgress',
-    },
-
     gameKey: 'MAF',
 }
 
@@ -90,14 +86,14 @@ const DELETE_ROLE = 'roles/delete-role'
 
 export function createNewRole(uid) {
     return(dispatch, getState) => {
-        const { roleInfoDefaults } = getState().roles
+        const { defaultInfo } = getState().roleCard
 
-        dispatch(addRoleToStory(uid, roleInfoDefaults.roleStoryKey))
+        dispatch(addRoleToStory(uid, defaultInfo.roleStoryKey))
 
         dispatch({
             type: CREATE_NEW_ROLE,
             payload: {
-                ...roleInfoDefaults,
+                ...defaultInfo,
                 roleId: uid,
             }
         })

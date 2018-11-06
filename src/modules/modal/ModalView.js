@@ -6,19 +6,19 @@ import { showModalByKey } from './ModalReducer'
 
 import { modalType } from './modalConfig'
 
-import CloseWindow from './keys/CloseWindow'
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
+import AddNewField from './keys/AddNewField'
 
 class ModalView extends React.Component {
     _renderModal(key) {
         switch(key) {
-            case modalType.closeWindow:
-                return <CloseWindow/>
             case modalType.deleteRole:
                 return <DeleteRole/>
             case modalType.addNewStory:
                 return <AddNewStory/>
+            case modalType.addNewField:
+                return <AddNewField/>
             default:
                 return null
         }

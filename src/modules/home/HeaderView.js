@@ -40,24 +40,27 @@ class HeaderView extends React.Component{
         let paths = path.split('/')
         let leftBtns = [], rightBtns = []
         
+        leftBtns = [
+            { key: 'back', icon: 'ion-ios-undo' },
+        ]
+        
         if (paths[1] === pathKey.board) {
             if (paths[2]) {
-                leftBtns = [
-                    { key: 'back', icon: 'ion-ios-undo' },
-                ]
                 rightBtns = [
                     { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
                     { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
                 ]
             } else {
-                leftBtns = [
-                    { key: 'back', icon: 'ion-ios-undo' },
-                ]
                 rightBtns = [
                     { key: 'create', title: 'New Role', icon: 'ion-ios-add-circle' },
                     { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                 ]
             }
+        } else if (paths[1] === pathKey.defaults) {
+            rightBtns = [
+                { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
+                { key: 'createField', title: 'Add a Field', icon: 'ion-md-browsers' },
+            ]
         }
 
         return {
@@ -75,6 +78,8 @@ class HeaderView extends React.Component{
                 return this._onCreate()
             case 'createStory':
                 return this.props.showModalByKey(modalType.addNewStory)
+            case 'createField':
+                return this.props.showModalByKey(modalType.addNewField)
             case 'delete':
                 return this._onDelete()
             default:
