@@ -48,12 +48,11 @@
     font: 400 15px Arial;
 }
 
-.path-separator {
-    padding: 0px 5px;
-    color: #969696;
-}
 
 .path-button {
+    animation: fadein 0.25s;
+    -webkit-animation: fadein 0.25s;
+    
     padding: 6px 10px;
     display: flex;
     justify-content: center;
