@@ -12,7 +12,7 @@ function createWindow() {
     width: 1000,
     height: 600,
     frame: false,
-    minHeight: 300,
+    minHeight: 500,
     minWidth: 700,
   });
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);

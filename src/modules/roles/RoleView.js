@@ -49,16 +49,10 @@ class RoleView extends React.Component{
 
     render() {
         return (
-            <div style={styles.container}>
+            <div className="story-view">
                 {this.props.fields.map(this._renderItem)}
             </div>
         )
-    }
-}
-
-const styles = {
-    container: {
-        flex: 1,
     }
 }
 

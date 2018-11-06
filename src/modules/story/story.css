@@ -1,8 +1,11 @@
 .story-view {
-    height: calc(100vh - 74px);
+    height: calc(100vh - 82px);
+    width: calc(100vw - 208px);
+    padding: 8px;
     overflow: auto;
     transition: color 0.3s;
     color: rgba(54, 57, 64, 1);
+    background-color: rgba(54, 57, 64);
 }
 
 .story-view:hover {

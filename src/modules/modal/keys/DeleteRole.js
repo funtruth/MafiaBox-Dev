@@ -13,7 +13,7 @@ class CloseWindow extends React.Component {
     _onDelete = () => {
         this.props.deleteRole(this.props.modalParams.roleId)
         this.props.showModalByKey()
-        this.props.navigate('/home')
+        this.props.navigate('/board')
     }
 
     render() {

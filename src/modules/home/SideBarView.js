@@ -39,7 +39,7 @@ class SideBarView extends React.Component{
     }
 
     _onClick = (item) => {
-        this.props.navigate(`/home/${item}`)
+        this.props.navigate(`/board/${item}`)
     }
 
     _redirect() {
@@ -56,7 +56,7 @@ class SideBarView extends React.Component{
 
     render() {
         return (
-            <div style={styles.container}>
+            <div className="side-bar-view">
                 {this._redirect()}
 
                 <div style={styles.header}>
@@ -73,12 +73,6 @@ class SideBarView extends React.Component{
 }
 
 const styles = {
-    container: {
-        width: '200px',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: 'rgba(47, 49, 54, 1)',
-    },
     header: {
         height: heights.header,
         backgroundColor: 'rgba(40, 43, 48)',

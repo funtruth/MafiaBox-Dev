@@ -8,6 +8,7 @@ import { navigate, goBack } from '../navigation/NavReducer'
 import * as helpers from '../roles/helpers'
 
 import { modalType } from '../modal/modalConfig'
+import { pathKey, pathToLabel } from '../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {
@@ -26,12 +27,8 @@ class HeaderView extends React.Component{
     }
 
     _getPathTitle(key) {
-        switch(key) {
-            case 'home':
-                return 'Storyboard'
-            default:
-                return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
-        }
+        if (pathToLabel[key]) return pathToLabel[key]
+        else return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
     }
 
     _onPathClick = (paths, index) => {
@@ -43,7 +40,7 @@ class HeaderView extends React.Component{
         let paths = path.split('/')
         let leftBtns = [], rightBtns = []
         
-        if (paths[1] === 'home') {
+        if (paths[1] === pathKey.board) {
             if (paths[2]) {
                 leftBtns = [
                     { key: 'back', icon: 'ion-ios-undo' },
@@ -94,7 +91,7 @@ class HeaderView extends React.Component{
             uid = helpers.genUID(gameKey)
         }
 
-        this.props.navigate(`/home/${uid}`)
+        this.props.navigate(`/${pathKey.board}/${uid}`)
         this.props.createNewRole(uid)
     }
 
@@ -105,7 +102,7 @@ class HeaderView extends React.Component{
 
         if (!roleName) {
             this.props.deleteRole(roleId)
-            this.props.navigate('/home')
+            this.props.navigate(`/${pathKey.board}`)
         } else {
             this.props.showModalByKey(modalType.deleteRole,
                 { roleId, roleName: this.props.roles[roleId].roleName }

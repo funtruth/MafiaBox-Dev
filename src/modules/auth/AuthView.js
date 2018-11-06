@@ -53,7 +53,7 @@ class AuthView extends Component {
 
   _redirectToHome() {
     if (!this.state.redirect) return null
-    return <Redirect to="/home" push/>
+    return <Redirect to="/board" push/>
   }
 
   render() {
@@ -61,7 +61,6 @@ class AuthView extends Component {
       <div className="App">
         <header className="login-view">
           {this._redirectToHome()}
-          <img src={'https://image.flaticon.com/icons/svg/201/201559.svg'} className="App-logo" alt="logo"/>
           <input value={this.state.username} className="login-box" 
             placeholder="Email or Username" type="text" onChange={this._onUsername}/>
           <input value={this.state.password} className="login-box"

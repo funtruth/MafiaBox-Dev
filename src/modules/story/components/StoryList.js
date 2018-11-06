@@ -20,7 +20,7 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.navigate(`/home/${item}`)
+            this.props.navigate(`/board/${item}`)
         }
     }
 
