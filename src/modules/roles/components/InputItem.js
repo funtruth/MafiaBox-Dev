@@ -2,13 +2,13 @@ import React from 'react'
 
 class InputItem extends React.Component{
     _onChange = e => {
-        const { roleId, name } = this.props
-        this.props.updateRoleInfo(roleId, name, e.target.value)
+        const { roleId, field } = this.props
+        this.props.updateRoleInfo(roleId, field, e.target.value)
     }
 
     render() {
-        const { label, placeholder, value, name } = this.props
-        const autoFocus = name === 'roleName'
+        const { label, placeholder, value, field } = this.props
+        const autoFocus = field === 'roleName'
 
         return (
             <div style={styles.item}>

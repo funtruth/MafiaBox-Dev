@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { createNewRole, deleteRole } from '../roles/RoleReducer'
+import { createNewRole, deleteRole, setRoleIdToDefault } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { navigate, goBack } from '../navigation/NavReducer'
 import * as helpers from '../roles/helpers'
@@ -48,7 +48,8 @@ class HeaderView extends React.Component{
             if (paths[2]) {
                 rightBtns = [
                     { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
-                    { key: 'delete', title: 'Delete Role', icon: 'ion-ios-trash' },
+                    { key: 'defaults', title: 'Apply Defaults', icon: 'ion-md-document' },
+                    { key: 'delete', title: 'Discard Role', icon: 'ion-ios-trash' },
                 ]
             } else {
                 rightBtns = [
@@ -64,6 +65,7 @@ class HeaderView extends React.Component{
         }
 
         return {
+            childPath: paths[2],
             leftBtns,
             rightBtns
         }
@@ -74,6 +76,8 @@ class HeaderView extends React.Component{
             case 'back':
             case 'done':
                 return this.props.goBack()
+            case 'defaults':
+                return this.props.setRoleIdToDefault(this.state.childPath)
             case 'create':
                 return this._onCreate()
             case 'createStory':
@@ -160,6 +164,7 @@ export default withRouter(connect(
     {
         createNewRole,
         deleteRole,
+        setRoleIdToDefault,
         showModalByKey,
         navigate,
         goBack,

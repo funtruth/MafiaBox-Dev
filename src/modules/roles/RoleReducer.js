@@ -6,24 +6,24 @@ const initialState = {
     fields: [
         {
             key: 'roleId',
-            title: 'Unique Role Id',
+            label: 'Unique Role Id',
             type: itemType.blurInput,
         },
         {
             key: 'roleName',
-            title: 'Name of Role',
+            label: 'Name of Role',
             placeholder: 'Doctor, Detective ...',
             type: itemType.input,
         },
         {
             key: 'roleDesc',
-            title: 'Role Description',
+            label: 'Role Description',
             placeholder: 'Describe what the role does ...',
             type: itemType.input,
         },
         {
             key: 'roleTeamType',
-            title: 'Role Alliance',
+            label: 'Role Alliance',
             type: itemType.tag,
             data: [
                 {
@@ -40,7 +40,7 @@ const initialState = {
         },
         {
             key: 'roleActionType',
-            title: 'Action Target',
+            label: 'Action Target',
             type: itemType.tag,
             data: [
                 {
@@ -82,6 +82,7 @@ const initialState = {
 
 const CREATE_NEW_ROLE = 'roles/create-new-role'
 const UPDATE_ROLE_INFO = 'roles/update-role-info'
+const SET_ROLE_TO_DEFAULT = 'roles/set-role-to-default'
 const DELETE_ROLE = 'roles/delete-role'
 
 export function createNewRole(uid) {
@@ -113,6 +114,26 @@ export function updateRoleInfo(roleId, field, value) {
     }
 }
 
+export function setRoleIdToDefault(roleId) {
+    return (dispatch, getState) => {
+        const { defaultInfo } = getState().roleCard
+        const { roles } = getState().roles
+
+        let roleInfo = {
+            ...roles[roleId],
+            ...defaultInfo
+        }
+        
+        dispatch({
+            type: SET_ROLE_TO_DEFAULT,
+            payload: {
+                roleId,
+                roleInfo
+            }
+        })
+    }
+}
+
 export function deleteRole(roleId) {
     return (dispatch, getState) => {
         let rolesClone = getState().roles.roles
@@ -132,6 +153,8 @@ export default (state = initialState, action) => {
         case UPDATE_ROLE_INFO:
             return { ...state, roles: { ...state.roles,
                 [action.payload.roleId]: { ...state.roles[action.payload.roleId], [action.payload.field]: action.payload.value } } }
+        case SET_ROLE_TO_DEFAULT:
+            return { ...state, roles: { ...state.roles, [action.payload.roleId]: action.payload.roleInfo } }
         case DELETE_ROLE:   
             return { ...state, roles: action.payload }
         default:

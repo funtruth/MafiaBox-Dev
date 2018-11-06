@@ -7,7 +7,7 @@ const initialState = {
 
 const UPDATE_DEFAULT_INFO = 'roles/update-default-info'
 
-export function updateDefaultInfo(roleId, field, value) {
+export function updateDefaultInfo(field, value) {
     return (dispatch) => {
         dispatch({
             type: UPDATE_DEFAULT_INFO,

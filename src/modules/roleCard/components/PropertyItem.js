@@ -2,8 +2,8 @@ import React from 'react'
 
 class PropertyItem extends React.Component{
     _renderItem = (item) => {
-        const { value, name } = this.props
-        const active = name && item.key === value
+        const { value, field } = this.props
+        const active = field && item.key === value
         const style = {
             backgroundColor: active ? (item.color || 'rgba(40, 43, 48,1)') : 'hsla(0,0%,100%,.1)',
         }
@@ -15,8 +15,8 @@ class PropertyItem extends React.Component{
     }
 
     _onClick = key => {
-        const { roleId, name } = this.props
-        this.props.updateRoleInfo(roleId, name, key)
+        const { roleId, field } = this.props
+        this.props.updateRoleInfo(field, key)
     }
 
     render() {
