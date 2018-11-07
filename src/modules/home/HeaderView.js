@@ -60,6 +60,19 @@ class HeaderView extends React.Component{
                 { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
                 { key: 'createField', title: 'Add a Field', icon: 'ion-md-browsers' },
             ]
+        } else if (paths[1] === pathKey.flow) {
+            if (paths[2]) {
+                rightBtns = [
+                    { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
+                    { key: 'defaults', title: 'Apply Defaults', icon: 'ion-md-document' },
+                    { key: 'delete', title: 'Discard Role', icon: 'ion-ios-trash' },
+                ]
+            } else {
+                rightBtns = [
+                    { key: 'create', title: 'New Phase', icon: 'ion-ios-add-circle' },
+                    { key: 'createStory', title: 'Add a Phase', icon: 'ion-md-browsers' },
+                ]
+            }
         }
 
         return {

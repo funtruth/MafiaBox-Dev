@@ -29,7 +29,7 @@ const initialState = {
     }
 }
 
-const REORDER_BOARD = 'story/reorder-board'
+const REORDER_STORY = 'story/reorder-story'
 const REORDER_ITEM = 'story/reorder-item'
 const RELOCATE_ITEM = 'story/relocate-item'
 
@@ -37,10 +37,10 @@ const ADD_NEW_STORY = 'story/add-new-story'
 const ADD_ROLE_TO_STORY = 'story/add-role-to-story'
 const DELETE_STORY = 'story/delete-story'
 
-export function reorderBoard(items) {
+export function reorderStory(items) {
     return (dispatch) => {
         dispatch({
-            type: REORDER_BOARD,
+            type: REORDER_STORY,
             payload: items
         })
     }
@@ -139,7 +139,7 @@ export function deleteStory(storyIndex) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case REORDER_BOARD:
+        case REORDER_STORY:
             return { ...state, stories: action.payload }
         case REORDER_ITEM:
             return { ...state, storyData: { ...state.storyData, [action.payload.key]: action.payload.items } }

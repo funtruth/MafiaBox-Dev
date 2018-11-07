@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { reorderStory, reorderItem, relocateItem } from '../StoryReducer'
+import { reorderStory, reorderItem, relocateItem } from '../FlowReducer'
 import { createNewRole } from '../../roles/RoleReducer'
 
 import StoryList from './StoryList'
@@ -44,7 +44,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-class StoryBoard extends React.Component{
+class FlowBoard extends React.Component{
     state = {
         showMenu: false,
         storyIndex: null,
@@ -172,7 +172,7 @@ class StoryBoard extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {this.props.stories.map((item, index) => (
+                            {this.props.flow.map((item, index) => (
                                 <Draggable key={item.key} draggableId={item.key} index={index}>
                                     {(provided, snapshot) => (
                                         <div
@@ -220,8 +220,8 @@ const styles = {
 
 export default connect(
     state => ({
-        stories: state.story.stories,
-        storyData: state.story.storyData,
+        flow: state.flow.flow,
+        flowData: state.flow.flowData,
     }),
     {
         reorderStory,
@@ -229,4 +229,4 @@ export default connect(
         relocateItem,
         createNewRole,
     }
-)(StoryBoard)
+)(FlowBoard)
