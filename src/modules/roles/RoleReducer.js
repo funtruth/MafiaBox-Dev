@@ -1,6 +1,9 @@
+import * as helpers from './helpers'
 import { itemType } from './types'
+import { pathKey } from '../navigation/paths'
 
 import { addRoleToStory } from '../story/StoryReducer'
+import { navigate } from '../navigation/NavReducer'
 
 const initialState = {
     fields: [
@@ -85,16 +88,25 @@ const UPDATE_ROLE_INFO = 'roles/update-role-info'
 const SET_ROLE_TO_DEFAULT = 'roles/set-role-to-default'
 const DELETE_ROLE = 'roles/delete-role'
 
-export function createNewRole(uid) {
+export function createNewRole(roleInfo = {}) {
     return(dispatch, getState) => {
         const { defaultInfo } = getState().roleCard
+        const { gameKey, roles } = getState().roles
 
-        dispatch(addRoleToStory(uid, defaultInfo.roleStoryKey))
+        let uid = helpers.genUID(gameKey)
+        while(roles[uid]) {
+            uid = helpers.genUID(gameKey)
+        }
+
+        dispatch(navigate(`/${pathKey.board}/${uid}`))
+
+        dispatch(addRoleToStory(uid, roleInfo.roleStoryKey || 'inProgress'))
 
         dispatch({
             type: CREATE_NEW_ROLE,
             payload: {
                 ...defaultInfo,
+                ...roleInfo,
                 roleId: uid,
             }
         })

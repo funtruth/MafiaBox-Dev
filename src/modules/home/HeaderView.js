@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 import { createNewRole, deleteRole, setRoleIdToDefault } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { navigate, goBack } from '../navigation/NavReducer'
-import * as helpers from '../roles/helpers'
 
 import { modalType } from '../modal/modalConfig'
 import { pathKey, pathToLabel } from '../navigation/paths'
@@ -91,15 +90,7 @@ class HeaderView extends React.Component{
     }
 
     _onCreate = () => {
-        const { gameKey, roles } = this.props
-
-        let uid = helpers.genUID(gameKey)
-        while(roles[uid]) {
-            uid = helpers.genUID(gameKey)
-        }
-
-        this.props.navigate(`/${pathKey.board}/${uid}`)
-        this.props.createNewRole(uid)
+        this.props.createNewRole()
     }
 
     _onDelete = () => {
@@ -158,7 +149,6 @@ class HeaderView extends React.Component{
 
 export default withRouter(connect(
     state => ({
-        gameKey: state.roles.gameKey,
         roles: state.roles.roles,
     }),
     {

@@ -10,6 +10,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   
     // styles we need to apply on draggables
     ...draggableStyle,
+    cursor: 'pointer',
 });
 
 const getListStyle = isDraggingOver => ({

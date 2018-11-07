@@ -15,7 +15,7 @@ class PropertyItem extends React.Component{
     }
 
     _onClick = key => {
-        const { roleId, field } = this.props
+        const { field } = this.props
         this.props.updateRoleInfo(field, key)
     }
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 class InputItem extends React.Component{
     _onChange = e => {
-        const { roleId, field } = this.props
+        const { field } = this.props
         this.props.updateRoleInfo(field, e.target.value)
     }
 

@@ -1,6 +1,5 @@
 const initialState = {
     defaultInfo: {
-        roleStoryKey: 'inProgress',
     },
     gameKey: 'MAF',
 }
