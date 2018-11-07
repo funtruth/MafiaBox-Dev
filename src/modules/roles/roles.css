@@ -30,6 +30,20 @@
     align-items: center;
 }
 
+.resizing-input {
+    background-color: hsla(0,0%,100%,.1);
+    border: none;
+    height: calc(1em + 4px);
+    max-height: 200px;
+    width: calc(100% - 14px);
+    padding: 7px 7px;
+    font: 400 13.3333px Arial;
+    line-height: 1.4;
+    border-radius: 3px;
+    color: #f6f6f7;
+    overflow: auto;
+}
+
 .role-label {
     font: 500 14px Arial;
     margin-bottom: 4px;
