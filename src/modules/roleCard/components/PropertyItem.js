@@ -8,7 +8,7 @@ class PropertyItem extends React.Component{
             backgroundColor: active ? (item.color || 'rgba(40, 43, 48,1)') : 'hsla(0,0%,100%,.1)',
         }
         return (
-            <div className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>
+            <div key={item.key} className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>
                 {item.label}
             </div>
         )

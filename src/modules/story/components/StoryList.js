@@ -27,7 +27,6 @@ class StoryList extends React.Component{
 
     render() {  
         const { item, roles, storyData } = this.props
-        console.log(storyData)
         const isEmpty = storyData[item.key].length === 0
 
         return (

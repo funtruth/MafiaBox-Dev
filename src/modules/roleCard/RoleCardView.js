@@ -32,6 +32,7 @@ class RoleCardView extends React.Component{
 
         return (
             <FieldComponent
+                key={item.key}
                 field={item.key}
                 label={item.label}
                 placeholder={item.placeholder}

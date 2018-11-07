@@ -47,7 +47,7 @@ class AddNewStory extends React.Component {
                         className="add-role-input"
                         placeholder="Ideas, Expansions ..."
                         style={{ marginTop: 5 }}
-                        onInput={this._onChange}
+                        onChange={this._onChange}
                         value={this.state.value}
                         autoFocus
                     />

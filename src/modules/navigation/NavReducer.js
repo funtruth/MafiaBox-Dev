@@ -24,7 +24,7 @@ export function goBack() {
 
         dispatch({
             type: REMOTE_NAVIGATION,
-            payload: newPath
+            payload: newPath || '/'
         })
     }
 }

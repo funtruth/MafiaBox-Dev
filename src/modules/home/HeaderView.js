@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import { createNewRole, deleteRole, setRoleIdToDefault } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
@@ -110,8 +109,8 @@ class HeaderView extends React.Component{
 
     _renderItem = (item, index) => {
         return (
-            <div className="row cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
-                <i class={`option-icon ${item.icon}`}></i>
+            <div key={item.key} className="row cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
+                <i className={`option-icon ${item.icon}`}></i>
                 {item.title && <div style={{ marginLeft: 6 }}>{item.title}</div>}
             </div>
         )
@@ -124,7 +123,7 @@ class HeaderView extends React.Component{
         return (
             <div className="row" style={{ marginRight: 'auto' }}>
                 {paths.map((item, index) => (
-                    <div className="row-centered path-view">
+                    <div key={index} className="row-centered path-view">
                         {index > 1 ? <div className="path-separator">{'/'}</div>
                         :<div style={{width: 2}}/>}
                         {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
@@ -147,7 +146,7 @@ class HeaderView extends React.Component{
     }
 }
 
-export default withRouter(connect(
+export default connect(
     state => ({
         roles: state.roles.roles,
     }),
@@ -159,4 +158,4 @@ export default withRouter(connect(
         navigate,
         goBack,
     }
-)(HeaderView))
+)(HeaderView)

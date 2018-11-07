@@ -19,7 +19,7 @@ class InputItem extends React.Component{
                     className="add-role-input"
                     placeholder={placeholder}
                     type="text"
-                    onInput={this._onChange}
+                    onChange={this._onChange}
                     value={value}
                     autoFocus={autoFocus}
                 />

@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom'
 import SideBarView from './SideBarView';
 import HeaderView from './HeaderView';
 
+import LandingView from './LandingView'
 import StoryView from '../story/StoryView';
 import RoleView from '../roles/RoleView';
 import FlowView from '../flow/FlowView'
@@ -19,6 +20,7 @@ class HomeView extends React.Component{
                 <div>
                     <HeaderView location={this.props.location}/>
                     <div>
+                        <Route exact path="/" component={LandingView}/>
                         <Route exact path="/board" component={StoryView}/>
                         <Route exact path="/board/:roleId" component={RoleView}/>
                         <Route exact path="/defaults" component={RoleCardView}/>

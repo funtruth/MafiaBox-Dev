@@ -120,12 +120,13 @@ export function deleteStory(storyIndex) {
     return (dispatch, getState) => {
         const { stories, storyData } = getState().story
         let storiesClone = Array.from(stories)
-        let storyDataClone = Array.from(storyData)
-
+        let storyDataClone = {}
+        storyDataClone = Object.assign(storyDataClone, storyData)
+        
         let storyId = storiesClone[storyIndex].key
         storiesClone.splice(storyIndex, 1)
         delete storyDataClone[storyId]
-
+        
         dispatch({
             type: DELETE_STORY,
             payload: {

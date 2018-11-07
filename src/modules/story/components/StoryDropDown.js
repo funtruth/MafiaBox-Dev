@@ -16,21 +16,21 @@ class StoryDropDown extends React.Component{
     render() {
         return (
             <div>
-                <div class="drop-down-menu-option">
-                    <i class={`drop-down-menu-icon ion-ios-git-merge`}></i>
+                <div className="drop-down-menu-option">
+                    <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>
                     Merge
                 </div>
-                <div class="drop-down-menu-option" onClick={this._onDelete}>
-                    <i class={`drop-down-menu-icon ion-ios-trash`}></i>
+                <div className="drop-down-menu-option" onClick={this._onDelete}>
+                    <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete
                 </div>
-                <div class="drop-down-menu-separator"/>
-                <div class="drop-down-menu-option">
-                    <i class={`drop-down-menu-icon ion-ios-flag`}></i>
+                <div className="drop-down-menu-separator"/>
+                <div className="drop-down-menu-option">
+                    <i className={`drop-down-menu-icon ion-ios-flag`}></i>
                     Flag
                 </div>
-                <div class="drop-down-menu-option">
-                    <i class={`drop-down-menu-icon ion-ios-bug`}></i>
+                <div className="drop-down-menu-option">
+                    <i className={`drop-down-menu-icon ion-ios-bug`}></i>
                     Bug Report
                 </div>
             </div>

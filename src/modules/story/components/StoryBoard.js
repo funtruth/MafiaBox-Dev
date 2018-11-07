@@ -111,7 +111,7 @@ class StoryBoard extends React.Component{
 
         return (
             <div 
-                class="drop-down-menu"
+                className="drop-down-menu"
                 style={menuStyle}
             >
                 <StoryDropDown

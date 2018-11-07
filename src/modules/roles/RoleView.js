@@ -32,10 +32,11 @@ class RoleView extends React.Component{
         if (!roleId) return null
         let roleInfo = this.props.roles[roleId]
         if (!roleInfo) return null
-        let value = roleInfo[item.key]
+        let value = roleInfo[item.key] || ''
 
         return (
             <FieldComponent
+                key={item.key}
                 field={item.key}
                 label={item.label}
                 placeholder={item.placeholder}
