@@ -2,13 +2,13 @@ import React from 'react'
 
 class StoryTitle extends React.Component{
     render() {
-        const { item } = this.props
+        const { item, index } = this.props
 
         return (
             <div className="story-title">
                 <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
-                <i class="story-option ion-ios-more menu-onclick" story-id={item.key} style={styles.moreIcon}></i>
-                <i class="story-option ion-ios-add" story-id={item.key} style={styles.addIcon} onClick={this.props.addRole}></i>
+                <i class="story-option ion-ios-more menu-onclick" story-index={index} style={styles.moreIcon}></i>
+                <i class="story-option ion-ios-add" story-index={index} style={styles.addIcon} onClick={this.props.addRole}></i>
             </div>
         )
     }

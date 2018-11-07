@@ -9,8 +9,27 @@ import { modalType } from './modalConfig'
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
+import DeleteStory from './keys/DeleteStory';
 
 class ModalView extends React.Component {
+    componentDidMount() {
+        window.addEventListener('keyup', this._onKeyPress)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', this._onKeyPress)
+    }
+
+    _onKeyPress = e => {
+        switch(e.key) {
+            case 'Enter':
+                return
+            case 'Escape':
+                return this.props.showModalByKey()
+            default:
+        }
+    }
+
     _renderModal(key) {
         switch(key) {
             case modalType.deleteRole:
@@ -19,6 +38,8 @@ class ModalView extends React.Component {
                 return <AddNewStory/>
             case modalType.addNewField:
                 return <AddNewField/>
+            case modalType.deleteStory:
+                return <DeleteStory/>
             default:
                 return null
         }

@@ -7,6 +7,7 @@ import { createNewRole } from '../../roles/RoleReducer'
 
 import StoryList from './StoryList'
 import StoryTitle from './StoryTitle';
+import StoryDropDown from './StoryDropDown';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -46,21 +47,35 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 class StoryBoard extends React.Component{
     state = {
         showMenu: false,
-        storyId: null,
+        storyIndex: null,
         pageX: null,
         pageY: null,
     }
 
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
+        window.addEventListener('scroll', this._handleScroll, true)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('click', this._handleClick)
+        window.removeEventListener('scroll', this._handleScroll, false)
+    }
+
+    _handleScroll = () => {
+        if (this.state.showMenu) {
+            this.setState({
+                showMenu: false
+            })
+        }
     }
 
     _handleClick = (e) => {
         if (e.target.matches('.menu-onclick')) {
-            if (!this.state.showMenu || e.target.getAttribute('story-id') !== this.state.storyId) {
+            if (!this.state.showMenu || e.target.getAttribute('story-index') !== this.state.storyIndex) {
                 this.setState({
                     showMenu: true,
-                    storyId: e.target.getAttribute('story-id'),
+                    storyIndex: e.target.getAttribute('story-index'),
                     pageX: e.pageX,
                     pageY: e.pageY
                 })
@@ -78,6 +93,12 @@ class StoryBoard extends React.Component{
         }
     }
 
+    _hideMenu = () => {
+        this.setState({
+            showMenu: false
+        })
+    }
+
     _addRole = (key) => {
         this.props.createNewRole({ roleStoryKey: key })
     }
@@ -93,17 +114,13 @@ class StoryBoard extends React.Component{
                 class="drop-down-menu"
                 style={menuStyle}
             >
-                <div class="drop-down-menu-option">
-                    <i class={`drop-down-menu-icon ion-ios-trash`}></i>
-                    Delete
-                </div>
-                <div class="drop-down-menu-separator"/>
-                <div class="drop-down-menu-option">hidfs</div>
-                <div class="drop-down-menu-option">hiqweqt</div>
+                <StoryDropDown
+                    storyIndex={this.state.storyIndex}
+                    hideMenu={this._hideMenu}
+                />
             </div>
         )
     }
-
 
     onDragEnd = result => {
         const { source, destination } = result;
@@ -167,7 +184,7 @@ class StoryBoard extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                            <StoryTitle item={item} dragging={snapshot.isDragging}
+                                            <StoryTitle item={item} index={index} dragging={snapshot.isDragging}
                                                 addRole={this._addRole.bind(this, item.key)}/>
                                             <StoryList item={item} dragging={snapshot.isDragging}/>
                                         </div>

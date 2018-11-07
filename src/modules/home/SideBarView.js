@@ -27,7 +27,7 @@ class SideBarView extends React.Component{
         let selected = item === paths[1]
 
         return (
-            <div className={selected ? "list-item light-grey" : "list-item"} onClick={this._onClick.bind(this, item)}>
+            <div className={selected ? "list-item-selected" : "list-item"} onClick={this._onClick.bind(this, item)}>
                 <div style={styles.title}>{pathToLabel[item]}</div>
                 <div style={styles.desc}>{pathToSublabel[item]}</div>
             </div>

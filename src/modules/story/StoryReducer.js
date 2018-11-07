@@ -35,6 +35,7 @@ const RELOCATE_ITEM = 'story/relocate-item'
 
 const ADD_NEW_STORY = 'story/add-new-story'
 const ADD_ROLE_TO_STORY = 'story/add-role-to-story'
+const DELETE_STORY = 'story/delete-story'
 
 export function reorderBoard(items) {
     return (dispatch) => {
@@ -115,6 +116,26 @@ export function addRoleToStory(roleId, storyKey) {
     }
 }
 
+export function deleteStory(storyIndex) {
+    return (dispatch, getState) => {
+        const { stories, storyData } = getState().story
+        let storiesClone = Array.from(stories)
+        let storyDataClone = Array.from(storyData)
+
+        let storyId = storiesClone[storyIndex].key
+        storiesClone.splice(storyIndex, 1)
+        delete storyDataClone[storyId]
+
+        dispatch({
+            type: DELETE_STORY,
+            payload: {
+                stories: storiesClone,
+                storyData: storyDataClone,
+            }
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case REORDER_BOARD:
@@ -129,6 +150,8 @@ export default (state = initialState, action) => {
                 storyData: { ...state.storyData, [action.payload.uid]: [] } }
         case ADD_ROLE_TO_STORY:
             return { ...state, storyData: { ...state.storyData, [action.payload.storyKey]: action.payload.storyClone }}
+        case DELETE_STORY:
+            return { ...state, stories: action.payload.stories, storyData: action.payload.storyData }
         default:
             return state;
     }
