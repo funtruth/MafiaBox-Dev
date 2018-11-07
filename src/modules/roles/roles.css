@@ -29,3 +29,29 @@
     display: flex;
     align-items: center;
 }
+
+.role-label {
+    font: 500 14px Arial;
+    margin-bottom: 4px;
+    color: #f6f6f7;
+    display: flex;
+}
+
+.more-button {
+    font-size: 17px;
+    color: #b6b6b6;
+    margin-left: auto;
+    margin-right: 8;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0px 6px;
+    display: flex;
+}
+
+.more-button:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.field-wrapper {
+    padding: 4px;
+}

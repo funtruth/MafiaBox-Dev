@@ -1,7 +1,7 @@
 import React from 'react'
 import LabelWithEdit from './LabelWithEdit';
 
-class InputItem extends React.Component{
+class ResizeInputItem extends React.Component{
     _onChange = e => {
         const { field } = this.props
         this.props.updateRoleInfo(field, e.target.value)
@@ -27,4 +27,4 @@ class InputItem extends React.Component{
     }
 }
 
-export default InputItem
+export default ResizeInputItem
