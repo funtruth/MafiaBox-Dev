@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { navigate } from '../../navigation/NavReducer'
+import { showModalByKey } from '../../modal/ModalReducer'
+import { modalType } from '../../modal/modalConfig'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -21,7 +22,7 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.navigate(`/board/${item}`)
+            this.props.showModalByKey(modalType.editPhase)
         }
     }
 
@@ -85,6 +86,6 @@ export default connect(
         flowInfo: state.flow.flowInfo,
     }),
     {
-        navigate,
+        showModalByKey,
     }
 )(StoryList)

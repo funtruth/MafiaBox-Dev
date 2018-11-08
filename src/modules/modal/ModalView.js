@@ -10,6 +10,9 @@ import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
+import AddNewPhase from './keys/AddNewPhase';
+import AddFlowStory from './keys/AddFlowStory.js';
+import FlowEditPhase from '../flow/components/FlowEditPhase'
 
 class ModalView extends React.Component {
     componentDidMount() {
@@ -40,6 +43,12 @@ class ModalView extends React.Component {
                 return <AddNewField/>
             case modalType.deleteStory:
                 return <DeleteStory/>
+            case modalType.addNewPhase:
+                return <AddNewPhase/>
+            case modalType.addFlowStory:
+                return <AddFlowStory/>
+            case modalType.editPhase:
+                return <FlowEditPhase/>
             default:
                 return null
         }

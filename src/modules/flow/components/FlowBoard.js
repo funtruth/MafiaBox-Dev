@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { reorderStory, reorderItem, relocateItem } from '../FlowReducer'
-import { createNewRole } from '../../roles/RoleReducer'
+import { addNewPhase } from '../FlowReducer'
 
 import StoryList from './StoryList'
 import StoryTitle from './StoryTitle';
@@ -99,8 +99,8 @@ class FlowBoard extends React.Component{
         })
     }
 
-    _addRole = (key) => {
-        this.props.createNewRole({ roleStoryKey: key })
+    _addPhase = (key) => {
+        this.props.addNewPhase({ phaseStoryKey: key })
     }
 
     _renderMenu() {
@@ -185,7 +185,7 @@ class FlowBoard extends React.Component{
                                             )}
                                         >
                                             <StoryTitle item={item} index={index} dragging={snapshot.isDragging}
-                                                addRole={this._addRole.bind(this, item.key)}/>
+                                                addPhase={this._addPhase.bind(this, item.key)}/>
                                             <StoryList item={item} dragging={snapshot.isDragging}/>
                                         </div>
                                     )}
@@ -227,6 +227,6 @@ export default connect(
         reorderStory,
         reorderItem,
         relocateItem,
-        createNewRole,
+        addNewPhase,
     }
 )(FlowBoard)

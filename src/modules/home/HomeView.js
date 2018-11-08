@@ -24,7 +24,7 @@ class HomeView extends React.Component{
                         <Route exact path="/board" component={StoryView}/>
                         <Route exact path="/board/:roleId" component={RoleView}/>
                         <Route exact path="/defaults" component={RoleCardView}/>
-                        <Route exact path="/flow" component={FlowView}/>
+                        <Route path="/flow" component={FlowView}/>
                         <Route exact path="/testhub" component={TestHubView}/>
                     </div>
                 </div>

@@ -51,7 +51,7 @@ class HeaderView extends React.Component{
                 ]
             } else {
                 rightBtns = [
-                    { key: 'create', title: 'New Role', icon: 'ion-ios-add-circle' },
+                    { key: 'createRole', title: 'New Role', icon: 'ion-ios-add-circle' },
                     { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                 ]
             }
@@ -69,8 +69,8 @@ class HeaderView extends React.Component{
                 ]
             } else {
                 rightBtns = [
-                    { key: 'create', title: 'New Phase', icon: 'ion-ios-add-circle' },
-                    { key: 'createStory', title: 'Add a Phase', icon: 'ion-md-browsers' },
+                    { key: 'createPhase', title: 'New Phase', icon: 'ion-ios-add-circle' },
+                    { key: 'createFlowStory', title: 'Add a Field', icon: 'ion-md-browsers' },
                 ]
             }
         }
@@ -89,12 +89,16 @@ class HeaderView extends React.Component{
                 return this.props.goBack()
             case 'defaults':
                 return this.props.setRoleIdToDefault(this.state.childPath)
-            case 'create':
+            case 'createRole':
                 return this._onCreate()
             case 'createStory':
                 return this.props.showModalByKey(modalType.addNewStory)
             case 'createField':
                 return this.props.showModalByKey(modalType.addNewField)
+            case 'createPhase':
+                return this.props.showModalByKey(modalType.addNewPhase)
+            case 'createFlowStory':
+                return this.props.showModalByKey(modalType.addFlowStory)
             case 'delete':
                 return this._onDelete()
             default:

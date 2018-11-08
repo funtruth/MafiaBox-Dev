@@ -14,14 +14,22 @@ const initialState = {
             palette: 'palette-blue',
             default: true,
         },
+        {
+            key: 'endState',
+            title: 'End State',
+            palette: 'palette-blue',
+            default: true,
+        },
     ],
 
     flowData: {
         main: [],
         unique: [],
+        endState: [],
     },
 
     flowInfo: {},
+    defaultInfo: {},
 }
 
 const REORDER_STORY = 'flow/reorder-story'
@@ -29,6 +37,7 @@ const REORDER_ITEM = 'flow/reorder-item'
 const RELOCATE_ITEM = 'flow/relocate-item'
 
 const ADD_NEW_STORY = 'flow/add-new-story'
+const ADD_NEW_PHASE = 'flow/add-new-phase'
 const ADD_PHASE_TO_STORY = 'flow/add-phase-to-story'
 const DELETE_STORY = 'flow/delete-story'
 
@@ -68,7 +77,27 @@ export function relocateItem(result) {
     } 
 }
 
-export function addNewStory(text) {
+export function addNewPhase(phaseInfo = {}) {
+    return(dispatch, getState) => {
+        const { flowInfo, defaultInfo } = getState().flow
+
+        let uid = helpers.genUID('phase')
+        while(flowInfo[uid]) {
+            uid = helpers.genUID('phase')
+        }
+        
+        dispatch({
+            type: ADD_NEW_PHASE,
+            payload: {
+                ...defaultInfo,
+                ...phaseInfo,
+                phaseId: uid,
+            }
+        })
+    }
+}
+
+export function addFlowStory(text) {
     return (dispatch, getState) => {
         const { flowData } = getState().flow
         let textNoSpace = text.replace(/\s/g, '').toLowerCase()
@@ -97,15 +126,15 @@ export function addNewStory(text) {
 
 export function addPhaseToStory(phaseId, storyKey) {
     return (dispatch, getState) => {
-        let flowClone = getState().flow.flowData[storyKey]
+        let storyClone = getState().flow.flowData[storyKey]
         
-        flowClone.unshift(phaseId)
+        storyClone.unshift(phaseId)
 
         dispatch({
             type: ADD_PHASE_TO_STORY,
             payload: {
                 storyKey,
-                flowClone
+                storyClone
             }
         })
     }
@@ -141,6 +170,9 @@ export default (state = initialState, action) => {
         case RELOCATE_ITEM:
             return { ...state, flowData: action.payload }
 
+        case ADD_NEW_PHASE:
+            return { ...state, flowData: { ...state.flowData, [action.payload.phaseStoryKey] : [ action.payload.phaseId, ...state.flowData[action.payload.phaseStoryKey]] },
+                flowInfo: { ...state.flowInfo, [action.payload.phaseId]: action.payload}}
         case ADD_NEW_STORY:
             return { ...state, flow: [ ...state.flow, action.payload.story ],
                 flowData: { ...state.flowData, [action.payload.uid]: [] } }
