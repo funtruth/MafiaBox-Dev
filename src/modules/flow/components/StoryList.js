@@ -23,12 +23,11 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.navigate('/flow/basic')
-            this.props.showModalByKey(modalType.editPhase, { phaseId: item })
+            this.props.showModalByKey(modalType.showPage, { pageKey: item })
         }
     }
 
-    render() {  
+    render() {
         const { item, flowInfo, flowData } = this.props
         const isEmpty = flowData[item.key].length === 0
 

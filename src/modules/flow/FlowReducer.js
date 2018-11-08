@@ -99,7 +99,7 @@ export function addNewPhase(phaseInfo = {}) {
             }
         })
 
-        dispatch(showModalByKey(modalType.editPhase, { phaseId: uid }))
+        dispatch(showModalByKey(modalType.showPage, { pageKey: uid }))
     }
 }
 
@@ -169,7 +169,12 @@ export function deleteStory(storyIndex) {
 
 export function updatePhaseInfo(id, field, value) {
     return (dispatch) => {
-
+        dispatch({
+            type: UPDATE_PHASE_INFO,
+            payload: {
+                id, field, value
+            }
+        })
     }
 }
 
@@ -194,7 +199,7 @@ export default (state = initialState, action) => {
             return { ...state, flow: action.payload.flow, flowData: action.payload.flowData }
     
         case UPDATE_PHASE_INFO:
-            return { ...state }
+            return { ...state, flowInfo: { ...state.flowInfo, [action.payload.id]: { ...state[action.payload.id],                   [action.payload.field]: action.payload.value } } }
         default:
             return state;
     }

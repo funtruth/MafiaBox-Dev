@@ -7,10 +7,10 @@ import HeaderView from './HeaderView';
 
 import LandingView from './LandingView'
 import StoryView from '../story/StoryView';
-import RoleView from '../roles/RoleView';
 import FlowView from '../flow/FlowView'
 import RoleCardView from '../roleCard/RoleCardView';
 import TestHubView from '../testhub/TestHubView'
+import PageContainer from '../page/PageContainer'
 
 class HomeView extends React.Component{
     render() {
@@ -22,9 +22,10 @@ class HomeView extends React.Component{
                     <div>
                         <Route exact path="/" component={LandingView}/>
                         <Route exact path="/board" component={StoryView}/>
-                        <Route exact path="/board/:roleId" component={RoleView}/>
+                        <Route exact path="/board/:pageKey" component={PageContainer}/>
                         <Route exact path="/defaults" component={RoleCardView}/>
-                        <Route path="/flow" component={FlowView}/>
+                        <Route exact path="/flow" component={FlowView}/>
+                        <Route exact path="/flow/:pageKey" component={PageContainer}/>
                         <Route exact path="/testhub" component={TestHubView}/>
                     </div>
                 </div>

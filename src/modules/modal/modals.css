@@ -47,3 +47,13 @@
     overflow: hidden;
 	box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
 }
+
+.modal-page {
+    min-height: 400px;
+    min-width: 600px;
+    height: 80vh;
+    width: 80vw;
+
+    display: flex;
+    flex-direction: row;
+}
