@@ -12,7 +12,7 @@ import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
 import AddNewPhase from './keys/AddNewPhase';
 import AddFlowStory from './keys/AddFlowStory.js';
-import FlowEditPhase from '../flow/components/FlowEditPhase'
+import FlowEditPhase from '../flow/modal/FlowEditPhase'
 
 class ModalView extends React.Component {
     componentDidMount() {

@@ -1,65 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
-import { navigate } from '../navigation/NavReducer'
+import { navigate } from '../../navigation/NavReducer'
 
-import { heights } from '../common/dim'
-import { pathToLabel, pathToSublabel, sideBarList } from '../navigation/paths'
+import { flowBarList } from '../../navigation/paths'
 
 class SideBarView extends React.Component{
-    state = {
-        redirect: false
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.path !== this.props.path) {
-            this.setState({
-                redirect: newProps.path
-            })
-        }
-    }
-
     _renderItem = (item) => {
-        const { location } = this.props
-        let path = location.pathname
+        const { path } = this.props
         let paths = path.split('/')
-        let selected = item === paths[1]
+        let selected = item.key === paths[2]
 
         return (
-            <div key={item} className={selected ? "list-item-selected" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{pathToLabel[item]}</div>
-                <div style={styles.desc}>{pathToSublabel[item]}</div>
+            <div key={item.key} className={selected ? "list-item-selected" : "list-item"} onClick={this._onClick.bind(this, item)}>
+                <div style={styles.title}>{item.title}</div>
+                <div style={styles.desc}>{item.subtitle}</div>
             </div>
         )
     }
 
     _onClick = (item) => {
-        this.props.navigate(`/${item}`)
-    }
-
-    _redirect() {
-        if (!this.state.redirect) return null
-        
-        this.setState({
-            redirect: false
-        })
-
-        return (
-            <Redirect to={this.state.redirect}/>
-        )
+        this.props.navigate(`/flow/${item.key}`)
     }
 
     render() {
         return (
             <div className="side-bar-view">
-                {this._redirect()}
-
                 <div style={styles.header}>
                 </div>
 
                 <div className="scrollable-y">
-                    {sideBarList.map(this._renderItem)}
+                    {flowBarList.map(this._renderItem)}
                 </div>
             </div>
         )
@@ -68,7 +39,6 @@ class SideBarView extends React.Component{
 
 const styles = {
     header: {
-        height: heights.header,
         backgroundColor: 'rgba(40, 43, 48)',
     },
     title: {

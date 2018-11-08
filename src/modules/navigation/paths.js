@@ -20,3 +20,21 @@ export const pathToSublabel = {
 }
 
 export const sideBarList = ['defaults', 'board', 'flow', 'testhub']
+
+export const flowBarList = [
+    {
+        key: 'info',
+        title: 'Basic Info',
+        subtitle: 'Edit basic details',
+    },
+    {
+        key: 'target',
+        title: 'Targetting',
+        subtitle: 'Manage action limitations',
+    },
+    {
+        key: 'phaseChange',
+        title: 'Phase Changes',
+        subtitle: 'Decide how phases change',
+    }
+]
