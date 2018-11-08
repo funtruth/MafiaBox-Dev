@@ -1,6 +1,7 @@
 import * as helpers from '../roles/helpers'
 import { modalType } from '../modal/modalConfig'
 import { showModalByKey } from '../modal/ModalReducer';
+import { addPage } from '../page/PageReducer'
 
 const initialState = {
     flow: [
@@ -81,25 +82,27 @@ export function relocateItem(result) {
     } 
 }
 
-export function addNewPhase(phaseInfo = {}) {
+export function addNewPhase(info = {}) {
     return(dispatch, getState) => {
-        const { flowInfo, defaultInfo } = getState().flow
+        const { pageMap } = getState().page
 
-        let uid = helpers.genUID('phase')
-        while(flowInfo[uid]) {
-            uid = helpers.genUID('phase')
+        let pageKey = helpers.genUID('phase')
+        while(pageMap[pageKey]) {
+            pageKey = helpers.genUID('phase')
+        }
+
+        let pageInfo = {
+            ...info,
+            pageKey,
         }
         
         dispatch({
             type: ADD_NEW_PHASE,
-            payload: {
-                ...defaultInfo,
-                ...phaseInfo,
-                phaseId: uid,
-            }
+            payload: pageInfo
         })
+        dispatch(addPage(pageInfo))
 
-        dispatch(showModalByKey(modalType.showPage, { pageKey: uid }))
+        dispatch(showModalByKey(modalType.showPage, { pageKey }))
     }
 }
 
@@ -151,7 +154,7 @@ export function deleteStory(storyIndex) {
         const { flow, flowData } = getState().flow
         let flowClone = Array.from(flow)
         let flowDataClone = {}
-        flowDataClone = Object.assign(flowDataClone, flowData)
+        Object.assign(flowDataClone, flowData)
         
         let storyId = flowClone[storyIndex].key
         flowClone.splice(storyIndex, 1)
@@ -188,8 +191,7 @@ export default (state = initialState, action) => {
             return { ...state, flowData: action.payload }
 
         case ADD_NEW_PHASE:
-            return { ...state, flowData: { ...state.flowData, [action.payload.phaseStoryKey] : [ action.payload.phaseId, ...state.flowData[action.payload.phaseStoryKey]] },
-                flowInfo: { ...state.flowInfo, [action.payload.phaseId]: action.payload}}
+            return { ...state, flowData: { ...state.flowData, [action.payload.phaseStoryKey] : [ action.payload.pageKey, ...state.flowData[action.payload.phaseStoryKey]] } }
         case ADD_NEW_STORY:
             return { ...state, flow: [ ...state.flow, action.payload.story ],
                 flowData: { ...state.flowData, [action.payload.uid]: [] } }

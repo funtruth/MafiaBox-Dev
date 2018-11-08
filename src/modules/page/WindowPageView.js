@@ -1,7 +1,7 @@
 import React from 'react'
 import PageView from './PageView'
 
-class PageContainer extends React.Component {
+class WindowPageView extends React.Component {
     render() {
         const { match } = this.props
         const { pageKey } = match.params
@@ -14,4 +14,4 @@ class PageContainer extends React.Component {
     }
 }
 
-export default PageContainer
+export default WindowPageView

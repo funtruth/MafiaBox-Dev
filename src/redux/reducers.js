@@ -7,6 +7,7 @@ import ModalReducer from '../modules/modal/ModalReducer'
 import StoryReducer from '../modules/story/StoryReducer'
 import NavReducer from '../modules/navigation/NavReducer'
 import FlowReducer from '../modules/flow/FlowReducer'
+import PageReducer from '../modules/page/PageReducer'
 
 const reducers = {
     user: UserReducer,
@@ -16,6 +17,7 @@ const reducers = {
     story: StoryReducer,
     nav: NavReducer,
     flow: FlowReducer,
+    page: PageReducer,
 }
 
 export default combineReducers( reducers )
