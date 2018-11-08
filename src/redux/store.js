@@ -9,7 +9,7 @@ const persistConfig = {
     timeout: 1000,
     key: 'root',
     storage,
-    blacklist: ['story', 'flow']
+    //blacklist: ['story', 'flow']
 }
   
 const persistedReducer = persistReducer(persistConfig, reducers)

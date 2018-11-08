@@ -1,12 +1,12 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import ModalMenu from './ModalMenu'
 import FlowBasic from './FlowBasic'
 import FlowTarget from './FlowTarget'
 import FlowPhase from './FlowPhase'
 
-class FlowEditPhase extends React.Component {
+class FlowModal extends React.Component {
     render() {
         return (
             <div className="flow-modal-menu">
@@ -21,4 +21,4 @@ class FlowEditPhase extends React.Component {
     }
 }
 
-export default FlowEditPhase
+export default withRouter(FlowModal)

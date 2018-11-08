@@ -3,6 +3,7 @@ import '../common/colors.css'
 import '../common/buttons.css'
 import '../common/styles.css'
 import '../common/animations.css'
+import '../components/components.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -21,7 +22,7 @@ export default class AppNavigator extends React.Component {
                     <BrowserRouter>
                         <div>
                             <Route path="/" component={HomeView}/>
-                            <ModalView/>
+                            <Route path="/" component={ModalView}/>
                         </div>
                     </BrowserRouter>
                 </PersistGate>

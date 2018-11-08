@@ -1,4 +1,6 @@
 import * as helpers from '../roles/helpers'
+import { modalType } from '../modal/modalConfig'
+import { showModalByKey } from '../modal/ModalReducer';
 
 const initialState = {
     flow: [
@@ -40,6 +42,8 @@ const ADD_NEW_STORY = 'flow/add-new-story'
 const ADD_NEW_PHASE = 'flow/add-new-phase'
 const ADD_PHASE_TO_STORY = 'flow/add-phase-to-story'
 const DELETE_STORY = 'flow/delete-story'
+
+const UPDATE_PHASE_INFO = 'flow/update-phase-info'
 
 export function reorderStory(items) {
     return (dispatch) => {
@@ -94,6 +98,8 @@ export function addNewPhase(phaseInfo = {}) {
                 phaseId: uid,
             }
         })
+
+        dispatch(showModalByKey(modalType.editPhase, { phaseId: uid }))
     }
 }
 
@@ -161,6 +167,12 @@ export function deleteStory(storyIndex) {
     }
 }
 
+export function updatePhaseInfo(id, field, value) {
+    return (dispatch) => {
+
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case REORDER_STORY:
@@ -180,6 +192,9 @@ export default (state = initialState, action) => {
             return { ...state, flowData: { ...state.flowData, [action.payload.storyKey]: action.payload.storyClone }}
         case DELETE_STORY:
             return { ...state, flow: action.payload.flow, flowData: action.payload.flowData }
+    
+        case UPDATE_PHASE_INFO:
+            return { ...state }
         default:
             return state;
     }

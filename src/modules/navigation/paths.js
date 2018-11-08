@@ -23,7 +23,7 @@ export const sideBarList = ['defaults', 'board', 'flow', 'testhub']
 
 export const flowBarList = [
     {
-        key: 'info',
+        key: 'basic',
         title: 'Basic Info',
         subtitle: 'Edit basic details',
     },
