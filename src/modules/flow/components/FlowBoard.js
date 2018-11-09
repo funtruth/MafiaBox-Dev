@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { reorderStory, reorderItem, relocateItem } from '../FlowReducer'
-import { addNewPhase } from '../FlowReducer'
+import { moveStory } from '../FlowReducer'
+import { addPageToMap, movePageWithinMap, movePageToOtherMap } from '../../page/PageReducer'
 
 import StoryList from './StoryList'
 import StoryTitle from './StoryTitle';
@@ -21,28 +21,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = isDraggingOver => ({
     ...styles.listStyle,
 });
-
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-  
-    return result;
-};
-
-const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
-};
 
 class FlowBoard extends React.Component{
     state = {
@@ -99,8 +77,8 @@ class FlowBoard extends React.Component{
         })
     }
 
-    _addPhase = (key) => {
-        this.props.addNewPhase({ phaseStoryKey: key })
+    _addPhase = (mapKey) => {
+        this.props.addPageToMap(mapKey)
     }
 
     _renderMenu() {
@@ -132,32 +110,24 @@ class FlowBoard extends React.Component{
 
         if (source.droppableId === 'board') {
             if (source.index === destination.index) return
-            
-            const items = reorder(
-                this.props.stories,
+            this.props.moveStory(
                 source.index,
-                destination.index
-            );
-    
-            this.props.reorderStory(items)
+                destination.index,
+            )    
         } else {
             if (source.droppableId === destination.droppableId) {
-                const items = reorder(
-                    this.props.storyData[source.droppableId],
+                this.props.movePageWithinMap(
+                    source.droppableId,
                     source.index,
-                    destination.index
-                );
-                
-                this.props.reorderItem(source.droppableId, items)
+                    destination.index,
+                )
             } else {
-                const result = move(
-                    this.props.storyData[source.droppableId],
-                    this.props.storyData[destination.droppableId],
-                    source,
-                    destination
-                );
-    
-                this.props.relocateItem(result)
+                this.props.movePageToOtherMap(
+                    source.droppableId,
+                    destination.droppableId,
+                    source.index,
+                    destination.index,
+                )
             }
         }
     }
@@ -172,7 +142,7 @@ class FlowBoard extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {this.props.flow.map((item, index) => (
+                            {this.props.storyMap.map((item, index) => (
                                 <Draggable key={item.key} draggableId={item.key} index={index}>
                                     {(provided, snapshot) => (
                                         <div
@@ -220,13 +190,12 @@ const styles = {
 
 export default connect(
     state => ({
-        flow: state.flow.flow,
-        flowData: state.flow.flowData,
+        storyMap: state.flow.storyMap,
     }),
     {
-        reorderStory,
-        reorderItem,
-        relocateItem,
-        addNewPhase,
+        moveStory,
+        addPageToMap,
+        movePageWithinMap,
+        movePageToOtherMap,
     }
 )(FlowBoard)

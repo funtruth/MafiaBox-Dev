@@ -11,8 +11,8 @@ import AddNewField from './components/AddNewField'
 
 class PageView extends React.Component {
     render() {
-        const { pageKey, pageMap } = this.props
-        const pageInfo = pageMap[pageKey]
+        const { pageKey, pageRepo } = this.props
+        const pageInfo = pageRepo[pageKey]
         
         if (!pageInfo) return null
 
@@ -32,7 +32,7 @@ class PageView extends React.Component {
 
 export default connect(
     state => ({
-        pageMap: state.page.pageMap,
+        pageRepo: state.page.pageRepo,
     }),
     {
         updatePage,

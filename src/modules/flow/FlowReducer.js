@@ -1,10 +1,9 @@
 import * as helpers from '../roles/helpers'
 import { modalType } from '../modal/modalConfig'
 import { showModalByKey } from '../modal/ModalReducer';
-import { addPage } from '../page/PageReducer'
 
 const initialState = {
-    flow: [
+    storyMap: [
         {
             key: 'main',
             title: 'Main',
@@ -31,63 +30,36 @@ const initialState = {
         endState: [],
     },
 
-    flowInfo: {},
     defaultInfo: {},
 }
 
-const REORDER_STORY = 'flow/reorder-story'
-const REORDER_ITEM = 'flow/reorder-item'
-const RELOCATE_ITEM = 'flow/relocate-item'
-
 const ADD_NEW_STORY = 'flow/add-new-story'
 const ADD_NEW_PHASE = 'flow/add-new-phase'
-const ADD_PHASE_TO_STORY = 'flow/add-phase-to-story'
 const DELETE_STORY = 'flow/delete-story'
 
-const UPDATE_PHASE_INFO = 'flow/update-phase-info'
+const MOVE_STORY = 'flow/move-story'
 
-export function reorderStory(items) {
-    return (dispatch) => {
-        dispatch({
-            type: REORDER_STORY,
-            payload: items
-        })
-    }
-}
-
-export function reorderItem(key, items) {
-    return (dispatch) => {
-        dispatch({
-            type: REORDER_ITEM,
-            payload: {
-                key,
-                items
-            }
-        })
-    }
-}
-
-export function relocateItem(result) {
+export function moveStory(startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { flow } = getState()
-        let flowClone = {
-            ...flow.flowData,
-            ...result
-        }
+        const { storyMap } = getState().flow
+        let storyMapClone = Array.from(storyMap)
+
+        const [removed] = storyMapClone.splice(startIndex, 1)
+        storyMapClone.splice(endIndex, 0, removed)
         
         dispatch({
-            type: RELOCATE_ITEM,
-            payload: flowClone
+            type: MOVE_STORY,
+            payload: storyMapClone
         })
-    } 
+    }
 }
 
 export function addNewPhase(info = {}) {
     return(dispatch, getState) => {
-        const { pageMap } = getState().page
+        const { pageRepo } = getState().page
 
         let pageKey = helpers.genUID('phase')
-        while(pageMap[pageKey]) {
+        while(pageRepo[pageKey]) {
             pageKey = helpers.genUID('phase')
         }
 
@@ -100,7 +72,6 @@ export function addNewPhase(info = {}) {
             type: ADD_NEW_PHASE,
             payload: pageInfo
         })
-        dispatch(addPage(pageInfo))
 
         dispatch(showModalByKey(modalType.showPage, { pageKey }))
     }
@@ -133,22 +104,6 @@ export function addFlowStory(text) {
     }
 }
 
-export function addPhaseToStory(phaseId, storyKey) {
-    return (dispatch, getState) => {
-        let storyClone = getState().flow.flowData[storyKey]
-        
-        storyClone.unshift(phaseId)
-
-        dispatch({
-            type: ADD_PHASE_TO_STORY,
-            payload: {
-                storyKey,
-                storyClone
-            }
-        })
-    }
-}
-
 export function deleteStory(storyIndex) {
     return (dispatch, getState) => {
         const { flow, flowData } = getState().flow
@@ -170,38 +125,18 @@ export function deleteStory(storyIndex) {
     }
 }
 
-export function updatePhaseInfo(id, field, value) {
-    return (dispatch) => {
-        dispatch({
-            type: UPDATE_PHASE_INFO,
-            payload: {
-                id, field, value
-            }
-        })
-    }
-}
-
 export default (state = initialState, action) => {
     switch(action.type){
-        case REORDER_STORY:
-            return { ...state, flow: action.payload }
-        case REORDER_ITEM:
-            return { ...state, flowData: { ...state.flowData, [action.payload.key]: action.payload.items } }
-        case RELOCATE_ITEM:
-            return { ...state, flowData: action.payload }
-
         case ADD_NEW_PHASE:
             return { ...state, flowData: { ...state.flowData, [action.payload.phaseStoryKey] : [ action.payload.pageKey, ...state.flowData[action.payload.phaseStoryKey]] } }
         case ADD_NEW_STORY:
             return { ...state, flow: [ ...state.flow, action.payload.story ],
                 flowData: { ...state.flowData, [action.payload.uid]: [] } }
-        case ADD_PHASE_TO_STORY:
-            return { ...state, flowData: { ...state.flowData, [action.payload.storyKey]: action.payload.storyClone }}
         case DELETE_STORY:
             return { ...state, flow: action.payload.flow, flowData: action.payload.flowData }
-    
-        case UPDATE_PHASE_INFO:
-            return { ...state, flowInfo: { ...state.flowInfo, [action.payload.id]: { ...state[action.payload.id],                   [action.payload.field]: action.payload.value } } }
+
+        case MOVE_STORY:
+            return { ...state, storyMap: action.payload }
         default:
             return state;
     }

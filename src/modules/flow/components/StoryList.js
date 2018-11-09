@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { showModalByKey } from '../../modal/ModalReducer'
-import { navigate } from '../../navigation/NavReducer'
 import { modalType } from '../../modal/modalConfig'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -28,8 +27,9 @@ class StoryList extends React.Component{
     }
 
     render() {
-        const { item, flowInfo, flowData } = this.props
-        const isEmpty = flowData[item.key].length === 0
+        const { item, pageRepo, pageMap } = this.props
+        if (!pageMap[item.key]) return null
+        const isEmpty = pageMap[item.key].length === 0
 
         return (
             <Droppable droppableId={item.key} type="ITEM">
@@ -42,8 +42,8 @@ class StoryList extends React.Component{
                         <div className="story-empty">
                             {`There is nothing here yet.`}
                         </div>:
-                        flowData[item.key].map((item, index) => (
-                            flowInfo[item] && <Draggable key={item} draggableId={item} index={index}>
+                        pageMap[item.key].map((item, index) => (
+                            pageRepo[item] && <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
                                         className="story-tag"
@@ -56,7 +56,7 @@ class StoryList extends React.Component{
                                             provided.draggableProps.style
                                         )}
                                     >
-                                        {(flowInfo[item] && flowInfo[item].phaseName) || 'Untitled'}
+                                        {(pageRepo[item] && pageRepo[item].title) || 'Untitled'}
                                     </div>
                                 )}
                             </Draggable>
@@ -83,11 +83,10 @@ const styles = {
 
 export default connect(
     state => ({
-        flowData: state.flow.flowData,
-        flowInfo: state.flow.flowInfo,
+        pageRepo: state.page.pageRepo,
+        pageMap: state.page.pageMap,
     }),
     {
         showModalByKey,
-        navigate,
     }
 )(StoryList)
