@@ -7,12 +7,12 @@ const initialState = {
     pageRepo: {},
 }
 
-//map
+//map: maps which pageKeys are in each mapKey
 const ADD_PAGE_TO_MAP = 'page/add-page-to-map'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
-//repo
+//[repo]sitory: holds all the pages keyed by pageKey
 const ADD_PAGE_TO_REPO = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'

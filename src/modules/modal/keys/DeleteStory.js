@@ -17,17 +17,17 @@ class DeleteStory extends React.Component {
     }
 
     render() {
-        const { modalParams, stories } = this.props
+        const { modalParams, storyMap } = this.props
         const { storyIndex } = modalParams
         
         return (
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Delete "${stories[storyIndex].title}"?`}
+                        {`Delete "${storyMap[storyIndex].title}"?`}
                     </div>
                     <div className="modal-subtitle">
-                        {`Are you sure you want to delete ${stories[storyIndex].title}?`}
+                        {`Are you sure you want to delete ${storyMap[storyIndex].title}?`}
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
@@ -46,7 +46,7 @@ class DeleteStory extends React.Component {
 export default connect(
     state => ({
         modalParams: state.modal.modalParams,
-        stories: state.story.stories,
+        storyMap: state.story.storyMap,
     }),
     {
         deleteStory,

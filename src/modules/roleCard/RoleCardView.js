@@ -46,7 +46,7 @@ class RoleCardView extends React.Component{
     render() {
         return (
             <div className="story-view">
-                {this.props.fields.map(this._renderItem)}
+                {/*this.props.fields.map(this._renderItem)*/}
             </div>
         )
     }

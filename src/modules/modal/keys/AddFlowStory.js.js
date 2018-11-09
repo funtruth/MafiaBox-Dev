@@ -38,7 +38,7 @@ class AddNewStory extends React.Component {
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`New Story`}
+                        {`New Story!!`}
                     </div>
                     <div className="modal-subtitle">
                         {`Choose a name for your new story.`}

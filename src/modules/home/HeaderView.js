@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { createNewRole, deleteRole, setRoleIdToDefault } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { navigate, goBack } from '../navigation/NavReducer'
+import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/modalConfig'
 import { pathKey, pathToLabel } from '../navigation/paths'
@@ -51,7 +52,7 @@ class HeaderView extends React.Component{
                 ]
             } else {
                 rightBtns = [
-                    { key: 'createRole', title: 'New Role', icon: 'ion-ios-add-circle' },
+                    { key: 'addRole', title: 'New Role', icon: 'ion-ios-add-circle' },
                     { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                 ]
             }
@@ -69,7 +70,7 @@ class HeaderView extends React.Component{
                 ]
             } else {
                 rightBtns = [
-                    { key: 'createPhase', title: 'New Phase', icon: 'ion-ios-add-circle' },
+                    { key: 'addPhase', title: 'New Phase', icon: 'ion-ios-add-circle' },
                     { key: 'createFlowStory', title: 'Add a Field', icon: 'ion-md-browsers' },
                 ]
             }
@@ -89,14 +90,14 @@ class HeaderView extends React.Component{
                 return this.props.goBack()
             case 'defaults':
                 return this.props.setRoleIdToDefault(this.state.childPath)
-            case 'createRole':
-                return this._onCreate()
+            case 'addRole':
+                return this.props.addPageToMap('inProgress')
             case 'createStory':
                 return this.props.showModalByKey(modalType.addNewStory)
             case 'createField':
                 return this.props.showModalByKey(modalType.addNewField)
-            case 'createPhase':
-                return this.props.showModalByKey(modalType.addNewPhase)
+            case 'addPhase':
+                return this.props.addPageToMap('main')
             case 'createFlowStory':
                 return this.props.showModalByKey(modalType.addFlowStory)
             case 'delete':
@@ -169,6 +170,7 @@ export default connect(
     }),
     {
         createNewRole,
+        addPageToMap,
         deleteRole,
         setRoleIdToDefault,
         showModalByKey,

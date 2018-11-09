@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { navigate } from '../../navigation/NavReducer'
+import { showModalByKey } from '../../modal/ModalReducer'
+import { modalType } from '../../modal/modalConfig'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -21,13 +22,13 @@ const getListStyle = isDraggingOver => ({
 class StoryList extends React.Component{
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.navigate(`/board/${item}`)
+            this.props.showModalByKey(modalType.showPage, { pageKey: item })
         }
     }
 
     render() {  
-        const { item, roles, storyData } = this.props
-        const isEmpty = storyData[item.key].length === 0
+        const { item, pageRepo, pageMap } = this.props
+        const isEmpty = !pageMap[item.key] || pageMap[item.key].length === 0
 
         return (
             <Droppable droppableId={item.key} type="ITEM">
@@ -40,8 +41,8 @@ class StoryList extends React.Component{
                         <div className="story-empty">
                             {`There is nothing here yet.`}
                         </div>:
-                        storyData[item.key].map((item, index) => (
-                            roles[item] && <Draggable key={item} draggableId={item} index={index}>
+                        pageMap[item.key].map((item, index) => (
+                            pageRepo[item] && <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
                                         className="story-tag"
@@ -54,7 +55,7 @@ class StoryList extends React.Component{
                                             provided.draggableProps.style
                                         )}
                                     >
-                                        {(roles[item] && roles[item].roleName) || 'Untitled'}
+                                        {(pageRepo[item] && pageRepo[item].title) || 'Untitled'}
                                     </div>
                                 )}
                             </Draggable>
@@ -81,10 +82,11 @@ const styles = {
 
 export default connect(
     state => ({
-        storyData: state.story.storyData,
         roles: state.roles.roles,
+        pageRepo: state.page.pageRepo,
+        pageMap: state.page.pageMap,
     }),
     {
-        navigate,
+        showModalByKey,
     }
 )(StoryList)

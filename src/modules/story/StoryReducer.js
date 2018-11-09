@@ -1,7 +1,7 @@
 import * as helpers from '../roles/helpers'
 
 const initialState = {
-    stories: [
+    storyMap: [
         {
             key: 'inProgress',
             title: 'In Progress',
@@ -21,56 +21,27 @@ const initialState = {
             default: true,
         }
     ],
-
-    storyData: {
-        inProgress: [],
-        complete: [],
-        live: [],
-    }
 }
-
-const REORDER_STORY = 'story/reorder-story'
-const REORDER_ITEM = 'story/reorder-item'
-const RELOCATE_ITEM = 'story/relocate-item'
 
 const ADD_NEW_STORY = 'story/add-new-story'
 const ADD_ROLE_TO_STORY = 'story/add-role-to-story'
 const DELETE_STORY = 'story/delete-story'
 
-export function reorderStory(items) {
-    return (dispatch) => {
-        dispatch({
-            type: REORDER_STORY,
-            payload: items
-        })
-    }
-}
+const MOVE_STORY = 'story/move-story'
 
-export function reorderItem(key, items) {
-    return (dispatch) => {
-        dispatch({
-            type: REORDER_ITEM,
-            payload: {
-                key,
-                items
-            }
-        })
-    }
-}
-
-export function relocateItem(result) {
+export function moveStory(startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { story } = getState()
-        let storyClone = {
-            ...story.storyData,
-            ...result
-        }
+        const { storyMap } = getState().story
+        let storyMapClone = Array.from(storyMap)
+
+        const [removed] = storyMapClone.splice(startIndex, 1)
+        storyMapClone.splice(endIndex, 0, removed)
         
         dispatch({
-            type: RELOCATE_ITEM,
-            payload: storyClone
+            type: MOVE_STORY,
+            payload: storyMapClone
         })
-    } 
+    }
 }
 
 export function addNewStory(text) {
@@ -139,13 +110,6 @@ export function deleteStory(storyIndex) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case REORDER_STORY:
-            return { ...state, stories: action.payload }
-        case REORDER_ITEM:
-            return { ...state, storyData: { ...state.storyData, [action.payload.key]: action.payload.items } }
-        case RELOCATE_ITEM:
-            return { ...state, storyData: action.payload }
-
         case ADD_NEW_STORY:
             return { ...state, stories: [ ...state.stories, action.payload.story ],
                 storyData: { ...state.storyData, [action.payload.uid]: [] } }
@@ -153,6 +117,9 @@ export default (state = initialState, action) => {
             return { ...state, storyData: { ...state.storyData, [action.payload.storyKey]: action.payload.storyClone }}
         case DELETE_STORY:
             return { ...state, stories: action.payload.stories, storyData: action.payload.storyData }
+            
+        case MOVE_STORY:
+            return { ...state, storyMap: action.payload }
         default:
             return state;
     }

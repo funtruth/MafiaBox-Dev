@@ -28,8 +28,7 @@ class StoryList extends React.Component{
 
     render() {
         const { item, pageRepo, pageMap } = this.props
-        if (!pageMap[item.key]) return null
-        const isEmpty = pageMap[item.key].length === 0
+        const isEmpty = !pageMap[item.key] || pageMap[item.key].length === 0
 
         return (
             <Droppable droppableId={item.key} type="ITEM">

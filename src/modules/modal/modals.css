@@ -39,8 +39,8 @@
 }
 
 .modal-child {
-    animation: scalein 0.25s;
-    -webkit-animation: scalein 0.25s;
+    animation: scalein 0.2s;
+    -webkit-animation: scalein 0.2s;
 
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
