@@ -53,7 +53,4 @@
     min-width: 600px;
     height: 80vh;
     width: 80vw;
-
-    display: flex;
-    flex-direction: row;
 }

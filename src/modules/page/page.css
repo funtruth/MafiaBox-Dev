@@ -1,0 +1,65 @@
+.header-button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font: 500 14px Arial;
+    color: #d6d6d6;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+}
+
+.header-button:hover {
+    background-color: hsla(0,0%,100%,.1);
+    color: #fff;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    padding: 0px 40px;
+}
+
+.page-header {
+    padding: 10px 16px;
+}
+
+.page-title-input {
+    border: none;
+    background-color: rgba(54, 57, 64);
+    padding: 4px 7px;
+    font: 600 27px Arial;
+    color: #f6f6f7;
+}
+
+.page-title-input:focus {
+    outline: none;
+}
+
+.page-input {
+    border: none;
+    background-color: rgba(54, 57, 64);
+    padding: 4px 7px;
+    font: 450 14px Arial;
+    color: #c6c6c6;
+}
+
+.page-input:focus {
+    outline: none;
+}
+
+.page-field-label {
+    padding: 6px 8px;
+    font: 500 15px Arial;
+    color: #d6d6d6d6;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 100px
+}
+
+.page-field-label:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
