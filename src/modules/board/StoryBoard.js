@@ -1,13 +1,13 @@
 import React from 'react'
+import './board.css'
 import { connect } from 'react-redux'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { moveStory } from '../FlowReducer'
-import { addPageToMap, movePageWithinMap, movePageToOtherMap } from '../../page/PageReducer'
+import { moveStory, addPageToMap, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 
-import StoryList from './StoryList'
-import StoryTitle from './StoryTitle';
-import StoryDropDown from './StoryDropDown';
+import StoryList from './components/StoryList'
+import StoryTitle from './components/StoryTitle';
+import StoryDropDown from './components/StoryDropDown';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -22,7 +22,7 @@ const getListStyle = isDraggingOver => ({
     ...styles.listStyle,
 });
 
-class FlowBoard extends React.Component{
+class StoryBoard extends React.Component{
     state = {
         showMenu: false,
         storyIndex: null,
@@ -77,7 +77,7 @@ class FlowBoard extends React.Component{
         })
     }
 
-    _addPhase = (mapKey) => {
+    _addPage = (mapKey) => {
         this.props.addPageToMap(mapKey)
     }
 
@@ -143,23 +143,24 @@ class FlowBoard extends React.Component{
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
                             {this.props.storyMap.map((item, index) => (
-                                <Draggable key={item.key} draggableId={item.key} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            <StoryTitle item={item} index={index} dragging={snapshot.isDragging}
-                                                addPhase={this._addPhase.bind(this, item.key)}/>
-                                            <StoryList item={item} dragging={snapshot.isDragging}/>
-                                        </div>
-                                    )}
-                                </Draggable>
+                                item.boardKey === this.props.boardType &&
+                                    <Draggable key={item.key} draggableId={item.key} index={index}>
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}
+                                            >
+                                                <StoryTitle item={item} index={index} dragging={snapshot.isDragging}
+                                                    addPage={this._addPage.bind(this, item.key)}/>
+                                                <StoryList item={item} dragging={snapshot.isDragging}/>
+                                            </div>
+                                        )}
+                                    </Draggable>
                             ))}
                             {provided.placeholder}
                         </div>
@@ -190,7 +191,7 @@ const styles = {
 
 export default connect(
     state => ({
-        storyMap: state.flow.storyMap,
+        storyMap: state.page.storyMap,
     }),
     {
         moveStory,
@@ -198,4 +199,4 @@ export default connect(
         movePageWithinMap,
         movePageToOtherMap,
     }
-)(FlowBoard)
+)(StoryBoard)

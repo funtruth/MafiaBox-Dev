@@ -26,7 +26,7 @@ class StoryList extends React.Component{
         }
     }
 
-    render() {
+    render() {  
         const { item, pageRepo, pageMap } = this.props
         const isEmpty = !pageMap[item.key] || pageMap[item.key].length === 0
 

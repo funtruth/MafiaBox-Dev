@@ -13,7 +13,6 @@ class DeleteStory extends React.Component {
     _onDelete = () => {
         this.props.deleteStory(this.props.modalParams.storyIndex)
         this.props.showModalByKey()
-        this.props.navigate('/board')
     }
 
     render() {
@@ -24,7 +23,7 @@ class DeleteStory extends React.Component {
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Delete "${storyMap[storyIndex].title}"?`}
+                        {`Delete '${storyMap[storyIndex].title}'?`}
                     </div>
                     <div className="modal-subtitle">
                         {`Are you sure you want to delete ${storyMap[storyIndex].title}?`}

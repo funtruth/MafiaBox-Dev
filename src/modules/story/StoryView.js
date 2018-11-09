@@ -1,13 +1,12 @@
 import React from 'react'
-import './story.css'
-
-import StoryBoard from './components/StoryBoard'
+import { boardType } from '../page/defaults'
+import StoryBoard from '../board/StoryBoard'
 
 class StoryView extends React.Component{
     render() {
         return (
             <div className="story-view">
-                <StoryBoard/>
+                <StoryBoard boardType={boardType.roles}/>
             </div>
         )
     }
