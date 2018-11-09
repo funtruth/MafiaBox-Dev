@@ -10,12 +10,12 @@ class InputField extends React.Component{
 
     render() {
         const { pageInfo, field } = this.props
+
         return (
-            <div className="row">
-                <div className="page-field-label-width">
-                    <div className="page-field-label">
-                        {field}
-                    </div>
+            <div className="row" style={{ marginBottom: 4 }}>
+                <div className="page-field-label">
+                    <i className="story-option ion-md-list" style={{ width: 16 }}></i>
+                    {field}
                 </div>
                 <input
                     className="page-input"
