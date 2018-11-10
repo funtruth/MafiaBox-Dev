@@ -1,5 +1,6 @@
 import React from 'react'
 import './page.css'
+import './monokai.css'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material.css'
 import { connect } from 'react-redux'
@@ -40,7 +41,7 @@ class PageView extends React.Component {
                     value={this.state.value}
                     options={{
                         mode: 'javascript',
-                        theme: 'material',
+                        theme: 'monokai',
                         lineNumbers: true
                     }}
                     onBeforeChange={(editor, data, value) => this.setState({value})}
