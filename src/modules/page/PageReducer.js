@@ -90,7 +90,7 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
     return (dispatch, getState) => {
         const { pageMap } = getState().page
         const startMapClone = Array.from(pageMap[startMapKey])
-        const endMapClone = Array.from(pageMap[endMapKey])
+        const endMapClone = Array.from(pageMap[endMapKey] || [])
         const [removed] = startMapClone.splice(startIndex, 1);
         endMapClone.splice(endIndex, 0, removed);
     

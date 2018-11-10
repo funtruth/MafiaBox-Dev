@@ -6,9 +6,7 @@ import StoryBoard from '../board/StoryBoard'
 class FlowView extends React.Component{
     render() {
         return (
-            <div className="story-view">
-                <StoryBoard boardType={boardType.flow}/>
-            </div>
+            <StoryBoard boardType={boardType.flow}/>
         )
     }
 }

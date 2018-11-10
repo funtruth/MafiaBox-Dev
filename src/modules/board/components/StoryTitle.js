@@ -1,4 +1,5 @@
 import React from 'react'
+import { menuType } from '../../app/types'
 
 class StoryTitle extends React.Component{
     render() {
@@ -7,8 +8,9 @@ class StoryTitle extends React.Component{
         return (
             <div className="story-title">
                 <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
-                <i className="story-option ion-ios-more menu-onclick" story-index={index} style={styles.moreIcon}></i>
-                <i className="story-option ion-ios-add" story-index={index} style={styles.addIcon} onClick={this.props.addPage}></i>
+                <i className="story-option ion-ios-more menu-onclick"
+                    story-index={index} menuType={menuType.storyShowMore} style={styles.moreIcon}></i>
+                <i className="story-option ion-ios-add" style={styles.addIcon} onClick={this.props.addPage}></i>
             </div>
         )
     }

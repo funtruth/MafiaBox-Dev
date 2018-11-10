@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import { store, persistor } from '../../redux/store'
 import Shell from './Shell'
+import AppWrapper from '../app/AppWrapper'
 import HomeView from '../home/HomeView'
 import ModalView from '../modal/ModalView'
 
@@ -18,12 +19,14 @@ export default class AppNavigator extends React.Component {
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
                     <Shell/>
-                    <BrowserRouter>
-                        <div>
-                            <Route path="/" component={HomeView}/>
-                            <Route path="/" component={ModalView}/>
-                        </div>
-                    </BrowserRouter>
+                    <AppWrapper>
+                        <BrowserRouter>
+                            <div>
+                                <Route path="/" component={HomeView}/>
+                                <Route path="/" component={ModalView}/>
+                            </div>
+                        </BrowserRouter>
+                    </AppWrapper>
                 </PersistGate>
             </Provider>
         )
