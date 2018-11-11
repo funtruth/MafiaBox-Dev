@@ -3,19 +3,11 @@ import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import { moveStory, addPageToMap, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
+import { showDropdownByKey } from './menu/DropdownReducer'
 
-import { menuType } from './types'
-
-import StoryDropDown from '../board/components/StoryDropDown';
+import { menuType } from './menu/types'
 
 class AppWrapper extends React.Component{
-    state = {
-        showMenu: false,
-        storyIndex: null,
-        pageX: null,
-        pageY: null,
-    }
-
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
         window.addEventListener('scroll', this._handleScroll, true)
@@ -27,69 +19,41 @@ class AppWrapper extends React.Component{
     }
 
     _handleScroll = () => {
-        if (this.state.showMenu) {
-            this.setState({
-                showMenu: false
-            })
+        if (this.props.dropdownKey) {
+            this.props.showDropdownByKey()
         }
     }
 
     _handleClick = (e) => {
         if (e.target.matches('.menu-onclick')) {
-            let menuClick = e.target.getAttribute('menuType')
+            let menuClick = e.target.getAttribute('menu-type')
             switch(menuClick) {
                 case menuType.storyShowMore:
-                    if (!this.state.showMenu || e.target.getAttribute('story-index') !== this.state.storyIndex) {
-                        this.setState({
-                            showMenu: true,
+                    if (!this.props.dropdownKey || e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
+                        this.props.showDropdownByKey(menuType.storyShowMore,{
                             storyIndex: e.target.getAttribute('story-index'),
                             pageX: e.pageX,
-                            pageY: e.pageY
+                            pageY: e.pageY,
                         })
                     } else {
-                        this.setState({
-                            showMenu: false
-                        })
+                        this.props.showDropdownByKey()
                     }
                     break
                 default:
             }
         } else {
-            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && this.state.showMenu) {
-                this.setState({
-                    showMenu: false
-                })
+            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && this.props.dropdownKey) {
+                this.props.showDropdownByKey()
             }
         }
     }
 
     _hideMenu = () => {
-        this.setState({
-            showMenu: false
-        })
+        this.props.showDropdownByKey()
     }
 
     _addPage = (mapKey) => {
         this.props.addPageToMap(mapKey)
-    }
-
-    _renderMenu() {
-        let menuStyle = {
-            top: this.state.pageY + 12,
-            left: this.state.pageX - 84,
-        }
-
-        return (
-            <div 
-                className="drop-down-menu"
-                style={menuStyle}
-            >
-                <StoryDropDown
-                    storyIndex={this.state.storyIndex}
-                    hideMenu={this._hideMenu}
-                />
-            </div>
-        )
     }
 
     onDragEnd = result => {
@@ -128,7 +92,6 @@ class AppWrapper extends React.Component{
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 {this.props.children}
-                {this.state.showMenu && this._renderMenu()}
             </DragDropContext>
         )
     }
@@ -137,11 +100,14 @@ class AppWrapper extends React.Component{
 export default connect(
     state => ({
         storyMap: state.page.storyMap,
+        dropdownKey: state.dropdown.dropdownKey,
+        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         moveStory,
         addPageToMap,
         movePageWithinMap,
         movePageToOtherMap,
+        showDropdownByKey,
     }
 )(AppWrapper)

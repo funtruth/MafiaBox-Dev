@@ -8,6 +8,7 @@ import StoryReducer from '../modules/story/StoryReducer'
 import NavReducer from '../modules/navigation/NavReducer'
 import FlowReducer from '../modules/flow/FlowReducer'
 import PageReducer from '../modules/page/PageReducer'
+import DropdownReducer from '../modules/app/menu/DropdownReducer'
 
 const reducers = {
     user: UserReducer,
@@ -18,6 +19,7 @@ const reducers = {
     nav: NavReducer,
     flow: FlowReducer,
     page: PageReducer,
+    dropdown: DropdownReducer,
 }
 
 export default combineReducers( reducers )

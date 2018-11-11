@@ -5,7 +5,7 @@ import { showModalByKey } from '../../modal/ModalReducer'
 
 import { modalType } from '../../modal/modalConfig'
 
-class StoryDropDown extends React.Component{
+class ClickMenu extends React.Component{
     _onDelete = () => {
         this.props.hideMenu()
         this.props.showModalByKey(modalType.deleteStory, {
@@ -14,8 +14,14 @@ class StoryDropDown extends React.Component{
     }
 
     render() {
+        const { dropdownParams } = this.props
+        let menuStyle = {
+            top: dropdownParams.pageY + 12,
+            left: dropdownParams.pageX - 84,
+        }
+
         return (
-            <div>
+            <div className="drop-down-menu" style={menuStyle}>
                 <div className="drop-down-menu-option">
                     <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>
                     Merge
@@ -39,8 +45,10 @@ class StoryDropDown extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        dropdownParams: state.dropdown.dropdownParams,
+    }),
     {
         showModalByKey,
     }
-)(StoryDropDown)
+)(ClickMenu)
