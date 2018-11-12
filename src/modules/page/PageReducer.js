@@ -1,4 +1,4 @@
-import * as helpers from '../roles/helpers'
+import * as helpers from '../common/helpers'
 import { modalType } from '../modal/modalConfig'
 import { showModalByKey } from '../modal/ModalReducer';
 

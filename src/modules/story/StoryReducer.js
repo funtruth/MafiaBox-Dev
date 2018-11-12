@@ -1,4 +1,4 @@
-import * as helpers from '../roles/helpers'
+import * as helpers from '../common/helpers'
 
 const initialState = {
     storyMap: [
