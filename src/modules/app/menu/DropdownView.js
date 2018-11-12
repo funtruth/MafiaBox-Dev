@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { showDropdownByKey } from './DropdownReducer'
 
+import { dropdownType } from './types'
+
 import ClickMenu from './ClickMenu'
 
 class DropdownView extends React.Component{
@@ -10,11 +12,12 @@ class DropdownView extends React.Component{
         const { dropdownKey } = this.props
         if (!dropdownKey) return null
 
-        return (
-            <div>
-                <ClickMenu/>
-            </div>
-        )
+        switch(dropdownKey) {
+            case dropdownType.storyShowMore:
+                return <ClickMenu/>
+            default:
+                return null
+        }
     }
 }
 

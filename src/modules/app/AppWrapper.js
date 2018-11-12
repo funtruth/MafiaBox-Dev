@@ -5,7 +5,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { moveStory, addPageToMap, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { showDropdownByKey } from './menu/DropdownReducer'
 
-import { menuType } from './menu/types'
+import { dropdownType } from './menu/types'
 
 class AppWrapper extends React.Component{
     componentDidMount() {
@@ -28,9 +28,9 @@ class AppWrapper extends React.Component{
         if (e.target.matches('.menu-onclick')) {
             let menuClick = e.target.getAttribute('menu-type')
             switch(menuClick) {
-                case menuType.storyShowMore:
+                case dropdownType.storyShowMore:
                     if (!this.props.dropdownKey || e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
-                        this.props.showDropdownByKey(menuType.storyShowMore,{
+                        this.props.showDropdownByKey(dropdownType.storyShowMore,{
                             storyIndex: e.target.getAttribute('story-index'),
                             pageX: e.pageX,
                             pageY: e.pageY,

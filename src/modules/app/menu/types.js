@@ -1,4 +1,3 @@
-export const menuType = {
-    storyShowMore: 'menuType/story-show-more'
+export const dropdownType = {
+    storyShowMore: 'dropdownType/story-show-more'
 }
-
