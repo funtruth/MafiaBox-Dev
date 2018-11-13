@@ -43,16 +43,12 @@
 .page-input {
     border: none;
     border-radius: 2px;
-    background-color: rgba(54, 57, 64);
+    background-color: transparent;
     padding: 10px 10px;
     font: 450 14px Arial;
     color: #c6c6c6;
-    width: 60%;
+    width: auto;
     cursor: pointer;
-}
-
-.page-input:hover {
-    background-color: hsla(0,0%,100%,.1);
 }
 
 .page-input:focus {
@@ -64,7 +60,7 @@
 }
 
 .page-field-label {
-    padding: 6px 2px;
+    padding: 0px 0px;
     font: 600 15px Arial;
     letter-spacing: .2px;
     color: #a6a6a6;
@@ -73,11 +69,7 @@
     width: 30%;
     display: flex;
     align-items: center;
-    margin-right: 4px;
-}
-
-.page-field-label:hover {
-    background-color: hsla(0,0%,100%,.1);
+    transition: 0.2s;
 }
 
 .add-field {
@@ -94,4 +86,29 @@
 
 .add-field:hover {
     background-color: hsla(0,0%,100%,.1);
+}
+
+.field-item {
+    padding: 6px 4px;
+    border-radius: 3px;
+}
+
+.field-item:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.see-code-button {
+    padding: 2px 12px;
+    border-radius: 4px;
+    font: 500 14px Arial;
+    color: #969696;
+    cursor: pointer;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.see-code-button:hover {
+    color: #fff;
 }

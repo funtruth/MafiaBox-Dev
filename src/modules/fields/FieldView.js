@@ -5,9 +5,9 @@ import { fieldType } from './defaults'
 
 import { updatePage } from '../page/PageReducer'
 
-import InputField from '../page/components/InputField'
-import TagField from '../page/components/TagField';
-import ExpertTagField from '../page/components/ExpertTagField';
+import InputField from './components/InputField'
+import TagField from './components/TagField';
+import PhaseTriggerField from './components/PhaseTriggerField';
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -30,8 +30,8 @@ class FieldView extends React.Component {
                 return <InputField {...props}/>
             case fieldType.tag:
                 return <TagField {...props}/>
-            case fieldType.expertTag:
-                return <ExpertTagField {...props}/>
+            case fieldType.phaseTrigger:
+                return <PhaseTriggerField {...props}/>
             default:
                 return null
         }

@@ -1,8 +1,7 @@
 import React from 'react'
-import { fieldIcon } from '../../fields/defaults'
-import AddNewField from './AddNewField'
+import { fieldIcon } from '../defaults'
 
-class ExpertTagField extends React.Component{
+class TagPickField extends React.Component{
     _renderItem = (item) => {
         const { value, field } = this.props
         const active = field && item.key === value
@@ -31,30 +30,12 @@ class ExpertTagField extends React.Component{
                     <i className={`story-option ${fieldIcon.tag}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <div>
-                    <div className="row">
-                        <div style={styles.label}>Destination</div>
-                        {fieldInfo.data.map(this._renderItem)}
-                    </div>
-                    <div className="row">
-                        <div style={styles.label}>Trigger</div>
-                        {fieldInfo.data.map(this._renderItem)}
-                    </div>
-                    <AddNewField/>
+                <div className="row-centered">
+                    {fieldInfo.data.map(this._renderItem)}
                 </div>
             </div>
         )
     }
 }
 
-const styles = {
-    label: {
-        font: '500 14px Arial',
-        color: '#969696',
-        margin: '0px 10px',
-        display: 'flex',
-        alignItems: 'center',
-    }
-}
-
-export default ExpertTagField
+export default TagPickField

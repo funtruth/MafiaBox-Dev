@@ -1,4 +1,5 @@
 import { boardType } from '../page/defaults'
+import { phaseActionMode, phaseTriggerType } from './actions'
 
 export const moldType = {
     role: 'moldType/role',
@@ -9,17 +10,19 @@ export const fieldType = {
     text: 'fieldType/text',
     tag: 'fieldType/tag',
     expertTag: 'fieldType/expertTag',
+    phaseTrigger: 'fieldType/phaseTrigger',
 }
 
 export const fieldIcon = {
     text: 'ion-md-list',
     tag: 'ion-ios-pricetag',
     expertTag: 'ion-ios-pricetags',
+    phaseTrigger: 'ion-md-fastforward',
 }
 
 export const initFieldMap = {
     [boardType.roles]: ['roleDescription', 'roleTeam', ],
-    [boardType.flow]: ['phaseDescription', 'phaseActionMode', ],
+    [boardType.flow]: ['phaseDescription', 'phaseActionMode', 'phaseTriggerMode'],
 }
 
 export const initFieldRepo = {
@@ -58,21 +61,36 @@ export const initFieldRepo = {
         fieldTitle: 'Action Mode',
         data: [
             {
-                key: 'phaseActionMode/all',
+                key: phaseActionMode.all,
                 title: 'All',
             },
             {
-                key: 'phaseActionMode/king',
+                key: phaseActionMode.king,
                 title: 'King',
             },
             {
-                key: 'phaseActionMode/clown',
+                key: phaseActionMode.clown,
                 title: 'Clown',
             },
             {
-                key: 'phaseActionMode/none',
+                key: phaseActionMode.none,
                 title: 'None',
             },
         ]
     },
+    phaseTriggerMode: {
+        fieldKey: 'phaseTriggerMode',
+        fieldType: fieldType.phaseTrigger,
+        fieldTitle: 'Phase Trigger',
+        data: [
+            {
+                key: phaseTriggerType.allReady,
+                title: 'All Ready',
+            },
+            {
+                key: phaseTriggerType.majority,
+                title: 'Majority',
+            }
+        ]
+    }
 }
