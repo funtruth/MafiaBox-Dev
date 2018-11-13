@@ -2,20 +2,20 @@ import React from 'react'
 
 class InputField extends React.Component{
     _onChange = e => {
-        const { updatePage, pageInfo, field } = this.props
+        const { pageInfo, field } = this.props
         const { pageKey } = pageInfo
 
-        updatePage(pageKey, field, e.target.value)
+        this.props.updatePage(pageKey, field, e.target.value)
     }
 
     render() {
-        const { pageInfo, field } = this.props
+        const { pageInfo, fieldInfo, field } = this.props
 
         return (
             <div className="row" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className="story-option ion-md-list" style={{ width: 16 }}></i>
-                    {field}
+                    {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
                 <input
                     className="page-input"

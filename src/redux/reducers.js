@@ -9,6 +9,7 @@ import NavReducer from '../modules/navigation/NavReducer'
 import FlowReducer from '../modules/flow/FlowReducer'
 import PageReducer from '../modules/page/PageReducer'
 import DropdownReducer from '../modules/app/menu/DropdownReducer'
+import FieldReducer from '../modules/fields/FieldReducer'
 
 const reducers = {
     user: UserReducer,
@@ -20,6 +21,7 @@ const reducers = {
     flow: FlowReducer,
     page: PageReducer,
     dropdown: DropdownReducer,
+    field: FieldReducer,
 }
 
 export default combineReducers( reducers )

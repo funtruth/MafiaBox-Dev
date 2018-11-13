@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { moveStory, addPageToMap, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
+import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { showDropdownByKey } from './menu/DropdownReducer'
 
 import { dropdownType } from './menu/types'
@@ -46,14 +46,6 @@ class AppWrapper extends React.Component{
                 this.props.showDropdownByKey()
             }
         }
-    }
-
-    _hideMenu = () => {
-        this.props.showDropdownByKey()
-    }
-
-    _addPage = (mapKey) => {
-        this.props.addPageToMap(mapKey)
     }
 
     onDragEnd = result => {
@@ -105,7 +97,6 @@ export default connect(
     }),
     {
         moveStory,
-        addPageToMap,
         movePageWithinMap,
         movePageToOtherMap,
         showDropdownByKey,

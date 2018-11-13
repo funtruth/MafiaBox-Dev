@@ -9,7 +9,7 @@ import { updatePage } from './PageReducer'
 
 import PageHeader from './components/PageHeader';
 import PageAbstract from './components/PageAbstract'
-import InputField from './components/InputField'
+import FieldView from '../fields/FieldView';
 import AddNewField from './components/AddNewField'
 
 import {Controlled as CodeMirror} from 'react-codemirror2'
@@ -33,8 +33,7 @@ class PageView extends React.Component {
                 <PageHeader/>
                 <div className="page-content">
                     <PageAbstract pageInfo={pageInfo} updatePage={this.props.updatePage}/>
-                    <InputField pageInfo={pageInfo} updatePage={this.props.updatePage} field="roleDesc"/>
-                    <InputField pageInfo={pageInfo} updatePage={this.props.updatePage} field="roleHelo"/>
+                    <FieldView pageInfo={pageInfo}/>
                     <AddNewField/>
                 </div>
                 <CodeMirror

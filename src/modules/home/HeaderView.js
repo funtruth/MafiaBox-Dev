@@ -91,13 +91,13 @@ class HeaderView extends React.Component{
             case 'defaults':
                 return this.props.setRoleIdToDefault(this.state.childPath)
             case 'addRole':
-                return this.props.addPageToMap('inProgress')
+                return this.props.addPageToMap('inProgress', 'role')
             case 'createStory':
                 return this.props.showModalByKey(modalType.addNewStory)
             case 'createField':
                 return this.props.showModalByKey(modalType.addNewField)
             case 'addPhase':
-                return this.props.addPageToMap('main')
+                return this.props.addPageToMap('main', 'phase')
             case 'createFlowStory':
                 return this.props.showModalByKey(modalType.addFlowStory)
             case 'delete':

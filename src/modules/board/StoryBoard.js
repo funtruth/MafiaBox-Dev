@@ -49,9 +49,12 @@ class StoryBoard extends React.Component{
                                                     item={item}
                                                     index={index}
                                                     dragging={snapshot.isDragging}
-                                                    addPage={this.props.addPageToMap.bind(this, item.key)}
+                                                    addPage={this.props.addPageToMap.bind(this, item.key, this.props.boardType)}
                                                 />
-                                                <StoryList item={item} dragging={snapshot.isDragging}/>
+                                                <StoryList
+                                                    item={item}
+                                                    dragging={snapshot.isDragging}
+                                                />
                                             </div>
                                         )}
                                     </Draggable>

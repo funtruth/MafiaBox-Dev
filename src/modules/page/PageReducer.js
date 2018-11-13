@@ -38,7 +38,7 @@ export function moveStory(startIndex, endIndex) {
     }
 }
 
-export function addPageToMap(mapKey) {
+export function addPageToMap(mapKey, boardType) {
     return (dispatch, getState) => {
         const { pageMap, pageRepo } = getState().page
 
@@ -52,6 +52,7 @@ export function addPageToMap(mapKey) {
 
         let pageInfo = {
             pageKey,
+            boardType,
         }
 
         dispatch({
