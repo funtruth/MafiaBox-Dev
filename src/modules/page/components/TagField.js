@@ -1,4 +1,5 @@
 import React from 'react'
+import { fieldIcon } from '../../fields/defaults'
 
 class TagPickField extends React.Component{
     _renderItem = (item) => {
@@ -24,12 +25,12 @@ class TagPickField extends React.Component{
         if (!data) return null
         
         return (
-            <div className="field-wrapper row">
+            <div className="row" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
-                    <i className="story-option ion-md-list" style={{ width: 16 }}></i>
+                    <i className={`story-option ${fieldIcon.tag}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <div className="row">
+                <div className="row-centered">
                     {fieldInfo.data.map(this._renderItem)}
                 </div>
             </div>

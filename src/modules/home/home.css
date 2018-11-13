@@ -73,7 +73,7 @@
 }
 
 .property-button {
-    padding: 6px 12px;
+    padding: 4px 12px;
     border-radius: 4px;
     font-size: 13px;
     font-weight: 500;
@@ -81,7 +81,6 @@
     color: #fff;
     cursor: pointer;
     background-color: rgba(40, 43, 48,1); 
-    margin-bottom: 4px;
     margin-right: 8px;
 }
 

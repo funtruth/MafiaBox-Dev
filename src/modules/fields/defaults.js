@@ -8,11 +8,18 @@ export const moldType = {
 export const fieldType = {
     text: 'fieldType/text',
     tag: 'fieldType/tag',
+    expertTag: 'fieldType/expertTag',
+}
+
+export const fieldIcon = {
+    text: 'ion-md-list',
+    tag: 'ion-ios-pricetag',
+    expertTag: 'ion-ios-pricetags',
 }
 
 export const initFieldMap = {
-    [boardType.roles]: ['roleDescription', 'roleTeam'],
-    [boardType.flow]: [],
+    [boardType.roles]: ['roleDescription', 'roleTeam', ],
+    [boardType.flow]: ['phaseDescription', 'phaseActionMode', ],
 }
 
 export const initFieldRepo = {
@@ -39,5 +46,33 @@ export const initFieldRepo = {
                 title: 'Neutral',
             }
         ]
-    }
+    },
+    phaseDescription: {
+        fieldKey: 'phaseDescription',
+        fieldType: fieldType.text,
+        fieldTitle: 'Phase Description',
+    },
+    phaseActionMode: {
+        fieldKey: 'phaseActionMode',
+        fieldType: fieldType.tag,
+        fieldTitle: 'Action Mode',
+        data: [
+            {
+                key: 'phaseActionMode/all',
+                title: 'All',
+            },
+            {
+                key: 'phaseActionMode/king',
+                title: 'King',
+            },
+            {
+                key: 'phaseActionMode/clown',
+                title: 'Clown',
+            },
+            {
+                key: 'phaseActionMode/none',
+                title: 'None',
+            },
+        ]
+    },
 }

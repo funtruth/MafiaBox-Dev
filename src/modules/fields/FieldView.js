@@ -6,7 +6,8 @@ import { fieldType } from './defaults'
 import { updatePage } from '../page/PageReducer'
 
 import InputField from '../page/components/InputField'
-import TagPickField from '../page/components/TagPickField';
+import TagField from '../page/components/TagField';
+import ExpertTagField from '../page/components/ExpertTagField';
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -28,7 +29,9 @@ class FieldView extends React.Component {
             case fieldType.text:
                 return <InputField {...props}/>
             case fieldType.tag:
-                return <TagPickField {...props}/>
+                return <TagField {...props}/>
+            case fieldType.expertTag:
+                return <ExpertTagField {...props}/>
             default:
                 return null
         }

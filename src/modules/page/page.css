@@ -70,12 +70,28 @@
     color: #a6a6a6;
     cursor: pointer;
     border-radius: 2px;
-    width: 25%;
+    width: 30%;
     display: flex;
     align-items: center;
     margin-right: 4px;
 }
 
 .page-field-label:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.add-field {
+    padding: 6px 12px;
+    font: 600 15px Arial;
+    letter-spacing: .2px;
+    color: #a6a6a6;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.add-field:hover {
     background-color: hsla(0,0%,100%,.1);
 }

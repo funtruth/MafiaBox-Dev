@@ -10,7 +10,6 @@ import { updatePage } from './PageReducer'
 import PageHeader from './components/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
-import AddNewField from './components/AddNewField'
 
 import {Controlled as CodeMirror} from 'react-codemirror2'
 require('codemirror/mode/javascript/javascript')
@@ -34,7 +33,6 @@ class PageView extends React.Component {
                 <div className="page-content">
                     <PageAbstract pageInfo={pageInfo} updatePage={this.props.updatePage}/>
                     <FieldView pageInfo={pageInfo}/>
-                    <AddNewField/>
                 </div>
                 <CodeMirror
                     value={this.state.value}

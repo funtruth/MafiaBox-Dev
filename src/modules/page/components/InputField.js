@@ -1,4 +1,5 @@
 import React from 'react'
+import { fieldIcon } from '../../fields/defaults'
 
 class InputField extends React.Component{
     _onChange = e => {
@@ -14,7 +15,7 @@ class InputField extends React.Component{
         return (
             <div className="row" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
-                    <i className="story-option ion-md-list" style={{ width: 16 }}></i>
+                    <i className={`story-option ${fieldIcon.text}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
                 <input
