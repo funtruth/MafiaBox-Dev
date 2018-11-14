@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { deleteStory } from '../../story/StoryReducer'
 import { showModalByKey } from '../ModalReducer'
 import { navigate } from '../../navigation/NavReducer'
 
@@ -11,22 +10,22 @@ class DeleteStory extends React.Component {
     }
 
     _onDelete = () => {
-        this.props.deleteStory(this.props.modalParams.storyIndex)
+        //TODO delete story
         this.props.showModalByKey()
     }
 
     render() {
-        const { modalParams, storyMap } = this.props
+        const { modalParams, pageRepo } = this.props
         const { storyIndex } = modalParams
         
         return (
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Delete '${storyMap[storyIndex].title}'?`}
+                        {`Delete '${pageRepo[storyIndex].title}'?`}
                     </div>
                     <div className="modal-subtitle">
-                        {`Are you sure you want to delete ${storyMap[storyIndex].title}?`}
+                        {`Are you sure you want to delete ${pageRepo[storyIndex].title}?`}
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
@@ -45,10 +44,9 @@ class DeleteStory extends React.Component {
 export default connect(
     state => ({
         modalParams: state.modal.modalParams,
-        storyMap: state.story.storyMap,
+        pageRepo: state.page.pageRepo,
     }),
     {
-        deleteStory,
         showModalByKey,
         navigate,
     }

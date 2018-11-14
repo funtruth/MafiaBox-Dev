@@ -2,7 +2,6 @@ import * as helpers from '../common/helpers'
 import { itemType } from './types'
 import { pathKey } from '../navigation/paths'
 
-import { addRoleToStory } from '../story/StoryReducer'
 import { navigate } from '../navigation/NavReducer'
 
 const initialState = {
@@ -100,7 +99,7 @@ export function createNewRole(roleInfo = {}) {
 
         dispatch(navigate(`/${pathKey.board}/${uid}`))
 
-        dispatch(addRoleToStory(uid, roleInfo.roleStoryKey || 'inProgress'))
+        //TODO add new story
 
         dispatch({
             type: CREATE_NEW_ROLE,

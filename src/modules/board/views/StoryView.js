@@ -1,6 +1,6 @@
 import React from 'react'
-import { boardType } from '../page/defaults'
-import StoryBoard from '../board/StoryBoard'
+import { boardType } from '../../page/defaults'
+import StoryBoard from '../StoryBoard'
 
 class StoryView extends React.Component{
     render() {

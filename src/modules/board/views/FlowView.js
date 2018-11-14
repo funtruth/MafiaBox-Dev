@@ -1,7 +1,6 @@
 import React from 'react'
-import './flow.css'
-import { boardType } from '../page/defaults'
-import StoryBoard from '../board/StoryBoard'
+import { boardType } from '../../page/defaults'
+import StoryBoard from '../StoryBoard'
 
 class FlowView extends React.Component{
     render() {

@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showModalByKey } from '../ModalReducer'
-import { addNewStory } from '../../story/StoryReducer'
 
 class AddNewStory extends React.Component {
     constructor(props) {
@@ -20,7 +19,7 @@ class AddNewStory extends React.Component {
         const { value } = this.state
 
         if (value && value.trim()) {
-            this.props.addNewStory(value)
+            //TODO add new story
             this.props.showModalByKey()
         } else {
             //highlight red.
@@ -68,7 +67,6 @@ class AddNewStory extends React.Component {
 export default connect(
     null,
     {
-        addNewStory,
         showModalByKey,
     }
 )(AddNewStory)

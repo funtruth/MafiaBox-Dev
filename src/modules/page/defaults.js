@@ -1,6 +1,7 @@
 export const boardType = {
     roles: 'boardType/roles',
     flow: 'boardType/flow',
+    events: 'boardType/events',
 }
 
 export const initStoryMap = [

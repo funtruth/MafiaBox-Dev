@@ -6,11 +6,12 @@ import SideBarView from './SideBarView';
 import HeaderView from './HeaderView';
 
 import LandingView from './LandingView'
-import StoryView from '../story/StoryView';
-import FlowView from '../flow/FlowView'
+import StoryView from '../board/views/StoryView';
+import FlowView from '../board/views/FlowView'
 import RoleCardView from '../roleCard/RoleCardView';
 import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
+import EventView from '../board/views/EventView'
 
 class HomeView extends React.Component{
     render() {
@@ -26,6 +27,7 @@ class HomeView extends React.Component{
                         <Route exact path="/defaults" component={RoleCardView}/>
                         <Route exact path="/flow" component={FlowView}/>
                         <Route exact path="/flow/:pageKey" component={WindowPageView}/>
+                        <Route exact path="/events" component={EventView}/>
                         <Route exact path="/testhub" component={TestHubView}/>
                     </div>
                 </div>

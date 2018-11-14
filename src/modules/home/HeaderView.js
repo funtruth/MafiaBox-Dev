@@ -7,7 +7,7 @@ import { navigate, goBack } from '../navigation/NavReducer'
 import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/modalConfig'
-import { pathKey, pathToLabel } from '../navigation/paths'
+import { pathKey } from '../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {
@@ -25,9 +25,8 @@ class HeaderView extends React.Component{
         }
     }
 
-    _getPathTitle(key) {
-        if (pathToLabel[key]) return pathToLabel[key]
-        else return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
+    _getPathTitle() {
+        return 'Untitled'
     }
 
     _onPathClick = (paths, index) => {
@@ -111,18 +110,7 @@ class HeaderView extends React.Component{
     }
 
     _onDelete = () => {
-        let paths = this.props.location.pathname.split('/')
-        let roleId = paths.pop()
-        let roleName = this.props.roles[roleId] && this.props.roles[roleId].roleName
-
-        if (!roleName) {
-            this.props.deleteRole(roleId)
-            this.props.navigate(`/${pathKey.board}`)
-        } else {
-            this.props.showModalByKey(modalType.deleteRole,
-                { roleId, roleName: this.props.roles[roleId].roleName }
-            )
-        }
+        
     }
 
     _renderItem = (item, index) => {
@@ -145,7 +133,7 @@ class HeaderView extends React.Component{
                         {index > 1 ? <div className="path-separator">{'/'}</div>
                         :<div style={{width: 2}}/>}
                         {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
-                            {this._getPathTitle(item)}
+                            {this._getPathTitle()}
                         </div>}
                     </div>
                 ))}
@@ -165,9 +153,7 @@ class HeaderView extends React.Component{
 }
 
 export default connect(
-    state => ({
-        roles: state.roles.roles,
-    }),
+    null,
     {
         createNewRole,
         addPageToMap,
