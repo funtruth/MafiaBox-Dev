@@ -3,54 +3,65 @@ import { fieldIcon } from '../defaults'
 import SeeCodeButton from '../../page/components/SeeCodeButton';
 
 import { dropdownType } from '../../app/menu/types'
+import { phaseTriggerCode, phaseTriggerTitle } from '../actions'
 
-import {Controlled as CodeMirror} from 'react-codemirror2'
-require('codemirror/mode/javascript/javascript')
+import CodeBlock from '../../page/components/CodeBlock';
+import AddNewField from '../../page/components/AddNewField'
 
 class PhaseTriggerField extends React.Component{
     state = {
-        value: ''
+        value: '',
+        visible: false,
     }
 
-    _renderItem = (item) => {
-        const { value, field, pageInfo } = this.props
+    _showCode = () => {
+        this.setState({
+            visible: !this.state.visible
+        })
+    }
 
-        const active = field && item.key === value
-        const empty = item.key === 'empty'
+    _onUpdate = (editor, data, value) => {
 
-        const style = {
-            backgroundColor: empty ?
-                null : active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
-            color: empty && '#969696',
-        }
-        
+    }
+
+    _renderRow = (item, index) => {
         return (
-            <div
-                key={item.key}
-                field-key={field}
-                page-key={pageInfo.pageKey}
-                className="property-button menu-onclick"
-                style={style}
-                menu-type={dropdownType.showOtherOptions}
-            >
-                {item.title}
+            <div className="row-centered" style={{marginBottom: 8}}>
+                {this._renderTrigger(item.mode, index)}
+                <i className="ion-ios-fastforward" style={{ color: '#a6a6a6', width: 20 }}></i>
+                {this._renderPhase(item.to)}
+                <SeeCodeButton
+                    onClick={this._showCode}
+                />
             </div>
         )
     }
 
-    _showCode = () => {
+    _renderTrigger = (mode, index) => {
+        const { pageInfo } = this.props
 
+        return (
+            <div
+                key={mode}
+                field-key="phaseTriggerMode"
+                page-key={pageInfo.pageKey}
+                subfield-key="mode"
+                index-key={index}
+                className="property-button menu-onclick"
+                menu-type={dropdownType.showOtherOptions}
+            >
+                {phaseTriggerTitle[mode]}
+            </div>
+        )
+    }
+
+    _renderPhase = (item) => {
+        return null
     }
 
     render() {
-        const { fieldInfo, field, data, value } = this.props
+        const { fieldInfo, field, pageInfo, data, value } = this.props
         if (!data) return null
-
-        let item
-        let emptyItem = { key: 'empty', title: 'Empty' }
-        for (var i=0; i<data.length; i++) {
-            if (data[i] && value === data[i].key) item = data[i]
-        }
         
         return (
             <div>
@@ -59,25 +70,20 @@ class PhaseTriggerField extends React.Component{
                         <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                         {(fieldInfo && fieldInfo.fieldTitle) || field}
                     </div>
-                    <div className="row-centered">
-                        {item ? this._renderItem(item) : this._renderItem(emptyItem)}
+                    <div>
+                        {value && value.map(this._renderRow)}
+                        <AddNewField
+                            pageKey={pageInfo.pageKey}
+                            field={field}
+                            value={value}
+                        />
                     </div>
-                    <SeeCodeButton
-                        onClick={this._showCode}
-                    />
                 </div>
-                <div style={{ width: '70%', marginLeft: 'auto' }}>
-                    <CodeMirror
-                        value={this.state.value}
-                        options={{
-                            mode: 'javascript',
-                            theme: 'monokai',
-                            lineNumbers: true
-                        }}
-                        onBeforeChange={(editor, data, value) => this.setState({value})}
-                    />
-                </div>
-                    
+                <CodeBlock
+                    visible={this.state.visible}
+                    value={phaseTriggerCode[value]}
+                    updateCode={this._onUpdate}
+                />
             </div>
         )
     }

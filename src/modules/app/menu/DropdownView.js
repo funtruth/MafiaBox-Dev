@@ -6,6 +6,7 @@ import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
 import OtherValues from './components/OtherValues'
+import PhaseMenu from './components/PhaseMenu';
 
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
@@ -14,6 +15,8 @@ class DropdownView extends React.Component{
                 return <ClickMenu key={index}/>
             case dropdownType.showOtherOptions:
                 return <OtherValues key={index}/>
+            case dropdownType.showAllPhases:
+                return <PhaseMenu key={index}/>
             default:
                 return null
         }

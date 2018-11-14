@@ -69,31 +69,23 @@
     display: flex;
     align-items: center;
     transition: 0.2s;
+    margin-top: 4px;
+    margin-bottom: auto;
 }
 
 .add-field {
-    padding: 6px 12px;
-    font: 600 15px Arial;
+    padding: 8px 6px;
+    font: 600 158 Arial;
     letter-spacing: .2px;
     color: #a6a6a6;
     cursor: pointer;
     border-radius: 2px;
     display: flex;
     align-items: center;
-    margin-right: 4px;
 }
 
 .add-field:hover {
-    background-color: hsla(0,0%,100%,.1);
-}
-
-.field-item {
-    padding: 6px 4px;
-    border-radius: 3px;
-}
-
-.field-item:hover {
-    background-color: hsla(0,0%,100%,.1);
+    color: #fff;
 }
 
 .see-code-button {
@@ -110,4 +102,13 @@
 
 .see-code-button:hover {
     color: #fff;
+}
+
+.code-block {
+    width: 70%;
+    margin-left: auto;
+    border-radius: 4px;
+    overflow: hidden;
+
+    padding: 6px 0px;
 }

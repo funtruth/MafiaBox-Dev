@@ -46,6 +46,8 @@ class AppWrapper extends React.Component{
                         this.props.showDropdownByKey(dropdownType.showOtherOptions, {
                             fieldKey: e.target.getAttribute('field-key'),
                             pageKey: e.target.getAttribute('page-key'),
+                            subfieldKey: e.target.getAttribute('subfield-key'),
+                            indexKey: e.target.getAttribute('index-key'),
                             pageX: e.pageX - e.offsetX,
                             pageY: e.pageY - e.offsetY + 28,
                         })

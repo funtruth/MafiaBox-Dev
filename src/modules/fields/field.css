@@ -1,0 +1,8 @@
+.field-item {
+    padding: 6px 4px;
+    border-radius: 3px;
+}
+
+.field-item:hover {
+    background-color: hsla(0,0%,100%,.1);
+}

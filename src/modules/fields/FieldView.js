@@ -1,4 +1,5 @@
 import React from 'react'
+import './field.css'
 import { connect } from 'react-redux';
 
 import { fieldType } from './defaults'

@@ -25,8 +25,13 @@ class OtherValues extends React.Component{
     }
 
     _select = (newValue) => {
-        const { dropdownParams } = this.props
-        this.props.updatePage(dropdownParams.pageKey, dropdownParams.fieldKey, newValue)
+        const { dropdownParams, pageRepo } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+
+        let valueClone = Array.from(pageRepo[pageKey][fieldKey])
+        valueClone[indexKey][subfieldKey] = newValue
+        
+        this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
     }
 

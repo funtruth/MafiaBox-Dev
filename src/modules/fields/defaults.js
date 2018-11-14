@@ -84,6 +84,10 @@ export const initFieldRepo = {
         fieldTitle: 'Phase Trigger',
         data: [
             {
+                key: phaseTriggerType.none,
+                title: 'None',
+            },
+            {
                 key: phaseTriggerType.allReady,
                 title: 'All Ready',
             },
