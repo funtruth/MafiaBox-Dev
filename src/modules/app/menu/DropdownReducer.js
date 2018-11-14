@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const initialState = {
     dropdownKeys: [],
     dropdownParams: {}
@@ -7,7 +9,7 @@ const SHOW_DROPDOWN_BY_KEY = 'dropdown/show-dropdown-by-key'
 
 export function showDropdownByKey(key, params) {
     return (dispatch, getState) => {
-        const { dropdownKeys } = getState().dropdown
+        const { dropdownKeys, dropdownParams } = getState().dropdown
 
         if (!key) {
             dispatch({
@@ -23,8 +25,11 @@ export function showDropdownByKey(key, params) {
             dispatch({
                 type: SHOW_DROPDOWN_BY_KEY,
                 payload: {
-                    keys,
-                    params,
+                    keys: _.uniq(keys),
+                    params: {
+                        ...dropdownParams,
+                        ...params
+                    },
                 }
             })
         }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { fieldIcon } from '../defaults'
 import SeeCodeButton from '../../page/components/SeeCodeButton';
 
@@ -26,10 +27,10 @@ class PhaseTriggerField extends React.Component{
 
     _renderRow = (item, index) => {
         return (
-            <div className="row-centered" style={{marginBottom: 8}}>
+            <div key={index} className="row-centered" style={{marginBottom: 8}}>
                 {this._renderTrigger(item.mode, index)}
                 <i className="ion-ios-fastforward" style={{ color: '#a6a6a6', width: 20 }}></i>
-                {this._renderPhase(item.to)}
+                {this._renderPhase(item.to, index)}
                 <SeeCodeButton
                     onClick={this._showCode}
                 />
@@ -55,8 +56,23 @@ class PhaseTriggerField extends React.Component{
         )
     }
 
-    _renderPhase = (item) => {
-        return null
+    _renderPhase = (to, index) => {
+        const { pageInfo, value, pageRepo } = this.props
+        const pageKey = value[index].to
+
+        return (
+            <div
+                key={to}
+                field-key="phaseTriggerMode"
+                page-key={pageInfo.pageKey}
+                subfield-key="to"
+                index-key={index}
+                className="property-button menu-onclick"
+                menu-type={dropdownType.showAllPhases}
+            >
+                {(pageKey && pageRepo[pageKey].title) || 'None'}
+            </div>
+        )
     }
 
     render() {
@@ -89,4 +105,8 @@ class PhaseTriggerField extends React.Component{
     }
 }
 
-export default PhaseTriggerField
+export default connect(
+    state => ({
+        pageRepo: state.page.pageRepo,
+    })
+)(PhaseTriggerField)

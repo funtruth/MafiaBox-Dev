@@ -4,54 +4,48 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
-class OtherValues extends React.Component{
+class DeepPhaseMenu extends React.Component{
     _renderItem = (item) => {
-        const { pageRepo, dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
-        
-        const selected = item.key === pageRepo[pageKey][fieldKey][indexKey][subfieldKey]
+        const { pageRepo } = this.props
 
         return (
             <div
-                key={item.key}
+                key={item}
                 className="drop-down-menu-option"
-                onClick={this._select.bind(this, item.key)}
+                onClick={this._onClick.bind(this, item)}
             >
-                {item.title}
-                {selected && <i
-                    className="ion-md-checkmark"
-                    style={{ marginLeft: 'auto' }}
-                />}
+                {pageRepo[item].title}
             </div>
         )
     }
 
-    _select = (newValue) => {
+    _onClick = (newValue) => {
+
         const { dropdownParams, pageRepo } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
 
         let valueClone = Array.from(pageRepo[pageKey][fieldKey])
         valueClone[indexKey][subfieldKey] = newValue
-        
+
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
     }
 
     render() {
-        const { dropdownParams, fieldRepo } = this.props
-        const { fieldKey, pageX, pageY } = dropdownParams
+        const { dropdownParams, pageMap } = this.props
+        const { pageX, pageY, deepKey } = dropdownParams
 
-        if (!fieldKey) return null
-        const fieldInfo = fieldRepo[fieldKey]
+        const data = pageMap[deepKey]
+        if (!data) return null
 
         let menuStyle = {
             top: pageY,
-            left: pageX,
+            left: pageX + 158,
         }
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
-                {fieldInfo.data.map(this._renderItem)}
+                {data.map(this._renderItem)}
             </div>
         )
     }
@@ -60,11 +54,12 @@ class OtherValues extends React.Component{
 export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
-        fieldRepo: state.field.fieldRepo,
+        pageMap: state.page.pageMap,
         pageRepo: state.page.pageRepo,
+
     }),
     {
         showDropdownByKey,
         updatePage,
     }
-)(OtherValues)
+)(DeepPhaseMenu)
