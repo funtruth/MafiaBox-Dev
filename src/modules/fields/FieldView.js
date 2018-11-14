@@ -28,7 +28,9 @@ class FieldView extends React.Component {
         
         switch(fieldInfo.fieldType) {
             case fieldType.text:
-                return <InputField {...props}/>
+                return <InputField {...props} inputType="text"/>
+            case fieldType.number:
+                return <InputField {...props} inputType="number"/>
             case fieldType.tag:
                 return <TagField {...props}/>
             case fieldType.phaseTrigger:

@@ -1,4 +1,5 @@
 export const pathKey = {
+    library: 'library',
     defaults: 'defaults',
     board: 'board',
     flow: 'flow',
@@ -7,6 +8,7 @@ export const pathKey = {
 }
 
 export const pathToLabel = {
+    library: 'Library',
     defaults: 'Rolecard',
     board: 'Roles',
     flow: 'Phases',
@@ -15,6 +17,7 @@ export const pathToLabel = {
 }
 
 export const pathToSublabel = {
+    library: 'View all definitions',
     defaults: 'Create a role template',
     board: 'Organize your roles',
     flow: 'Set up game phases',
@@ -22,4 +25,4 @@ export const pathToSublabel = {
     testhub: 'Test a game phase',
 }
 
-export const sideBarList = ['defaults', 'board', 'flow', 'events', 'testhub']
+export const sideBarList = ['library', 'defaults', 'board', 'flow', 'events', 'testhub']

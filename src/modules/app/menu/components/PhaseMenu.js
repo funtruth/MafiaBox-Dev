@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
-import { boardType } from '../../../page/defaults'
+import { boardType } from '../../../board/types'
 import { dropdownType } from '../types'
 
 class PhaseMenu extends React.Component{

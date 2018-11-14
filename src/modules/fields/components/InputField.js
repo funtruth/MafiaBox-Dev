@@ -10,10 +10,10 @@ class InputField extends React.Component{
     }
 
     render() {
-        const { value, fieldInfo, field } = this.props
+        const { value, fieldInfo, field, inputType } = this.props
 
         return (
-            <div className="row field-item" style={{ marginBottom: 4 }}>
+            <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.text}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
@@ -23,7 +23,7 @@ class InputField extends React.Component{
                     value={value}
                     onChange={this._onChange}
                     placeholder="Empty"
-                    type="text"
+                    type={inputType}
                 />
             </div>
         )

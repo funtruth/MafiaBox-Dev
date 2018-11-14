@@ -1,10 +1,20 @@
-export const boardType = {
-    roles: 'boardType/roles',
-    flow: 'boardType/flow',
-    events: 'boardType/events',
-}
+import { boardType } from '../board/types'
 
 export const initStoryMap = [
+    {
+        key: 'conditionals',
+        title: 'Conditionals',
+        boardType: boardType.library,
+        palette: 'palette-yellow',
+        default: true,
+    },
+    {
+        key: 'functions',
+        title: 'Functions',
+        boardType: boardType.library,
+        palette: 'palette-blue',
+        default: true,
+    },
     {
         key: 'inProgress',
         title: 'In Progress',
@@ -26,7 +36,6 @@ export const initStoryMap = [
         palette: 'palette-green',
         default: true,
     },
-
     {
         key: 'main',
         title: 'Main',

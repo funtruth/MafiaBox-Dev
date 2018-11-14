@@ -81,7 +81,7 @@ class PhaseTriggerField extends React.Component{
         
         return (
             <div>
-                <div className="row field-item" style={{ marginBottom: 4 }}>
+                <div className="field-item" style={{ marginBottom: 4 }}>
                     <div className="page-field-label">
                         <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                         {(fieldInfo && fieldInfo.fieldTitle) || field}

@@ -1,4 +1,4 @@
-import { boardType } from '../page/defaults'
+import { boardType } from '../board/types'
 import { phaseActionMode, phaseTriggerType } from './actions'
 
 export const moldType = {
@@ -8,6 +8,7 @@ export const moldType = {
 
 export const fieldType = {
     text: 'fieldType/text',
+    number: 'fieldType/number',
     tag: 'fieldType/tag',
     expertTag: 'fieldType/expertTag',
     phaseTrigger: 'fieldType/phaseTrigger',
@@ -21,7 +22,7 @@ export const fieldIcon = {
 }
 
 export const initFieldMap = {
-    [boardType.roles]: ['roleDescription', 'roleTeam', ],
+    [boardType.roles]: ['roleDescription', 'roleTeam', 'roleCharges', 'roleActionMode'],
     [boardType.flow]: ['phaseDescription', 'phaseActionMode', 'phaseTriggerMode'],
 }
 
@@ -47,6 +48,26 @@ export const initFieldRepo = {
             {
                 key: 'roleTeam/neutral',
                 title: 'Neutral',
+            }
+        ]
+    },
+    roleCharges: {
+        fieldKey: 'roleCharges',
+        fieldType: fieldType.number,
+        fieldTitle: 'Role Charges',
+    },
+    roleActionMode: {
+        fieldKey: 'roleActionMode',
+        fieldType: fieldType.phaseTrigger,
+        fieldTitle: 'Role Action Mode',
+        data: [
+            {
+                key: phaseTriggerType.allReady,
+                title: 'All Ready',
+            },
+            {
+                key: phaseTriggerType.majority,
+                title: 'Majority',
             }
         ]
     },
@@ -83,10 +104,6 @@ export const initFieldRepo = {
         fieldType: fieldType.phaseTrigger,
         fieldTitle: 'Phase Trigger',
         data: [
-            {
-                key: phaseTriggerType.none,
-                title: 'None',
-            },
             {
                 key: phaseTriggerType.allReady,
                 title: 'All Ready',

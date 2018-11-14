@@ -1,5 +1,5 @@
 import React from 'react'
-import { boardType } from '../../page/defaults'
+import { boardType } from '../types'
 import StoryBoard from '../StoryBoard'
 
 class StoryView extends React.Component{

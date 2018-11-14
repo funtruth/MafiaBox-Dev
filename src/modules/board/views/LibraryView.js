@@ -2,7 +2,7 @@ import React from 'react'
 import { boardType } from '../types'
 import StoryBoard from '../StoryBoard'
 
-class EventView extends React.Component{
+class LibraryView extends React.Component{
     render() {
         return (
             <StoryBoard boardType={boardType.events}/>
@@ -10,4 +10,4 @@ class EventView extends React.Component{
     }
 }
 
-export default EventView
+export default LibraryView
