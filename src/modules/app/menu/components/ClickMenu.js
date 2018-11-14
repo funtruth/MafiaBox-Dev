@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../../modal/ModalReducer'
+import { showModalByKey } from '../../../modal/ModalReducer'
 
-import { modalType } from '../../modal/modalConfig'
+import { modalType } from '../../../modal/modalConfig'
 
 class ClickMenu extends React.Component{
     _onDelete = () => {

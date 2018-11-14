@@ -1,11 +1,11 @@
 import React from 'react'
+import './dropdown.css'
 import { connect } from 'react-redux'
-
-import { showDropdownByKey } from './DropdownReducer'
 
 import { dropdownType } from './types'
 
-import ClickMenu from './ClickMenu'
+import ClickMenu from './components/ClickMenu'
+import OtherValues from './components/OtherValues'
 
 class DropdownView extends React.Component{
     render() {
@@ -15,6 +15,8 @@ class DropdownView extends React.Component{
         switch(dropdownKey) {
             case dropdownType.storyShowMore:
                 return <ClickMenu/>
+            case dropdownType.showOtherOptions:
+                return <OtherValues/>
             default:
                 return null
         }
@@ -24,8 +26,5 @@ class DropdownView extends React.Component{
 export default connect(
     state => ({
         dropdownKey: state.dropdown.dropdownKey,
-    }),
-    {
-        showDropdownByKey,
-    }
+    })
 )(DropdownView)

@@ -2,6 +2,8 @@ import React from 'react'
 import { fieldIcon } from '../defaults'
 import SeeCodeButton from '../../page/components/SeeCodeButton';
 
+import { dropdownType } from '../../app/menu/types'
+
 class PhaseTriggerField extends React.Component{
     _renderItem = (item) => {
         const { value, field } = this.props
@@ -9,20 +11,22 @@ class PhaseTriggerField extends React.Component{
         const style = {
             backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
         }
+        
         return (
-            <div key={item.key} className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>
+            <div
+                key={item.key}
+                field-key="phaseTriggerMode"
+                className="property-button menu-onclick"
+                style={style}
+                menu-type={dropdownType.showOtherOptions}
+            >
                 {item.title}
             </div>
         )
     }
 
-    _onClick = key => {
-        const { field, pageInfo } = this.props
-        this.props.updatePage(pageInfo.pageKey, field, key)
-    }
-
     _showCode = () => {
-        
+
     }
 
     render() {

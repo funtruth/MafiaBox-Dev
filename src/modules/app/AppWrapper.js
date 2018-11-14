@@ -30,7 +30,7 @@ class AppWrapper extends React.Component{
             switch(menuClick) {
                 case dropdownType.storyShowMore:
                     if (!this.props.dropdownKey || e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
-                        this.props.showDropdownByKey(dropdownType.storyShowMore,{
+                        this.props.showDropdownByKey(dropdownType.storyShowMore, {
                             storyIndex: e.target.getAttribute('story-index'),
                             pageX: e.pageX,
                             pageY: e.pageY,
@@ -38,6 +38,13 @@ class AppWrapper extends React.Component{
                     } else {
                         this.props.showDropdownByKey()
                     }
+                    break
+                case dropdownType.showOtherOptions:
+                    this.props.showDropdownByKey(dropdownType.showOtherOptions, {
+                        fieldKey: e.target.getAttribute('field-key'),
+                        pageX: e.pageX - e.offsetX,
+                        pageY: e.pageY - e.offsetY + 28,
+                    })
                     break
                 default:
             }
