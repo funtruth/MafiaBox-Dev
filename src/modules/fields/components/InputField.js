@@ -10,7 +10,7 @@ class InputField extends React.Component{
     }
 
     render() {
-        const { pageInfo, fieldInfo, field } = this.props
+        const { value, fieldInfo, field } = this.props
 
         return (
             <div className="row field-item" style={{ marginBottom: 4 }}>
@@ -20,7 +20,7 @@ class InputField extends React.Component{
                 </div>
                 <input
                     className="page-input"
-                    value={pageInfo[field]}
+                    value={value}
                     onChange={this._onChange}
                     placeholder="Empty"
                     type="text"

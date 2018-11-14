@@ -40,14 +40,21 @@ class AppWrapper extends React.Component{
                     }
                     break
                 case dropdownType.showOtherOptions:
-                    this.props.showDropdownByKey(dropdownType.showOtherOptions, {
-                        fieldKey: e.target.getAttribute('field-key'),
-                        pageX: e.pageX - e.offsetX,
-                        pageY: e.pageY - e.offsetY + 28,
-                    })
+                    if (!this.props.dropdownKey || e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                        this.props.showDropdownByKey(dropdownType.showOtherOptions, {
+                            fieldKey: e.target.getAttribute('field-key'),
+                            pageKey: e.target.getAttribute('page-key'),
+                            pageX: e.pageX - e.offsetX,
+                            pageY: e.pageY - e.offsetY + 28,
+                        })
+                    } else {
+                        this.props.showDropdownByKey()
+                    }
                     break
                 default:
             }
+        } else if (e.target.matches('.menu-voidclick')) {
+            //negate the click from closing
         } else {
             if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && this.props.dropdownKey) {
                 this.props.showDropdownByKey()

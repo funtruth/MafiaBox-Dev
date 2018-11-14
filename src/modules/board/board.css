@@ -111,7 +111,7 @@
     border-radius: 4px;
     min-width: 160px;
     padding: 8px 0px;
-    z-index: 1;
+    z-index: 7;
 
     animation: fadein 0.2s, scalein 0.2s;
     -webkit-animation: fadein 0.2s, scalein 0.2s;

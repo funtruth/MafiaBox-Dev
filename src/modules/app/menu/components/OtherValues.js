@@ -1,24 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../../../modal/ModalReducer'
-
-import { modalType } from '../../../modal/modalConfig'
+import { showDropdownByKey } from '../DropdownReducer'
+import { updatePage } from '../../../page/PageReducer'
 
 class OtherValues extends React.Component{
-    _onDelete = () => {
-        this.props.hideMenu()
-        this.props.showModalByKey(modalType.deleteStory, {
-            storyIndex: this.props.storyIndex,
-        })
-    }
-
     _renderItem = (item) => {
+        const { pageRepo, dropdownParams } = this.props
+        const selected = item.key === pageRepo[dropdownParams.pageKey][dropdownParams.fieldKey]
+
         return (
-            <div key={item.key} className="drop-down-menu-option">
+            <div
+                key={item.key}
+                className="drop-down-menu-option"
+                onClick={this._select.bind(this, item.key)}
+            >
                 {item.title}
+                {selected && <i
+                    className="ion-md-checkmark"
+                    style={{ marginLeft: 'auto' }}
+                />}
             </div>
         )
+    }
+
+    _select = (newValue) => {
+        const { dropdownParams } = this.props
+        this.props.updatePage(dropdownParams.pageKey, dropdownParams.fieldKey, newValue)
+        this.props.showDropdownByKey()
     }
 
     render() {
@@ -45,8 +54,10 @@ export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
         fieldRepo: state.field.fieldRepo,
+        pageRepo: state.page.pageRepo,
     }),
     {
-        showModalByKey,
+        showDropdownByKey,
+        updatePage,
     }
 )(OtherValues)

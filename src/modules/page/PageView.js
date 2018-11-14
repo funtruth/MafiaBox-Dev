@@ -11,9 +11,6 @@ import PageHeader from './components/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
 
-import {Controlled as CodeMirror} from 'react-codemirror2'
-require('codemirror/mode/javascript/javascript')
-
 class PageView extends React.Component {
     constructor(props) {
         super(props)
@@ -31,18 +28,14 @@ class PageView extends React.Component {
             <div className="page">
                 <PageHeader/>
                 <div className="page-content">
-                    <PageAbstract pageInfo={pageInfo} updatePage={this.props.updatePage}/>
-                    <FieldView pageInfo={pageInfo}/>
+                    <PageAbstract
+                        pageInfo={pageInfo}
+                        updatePage={this.props.updatePage}
+                    />
+                    <FieldView
+                        pageInfo={pageInfo}
+                    />
                 </div>
-                <CodeMirror
-                    value={this.state.value}
-                    options={{
-                        mode: 'javascript',
-                        theme: 'monokai',
-                        lineNumbers: true
-                    }}
-                    onBeforeChange={(editor, data, value) => this.setState({value})}
-                />
             </div>
         )
     }
