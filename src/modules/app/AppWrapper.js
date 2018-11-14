@@ -19,7 +19,7 @@ class AppWrapper extends React.Component{
     }
 
     _handleScroll = () => {
-        if (this.props.dropdownKey) {
+        if (this.props.dropdownKeys.length) {
             this.props.showDropdownByKey()
         }
     }
@@ -29,7 +29,8 @@ class AppWrapper extends React.Component{
             let menuClick = e.target.getAttribute('menu-type')
             switch(menuClick) {
                 case dropdownType.storyShowMore:
-                    if (!this.props.dropdownKey || e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
+                    if (!this.props.dropdownKeys.length ||
+                        e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
                         this.props.showDropdownByKey(dropdownType.storyShowMore, {
                             storyIndex: e.target.getAttribute('story-index'),
                             pageX: e.pageX,
@@ -40,7 +41,8 @@ class AppWrapper extends React.Component{
                     }
                     break
                 case dropdownType.showOtherOptions:
-                    if (!this.props.dropdownKey || e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                    if (!this.props.dropdownKeys.length ||
+                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
                         this.props.showDropdownByKey(dropdownType.showOtherOptions, {
                             fieldKey: e.target.getAttribute('field-key'),
                             pageKey: e.target.getAttribute('page-key'),
@@ -56,7 +58,8 @@ class AppWrapper extends React.Component{
         } else if (e.target.matches('.menu-voidclick')) {
             //negate the click from closing
         } else {
-            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && this.props.dropdownKey) {
+            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option')
+                && this.props.dropdownKeys.length) {
                 this.props.showDropdownByKey()
             }
         }
@@ -106,7 +109,7 @@ class AppWrapper extends React.Component{
 export default connect(
     state => ({
         storyMap: state.page.storyMap,
-        dropdownKey: state.dropdown.dropdownKey,
+        dropdownKeys: state.dropdown.dropdownKeys,
         dropdownParams: state.dropdown.dropdownParams,
     }),
     {

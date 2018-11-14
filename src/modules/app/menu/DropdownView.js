@@ -8,23 +8,30 @@ import ClickMenu from './components/ClickMenu'
 import OtherValues from './components/OtherValues'
 
 class DropdownView extends React.Component{
-    render() {
-        const { dropdownKey } = this.props
-        if (!dropdownKey) return null
-
+    _renderItem = (dropdownKey, index) => {
         switch(dropdownKey) {
             case dropdownType.storyShowMore:
-                return <ClickMenu/>
+                return <ClickMenu key={index}/>
             case dropdownType.showOtherOptions:
-                return <OtherValues/>
+                return <OtherValues key={index}/>
             default:
                 return null
         }
+    }
+
+    render() {
+        const { dropdownKeys } = this.props
+        if (dropdownKeys.length === 0) return null
+        return (
+            <div>
+                {dropdownKeys.map(this._renderItem)}
+            </div>
+        )
     }
 }
 
 export default connect(
     state => ({
-        dropdownKey: state.dropdown.dropdownKey,
+        dropdownKeys: state.dropdown.dropdownKeys,
     })
 )(DropdownView)
