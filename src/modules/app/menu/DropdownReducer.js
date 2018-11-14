@@ -6,6 +6,7 @@ const initialState = {
 }
 
 const SHOW_DROPDOWN_BY_KEY = 'dropdown/show-dropdown-by-key'
+const POP_HIGHEST_DROPDOWN = 'dropdown/pop-highest-dropdown'
 
 export function showDropdownByKey(key, params) {
     return (dispatch, getState) => {
@@ -32,8 +33,21 @@ export function showDropdownByKey(key, params) {
                     },
                 }
             })
-        }
-        
+        }  
+    }
+}
+
+export function popHighestDropdown() {
+    return (dispatch, getState) => {
+        const { dropdownKeys } = getState().dropdown
+
+        let keys = Array.from(dropdownKeys)
+        keys.pop()
+
+        dispatch({
+            type: POP_HIGHEST_DROPDOWN,
+            payload: keys
+        })
     }
 }
 
@@ -41,6 +55,8 @@ export default (state = initialState, action) => {
     switch(action.type){
         case SHOW_DROPDOWN_BY_KEY:
             return { ...state, dropdownKeys: action.payload.keys, dropdownParams: action.payload.params }
+        case POP_HIGHEST_DROPDOWN:
+            return { ...state, dropdownKeys: action.payload }
         default:
             return state;
     }

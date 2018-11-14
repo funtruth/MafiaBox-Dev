@@ -7,7 +7,7 @@ import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/modalConfig'
 import { boardType } from '../board/types'
-import { pathKey } from '../navigation/paths'
+import { pathKey, pathToLabel } from '../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {
@@ -25,8 +25,9 @@ class HeaderView extends React.Component{
         }
     }
 
-    _getPathTitle() {
-        return 'Untitled'
+    _getPathTitle(key) {
+        if (pathToLabel[key]) return pathToLabel[key]
+        else return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
     }
 
     _onPathClick = (paths, index) => {
@@ -118,7 +119,7 @@ class HeaderView extends React.Component{
                         {index > 1 ? <div className="path-separator">{'/'}</div>
                         :<div style={{width: 2}}/>}
                         {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
-                            {this._getPathTitle()}
+                            {this._getPathTitle(item)}
                         </div>}
                     </div>
                 ))}

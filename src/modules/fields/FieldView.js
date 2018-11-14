@@ -9,6 +9,7 @@ import { updatePage } from '../page/PageReducer'
 import InputField from './components/InputField'
 import TagField from './components/TagField';
 import PhaseTriggerField from './components/PhaseTriggerField';
+import CodeField from './components/CodeField'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -31,6 +32,8 @@ class FieldView extends React.Component {
                 return <InputField {...props} inputType="text"/>
             case fieldType.number:
                 return <InputField {...props} inputType="number"/>
+            case fieldType.code:
+                return <CodeField {...props}/>
             case fieldType.tag:
                 return <TagField {...props}/>
             case fieldType.phaseTrigger:
@@ -47,6 +50,7 @@ class FieldView extends React.Component {
         if (!boardType) return null
         
         const fields = this.props.fieldMap[boardType]
+        if (!fields) return null
 
         return (
             <div>

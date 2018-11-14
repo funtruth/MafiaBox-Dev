@@ -9,7 +9,10 @@ class OtherValues extends React.Component{
         const { pageRepo, dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        const selected = item.key === pageRepo[pageKey][fieldKey][indexKey][subfieldKey]
+        const selected = pageRepo[pageKey] 
+            && pageRepo[pageKey][fieldKey] 
+            && pageRepo[pageKey][fieldKey][indexKey]
+            && item.key === pageRepo[pageKey][fieldKey][indexKey][subfieldKey]
 
         return (
             <div

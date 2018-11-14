@@ -2,8 +2,8 @@ import { boardType } from '../board/types'
 
 export const initStoryMap = [
     {
-        key: 'conditionals',
-        title: 'Conditionals',
+        key: 'boolean',
+        title: 'Boolean',
         boardType: boardType.library,
         palette: 'palette-yellow',
         default: true,

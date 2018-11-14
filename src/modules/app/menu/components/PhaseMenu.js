@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
 import { boardType } from '../../../board/types'
@@ -13,8 +13,7 @@ class PhaseMenu extends React.Component{
         this.timer = null
     }
 
-    _onMouseEnter = (key, e) => {
-        console.log(e)
+    _onMouseEnter = (key, disabled, e) => {
         this.props.showDropdownByKey(dropdownType.showMorePhases, {
             deepKey: key,
         })
@@ -25,6 +24,7 @@ class PhaseMenu extends React.Component{
 
         const { pageMap } = this.props
         const showMore = pageMap[item.key] && pageMap[item.key].length
+        const disabled = !showMore
         let itemStyle
 
         if (!showMore) {
@@ -37,7 +37,7 @@ class PhaseMenu extends React.Component{
             <div
                 key={item.key}
                 className="drop-down-menu-option"
-                onMouseOver={this._onMouseEnter.bind(this, item.key)}
+                onMouseOver={this._onMouseEnter.bind(this, item.key, disabled)}
                 style={itemStyle}
             >
                 {item.title}
@@ -74,6 +74,7 @@ export default connect(
     }),
     {
         showDropdownByKey,
+        popHighestDropdown,
         updatePage,
     }
 )(PhaseMenu)

@@ -9,6 +9,8 @@ export const moldType = {
 export const fieldType = {
     text: 'fieldType/text',
     number: 'fieldType/number',
+    code: 'fieldType/code',
+    logic: 'fieldType/logic',
     tag: 'fieldType/tag',
     expertTag: 'fieldType/expertTag',
     phaseTrigger: 'fieldType/phaseTrigger',
@@ -17,20 +19,28 @@ export const fieldType = {
 export const fieldIcon = {
     text: 'ion-md-list',
     tag: 'ion-ios-pricetag',
+    code: 'ion-md-code',
+    logic: 'ion-md-options',
     expertTag: 'ion-ios-pricetags',
     phaseTrigger: 'ion-md-fastforward',
 }
 
 export const initFieldMap = {
-    [boardType.roles]: ['roleDescription', 'roleTeam', 'roleCharges', 'roleActionMode'],
-    [boardType.flow]: ['phaseDescription', 'phaseActionMode', 'phaseTriggerMode'],
+    [boardType.library]: ['description', 'code'],
+    [boardType.roles]: ['description', 'roleTeam', 'roleCharges', 'roleActionMode'],
+    [boardType.flow]: ['description', 'phaseActionMode', 'phaseTriggerMode'],
 }
 
 export const initFieldRepo = {
-    roleDescription: {
-        fieldKey: 'roleDescription',
+    description: {
+        fieldKey: 'description',
         fieldType: fieldType.text,
-        fieldTitle: 'Role Description',
+        fieldTitle: 'Description',
+    },
+    code: {
+        fieldKey: 'code',
+        fieldType: fieldType.code,
+        fieldTitle: 'Code Interpretation',
     },
     roleTeam: {
         fieldKey: 'roleTeam',
@@ -58,23 +68,8 @@ export const initFieldRepo = {
     },
     roleActionMode: {
         fieldKey: 'roleActionMode',
-        fieldType: fieldType.phaseTrigger,
+        fieldType: fieldType.logic,
         fieldTitle: 'Role Action Mode',
-        data: [
-            {
-                key: phaseTriggerType.allReady,
-                title: 'All Ready',
-            },
-            {
-                key: phaseTriggerType.majority,
-                title: 'Majority',
-            }
-        ]
-    },
-    phaseDescription: {
-        fieldKey: 'phaseDescription',
-        fieldType: fieldType.text,
-        fieldTitle: 'Phase Description',
     },
     phaseActionMode: {
         fieldKey: 'phaseActionMode',
@@ -113,5 +108,5 @@ export const initFieldRepo = {
                 title: 'Majority',
             }
         ]
-    }
+    },
 }

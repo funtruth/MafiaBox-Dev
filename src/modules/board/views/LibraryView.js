@@ -5,7 +5,7 @@ import StoryBoard from '../StoryBoard'
 class LibraryView extends React.Component{
     render() {
         return (
-            <StoryBoard boardType={boardType.events}/>
+            <StoryBoard boardType={boardType.library}/>
         )
     }
 }

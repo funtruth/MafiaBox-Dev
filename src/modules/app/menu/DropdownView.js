@@ -27,7 +27,7 @@ class DropdownView extends React.Component{
 
     render() {
         const { dropdownKeys } = this.props
-        if (dropdownKeys.length === 0) return null
+        if (!dropdownKeys || dropdownKeys.length === 0) return null
         return (
             <div>
                 {dropdownKeys.map(this._renderItem)}

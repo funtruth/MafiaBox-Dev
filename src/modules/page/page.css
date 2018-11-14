@@ -47,7 +47,7 @@
     padding: 10px 10px;
     font: 450 14px Arial;
     color: #c6c6c6;
-    width: auto;
+    width: 80%;
     cursor: pointer;
 }
 
@@ -65,7 +65,6 @@
     color: #a6a6a6;
     cursor: pointer;
     border-radius: 2px;
-    width: 30%;
     display: flex;
     align-items: center;
     transition: 0.2s;
@@ -105,8 +104,6 @@
 }
 
 .code-block {
-    width: 70%;
-    margin-left: auto;
     border-radius: 4px;
     overflow: hidden;
 
