@@ -11,6 +11,7 @@ const initialState = {
 }
 
 //storyMap:
+const ADD_STORY = 'story/add-story-to'
 const MOVE_STORY = 'story/move-story'
 
 //pageMap: maps which pageKeys are in each mapKey
@@ -22,6 +23,30 @@ const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const ADD_PAGE_TO_REPO = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'
+
+export function addStory(title, boardType) {
+    return (dispatch, getState) => {
+        const { storyMap, pageMap } = getState().page
+
+        let storyKey = helpers.genUID('story')
+        while(pageMap[storyKey]) {
+            storyKey = helpers.genUID('story')
+        }
+
+        let storyMapClone = Array.from(storyMap)
+        storyMapClone.push({
+            key: storyKey,
+            title,
+            boardType,
+            default: false,
+        })
+
+        dispatch({
+            type: ADD_STORY,
+            payload: storyMapClone,
+        })
+    }
+}
 
 export function moveStory(startIndex, endIndex) {
     return (dispatch, getState) => {
@@ -147,8 +172,11 @@ export function updatePage(pageKey, field, newValue) {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case ADD_STORY: 
+            return { ...state, storyMap: action.payload }
         case MOVE_STORY:
             return { ...state, storyMap: action.payload }
+            
         case ADD_PAGE_TO_MAP:
             return { ...state, pageMap: { ...state.pageMap, [action.payload.mapKey]: action.payload.mapInfo } }
         case MOVE_PAGE_WITHIN_MAP:

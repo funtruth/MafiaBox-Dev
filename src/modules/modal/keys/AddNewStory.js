@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { addStory } from '../../page/PageReducer'
 import { showModalByKey } from '../ModalReducer'
 
 class AddNewStory extends React.Component {
@@ -16,10 +17,11 @@ class AddNewStory extends React.Component {
     }
 
     _onSave = () => {
+        const { modalParams } = this.props
         const { value } = this.state
 
         if (value && value.trim()) {
-            //TODO add new story
+            this.props.addStory(value.trim(), modalParams.boardType)
             this.props.showModalByKey()
         } else {
             //highlight red.
@@ -65,8 +67,11 @@ class AddNewStory extends React.Component {
 }
 
 export default connect(
-    null,
+    state => ({
+        modalParams: state.modal.modalParams,
+    }),
     {
+        addStory,
         showModalByKey,
     }
 )(AddNewStory)

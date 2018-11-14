@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { createNewRole, deleteRole, setRoleIdToDefault } from '../roles/RoleReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { navigate, goBack } from '../navigation/NavReducer'
 import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/modalConfig'
+import { boardType } from '../board/types'
 import { pathKey } from '../navigation/paths'
 
 class HeaderView extends React.Component{
@@ -42,40 +42,27 @@ class HeaderView extends React.Component{
             { key: 'back', icon: 'ion-ios-undo' },
         ]
         
-        if (paths[1] === pathKey.board) {
-            if (paths[2]) {
+        switch(paths[1]) {
+            case pathKey.library:
+            case pathKey.board:
+            case pathKey.flow:
+            case pathKey.events:
+                rightBtns = [
+                    { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
+                    { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
+                ]
+                break
+            case pathKey.defaults:
                 rightBtns = [
                     { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
-                    { key: 'defaults', title: 'Apply Defaults', icon: 'ion-md-document' },
-                    { key: 'delete', title: 'Discard Role', icon: 'ion-ios-trash' },
+                    { key: 'createField', title: 'Add a Field', icon: 'ion-md-browsers' },
                 ]
-            } else {
-                rightBtns = [
-                    { key: 'addRole', title: 'New Role', icon: 'ion-ios-add-circle' },
-                    { key: 'createStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                ]
-            }
-        } else if (paths[1] === pathKey.defaults) {
-            rightBtns = [
-                { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
-                { key: 'createField', title: 'Add a Field', icon: 'ion-md-browsers' },
-            ]
-        } else if (paths[1] === pathKey.flow) {
-            if (paths[2]) {
-                rightBtns = [
-                    { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
-                    { key: 'defaults', title: 'Apply Defaults', icon: 'ion-md-document' },
-                    { key: 'delete', title: 'Discard Role', icon: 'ion-ios-trash' },
-                ]
-            } else {
-                rightBtns = [
-                    { key: 'addPhase', title: 'New Phase', icon: 'ion-ios-add-circle' },
-                    { key: 'createFlowStory', title: 'Add a Field', icon: 'ion-md-browsers' },
-                ]
-            }
+                break
+            default:
         }
 
         return {
+            mainPath: paths[1],
             childPath: paths[2],
             leftBtns,
             rightBtns
@@ -83,34 +70,32 @@ class HeaderView extends React.Component{
     }
 
     _onClick = (key) => {
+        const { storyMap } = this.props
+
+        //adds item to first story of board
+        let mapKey
+        for (var i=0; i<storyMap.length; i++) {
+            console.log(i, storyMap[i].boardType)
+            if (storyMap[i].boardType === boardType[this.state.mainPath]) {
+                mapKey = storyMap[i].key
+                break
+            }
+        }
+        
         switch(key) {
             case 'back':
             case 'done':
                 return this.props.goBack()
-            case 'defaults':
-                return this.props.setRoleIdToDefault(this.state.childPath)
-            case 'addRole':
-                return this.props.addPageToMap('inProgress', 'role')
-            case 'createStory':
-                return this.props.showModalByKey(modalType.addNewStory)
+            case 'addPage':
+                return this.props.addPageToMap(mapKey, boardType[this.state.mainPath])
+            case 'addStory':
+                return this.props.showModalByKey(modalType.addNewStory, {
+                    boardType: boardType[this.state.mainPath]
+                })
             case 'createField':
                 return this.props.showModalByKey(modalType.addNewField)
-            case 'addPhase':
-                return this.props.addPageToMap('main', 'phase')
-            case 'createFlowStory':
-                return this.props.showModalByKey(modalType.addFlowStory)
-            case 'delete':
-                return this._onDelete()
             default:
         }
-    }
-
-    _onCreate = () => {
-        this.props.createNewRole()
-    }
-
-    _onDelete = () => {
-        
     }
 
     _renderItem = (item, index) => {
@@ -153,12 +138,11 @@ class HeaderView extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        storyMap: state.page.storyMap,
+    }),
     {
-        createNewRole,
         addPageToMap,
-        deleteRole,
-        setRoleIdToDefault,
         showModalByKey,
         navigate,
         goBack,

@@ -11,7 +11,6 @@ import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
-import AddFlowStory from './keys/AddFlowStory.js';
 import PageModal from './keys/PageModal';
 
 class ModalView extends React.Component {
@@ -43,8 +42,6 @@ class ModalView extends React.Component {
                 return <AddNewField/>
             case modalType.deleteStory:
                 return <DeleteStory/>
-            case modalType.addFlowStory:
-                return <AddFlowStory/>
 
             case modalType.showPage:
                 return <PageModal/>
