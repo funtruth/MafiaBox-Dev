@@ -1,5 +1,6 @@
-export const conditionType = {
-    if: 'conditionType/if',
-    else: 'conditionType/else',
-    elseif: 'conditionType/elseif',
+export const logicType = {
+    if: 'logicType/if',
+    else: 'logicType/else',
+    elseif: 'logicType/elseif',
+    return: 'logicType/return',
 }
