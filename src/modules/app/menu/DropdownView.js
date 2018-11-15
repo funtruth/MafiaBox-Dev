@@ -8,6 +8,7 @@ import ClickMenu from './components/ClickMenu'
 import OtherValues from './components/OtherValues'
 import PhaseMenu from './components/PhaseMenu';
 import DeepPhaseMenu from './components/DeepPhaseMenu'
+import LogicMenu from './components/LogicMenu';
 
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
@@ -20,6 +21,8 @@ class DropdownView extends React.Component{
                 return <PhaseMenu key={index}/>
             case dropdownType.showMorePhases:
                 return <DeepPhaseMenu key={index}/>
+            case dropdownType.showLogic:
+                return <LogicMenu key={index}/>
             default:
                 return null
         }

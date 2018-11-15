@@ -17,7 +17,7 @@ class FieldView extends React.Component {
         const { pageInfo, fieldRepo, updatePage } = this.props
         const fieldInfo = fieldRepo[item]
         const { fieldKey, data } = fieldInfo
-
+        
         const props = {
             key: fieldKey,
             field: fieldKey,

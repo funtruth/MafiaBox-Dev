@@ -4,4 +4,6 @@ export const dropdownType = {
 
     showAllPhases: 'dropdownType/show-all-phases',
     showMorePhases: 'dropdownType/show-more-phases',
+
+    showLogic: 'dropdownType/show-logic',
 }

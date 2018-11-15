@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fieldIcon } from '../defaults'
 
 import { dropdownType } from '../../app/menu/types'
-import { logicType } from '../logic/types'
+import { logicType, logicLabel } from '../logic/types'
 
 const tempData = [
     {
@@ -58,22 +58,10 @@ const tempData = [
 ]
 
 class LogicBlock extends React.Component{
-    _getLogicLabel(type) {
-        switch(type) {
-            case logicType.if:
-                return 'if'
-            case logicType.else:
-                return 'else'
-            case logicType.elseif:
-                return 'else if'
-            case logicType.return:
-                return 'return'
-            default:
-                return
-        }
-    }
-
     render() {
+        const { field, pageInfo } = this.props
+        if (!pageInfo) return null
+
         const index = this.props.index || 0
         const rows = [index]
         let pointer = tempData[index].down
@@ -87,8 +75,14 @@ class LogicBlock extends React.Component{
             <div>
                 {rows.map((item, index) => (
                     <div className="row" key={index}>
-                        <div className="logic-label">
-                            {this._getLogicLabel(tempData[item].logicType)}
+                        <div
+                            className="logic-label menu-onclick"
+                            menu-type={dropdownType.showLogic}
+                            field-key={field}
+                            index-key={index}
+                            page-key={pageInfo.pageKey}
+                        >
+                            {logicLabel[tempData[item].logicType]}
                         </div>
                         <div
                             field-key="phaseTriggerMode"
@@ -105,7 +99,7 @@ class LogicBlock extends React.Component{
                             </i>
                         }
                         {tempData[item].right && 
-                            <LogicBlock index={tempData[item].right}/>
+                            <LogicBlock index={tempData[item].right} field={field} pageInfo={pageInfo}/>
                         }
                     </div>
                 ))}
@@ -129,7 +123,7 @@ class LogicBoard extends React.Component{
     _renderPhase = (to, index) => {
         const { pageInfo, value, pageRepo } = this.props
         const pageKey = value[index].to
-
+        
         return (
             <div
                 key={to}
@@ -154,7 +148,7 @@ class LogicBoard extends React.Component{
                     <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <LogicBlock/>
+                <LogicBlock pageInfo={pageInfo} field={field}/>
             </div>
         )
     }
