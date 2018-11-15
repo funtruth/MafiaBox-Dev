@@ -3,31 +3,19 @@ import { dropdownType } from '../../app/menu/types'
 
 class AddCondition extends React.Component{
     render() {
-        const { pageInfo, data } = this.props
-        if (!data) return null
-        
-        const { value } = this.props
-
-        if (value && value[value.length - 1])
+        const { field } = this.props
         return (
             <div
-                key={to}
-                field-key="phaseTriggerMode"
-                page-key={pageInfo.pageKey}
-                subfield-key="to"
-                index-key={index}
-                className="property-button menu-onclick"
-                menu-type={dropdownType.showAllPhases}
+                className="add-condition menu-onclick"
+                menu-type={dropdownType.showLogic}
+                field-key={field}
+                style={{ marginBottom: 'auto' }}
             >
                 <i className="ion-ios-add-circle" style={{ color: '#a6a6a6', width: 20 }}></i>
-                {(pageKey && pageRepo[pageKey].title) || 'None'}
+                New Field
             </div>
         )
     }
-}
-
-const style = {
-
 }
 
 export default AddCondition

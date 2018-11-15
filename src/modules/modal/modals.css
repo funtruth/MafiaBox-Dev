@@ -44,7 +44,7 @@
 
     border-radius: 4px;
     background-color: rgba(54, 57, 64);
-    overflow: hidden;
+    overflow: auto;
 	box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
 }
 
@@ -53,4 +53,5 @@
     min-width: 600px;
     height: 80vh;
     width: 65vw;
+    overflow: scroll;
 }

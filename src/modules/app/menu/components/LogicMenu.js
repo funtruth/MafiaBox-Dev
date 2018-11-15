@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
-import { logicType, logicLabel } from '../../../fields/logic/types'
+import { logicType, logicTypeInfo } from '../../../fields/logic/types'
 
 class LogicMenu extends React.Component{
     _renderItem = (item) => {
@@ -22,7 +22,7 @@ class LogicMenu extends React.Component{
                 className="drop-down-menu-option"
                 onClick={this._select.bind(this, item)}
             >
-                {logicLabel[item]}
+                {logicTypeInfo[item].title}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{ marginLeft: 'auto' }}
