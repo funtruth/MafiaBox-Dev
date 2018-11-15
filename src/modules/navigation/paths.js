@@ -26,3 +26,5 @@ export const pathToSublabel = {
 }
 
 export const sideBarList = ['library', 'defaults', 'board', 'flow', 'events', 'testhub']
+
+export const refMenuList = ['library', 'board', 'flow', 'events']

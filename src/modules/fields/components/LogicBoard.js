@@ -4,7 +4,87 @@ import { fieldIcon } from '../defaults'
 
 import { dropdownType } from '../../app/menu/types'
 
-import AddNewField from '../../page/components/AddNewField'
+const tempData = [
+    {
+        title: '-0-',
+        right: 1,
+        down: 8,
+    },
+    {
+        title: '-1-',
+        right: 2,
+        down: 3,
+    },
+    {
+        title: '-2-',
+    },
+    {
+        title: '-3-',
+        right: 4,
+    },
+    {
+        title: '-4-',
+        right: 5,
+        down: 6,
+    },
+    {
+        title: '-5-',
+    },
+    {
+        title: '-6-',
+        right: 7,
+    },
+    {
+        title: '-7-',
+    },
+    {
+        title: '-8-',
+        right: 9,
+    },
+    {
+        title: '-9-',
+    },
+]
+
+class LogicBlock extends React.Component{
+    render() {
+        const index = this.props.index || 0
+        const rows = [index]
+        let pointer = tempData[index].down
+
+        while(pointer) {
+            rows.push(pointer)
+            pointer = tempData[pointer].down
+        }
+
+        return (
+            <div>
+                {rows.map((item, index) => (
+                    <div className="row" key={index}>
+                        <div
+                            field-key="phaseTriggerMode"
+                            subfield-key="to"
+                            index-key={index}
+                            className="property-button menu-onclick"
+                            menu-type={dropdownType.showAllPhases}
+                        >
+                            {tempData[item].title}
+                        </div>
+                        {tempData[item].right && 
+                            <i className="ion-ios-fastforward"
+                                style={{ color: '#a6a6a6', width: 20 }}>
+                            </i>
+                        }
+                        {tempData[item].right && 
+                            <LogicBlock index={tempData[item].right}/>
+                        }
+                    </div>
+                ))}
+            </div>
+                
+        )
+    }
+}
 
 class LogicBoard extends React.Component{
     _renderRow = (item, index) => {
@@ -38,24 +118,14 @@ class LogicBoard extends React.Component{
 
     render() {
         const { fieldInfo, field, pageInfo, data, value } = this.props
-        if (!data) return null
         
         return (
-            <div>
-                <div className="field-item" style={{ marginBottom: 4 }}>
-                    <div className="page-field-label">
-                        <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
-                        {(fieldInfo && fieldInfo.fieldTitle) || field}
-                    </div>
-                    <div>
-                        {value && value.map(this._renderRow)}
-                        <AddNewField
-                            pageKey={pageInfo.pageKey}
-                            field={field}
-                            value={value}
-                        />
-                    </div>
+            <div className="field-item" style={{ marginBottom: 4 }}>
+                <div className="page-field-label">
+                    <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
+                    {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
+                <LogicBlock/>
             </div>
         )
     }

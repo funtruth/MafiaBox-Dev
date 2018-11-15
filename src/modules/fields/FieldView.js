@@ -10,6 +10,7 @@ import InputField from './components/InputField'
 import TagField from './components/TagField';
 import PhaseTriggerField from './components/PhaseTriggerField';
 import CodeField from './components/CodeField'
+import LogicBoard from './components/LogicBoard';
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -34,6 +35,8 @@ class FieldView extends React.Component {
                 return <InputField {...props} inputType="number"/>
             case fieldType.code:
                 return <CodeField {...props}/>
+            case fieldType.logic:
+                return <LogicBoard {...props}/>
             case fieldType.tag:
                 return <TagField {...props}/>
             case fieldType.phaseTrigger:
