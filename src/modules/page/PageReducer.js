@@ -26,7 +26,7 @@ const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'
 
 //Logicboard
-const ADD_ITEM_TO_RIGHT_OF = 'page/add-item-to-right-of'
+const ADD_ITEM_LOGIC = 'page/add-item-logic'
 const DELETE_LOGIC_ITEM = 'page/delete-logic-item'
 
 export function addStory(title, boardType) {
@@ -192,7 +192,33 @@ export function addItemToRightOf(itemKey, pageKey, fieldKey) {
         logicMap[itemKey] = { ...logicMap[itemKey], right: newItemKey }
 
         dispatch({
-            type: ADD_ITEM_TO_RIGHT_OF,
+            type: ADD_ITEM_LOGIC,
+            payload: {
+                pageKey: pageKey,
+                field: fieldKey,
+                value: logicMap,
+            }
+        })
+    }
+}
+
+export function addItemBelowOf(itemKey, pageKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = defaultLogic
+        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+
+        let newItemKey = helpers.genUID('phase')
+        while(logicMap[newItemKey]) {
+            newItemKey = helpers.genUID('phase')
+        }
+
+        logicMap[newItemKey] = { down: logicMap[itemKey].down }
+        logicMap[itemKey] = { ...logicMap[itemKey], down: newItemKey }
+
+        dispatch({
+            type: ADD_ITEM_LOGIC,
             payload: {
                 pageKey: pageKey,
                 field: fieldKey,
@@ -244,7 +270,7 @@ export default (state = initialState, action) => {
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
 
-        case ADD_ITEM_TO_RIGHT_OF:
+        case ADD_ITEM_LOGIC:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: 
                 { ...state.pageRepo[action.payload.pageKey], [action.payload.field]: action.payload.value } }}
         case DELETE_LOGIC_ITEM:

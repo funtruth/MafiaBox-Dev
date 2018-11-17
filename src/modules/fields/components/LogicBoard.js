@@ -3,6 +3,7 @@ import { fieldIcon } from '../defaults'
 
 import { dropdownType } from '../../app/menu/types'
 import LogicBlock from '../../fields/logic/LogicBlock'
+import { defaultLogic } from '../logic/types';
 
 class LogicBoard extends React.Component{
     _renderRow = (item, index) => {
@@ -35,7 +36,7 @@ class LogicBoard extends React.Component{
     }
 
     render() {
-        const { fieldInfo, field, pageInfo, data, value } = this.props
+        const { fieldInfo, field, value } = this.props
         
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
@@ -43,7 +44,7 @@ class LogicBoard extends React.Component{
                     <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <LogicBlock {...this.props}/>
+                <LogicBlock {...this.props} value={value || defaultLogic}/>
             </div>
         )
     }

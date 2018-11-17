@@ -5,58 +5,6 @@ import { logicType, logicTypeInfo, defaultLogic } from './types'
 
 import { addItemToRightOf } from '../../page/PageReducer'
 
-const tempData = {
-    START: {
-        title: '- 0 -',
-        right: 'a',
-        down: 'h',
-        logicType: logicType.if,
-    },
-    a: {
-        title: '- 1 -',
-        right: 'b',
-        down: 'c',
-        logicType: logicType.if,
-    },
-    b: {
-        title: '- 2 -',
-        logicType: logicType.return,
-    },
-    c: {
-        title: '- 3 -',
-        right: 'd',
-        logicType: logicType.else,
-    },
-    d: {
-        title: '- 4 -',
-        right: 'e',
-        down: 'f',
-        logicType: logicType.if,
-    },
-    e: {
-        title: '- 5 -',
-        logicType: logicType.return,
-    },
-    f: {
-        title: '- 6 -',
-        right: 'g',
-        logicType: logicType.elseif,
-    },
-    g: {
-        title: '- 7 -',
-        logicType: logicType.return,
-    },
-    h: {
-        title: '- 8 -',
-        right: 'i',
-        logicType: logicType.else,
-    },
-    i: {
-        title: '- 9 -',
-        logicType: logicType.return,
-    },
-}
-
 class LogicBlock extends React.Component{
     _addItem = (index) => {
         const { field, pageInfo } = this.props
