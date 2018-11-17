@@ -1,4 +1,5 @@
 export const logicType = {
+    none: 'logicType/none',
     if: 'logicType/if',
     else: 'logicType/else',
     elseif: 'logicType/elseif',
@@ -6,6 +7,11 @@ export const logicType = {
 }
 
 export const logicTypeInfo = {
+    [logicType.none]: {
+        title: 'if',
+        icon: 'ion-md-create',
+        color: '#767676',
+    },
     [logicType.if]: {
         title: 'if',
         icon: 'ion-ios-help',
@@ -26,4 +32,10 @@ export const logicTypeInfo = {
         icon: 'ion-ios-return-right',
         color: '#744ee7',
     },
+}
+
+export const defaultLogic = {
+    START: {
+        logicType: logicType.none,
+    }
 }

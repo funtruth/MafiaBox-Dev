@@ -1,117 +1,138 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { dropdownType } from '../../app/menu/types'
-import { logicType, logicTypeInfo } from './types'
+import { logicType, logicTypeInfo, defaultLogic } from './types'
 
-import AddCondition from './AddCondition'
+import { addItemToRightOf } from '../../page/PageReducer'
 
-const tempData = [
-    {
+const tempData = {
+    START: {
         title: '- 0 -',
-        right: 1,
-        down: 8,
+        right: 'a',
+        down: 'h',
         logicType: logicType.if,
     },
-    {
+    a: {
         title: '- 1 -',
-        right: 2,
-        down: 3,
+        right: 'b',
+        down: 'c',
         logicType: logicType.if,
     },
-    {
+    b: {
         title: '- 2 -',
         logicType: logicType.return,
     },
-    {
+    c: {
         title: '- 3 -',
-        right: 4,
+        right: 'd',
         logicType: logicType.else,
     },
-    {
+    d: {
         title: '- 4 -',
-        right: 5,
-        down: 6,
+        right: 'e',
+        down: 'f',
         logicType: logicType.if,
     },
-    {
+    e: {
         title: '- 5 -',
         logicType: logicType.return,
     },
-    {
+    f: {
         title: '- 6 -',
-        right: 7,
+        right: 'g',
         logicType: logicType.elseif,
     },
-    {
+    g: {
         title: '- 7 -',
         logicType: logicType.return,
     },
-    {
+    h: {
         title: '- 8 -',
-        right: 9,
+        right: 'i',
         logicType: logicType.else,
     },
-    {
+    i: {
         title: '- 9 -',
         logicType: logicType.return,
     },
-]
+}
 
 class LogicBlock extends React.Component{
-    render() {
+    _addItem = (index) => {
         const { field, pageInfo } = this.props
+        const { pageKey } = pageInfo
+        
+        this.props.addItemToRightOf(index, pageKey, field)
+    }
+
+    render() {
+        let { field, pageInfo, value } = this.props
         if (!pageInfo) return null
 
-        const index = this.props.index || 0
+        if (!value) {
+            value = defaultLogic
+        }
+
+        const index = this.props.index || 'START'
         const rows = [index]
-        let pointer = tempData[index].down
+        let pointer = value[index].down
 
         while(pointer) {
             rows.push(pointer)
-            pointer = tempData[pointer].down
+            pointer = value[pointer].down
         }
 
         return (
             <div>
                 {rows.map((item, index) => (
-                    <div style={{marginTop: index ? 8 : 0, marginBottom: 'auto'}}>
-                        <div className="row" key={index} >
-                            <div
-                                className="logic-label menu-onclick"
-                                menu-type={dropdownType.showLogic}
-                                field-key={field}
-                                index-key={index}
-                                page-key={pageInfo.pageKey}
-                                style={{
-                                    backgroundColor: logicTypeInfo[tempData[item].logicType].color
-                                }}
-                            >
-                                <i className={logicTypeInfo[tempData[item].logicType].icon}/>
-                            </div>
-                            <div
-                                className="logic-button menu-onclick"
-                                menu-type={dropdownType.showAllPhases}
-                                field-key="phaseTriggerMode"
-                                index-key={index}
-                            >
-                                {tempData[item].logicType !== logicType.else &&
-                                    tempData[item].title}
-                            </div>
-                            <i className="ion-ios-fastforward"
-                                style={{
-                                    color: tempData[item].right ? '#a6a6a6' : '#fff',
-                                    width: 20
-                                }}>
-                            </i>
-                            {tempData[item].right && 
-                                <LogicBlock index={tempData[item].right} field={field} pageInfo={pageInfo}/>
-                            }
+                    <div className="row" key={index} style={{marginTop: index ? 8 : 0, marginBottom: 'auto'}}>
+                        <div
+                            className="logic-label menu-onclick"
+                            menu-type={dropdownType.showLogic}
+                            field-key={field}
+                            index-key={item}
+                            page-key={pageInfo.pageKey}
+                            style={{
+                                backgroundColor: (value[item].logicType &&
+                                    logicTypeInfo[value[item].logicType].color) ||
+                                    '#767676'
+                            }}
+                        >
+                            <i className={(value[item].logicType &&
+                                logicTypeInfo[value[item].logicType].icon) ||
+                                'ion-md-create'}/>
                         </div>
+                        <div
+                            className="logic-button menu-onclick"
+                            menu-type={dropdownType.showAllPhases}
+                            field-key="phaseTriggerMode"
+                            index-key={item}
+                        >
+                            {value[item].logicType !== logicType.else &&
+                                value[item].title}
+                        </div>
+                        <i className="ion-ios-fastforward"
+                            style={{
+                                color: value[item].right ? '#a6a6a6' : '#fff',
+                                width: 20
+                            }}
+                            onClick={this._addItem.bind(this, item)}
+                        />
+                        {value[item].right && 
+                            <LogicBlock {...this.props} index={value[item].right}/>
+                        }
                     </div>
                 ))}
-            </div>
-                
+            </div> 
         )
     }
 }
 
-export default LogicBlock
+export default connect(
+    state => ({
+
+    }),
+    {
+        addItemToRightOf,
+    }
+)(LogicBlock)

@@ -43,7 +43,7 @@ class LogicBoard extends React.Component{
                     <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <LogicBlock pageInfo={pageInfo} field={field}/>
+                <LogicBlock {...this.props}/>
             </div>
         )
     }

@@ -58,3 +58,7 @@
     display: flex;
     align-items: center;
 }
+
+.ion-ios-fastforward {
+    cursor: pointer;
+}

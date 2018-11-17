@@ -3,6 +3,7 @@ import { modalType } from '../modal/modalConfig'
 import { showModalByKey } from '../modal/ModalReducer';
 
 import { initStoryMap } from './defaults'
+import { defaultLogic } from '../fields/logic/types'
 
 const initialState = {
     storyMap: initStoryMap,
@@ -23,6 +24,10 @@ const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const ADD_PAGE_TO_REPO = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'
+
+//Logicboard
+const ADD_ITEM_TO_RIGHT_OF = 'page/add-item-to-right-of'
+const DELETE_LOGIC_ITEM = 'page/delete-logic-item'
 
 export function addStory(title, boardType) {
     return (dispatch, getState) => {
@@ -170,6 +175,54 @@ export function updatePage(pageKey, field, newValue) {
     }
 }
 
+//LogicBoard functions
+export function addItemToRightOf(itemKey, pageKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = defaultLogic
+        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+
+        let newItemKey = helpers.genUID('phase')
+        while(logicMap[newItemKey]) {
+            newItemKey = helpers.genUID('phase')
+        }
+
+        logicMap[newItemKey] = { right: logicMap[itemKey].right }
+        logicMap[itemKey] = { ...logicMap[itemKey], right: newItemKey }
+
+        dispatch({
+            type: ADD_ITEM_TO_RIGHT_OF,
+            payload: {
+                pageKey: pageKey,
+                field: fieldKey,
+                value: logicMap,
+            }
+        })
+    }
+}
+
+export function deleteLogicItem(itemKey, pageKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = {}
+        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+        
+        for (var key in logicMap) {
+            //TODO
+        }
+
+        dispatch({
+            type: DELETE_LOGIC_ITEM,
+            payload: {
+                field: fieldKey,
+                value: logicMap,
+            }
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
@@ -190,6 +243,12 @@ export default (state = initialState, action) => {
             return { ...state, pageRepo: action.payload }
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
+
+        case ADD_ITEM_TO_RIGHT_OF:
+            return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: 
+                { ...state.pageRepo[action.payload.pageKey], [action.payload.field]: action.payload.value } }}
+        case DELETE_LOGIC_ITEM:
+            return { ...state, pageRepo: { ...state.pageRepo, [action.payload.field]: action.payload.value }}
         default:
             return state;
     }
