@@ -34,8 +34,10 @@ class LogicMenu extends React.Component{
     _select = (newValue) => {
         const { dropdownParams, pageRepo } = this.props
         const { pageKey, fieldKey, indexKey } = dropdownParams
+        
+        let valueClone = {}
+        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
 
-        let valueClone = Array.from(pageRepo[pageKey][fieldKey])
         valueClone[indexKey].logicType = newValue
         
         this.props.updatePage(pageKey, fieldKey, valueClone)

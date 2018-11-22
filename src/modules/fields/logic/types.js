@@ -8,19 +8,19 @@ export const logicType = {
 
 export const logicTypeInfo = {
     [logicType.none]: {
-        title: 'if',
+        title: 'none',
         icon: 'ion-md-create',
         color: '#767676',
     },
     [logicType.if]: {
         title: 'if',
-        icon: 'ion-ios-help',
+        icon: 'ion-md-help',
         color: '#af8c40',
     },
     [logicType.else]: {
         title: 'else',
         icon: 'ion-ios-more',
-        color: '#0e7db4',
+        color: '#db4757',
     },
     [logicType.elseif]: {
         title: 'else if',
@@ -30,7 +30,7 @@ export const logicTypeInfo = {
     [logicType.return]: {
         title: 'return',
         icon: 'ion-ios-return-right',
-        color: '#744ee7',
+        color: '#1e9939',
     },
 }
 

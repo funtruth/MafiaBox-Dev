@@ -11,7 +11,7 @@ class AddCondition extends React.Component{
                 field-key={field}
                 style={{ marginBottom: 'auto' }}
             >
-                <i className="ion-ios-add-circle" style={{ color: '#a6a6a6', width: 20 }}></i>
+                <i className="ion-ios-add-circle" style={{ color: '#a6a6a6' }}></i>
                 New Field
             </div>
         )

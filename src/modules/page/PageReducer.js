@@ -216,7 +216,7 @@ export function addItemBelowOf(itemKey, pageKey, fieldKey) {
 
         logicMap[newItemKey] = { down: logicMap[itemKey].down }
         logicMap[itemKey] = { ...logicMap[itemKey], down: newItemKey }
-
+        
         dispatch({
             type: ADD_ITEM_LOGIC,
             payload: {

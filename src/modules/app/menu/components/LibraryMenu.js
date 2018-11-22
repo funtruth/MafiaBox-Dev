@@ -7,7 +7,7 @@ import { updatePage } from '../../../page/PageReducer'
 import { boardType } from '../../../board/types'
 import { dropdownType } from '../types'
 
-class PhaseMenu extends React.Component{
+class LibraryMenu extends React.Component{
     constructor(props) {
         super(props)
         this.timer = null
@@ -77,4 +77,4 @@ export default connect(
         popHighestDropdown,
         updatePage,
     }
-)(PhaseMenu)
+)(LibraryMenu)

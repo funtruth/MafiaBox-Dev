@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
-class DeepPhaseMenu extends React.Component{
+class DeepLibraryMenu extends React.Component{
     _renderItem = (item) => {
         const { pageRepo } = this.props
 
@@ -62,4 +62,4 @@ export default connect(
         showDropdownByKey,
         updatePage,
     }
-)(DeepPhaseMenu)
+)(DeepLibraryMenu)
