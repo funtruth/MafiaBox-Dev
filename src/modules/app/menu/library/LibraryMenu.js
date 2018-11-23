@@ -1,51 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
+import { dropdownType } from '../types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
-import { boardType } from '../../../board/types'
-import { dropdownType } from '../types'
-
-const menuKeys = [
-    {
-        title: 'Library',
-        boardType: boardType.library,
-    },
-    {
-        title: 'Roles',
-        boardType: boardType.roles,
-    },
-    {
-        title: 'Phases',
-        boardType: boardType.flow,
-    },
-]
-
-function sortLibrary(storyMap) {
-    let keyedLibrary = {}
-    for (var i=0; i<menuKeys.length; i++) {
-        keyedLibrary[menuKeys[i].boardType] = []
-    }
-    for (var j=0; j<storyMap.length; j++) {
-        if (keyedLibrary[storyMap[j].boardType]) {
-            keyedLibrary[storyMap[j].boardType].push(storyMap[j].key)
-        }
-    }
-    return keyedLibrary
-}
-
 class LibraryMenu extends React.Component{
-    _onMouseEnter = (key, disabled, e) => {
+    _onMouseEnter = (key, e) => {
+        const { dropdownParams } = this.props
+        const { pageX, pageY, deepKey, deepestKey } = dropdownParams
+
         this.props.showDropdownByKey(dropdownType.showDeepLibrary, {
             deepKey: key,
+            deepestKey: key === deepKey ? deepestKey : null,
+            deepPageX: pageX + 158,
+            deepPageY: e.pageY - (e.pageY - pageY - 8) % 28 - 8,
         })
     }
 
     _renderItem = (item) => {
-        const { pageMap } = this.props
-        const showMore = pageMap[item] && pageMap[item].length
-        const disabled = !showMore
+        const { boardRepo, storyMap } = this.props
+
+        const items = _.filter(storyMap, i => i.boardType === item)
+        const showMore = items.length > 0
+
         let itemStyle
 
         if (!showMore) {
@@ -56,12 +36,12 @@ class LibraryMenu extends React.Component{
 
         return (
             <div
-                key={item.key}
+                key={item}
                 className="drop-down-menu-option"
-                onMouseOver={this._onMouseEnter.bind(this, item.key, disabled)}
+                onMouseOver={this._onMouseEnter.bind(this, item)}
                 style={itemStyle}
             >
-                {pageMap[item].title}
+                {boardRepo[item].title}
                 {showMore && <i
                     className="ion-ios-play"
                     style={{ marginLeft: 'auto' }}
@@ -71,7 +51,7 @@ class LibraryMenu extends React.Component{
     }
 
     render() {
-        const { dropdownParams, keyedStoryMap } = this.props
+        const { dropdownParams, boardOrder } = this.props
         const { pageX, pageY } = dropdownParams
 
         let menuStyle = {
@@ -81,9 +61,7 @@ class LibraryMenu extends React.Component{
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
-                {menuKeys.map((item, index) => (
-                    keyedStoryMap[item.boardType].map(this._renderItem)
-                ))}
+                {boardOrder.map(this._renderItem)}
             </div>
         )
     }
@@ -92,9 +70,9 @@ class LibraryMenu extends React.Component{
 export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
-        keyedStoryMap: sortLibrary(state.page.storyMap),
-
-        pageMap: state.page.pageMap,
+        boardOrder: state.board.boardOrder,
+        boardRepo: state.board.boardRepo,
+        storyMap: state.page.storyMap,
     }),
     {
         showDropdownByKey,

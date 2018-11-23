@@ -8,6 +8,7 @@ import NavReducer from '../modules/navigation/NavReducer'
 import PageReducer from '../modules/page/PageReducer'
 import DropdownReducer from '../modules/app/menu/DropdownReducer'
 import FieldReducer from '../modules/fields/FieldReducer'
+import BoardReducer from '../modules/board/BoardReducer'
 
 const reducers = {
     user: UserReducer,
@@ -18,6 +19,7 @@ const reducers = {
     page: PageReducer,
     dropdown: DropdownReducer,
     field: FieldReducer,
+    board: BoardReducer,
 }
 
 export default combineReducers( reducers )

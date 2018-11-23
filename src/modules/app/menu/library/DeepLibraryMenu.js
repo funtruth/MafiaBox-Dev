@@ -1,22 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
+import { dropdownType } from '../types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
 
 class DeepLibraryMenu extends React.Component{
-    _renderItem = (item) => {
-        const { pageRepo } = this.props
+    _onMouseEnter = (key, disabled, e) => {
+        const { dropdownParams } = this.props
+        const { deepPageX, deepPageY } = dropdownParams
 
-        return (
-            <div
-                key={item}
-                className="drop-down-menu-option"
-                onClick={this._onClick.bind(this, item)}
-            >
-                {pageRepo[item].title}
-            </div>
-        )
+        this.props.showDropdownByKey(dropdownType.showDeepestLibrary, {
+            deepestKey: key,
+            deepestPageX: deepPageX + 158,
+            deepestPageY: e.pageY - (e.pageY - deepPageY - 8) % 28 - 8,
+        })
     }
 
     _onClick = (newValue) => {
@@ -31,21 +31,44 @@ class DeepLibraryMenu extends React.Component{
         this.props.showDropdownByKey()
     }
 
-    render() {
-        const { dropdownParams, pageMap } = this.props
-        const { pageX, pageY, deepKey } = dropdownParams
+    _renderItem = (item) => {
+        const { pageMap } = this.props
+        
+        const items = pageMap[item.key] || []
+        const showMore = items.length > 0
+        const disabled = !showMore
 
-        const data = pageMap[deepKey]
-        if (!data) return null
+        return (
+            <div
+                key={item.key}
+                className="drop-down-menu-option"
+                onMouseOver={this._onMouseEnter.bind(this, item.key, disabled)}
+                onFocus={() => alert('wtf')}
+                onClick={this._onClick.bind(this, item.key)}
+            >
+                {item.title}
+                {showMore && <i
+                    className="ion-ios-play"
+                    style={{ marginLeft: 'auto' }}
+                />}
+            </div>
+        )
+    }
+
+    render() {
+        const { dropdownParams, storyMap } = this.props
+        const { deepPageX, deepPageY, deepKey } = dropdownParams
+
+        const items = _.filter(storyMap, i => i.boardType === deepKey)
 
         let menuStyle = {
-            top: pageY,
-            left: pageX + 158,
+            top: deepPageY,
+            left: deepPageX,
         }
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
-                {data.map(this._renderItem)}
+                {items.map(this._renderItem)}
             </div>
         )
     }
@@ -54,9 +77,8 @@ class DeepLibraryMenu extends React.Component{
 export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
+        storyMap: state.page.storyMap,
         pageMap: state.page.pageMap,
-        pageRepo: state.page.pageRepo,
-
     }),
     {
         showDropdownByKey,
