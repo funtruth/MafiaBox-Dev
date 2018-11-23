@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
+import { moveStory, movePageWithinMap, movePageToOtherMap, moveLogic } from '../page/PageReducer'
 import { showDropdownByKey } from './menu/DropdownReducer'
 
 import { dropdownType } from './menu/types'
@@ -109,7 +109,23 @@ class AppWrapper extends React.Component{
             this.props.moveStory(
                 source.index,
                 destination.index,
-            )    
+            )  
+        } else if (source.droppableId.indexOf('CIRCUIT') !== -1) {
+            if (source.droppableId === destination.droppableId) {
+                let sources = source.droppableId.split('/')
+                let pageKey = sources[1]
+                let fieldKey = sources[2]
+                let origin = sources[3]
+
+                this.props.moveLogic(
+                    pageKey,
+                    fieldKey,
+                    origin,
+                    source.index,
+                    destination.index,
+                )
+            }
+
         } else {
             if (source.droppableId === destination.droppableId) {
                 this.props.movePageWithinMap(
@@ -148,5 +164,6 @@ export default connect(
         movePageWithinMap,
         movePageToOtherMap,
         showDropdownByKey,
+        moveLogic,
     }
 )(AppWrapper)

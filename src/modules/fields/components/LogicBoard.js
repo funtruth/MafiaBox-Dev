@@ -1,5 +1,6 @@
 import React from 'react'
 import { fieldIcon } from '../defaults'
+import _ from 'lodash'
 
 import { dropdownType } from '../../app/menu/types'
 import LogicBlock from '../../fields/logic/LogicBlock'
@@ -38,13 +39,22 @@ class LogicBoard extends React.Component{
     render() {
         const { fieldInfo, field, value } = this.props
         
+        let parents, index
+        let children = {}
+        for (var logicKey in value) {
+            if (value[logicKey].right) children[value[logicKey].right] = true
+            if (value[logicKey].down) children[value[logicKey].down] = true
+        }
+        parents = _.pickBy(value, (i, key) => !children[key])
+        index = Object.keys(parents)[0]
+
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                <LogicBlock {...this.props} value={value || defaultLogic}/>
+                <LogicBlock {...this.props} value={value || defaultLogic} index={index}/>
             </div>
         )
     }

@@ -68,14 +68,13 @@
     width: 20px;
     transition: 0.2s;
 
-    padding: 0px 4px;
+    padding: 6px 4px;
     margin: 0px 4px;
     border-radius: 2px;
     font: 500 Arial;
     color: #fff;
     cursor: pointer;
     display: flex;
-    align-items: center;
     justify-content: center;
     transition: 0.2s;
 }

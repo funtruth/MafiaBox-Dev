@@ -28,6 +28,7 @@ const UPDATE_PAGE = 'page/update-page'
 //Logicboard
 const ADD_ITEM_LOGIC = 'page/add-item-logic'
 const DELETE_LOGIC_ITEM = 'page/delete-logic-item'
+const MOVE_LOGIC = 'page/move-logic'
 
 export function addStory(title, boardType) {
     return (dispatch, getState) => {
@@ -234,6 +235,9 @@ export function deleteLogicItem(itemKey, pageKey, fieldKey) {
 
         let logicMap = {}
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+
+        let objectRight = logicMap[itemKey].right
+        let objectDown = logicMap[itemKey].down
         
         for (var key in logicMap) {
             //TODO
@@ -244,6 +248,63 @@ export function deleteLogicItem(itemKey, pageKey, fieldKey) {
             payload: {
                 field: fieldKey,
                 value: logicMap,
+            }
+        })
+    }
+}
+
+export function deleteLogicTree(itemKey, pageKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = {}
+        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+
+        let objectRight = logicMap[itemKey].right
+        let objectDown = logicMap[itemKey].down
+        
+        for (var key in logicMap) {
+            //TODO
+        }
+
+        dispatch({
+            type: DELETE_LOGIC_ITEM,
+            payload: {
+                field: fieldKey,
+                value: logicMap,
+            }
+        })
+    }
+}
+
+export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        let valueClone = {}
+        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
+        
+        let rows = [origin]
+        let pointer = origin
+
+        while(valueClone[pointer].down) {
+            pointer = valueClone[pointer].down
+            rows.push(pointer)
+        }
+        
+        const [removed] = rows.splice(startIndex, 1)
+        rows.splice(endIndex, 0, removed)
+
+        for (var i=0; i<rows.length - 1; i++) {
+            valueClone[rows[i]].down = rows[i + 1]
+        }
+        delete valueClone[rows[rows.length - 1]].down
+        
+        dispatch({
+            type: MOVE_LOGIC,
+            payload: {
+                pageKey,
+                field: fieldKey,
+                value: valueClone
             }
         })
     }
@@ -275,6 +336,9 @@ export default (state = initialState, action) => {
                 { ...state.pageRepo[action.payload.pageKey], [action.payload.field]: action.payload.value } }}
         case DELETE_LOGIC_ITEM:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.field]: action.payload.value }}
+        case MOVE_LOGIC:
+            return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: 
+                { ...state.pageRepo[action.payload.pageKey], [action.payload.field]: action.payload.value }}}
         default:
             return state;
     }
