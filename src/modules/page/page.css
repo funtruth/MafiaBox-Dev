@@ -25,6 +25,10 @@
 
 .page-header {
     padding: 8px 12px;
+    position: sticky;
+    top: 0;
+    background-color: rgba(54, 57, 64);
+    border-radius: 4px;
 }
 
 .page-title-input {

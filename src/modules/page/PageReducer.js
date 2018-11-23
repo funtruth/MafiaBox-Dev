@@ -173,21 +173,18 @@ export function updatePage(pageKey, field, newValue) {
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
-            return { ...state, storyMap: action.payload }
         case MOVE_STORY:
             return { ...state, storyMap: action.payload }
             
         case ADD_PAGE_TO_MAP:
-            return { ...state, pageMap: { ...state.pageMap, [action.payload.mapKey]: action.payload.mapInfo } }
         case MOVE_PAGE_WITHIN_MAP:
             return { ...state, pageMap: { ...state.pageMap, [action.payload.mapKey]: action.payload.mapInfo } }
         case MOVE_PAGE_TO_OTHER_MAP:
             return { ...state, pageMap: { ...state.pageMap, ...action.payload } }
         
-        case ADD_PAGE_TO_REPO:
-            return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
+        case ADD_PAGE_TO_REPO:
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
         default:

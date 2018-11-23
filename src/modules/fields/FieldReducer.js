@@ -60,9 +60,9 @@ export function addItemToRightOf(itemKey, pageKey, fieldKey) {
         let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
-        let newItemKey = helpers.genUID('phase')
+        let newItemKey = helpers.genUID('item')
         while(logicMap[newItemKey]) {
-            newItemKey = helpers.genUID('phase')
+            newItemKey = helpers.genUID('item')
         }
 
         logicMap[newItemKey] = {}
@@ -81,9 +81,9 @@ export function addItemBelowOf(itemKey, pageKey, fieldKey) {
         let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
-        let newItemKey = helpers.genUID('phase')
+        let newItemKey = helpers.genUID('item')
         while(logicMap[newItemKey]) {
-            newItemKey = helpers.genUID('phase')
+            newItemKey = helpers.genUID('item')
         }
         
         logicMap[newItemKey] = {}
