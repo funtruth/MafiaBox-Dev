@@ -9,6 +9,11 @@ import * as helpers from '../../common/helpers'
 import { addItemToRightOf, addItemBelowOf, deleteItem } from '../FieldReducer'
 
 class LogicBlock extends React.Component{
+    constructor(props) {
+        super(props)
+        this.rng = helpers.genUID('rng')
+    }
+
     _addItemRight = (index) => {
         const { field, pageInfo } = this.props
         const { pageKey } = pageInfo
@@ -38,7 +43,6 @@ class LogicBlock extends React.Component{
         }
 
         const rows = [index]
-        const rng = helpers.genUID('rng') //this is a hack to avoid unmounting-bug
         let pointer = value[index] && value[index].down
 
         while(pointer) {
@@ -46,10 +50,10 @@ class LogicBlock extends React.Component{
             rows.push(pointer)
             pointer = value[pointer].down
         }
-        
+
         return (
             <Droppable
-                droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}/${rng}`}
+                droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}/${this.rng}`}
                 type={`ROW/${index}`}
             >
                 {(provided, snapshot) => (
