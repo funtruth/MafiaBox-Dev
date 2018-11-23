@@ -6,10 +6,11 @@ import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
 import OtherValues from './components/OtherValues'
-import LibraryMenu from './components/LibraryMenu';
-import DeepLibraryMenu from './components/DeepLibraryMenu'
 import LogicMenu from './components/LogicMenu';
 import LogicDelete from './components/LogicDelete'
+
+import LibraryMenu from './library/LibraryMenu';
+import DeepLibraryMenu from './library/DeepLibraryMenu'
 
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
@@ -18,9 +19,9 @@ class DropdownView extends React.Component{
                 return <ClickMenu key={index}/>
             case dropdownType.showOtherOptions:
                 return <OtherValues key={index}/>
-            case dropdownType.showAllPhases:
+            case dropdownType.showLibrary:
                 return <LibraryMenu key={index}/>
-            case dropdownType.showMorePhases:
+            case dropdownType.showDeepLibrary:
                 return <DeepLibraryMenu key={index}/>
             case dropdownType.showLogic:
                 return <LogicMenu key={index}/>

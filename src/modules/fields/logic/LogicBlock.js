@@ -94,7 +94,7 @@ class LogicBlock extends React.Component{
                                                 />
                                                 <div
                                                     className="logic-button menu-onclick"
-                                                    menu-type={dropdownType.showAllPhases}
+                                                    menu-type={dropdownType.showLibrary}
                                                     field-key="phaseTriggerMode"
                                                     index-key={item}
                                                 >

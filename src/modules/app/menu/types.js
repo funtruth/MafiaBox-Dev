@@ -2,8 +2,9 @@ export const dropdownType = {
     storyShowMore: 'dropdownType/story-show-more',
     showOtherOptions: 'dropdownType/show-other-options',
 
-    showAllPhases: 'dropdownType/show-all-phases',
-    showMorePhases: 'dropdownType/show-more-phases',
+    showLibrary: 'dropdownType/show-library',
+    showDeepLibrary: 'dropdownType/show-deep-library',
+    showDeepestLibrary: 'dropdownType/show-deepest-library',
 
     showLogic: 'dropdownType/show-logic',
     deleteLogic: 'dropdownType/delete-logic',

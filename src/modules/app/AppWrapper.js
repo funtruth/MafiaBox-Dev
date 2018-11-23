@@ -56,10 +56,10 @@ class AppWrapper extends React.Component{
                         this.props.showDropdownByKey()
                     }
                     break
-                case dropdownType.showAllPhases:
+                case dropdownType.showLibrary:
                     if (!this.props.dropdownKeys.length ||
                         e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.showAllPhases, {
+                        this.props.showDropdownByKey(dropdownType.showLibrary, {
                             fieldKey: e.target.getAttribute('field-key'),
                             pageKey: e.target.getAttribute('page-key'),
                             subfieldKey: e.target.getAttribute('subfield-key'),

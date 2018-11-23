@@ -46,7 +46,7 @@ function getLastYChild(key, values) {
 
 //deletes key and all children of key. MUTATES.
 function recursiveDelete(key, values) {
-    if (!key) return
+    if (!key || !values[key]) return
     values[key].right && recursiveDelete(values[key].right, values)
     values[key].down && recursiveDelete(values[key].down, values)
     return delete values[key]
@@ -126,6 +126,12 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
 
         //changing the parent relationship
         const { key, type } = getParent(itemKey, logicMap)
+
+        //if item is main parent
+        if (!type && !key) {
+            return dispatch(updatePage(pageKey, fieldKey, defaultLogic))
+        }
+
         if (logicMap[itemKey].down) {
             logicMap[key][type] = logicMap[itemKey].down
         } else {

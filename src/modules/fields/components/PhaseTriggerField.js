@@ -65,7 +65,7 @@ class PhaseTriggerField extends React.Component{
                 subfield-key="to"
                 index-key={index}
                 className="property-button menu-onclick"
-                menu-type={dropdownType.showAllPhases}
+                menu-type={dropdownType.showLibrary}
             >
                 {(pageKey && pageRepo[pageKey].title) || 'None'}
             </div>
