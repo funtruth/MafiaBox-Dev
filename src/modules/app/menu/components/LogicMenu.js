@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../../page/PageReducer'
+import { addItemBelowOf, deleteItem } from '../../../fields/FieldReducer'
 
 import { logicType, logicTypeInfo } from '../../../fields/logic/types'
 
@@ -16,16 +17,30 @@ class LogicMenu extends React.Component{
             && pageRepo[pageKey][fieldKey][indexKey]
             && item === pageRepo[pageKey][fieldKey][indexKey].logicType
 
+        let itemStyle = {}
+        selected && (itemStyle = {
+            backgroundColor: selected ? logicTypeInfo[item].color : null,
+            color: selected ? '#fff' : '#b6b6b6',
+        })
+
         return (
             <div
                 key={item}
                 className="drop-down-menu-option"
                 onClick={this._select.bind(this, item)}
+                style={itemStyle}
             >
+                <i
+                    className={`${logicTypeInfo[item].icon} drop-down-menu-icon`}
+                />
                 {logicTypeInfo[item].title}
                 {selected && <i
                     className="ion-md-checkmark"
-                    style={{ marginLeft: 'auto' }}
+                    style={{
+                        marginLeft: 'auto',
+                        width: 30,
+                        textAlign: 'center',
+                    }}
                 />}
             </div>
         )
@@ -44,6 +59,22 @@ class LogicMenu extends React.Component{
         this.props.showDropdownByKey()
     }
 
+    _addItemBelow = () => {
+        const { dropdownParams } = this.props
+        const { pageKey, fieldKey, indexKey } = dropdownParams
+        
+        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
+        this.props.showDropdownByKey()
+    }
+
+    _deleteItem = () => {
+        const { dropdownParams } = this.props
+        const { pageKey, fieldKey, indexKey } = dropdownParams
+        
+        this.props.deleteItem(indexKey, pageKey, fieldKey)
+        this.props.showDropdownByKey()
+    }
+
     render() {
         const { dropdownParams } = this.props
         const { pageX, pageY } = dropdownParams
@@ -58,6 +89,15 @@ class LogicMenu extends React.Component{
         return (
             <div className="drop-down-menu" style={menuStyle}>
                 {logicMenu.map(this._renderItem)}
+                <div className="drop-down-menu-separator"/>
+                <div className="drop-down-menu-option" onClick={this._addItemBelow}>
+                    <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
+                    Add Logic
+                </div>
+                <div className="drop-down-menu-option" onClick={this._deleteItem}>
+                    <i className={`drop-down-menu-icon ion-md-close`}></i>
+                    Delete
+                </div>
             </div>
         )
     }
@@ -71,5 +111,7 @@ export default connect(
     {
         updatePage,
         showDropdownByKey,
+        addItemBelowOf,
+        deleteItem,
     }
 )(LogicMenu)

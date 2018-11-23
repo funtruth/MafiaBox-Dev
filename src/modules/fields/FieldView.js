@@ -28,6 +28,7 @@ class FieldView extends React.Component {
             updatePage,
         }
 
+        //if the field has a default that hasn't been set, update
         if (!pageInfo[fieldKey] && fieldInfo.fieldDefault) {
             this.props.updatePage(pageInfo.pageKey, fieldKey, fieldInfo.fieldDefault)
         }

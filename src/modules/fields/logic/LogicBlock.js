@@ -40,10 +40,11 @@ class LogicBlock extends React.Component{
         let pointer = value[index] && value[index].down
 
         while(pointer) {
+            if (!value[pointer]) break
             rows.push(pointer)
             pointer = value[pointer].down
         }
-        console.log('valudl', value, rows)
+        
         return (
             <Droppable
                 droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}`}
@@ -53,15 +54,17 @@ class LogicBlock extends React.Component{
                     <div 
                         ref={provided.innerRef}
                     >
-                        {rows.map((item, index) => (
-                            <Draggable key={item} draggableId={item} index={index}>
+                        {rows.map((item, index) => {
+                            if (!value[item]) return null
+                            
+                            return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
                                         className="row"
                                         key={index}
                                         style={{
                                             marginTop: index ? 8 : 0,
-                                            marginBottom: 'auto'
+                                            marginBottom: 'auto',
                                         }}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
@@ -100,8 +103,11 @@ class LogicBlock extends React.Component{
                                                 />
                                                 <div style={{ marginRight: 'auto' }}/>
                                                 <i 
-                                                    className="ion-md-close logic-button-down"
-                                                    onClick={this._deleteItem.bind(this, item)}
+                                                    className="ion-md-close logic-button-down menu-onclick"
+                                                    menu-type={dropdownType.deleteLogic}
+                                                    field-key={field}
+                                                    index-key={item}
+                                                    page-key={pageInfo.pageKey}
                                                 />
                                                 <i 
                                                     className="ion-md-expand logic-button-down"
@@ -121,7 +127,7 @@ class LogicBlock extends React.Component{
                                     </div>
                                 )}
                             </Draggable>
-                        ))}
+                        })}
                     </div>
                 )}
             </Droppable>

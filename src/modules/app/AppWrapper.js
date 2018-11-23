@@ -78,8 +78,22 @@ class AppWrapper extends React.Component{
                             fieldKey: e.target.getAttribute('field-key'),
                             pageKey: e.target.getAttribute('page-key'),
                             indexKey: e.target.getAttribute('index-key'),
-                            pageX: e.pageX - e.offsetX,
+                            pageX: e.pageX - e.offsetX - 15,
                             pageY: e.pageY - e.offsetY + 28,
+                        })
+                    } else {
+                        this.props.showDropdownByKey()
+                    }
+                    break
+                case dropdownType.deleteLogic:
+                    if (!this.props.dropdownKeys.length ||
+                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                        this.props.showDropdownByKey(dropdownType.deleteLogic, {
+                            fieldKey: e.target.getAttribute('field-key'),
+                            pageKey: e.target.getAttribute('page-key'),
+                            indexKey: e.target.getAttribute('index-key'),
+                            pageX: e.pageX - e.offsetX + 28,
+                            pageY: e.pageY - e.offsetY - 6,
                         })
                     } else {
                         this.props.showDropdownByKey()

@@ -1,7 +1,7 @@
 import * as helpers from '../common/helpers'
 import { updatePage } from '../page/PageReducer'
 
-import { defaultLogic } from '../fields/logic/types'
+import { defaultLogic } from './logic/types'
 import { initFieldMap, initFieldRepo } from './defaults'
 
 const initialState = {
@@ -12,8 +12,8 @@ const initialState = {
 }
 
 const parentType = {
-    v: 'parentType/v',
-    h: 'parentType/h',
+    y: 'down',
+    x: 'right',
 }
 
 function getParent(key, values) {
@@ -21,12 +21,12 @@ function getParent(key, values) {
         if (values[logicKey].right === key) {
             return {
                 key: logicKey,
-                type: parentType.h,
+                type: parentType.x,
             }
         } else if (values[logicKey].down === key) {
             return {
                 key: logicKey,
-                type: parentType.v,
+                type: parentType.y,
             }
         }
     }
@@ -36,12 +36,28 @@ function getParent(key, values) {
     }
 }
 
+function getLastYChild(key, values) {
+    let last = key
+    while(values[last].down) {
+        last = values[last].down
+    }
+    return last
+}
+
+//deletes key and all children of key. MUTATES.
+function recursiveDelete(key, values) {
+    if (!key) return
+    values[key].right && recursiveDelete(values[key].right, values)
+    values[key].down && recursiveDelete(values[key].down, values)
+    return delete values[key]
+}
+
 //LogicBoard functions
 export function addItemToRightOf(itemKey, pageKey, fieldKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-
-        let logicMap = defaultLogic
+        
+        let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
         let newItemKey = helpers.genUID('phase')
@@ -49,8 +65,10 @@ export function addItemToRightOf(itemKey, pageKey, fieldKey) {
             newItemKey = helpers.genUID('phase')
         }
 
-        logicMap[newItemKey] = { right: logicMap[itemKey].right }
-        logicMap[itemKey] = { ...logicMap[itemKey], right: newItemKey }
+        logicMap[newItemKey] = {}
+        logicMap[itemKey].right && (logicMap[newItemKey].right = logicMap[itemKey].right)
+        logicMap[itemKey].right = newItemKey
+
 
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }
@@ -60,16 +78,17 @@ export function addItemBelowOf(itemKey, pageKey, fieldKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
 
-        let logicMap = defaultLogic
+        let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
         let newItemKey = helpers.genUID('phase')
         while(logicMap[newItemKey]) {
             newItemKey = helpers.genUID('phase')
         }
-
-        logicMap[newItemKey] = { down: logicMap[itemKey].down }
-        logicMap[itemKey] = { ...logicMap[itemKey], down: newItemKey }
+        
+        logicMap[newItemKey] = {}
+        logicMap[itemKey].down && (logicMap[newItemKey].down = logicMap[itemKey].down)
+        logicMap[itemKey].down = newItemKey
         
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }
@@ -82,12 +101,17 @@ export function deleteItem(itemKey, pageKey, fieldKey) {
         let logicMap = {}
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
-        let objectRight = logicMap[itemKey].right
-        let objectDown = logicMap[itemKey].down
+        //re-assign parent logic path
+        const { key, type } = getParent(itemKey, logicMap)
+        key && (logicMap[key][type] = logicMap[itemKey].right || logicMap[itemKey].down || null)
         
-        for (var key in logicMap) {
-            //TODO
+        //re-assign furthest child in next .right IF removed child has a .down
+        if (logicMap[itemKey].right) {
+            let keyToChange = getLastYChild(logicMap[itemKey].right, logicMap)
+            logicMap[itemKey].down && (logicMap[keyToChange].down = logicMap[itemKey].down)
         }
+        
+        delete logicMap[itemKey]
 
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }
@@ -100,12 +124,17 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
         let logicMap = {}
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
-        let objectRight = logicMap[itemKey].right
-        let objectDown = logicMap[itemKey].down
-        
-        for (var key in logicMap) {
-            //TODO
+        //changing the parent relationship
+        const { key, type } = getParent(itemKey, logicMap)
+        if (logicMap[itemKey].down) {
+            logicMap[key][type] = logicMap[itemKey].down
+        } else {
+            delete logicMap[key][type]
         }
+
+        //goodbyeChildren
+        recursiveDelete(logicMap[itemKey].right, logicMap)
+        delete logicMap[itemKey]
 
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }

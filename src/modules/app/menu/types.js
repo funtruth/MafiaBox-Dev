@@ -6,4 +6,5 @@ export const dropdownType = {
     showMorePhases: 'dropdownType/show-more-phases',
 
     showLogic: 'dropdownType/show-logic',
+    deleteLogic: 'dropdownType/delete-logic',
 }
