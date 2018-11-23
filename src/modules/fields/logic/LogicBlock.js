@@ -5,7 +5,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import { dropdownType } from '../../app/menu/types'
 import { logicTypeInfo, defaultLogic } from './types'
 
-import { addItemToRightOf, addItemBelowOf } from '../../page/PageReducer'
+import { addItemToRightOf, addItemBelowOf, deleteItem } from '../FieldReducer'
 
 class LogicBlock extends React.Component{
     _addItemRight = (index) => {
@@ -22,6 +22,13 @@ class LogicBlock extends React.Component{
         this.props.addItemBelowOf(index, pageKey, field)
     }
 
+    _deleteItem = (index) => {
+        const { field, pageInfo } = this.props
+        const { pageKey } = pageInfo
+        
+        this.props.deleteItem(index, pageKey, field)
+    }
+
     render() {
         let { field, pageInfo, value, index } = this.props
         if (!pageInfo) return null
@@ -36,7 +43,7 @@ class LogicBlock extends React.Component{
             rows.push(pointer)
             pointer = value[pointer].down
         }
-
+        console.log('valudl', value, rows)
         return (
             <Droppable
                 droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}`}
@@ -89,17 +96,15 @@ class LogicBlock extends React.Component{
                                                 <i 
                                                     className={`${index === rows.length - 1 ?
                                                         "ion-ios-add" : "ion-md-arrow-dropdown"} logic-button-down`}
-                                                    style={{
-                                                        color: index === rows.length - 1 ? '#a6a6a6' : '#fff',
-                                                        marginRight: 'auto',
-                                                    }}
                                                     onClick={this._addItemBelow.bind(this, item)}
+                                                />
+                                                <div style={{ marginRight: 'auto' }}/>
+                                                <i 
+                                                    className="ion-md-close logic-button-down"
+                                                    onClick={this._deleteItem.bind(this, item)}
                                                 />
                                                 <i 
                                                     className="ion-md-expand logic-button-down"
-                                                    style={{
-                                                        color: index === rows.length - 1 ? '#a6a6a6' : '#fff'
-                                                    }}
                                                 />
                                             </div>
                                         </div> 
@@ -129,5 +134,6 @@ export default connect(
     {
         addItemToRightOf,
         addItemBelowOf,
+        deleteItem,
     }
 )(LogicBlock)

@@ -27,6 +27,10 @@ class FieldView extends React.Component {
             fieldInfo,
             updatePage,
         }
+
+        if (!pageInfo[fieldKey] && fieldInfo.fieldDefault) {
+            this.props.updatePage(pageInfo.pageKey, fieldKey, fieldInfo.fieldDefault)
+        }
         
         switch(fieldInfo.fieldType) {
             case fieldType.text:

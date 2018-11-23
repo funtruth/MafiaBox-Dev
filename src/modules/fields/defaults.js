@@ -1,5 +1,6 @@
 import { boardType } from '../board/types'
 import { phaseActionMode, phaseTriggerType } from './actions'
+import { defaultLogic } from './logic/types';
 
 export const moldType = {
     role: 'moldType/role',
@@ -70,6 +71,7 @@ export const initFieldRepo = {
         fieldKey: 'roleActionMode',
         fieldType: fieldType.logic,
         fieldTitle: 'Role Action Mode',
+        fieldDefault: defaultLogic,
     },
     phaseActionMode: {
         fieldKey: 'phaseActionMode',

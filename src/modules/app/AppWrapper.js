@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
-import { moveStory, movePageWithinMap, movePageToOtherMap, moveLogic } from '../page/PageReducer'
+import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
+import { moveLogic } from '../fields/FieldReducer'
 import { showDropdownByKey } from './menu/DropdownReducer'
 
 import { dropdownType } from './menu/types'

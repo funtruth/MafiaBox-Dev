@@ -45,8 +45,11 @@ class LogicBoard extends React.Component{
             if (value[logicKey].right) children[value[logicKey].right] = true
             if (value[logicKey].down) children[value[logicKey].down] = true
         }
+        
         parents = _.pickBy(value, (i, key) => !children[key])
         index = Object.keys(parents)[0]
+
+        if (!value) return null
 
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
