@@ -7,7 +7,9 @@ import { logicTypeInfo, defaultLogic } from './types'
 
 import * as helpers from '../../common/helpers'
 import * as maptool from './maptool'
-import { addItemToRightOf, addItemBelowOf, deleteItem } from '../FieldReducer'
+import { addItemToRightOf, addItemBelowOf, deleteItem, toggleCollapse } from '../FieldReducer'
+
+import LoginErrors from './LogicErrors'
 
 class LogicBlock extends React.Component{
     constructor(props) {
@@ -34,6 +36,13 @@ class LogicBlock extends React.Component{
         const { pageKey } = pageInfo
         
         this.props.deleteItem(index, pageKey, field)
+    }
+
+    _toggleCollapse = (index) => {
+        const { field, pageInfo } = this.props
+        const { pageKey } = pageInfo
+
+        this.props.toggleCollapse(index, pageKey, field)
     }
 
     render() {
@@ -63,8 +72,10 @@ class LogicBlock extends React.Component{
                     >
                         {rows.map((item, index) => {
                             if (!value[item]) return null
+
                             const hasPage = pageRepo[value[item].pageKey]
                             const errors = maptool.compile(item, value)
+                            const collapsed = value[item].collapsed
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -78,6 +89,7 @@ class LogicBlock extends React.Component{
                                             ...provided.draggableProps.style,
                                             marginTop: index ? 10 : 0,
                                             marginBottom: 'auto',
+                                            cursor: 'pointer',
                                         }}
                                     >
                                         <div>
@@ -114,18 +126,10 @@ class LogicBlock extends React.Component{
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <i 
                                                     className="ion-md-arrow-dropdown logic-button-down"
+                                                    data-tip="Add another operator."
                                                     onClick={this._addItemBelow.bind(this, item)}
                                                 />
-                                                {errors.map((item, index) => (
-                                                    <i
-                                                        key={index}
-                                                        className={`${item.icon} logic-alert`}
-                                                        style={{
-                                                            color: item.color,
-                                                            fontSize: item.fontSize,
-                                                        }}
-                                                    />
-                                                ))}
+                                                <LoginErrors errors={errors}/>
                                             </div>
                                         </div>
                                         <div style={{ textAlign: 'center' }}>
@@ -137,14 +141,17 @@ class LogicBlock extends React.Component{
                                                 page-key={pageInfo.pageKey}
                                             />
                                             <i 
-                                                className="ion-md-expand logic-option"
+                                                className={`${collapsed ? "ion-md-expand" : "ion-md-contract"} logic-option`}
+                                                data-tip={collapsed ? "Expand." : "Collapse"}
+                                                onClick={this._toggleCollapse.bind(this, item)}
                                             />
                                         </div>
                                         <i
                                             className="ion-ios-fastforward logic-button-right"
+                                            data-tip="Add another operator."
                                             onClick={this._addItemRight.bind(this, item)}
                                         />
-                                        {value[item].right && 
+                                        {!collapsed && value[item].right && 
                                             <LogicBlock 
                                                 {...this.props}
                                                 index={value[item].right}
@@ -169,5 +176,6 @@ export default connect(
         addItemToRightOf,
         addItemBelowOf,
         deleteItem,
+        toggleCollapse,
     }
 )(LogicBlock)

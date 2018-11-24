@@ -29,7 +29,7 @@ export const logicTypeInfo = {
     },
     [logicType.return]: {
         title: 'return',
-        icon: 'ion-ios-return-right',
+        icon: 'ion-ios-send',
         color: '#1e9939',
     },
 }

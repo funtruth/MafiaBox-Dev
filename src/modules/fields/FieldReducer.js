@@ -28,6 +28,19 @@ function recursiveDelete(key, values) {
     return delete values[key]
 }
 
+export function toggleCollapse(itemKey, pageKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = { ...defaultLogic }
+        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+
+        logicMap[itemKey].collapsed = !logicMap[itemKey].collapsed
+
+        dispatch(updatePage(pageKey, fieldKey, logicMap))
+    }
+}
+
 //LogicBoard functions
 export function addItemToRightOf(itemKey, pageKey, fieldKey) {
     return (dispatch, getState) => {
@@ -44,7 +57,6 @@ export function addItemToRightOf(itemKey, pageKey, fieldKey) {
         logicMap[newItemKey] = {}
         logicMap[itemKey].right && (logicMap[newItemKey].right = logicMap[itemKey].right)
         logicMap[itemKey].right = newItemKey
-
 
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }

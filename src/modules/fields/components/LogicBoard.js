@@ -1,6 +1,7 @@
 import React from 'react'
 import { fieldIcon } from '../defaults'
 import _ from 'lodash'
+import ReactTooltip from 'react-tooltip'
 
 import LogicBlock from '../../fields/logic/LogicBlock'
 import { defaultLogic } from '../logic/types';
@@ -37,6 +38,7 @@ class LogicBoard extends React.Component{
                         index={item}
                     />
                 ))}
+                <ReactTooltip place="right"/>
             </div>
         )
     }
