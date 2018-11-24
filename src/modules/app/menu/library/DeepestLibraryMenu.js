@@ -6,12 +6,12 @@ import { updatePage } from '../../../page/PageReducer'
 
 class DeepestLibraryMenu extends React.Component{
     _onClick = (newValue) => {
-
         const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = dropdownParams
 
-        let valueClone = Array.from(pageRepo[pageKey][fieldKey])
-        valueClone[indexKey][subfieldKey] = newValue
+        let valueClone = {}
+        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
+        valueClone[indexKey].pageKey = newValue
 
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()

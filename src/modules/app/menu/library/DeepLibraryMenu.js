@@ -38,13 +38,19 @@ class DeepLibraryMenu extends React.Component{
         const showMore = items.length > 0
         const disabled = !showMore
 
+        let itemStyle
+        if (!showMore) {
+            itemStyle = {
+                color: '#767676',
+            }
+        }
+
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
                 onMouseOver={this._onMouseEnter.bind(this, item.key, disabled)}
-                onFocus={() => alert('wtf')}
-                onClick={this._onClick.bind(this, item.key)}
+                style={itemStyle}
             >
                 {item.title}
                 {showMore && <i

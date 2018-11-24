@@ -27,7 +27,6 @@ class LibraryMenu extends React.Component{
         const showMore = items.length > 0
 
         let itemStyle
-
         if (!showMore) {
             itemStyle = {
                 color: '#767676',

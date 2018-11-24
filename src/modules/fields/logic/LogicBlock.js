@@ -36,7 +36,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        let { field, pageInfo, value, index } = this.props
+        let { field, pageInfo, value, index, pageRepo } = this.props
         if (!pageInfo) return null
         if (!value) {
             value = defaultLogic
@@ -50,7 +50,7 @@ class LogicBlock extends React.Component{
             rows.push(pointer)
             pointer = value[pointer].down
         }
-
+        
         return (
             <Droppable
                 droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}/${this.rng}`}
@@ -62,6 +62,7 @@ class LogicBlock extends React.Component{
                     >
                         {rows.map((item, index) => {
                             if (!value[item]) return null
+                            let hasPage = pageRepo[value[item].pageKey]
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -95,10 +96,11 @@ class LogicBlock extends React.Component{
                                                 <div
                                                     className="logic-button menu-onclick"
                                                     menu-type={dropdownType.showLibrary}
-                                                    field-key="phaseTriggerMode"
+                                                    field-key={field}
                                                     index-key={item}
+                                                    page-key={pageInfo.pageKey}
                                                 >
-                                                    {value[item].title}
+                                                    {hasPage && pageRepo[value[item].pageKey].title}
                                                 </div>
                                             </div>
                                             <div className="row">
@@ -142,7 +144,9 @@ class LogicBlock extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        pageRepo: state.page.pageRepo,
+    }),
     {
         addItemToRightOf,
         addItemBelowOf,
