@@ -9,7 +9,6 @@
 
 .logic-label {
     padding: 4px 4px;
-    color: #fff;
     pointer-events: auto;
     border-radius: 4px 0px 0px 4px;
     display: flex;
@@ -30,7 +29,6 @@
     font-size: 13px;
     font-weight: 500;
     font-family: Arial;
-    color: #fff;
     cursor: pointer;
     background-color: rgba(40, 43, 48,1);
     height: 18px;
@@ -44,6 +42,22 @@
 }
 
 .logic-button-down {
+    padding: 1px 4px;
+    font: 500 20px Arial;
+    color: #a6a6a6;
+    cursor: pointer;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logic-button-down:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.logic-option {
     padding: 2px 4px;
     border-radius: 2px;
     font: 500 20px Arial;
@@ -52,50 +66,47 @@
     height: 18px;
     width: 18px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    transition: 0.2s;
 }
 
-.logic-button-down:hover {
-    background-color: #dfac50;
+.logic-option:hover {
     color: #fff;
+    transform: scale(1.1);
 }
 
 .logic-button-right {
     color: #a6a6a6;
     cursor: pointer;
     width: 20px;
-    transition: 0.2s;
+    height: 20px;
 
-    padding: 6px 4px;
-    margin: 0px 4px;
-    border-radius: 2px;
+    padding: 4px 4px;
     font: 500 Arial;
-    color: #fff;
+    color: #a6a6a6;
     cursor: pointer;
     display: flex;
     justify-content: center;
-    transition: 0.2s;
 }
 
 .logic-button-right:hover {
     color: #fff;
-    background-color: #dfac50;
+    transform: scale(1.1);
 }
 
-.add-condition {
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: Arial;
-    color: #fff;
+.logic-alert {
+    padding: 2px 0px;
+    border-radius: 2px;
+    color: #a6a6a6;
     cursor: pointer;
-    margin-right: 8px;
-    background-color: rgba(40, 43, 48,1);
-    height: 18px;
-    width: 60px;
+    width: 18px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    margin-top: 2px;
+    opacity: 0.6;
+}
+
+.logic-alert:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }

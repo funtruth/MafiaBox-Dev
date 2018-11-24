@@ -1,4 +1,5 @@
 import * as helpers from '../common/helpers'
+import * as maptool from './logic/maptool'
 import { updatePage } from '../page/PageReducer'
 
 import { defaultLogic } from './logic/types'
@@ -9,31 +10,6 @@ const initialState = {
     fieldRepo: initFieldRepo,
 
     defaultLogic,
-}
-
-const parentType = {
-    y: 'down',
-    x: 'right',
-}
-
-function getParent(key, values) {
-    for (var logicKey in values) {
-        if (values[logicKey].right === key) {
-            return {
-                key: logicKey,
-                type: parentType.x,
-            }
-        } else if (values[logicKey].down === key) {
-            return {
-                key: logicKey,
-                type: parentType.y,
-            }
-        }
-    }
-    return {
-        key: null,
-        type: null,
-    }
 }
 
 function getLastYChild(key, values) {
@@ -102,7 +78,7 @@ export function deleteItem(itemKey, pageKey, fieldKey) {
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
         //re-assign parent logic path
-        const { key, type } = getParent(itemKey, logicMap)
+        const { key, type } = maptool.getParent(itemKey, logicMap)
         key && (logicMap[key][type] = logicMap[itemKey].right || logicMap[itemKey].down || null)
         
         //re-assign furthest child in next .right IF removed child has a .down
@@ -125,7 +101,7 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
 
         //changing the parent relationship
-        const { key, type } = getParent(itemKey, logicMap)
+        const { key, type } = maptool.getParent(itemKey, logicMap)
 
         //if item is main parent
         if (!type && !key) {
@@ -165,7 +141,7 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
         rows.splice(endIndex, 0, removed)
 
         //re-assign previous column .right prop in case the first item has been modified
-        const parentKey = getParent(origin, valueClone).key
+        const parentKey = maptool.getParent(origin, valueClone).key
         parentKey && (valueClone[parentKey].right = rows[0])
 
         //re-assign items in column .down props

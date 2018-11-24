@@ -6,6 +6,7 @@ import { dropdownType } from '../../app/menu/types'
 import { logicTypeInfo, defaultLogic } from './types'
 
 import * as helpers from '../../common/helpers'
+import * as maptool from './maptool'
 import { addItemToRightOf, addItemBelowOf, deleteItem } from '../FieldReducer'
 
 class LogicBlock extends React.Component{
@@ -62,20 +63,22 @@ class LogicBlock extends React.Component{
                     >
                         {rows.map((item, index) => {
                             if (!value[item]) return null
-                            let hasPage = pageRepo[value[item].pageKey]
+                            const hasPage = pageRepo[value[item].pageKey]
+                            const errors = maptool.compile(item, value)
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
                                         className="row"
                                         key={index}
-                                        style={{
-                                            marginTop: index ? 8 : 0,
-                                            marginBottom: 'auto',
-                                        }}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
+                                        style={{
+                                            ...provided.draggableProps.style,
+                                            marginTop: index ? 10 : 0,
+                                            marginBottom: 'auto',
+                                        }}
                                     >
                                         <div>
                                             <div className="row">
@@ -90,7 +93,8 @@ class LogicBlock extends React.Component{
                                                     style={{
                                                         backgroundColor: (value[item].logicType &&
                                                             logicTypeInfo[value[item].logicType].color) ||
-                                                            '#767676'
+                                                            '#767676',
+                                                        color: '#fff',
                                                     }}
                                                 />
                                                 <div
@@ -99,31 +103,45 @@ class LogicBlock extends React.Component{
                                                     field-key={field}
                                                     index-key={item}
                                                     page-key={pageInfo.pageKey}
+                                                    style={{ color: hasPage ? '#fff' : '#868686' }}
                                                 >
-                                                    {hasPage && pageRepo[value[item].pageKey].title}
+                                                    {hasPage ? 
+                                                        pageRepo[value[item].pageKey].title
+                                                        :'Empty'
+                                                    }
                                                 </div>
                                             </div>
-                                            <div className="row">
+                                            <div className="row" style={{ textAlign: 'center' }}>
                                                 <i 
-                                                    className={`${index === rows.length - 1 ?
-                                                        "ion-ios-add" : "ion-md-arrow-dropdown"} logic-button-down`}
+                                                    className="ion-md-arrow-dropdown logic-button-down"
                                                     onClick={this._addItemBelow.bind(this, item)}
                                                 />
-                                                <div style={{ marginRight: 'auto' }}/>
-                                                <i 
-                                                    className="ion-md-close logic-button-down menu-onclick"
-                                                    menu-type={dropdownType.deleteLogic}
-                                                    field-key={field}
-                                                    index-key={item}
-                                                    page-key={pageInfo.pageKey}
-                                                />
-                                                <i 
-                                                    className="ion-md-expand logic-button-down"
-                                                />
+                                                {errors.map((item, index) => (
+                                                    <i
+                                                        key={index}
+                                                        className={`${item.icon} logic-alert`}
+                                                        style={{
+                                                            color: item.color,
+                                                            fontSize: item.fontSize,
+                                                        }}
+                                                    />
+                                                ))}
                                             </div>
-                                        </div> 
-                                        <i className="ion-ios-fastforward logic-button-right"
-                                            style={{ color: !value[item].right && '#fff' }}
+                                        </div>
+                                        <div style={{ textAlign: 'center' }}>
+                                            <i 
+                                                className="ion-md-close logic-option menu-onclick"
+                                                menu-type={dropdownType.deleteLogic}
+                                                field-key={field}
+                                                index-key={item}
+                                                page-key={pageInfo.pageKey}
+                                            />
+                                            <i 
+                                                className="ion-md-expand logic-option"
+                                            />
+                                        </div>
+                                        <i
+                                            className="ion-ios-fastforward logic-button-right"
                                             onClick={this._addItemRight.bind(this, item)}
                                         />
                                         {value[item].right && 

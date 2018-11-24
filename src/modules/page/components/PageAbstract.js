@@ -11,7 +11,7 @@ class PageAbstract extends React.Component{
             <div>
                 <input
                     className="page-title-input"
-                    value={this.props.pageInfo.title}
+                    value={this.props.pageInfo.title || ''}
                     onChange={this._onChange}
                     placeholder="Untitled"
                     type="text"
