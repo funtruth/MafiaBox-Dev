@@ -20,7 +20,7 @@ class InputField extends React.Component{
                 </div>
                 <input
                     className="page-input"
-                    value={value}
+                    value={value || ''}
                     onChange={this._onChange}
                     placeholder="Empty"
                     type={inputType}
