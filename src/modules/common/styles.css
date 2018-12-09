@@ -4,6 +4,11 @@
     flex-wrap: wrap;
 }
 
+.row-nowrap {
+    display: flex;
+    flex-direction: row;
+}
+
 .row-centered {
     display: flex;
     flex-direction: row;

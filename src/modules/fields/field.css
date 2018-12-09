@@ -77,7 +77,7 @@
 .logic-button-right {
     color: #a6a6a6;
     cursor: pointer;
-    width: 20px;
+    min-width: 20px;
     height: 20px;
 
     padding: 4px 4px;
@@ -109,4 +109,9 @@
 .logic-alert:hover {
     opacity: 1;
     transform: scale(1.1);
+}
+
+.logic-board {
+    overflow: auto;
+    max-height: 400px;
 }

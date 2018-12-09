@@ -67,7 +67,7 @@ class LogicBlock extends React.Component{
                 type={`ROW/${index}`}
             >
                 {(provided, snapshot) => (
-                    <div 
+                    <div
                         ref={provided.innerRef}
                     >
                         {rows.map((item, index) => {
@@ -80,7 +80,7 @@ class LogicBlock extends React.Component{
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
-                                        className="row"
+                                        className="row-nowrap"
                                         key={index}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
@@ -93,7 +93,7 @@ class LogicBlock extends React.Component{
                                         }}
                                     >
                                         <div>
-                                            <div className="row">
+                                            <div className="row-nowrap">
                                                 <i 
                                                     className={`${(value[item].logicType &&
                                                         logicTypeInfo[value[item].logicType].icon) ||

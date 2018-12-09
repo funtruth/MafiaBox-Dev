@@ -30,14 +30,16 @@ class LogicBoard extends React.Component{
                     <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
-                {Object.keys(parents).map((item, index) => (
-                    <LogicBlock
-                        {...this.props}
-                        key={index}
-                        value={value || defaultLogic}
-                        index={item}
-                    />
-                ))}
+                <div className="logic-board">
+                    {Object.keys(parents).map((item, index) => (
+                        <LogicBlock
+                            {...this.props}
+                            key={index}
+                            value={value || defaultLogic}
+                            index={item}
+                        />
+                    ))}
+                </div>
                 <ReactTooltip place="right"/>
             </div>
         )
