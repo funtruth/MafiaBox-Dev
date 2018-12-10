@@ -12,6 +12,23 @@ const initialState = {
     defaultLogic,
 }
 
+const UPDATE_FIELD = 'field/update-field'
+
+export function updateField(fieldKey, field, newValue) {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().field
+        let fieldInfo = {
+            ...fieldRepo[fieldKey],
+            [field]: newValue,
+        }
+
+        dispatch({
+            type: UPDATE_FIELD,
+            payload: fieldInfo
+        })
+    }
+}
+
 function getLastYChild(key, values) {
     let last = key
     while(values[last].down) {
@@ -169,6 +186,8 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case UPDATE_FIELD:
+            return { ...state, fieldRepo: action.payload }
         default:
             return state;
     }

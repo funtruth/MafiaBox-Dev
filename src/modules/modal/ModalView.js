@@ -12,6 +12,7 @@ import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
+import TemplateModal from './keys/TemplateModal'
 
 class ModalView extends React.Component {
     componentDidMount() {
@@ -45,6 +46,8 @@ class ModalView extends React.Component {
 
             case modalType.showPage:
                 return <PageModal/>
+            case modalType.showTemplate:
+                return <TemplateModal/>
             default:
                 return null
         }

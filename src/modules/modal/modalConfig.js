@@ -6,4 +6,5 @@ export const modalType = {
     editPhase: 'modalType/edit-phase',
 
     showPage: 'modalType/show-page',
+    showTemplate: 'modalType/show-template',
 }

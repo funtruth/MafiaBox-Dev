@@ -1,52 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { itemType } from '../roles/types'
+import { boardType } from '../board/types'
+import { fieldType } from '../fields/defaults'
 
 import InputItem from './components/InputItem'
-import BlurInputItem from './components/BlurInputItem'
-import PropertyItem from './components/PropertyItem';
-
-import { updateDefaultInfo } from './RoleCardReducer'
 
 class RoleCardView extends React.Component{
-    _renderItem = (item) => {
+    _renderItem = (fieldKey) => {
+        const { fieldRepo } = this.props
+        const item = fieldRepo[fieldKey]
+        if (!item) return null
+
         let FieldComponent
-        switch(item.type) {
-            case itemType.input:
+        switch(item.fieldType) {
+            case fieldType.text:
                 FieldComponent = InputItem
                 break
-            case itemType.blurInput:
-                FieldComponent = BlurInputItem
-                break
-            case itemType.tag:
-                FieldComponent = PropertyItem
-                break
             default:
-                FieldComponent = null
-                break
         }
 
-        let defaultInfo = this.props.defaultInfo
-        let value = defaultInfo[item.key]
-
+        if (!FieldComponent) return null
         return (
             <FieldComponent
-                key={item.key}
-                field={item.key}
-                label={item.label}
-                placeholder={item.placeholder}
-                data={item.data}
-                value={value}
-                updateRoleInfo={this.props.updateDefaultInfo}
+                {...item}
+                key={item.fieldKey}
             />
         )
+        
     }
 
     render() {
+        const info = this.props.fieldMap[boardType.roles]
+        if (!info) return null
+
         return (
             <div className="story-view">
-                {/*this.props.fields.map(this._renderItem)*/}
+                {info.map(this._renderItem)}
             </div>
         )
     }
@@ -54,10 +44,7 @@ class RoleCardView extends React.Component{
 
 export default connect(
     state => ({
-        fields: state.roles.fields,
-        defaultInfo: state.roleCard.defaultInfo,
+        fieldMap: state.field.fieldMap,
+        fieldRepo: state.field.fieldRepo,
     }),
-    {
-        updateDefaultInfo,
-    }
 )(RoleCardView)

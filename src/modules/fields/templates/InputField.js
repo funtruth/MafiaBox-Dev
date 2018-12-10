@@ -1,5 +1,5 @@
 import React from 'react'
-import { fieldIcon } from '../../fields/defaults'
+import { fieldIcon } from '../defaults'
 
 class InputField extends React.Component{
     _onChange = e => {
@@ -10,15 +10,21 @@ class InputField extends React.Component{
     }
 
     render() {
-        const { fieldTitle } = this.props
-        
+        const { value, fieldInfo, field, inputType } = this.props
+
         return (
-            <div className="field-item template-title" style={{ marginBottom: 4 }}>
-            {fieldTitle}
+            <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.text}`} style={{ width: 16 }}></i>
-                    Text Field
+                    {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
+                <input
+                    className="page-input"
+                    value={value || ''}
+                    onChange={this._onChange}
+                    placeholder="Empty"
+                    type={inputType}
+                />
             </div>
         )
     }

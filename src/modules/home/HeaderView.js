@@ -46,6 +46,12 @@ class HeaderView extends React.Component{
         switch(paths[1]) {
             case pathKey.library:
             case pathKey.board:
+                rightBtns = [
+                    { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
+                    { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                ]
+                break
             case pathKey.flow:
             case pathKey.events:
                 rightBtns = [
@@ -76,7 +82,6 @@ class HeaderView extends React.Component{
         //adds item to first story of board
         let mapKey
         for (var i=0; i<storyMap.length; i++) {
-            console.log(i, storyMap[i].boardType)
             if (storyMap[i].boardType === boardType[this.state.mainPath]) {
                 mapKey = storyMap[i].key
                 break
@@ -95,6 +100,10 @@ class HeaderView extends React.Component{
                 })
             case 'createField':
                 return this.props.showModalByKey(modalType.addNewField)
+            case 'editTemplate':
+                return this.props.showModalByKey(modalType.showTemplate, {
+                    fieldMapKey: boardType.roles
+                })
             default:
         }
     }
