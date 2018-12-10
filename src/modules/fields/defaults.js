@@ -57,20 +57,6 @@ export const initFieldRepo = {
         fieldKey: 'roleTeam',
         fieldType: fieldType.tag,
         fieldTitle: 'Role Team',
-        data: [
-            {
-                key: 'roleTeam/mafia',
-                title: 'Mafia',
-            },
-            {
-                key: 'roleTeam/town',
-                title: 'Town',
-            },
-            {
-                key: 'roleTeam/neutral',
-                title: 'Neutral',
-            }
-        ]
     },
     roleCharges: {
         fieldKey: 'roleCharges',

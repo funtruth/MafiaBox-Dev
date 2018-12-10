@@ -7,7 +7,7 @@ import { fieldType } from './defaults'
 import { updateField } from './FieldReducer'
 
 import InputField from './templates/InputField'
-import TemplateTag from './templates/TemplateTag';
+import TemplateTagView from './templates/TemplateTagView';
 import PhaseTriggerField from './templates/PhaseTriggerField';
 import CodeField from './templates/CodeField'
 import LogicBoard from './templates/LogicBoard';
@@ -34,7 +34,7 @@ class FieldTemplateView extends React.Component {
             case fieldType.logic:
                 return <LogicBoard {...props}/>
             case fieldType.tag:
-                return <TemplateTag {...props}/>
+                return <TemplateTagView {...props}/>
             case fieldType.phaseTrigger:
                 return <PhaseTriggerField {...props}/>
             default:

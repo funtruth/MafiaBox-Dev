@@ -4,6 +4,8 @@ import { updatePage } from '../page/PageReducer'
 
 import { defaultLogic } from './logic/types'
 import { initFieldMap, initFieldRepo } from './defaults'
+import { showDropdownByKey } from '../app/menu/DropdownReducer'
+import { dropdownType } from '../app/menu/types';
 
 const initialState = {
     fieldMap: initFieldMap,
@@ -52,6 +54,8 @@ export function addTag(fieldKey) {
                 tagKey: newItemKey,
             }
         })
+
+        dispatch(showDropdownByKey(dropdownType.editTag, { tagKey: newItemKey }))
     }
 }
 

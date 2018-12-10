@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { updateTag } from '../../../fields/FieldReducer'
 
-class EditTag extends React.Component{
-    _onDelete = () => {
-
-    }
-
+class CreateTag extends React.Component{
     _onChange = e => {
         const { tagKey } = this.props.dropdownParams
         this.props.updateTag(tagKey, 'title', e.target.value)
@@ -24,23 +20,19 @@ class EditTag extends React.Component{
     }
 
     render() {
-        const { dropdownParams, tagRepo } = this.props
-        const { tagKey, pageX, pageY } = dropdownParams
-
-        const fieldInfo = tagRepo[tagKey]
+        const { dropdownParams } = this.props
+        const { pageX, pageY } = dropdownParams
 
         let menuStyle = {
             top: pageY,
             left: pageX,
         }
 
-        if (!fieldInfo) return null
-
         return (
             <div className="drop-down-menu" style={menuStyle}>
                 <input
                     className="tag-input menu-voidclick"
-                    value={fieldInfo.title || ''}
+                    value={''}
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}
                     placeholder="Untitled"
@@ -49,12 +41,8 @@ class EditTag extends React.Component{
                 />
                 <div className="drop-down-menu-separator"/>
                 <div className="drop-down-menu-option" onClick={this._onDelete}>
-                    <i className={`drop-down-menu-icon ion-md-return-left`}></i>
-                    Move to
-                </div>
-                <div className="drop-down-menu-option" onClick={this._onDelete}>
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
-                    Delete
+                    Submit
                 </div>
             </div>
         )
@@ -71,4 +59,4 @@ export default connect(
         showDropdownByKey,
         updateTag,
     }
-)(EditTag)
+)(CreateTag)

@@ -9,6 +9,7 @@ import OtherValues from './components/OtherValues'
 import LogicMenu from './components/LogicMenu';
 import LogicDelete from './components/LogicDelete'
 import EditTag from './components/EditTag'
+import CreateSomething from './components/CreateSomething'
 
 import LibraryMenu from './library/LibraryMenu';
 import DeepLibraryMenu from './library/DeepLibraryMenu'
@@ -33,6 +34,8 @@ class DropdownView extends React.Component{
                 return <LogicDelete key={index}/>
             case dropdownType.editTag:
                 return <EditTag key={index}/>
+            case dropdownType.createSomething:
+                return <CreateSomething key={index}/>
             default:
                 return null
         }

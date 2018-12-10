@@ -101,14 +101,25 @@ class AppWrapper extends React.Component{
                     break
                 case dropdownType.editTag:
                     if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.editTag, {
-                            fieldKey: e.target.getAttribute('field-key'),
-                            indexKey: e.target.getAttribute('index-key'),
-                            tagKey: e.target.getAttribute('tag-key'),
-                            pageX: e.pageX - e.offsetX - 8,
-                            pageY: e.pageY - e.offsetY + 28,
-                        })
+                        e.target.getAttribute('tag-key') !== this.props.dropdownParams.tagKey) {
+                            this.props.showDropdownByKey(dropdownType.editTag, {
+                                indexKey: e.target.getAttribute('index-key'),
+                                tagKey: e.target.getAttribute('tag-key'),
+                                pageX: e.pageX - e.offsetX - 8,
+                                pageY: e.pageY - e.offsetY + 28,
+                            })
+                    } else {
+                        this.props.showDropdownByKey()
+                    }
+                    break
+                case dropdownType.createSomething:
+                    if (!this.props.dropdownKeys.length ||
+                        e.target.getAttribute('tag-key') !== this.props.dropdownParams.tagKey) {
+                            this.props.showDropdownByKey(dropdownType.createSomething, {
+                                tagKey: e.target.getAttribute('tag-key'),
+                                pageX: e.pageX - e.offsetX - 8,
+                                pageY: e.pageY - e.offsetY + 28,
+                            })
                     } else {
                         this.props.showDropdownByKey()
                     }

@@ -10,4 +10,5 @@ export const dropdownType = {
     deleteLogic: 'dropdownType/delete-logic',
 
     editTag: 'dropdownType/edit-tag',
+    createSomething: 'dropdownType/create-something',
 }
