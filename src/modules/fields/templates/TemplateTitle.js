@@ -13,16 +13,17 @@ class TemplateTitle extends React.Component{
 
         return (
             <div className="row">
+                <div
+                    className="tag-button"
+                >{fieldTypeToTitle[fieldType]}</div>
                 <input
                     className="field-title-input"
                     value={fieldTitle || ''}
                     onChange={this._onChange}
                     placeholder="Untitled"
                     type="text"
-                />
-                <div
-                    className="tag-button"
-                >{fieldTypeToTitle[fieldType]}</div>
+                >
+                </input>
             </div>
         )
     }

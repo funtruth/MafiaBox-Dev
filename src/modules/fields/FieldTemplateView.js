@@ -51,7 +51,7 @@ class FieldTemplateView extends React.Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {pageInfo.map((item, index) => (
                     <div key={item}>
-                        <div className="highlight">
+                        <div className="highlight" style={{ padding: '2px 6px', borderRadius: 2 }}>
                             <TemplateTitle
                                 fieldInfo={fieldRepo[item]}
                                 updateField={updateField}

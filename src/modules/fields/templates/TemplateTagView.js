@@ -8,12 +8,13 @@ const ADD_NEW_TAG = 'add-new-tag'
 
 class TemplateTag extends React.Component{
     _renderItem = (item, index) => {
-        const { tagRepo } = this.props
-        const fieldInfo = tagRepo[item.key]
+        const { tagRepo, fieldInfo } = this.props
+        const tagInfo = tagRepo[item.key]
 
         const style = {
             backgroundColor: item.color || 'rgba(40, 43, 48,1)',
-            color: fieldInfo && fieldInfo.title ? '#fff' : '#969696',
+            color: tagInfo && tagInfo.title ? '#fff' : '#969696',
+            marginBottom: 6,
         }
 
         return (
@@ -23,17 +24,21 @@ class TemplateTag extends React.Component{
                 menu-type={dropdownType.editTag}
                 index-key={index}
                 tag-key={item.key}
+                field-key={fieldInfo.fieldKey}
                 style={style}
             >
-                {(fieldInfo && fieldInfo.title) || (item.key === ADD_NEW_TAG && item.title) || 'Untitled'}
+                {(tagInfo && tagInfo.title) || (item.key === ADD_NEW_TAG && item.title) || 'Untitled'}
             </div>
         )
     }
 
     _renderFooter() {
+        const { fieldInfo } = this.props
+
         const style = {
             backgroundColor: 'hsla(0,0%,100%,.1)',
             color: '#969696',
+            marginBottom: 6,
         }
 
         return (
@@ -41,6 +46,7 @@ class TemplateTag extends React.Component{
                 className="property-button menu-onclick"
                 menu-type={dropdownType.createSomething}
                 tag-key={ADD_NEW_TAG}
+                field-key={fieldInfo.fieldKey}
                 style={style}
             >
                 Add Tag
