@@ -15,6 +15,7 @@ const initialState = {
 const UPDATE_FIELD = 'field/update-field'
 const ADD_TAG = 'field/add-tag'
 const DELETE_TAG = 'field/delete-tag'
+const UPDATE_TAG = 'field/update-tag'
 
 export function updateField(fieldKey, field, newValue) {
     return (dispatch, getState) => {
@@ -67,6 +68,21 @@ export function deleteTag(fieldKey, index) {
                 data: dataClone,
                 delete: removed
             }
+        })
+    }
+}
+
+export function updateTag(tagKey, field, newValue) {
+    return (dispatch, getState) => {
+        const { tagRepo } = getState().field
+        let tagInfo = {
+            ...tagRepo[tagKey],
+            [field]: newValue,
+        }
+
+        dispatch({
+            type: UPDATE_TAG,
+            payload: tagInfo
         })
     }
 }
@@ -234,6 +250,8 @@ export default (state = initialState, action) => {
             return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
         case DELETE_TAG:
             return { ...state, tagRepo: action.payload }
+        case UPDATE_TAG:
+            return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
         default:
             return state;
     }

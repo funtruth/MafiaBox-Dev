@@ -105,6 +105,7 @@ class AppWrapper extends React.Component{
                         this.props.showDropdownByKey(dropdownType.editTag, {
                             fieldKey: e.target.getAttribute('field-key'),
                             indexKey: e.target.getAttribute('index-key'),
+                            tagKey: e.target.getAttribute('tag-key'),
                             pageX: e.pageX - e.offsetX - 8,
                             pageY: e.pageY - e.offsetY + 28,
                         })
