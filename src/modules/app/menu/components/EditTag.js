@@ -24,6 +24,7 @@ class EditTag extends React.Component{
             left: pageX,
         }
 
+        if (!fieldInfo) return null
         return (
             <div className="drop-down-menu" style={menuStyle}>
                 <input
