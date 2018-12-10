@@ -187,7 +187,7 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
 export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_FIELD:
-            return { ...state, fieldRepo: action.payload }
+            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
         default:
             return state;
     }

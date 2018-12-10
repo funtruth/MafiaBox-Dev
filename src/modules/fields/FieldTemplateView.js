@@ -26,7 +26,7 @@ class FieldTemplateView extends React.Component {
         
         switch(fieldInfo.fieldType) {
             case fieldType.text:
-                return <InputField {...props} inputType="text"/>
+                return null
             case fieldType.number:
                 return <InputField {...props} inputType="number"/>
             case fieldType.code:
@@ -48,17 +48,25 @@ class FieldTemplateView extends React.Component {
             fieldRepo, updateField } = this.props
 
         return (
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {pageInfo.map((item, index) => (
-                    <div>
+                    <div key={item}>
                         <TemplateTitle
                             fieldInfo={fieldRepo[item]}
                             updateField={updateField}
                         />
                         {this._renderItem(item)}
+                        <div style={{
+                            height: 0.75,
+                            backgroundColor: '#666',
+                            marginTop: 8,
+                            marginBottom: 8,
+                        }}/>
                     </div>
                 ))}
-                
+                <div className="add-button">
+                    Add Field
+                </div>
             </div>
         )
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { fieldTypeToTitle } from '../defaults'
 
 class TemplateTitle extends React.Component{
     _onChange = e => {
@@ -8,17 +9,20 @@ class TemplateTitle extends React.Component{
 
     render() {
         const { fieldInfo } = this.props
+        const { fieldTitle, fieldType } = fieldInfo
 
         return (
-            <div>
+            <div className="row">
                 <input
                     className="field-title-input"
-                    value={fieldInfo.title || ''}
+                    value={fieldTitle || ''}
                     onChange={this._onChange}
                     placeholder="Untitled"
                     type="text"
-                    autoFocus={true}
                 />
+                <div
+                    className="tag-button"
+                >{fieldTypeToTitle[fieldType]}</div>
             </div>
         )
     }

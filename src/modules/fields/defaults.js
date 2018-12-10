@@ -17,6 +17,16 @@ export const fieldType = {
     phaseTrigger: 'fieldType/phaseTrigger',
 }
 
+export const fieldTypeToTitle = {
+    [fieldType.text]: 'Text',
+    [fieldType.number]: 'Number',
+    [fieldType.code]: 'Code',
+    [fieldType.logic]: 'Logic',
+    [fieldType.tag]: 'Tag',
+    [fieldType.expertTag]: 'Expert Tag',
+    [fieldType.phaseTrigger]: 'Phase Trigger',
+}
+
 export const fieldIcon = {
     text: 'ion-md-list',
     tag: 'ion-ios-pricetag',

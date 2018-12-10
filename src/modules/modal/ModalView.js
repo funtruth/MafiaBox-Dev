@@ -1,6 +1,5 @@
 import React from 'react'
 import './modals.css'
-import '../roles/roles.css'
 import { connect } from 'react-redux'
 
 import { showModalByKey } from './ModalReducer'

@@ -9,7 +9,7 @@ import LandingView from './LandingView'
 import LibraryView from '../board/views/LibraryView'
 import StoryView from '../board/views/StoryView';
 import FlowView from '../board/views/FlowView'
-import RoleCardView from '../roleCard/RoleCardView';
+import WindowTemplateView from '../template/WindowTemplateVIew'
 import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
 import EventView from '../board/views/EventView'
@@ -26,7 +26,7 @@ class HomeView extends React.Component{
                         <Route exact path="/library" component={LibraryView}/>
                         <Route exact path="/board" component={StoryView}/>
                         <Route exact path="/board/:pageKey" component={WindowPageView}/>
-                        <Route exact path="/defaults" component={RoleCardView}/>
+                        <Route exact path="/defaults/:fieldMapKey" component={WindowTemplateView}/>
                         <Route exact path="/flow" component={FlowView}/>
                         <Route exact path="/flow/:pageKey" component={WindowPageView}/>
                         <Route exact path="/events" component={EventView}/>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { deleteRole } from '../../roles/RoleReducer'
 import { showModalByKey } from '../ModalReducer'
 import { navigate } from '../../navigation/NavReducer'
 
@@ -47,7 +46,6 @@ export default connect(
         modalParams: state.modal.modalParams,
     }),
     {
-        deleteRole,
         showModalByKey,
         navigate,
     }
