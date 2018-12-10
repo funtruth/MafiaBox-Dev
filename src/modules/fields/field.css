@@ -5,7 +5,7 @@
 
 .field-title-input {
     border: none;
-    background-color: rgba(54, 57, 64);
+    background-color: transparent;
     padding: 4px 7px;
     font: 600 18px Arial;
     color: #d6d6d7;

@@ -8,11 +8,13 @@ import { initFieldMap, initFieldRepo } from './defaults'
 const initialState = {
     fieldMap: initFieldMap,
     fieldRepo: initFieldRepo,
-
+    tagRepo: {},
     defaultLogic,
 }
 
 const UPDATE_FIELD = 'field/update-field'
+const ADD_TAG = 'field/add-tag'
+const DELETE_TAG = 'field/delete-tag'
 
 export function updateField(fieldKey, field, newValue) {
     return (dispatch, getState) => {
@@ -25,6 +27,46 @@ export function updateField(fieldKey, field, newValue) {
         dispatch({
             type: UPDATE_FIELD,
             payload: fieldInfo
+        })
+    }
+}
+
+export function addTag(fieldKey) {
+    return (dispatch, getState) => {
+        const { fieldRepo, tagRepo } = getState().field
+
+        let dataClone = Array.from(fieldRepo[fieldKey].data || [])
+        
+        let newItemKey = helpers.genUID('tag')
+        while(tagRepo[newItemKey]) {
+            newItemKey = helpers.genUID('tag')
+        }
+
+        dataClone.push({ key: newItemKey })
+        dispatch(updateField(fieldKey, 'data', dataClone))
+
+        dispatch({
+            type: ADD_TAG,
+            payload: {
+                tagKey: newItemKey,
+            }
+        })
+    }
+}
+
+export function deleteTag(fieldKey, index) {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().field
+
+        let dataClone = Array.from(fieldRepo[fieldKey].data || [])
+        const removed = dataClone.splice(index, 1)
+
+        dispatch({
+            type: DELETE_TAG,
+            payload: {
+                data: dataClone,
+                delete: removed
+            }
         })
     }
 }
@@ -188,6 +230,10 @@ export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_FIELD:
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
+        case ADD_TAG:
+            return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
+        case DELETE_TAG:
+            return { ...state, tagRepo: action.payload }
         default:
             return state;
     }

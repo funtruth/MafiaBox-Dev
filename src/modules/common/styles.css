@@ -23,3 +23,8 @@
     align-self: center;
     margin-right: 8px;
 }
+
+.highlight:hover {
+    background-color: hsla(0,0%,100%,.1);
+    cursor: pointer;
+}

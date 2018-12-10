@@ -7,7 +7,7 @@ import { fieldType } from './defaults'
 import { updateField } from './FieldReducer'
 
 import InputField from './templates/InputField'
-import TagField from './templates/TagField';
+import TemplateTag from './templates/TemplateTag';
 import PhaseTriggerField from './templates/PhaseTriggerField';
 import CodeField from './templates/CodeField'
 import LogicBoard from './templates/LogicBoard';
@@ -34,7 +34,7 @@ class FieldTemplateView extends React.Component {
             case fieldType.logic:
                 return <LogicBoard {...props}/>
             case fieldType.tag:
-                return <TagField {...props}/>
+                return <TemplateTag {...props}/>
             case fieldType.phaseTrigger:
                 return <PhaseTriggerField {...props}/>
             default:
@@ -51,11 +51,13 @@ class FieldTemplateView extends React.Component {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {pageInfo.map((item, index) => (
                     <div key={item}>
-                        <TemplateTitle
-                            fieldInfo={fieldRepo[item]}
-                            updateField={updateField}
-                        />
-                        {this._renderItem(item)}
+                        <div className="highlight">
+                            <TemplateTitle
+                                fieldInfo={fieldRepo[item]}
+                                updateField={updateField}
+                            />
+                            {this._renderItem(item)}
+                        </div>
                         <div style={{
                             height: 0.75,
                             backgroundColor: '#666',

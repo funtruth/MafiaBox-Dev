@@ -8,4 +8,6 @@ export const dropdownType = {
 
     showLogic: 'dropdownType/show-logic',
     deleteLogic: 'dropdownType/delete-logic',
+
+    editTag: 'dropdownType/edit-tag',
 }
