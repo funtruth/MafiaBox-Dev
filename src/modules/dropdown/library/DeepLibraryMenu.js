@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../../page/PageReducer'
+import { updatePage } from '../../page/PageReducer'
 
 class DeepLibraryMenu extends React.Component{
     _onMouseEnter = (key, disabled, e) => {

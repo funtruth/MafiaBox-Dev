@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
-import { dropdownType } from '../../app/menu/types'
+import { dropdownType } from '../../dropdown/types'
 import { logicTypeInfo, defaultLogic } from './types'
 
 import * as helpers from '../../common/helpers'

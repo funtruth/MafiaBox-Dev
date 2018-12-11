@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
-import { updatePage } from '../../../page/PageReducer'
+import { updatePage } from '../../page/PageReducer'
 
 class LibraryMenu extends React.Component{
     _onMouseEnter = (key, e) => {

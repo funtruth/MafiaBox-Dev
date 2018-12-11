@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { addTag } from '../FieldReducer'
-import { dropdownType } from '../../app/menu/types';
+import { dropdownType } from '../../dropdown/types';
 
 const ADD_NEW_TAG = 'add-new-tag'
 

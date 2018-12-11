@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { deleteItem, deleteLogicTree } from '../../../fields/FieldReducer'
+import { deleteItem, deleteLogicTree } from '../../fields/FieldReducer'
 
 class LogicDelete extends React.Component {
     _deleteItem = () => {

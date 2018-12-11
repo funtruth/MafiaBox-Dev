@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateTag, deleteTag } from '../../../fields/FieldReducer'
+import { updateTag, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
     _onDelete = () => {

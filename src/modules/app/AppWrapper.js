@@ -5,9 +5,9 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic } from '../fields/FieldReducer'
 import { showModalByKey } from '../modal/ModalReducer'
-import { showDropdownByKey } from './menu/DropdownReducer'
+import { showDropdownByKey } from '../dropdown/DropdownReducer'
 
-import { dropdownType } from './menu/types'
+import { dropdownType } from '../dropdown/types'
 
 class AppWrapper extends React.Component{
     componentDidMount() {

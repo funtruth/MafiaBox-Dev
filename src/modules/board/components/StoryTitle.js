@@ -1,5 +1,5 @@
 import React from 'react'
-import { dropdownType } from '../../app/menu/types'
+import { dropdownType } from '../../dropdown/types'
 
 class StoryTitle extends React.Component{
     render() {

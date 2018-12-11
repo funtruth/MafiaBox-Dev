@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../../page/PageReducer'
+import { updatePage } from '../../page/PageReducer'
 
 class OtherValues extends React.Component{
     _renderItem = (item) => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fieldIcon } from '../defaults'
 import SeeCodeButton from '../../page/components/SeeCodeButton';
 
-import { dropdownType } from '../../app/menu/types'
+import { dropdownType } from '../../dropdown/types'
 import { phaseTriggerCode, phaseTriggerTitle } from '../actions'
 
 import CodeBlock from '../../page/components/CodeBlock';

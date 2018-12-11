@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { addTag } from '../../../fields/FieldReducer'
+import { addTag } from '../../fields/FieldReducer'
 
 class CreateTag extends React.Component{
     constructor(props){

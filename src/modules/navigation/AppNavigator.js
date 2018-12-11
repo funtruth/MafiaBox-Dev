@@ -11,7 +11,7 @@ import { store, persistor } from '../../redux/store'
 import Shell from './Shell'
 import AppWrapper from '../app/AppWrapper'
 import HomeView from '../home/HomeView'
-import DropdownView from '../app/menu/DropdownView'
+import DropdownView from '../dropdown/DropdownView'
 import ModalView from '../modal/ModalView'
 
 export default class AppNavigator extends React.Component {

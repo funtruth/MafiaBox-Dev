@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../../page/PageReducer'
-import { addItemBelowOf, deleteItem } from '../../../fields/FieldReducer'
+import { updatePage } from '../../page/PageReducer'
+import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
-import { logicType, logicTypeInfo } from '../../../fields/logic/types'
+import { logicType, logicTypeInfo } from '../../fields/logic/types'
 
 class LogicMenu extends React.Component{
     _renderItem = (item) => {
