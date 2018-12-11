@@ -142,6 +142,18 @@ class AppWrapper extends React.Component{
                         this.props.showDropdownByKey()
                     }
                     break
+                case dropdownType.pickFieldType:
+                    if (!this.props.dropdownKeys.length ||
+                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                            this.props.showDropdownByKey(dropdownType.pickFieldType, {
+                                fieldKey: e.target.getAttribute('field-key'),
+                                pageX: e.pageX - e.offsetX - 8,
+                                pageY: e.pageY - e.offsetY + 28,
+                            })
+                    } else {
+                        this.props.showDropdownByKey()
+                    }
+                    break
                 default:
             }
         } else if (e.target.matches('.menu-voidclick')) {

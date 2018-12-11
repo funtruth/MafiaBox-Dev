@@ -11,4 +11,5 @@ export const dropdownType = {
 
     editTag: 'dropdownType/edit-tag',
     createSomething: 'dropdownType/create-something',
+    pickFieldType: 'dropdownType/pick-field-type',
 }
