@@ -2,11 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateTag } from '../../../fields/FieldReducer'
+import { updateTag, deleteTag } from '../../../fields/FieldReducer'
 
 class EditTag extends React.Component{
     _onDelete = () => {
+        const { dropdownParams } = this.props
+        const { indexKey, fieldKey } = dropdownParams
 
+        this.props.deleteTag(fieldKey, indexKey)
+        this.props.showDropdownByKey()
     }
 
     _onChange = e => {
@@ -27,14 +31,14 @@ class EditTag extends React.Component{
         const { dropdownParams, tagRepo } = this.props
         const { tagKey, pageX, pageY } = dropdownParams
 
+        if (!tagKey) return null
         const fieldInfo = tagRepo[tagKey]
+        if (!fieldInfo) return null
 
         let menuStyle = {
             top: pageY,
             left: pageX,
         }
-
-        if (!fieldInfo) return null
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
@@ -70,5 +74,6 @@ export default connect(
     {
         showDropdownByKey,
         updateTag,
+        deleteTag,
     }
 )(EditTag)

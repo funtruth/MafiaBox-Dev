@@ -2,20 +2,37 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateTag } from '../../../fields/FieldReducer'
+import { addTag } from '../../../fields/FieldReducer'
 
 class CreateTag extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            value: ''
+        }
+    }
+
     _onChange = e => {
-        const { tagKey } = this.props.dropdownParams
-        this.props.updateTag(tagKey, 'title', e.target.value)
+        this.setState({
+            value: e.target.value
+        })
     }
 
     _onKeyDown = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                this.props.showDropdownByKey()
+                this._confirm()
                 break
             default:
+        }
+    }
+
+    _confirm = () => {
+        if (true) {
+            this.props.addTag(this.props.dropdownParams.fieldKey, this.state.value)
+            this.props.showDropdownByKey()
+        } else {
+
         }
     }
 
@@ -32,7 +49,7 @@ class CreateTag extends React.Component{
             <div className="drop-down-menu" style={menuStyle}>
                 <input
                     className="tag-input menu-voidclick"
-                    value={''}
+                    value={this.state.value}
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}
                     placeholder="Untitled"
@@ -40,9 +57,9 @@ class CreateTag extends React.Component{
                     autoFocus
                 />
                 <div className="drop-down-menu-separator"/>
-                <div className="drop-down-menu-option" onClick={this._onDelete}>
-                    <i className={`drop-down-menu-icon ion-ios-trash`}></i>
-                    Submit
+                <div className="drop-down-menu-option" onClick={this._confirm}>
+                    <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
+                    Create
                 </div>
             </div>
         )
@@ -57,6 +74,6 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        updateTag,
+        addTag,
     }
 )(CreateTag)

@@ -4,8 +4,6 @@ import { updatePage } from '../page/PageReducer'
 
 import { defaultLogic } from './logic/types'
 import { initFieldMap, initFieldRepo } from './defaults'
-import { showDropdownByKey } from '../app/menu/DropdownReducer'
-import { dropdownType } from '../app/menu/types';
 
 const initialState = {
     fieldMap: initFieldMap,
@@ -34,7 +32,7 @@ export function updateField(fieldKey, field, newValue) {
     }
 }
 
-export function addTag(fieldKey) {
+export function addTag(fieldKey, text) {
     return (dispatch, getState) => {
         const { fieldRepo, tagRepo } = getState().field
 
@@ -45,33 +43,39 @@ export function addTag(fieldKey) {
             newItemKey = helpers.genUID('tag')
         }
 
-        dataClone.push({ key: newItemKey })
+        dataClone.push(newItemKey)
+        
         dispatch(updateField(fieldKey, 'data', dataClone))
 
         dispatch({
             type: ADD_TAG,
             payload: {
                 tagKey: newItemKey,
+                title: text
             }
         })
-
-        dispatch(showDropdownByKey(dropdownType.editTag, { tagKey: newItemKey }))
     }
 }
 
 export function deleteTag(fieldKey, index) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo, tagRepo } = getState().field
 
         let dataClone = Array.from(fieldRepo[fieldKey].data || [])
+        console.log('first data clone', dataClone)
         const removed = dataClone.splice(index, 1)
+        console.log('results of splice', dataClone, removed)
 
+        let tagRepoClone = {}
+        Object.assign(tagRepoClone, tagRepo)
+        delete tagRepoClone[removed]
+
+        dispatch(updateField(fieldKey, 'data', dataClone))
+
+        console.log('tagRepo clone', tagRepoClone)
         dispatch({
             type: DELETE_TAG,
-            payload: {
-                data: dataClone,
-                delete: removed
-            }
+            payload: tagRepoClone,
         })
     }
 }
