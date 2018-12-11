@@ -26,7 +26,7 @@ class DeepestLibraryMenu extends React.Component{
                 className="drop-down-menu-option"
                 onClick={this._onClick.bind(this, item)}
             >
-                {pageRepo[item].title}
+                {pageRepo[item].title || 'Untitled'}
             </div>
         )
     }

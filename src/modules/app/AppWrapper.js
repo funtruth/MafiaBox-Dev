@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic } from '../fields/FieldReducer'
+import { showModalByKey } from '../modal/ModalReducer'
 import { showDropdownByKey } from './menu/DropdownReducer'
 
 import { dropdownType } from './menu/types'
@@ -12,16 +13,31 @@ class AppWrapper extends React.Component{
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
         window.addEventListener('scroll', this._handleScroll, true)
+        window.addEventListener('keyup', this._onKeyPress)
     }
 
     componentWillUnmount() {
         window.removeEventListener('click', this._handleClick)
         window.removeEventListener('scroll', this._handleScroll, false)
+        window.removeEventListener('keyup', this._onKeyPress)
     }
 
     _handleScroll = () => {
         if (this.props.dropdownKeys.length) {
             this.props.showDropdownByKey()
+        }
+    }
+
+    _onKeyPress = e => {
+        switch(e.key) {
+            case 'Enter':
+                return
+            case 'Escape':
+                if (this.props.dropdownKeys.length) {
+                    return this.props.showDropdownByKey()
+                }
+                return this.props.showModalByKey()
+            default:
         }
     }
 
@@ -206,6 +222,7 @@ export default connect(
         movePageWithinMap,
         movePageToOtherMap,
         showDropdownByKey,
+        showModalByKey,
         moveLogic,
     }
 )(AppWrapper)

@@ -52,7 +52,7 @@ class DeepLibraryMenu extends React.Component{
                 onMouseOver={this._onMouseEnter.bind(this, item.key, disabled)}
                 style={itemStyle}
             >
-                {item.title}
+                {item.title || 'Untitled'}
                 {showMore && <i
                     className="ion-ios-play"
                     style={{ marginLeft: 'auto' }}

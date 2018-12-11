@@ -14,24 +14,6 @@ import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
 class ModalView extends React.Component {
-    componentDidMount() {
-        window.addEventListener('keyup', this._onKeyPress)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keyup', this._onKeyPress)
-    }
-
-    _onKeyPress = e => {
-        switch(e.key) {
-            case 'Enter':
-                return
-            case 'Escape':
-                return this.props.showModalByKey()
-            default:
-        }
-    }
-
     _renderModal(key) {
         switch(key) {
             case modalType.deleteRole:

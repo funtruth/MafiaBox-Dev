@@ -1,15 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { fieldIcon } from '../defaults'
 
-class TagPickField extends React.Component{
-    _renderItem = (item) => {
-        const { value, field } = this.props
-        const active = field && item.key === value
+class TagField extends React.Component{
+    _renderItem = (tagKey) => {
+        const { value, field, tagRepo } = this.props
+        const active = field && tagKey === value
         const style = {
             backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
         }
+        
+        const item = tagRepo[tagKey]
+
         return (
-            <div key={item.key} className="property-button" style={style} onClick={this._onClick.bind(this, item.key)}>
+            <div key={tagKey} className="property-button" style={style} onClick={this._onClick.bind(this, tagKey)}>
                 {item.title}
             </div>
         )
@@ -21,7 +25,8 @@ class TagPickField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, field, data } = this.props
+        const { fieldInfo, field, data,
+            tagRepo } = this.props
         if (!data) return null
         
         return (
@@ -38,4 +43,11 @@ class TagPickField extends React.Component{
     }
 }
 
-export default TagPickField
+export default connect(
+    state => ({
+        tagRepo: state.field.tagRepo,
+    }),
+    {
+        
+    }
+)(TagField)
