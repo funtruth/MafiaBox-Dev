@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
-import { moveLogic } from '../fields/FieldReducer'
+import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { showDropdownByKey } from '../dropdown/DropdownReducer'
 
@@ -98,6 +98,40 @@ class AppWrapper extends React.Component{
                     destination.index,
                 )
             }
+        } else if (source.droppableId.indexOf('TEMPLATE') !== -1) {
+            if (source.droppableId === destination.droppableId) {
+                let sources = source.droppableId.split('-')
+                let fieldMapKey = sources[1]
+
+                this.props.moveField(
+                    fieldMapKey,
+                    source.index,
+                    destination.index,
+                )
+            }
+        } else if (source.droppableId.indexOf('TAG') !== -1) {
+            if (source.droppableId === destination.droppableId) {
+                let sources = source.droppableId.split('/')
+                let fieldKey = sources[1]
+
+                this.props.moveTagWithinField(
+                    fieldKey,
+                    source.index,
+                    destination.index,
+                )
+            } else {
+                let sources = source.droppableId.split('/')
+                let dests = destination.droppableId.split('/')
+                let startFieldKey = sources[1]
+                let endFieldKey = dests[1]
+
+                this.props.moveTagToOtherField(
+                    startFieldKey,
+                    endFieldKey,
+                    source.index,
+                    destination.index
+                )
+            }
         } else {
             if (source.droppableId === destination.droppableId) {
                 this.props.movePageWithinMap(
@@ -138,5 +172,8 @@ export default connect(
         showDropdownByKey,
         showModalByKey,
         moveLogic,
+        moveField,
+        moveTagToOtherField,
+        moveTagWithinField,
     }
 )(AppWrapper)

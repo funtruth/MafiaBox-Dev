@@ -1,14 +1,15 @@
 import React from 'react'
 import './field.css'
 import { connect } from 'react-redux';
+import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 import { fieldType } from './defaults'
+import { dropdownType } from '../dropdown/types';
 
 import { updateField } from './FieldReducer'
 
-import TemplateTagView from './templates/TemplateTagView';
+import TagsView from './templates/TagsView';
 import TemplateTitle from './templates/TemplateTitle';
-import { dropdownType } from '../dropdown/types';
 
 class FieldTemplateView extends React.Component {
     _renderItem = (fieldKey) => {
@@ -22,18 +23,10 @@ class FieldTemplateView extends React.Component {
         }
         
         switch(fieldInfo.fieldType) {
-            case fieldType.text:
-                return null
-            case fieldType.number:
-                return null
-            case fieldType.code:
-                return null
-            case fieldType.logic:
-                return null
             case fieldType.tag:
-                return <TemplateTagView {...props}/>
-            case fieldType.phaseTrigger:
-                return null
+                return <TagsView {...props} add="Add Tag"/>
+            case fieldType.property:
+                return <TagsView {...props} add="Add Property"/>
             default:
                 return null
         }
@@ -43,21 +36,39 @@ class FieldTemplateView extends React.Component {
     render() {
         const { pageInfo, fieldMapKey,
             fieldRepo, updateField } = this.props
-
+            
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {pageInfo.map((item, index) => (
-                    <div key={item}>
-                        <div className="highlight" style={{ padding: '2px 6px', borderRadius: 2 }}>
-                            <TemplateTitle
-                                fieldInfo={fieldRepo[item]}
-                                updateField={updateField}
-                            />
-                            {this._renderItem(item)}
+                <Droppable droppableId={`TEMPLATE-${fieldMapKey}`} type="TEMPLATE">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                        >
+                            {pageInfo.map((item, index) => (
+                                <Draggable key={item} draggableId={item} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <div className="highlight" style={{ padding: '2px 6px', borderRadius: 2 }}>
+                                                <TemplateTitle
+                                                    fieldInfo={fieldRepo[item]}
+                                                    updateField={updateField}
+                                                />
+                                                {this._renderItem(item)}
+                                            </div>
+                                            <div className="page-separator"/>
+                                        </div>
+                                    )}
+                                        
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
                         </div>
-                        <div className="page-separator"/>
-                    </div>
-                ))}
+                    )}
+                </Droppable>
                 <div
                     className="add-button menu-onclick"
                     menu-type={dropdownType.addTemplateField}

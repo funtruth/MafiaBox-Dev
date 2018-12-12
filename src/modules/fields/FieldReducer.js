@@ -15,9 +15,13 @@ const initialState = {
 
 const ADD_FIELD = 'field/add-field'
 const UPDATE_FIELD = 'field/update-field'
+const MOVE_FIELD = 'field/move-field'
+
 const ADD_TAG = 'field/add-tag'
 const DELETE_TAG = 'field/delete-tag'
 const UPDATE_TAG = 'field/update-tag'
+const MOVE_TAG_WITHIN_FIELD = 'field/move-tag-within-field'
+const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
 export function addField(fieldMapKey, text) {
     return (dispatch, getState) => {
@@ -45,6 +49,24 @@ export function addField(fieldMapKey, text) {
             payload: {
                 fieldMap: fieldMapClone,
                 fieldRepo: fieldRepoClone,
+            }
+        })
+    }
+}
+
+export function moveField(fieldMapKey, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { fieldMap } = getState().field
+        
+        let dataClone = Array.from(fieldMap[fieldMapKey])
+        let removed = dataClone.splice(startIndex, 1)
+        dataClone.splice(endIndex, 0, removed)
+
+        dispatch({
+            type: MOVE_FIELD,
+            payload: {
+                key: fieldMapKey,
+                data: dataClone
             }
         })
     }
@@ -121,6 +143,50 @@ export function updateTag(tagKey, field, newValue) {
         dispatch({
             type: UPDATE_TAG,
             payload: tagInfo
+        })
+    }
+}
+
+export function moveTagWithinField(fieldKey, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().field
+        
+        let dataClone = Array.from(fieldRepo[fieldKey].data)
+        let [removed] = dataClone.splice(startIndex, 1)
+        dataClone.splice(endIndex, 0, removed)
+
+        dispatch({
+            type: MOVE_TAG_WITHIN_FIELD,
+            payload: {
+                key: fieldKey,
+                data: {
+                    ...fieldRepo[fieldKey],
+                    data: dataClone
+                },
+            }
+        })
+    }
+}
+
+export function moveTagToOtherField(startFieldKey, endFieldKey, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().field
+
+        let fieldRepoClone = {}
+        Object.assign(fieldRepoClone, fieldRepo)
+
+        let startFieldData = Array.from(fieldRepoClone[startFieldKey].data)
+        let endFieldData = Array.from(fieldRepoClone[endFieldKey].data)
+        
+        let [removed] = startFieldData.splice(startIndex, 1)
+        endFieldData.splice(endIndex, 0, removed)
+
+        fieldRepoClone[startFieldKey].data = startFieldData
+        fieldRepoClone[endFieldKey].data = endFieldData
+
+        dispatch({
+            type: MOVE_TAG_TO_OTHER_FIELD,
+            payload: fieldRepoClone
         })
     }
 }
@@ -286,12 +352,18 @@ export default (state = initialState, action) => {
             return { ...state, fieldMap: action.payload.fieldMap, fieldRepo: action.payload.fieldRepo }
         case UPDATE_FIELD:
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
+        case MOVE_FIELD:
+            return { ...state, fieldMap: { ...state.fieldMap, [action.payload.key]: action.payload.data }}
         case ADD_TAG:
             return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
         case DELETE_TAG:
             return { ...state, tagRepo: action.payload }
         case UPDATE_TAG:
             return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
+        case MOVE_TAG_WITHIN_FIELD:
+            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.key]: action.payload.data }}
+        case MOVE_TAG_TO_OTHER_FIELD:
+            return { ...state, fieldRepo: action.payload }
         default:
             return state;
     }

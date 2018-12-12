@@ -13,6 +13,7 @@ export const fieldType = {
     code: 'fieldType/code',
     logic: 'fieldType/logic',
     tag: 'fieldType/tag',
+    property: 'fieldType/property',
     expertTag: 'fieldType/expertTag',
     phaseTrigger: 'fieldType/phaseTrigger',
 }
@@ -23,6 +24,7 @@ export const fieldTypeToIcon = {
     [fieldType.code]: 'ion-md-code',
     [fieldType.logic]: 'ion-md-options',
     [fieldType.tag]: 'ion-ios-pricetag',
+    [fieldType.property]: 'ion-md-switch',
     [fieldType.expertTag]: 'ion-ios-pricetags',
     [fieldType.phaseTrigger]: 'ion-md-fastforward',
 }
@@ -33,6 +35,7 @@ export const fieldTypeToTitle = {
     [fieldType.code]: 'Code',
     [fieldType.logic]: 'Logic',
     [fieldType.tag]: 'Tag',
+    [fieldType.property]: 'Properties',
     [fieldType.expertTag]: 'Expert Tag',
     [fieldType.phaseTrigger]: 'Phase Trigger',
 }

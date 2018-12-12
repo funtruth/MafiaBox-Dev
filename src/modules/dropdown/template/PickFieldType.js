@@ -60,6 +60,7 @@ class PickFieldType extends React.Component{
             fieldType.number,
             fieldType.logic,
             fieldType.tag,
+            fieldType.property,
         ]
 
         return (
