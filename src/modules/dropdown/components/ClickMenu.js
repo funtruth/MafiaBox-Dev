@@ -9,15 +9,17 @@ class ClickMenu extends React.Component{
     _onDelete = () => {
         this.props.hideMenu()
         this.props.showModalByKey(modalType.deleteStory, {
-            storyIndex: this.props.storyIndex,
+            fieldKey: this.props.fieldKey,
         })
     }
 
     render() {
         const { dropdownParams } = this.props
+        const { pageX, pageY } = dropdownParams
+        
         let menuStyle = {
-            top: dropdownParams.pageY + 12,
-            left: dropdownParams.pageX - 84,
+            top: pageY,
+            left: pageX,
         }
 
         return (

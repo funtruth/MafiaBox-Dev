@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { updateField } from '../fields/FieldReducer'
 
 import PageHeader from './components/PageHeader';
-import PageAbstract from './components/PageAbstract'
 import FieldTemplateView from '../fields/FieldTemplateView';
 
 class TemplateView extends React.Component {

@@ -5,12 +5,13 @@ import { fieldIcon } from '../defaults'
 class TagField extends React.Component{
     _renderItem = (tagKey) => {
         const { value, field, tagRepo } = this.props
+        const item = tagRepo[tagKey]
+        
         const active = field && tagKey === value
         const style = {
             backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
         }
         
-        const item = tagRepo[tagKey]
 
         return (
             <div key={tagKey} className="property-button" style={style} onClick={this._onClick.bind(this, tagKey)}>
@@ -25,8 +26,7 @@ class TagField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, field, data,
-            tagRepo } = this.props
+        const { fieldInfo, field, data } = this.props
         if (!data) return null
         
         return (

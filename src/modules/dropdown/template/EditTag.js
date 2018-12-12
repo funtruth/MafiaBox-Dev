@@ -53,10 +53,6 @@ class EditTag extends React.Component{
                 />
                 <div className="drop-down-menu-separator"/>
                 <div className="drop-down-menu-option" onClick={this._onDelete}>
-                    <i className={`drop-down-menu-icon ion-md-return-left`}></i>
-                    Move to
-                </div>
-                <div className="drop-down-menu-option" onClick={this._onDelete}>
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete
                 </div>

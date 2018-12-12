@@ -6,11 +6,7 @@ import { fieldType } from './defaults'
 
 import { updateField } from './FieldReducer'
 
-import InputField from './templates/InputField'
 import TemplateTagView from './templates/TemplateTagView';
-import PhaseTriggerField from './templates/PhaseTriggerField';
-import CodeField from './templates/CodeField'
-import LogicBoard from './templates/LogicBoard';
 import TemplateTitle from './templates/TemplateTitle';
 
 class FieldTemplateView extends React.Component {
@@ -28,15 +24,15 @@ class FieldTemplateView extends React.Component {
             case fieldType.text:
                 return null
             case fieldType.number:
-                return <InputField {...props} inputType="number"/>
+                return null
             case fieldType.code:
-                return <CodeField {...props}/>
+                return null
             case fieldType.logic:
-                return <LogicBoard {...props}/>
+                return null
             case fieldType.tag:
                 return <TemplateTagView {...props}/>
             case fieldType.phaseTrigger:
-                return <PhaseTriggerField {...props}/>
+                return null
             default:
                 return null
         }
@@ -59,7 +55,7 @@ class FieldTemplateView extends React.Component {
                             {this._renderItem(item)}
                         </div>
                         <div style={{
-                            height: 0.75,
+                            height: 1,
                             backgroundColor: '#666',
                             marginTop: 8,
                             marginBottom: 8,

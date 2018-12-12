@@ -44,109 +44,24 @@ class AppWrapper extends React.Component{
     _handleClick = (e) => {
         if (e.target.matches('.menu-onclick')) {
             let menuClick = e.target.getAttribute('menu-type')
+
             switch(menuClick) {
                 case dropdownType.storyShowMore:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('story-index') !== this.props.dropdownParams.storyIndex) {
-                        this.props.showDropdownByKey(dropdownType.storyShowMore, {
-                            storyIndex: e.target.getAttribute('story-index'),
-                            pageX: e.pageX,
-                            pageY: e.pageY,
-                        })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
-                case dropdownType.showOtherOptions:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.showOtherOptions, {
-                            fieldKey: e.target.getAttribute('field-key'),
-                            pageKey: e.target.getAttribute('page-key'),
-                            subfieldKey: e.target.getAttribute('subfield-key'),
-                            indexKey: e.target.getAttribute('index-key'),
-                            pageX: e.pageX - e.offsetX,
-                            pageY: e.pageY - e.offsetY + 28,
-                        })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
-                case dropdownType.showLibrary:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.showLibrary, {
-                            fieldKey: e.target.getAttribute('field-key'),
-                            pageKey: e.target.getAttribute('page-key'),
-                            subfieldKey: e.target.getAttribute('subfield-key'),
-                            indexKey: e.target.getAttribute('index-key'),
-                            pageX: e.pageX - e.offsetX,
-                            pageY: e.pageY - e.offsetY + 28,
-                        })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
-                case dropdownType.showLogic:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.showLogic, {
-                            fieldKey: e.target.getAttribute('field-key'),
-                            pageKey: e.target.getAttribute('page-key'),
-                            indexKey: e.target.getAttribute('index-key'),
-                            pageX: e.pageX - e.offsetX - 15,
-                            pageY: e.pageY - e.offsetY + 28,
-                        })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
                 case dropdownType.deleteLogic:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                        this.props.showDropdownByKey(dropdownType.deleteLogic, {
-                            fieldKey: e.target.getAttribute('field-key'),
-                            pageKey: e.target.getAttribute('page-key'),
-                            indexKey: e.target.getAttribute('index-key'),
-                            pageX: e.pageX - e.offsetX + 28,
-                            pageY: e.pageY - e.offsetY - 6,
-                        })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
+                case dropdownType.showOtherOptions:
+                case dropdownType.showLibrary:
+                case dropdownType.showLogic:
                 case dropdownType.editTag:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                            this.props.showDropdownByKey(dropdownType.editTag, {
-                                indexKey: e.target.getAttribute('index-key'),
-                                tagKey: e.target.getAttribute('tag-key'),
-                                fieldKey: e.target.getAttribute('field-key'),
-                                pageX: e.pageX - e.offsetX - 8,
-                                pageY: e.pageY - e.offsetY + 28,
-                            })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
                 case dropdownType.createSomething:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                            this.props.showDropdownByKey(dropdownType.createSomething, {
-                                tagKey: e.target.getAttribute('tag-key'),
-                                fieldKey: e.target.getAttribute('field-key'),
-                                pageX: e.pageX - e.offsetX - 8,
-                                pageY: e.pageY - e.offsetY + 28,
-                            })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
                 case dropdownType.pickFieldType:
                     if (!this.props.dropdownKeys.length ||
                         e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                            this.props.showDropdownByKey(dropdownType.pickFieldType, {
+                            this.props.showDropdownByKey(menuClick, {
+                                indexKey: e.target.getAttribute('index-key'),
+                                tagKey: e.target.getAttribute('tag-key'),
                                 fieldKey: e.target.getAttribute('field-key'),
+                                subfieldKey: e.target.getAttribute('subfield-key'),
+                                pageKey: e.target.getAttribute('page-key'),
                                 pageX: e.pageX - e.offsetX - 8,
                                 pageY: e.pageY - e.offsetY + 28,
                             })
@@ -195,7 +110,6 @@ class AppWrapper extends React.Component{
                     destination.index,
                 )
             }
-
         } else {
             if (source.droppableId === destination.droppableId) {
                 this.props.movePageWithinMap(
