@@ -7,7 +7,6 @@ import { modalType } from '../../modal/modalConfig'
 
 class ClickMenu extends React.Component{
     _onDelete = () => {
-        this.props.hideMenu()
         this.props.showModalByKey(modalType.deleteStory, {
             fieldKey: this.props.fieldKey,
         })

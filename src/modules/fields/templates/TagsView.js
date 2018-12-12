@@ -51,9 +51,10 @@ class TagsView extends React.Component{
             backgroundColor: 'hsla(0,0%,100%,.1)',
             color: '#969696',
             marginBottom: 6,
-            maxWidth: 100,
+            maxWidth: 130,
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
         }
 
         return (
@@ -64,6 +65,7 @@ class TagsView extends React.Component{
                 field-key={fieldInfo.fieldKey}
                 style={style}
             >
+                <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>
                 {add || "Add"}
             </div>
         )

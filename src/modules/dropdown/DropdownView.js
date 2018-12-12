@@ -6,13 +6,14 @@ import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
 import OtherValues from './components/OtherValues'
-import LogicMenu from './components/LogicMenu';
+import LogicMenu from './components/LogicMenu'
 import LogicDelete from './components/LogicDelete'
 
 import EditTag from './template/EditTag'
 import CreateSomething from './template/CreateSomething'
 import PickFieldType from './template/PickFieldType'
-import AddTemplateField from './template/AddTemplateField';
+import AddTemplateField from './template/AddTemplateField'
+import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import LibraryMenu from './library/LibraryMenu';
 import DeepLibraryMenu from './library/DeepLibraryMenu'
@@ -43,6 +44,8 @@ class DropdownView extends React.Component{
                 return <PickFieldType key={index}/>
             case dropdownType.addTemplateField:
                 return <AddTemplateField key={index}/>
+            case dropdownType.templateTitleOptions:
+                return <TemplateTitleOptions key={index}/>
             default:
                 return null
         }

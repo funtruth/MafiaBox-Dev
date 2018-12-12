@@ -1,5 +1,6 @@
 import * as helpers from '../common/helpers'
 import * as maptool from './logic/maptool'
+import _ from 'lodash'
 import { updatePage } from '../page/PageReducer'
 
 import { fieldType } from './defaults'
@@ -16,6 +17,7 @@ const initialState = {
 const ADD_FIELD = 'field/add-field'
 const UPDATE_FIELD = 'field/update-field'
 const MOVE_FIELD = 'field/move-field'
+const DELETE_FIELD = 'field/delete-field'
 
 const ADD_TAG = 'field/add-tag'
 const DELETE_TAG = 'field/delete-tag'
@@ -49,6 +51,38 @@ export function addField(fieldMapKey, text) {
             payload: {
                 fieldMap: fieldMapClone,
                 fieldRepo: fieldRepoClone,
+            }
+        })
+    }
+}
+
+export function deleteField(fieldMapKey, fieldKey) {
+    return (dispatch, getState) => {
+        const { fieldMap, fieldRepo, tagRepo } = getState().field
+
+        let fieldMapClone = {}
+        Object.assign(fieldMapClone, fieldMap)
+        let fieldRepoClone = {}
+        Object.assign(fieldRepoClone, fieldRepo)
+        let tagRepoClone = {}
+        Object.assign(tagRepoClone, tagRepo)
+
+        _.remove(fieldMapClone[fieldMapKey], i => i === fieldKey)
+
+        if (fieldRepo[fieldKey].data) {
+            for (var i=0; i<fieldRepo[fieldKey].data.length; i++) {
+                delete tagRepoClone[fieldRepo[fieldKey].data[i]]
+            }
+        }
+
+        delete fieldRepoClone[fieldKey]
+
+        dispatch({
+            type: DELETE_FIELD,
+            payload: {
+                fieldMap: fieldMapClone,
+                fieldRepo: fieldRepoClone,
+                tagRepo: tagRepoClone,
             }
         })
     }
@@ -354,6 +388,9 @@ export default (state = initialState, action) => {
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
         case MOVE_FIELD:
             return { ...state, fieldMap: { ...state.fieldMap, [action.payload.key]: action.payload.data }}
+        case DELETE_FIELD:
+            return { ...state, ...action.payload }
+
         case ADD_TAG:
             return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
         case DELETE_TAG:

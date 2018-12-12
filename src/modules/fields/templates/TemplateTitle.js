@@ -9,11 +9,11 @@ class TemplateTitle extends React.Component{
     }
 
     render() {
-        const { fieldInfo } = this.props
+        const { fieldInfo, fieldMapKey } = this.props
         const { fieldKey, fieldTitle, fieldType } = fieldInfo
 
         return (
-            <div className="row">
+            <div className="row" style={{ alignItems: 'center' }}>
                 <div
                     className="tag-button menu-onclick"
                     menu-type={dropdownType.pickFieldType}
@@ -27,6 +27,15 @@ class TemplateTitle extends React.Component{
                     type="text"
                 >
                 </input>
+                <i className="story-option ion-ios-more menu-onclick"
+                    menu-type={dropdownType.templateTitleOptions}
+                    field-key={fieldKey}
+                    page-key={fieldMapKey}
+                    style={{
+                        fontSize: 16,
+                        marginLeft: 'auto',
+                    }}>
+                </i>
             </div>
         )
     }
