@@ -93,7 +93,7 @@ export function moveField(fieldMapKey, startIndex, endIndex) {
         const { fieldMap } = getState().field
         
         let dataClone = Array.from(fieldMap[fieldMapKey])
-        let removed = dataClone.splice(startIndex, 1)
+        let [removed] = dataClone.splice(startIndex, 1)
         dataClone.splice(endIndex, 0, removed)
 
         dispatch({
@@ -151,7 +151,7 @@ export function deleteTag(fieldKey, index) {
         const { fieldRepo, tagRepo } = getState().field
 
         let dataClone = Array.from(fieldRepo[fieldKey].data || [])
-        const removed = dataClone.splice(index, 1)
+        const [removed] = dataClone.splice(index, 1)
 
         let tagRepoClone = {}
         Object.assign(tagRepoClone, tagRepo)
