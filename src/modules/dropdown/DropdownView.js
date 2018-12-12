@@ -12,6 +12,7 @@ import LogicDelete from './components/LogicDelete'
 import EditTag from './template/EditTag'
 import CreateSomething from './template/CreateSomething'
 import PickFieldType from './template/PickFieldType'
+import AddTemplateField from './template/AddTemplateField';
 
 import LibraryMenu from './library/LibraryMenu';
 import DeepLibraryMenu from './library/DeepLibraryMenu'
@@ -40,6 +41,8 @@ class DropdownView extends React.Component{
                 return <CreateSomething key={index}/>
             case dropdownType.pickFieldType:
                 return <PickFieldType key={index}/>
+            case dropdownType.addTemplateField:
+                return <AddTemplateField key={index}/>
             default:
                 return null
         }

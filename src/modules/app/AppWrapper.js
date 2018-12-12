@@ -7,8 +7,6 @@ import { moveLogic } from '../fields/FieldReducer'
 import { showModalByKey } from '../modal/ModalReducer'
 import { showDropdownByKey } from '../dropdown/DropdownReducer'
 
-import { dropdownType } from '../dropdown/types'
-
 class AppWrapper extends React.Component{
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
@@ -45,31 +43,21 @@ class AppWrapper extends React.Component{
         if (e.target.matches('.menu-onclick')) {
             let menuClick = e.target.getAttribute('menu-type')
 
-            switch(menuClick) {
-                case dropdownType.storyShowMore:
-                case dropdownType.deleteLogic:
-                case dropdownType.showOtherOptions:
-                case dropdownType.showLibrary:
-                case dropdownType.showLogic:
-                case dropdownType.editTag:
-                case dropdownType.createSomething:
-                case dropdownType.pickFieldType:
-                    if (!this.props.dropdownKeys.length ||
-                        e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
-                            this.props.showDropdownByKey(menuClick, {
-                                indexKey: e.target.getAttribute('index-key'),
-                                tagKey: e.target.getAttribute('tag-key'),
-                                fieldKey: e.target.getAttribute('field-key'),
-                                subfieldKey: e.target.getAttribute('subfield-key'),
-                                pageKey: e.target.getAttribute('page-key'),
-                                pageX: e.pageX - e.offsetX - 8,
-                                pageY: e.pageY - e.offsetY + 28,
-                            })
-                    } else {
-                        this.props.showDropdownByKey()
-                    }
-                    break
-                default:
+            if (menuClick) {
+                if (!this.props.dropdownKeys.length ||
+                    e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                        this.props.showDropdownByKey(menuClick, {
+                            indexKey: e.target.getAttribute('index-key'),
+                            tagKey: e.target.getAttribute('tag-key'),
+                            fieldKey: e.target.getAttribute('field-key'),
+                            subfieldKey: e.target.getAttribute('subfield-key'),
+                            pageKey: e.target.getAttribute('page-key'),
+                            pageX: e.pageX - e.offsetX - 8,
+                            pageY: e.pageY - e.offsetY + 28,
+                        })
+                } else {
+                    this.props.showDropdownByKey()
+                }
             }
         } else if (e.target.matches('.menu-voidclick')) {
             //negate the click from closing

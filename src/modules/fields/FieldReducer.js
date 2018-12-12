@@ -2,6 +2,7 @@ import * as helpers from '../common/helpers'
 import * as maptool from './logic/maptool'
 import { updatePage } from '../page/PageReducer'
 
+import { fieldType } from './defaults'
 import { defaultLogic } from './logic/types'
 import { initFieldMap, initFieldRepo } from './defaults'
 
@@ -12,10 +13,42 @@ const initialState = {
     defaultLogic,
 }
 
+const ADD_FIELD = 'field/add-field'
 const UPDATE_FIELD = 'field/update-field'
 const ADD_TAG = 'field/add-tag'
 const DELETE_TAG = 'field/delete-tag'
 const UPDATE_TAG = 'field/update-tag'
+
+export function addField(fieldMapKey, text) {
+    return (dispatch, getState) => {
+        const { fieldMap, fieldRepo } = getState().field
+
+        let fieldMapClone = {}
+        Object.assign(fieldMapClone, fieldMap)
+        let fieldRepoClone = {}
+        Object.assign(fieldRepoClone, fieldRepo)
+
+        let newItemKey = helpers.genUID('field')
+        while(fieldRepo[newItemKey]) {
+            newItemKey = helpers.genUID('field')
+        }
+
+        fieldMapClone[fieldMapKey].push(newItemKey)
+        fieldRepoClone[newItemKey] = {
+            fieldKey: newItemKey,
+            fieldTitle: text,
+            fieldType: fieldType.text
+        }
+
+        dispatch({
+            type: ADD_FIELD,
+            payload: {
+                fieldMap: fieldMapClone,
+                fieldRepo: fieldRepoClone,
+            }
+        })
+    }
+}
 
 export function updateField(fieldKey, field, newValue) {
     return (dispatch, getState) => {
@@ -62,9 +95,7 @@ export function deleteTag(fieldKey, index) {
         const { fieldRepo, tagRepo } = getState().field
 
         let dataClone = Array.from(fieldRepo[fieldKey].data || [])
-        console.log('first data clone', dataClone)
         const removed = dataClone.splice(index, 1)
-        console.log('results of splice', dataClone, removed)
 
         let tagRepoClone = {}
         Object.assign(tagRepoClone, tagRepo)
@@ -72,7 +103,6 @@ export function deleteTag(fieldKey, index) {
 
         dispatch(updateField(fieldKey, 'data', dataClone))
 
-        console.log('tagRepo clone', tagRepoClone)
         dispatch({
             type: DELETE_TAG,
             payload: tagRepoClone,
@@ -252,6 +282,8 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case ADD_FIELD:
+            return { ...state, fieldMap: action.payload.fieldMap, fieldRepo: action.payload.fieldRepo }
         case UPDATE_FIELD:
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
         case ADD_TAG:

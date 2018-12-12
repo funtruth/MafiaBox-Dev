@@ -25,6 +25,7 @@ class TemplateView extends React.Component {
                 <PageHeader/>
                 <div className="page-content">
                     <FieldTemplateView
+                        fieldMapKey={fieldMapKey}
                         pageInfo={pageInfo}
                     />
                 </div>

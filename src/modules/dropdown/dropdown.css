@@ -31,6 +31,12 @@
     background-color: #464646;
 }
 
+.page-separator {
+    height: 1px;
+    margin: 8px 2px;
+    background-color: #666;
+}
+
 .drop-down-menu-icon {
     font-size: 17px;
     width: 30px;

@@ -8,6 +8,7 @@ import { updateField } from './FieldReducer'
 
 import TemplateTagView from './templates/TemplateTagView';
 import TemplateTitle from './templates/TemplateTitle';
+import { dropdownType } from '../dropdown/types';
 
 class FieldTemplateView extends React.Component {
     _renderItem = (fieldKey) => {
@@ -40,7 +41,7 @@ class FieldTemplateView extends React.Component {
     }
 
     render() {
-        const { pageInfo,
+        const { pageInfo, fieldMapKey,
             fieldRepo, updateField } = this.props
 
         return (
@@ -54,15 +55,14 @@ class FieldTemplateView extends React.Component {
                             />
                             {this._renderItem(item)}
                         </div>
-                        <div style={{
-                            height: 1,
-                            backgroundColor: '#666',
-                            marginTop: 8,
-                            marginBottom: 8,
-                        }}/>
+                        <div className="page-separator"/>
                     </div>
                 ))}
-                <div className="add-button">
+                <div
+                    className="add-button menu-onclick"
+                    menu-type={dropdownType.addTemplateField}
+                    field-key={fieldMapKey}
+                >
                     Add Field
                 </div>
             </div>
