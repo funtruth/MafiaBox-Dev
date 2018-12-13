@@ -2,7 +2,7 @@ import React from 'react'
 import { fieldIcon } from '../defaults'
 import _ from 'lodash'
 
-import LogicBlock from '../../fields/logic/LogicBlock'
+import LogicBlock from '../../logic/LogicBlock'
 import { defaultLogic } from '../logic/types';
 
 class LogicBoard extends React.Component{

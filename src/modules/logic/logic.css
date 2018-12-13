@@ -1,0 +1,116 @@
+
+.logic-label {
+    padding: 4px 4px;
+    pointer-events: auto;
+    border-radius: 4px 0px 0px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    background-color: hsla(0,0%,100%,.1);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.6px;
+    cursor: pointer;
+}
+
+.logic-button {
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: Arial;
+    cursor: pointer;
+    background-color: rgba(40, 43, 48,1);
+    height: 18px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.logic-button:hover {
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.logic-button-down {
+    padding: 1px 4px;
+    font: 500 20px Arial;
+    color: #a6a6a6;
+    cursor: pointer;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logic-button-down:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.logic-option {
+    padding: 2px 4px;
+    border-radius: 2px;
+    font: 500 20px Arial;
+    color: #a6a6a6;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+}
+
+.logic-option:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.logic-button-right {
+    color: #a6a6a6;
+    cursor: pointer;
+    min-width: 20px;
+    height: 20px;
+
+    padding: 4px 4px;
+    font: 500 Arial;
+    color: #a6a6a6;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+.logic-button-right:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.logic-alert {
+    padding: 2px 0px;
+    border-radius: 2px;
+    color: #a6a6a6;
+    cursor: pointer;
+    width: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    opacity: 0.6;
+}
+
+.logic-alert:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.logic-board {
+    overflow: auto;
+    max-height: 400px;
+}
+
+.logic-new-var {
+    background-color: #18449b;
+    color: #d6d6d6;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font: 300 12px Arial;
+    margin-left: 2px;
+}
