@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
+import ReactTooltip from 'react-tooltip'
 
 import { dropdownType } from '../../dropdown/types'
 import { logicTypeInfo, defaultLogic } from './types'
@@ -9,7 +10,7 @@ import * as helpers from '../../common/helpers'
 import * as maptool from './maptool'
 import { addItemToRightOf, addItemBelowOf, deleteItem, toggleCollapse } from '../FieldReducer'
 
-import LoginErrors from './LogicErrors'
+import LogicErrors from './LogicErrors'
 
 class LogicBlock extends React.Component{
     constructor(props) {
@@ -129,7 +130,7 @@ class LogicBlock extends React.Component{
                                                     data-tip="Add another operator."
                                                     onClick={this._addItemBelow.bind(this, item)}
                                                 />
-                                                <LoginErrors errors={errors}/>
+                                                <LogicErrors errors={errors}/>
                                             </div>
                                         </div>
                                         <div style={{ textAlign: 'center' }}>
@@ -157,6 +158,7 @@ class LogicBlock extends React.Component{
                                                 index={value[item].right}
                                             />
                                         }
+                                        <ReactTooltip place="right"/>
                                     </div>
                                 )}
                             </Draggable>

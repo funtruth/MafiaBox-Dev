@@ -49,20 +49,21 @@ class HeaderView extends React.Component{
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', fieldMapKey: boardType.roles, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathKey.flow:
+                rightBtns = [
+                    { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
+                    { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', fieldMapKey: boardType.flow, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                ]
+                break
             case pathKey.events:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                ]
-                break
-            case pathKey.defaults:
-                rightBtns = [
-                    { key: 'done', title: 'Done', icon: 'ion-md-checkmark' },
-                    { key: 'createField', title: 'Add a Field', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', fieldMapKey: boardType.events, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             default:
@@ -76,8 +77,9 @@ class HeaderView extends React.Component{
         }
     }
 
-    _onClick = (key) => {
+    _onClick = (item) => {
         const { storyMap } = this.props
+        const { key, fieldMapKey } = item
 
         //adds item to first story of board
         let mapKey
@@ -102,7 +104,7 @@ class HeaderView extends React.Component{
                 return this.props.showModalByKey(modalType.addNewField)
             case 'editTemplate':
                 return this.props.showModalByKey(modalType.showTemplate, {
-                    fieldMapKey: boardType.roles
+                    fieldMapKey: fieldMapKey
                 })
             default:
         }
@@ -110,7 +112,12 @@ class HeaderView extends React.Component{
 
     _renderItem = (item, index) => {
         return (
-            <div key={item.key} className="row cute-button" style={{ marginLeft: index ? 8 : 0 }} onClick={this._onClick.bind(this, item.key)}>
+            <div
+                key={item.key}
+                className="row cute-button"
+                style={{ marginLeft: index ? 8 : 0 }}
+                onClick={this._onClick.bind(this, item)}
+            >
                 <i className={`option-icon ${item.icon}`}></i>
                 {item.title && <div style={{ marginLeft: 6 }}>{item.title}</div>}
             </div>

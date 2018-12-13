@@ -1,11 +1,4 @@
 import { boardType } from '../board/types'
-import { phaseActionMode, phaseTriggerType } from './actions'
-import { defaultLogic } from './logic/types';
-
-export const moldType = {
-    role: 'moldType/role',
-    phase: 'moldType/phase',
-}
 
 export const fieldType = {
     text: 'fieldType/text',
@@ -15,7 +8,6 @@ export const fieldType = {
     tag: 'fieldType/tag',
     property: 'fieldType/property',
     expertTag: 'fieldType/expertTag',
-    phaseTrigger: 'fieldType/phaseTrigger',
 }
 
 export const fieldTypeToIcon = {
@@ -26,7 +18,6 @@ export const fieldTypeToIcon = {
     [fieldType.tag]: 'ion-ios-pricetag',
     [fieldType.property]: 'ion-md-switch',
     [fieldType.expertTag]: 'ion-ios-pricetags',
-    [fieldType.phaseTrigger]: 'ion-md-fastforward',
 }
 
 export const fieldTypeToTitle = {
@@ -37,7 +28,6 @@ export const fieldTypeToTitle = {
     [fieldType.tag]: 'Tag',
     [fieldType.property]: 'Properties',
     [fieldType.expertTag]: 'Expert Tag',
-    [fieldType.phaseTrigger]: 'Phase Trigger',
 }
 
 export const fieldIcon = {
@@ -46,7 +36,6 @@ export const fieldIcon = {
     code: 'ion-md-code',
     logic: 'ion-md-options',
     expertTag: 'ion-ios-pricetags',
-    phaseTrigger: 'ion-md-fastforward',
 }
 
 export const initFieldMap = {
@@ -80,44 +69,47 @@ export const initFieldRepo = {
         fieldKey: 'roleActionMode',
         fieldType: fieldType.logic,
         fieldTitle: 'Role Action Mode',
-        fieldDefault: defaultLogic,
     },
     phaseActionMode: {
         fieldKey: 'phaseActionMode',
         fieldType: fieldType.tag,
         fieldTitle: 'Action Mode',
-        data: [
-            {
-                key: phaseActionMode.all,
-                title: 'All',
-            },
-            {
-                key: phaseActionMode.king,
-                title: 'King',
-            },
-            {
-                key: phaseActionMode.clown,
-                title: 'Clown',
-            },
-            {
-                key: phaseActionMode.none,
-                title: 'None',
-            },
-        ]
+        data: ['phaseActionMode/all', 'phaseActionMode/king', 'phaseActionMode/clown', 'phaseActionMode/none']
     },
     phaseTriggerMode: {
         fieldKey: 'phaseTriggerMode',
-        fieldType: fieldType.phaseTrigger,
+        fieldType: fieldType.logic,
         fieldTitle: 'Phase Trigger',
-        data: [
-            {
-                key: phaseTriggerType.allReady,
-                title: 'All Ready',
-            },
-            {
-                key: phaseTriggerType.majority,
-                title: 'Majority',
-            }
-        ]
+    },
+}
+
+export const initTagRepo = {
+    'phaseActionMode/all': {
+        tagKey: 'phaseActionMode/all',
+        title: 'All',
+    },
+    'phaseActionMode/king': {
+        tagKey: 'phaseActionMode/king',
+        title: 'King',
+    },
+    'phaseActionMode/clown': {
+        tagKey: 'phaseActionMode/clown',
+        title: 'Clown',
+    },
+    'phaseActionMode/none': {
+        tagKey: 'phaseActionMode/none',
+        title: 'None',
+    },
+    'phaseTriggerType/none': {
+        tagkey: 'phaseTriggerType/none',
+        title: 'None',
+    },
+    'phaseTriggerType/allReady': {
+        tagkey: 'phaseTriggerType/allReady',
+        title: 'None',
+    },
+    'phaseTriggerType/majority': {
+        tagkey: 'phaseTriggerType/majority',
+        title: 'None',
     },
 }

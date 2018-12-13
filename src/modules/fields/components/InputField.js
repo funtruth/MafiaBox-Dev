@@ -3,20 +3,20 @@ import { fieldIcon } from '../defaults'
 
 class InputField extends React.Component{
     _onChange = e => {
-        const { pageInfo, field } = this.props
+        const { pageInfo, fieldKey } = this.props
         const { pageKey } = pageInfo
 
-        this.props.updatePage(pageKey, field, e.target.value)
+        this.props.updatePage(pageKey, fieldKey, e.target.value)
     }
 
     render() {
-        const { value, fieldInfo, field, inputType } = this.props
+        const { value, fieldInfo, fieldKey, inputType } = this.props
 
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.text}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || field}
+                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
                 </div>
                 <input
                     className="page-input"

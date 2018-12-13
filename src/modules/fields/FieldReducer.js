@@ -5,12 +5,12 @@ import { updatePage } from '../page/PageReducer'
 
 import { fieldType } from './defaults'
 import { defaultLogic } from './logic/types'
-import { initFieldMap, initFieldRepo } from './defaults'
+import { initFieldMap, initFieldRepo, initTagRepo } from './defaults'
 
 const initialState = {
     fieldMap: initFieldMap,
     fieldRepo: initFieldRepo,
-    tagRepo: {},
+    tagRepo: initTagRepo,
     defaultLogic,
 }
 
@@ -25,6 +25,7 @@ const UPDATE_TAG = 'field/update-tag'
 const MOVE_TAG_WITHIN_FIELD = 'field/move-tag-within-field'
 const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
+//add field to the current fieldMap
 export function addField(fieldMapKey, text) {
     return (dispatch, getState) => {
         const { fieldMap, fieldRepo } = getState().field
@@ -56,6 +57,7 @@ export function addField(fieldMapKey, text) {
     }
 }
 
+//delete field from current fieldMap, delete from fieldRepo, and delete related tags from tagRepo
 export function deleteField(fieldMapKey, fieldKey) {
     return (dispatch, getState) => {
         const { fieldMap, fieldRepo, tagRepo } = getState().field

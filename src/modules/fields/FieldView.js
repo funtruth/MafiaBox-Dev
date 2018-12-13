@@ -3,12 +3,13 @@ import './field.css'
 import { connect } from 'react-redux';
 
 import { fieldType } from './defaults'
+import { defaultLogic } from './logic/types';
 
 import { updatePage } from '../page/PageReducer'
 
 import InputField from './components/InputField'
 import TagField from './components/TagField';
-import PhaseTriggerField from './components/PhaseTriggerField';
+import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
 
@@ -21,6 +22,7 @@ class FieldView extends React.Component {
         const props = {
             key: fieldKey,
             field: fieldKey,
+            fieldKey,
             value: pageInfo[fieldKey],
             data,
             pageInfo,
@@ -29,8 +31,8 @@ class FieldView extends React.Component {
         }
 
         //if the field has a default that hasn't been set, update
-        if (!pageInfo[fieldKey] && fieldInfo.fieldDefault) {
-            this.props.updatePage(pageInfo.pageKey, fieldKey, fieldInfo.fieldDefault)
+        if (!pageInfo[fieldKey] && fieldInfo.fieldType === fieldType.logic) {
+            this.props.updatePage(pageInfo.pageKey, fieldKey, defaultLogic)
         }
         
         switch(fieldInfo.fieldType) {
@@ -44,8 +46,8 @@ class FieldView extends React.Component {
                 return <LogicBoard {...props}/>
             case fieldType.tag:
                 return <TagField {...props}/>
-            case fieldType.phaseTrigger:
-                return <PhaseTriggerField {...props}/>
+            case fieldType.property:
+                return <PropertyField {...props}/>
             default:
                 return null
         }

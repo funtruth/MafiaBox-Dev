@@ -1,7 +1,6 @@
 import React from 'react'
 import { fieldIcon } from '../defaults'
 import _ from 'lodash'
-import ReactTooltip from 'react-tooltip'
 
 import LogicBlock from '../../fields/logic/LogicBlock'
 import { defaultLogic } from '../logic/types';
@@ -27,7 +26,7 @@ class LogicBoard extends React.Component{
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
-                    <i className={`story-option ${fieldIcon.phaseTrigger}`} style={{ width: 16 }}></i>
+                    <i className={`story-option ${fieldIcon.logic}`} style={{ width: 16 }}></i>
                     {(fieldInfo && fieldInfo.fieldTitle) || field}
                 </div>
                 <div className="logic-board">
@@ -40,7 +39,6 @@ class LogicBoard extends React.Component{
                         />
                     ))}
                 </div>
-                <ReactTooltip place="right"/>
             </div>
         )
     }

@@ -4,7 +4,7 @@ import { fieldIcon } from '../defaults'
 import {Controlled as CodeMirror} from 'react-codemirror2'
 require('codemirror/mode/javascript/javascript')
 
-class CodeBlock extends React.Component{
+class CodeField extends React.Component{
     _onChange = (editor, c, value)  => {
         const { pageInfo, field } = this.props
         const { pageKey } = pageInfo
@@ -35,4 +35,4 @@ class CodeBlock extends React.Component{
     }
 }
 
-export default CodeBlock
+export default CodeField
