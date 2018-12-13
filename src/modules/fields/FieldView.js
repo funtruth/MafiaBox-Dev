@@ -3,7 +3,7 @@ import './field.css'
 import { connect } from 'react-redux';
 
 import { fieldType } from './defaults'
-import { defaultLogic } from './logic/types';
+import { defaultLogic } from '../logic/types';
 
 import { updatePage } from '../page/PageReducer'
 

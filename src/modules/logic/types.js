@@ -4,6 +4,7 @@ export const logicType = {
     else: 'logicType/else',
     elseif: 'logicType/elseif',
     operator: 'logicType/operator',
+    function: 'logicType/function',
     return: 'logicType/return',
 }
 
@@ -32,6 +33,11 @@ export const logicTypeInfo = {
         title: 'operator',
         icon: 'ion-md-code-working',
         color: 'Mediumslateblue'
+    },
+    [logicType.function]: {
+        title: 'function',
+        icon: 'ion-md-pulse',
+        color: '#3864ab',
     },
     [logicType.return]: {
         title: 'return',

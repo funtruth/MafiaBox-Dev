@@ -1,10 +1,10 @@
 import * as helpers from '../common/helpers'
-import * as maptool from './logic/maptool'
+import * as maptool from '../logic/maptool'
 import _ from 'lodash'
 import { updatePage } from '../page/PageReducer'
 
 import { fieldType } from './defaults'
-import { defaultLogic } from './logic/types'
+import { defaultLogic } from '../logic/types'
 import { initFieldMap, initFieldRepo, initTagRepo } from './defaults'
 
 const initialState = {
