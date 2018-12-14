@@ -6,6 +6,7 @@ export const logicType = {
     operator: 'logicType/operator',
     function: 'logicType/function',
     return: 'logicType/return',
+    update: 'logicType/update',
 }
 
 export const comparisonType = {
@@ -76,6 +77,11 @@ export const logicTypeInfo = {
         title: 'return',
         icon: 'ion-ios-send',
         color: '#1e9939',
+    },
+    [logicType.update]: {
+        title: 'update',
+        icon: 'mdi mdi-code-braces',
+        color: '#a566b0',
     },
 }
 

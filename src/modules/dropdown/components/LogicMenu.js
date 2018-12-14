@@ -84,7 +84,15 @@ class LogicMenu extends React.Component{
             left: pageX,
         }
 
-        let logicMenu = [logicType.if, logicType.else, logicType.elseif, logicType.operator, logicType.return, logicType.function]
+        let logicMenu = [
+            logicType.if,
+            logicType.else,
+            logicType.elseif,
+            logicType.operator,
+            logicType.function,
+            logicType.return,
+            logicType.update,
+        ]
 
         return (
             <div className="drop-down-menu" style={menuStyle}>

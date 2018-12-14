@@ -7,6 +7,7 @@ import PageReducer from '../modules/page/PageReducer'
 import DropdownReducer from '../modules/dropdown/DropdownReducer'
 import FieldReducer from '../modules/fields/FieldReducer'
 import BoardReducer from '../modules/board/BoardReducer'
+import TemplateReducer from '../modules/template/TemplateReducer'
 
 const reducers = {
     user: UserReducer,
@@ -16,6 +17,7 @@ const reducers = {
     dropdown: DropdownReducer,
     field: FieldReducer,
     board: BoardReducer,
+    template: TemplateReducer,
 }
 
 export default combineReducers( reducers )

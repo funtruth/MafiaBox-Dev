@@ -7,8 +7,6 @@ import { dropdownType } from '../types'
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 
-const HIDE_MENU = 'hide-menu'
-
 class LibraryMenu extends React.Component{
     _onMouseEnter = (key, e) => {
         const { dropdownParams } = this.props
@@ -62,10 +60,10 @@ class LibraryMenu extends React.Component{
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
-                <div
+                {/*<div
                     className="drop-down-menu-option"
                     onClick={this._addItemBelow}
-                    onMouseOver={this._onMouseEnter.bind(this, HIDE_MENU)}
+                    onMouseOver={this._onMouseEnter.bind(this, 'hide-menu')}
                 >
                     <i className={`drop-down-menu-icon mdi mdi-variable`}></i>
                     Variable
@@ -73,12 +71,12 @@ class LibraryMenu extends React.Component{
                 <div
                     className="drop-down-menu-option"
                     onClick={this._addItemBelow}
-                    onMouseOver={this._onMouseEnter.bind(this, HIDE_MENU)}
+                    onMouseOver={this._onMouseEnter.bind(this, 'hide-menu')}
                 >
                     <i className={`drop-down-menu-icon mdi mdi-code-braces`}></i>
                     Object
                 </div>
-                <div className="drop-down-menu-separator"/>
+                <div className="drop-down-menu-separator"/>*/}
                 {boardOrder.map(this._renderItem)}
             </div>
         )

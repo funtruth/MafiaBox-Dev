@@ -35,7 +35,7 @@ class LogicPanels extends React.Component{
                     onClick={this._onClick}
                 >
                     <div className="text-ellipsis">
-                        {value[item].var1 || 'Empty'}
+                        {value[item].var1 || 'Variable'}
                     </div> 
                 </div>
                 <div
@@ -50,7 +50,7 @@ class LogicPanels extends React.Component{
                     }}
                 >
                     <div className="text-ellipsis">
-                        {(value[item].comparison && comparisonType[value[item].comparison].title) || ''}
+                        {(value[item].comparison && comparisonType[value[item].comparison].title) || 'Operator'}
                     </div>
                 </div>
                 <div
@@ -67,7 +67,7 @@ class LogicPanels extends React.Component{
                     onClick={this._onClick}
                 >
                     <div className="text-ellipsis">
-                        {value[item].var2 || 'Empty'}
+                        {value[item].var2 || 'Variable'}
                     </div>
                 </div>
             </div>

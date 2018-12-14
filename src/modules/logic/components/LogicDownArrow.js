@@ -6,9 +6,8 @@ import { logicType } from '../types'
 import { addItemBelowOf } from '../../fields/FieldReducer'
 
 class LogicDownArrow extends React.Component{
-    _onClick = (enableDown) => {
-        if (!enableDown) return
-
+    _onClick = (hide) => {
+        if (hide) return
         const { item, field, pageInfo } = this.props
         const { pageKey } = pageInfo
         
@@ -17,15 +16,16 @@ class LogicDownArrow extends React.Component{
 
     render() {
         const { item, value } = this.props
-        const enableDown = (value[item].logicType !== logicType.function
-            && value[item].logicType !== logicType.return)
+
+        const hide = value[item].logicType === logicType.return ||
+            value[item].logicType === logicType.update
 
         return (
             <i 
                 className="ion-md-arrow-dropdown logic-button-down"
-                data-tip={enableDown ? "Add another operator." : null}
-                onClick={this._onClick.bind(this, enableDown)}
-                style={{ opacity: enableDown? 1 : 0.5 }}
+                data-tip={hide ? null : "Add another operator"}
+                onClick={this._onClick.bind(this, hide)}
+                style={{ opacity: hide ? 0.4 : 1 }}
             />
         )
     }

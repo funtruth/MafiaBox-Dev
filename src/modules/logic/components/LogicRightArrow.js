@@ -6,9 +6,7 @@ import { logicType } from '../types'
 import { addItemToRightOf } from '../../fields/FieldReducer'
 
 class LogicRightArrow extends React.Component{
-    _onClick = (enable) => {
-        if (!enable) return
-
+    _onClick = () => {
         const { item, field, pageInfo } = this.props
         const { pageKey } = pageInfo
         
@@ -17,14 +15,16 @@ class LogicRightArrow extends React.Component{
 
     render() {
         const { item, value } = this.props
-        const enableRight = (value[item].logicType !== logicType.return)
+
+        const hide = value[item].logicType === logicType.return ||
+            value[item].logicType === logicType.update
+        if (hide) return null
 
         return (
             <i
                 className="ion-ios-fastforward logic-button-right"
-                data-tip={enableRight ? "Add another operator." : null}
-                onClick={this._onClick.bind(this, enableRight)}
-                style={{ opacity: enableRight? 1 : 0.5 }}
+                data-tip="Add another operator"
+                onClick={this._onClick}
             />
         )
     }
