@@ -36,7 +36,7 @@ class DeepestLibraryMenu extends React.Component{
         const { deepestPageX, deepestPageY, deepestKey } = dropdownParams
 
         const data = pageMap[deepestKey]
-        if (!data) return null
+        if (!data || !data.length) return null
 
         let menuStyle = {
             top: deepestPageY,

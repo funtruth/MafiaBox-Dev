@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
-import OtherValues from './components/OtherValues'
 import LogicMenu from './components/LogicMenu'
 import LogicDelete from './components/LogicDelete'
 import PickOperator from './components/PickOperator'
@@ -30,8 +29,6 @@ class DropdownView extends React.Component{
         switch(dropdownKey) {
             case dropdownType.storyShowMore:
                 return <ClickMenu key={index}/>
-            case dropdownType.showOtherOptions:
-                return <OtherValues key={index}/>
             case dropdownType.showLibrary:
                 return <LibraryMenu key={index}/>
             case dropdownType.showDeepLibrary:

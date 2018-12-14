@@ -66,6 +66,7 @@ class DeepLibraryMenu extends React.Component{
         const { deepPageX, deepPageY, deepKey } = dropdownParams
 
         const items = _.filter(storyMap, i => i.boardType === deepKey)
+        if (!items || !items.length) return null
 
         let menuStyle = {
             top: deepPageY,
