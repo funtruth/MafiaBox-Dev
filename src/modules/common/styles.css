@@ -28,3 +28,9 @@
     background-color: hsla(0,0%,100%,.1);
     cursor: pointer;
 }
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

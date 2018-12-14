@@ -34,7 +34,9 @@ class LogicPanels extends React.Component{
                     }}
                     onClick={this._onClick}
                 >
-                    {value[item].var1 || 'Empty'}
+                    <div className="text-ellipsis">
+                        {value[item].var1 || 'Empty'}
+                    </div> 
                 </div>
                 <div
                     className="logic-button menu-onclick"
@@ -47,7 +49,9 @@ class LogicPanels extends React.Component{
                         color: value[item].comparison ? '#d6d6d6' : '#868686',
                     }}
                 >
-                    {(value[item].comparison && comparisonType[value[item].comparison].title) || ''}
+                    <div className="text-ellipsis">
+                        {(value[item].comparison && comparisonType[value[item].comparison].title) || ''}
+                    </div>
                 </div>
                 <div
                     className="logic-button menu-onclick"
@@ -62,7 +66,9 @@ class LogicPanels extends React.Component{
                     }}
                     onClick={this._onClick}
                 >
-                    {value[item].var2 || 'Empty'}
+                    <div className="text-ellipsis">
+                        {value[item].var2 || 'Empty'}
+                    </div>
                 </div>
             </div>
         )
@@ -80,10 +86,12 @@ class LogicPanels extends React.Component{
                     borderRadius: '0px 4px 4px 0px',
                 }}
             >
-                {hasPage ? 
-                    pageRepo[value[item].pageKey].title
-                    :'Empty'
-                }
+                <div className="text-ellipsis">
+                    {hasPage ? 
+                        pageRepo[value[item].pageKey].title
+                        :'Empty'
+                    }
+                </div>
             </div>
         )
     }
