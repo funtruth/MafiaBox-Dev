@@ -15,8 +15,15 @@ const initialState = {
                 health: '',
             },
         },
-        choice: {},
-        news: {},
+        choice: '',
+        ready: '',
+        news: {
+            '{timestamp}': {
+                message: '',
+                timestamp: '',
+                counter: 0,
+            }
+        },
     }
 }
 
