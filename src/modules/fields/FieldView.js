@@ -12,6 +12,7 @@ import TagField from './components/TagField';
 import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
+import VariableField from './components/VariableField'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -48,6 +49,8 @@ class FieldView extends React.Component {
                 return <TagField {...props}/>
             case fieldType.property:
                 return <PropertyField {...props}/>
+            case fieldType.vars:
+                return <VariableField {...props}/>
             default:
                 return null
         }

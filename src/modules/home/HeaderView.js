@@ -45,6 +45,12 @@ class HeaderView extends React.Component{
         
         switch(paths[1]) {
             case pathKey.library:
+                rightBtns = [
+                    { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
+                    { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', fieldMapKey: boardType.library, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                ]
+                break
             case pathKey.board:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },

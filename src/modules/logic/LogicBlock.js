@@ -1,5 +1,6 @@
 import React from 'react'
 import './logic.css'
+import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
@@ -23,7 +24,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        let { field, pageInfo, value, index } = this.props
+        let { field, pageInfo, pageRepo, value, index, vars } = this.props
         if (!pageInfo) return null
         if (!value) {
             value = defaultLogic
@@ -57,8 +58,10 @@ class LogicBlock extends React.Component{
                                 item,
                                 value,
                                 field,
-                                pageInfo
+                                pageInfo,
                             }
+
+                            const newVars = value[item].pageKey && pageRepo[value[item].pageKey].vars
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -80,7 +83,7 @@ class LogicBlock extends React.Component{
                                                 <LogicType {...iprops}/>
                                                 <LogicPanels {...iprops}/>
                                             </div>
-                                            <LogicNewVars {...iprops}/>
+                                            <LogicNewVars {...iprops} newVars={newVars}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>
@@ -92,6 +95,10 @@ class LogicBlock extends React.Component{
                                             <LogicBlock 
                                                 {...this.props}
                                                 index={value[item].right}
+                                                vars={{
+                                                    ...vars,
+                                                    ...newVars
+                                                }}
                                             />
                                         }
                                         <ReactTooltip place="right"/>
@@ -106,4 +113,8 @@ class LogicBlock extends React.Component{
     }
 }
 
-export default LogicBlock
+export default connect(
+    state => ({
+        pageRepo: state.page.pageRepo,
+    })
+)(LogicBlock)

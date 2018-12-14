@@ -1,18 +1,18 @@
 import React from 'react'
 
-class LogicNewVars extends React.Component{
+class LogicArgs extends React.Component{
     render() {
-        const { item, value, newVars } = this.props
-        if (!newVars) return null
+        const { fieldInfo } = this.props
+        const { vars } = fieldInfo
+        
+        if (!vars) return null
 
         return (
             <div
-                className="row"
-                style={{
-                    width: 110,
-                }}
+                className="row logic-variable-label"
             >
-                {Object.keys(newVars).map((item, index) => (
+                Variables:
+                {Object.keys(vars).map((item, index) => (
                     <div
                         key={index}
                         className="logic-new-var"
@@ -28,4 +28,4 @@ class LogicNewVars extends React.Component{
     }
 }
 
-export default LogicNewVars
+export default LogicArgs

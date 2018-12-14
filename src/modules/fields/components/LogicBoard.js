@@ -4,10 +4,12 @@ import _ from 'lodash'
 
 import LogicBlock from '../../logic/LogicBlock'
 import { defaultLogic } from '../../logic/types';
+import LogicNewVars from '../../logic/components/LogicNewVars';
+import LogicArgs from '../../logic/components/LogicArgs';
 
 class LogicBoard extends React.Component{
     render() {
-        const { fieldInfo, field, value } = this.props
+        const { fieldInfo, fieldKey, value } = this.props
         
         let parents
         let children = {}
@@ -27,15 +29,17 @@ class LogicBoard extends React.Component{
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.logic}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || field}
+                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
                 </div>
                 <div className="logic-board">
+                    <LogicArgs {...this.props}/>
                     {Object.keys(parents).map((item, index) => (
                         <LogicBlock
                             {...this.props}
                             key={index}
                             value={value || defaultLogic}
                             index={item}
+                            vars={fieldInfo.vars}
                         />
                     ))}
                 </div>

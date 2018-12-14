@@ -20,6 +20,9 @@ import LibraryMenu from './library/LibraryMenu';
 import DeepLibraryMenu from './library/DeepLibraryMenu'
 import DeepestLibraryMenu from './library/DeepestLibraryMenu';
 
+import AddVar from './vars/AddVar';
+import EditVar from './vars/EditVar'
+
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
         switch(dropdownKey) {
@@ -49,6 +52,10 @@ class DropdownView extends React.Component{
                 return <AddTemplateField key={index}/>
             case dropdownType.templateTitleOptions:
                 return <TemplateTitleOptions key={index}/>
+            case dropdownType.addVar:
+                return <AddVar key={index}/>
+            case dropdownType.editVar:
+                return <EditVar key={index}/>
             default:
                 return null
         }

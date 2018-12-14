@@ -6,6 +6,7 @@ export const fieldType = {
     code: 'fieldType/code',
     logic: 'fieldType/logic',
     tag: 'fieldType/tag',
+    vars: 'fieldType/vars',
     property: 'fieldType/property',
     expertTag: 'fieldType/expertTag',
 }
@@ -16,6 +17,7 @@ export const fieldTypeToIcon = {
     [fieldType.code]: 'ion-md-code',
     [fieldType.logic]: 'ion-md-options',
     [fieldType.tag]: 'ion-ios-pricetag',
+    [fieldType.vars]: 'ion-md-planet',
     [fieldType.property]: 'ion-md-switch',
     [fieldType.expertTag]: 'ion-ios-pricetags',
 }
@@ -26,6 +28,7 @@ export const fieldTypeToTitle = {
     [fieldType.code]: 'Code',
     [fieldType.logic]: 'Logic',
     [fieldType.tag]: 'Tag',
+    [fieldType.vars]: 'Variables',
     [fieldType.property]: 'Properties',
     [fieldType.expertTag]: 'Expert Tag',
 }
@@ -39,7 +42,7 @@ export const fieldIcon = {
 }
 
 export const initFieldMap = {
-    [boardType.library]: ['description', 'code'],
+    [boardType.library]: ['description', 'vars', 'code'],
     [boardType.roles]: ['description', 'roleTeam', 'roleCharges', 'roleActionMode'],
     [boardType.flow]: ['description', 'phaseActionMode', 'phaseTriggerMode'],
 }
@@ -54,6 +57,11 @@ export const initFieldRepo = {
         fieldKey: 'code',
         fieldType: fieldType.code,
         fieldTitle: 'Code Interpretation',
+    },
+    vars: {
+        fieldKey: 'vars',
+        fieldType: fieldType.vars,
+        fieldTitle: 'Declared Variables',
     },
     roleTeam: {
         fieldKey: 'roleTeam',
@@ -80,6 +88,11 @@ export const initFieldRepo = {
         fieldKey: 'phaseTriggerMode',
         fieldType: fieldType.logic,
         fieldTitle: 'Phase Trigger',
+        vars: {
+            e: {},
+            choices: {},
+            roomSnapshot: {},
+        }
     },
 }
 
