@@ -8,6 +8,39 @@ export const logicType = {
     return: 'logicType/return',
 }
 
+export const comparisonType = {
+    e: {
+        key: 'e',
+        code: '===',
+        title: '===',
+    },
+    nE: {
+        key: 'nE',
+        code: '!==',
+        title: '!==',
+    },
+    gT: {
+        key: 'gT',
+        code: '>',
+        title: '>',
+    },
+    gTOET: {
+        key: 'gTOET',
+        code: '>=',
+        title: '≥',
+    },
+    lT: {
+        key: 'lT',
+        code: '<',
+        title: '>',
+    },
+    lTOET: {
+        key: 'lTOET',
+        code: '<=',
+        title: '≤',
+    },
+}
+
 export const logicTypeInfo = {
     [logicType.none]: {
         title: 'none',

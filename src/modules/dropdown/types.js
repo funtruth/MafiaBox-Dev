@@ -18,4 +18,6 @@ export const dropdownType = {
 
     editVar: 'dropdownType/edit-var',
     addVar: 'dropdownType/add-var',
+    pickVar: 'dropdownType/pick-var',
+    pickComparison: 'dropdownType/pick-comparison',
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 
+import { dropdownType } from '../dropdown/types';
+
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
 import { showModalByKey } from '../modal/ModalReducer'
@@ -21,7 +23,9 @@ class AppWrapper extends React.Component{
     }
 
     _handleScroll = () => {
-        if (this.props.dropdownKeys.length) {
+        const { dropdownKeys } = this.props
+        if (dropdownKeys.length) {
+            if (dropdownKeys[0] === dropdownType.pickVar) return
             this.props.showDropdownByKey()
         }
     }
@@ -42,7 +46,7 @@ class AppWrapper extends React.Component{
     _handleClick = (e) => {
         if (e.target.matches('.menu-onclick')) {
             let menuClick = e.target.getAttribute('menu-type')
-
+            
             if (menuClick) {
                 if (!this.props.dropdownKeys.length ||
                     e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {

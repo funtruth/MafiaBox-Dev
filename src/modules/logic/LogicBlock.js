@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
-import { defaultLogic } from './types'
+import { defaultLogic, logicType } from './types'
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
@@ -59,9 +59,11 @@ class LogicBlock extends React.Component{
                                 value,
                                 field,
                                 pageInfo,
+                                vars,
                             }
 
-                            const newVars = value[item].pageKey && pageRepo[value[item].pageKey].vars
+                            const newVars = value[item].logicType === logicType.function &&
+                                value[item].pageKey && pageRepo[value[item].pageKey].vars
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (

@@ -16,12 +16,14 @@ import PickFieldType from './template/PickFieldType'
 import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
-import LibraryMenu from './library/LibraryMenu';
+import LibraryMenu from './library/LibraryMenu'
 import DeepLibraryMenu from './library/DeepLibraryMenu'
-import DeepestLibraryMenu from './library/DeepestLibraryMenu';
+import DeepestLibraryMenu from './library/DeepestLibraryMenu'
 
-import AddVar from './vars/AddVar';
+import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
+import PickVar from './vars/PickVar'
+import PickComparison from './vars/PickComparison'
 
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
@@ -56,6 +58,10 @@ class DropdownView extends React.Component{
                 return <AddVar key={index}/>
             case dropdownType.editVar:
                 return <EditVar key={index}/>
+            case dropdownType.pickVar:
+                return <PickVar key={index}/>
+            case dropdownType.pickComparison:
+                return <PickComparison key={index}/>
             default:
                 return null
         }

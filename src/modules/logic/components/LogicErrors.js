@@ -1,6 +1,11 @@
 import React from 'react'
+import ReactTooltip from 'react-tooltip'
 
 class LogicErrors extends React.Component{
+    componentDidUpdate() {
+        ReactTooltip.rebuild()
+    }
+
     render() {
         return (
             this.props.errors.map((item, index) => (

@@ -2,7 +2,7 @@ import React from 'react'
 
 class LogicNewVars extends React.Component{
     render() {
-        const { item, value, newVars } = this.props
+        const { newVars } = this.props
         if (!newVars) return null
 
         return (

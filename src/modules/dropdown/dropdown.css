@@ -13,6 +13,20 @@
     font: 520 14px Arial;
 }
 
+.drop-down-menu-autow {
+    position: fixed;
+    background-color: rgba(54, 57, 64, 1);
+    border-radius: 4px;
+    padding: 8px 0px;
+    z-index: 7;
+
+    animation: fadein 0.2s, scalein 0.2s;
+    -webkit-animation: fadein 0.2s, scalein 0.2s;
+    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
+    color: #b6b6b6;
+    font: 520 14px Arial;
+}
+
 .drop-down-menu-option {
     padding: 6px 12px;
     cursor: pointer;
