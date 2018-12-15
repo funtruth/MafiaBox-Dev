@@ -42,6 +42,45 @@ export const comparisonType = {
     },
 }
 
+export const valueType = {
+    nC: {
+        key: 'nC',
+        title: 'no change',
+        label: ' ',
+        icon: 'mdi mdi-do-not-disturb',
+    },
+    null: {
+        key: 'null',
+        title: 'null',
+        label: 'null',
+        icon: 'mdi mdi-null',
+    },
+    i: {
+        key: 'i',
+        title: 'increment',
+        label: '++',
+        icon: 'mdi mdi-numeric-1-box',
+    },
+    iB: {
+        key: 'iB',
+        title: 'increment by',
+        label: '++',
+        icon: 'mdi mdi-alpha-n-box',
+    },
+    d: {
+        key: 'd',
+        title: 'decrement',
+        label: '--',
+        icon: 'ion-md-arrow-round-down',
+    },
+    dB: {
+        key: 'dB',
+        title: 'decrement by',
+        label: '--',
+        icon: 'ion-md-download',
+    },
+}
+
 export const logicTypeInfo = {
     [logicType.none]: {
         title: 'none',

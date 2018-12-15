@@ -171,19 +171,12 @@ export function updatePage(pageKey, field, newValue) {
 }
 
 //TODO create with variable args
-export function updateDeepPage(pageKey, fieldKey, itemKey, subfieldKey, newValue) {
+export function updateDeepPage() {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        let pageInfo = {
-            ...pageRepo[pageKey],
-            [fieldKey]: {
-                ...pageRepo[pageKey][fieldKey],
-                [itemKey]: {
-                    ...pageRepo[pageKey][fieldKey][itemKey],
-                    [subfieldKey]: newValue,
-                },
-            },
-        }
+        
+        const pageInfo = helpers.pathUpdate(arguments, 0, pageRepo)
+        if (!pageInfo) return
 
         dispatch({
             type: UPDATE_PAGE,

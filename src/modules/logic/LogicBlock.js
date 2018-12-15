@@ -50,12 +50,11 @@ class LogicBlock extends React.Component{
                         ref={provided.innerRef}
                     >
                         {rows.map((item, index) => {
-                            if (!value[item]) return null
-
                             const logicInfo = value[item]
+                            if (!logicInfo) return null
+
                             const errors = maptool.compile(item, value)
                             const collapsed = logicInfo.collapsed
-
                             const iprops = {
                                 item,
                                 logicInfo,
@@ -63,7 +62,6 @@ class LogicBlock extends React.Component{
                                 pageInfo,
                                 vars,
                             }
-
                             const newVars = logicInfo.logicType === logicType.function &&
                                 logicInfo.pageKey && pageRepo[logicInfo.pageKey].vars
                             
