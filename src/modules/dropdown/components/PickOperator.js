@@ -53,11 +53,14 @@ class PickOperator extends React.Component{
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
 
-        //TODO add other crtieria
-        valueClone[indexKey] = {
-            logicType: newValue,
-            right: valueClone[indexKey].right,
-            down: valueClone[indexKey].down,
+        valueClone[indexKey].logicType = newValue
+        switch(newValue) {
+            case logicType.operator:
+            case logicType.update:
+                valueClone[indexKey].data = {}
+                break
+            default:
+                valueClone[indexKey].data = ''
         }
         
         this.props.updatePage(pageKey, fieldKey, valueClone)

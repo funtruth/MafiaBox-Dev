@@ -52,19 +52,20 @@ class LogicBlock extends React.Component{
                         {rows.map((item, index) => {
                             if (!value[item]) return null
 
+                            const logicInfo = value[item]
                             const errors = maptool.compile(item, value)
-                            const collapsed = value[item].collapsed
+                            const collapsed = logicInfo.collapsed
 
                             const iprops = {
                                 item,
-                                value,
+                                logicInfo,
                                 field,
                                 pageInfo,
                                 vars,
                             }
 
-                            const newVars = value[item].logicType === logicType.function &&
-                                value[item].pageKey && pageRepo[value[item].pageKey].vars
+                            const newVars = logicInfo.logicType === logicType.function &&
+                                logicInfo.pageKey && pageRepo[logicInfo.pageKey].vars
                             
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -96,10 +97,10 @@ class LogicBlock extends React.Component{
                                         </div>
                                         {/*<LogicOptions {...iprops}/>*/}
                                         <LogicRightArrow {...iprops}/>
-                                        {!collapsed && value[item].right && 
+                                        {!collapsed && logicInfo.right && 
                                             <LogicBlock 
                                                 {...this.props}
-                                                index={value[item].right}
+                                                index={logicInfo.right}
                                                 vars={{
                                                     ...vars,
                                                     ...newVars

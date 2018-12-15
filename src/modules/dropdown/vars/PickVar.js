@@ -12,7 +12,8 @@ class PickVar extends React.Component{
         const selected = pageRepo[pageKey] 
             && pageRepo[pageKey][fieldKey] 
             && pageRepo[pageKey][fieldKey][indexKey]
-            && pageRepo[pageKey][fieldKey][indexKey][subfieldKey] === item
+            && pageRepo[pageKey][fieldKey][indexKey].data
+            && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey] === item
         
         let itemStyle = {}
         selected && (itemStyle = {
@@ -46,7 +47,7 @@ class PickVar extends React.Component{
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
 
-        valueClone[indexKey][subfieldKey] = newValue
+        valueClone[indexKey].data[subfieldKey] = newValue
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
     }

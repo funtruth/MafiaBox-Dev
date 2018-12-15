@@ -20,6 +20,7 @@ class LogicExpandable extends React.Component{
     render() {
         const { pageInfo, field, item,
             property, room, prefix } = this.props
+            
         const expanded = pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
             pageInfo[field][item].data[prefix].expand

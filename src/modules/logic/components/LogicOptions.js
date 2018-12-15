@@ -14,8 +14,8 @@ class LogicOptions extends React.Component{
     }
 
     render() {
-        const { item, value, field, pageInfo } = this.props
-        const collapsed = value[item].collapsed
+        const { item, logicInfo, field, pageInfo } = this.props
+        const collapsed = logicInfo.collapsed
 
         return (
             <div style={{ textAlign: 'center' }}>

@@ -16,8 +16,8 @@ class LogicPanels extends React.Component{
     }
     
     render() {
-        const { item, field, value, pageInfo, pageRepo } = this.props
-        const isOperator = value[item].logicType === logicType.operator
+        const { item, field, logicInfo, pageInfo, pageRepo } = this.props
+        const isOperator = logicInfo.logicType === logicType.operator
         
         if (isOperator) return (
             <div>
@@ -29,13 +29,13 @@ class LogicPanels extends React.Component{
                     index-key={item}
                     page-key={pageInfo.pageKey}
                     style={{
-                        color: value[item].var1 ? '#fff' : '#868686',
+                        color: logicInfo.data.var1 ? '#fff' : '#868686',
                         borderRadius: '0px 4px 0px 0px',
                     }}
                     onClick={this._onClick}
                 >
                     <div className="text-ellipsis">
-                        {value[item].var1 || 'Variable'}
+                        {logicInfo.data.var1 || 'Variable'}
                     </div> 
                 </div>
                 <div
@@ -46,11 +46,11 @@ class LogicPanels extends React.Component{
                     index-key={item}
                     page-key={pageInfo.pageKey}
                     style={{
-                        color: value[item].comparison ? '#d6d6d6' : '#868686',
+                        color: logicInfo.data.comparison ? '#d6d6d6' : '#868686',
                     }}
                 >
                     <div className="text-ellipsis">
-                        {(value[item].comparison && comparisonType[value[item].comparison].title) || 'Operator'}
+                        {(logicInfo.data.comparison && comparisonType[logicInfo.data.comparison].title) || 'Operator'}
                     </div>
                 </div>
                 <div
@@ -61,19 +61,19 @@ class LogicPanels extends React.Component{
                     index-key={item}
                     page-key={pageInfo.pageKey}
                     style={{
-                        color: value[item].var2 ? '#fff' : '#868686',
+                        color: logicInfo.data.var2 ? '#fff' : '#868686',
                         borderRadius: '0px 0px 4px 0px',
                     }}
                     onClick={this._onClick}
                 >
                     <div className="text-ellipsis">
-                        {value[item].var2 || 'Variable'}
+                        {logicInfo.data.var2 || 'Variable'}
                     </div>
                 </div>
             </div>
         )
 
-        const hasPage = pageRepo[value[item].pageKey]
+        const hasPage = pageRepo[logicInfo.data]
         return (
             <div
                 className="logic-button menu-onclick"
@@ -88,7 +88,7 @@ class LogicPanels extends React.Component{
             >
                 <div className="text-ellipsis">
                     {hasPage ? 
-                        pageRepo[value[item].pageKey].title
+                        pageRepo[logicInfo.data].title
                         :'Empty'
                     }
                 </div>

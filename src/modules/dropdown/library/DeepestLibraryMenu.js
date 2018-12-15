@@ -11,7 +11,7 @@ class DeepestLibraryMenu extends React.Component{
 
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
-        valueClone[indexKey].pageKey = newValue
+        valueClone[indexKey].data = newValue
 
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
