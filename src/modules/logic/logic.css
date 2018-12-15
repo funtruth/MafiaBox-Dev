@@ -103,7 +103,6 @@
 
 .logic-board {
     overflow: auto;
-    max-height: 400px;
 }
 
 .logic-new-var {
@@ -133,4 +132,11 @@
     padding: 3px 0px 3px 6px;
     font: 300 13px Arial;
     margin-left: 2px;
+}
+
+.logic-pick-update {
+    background-color: rgba(60, 63, 68,1);
+    border-radius: 4px;
+    padding: 3px 6px 3px 6px;
+    font: 300 12px Arial;
 }

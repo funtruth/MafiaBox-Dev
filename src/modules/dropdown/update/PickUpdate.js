@@ -7,7 +7,7 @@ import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
 import { logicType, logicTypeInfo } from '../../logic/types'
 
-class LogicMenu extends React.Component{
+class PickUpdate extends React.Component{
     _renderItem = (item) => {
         const { pageRepo, dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey } = dropdownParams
@@ -53,7 +53,12 @@ class LogicMenu extends React.Component{
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
 
-        valueClone[indexKey].logicType = newValue
+        //TODO add other crtieria
+        valueClone[indexKey] = {
+            logicType: newValue,
+            right: valueClone[indexKey].right,
+            down: valueClone[indexKey].down,
+        }
         
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
@@ -122,4 +127,4 @@ export default connect(
         addItemBelowOf,
         deleteItem,
     }
-)(LogicMenu)
+)(PickUpdate)

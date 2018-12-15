@@ -1,48 +1,68 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { updateDeepPage } from '../../page/PageReducer'
+import LogicPickUpdate from './LogicPickUpdate';
 
 class LogicExpandable extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            collapsed: true,
-        }
-    }
+    _toggle = () => {
+        const { pageInfo, field, item, prefix } = this.props
+        const { pageKey } = pageInfo
 
-    _toggleCollapse = () => {
-        this.setState({
-            collapsed: !this.state.collapsed
-        })
+        let dataClone = {}
+        Object.assign(dataClone, pageInfo[field][item].data)
+        if (!dataClone[prefix]) dataClone[prefix] = {}
+        dataClone[prefix].expand = !dataClone[prefix].expand
+        
+        this.props.updateDeepPage(pageKey, field, item, 'data', dataClone)
     }
 
     render() {
-        const { item, room } = this.props
-        const { collapsed } = this.state
-        const hasChildren = typeof room === 'object'
-
+        const { pageInfo, field, item,
+            property, room, prefix } = this.props
+        const expanded = pageInfo[field][item].data &&
+            pageInfo[field][item].data[prefix] &&
+            pageInfo[field][item].data[prefix].expand
+        const hasChildren = !room.dropdownType
+        
         return (
             <div
-                className="logic-form-label"
                 style={{
                     marginTop: 2,
+                    marginLeft: 4,
                 }}
             >
-                <div className="row">
-                    {item}
-                    {hasChildren &&
+                <div
+                    className="row logic-form-label"
+                    style={{
+                        alignItems: 'center',
+                    }}
+                >
+                    {property}
+                    {hasChildren ?
                         <i 
-                            className={collapsed ? "ion-md-arrow-dropdown" : "ion-md-arrow-dropup"}
-                            data-tip={collapsed ? "Expand" : "Collapse"}
-                            onClick={this._toggleCollapse}
+                            className={expanded ? "ion-md-arrow-dropup" : "ion-md-arrow-dropdown"}
+                            data-tip={expanded ? "Collapse" : "Expand"}
+                            onClick={this._toggle}
                             style={{
                                 marginLeft: 'auto',
                                 width: 15,
                             }}
+                        />:
+                        <LogicPickUpdate
+                            {...this.props}
                         />
                     }
                 </div>
-                {!collapsed && hasChildren &&
-                    Object.keys(room).map((item, index) => (
-                        <LogicExpandable {...this.props} key={index} item={item} room={room[item]}/>
+                {expanded && hasChildren &&
+                    Object.keys(room).map((property, index) => (
+                        <LogicExpandable
+                            {...this.props}
+                            key={index}
+                            property={property}
+                            room={room[property]}
+                            prefix={prefix + "." + property}
+                        />
                     ))
                 }
             </div>
@@ -50,4 +70,9 @@ class LogicExpandable extends React.Component{
     }
 }
 
-export default LogicExpandable
+export default connect(
+    null,
+    {
+        updateDeepPage,
+    }
+)(LogicExpandable)

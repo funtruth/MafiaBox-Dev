@@ -1,30 +1,48 @@
+import { dropdownType } from '../dropdown/types'
+
 const initialState = {
     room: {
         gameState: {
-            phase: '',
-            counter1: 0,
-            veto: 0,
-            nominate: '',
-        },
-        lobby: {
-            '{player1}': {
-                name: '',
-                roleId: '',
-                uid: '',
-                dead: '',
-                health: '',
+            phase: {
+                dropdownType: dropdownType.pickPhase,
+            },
+            counter1: {
+                dropdownType: dropdownType.pickUpdate,
+            },
+            veto: {
+                dropdownType: dropdownType.pickUpdate,
+            },
+            nominate: {
+                dropdownType: dropdownType.pickUid,
             },
         },
-        choice: '',
-        ready: '',
-        news: {
-            '{timestamp}': {
-                message: '',
-                timestamp: '',
-                counter: 0,
-            }
+        lobby: {
+            dropdownType: dropdownType.pickUid,
         },
-    }
+        choice: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+        news: {
+            dropdownType: dropdownType.writeNews,
+        },
+    },
+    uid: {
+        name: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+        roleId: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+        uid: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+        dead: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+        health: {
+            dropdownType: dropdownType.pickUpdate,
+        },
+    },
 }
 
 export default (state = initialState, action) => {

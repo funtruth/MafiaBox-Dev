@@ -10,8 +10,14 @@ class LogicObject extends React.Component{
         if (!showForm) return null
 
         return (
-            Object.keys(room).map((item, index) => (
-                <LogicExpandable {...this.props} key={index} item={item} room={room[item]}/>
+            Object.keys(room).map((property, index) => (
+                <LogicExpandable
+                    {...this.props}
+                    key={index}
+                    property={property}
+                    room={room[property]}
+                    prefix={property}
+                />
             ))
         )
     }

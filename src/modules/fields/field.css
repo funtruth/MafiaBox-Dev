@@ -14,7 +14,3 @@
 .field-title-input:focus {
     outline: none;
 }
-
-.field-item:hover {
-    background-color: hsla(0,0%,100%,.1);
-}

@@ -3,7 +3,7 @@ import _ from 'lodash'
 const initialState = {
     dropdownKeys: [],
     dropdownParams: {},
-    dropdownData: {},
+    dropdownData: null,
 }
 
 const SHOW_DROPDOWN_BY_KEY = 'dropdown/show-dropdown-by-key'

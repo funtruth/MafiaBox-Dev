@@ -7,7 +7,6 @@ export const dropdownType = {
 
     showLogic: 'dropdownType/show-logic',
     deleteLogic: 'dropdownType/delete-logic',
-    pickOperator: 'dropdownType/pick-operator',
 
     editTag: 'dropdownType/edit-tag',
     createSomething: 'dropdownType/create-something',
@@ -19,4 +18,9 @@ export const dropdownType = {
     addVar: 'dropdownType/add-var',
     pickVar: 'dropdownType/pick-var',
     pickComparison: 'dropdownType/pick-comparison',
+
+    pickUpdate: 'dropdownType/pick-update',
+    pickPhase: 'dropdownType/pick-phase',
+    pickUid: 'dropdownType/pick-uid',
+    writeNews: 'dropdownType/write-news',
 }

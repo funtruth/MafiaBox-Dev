@@ -170,6 +170,28 @@ export function updatePage(pageKey, field, newValue) {
     }
 }
 
+//TODO create with variable args
+export function updateDeepPage(pageKey, fieldKey, itemKey, subfieldKey, newValue) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        let pageInfo = {
+            ...pageRepo[pageKey],
+            [fieldKey]: {
+                ...pageRepo[pageKey][fieldKey],
+                [itemKey]: {
+                    ...pageRepo[pageKey][fieldKey][itemKey],
+                    [subfieldKey]: newValue,
+                },
+            },
+        }
+
+        dispatch({
+            type: UPDATE_PAGE,
+            payload: pageInfo
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 

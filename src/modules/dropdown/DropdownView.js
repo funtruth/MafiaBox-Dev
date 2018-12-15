@@ -5,9 +5,8 @@ import { connect } from 'react-redux'
 import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
-import LogicMenu from './components/LogicMenu'
+import PickOperator from './components/PickOperator';
 import LogicDelete from './components/LogicDelete'
-import PickOperator from './components/PickOperator'
 
 import EditTag from './template/EditTag'
 import CreateSomething from './template/CreateSomething'
@@ -24,23 +23,28 @@ import EditVar from './vars/EditVar'
 import PickVar from './vars/PickVar'
 import PickComparison from './vars/PickComparison'
 
+import PickPhase from './update/PickPhase'
+import PickUid from './update/PickUid'
+import PickUpdate from './update/PickUpdate'
+import WriteNews from './update/WriteNews'
+
 class DropdownView extends React.Component{
     _renderItem = (dropdownKey, index) => {
         switch(dropdownKey) {
             case dropdownType.storyShowMore:
                 return <ClickMenu key={index}/>
+            case dropdownType.showLogic:
+                return <PickOperator key={index}/>
+            case dropdownType.deleteLogic:
+                return <LogicDelete key={index}/>
+
             case dropdownType.showLibrary:
                 return <LibraryMenu key={index}/>
             case dropdownType.showDeepLibrary:
                 return <DeepLibraryMenu key={index}/>
             case dropdownType.showDeepestLibrary:
                 return <DeepestLibraryMenu key={index}/>
-            case dropdownType.showLogic:
-                return <LogicMenu key={index}/>
-            case dropdownType.deleteLogic:
-                return <LogicDelete key={index}/>
-            case dropdownType.pickOperator:
-                return <PickOperator key={index}/>
+
             case dropdownType.editTag:
                 return <EditTag key={index}/>
             case dropdownType.createSomething:
@@ -51,6 +55,7 @@ class DropdownView extends React.Component{
                 return <AddTemplateField key={index}/>
             case dropdownType.templateTitleOptions:
                 return <TemplateTitleOptions key={index}/>
+                
             case dropdownType.addVar:
                 return <AddVar key={index}/>
             case dropdownType.editVar:
@@ -59,6 +64,15 @@ class DropdownView extends React.Component{
                 return <PickVar key={index}/>
             case dropdownType.pickComparison:
                 return <PickComparison key={index}/>
+
+            case dropdownType.pickPhase:
+                return <PickPhase key={index}/>
+            case dropdownType.pickUid:
+                return <PickUid key={index}/>
+            case dropdownType.pickUpdate:
+                return <PickUpdate key={index}/>
+            case dropdownType.writeNews:
+                return <WriteNews key={index}/>
             default:
                 return null
         }

@@ -7,7 +7,7 @@ import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
 import { logicType, logicTypeInfo } from '../../logic/types'
 
-class PickOperator extends React.Component{
+class PickUid extends React.Component{
     _renderItem = (item) => {
         const { pageRepo, dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey } = dropdownParams
@@ -127,4 +127,4 @@ export default connect(
         addItemBelowOf,
         deleteItem,
     }
-)(PickOperator)
+)(PickUid)
