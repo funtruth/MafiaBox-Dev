@@ -10,6 +10,7 @@
     "concurrently": "^4.0.1",
     "electron-is-dev": "^1.0.1",
     "firebase": "^5.5.4",
+    "fuse.js": "^3.3.0",
     "lodash": "^4.17.11",
     "react": "^16.5.2",
     "react-beautiful-dnd": "^9.0.2",
