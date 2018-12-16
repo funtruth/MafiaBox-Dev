@@ -170,7 +170,6 @@ export function updatePage(pageKey, field, newValue) {
     }
 }
 
-//TODO create with variable args
 export function updateDeepPage() {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page

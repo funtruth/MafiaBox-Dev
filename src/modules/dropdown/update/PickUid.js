@@ -53,13 +53,6 @@ class PickUid extends React.Component{
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
 
-        //TODO add other crtieria
-        valueClone[indexKey] = {
-            logicType: newValue,
-            right: valueClone[indexKey].right,
-            down: valueClone[indexKey].down,
-        }
-        
         this.props.updatePage(pageKey, fieldKey, valueClone)
         this.props.showDropdownByKey()
     }

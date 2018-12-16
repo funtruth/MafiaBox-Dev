@@ -8,10 +8,6 @@ export function genUID(key) {
 
 //updates a property deep inside an object and returns the entire object
 export function pathUpdate(args, index, repo) {
-    if (!repo[args[index]]) {
-        console.warn('Path does not exist (helpers.pathUpdate)')
-        return null
-    }
     return {
         ...repo[args[index]],
         [args[index + 1]]: index===args.length-3?args[args.length-1]:pathUpdate(args, index+1, repo[args[index]])

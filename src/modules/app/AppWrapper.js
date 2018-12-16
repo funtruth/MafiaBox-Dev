@@ -56,6 +56,7 @@ class AppWrapper extends React.Component{
                             fieldKey: e.target.getAttribute('field-key'),
                             subfieldKey: e.target.getAttribute('subfield-key'),
                             pageKey: e.target.getAttribute('page-key'),
+                            currentValue: e.target.getAttribute('current-value'),
                             pageX: e.pageX - e.offsetX - 8,
                             pageY: e.pageY - e.offsetY + 28,
                         })

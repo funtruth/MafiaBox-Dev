@@ -1,17 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
 import { valueType } from '../types';
 
-import { pushData } from '../../dropdown/DropdownReducer'
-
 class LogicPickUpdate extends React.Component{
-    _onClick = () => {
-        const { logicInfo, prefix } = this.props
-        const value = (logicInfo.data[prefix] && logicInfo.data[prefix].value) || valueType.nC.key
-        this.props.pushData(value)
-    }
-
     render() {
         const { room, field, pageInfo, logicInfo, item, prefix } = this.props
         const { dropdownType } = room
@@ -25,20 +15,20 @@ class LogicPickUpdate extends React.Component{
                 index-key={item}
                 field-key={field}
                 subfield-key={prefix}
+                current-value={value}
                 style={{
                     marginLeft: 'auto',
+                    width: 18,
+                    textAlign: 'center',
                 }}
-                onClick={this._onClick}
             >
-                {valueType[value].label}
+                <i
+                    className={`${valueType[value].icon} drop-down-menu-icon`}
+                    style={{ pointerEvents: 'none' }}
+                />
             </div>
         )
     }
 }
 
-export default connect(
-    null,
-    {
-        pushData,
-    }
-)(LogicPickUpdate)
+export default LogicPickUpdate

@@ -8,10 +8,11 @@ import { valueType } from '../../logic/types'
 
 class PickUpdate extends React.Component{
     _renderItem = (item) => {
-        const { dropdownData } = this.props
+        const { dropdownParams } = this.props
+        const { currentValue } = dropdownParams
         
         let selected = false
-        if (typeof dropdownData === 'string') selected = dropdownData === item
+        if (typeof currentValue === 'string') selected = currentValue === item
 
         let itemStyle = {}
         selected && (itemStyle = {
@@ -78,7 +79,6 @@ class PickUpdate extends React.Component{
 export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
-        dropdownData: state.dropdown.dropdownData
     }),
     {
         updateDeepPage,
