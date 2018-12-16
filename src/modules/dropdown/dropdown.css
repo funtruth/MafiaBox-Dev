@@ -54,6 +54,7 @@
     font-size: 17px;
     width: 30px;
     text-align: center;
+    pointer-events: none;
 }
 
 .tag-input {

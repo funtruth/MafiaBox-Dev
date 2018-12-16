@@ -2,6 +2,29 @@ import React from 'react'
 import { valueType } from '../types';
 
 class LogicPickUpdate extends React.Component{
+    _renderItem = (value) => {
+        const ids = value.split('-')
+        switch(ids[0]) {
+            case 'phase':
+                return (
+                    <div
+                        style={{
+                            fontSize: 17,
+                            textAlign: 'center',
+                            pointerEvents: 'none',
+                        }}
+                    >...
+                    </div>
+                )
+            default:
+                return (
+                    <i
+                        className={`${valueType[value].icon} drop-down-menu-icon`}
+                    />
+                )
+        }
+    }
+
     render() {
         const { room, field, pageInfo, logicInfo, item, prefix } = this.props
         const { dropdownType } = room
@@ -22,10 +45,7 @@ class LogicPickUpdate extends React.Component{
                     textAlign: 'center',
                 }}
             >
-                <i
-                    className={`${valueType[value].icon} drop-down-menu-icon`}
-                    style={{ pointerEvents: 'none' }}
-                />
+                {this._renderItem(value)}
             </div>
         )
     }

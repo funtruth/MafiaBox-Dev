@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import PageLib from './PageLib'
+import Dropdown from '../components/Dropdown';
 
 class StoryMapLib extends React.Component{
     constructor(props) {
@@ -24,25 +25,26 @@ class StoryMapLib extends React.Component{
     }
 
     _onMouseEnter = (key, e) => {
-        const { pageX, pageY } = this.props
+        const { pageX, pageY, searchMenu } = this.props
         
+        //TODO better alg cause sometimes buggy
         this.setState({
             showDropdown: true,
-            nextPageX: pageX + 158,
-            nextPageY: e.pageY - (e.pageY - pageY - 8) % 28 - 8,
+            nextPageX: pageX + (searchMenu?208:158),
+            nextPageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % 28 - 8,
             nextHoverKey: key,
         })
     }
 
     render() {
-        const { storyMap, pageRepo, pageX, pageY, hoverKey } = this.props
+        const { storyMap, pageRepo, hoverKey } = this.props
         const { showDropdown, nextPageX, nextPageY, nextHoverKey } = this.state
         
         let stories = _.filter(pageRepo, i => hoverKey === i.boardType)
         stories = _.groupBy(stories, i => i.storyType)
 
         return (
-            <div className="drop-down-menu" style={{ top: pageY, left: pageX }}>
+            <div>
                 {Object.keys(stories).map((item, index) => {
                     return (
                         <div
@@ -60,7 +62,14 @@ class StoryMapLib extends React.Component{
                         </div>
                     )
                 })}
-                {showDropdown && <PageLib pageX={nextPageX} pageY={nextPageY} hoverKey={nextHoverKey}/>}
+                {showDropdown && <Dropdown pageX={nextPageX} pageY={nextPageY}>
+                    <PageLib
+                        pageX={nextPageX}
+                        pageY={nextPageY}
+                        hoverKey={nextHoverKey}
+                        onSelect={this.props.onSelect}
+                    />
+                </Dropdown>}
             </div>
         )
     }

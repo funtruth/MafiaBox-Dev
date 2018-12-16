@@ -1,76 +1,89 @@
 import React from 'react'
+import _ from 'lodash'
+import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { fuseType } from '../types'
+import { boardType } from '../../board/types'
+
+import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
-import { valueType } from '../../logic/types'
+import StoryMapLib from '../library/StoryMapLib';
 
-class PickPhase extends React.Component{
-    _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
-        
-        let selected = false
-        if (typeof currentValue === 'string') selected = currentValue === item
-
-        let itemStyle = {}
-        selected && (itemStyle = {
-            color: selected ? '#fff' : '#b6b6b6',
-        })
-        
-        return (
-            <div
-                key={item}
-                className="drop-down-menu-option"
-                onClick={this._select.bind(this, item)}
-                style={itemStyle}
-            >
-                <i
-                    className={`${valueType[item].icon} drop-down-menu-icon`}
-                />
-                {valueType[item].title}
-                {selected && <i
-                    className="ion-md-checkmark"
-                    style={{
-                        marginLeft: 'auto',
-                        width: 30,
-                        textAlign: 'center',
-                    }}
-                />}
-            </div>
-        )
+class BoardLib extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            searchText: '',
+            results: [],
+            showDropdown: false,
+            nextPageX: 0,
+            nextPageY: 0,
+            hoverKey: null,
+        }
+        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === boardType.flow), fuseType.boardLib)
     }
 
-    _select = (newValue) => {
+    _onSelect = (value) => {
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', newValue)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', value)
         this.props.showDropdownByKey()
     }
 
+    _onType = (e) => {
+        this.setState({
+            searchText: e.target.value,
+            results: this.fuse.search(e.target.value),
+            showDropdown: false,
+        })
+    }
+
     render() {
-        const { dropdownParams } = this.props
+        const { dropdownParams, pageRepo, boardRepo } = this.props
         const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
-        let items = [
-            valueType.nC.key,
-            valueType.null.key,
-            valueType.i.key,
-            valueType.iB.key,
-            valueType.d.key,
-            valueType.dB.key,
-        ]
-
+        const { searchText } = this.state
+        
         return (
-            <div className="drop-down-menu" style={menuStyle}>
-                {items.map(this._renderItem)}
+            <div className="drop-down-menu" style={{ top: pageY, left: pageX }}>
+                <input
+                    className="tag-input menu-voidclick"
+                    value={this.state.searchText}
+                    onChange={this._onType}
+                    placeholder="Search for page"
+                    type='text'
+                    autoFocus
+                />
+                <div className="drop-down-menu-separator"/>
+                {searchText ?
+                    this.state.results.length ?
+                        this.state.results.map((item, index) => {
+                            return (
+                                <div
+                                    key={item.pageKey}
+                                    className="drop-down-menu-option"
+                                    onClick={this._onSelect.bind(this, item)}
+                                >
+                                    <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
+                                    <div style={{ marginLeft: 'auto', color: '#666666' }}>
+                                        {`${boardRepo[item.boardType].title}`}
+                                    </div>
+                                </div>
+                            )
+                        })
+                        :<div className="drop-down-menu-option" style={{ color: '#666666' }}>
+                            No search results found
+                        </div>
+                    :<StoryMapLib
+                        searchMenu
+                        pageX={pageX}
+                        pageY={pageY}
+                        hoverKey={boardType.flow}
+                        onSelect={this._onSelect}
+                    />
+                }
             </div>
         )
     }
@@ -79,9 +92,14 @@ class PickPhase extends React.Component{
 export default connect(
     state => ({
         dropdownParams: state.dropdown.dropdownParams,
+        boardRepo: state.page.boardRepo,
+        pageRepo: state.page.pageRepo,
+        storyMap: state.page.storyMap,
     }),
     {
-        updatePageByPath,
         showDropdownByKey,
+        popHighestDropdown,
+        updatePageByPath,
+
     }
-)(PickPhase)
+)(BoardLib)

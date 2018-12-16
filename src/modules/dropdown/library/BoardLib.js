@@ -3,10 +3,13 @@ import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
+import { fuseType } from '../types'
+
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from './StoryMapLib';
+import Dropdown from '../components/Dropdown';
 
 class BoardLib extends React.Component{
     constructor(props) {
@@ -19,17 +22,7 @@ class BoardLib extends React.Component{
             nextPageY: 0,
             hoverKey: null,
         }
-        this.fuse = new Fuse(_.toArray(props.pageRepo), {
-            shouldSort: true,
-            threshold: 0.5,
-            location: 0,
-            distance: 100,
-            maxPatternLength: 32,
-            minMatchCharLength: 1,
-            keys: [
-                "title"
-            ],
-        })
+        this.fuse = new Fuse(_.toArray(props.pageRepo), fuseType.boardLib)
     }
 
     _onSelect = (item) => {
@@ -62,7 +55,7 @@ class BoardLib extends React.Component{
     }
 
     render() {
-        const { dropdownParams, pageRepo, boardRepo, storyMap } = this.props
+        const { dropdownParams, pageRepo, boardRepo } = this.props
         const { pageX, pageY } = dropdownParams
         const { searchText, showDropdown, nextPageX, nextPageY, hoverKey } = this.state
 
@@ -74,7 +67,7 @@ class BoardLib extends React.Component{
                     className="tag-input menu-voidclick"
                     value={this.state.searchText}
                     onChange={this._onType}
-                    placeholder="Search for"
+                    placeholder="Search for page"
                     type='text'
                     autoFocus
                 />
@@ -116,7 +109,14 @@ class BoardLib extends React.Component{
                         )
                     })
                 }
-                {showDropdown && <StoryMapLib pageX={nextPageX} pageY={nextPageY} hoverKey={hoverKey}/>}
+                {showDropdown && <Dropdown pageX={nextPageX} pageY={nextPageY}>
+                    <StoryMapLib
+                        pageX={nextPageX}
+                        pageY={nextPageY}
+                        hoverKey={hoverKey}
+                        onSelect={this._onSelect}
+                    />
+                </Dropdown>}
             </div>
         )
     }

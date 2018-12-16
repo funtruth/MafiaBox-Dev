@@ -7,20 +7,16 @@ import { showDropdownByKey } from '../DropdownReducer'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
-
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', item.pageKey)
-        this.props.showDropdownByKey()
+        this.props.onSelect(item.pageKey)
     }
 
     render() {
-        const { pageRepo, pageX, pageY, hoverKey } = this.props
+        const { pageRepo, hoverKey } = this.props
         
         let pages = _.filter(pageRepo, i => i.storyType === hoverKey)
 
         return (
-            <div className="drop-down-menu" style={{ top: pageY, left: pageX }}>
+            <div>
                 {pages.map((item, index) => {
                     return (
                         <div
