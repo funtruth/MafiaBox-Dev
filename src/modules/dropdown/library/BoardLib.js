@@ -4,33 +4,40 @@ import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
-import { updatePage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from './StoryMapLib';
 
-const OPTIONS = {
-    shouldSort: true,
-    threshold: 0.5,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: [
-        "title"
-    ],
-}
-
-class LibraryMenu extends React.Component{
+class BoardLib extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
             searchText: '',
+            results: [],
             showDropdown: false,
             nextPageX: 0,
             nextPageY: 0,
             hoverKey: null,
         }
-        this.fuse = new Fuse(_.toArray(props.pageRepo), OPTIONS)
+        this.fuse = new Fuse(_.toArray(props.pageRepo), {
+            shouldSort: true,
+            threshold: 0.5,
+            location: 0,
+            distance: 100,
+            maxPatternLength: 32,
+            minMatchCharLength: 1,
+            keys: [
+                "title"
+            ],
+        })
+    }
+
+    _onSelect = (item) => {
+        const { dropdownParams } = this.props
+        const { pageKey, fieldKey, indexKey } = dropdownParams
+
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', item.pageKey)
+        this.props.showDropdownByKey()
     }
 
     _onMouseEnter = (key, e) => {
@@ -49,12 +56,13 @@ class LibraryMenu extends React.Component{
     _onType = (e) => {
         this.setState({
             searchText: e.target.value,
-            results: this.fuse.search(e.target.value)
+            results: this.fuse.search(e.target.value),
+            showDropdown: false,
         })
     }
 
     render() {
-        const { dropdownParams, pageRepo, boardRepo } = this.props
+        const { dropdownParams, pageRepo, boardRepo, storyMap } = this.props
         const { pageX, pageY } = dropdownParams
         const { searchText, showDropdown, nextPageX, nextPageY, hoverKey } = this.state
 
@@ -71,8 +79,25 @@ class LibraryMenu extends React.Component{
                     autoFocus
                 />
                 <div className="drop-down-menu-separator"/>
-                {searchText ? 
-                    <div></div>
+                {searchText ?
+                    this.state.results.length ?
+                        this.state.results.map((item, index) => {
+                            return (
+                                <div
+                                    key={item.pageKey}
+                                    className="drop-down-menu-option"
+                                    onClick={this._onSelect.bind(this, item)}
+                                >
+                                    <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
+                                    <div style={{ marginLeft: 'auto', color: '#666666' }}>
+                                        {`${boardRepo[item.boardType].title}`}
+                                    </div>
+                                </div>
+                            )
+                        })
+                        :<div className="drop-down-menu-option" style={{ color: '#666666' }}>
+                            No search results found
+                        </div>
                     :Object.keys(boards).map((item, index) => {
                         return (
                             <div
@@ -107,6 +132,7 @@ export default connect(
     {
         showDropdownByKey,
         popHighestDropdown,
-        updatePage,
+        updatePageByPath,
+
     }
-)(LibraryMenu)
+)(BoardLib)

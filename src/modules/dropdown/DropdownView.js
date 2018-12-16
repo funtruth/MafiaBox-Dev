@@ -14,7 +14,7 @@ import PickFieldType from './template/PickFieldType'
 import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
-import LibraryMenu from './library/LibraryMenu'
+import BoardLib from './library/BoardLib';
 
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
@@ -37,7 +37,7 @@ class DropdownView extends React.Component{
                 return <LogicDelete key={index}/>
 
             case dropdownType.showLibrary:
-                return <LibraryMenu key={index}/>
+                return <BoardLib key={index}/>
 
             case dropdownType.editTag:
                 return <EditTag key={index}/>
