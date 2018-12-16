@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateDeepPage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 
 import { valueType } from '../../logic/types'
 
@@ -46,7 +46,7 @@ class PickUpdate extends React.Component{
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updateDeepPage(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', newValue)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', newValue)
         this.props.showDropdownByKey()
     }
 
@@ -81,7 +81,7 @@ export default connect(
         dropdownParams: state.dropdown.dropdownParams,
     }),
     {
-        updateDeepPage,
+        updatePageByPath,
         showDropdownByKey,
     }
 )(PickUpdate)

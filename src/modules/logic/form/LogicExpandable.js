@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateDeepPage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 import LogicPickUpdate from './LogicPickUpdate';
 
 class LogicExpandable extends React.Component{
@@ -14,7 +14,7 @@ class LogicExpandable extends React.Component{
         if (!dataClone[prefix]) dataClone[prefix] = {}
         dataClone[prefix].expand = !dataClone[prefix].expand
         
-        this.props.updateDeepPage(pageKey, field, item, 'data', dataClone)
+        this.props.updatePageByPath(pageKey, field, item, 'data', dataClone)
     }
 
     render() {
@@ -74,6 +74,6 @@ class LogicExpandable extends React.Component{
 export default connect(
     null,
     {
-        updateDeepPage,
+        updatePageByPath,
     }
 )(LogicExpandable)

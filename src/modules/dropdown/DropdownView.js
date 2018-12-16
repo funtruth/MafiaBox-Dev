@@ -15,8 +15,6 @@ import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import LibraryMenu from './library/LibraryMenu'
-import DeepLibraryMenu from './library/DeepLibraryMenu'
-import DeepestLibraryMenu from './library/DeepestLibraryMenu'
 
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
@@ -40,10 +38,6 @@ class DropdownView extends React.Component{
 
             case dropdownType.showLibrary:
                 return <LibraryMenu key={index}/>
-            case dropdownType.showDeepLibrary:
-                return <DeepLibraryMenu key={index}/>
-            case dropdownType.showDeepestLibrary:
-                return <DeepestLibraryMenu key={index}/>
 
             case dropdownType.editTag:
                 return <EditTag key={index}/>

@@ -11,7 +11,7 @@ import { pushData } from '../../dropdown/DropdownReducer'
 class LogicPanels extends React.Component{
     _onClick = () => {
         const { vars } = this.props
-        const varKeys = Object.keys(vars)
+        const varKeys = Object.keys(vars || {})
         this.props.pushData(varKeys)
     }
     

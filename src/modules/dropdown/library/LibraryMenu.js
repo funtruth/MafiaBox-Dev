@@ -1,12 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
-
-import { dropdownType } from '../types'
+import { connect } from 'react-redux'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
+
+import StoryMapLib from './StoryMapLib';
 
 const OPTIONS = {
     shouldSort: true,
@@ -25,19 +25,24 @@ class LibraryMenu extends React.Component{
         super(props)
         this.state = {
             searchText: '',
+            showDropdown: false,
+            nextPageX: 0,
+            nextPageY: 0,
+            hoverKey: null,
         }
         this.fuse = new Fuse(_.toArray(props.pageRepo), OPTIONS)
     }
 
     _onMouseEnter = (key, e) => {
         const { dropdownParams } = this.props
-        const { pageX, pageY, deepKey, deepestKey } = dropdownParams
+        const { pageX, pageY } = dropdownParams
+        if (key === this.state.hoverKey) return
 
-        this.props.showDropdownByKey(dropdownType.showDeepLibrary, {
-            deepKey: key,
-            deepestKey: key === deepKey ? deepestKey : null,
-            deepPageX: pageX + 158,
-            deepPageY: e.pageY - (e.pageY - pageY - 8) % 28 - 8,
+        this.setState({
+            showDropdown: true,
+            nextPageX: pageX + 208,
+            nextPageY: e.pageY - (e.pageY - pageY - 60) % 28 - 8,
+            hoverKey: key,
         })
     }
 
@@ -51,17 +56,12 @@ class LibraryMenu extends React.Component{
     render() {
         const { dropdownParams, pageRepo, boardRepo } = this.props
         const { pageX, pageY } = dropdownParams
-        const { searchText } = this.state
+        const { searchText, showDropdown, nextPageX, nextPageY, hoverKey } = this.state
 
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
         const boards = _.groupBy(pageRepo, i => i.boardType)
-        console.log(boards)
         
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div className="drop-down-menu" style={{ top: pageY, left: pageX }}>
                 <input
                     className="tag-input menu-voidclick"
                     value={this.state.searchText}
@@ -91,6 +91,7 @@ class LibraryMenu extends React.Component{
                         )
                     })
                 }
+                {showDropdown && <StoryMapLib pageX={nextPageX} pageY={nextPageY} hoverKey={hoverKey}/>}
             </div>
         )
     }

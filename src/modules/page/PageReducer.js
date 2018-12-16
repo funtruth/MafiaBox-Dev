@@ -179,7 +179,7 @@ export function updatePage(pageKey, field, newValue) {
     }
 }
 
-export function updateDeepPage() {
+export function updatePageByPath() {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
