@@ -64,7 +64,7 @@ class DeepLibraryMenu extends React.Component{
     render() {
         const { dropdownParams, storyMap } = this.props
         const { deepPageX, deepPageY, deepKey } = dropdownParams
-
+        return null
         const items = _.filter(storyMap, i => i.boardType === deepKey)
         if (!items || !items.length) return null
 

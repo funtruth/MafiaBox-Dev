@@ -1,12 +1,12 @@
 import React from 'react'
 import './board.css'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { addPageToMap } from '../page/PageReducer'
 
 import StoryList from './components/StoryList'
-import StoryTitle from './components/StoryTitle';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -23,6 +23,13 @@ const getListStyle = isDraggingOver => ({
 
 class StoryBoard extends React.Component{
     render() {
+        const { storyMap, pageRepo, boardType } = this.props
+        let filteredStoryMap = _.filter(storyMap, i => i.boardType === boardType)
+        let filteredPageRepo = _.filter(pageRepo, i => i.boardType === boardType)
+        
+        filteredStoryMap = _.sortBy(filteredStoryMap, i => i.index)
+        filteredPageRepo = _.sortBy(filteredPageRepo, i => i.index)
+
         return (
             <div className="story-view">
                 <Droppable droppableId="board" direction="horizontal" type="COLUMN">
@@ -32,32 +39,28 @@ class StoryBoard extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {this.props.storyMap.map((item, index) => (
-                                item.boardType === this.props.boardType &&
-                                    <Draggable key={item.key} draggableId={item.key} index={index}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                style={getItemStyle(
-                                                    snapshot.isDragging,
-                                                    provided.draggableProps.style
-                                                )}
-                                            >
-                                                <StoryTitle
-                                                    item={item}
-                                                    index={index}
-                                                    dragging={snapshot.isDragging}
-                                                    addPage={this.props.addPageToMap.bind(this, item.key, this.props.boardType)}
-                                                />
-                                                <StoryList
-                                                    item={item}
-                                                    dragging={snapshot.isDragging}
-                                                />
-                                            </div>
-                                        )}
-                                    </Draggable>
+                            {filteredStoryMap.map((item, index) => (
+                                <Draggable key={item.key} draggableId={item.key} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}
+                                        >
+                                            <StoryList
+                                                item={item}
+                                                storyIndex={index}
+                                                boardType={boardType}
+                                                dragging={snapshot.isDragging}
+                                                repo={filteredPageRepo}
+                                            />
+                                        </div>
+                                    )}
+                                </Draggable>
                             ))}
                             {provided.placeholder}
                         </div>
@@ -88,6 +91,7 @@ const styles = {
 export default connect(
     state => ({
         storyMap: state.page.storyMap,
+        pageRepo: state.page.pageRepo,
     }),
     {
         addPageToMap,

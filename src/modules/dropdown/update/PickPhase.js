@@ -70,16 +70,6 @@ class PickPhase extends React.Component{
 
         return (
             <div className="drop-down-menu" style={menuStyle}>
-            <input
-                className="tag-input menu-voidclick"
-                value={this.state.value}
-                onChange={this._onChange}
-                onKeyDown={this._onKeyDown}
-                placeholder="Untitled"
-                type='text'
-                autoFocus
-            />
-            <div className="drop-down-menu-separator"/>
                 {items.map(this._renderItem)}
             </div>
         )

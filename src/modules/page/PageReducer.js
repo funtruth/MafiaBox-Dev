@@ -1,21 +1,19 @@
+import _ from 'lodash'
 import * as helpers from '../common/helpers'
 import { modalType } from '../modal/modalConfig'
 import { showModalByKey } from '../modal/ModalReducer';
 
-import { initStoryMap } from './defaults'
+import { initStoryMap, initBoardRepo } from './defaults'
 
 const initialState = {
     storyMap: initStoryMap,
-    pageMap: {},
+    boardRepo: initBoardRepo,
     pageRepo: {},
 }
 
 //storyMap:
 const ADD_STORY = 'story/add-story-to'
 const MOVE_STORY = 'story/move-story'
-
-//pageMap: maps which pageKeys are in each mapKey
-const ADD_PAGE_TO_MAP = 'page/add-page-to-map'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
@@ -26,20 +24,21 @@ const UPDATE_PAGE = 'page/update-page'
 
 export function addStory(title, boardType) {
     return (dispatch, getState) => {
-        const { storyMap, pageMap } = getState().page
+        const { storyMap } = getState().page
 
         let storyKey = helpers.genUID('story')
-        while(pageMap[storyKey]) {
+        while(storyMap[storyKey]) {
             storyKey = helpers.genUID('story')
         }
 
-        let storyMapClone = Array.from(storyMap)
-        storyMapClone.push({
+        let storyMapClone = {}
+        Object.assign(storyMapClone, storyMap)
+        storyMapClone[storyKey] = {
             key: storyKey,
             title,
             boardType,
             default: false,
-        })
+        }
 
         dispatch({
             type: ADD_STORY,
@@ -63,70 +62,80 @@ export function moveStory(startIndex, endIndex) {
     }
 }
 
-export function addPageToMap(mapKey, boardType) {
+export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
-        const { pageMap, pageRepo } = getState().page
+        const { pageRepo } = getState().page
 
         let pageKey = helpers.genUID('phase')
         while(pageRepo[pageKey]) {
             pageKey = helpers.genUID('phase')
         }
 
-        let mapInfo = Array.from(pageMap[mapKey] || [])
-        mapInfo.unshift(pageKey)
-
         let pageInfo = {
             pageKey,
             boardType,
+            storyType: mapKey,
+            index: itemCount,
         }
 
         dispatch({
             type: ADD_PAGE_TO_REPO,
             payload: pageInfo
         })
-
-        dispatch({
-            type: ADD_PAGE_TO_MAP,
-            payload: { mapKey, mapInfo }
-        })
-        
         dispatch(showModalByKey(modalType.showPage, { pageKey }))
     }
 }
 
 export function movePageWithinMap(mapKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { pageMap } = getState().page
-        let mapInfo = Array.from(pageMap[mapKey])
+        const { pageRepo } = getState().page
+        
+        let pageRepoClone = {}
+        Object.assign(pageRepoClone, pageRepo)
 
-        const [removed] = mapInfo.splice(startIndex, 1);
-        mapInfo.splice(endIndex, 0, removed);
+        let relatedPages = _.filter(pageRepo, i => i.storyType === mapKey)
+        relatedPages = _.sortBy(relatedPages, i => i.index)
+        
+        const [removed] = relatedPages.splice(startIndex, 1)
+        relatedPages.splice(endIndex, 0, removed)
+        
+        for(var i=0; i<relatedPages.length; i++) {
+            pageRepoClone[relatedPages[i].pageKey].index = i
+        }
 
         dispatch({
             type: MOVE_PAGE_WITHIN_MAP,
-            payload: {
-                mapKey,
-                mapInfo,
-            }
+            payload: pageRepoClone
         })
     }
 }
 
 export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { pageMap } = getState().page
-        const startMapClone = Array.from(pageMap[startMapKey])
-        const endMapClone = Array.from(pageMap[endMapKey] || [])
-        const [removed] = startMapClone.splice(startIndex, 1);
-        endMapClone.splice(endIndex, 0, removed);
-    
-        const result = {};
-        result[startMapKey] = startMapClone;
-        result[endMapKey] = endMapClone;
+        const { pageRepo } = getState().page
+
+        let pageRepoClone = {}
+        Object.assign(pageRepoClone, pageRepo)
+
+        let startPages = _.filter(pageRepo, i => i.storyType === startMapKey)
+        startPages = _.sortBy(startPages, i => i.index)
+        let endPages = _.filter(pageRepo, i => i.storyType === endMapKey)
+        endPages = _.sortBy(endPages, i => i.index)
+
+        startPages[startIndex].storyType = endMapKey
+        const [removed] = startPages.splice(startIndex, 1)
+        endPages.splice(endIndex, 0, removed)
+
+        for(var i=0; i<startPages.length; i++) {
+            pageRepoClone[startPages[i].pageKey].index = i
+        }
+        for(var j=0; j<endPages.length; j++) {
+            pageRepoClone[endPages[j].pageKey].index = j
+        }
     
         dispatch({
             type: MOVE_PAGE_TO_OTHER_MAP,
-            payload: result
+            payload: pageRepoClone
         })
     }
 }
@@ -190,14 +199,11 @@ export default (state = initialState, action) => {
         case MOVE_STORY:
             return { ...state, storyMap: action.payload }
             
-        case ADD_PAGE_TO_MAP:
         case MOVE_PAGE_WITHIN_MAP:
-            return { ...state, pageMap: { ...state.pageMap, [action.payload.mapKey]: action.payload.mapInfo } }
         case MOVE_PAGE_TO_OTHER_MAP:
-            return { ...state, pageMap: { ...state.pageMap, ...action.payload } }
-        
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
+            
         case ADD_PAGE_TO_REPO:
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}

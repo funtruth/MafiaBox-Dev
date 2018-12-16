@@ -1,9 +1,13 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { showModalByKey } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/modalConfig'
+import { dropdownType } from '../../dropdown/types'
+
+import { showModalByKey } from '../../modal/ModalReducer'
+import { addPageToMap } from '../../page/PageReducer'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -20,6 +24,11 @@ const getListStyle = isDraggingOver => ({
 
 
 class StoryList extends React.Component{
+    _onAdd = (itemCount) => {
+        const { item, boardType } = this.props
+        this.props.addPageToMap(item.key, itemCount, boardType)
+    }
+
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
             this.props.showModalByKey(modalType.showPage, { pageKey: item })
@@ -27,43 +36,64 @@ class StoryList extends React.Component{
     }
 
     render() {  
-        const { item, pageRepo, pageMap } = this.props
-        const isEmpty = !pageMap[item.key] || pageMap[item.key].length === 0
+        const { item, index, repo } = this.props
+
+        const filteredPageRepo = _.filter(repo, i => i.storyType === item.key)
+        
+        const itemCount = filteredPageRepo.length
+        const isEmpty = filteredPageRepo.length === 0
 
         return (
-            <Droppable droppableId={item.key} type="ITEM">
-                {(provided, snapshot) => (
-                    <div 
-                        ref={provided.innerRef}
-                        style={getListStyle(snapshot.isDraggingOver)}
-                    >
-                        {isEmpty?
-                        <div className="story-empty">
-                            {`There is nothing here yet.`}
-                        </div>:
-                        pageMap[item.key].map((item, index) => (
-                            pageRepo[item] && <Draggable key={item} draggableId={item} index={index}>
-                                {(provided, snapshot) => (
-                                    <div
-                                        className="story-tag"
-                                        onClick={this._onClick.bind(this, item, snapshot)}
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                            snapshot.isDragging,
-                                            provided.draggableProps.style
-                                        )}
-                                    >
-                                        {(pageRepo[item] && pageRepo[item].title) || 'Untitled'}
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </div>
-                )}
-            </Droppable>
+            <div>
+                <div className="story-title">
+                    <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
+                    <i
+                        className="story-option ion-ios-more menu-onclick"
+                        menu-type={dropdownType.storyShowMore}
+                        field-key={index}
+                        style={styles.moreIcon}
+                    ></i>
+                    <i
+                        className="story-option ion-ios-add"
+                        style={styles.addIcon}
+                        onClick={this._onAdd.bind(this, itemCount)}
+                    ></i>
+                </div>
+                <Droppable droppableId={item.key} type="ITEM">
+                    {(provided, snapshot) => (
+                        <div
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                        >
+                            {isEmpty?
+                            <div className="story-empty">
+                                {`There is nothing here yet.`}
+                            </div>:
+                            filteredPageRepo.map((item, index) => (
+                                <Draggable key={item.pageKey} draggableId={item.pageKey} index={index}>
+                                    {(provided, snapshot) => (
+                                        <div
+                                            className="story-tag"
+                                            onClick={this._onClick.bind(this, item.pageKey, snapshot)}
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                            style={getItemStyle(
+                                                snapshot.isDragging,
+                                                provided.draggableProps.style
+                                            )}
+                                        >
+                                            {item.title || 'Untitled'}
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                    )}
+                </Droppable>
+            </div>
+                
         )
     }
 }
@@ -78,14 +108,23 @@ const styles = {
         overflow: 'auto',
         minHeight: 250,
     },
+    title: {
+        borderRadius: 2,
+        padding: '2px 10px',
+        marginRight: 'auto',
+    },
+    moreIcon: {
+        fontSize: 16,
+    },
+    addIcon: {
+        fontSize: 19,
+    }
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-        pageMap: state.page.pageMap,
-    }),
+    null,
     {
         showModalByKey,
+        addPageToMap,
     }
 )(StoryList)
