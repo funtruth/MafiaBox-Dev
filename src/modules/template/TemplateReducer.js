@@ -18,29 +18,29 @@ const initialState = {
         },
         lobby: {
             dropdownType: dropdownType.pickUid,
+            "/uid/": {
+                name: {
+                    dropdownType: dropdownType.pickUpdate,
+                },
+                roleId: {
+                    dropdownType: dropdownType.pickUpdate,
+                },
+                uid: {
+                    dropdownType: dropdownType.pickUpdate,
+                },
+                dead: {
+                    dropdownType: dropdownType.pickUpdate,
+                },
+                health: {
+                    dropdownType: dropdownType.pickUpdate,
+                },
+            }
         },
         choice: {
             dropdownType: dropdownType.pickUpdate,
         },
         news: {
             dropdownType: dropdownType.writeNews,
-        },
-    },
-    uid: {
-        name: {
-            dropdownType: dropdownType.pickUpdate,
-        },
-        roleId: {
-            dropdownType: dropdownType.pickUpdate,
-        },
-        uid: {
-            dropdownType: dropdownType.pickUpdate,
-        },
-        dead: {
-            dropdownType: dropdownType.pickUpdate,
-        },
-        health: {
-            dropdownType: dropdownType.pickUpdate,
         },
     },
 }

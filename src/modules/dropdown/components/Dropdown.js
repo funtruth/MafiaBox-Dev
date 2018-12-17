@@ -8,8 +8,8 @@ class Dropdown extends React.Component{
             <div
                 className="drop-down-menu" 
                 style={{
-                    top: dropdownParams.pageY || pageY,
-                    left: dropdownParams.pageX || pageX,
+                    top: pageY || dropdownParams.pageY,
+                    left: pageX || dropdownParams.pageX,
                     position: 'fixed'
                 }}>
                 {children}

@@ -18,28 +18,31 @@ class LogicExpandable extends React.Component{
     }
 
     render() {
-        const { pageInfo, field, item, nested,
+        const { pageInfo, logicInfo, field, item, nested,
             property, room, prefix } = this.props
             
         const expanded = pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
             pageInfo[field][item].data[prefix].expand
-        const hasChildren = !room.dropdownType
+        const hasPicker = typeof room.dropdownType === 'string'
+        const hasUidChild = room['/uid/'] && logicInfo.data[prefix] && logicInfo.data[prefix].value
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
-                <div className="row" onClick={this._toggle}>
-                    <div className="common-bubble --grey27">
+                <div className="row">
+                    {!hasPicker || hasUidChild ? <i
+                        className={`${expanded ? "mdi mdi-minus-box" : "mdi mdi-plus-box"} common-bubble`}
+                        onClick={this._toggle}
+                    />:<i
+                        className="mdi mdi-plus-box common-bubble"
+                        style={{ opacity: 0 }}
+                    />}
+                    <div className="common-bubble --grey27" onClick={this._toggle}>
                         {property}
-                        {hasChildren && <i
-                            className={`${expanded ? "ion-md-arrow-dropup" : "ion-md-arrow-dropdown"} common-bubble`}
-                            data-tip={expanded ? "Collapse" : "Expand"}
-                            style={{ marginLeft: 12 }}
-                        />}
                     </div>
-                    {!hasChildren && <LogicPickUpdate {...this.props}/>}
+                    {hasPicker && <LogicPickUpdate {...this.props}/>}
                 </div>
-                {expanded && hasChildren &&
+                {expanded && !hasPicker &&
                     Object.keys(room).map((property, index) => (
                         <LogicExpandable
                             {...this.props}
@@ -48,6 +51,18 @@ class LogicExpandable extends React.Component{
                             property={property}
                             room={room[property]}
                             prefix={prefix + "." + property}
+                        />
+                    ))
+                }
+                {expanded && hasUidChild &&
+                    Object.keys(room['/uid/']).map((property, index) => (
+                        <LogicExpandable
+                            {...this.props}
+                            nested
+                            key={index}
+                            property={property}
+                            room={room['/uid/'][property]}
+                            prefix={prefix + "./uid/." + property}
                         />
                     ))
                 }

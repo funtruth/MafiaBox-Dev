@@ -44,7 +44,7 @@ class PickUid extends React.Component{
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', item.key)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {expand: true, value: item.key})
         this.props.showDropdownByKey()
     }
 
@@ -71,15 +71,6 @@ class PickUid extends React.Component{
         return (
             <Dropdown>
                 {uids.map(this._renderItem)}
-                <div className="drop-down-menu-separator"/>
-                <div className="drop-down-menu-option" onClick={this._addItemBelow}>
-                    <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
-                    Add Logic
-                </div>
-                <div className="drop-down-menu-option" onClick={this._deleteItem}>
-                    <i className={`drop-down-menu-icon ion-md-close`}></i>
-                    Delete
-                </div>
             </Dropdown>
         )
     }
