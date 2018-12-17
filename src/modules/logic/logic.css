@@ -22,7 +22,7 @@
     cursor: pointer;
     background-color: rgba(40, 43, 48,1);
     height: 18px;
-    width: 60px;
+    width: 80px;
     display: flex;
     align-items: center;
 }
@@ -125,16 +125,8 @@
     margin: 6px;
 }
 
-.logic-form-label {
-    background-color: rgba(40, 43, 48,1);
-    color: #d6d6d6;
-    border-radius: 4px;
-    padding: 3px 0px 3px 6px;
-    font: 300 13px Arial;
-    margin-left: 2px;
-}
-
 .logic-pick-update {
+    color: #d6d6d6;
     background-color: rgba(60, 63, 68,1);
     border-radius: 4px;
     padding: 3px 6px 3px 6px;

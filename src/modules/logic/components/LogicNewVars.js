@@ -9,7 +9,7 @@ class LogicNewVars extends React.Component{
             <div
                 className="row"
                 style={{
-                    width: 110,
+                    width: 120,
                 }}
             >
                 {Object.keys(newVars).map((item, index) => (

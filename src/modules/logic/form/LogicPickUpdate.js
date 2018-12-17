@@ -23,26 +23,21 @@ class LogicPickUpdate extends React.Component{
         
         return (
             <div
-                className="logic-pick-update menu-onclick"
+                className="logic-pick-update menu-onclick highlight"
                 menu-type={dropdownType}
                 page-key={pageInfo.pageKey}
                 index-key={item}
                 field-key={field}
                 subfield-key={prefix}
                 current-value={value}
-                style={{
-                    marginLeft: 'auto',
-                    width: 18,
-                    fontSize: 13,
-                    textAlign: 'center',
-                }}
                 onClick={this._onClick}
             >
-                {isPage && <div style={{ pointerEvents: 'none' }}>
-                    {pageRepo[value].title}</div>}
-                {isLogicValue && <i className={`${valueType[value].icon} drop-down-menu-icon`}/>}
-                {isVariable && <div style={{ pointerEvents: 'none' }}>
-                    {value}</div>}
+                {isPage &&
+                    <div style={{ pointerEvents: 'none' }}>{pageRepo[value].title}</div>}
+                {isLogicValue &&
+                    <i className={`${valueType[value].icon} small-icon`}/>}
+                {isVariable &&
+                    <div style={{ pointerEvents: 'none' }}>{value}</div>}
             </div>
         )
     }

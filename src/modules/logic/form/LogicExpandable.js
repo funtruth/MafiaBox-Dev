@@ -18,7 +18,7 @@ class LogicExpandable extends React.Component{
     }
 
     render() {
-        const { pageInfo, field, item,
+        const { pageInfo, field, item, nested,
             property, room, prefix } = this.props
             
         const expanded = pageInfo[field][item].data &&
@@ -27,38 +27,23 @@ class LogicExpandable extends React.Component{
         const hasChildren = !room.dropdownType
         
         return (
-            <div
-                style={{
-                    marginTop: 2,
-                    marginLeft: 4,
-                }}
-            >
-                <div
-                    className="row logic-form-label"
-                    style={{
-                        alignItems: 'center',
-                    }}
-                >
-                    {property}
-                    {hasChildren ?
-                        <i 
-                            className={expanded ? "ion-md-arrow-dropup" : "ion-md-arrow-dropdown"}
+            <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
+                <div className="row" onClick={this._toggle}>
+                    <div className="common-bubble --grey27">
+                        {property}
+                        {hasChildren && <i
+                            className={`${expanded ? "ion-md-arrow-dropup" : "ion-md-arrow-dropdown"} common-bubble`}
                             data-tip={expanded ? "Collapse" : "Expand"}
-                            onClick={this._toggle}
-                            style={{
-                                marginLeft: 'auto',
-                                width: 15,
-                            }}
-                        />:
-                        <LogicPickUpdate
-                            {...this.props}
-                        />
-                    }
+                            style={{ marginLeft: 12 }}
+                        />}
+                    </div>
+                    {!hasChildren && <LogicPickUpdate {...this.props}/>}
                 </div>
                 {expanded && hasChildren &&
                     Object.keys(room).map((property, index) => (
                         <LogicExpandable
                             {...this.props}
+                            nested
                             key={index}
                             property={property}
                             room={room[property]}

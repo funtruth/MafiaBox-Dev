@@ -35,3 +35,19 @@
     text-overflow: ellipsis;
     pointer-events: none;
 }
+
+.common-bubble {
+    color: #d6d6d6;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font: 300 13px Arial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-icon {
+    color: #d6d6d6;
+    font-size: 13px;
+    pointer-events: none;
+}
