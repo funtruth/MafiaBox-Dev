@@ -1,4 +1,5 @@
 import { boardType } from '../board/types'
+import { variableType } from '../logic/types'
 
 export const fieldType = {
     text: 'fieldType/text',
@@ -89,9 +90,18 @@ export const initFieldRepo = {
         fieldType: fieldType.logic,
         fieldTitle: 'Phase Trigger',
         vars: {
-            e: {},
-            choices: {},
-            roomSnapshot: {},
+            e: {
+                key: 'e',
+                variableType: variableType.uid.key,
+            },
+            choices: {
+                key: 'choices',
+                variableType: variableType.object.key,
+            },
+            roomSnapshot: {
+                key: 'roomSnapshot',
+                variableType: variableType.object.key,
+            },
         }
     },
 }

@@ -25,11 +25,11 @@ class BoardLib extends React.Component{
         this.fuse = new Fuse(_.toArray(props.pageRepo), fuseType.boardLib)
     }
 
-    _onSelect = (item) => {
+    _onSelect = (key) => {
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey } = dropdownParams
-
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', item.pageKey)
+        
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', key)
         this.props.showDropdownByKey()
     }
 

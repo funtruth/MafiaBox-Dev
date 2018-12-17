@@ -1,39 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
+import { variableType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
-import { logicType, logicTypeInfo } from '../../logic/types'
+import Dropdown from '../components/Dropdown'
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
-        const { pageRepo, dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { dropdownParams } = this.props
+        const { currentValue } = dropdownParams
         
-        const selected = pageRepo[pageKey] 
-            && pageRepo[pageKey][fieldKey] 
-            && pageRepo[pageKey][fieldKey][indexKey]
-            && item === pageRepo[pageKey][fieldKey][indexKey].logicType
-
-        let itemStyle = {}
-        selected && (itemStyle = {
-            backgroundColor: selected ? logicTypeInfo[item].color : null,
-            color: selected ? '#fff' : '#b6b6b6',
-        })
+        let selected = false
+        if (typeof currentValue === 'string') selected = currentValue === item
 
         return (
             <div
-                key={item}
+                key={item.key}
                 className="drop-down-menu-option"
                 onClick={this._select.bind(this, item)}
-                style={itemStyle}
+                style={{
+                    color: selected ? '#fff' : '#b6b6b6',
+                }}
             >
-                <i
-                    className={`${logicTypeInfo[item].icon} drop-down-menu-icon`}
-                />
-                {logicTypeInfo[item].title}
+                {item.key}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -46,14 +40,11 @@ class PickUid extends React.Component{
         )
     }
 
-    _select = (newValue) => {
-        const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+    _select = (item) => {
+        const { dropdownParams } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        let valueClone = {}
-        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
-
-        this.props.updatePage(pageKey, fieldKey, valueClone)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', item.key)
         this.props.showDropdownByKey()
     }
 
@@ -74,27 +65,12 @@ class PickUid extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
-        let logicMenu = [
-            logicType.if,
-            logicType.else,
-            logicType.elseif,
-            logicType.operator,
-            logicType.function,
-            logicType.return,
-            logicType.update,
-        ]
-
+        const { dropdownData } = this.props
+        const uids = _.filter(dropdownData, i => i.variableType === variableType.uid.key)
+        
         return (
-            <div className="drop-down-menu" style={menuStyle}>
-                {logicMenu.map(this._renderItem)}
+            <Dropdown>
+                {uids.map(this._renderItem)}
                 <div className="drop-down-menu-separator"/>
                 <div className="drop-down-menu-option" onClick={this._addItemBelow}>
                     <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
@@ -104,18 +80,18 @@ class PickUid extends React.Component{
                     <i className={`drop-down-menu-icon ion-md-close`}></i>
                     Delete
                 </div>
-            </div>
+            </Dropdown>
         )
     }
 }
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
         dropdownParams: state.dropdown.dropdownParams,
+        dropdownData: state.dropdown.dropdownData,
     }),
     {
-        updatePage,
+        updatePageByPath,
         showDropdownByKey,
         addItemBelowOf,
         deleteItem,

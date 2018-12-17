@@ -19,6 +19,7 @@ import BoardLib from './library/BoardLib';
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
 import PickVar from './vars/PickVar'
+import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
 import PickPhase from './update/PickPhase'
@@ -56,6 +57,8 @@ class DropdownView extends React.Component{
                 return <EditVar key={index}/>
             case dropdownType.pickVar:
                 return <PickVar key={index}/>
+            case dropdownType.pickVarType:
+                return <PickVarType key={index}/>
             case dropdownType.pickComparison:
                 return <PickComparison key={index}/>
 

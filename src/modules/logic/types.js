@@ -124,3 +124,31 @@ export const defaultLogic = {
         logicType: logicType.none,
     }
 }
+
+export const variableType = {
+    any: {
+        key: 'any',
+        title: 'Any',
+        icon: 'mdi mdi-variable'
+    },
+    number: {
+        key: 'number',
+        title: 'Number',
+        icon: 'mdi mdi-numeric-1-box'
+    },
+    string: {
+        key: 'string',
+        title: 'String',
+        icon: 'mdi mdi-code-string'
+    },
+    uid: {
+        key: 'uid',
+        title: 'Unique ID',
+        icon: 'mdi mdi-account'
+    },
+    object: {
+        key: 'object',
+        title: 'Object',
+        icon: 'mdi mdi-code-braces'
+    }
+}

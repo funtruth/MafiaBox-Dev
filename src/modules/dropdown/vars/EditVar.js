@@ -12,6 +12,25 @@ class EditVar extends React.Component{
         }
     }
 
+    _onSave = () => {
+        const { pageRepo, dropdownParams } = this.props
+        const { pageKey, tagKey } = dropdownParams
+
+        if (tagKey === this.state.value) return this.props.showDropdownByKey()
+
+        let varsClone = {}
+        Object.assign(varsClone, pageRepo[pageKey].vars)
+
+        varsClone[this.state.value] = {
+            ...varsClone[tagKey],
+            key: this.state.value    
+        }
+        delete varsClone[tagKey]
+
+        this.props.updatePage(pageKey, 'vars', varsClone)
+        this.props.showDropdownByKey()
+    }
+
     _onDelete = () => {
         const { pageRepo, dropdownParams } = this.props
         const { pageKey } = dropdownParams
@@ -25,22 +44,15 @@ class EditVar extends React.Component{
     }
 
     _onChange = e => {
-        const { pageRepo, dropdownParams } = this.props
-        const { pageKey } = dropdownParams
-
-        let varsClone = {}
-        Object.assign(varsClone, pageRepo[pageKey].vars)
-        delete varsClone[this.state.value]
-        varsClone[e.target.value] = {}
-
-        this.setState({ value: e.target.value })
-        this.props.updatePage(pageKey, 'vars', varsClone)
+        this.setState({
+            value: e.target.value
+        })
     }
 
     _onKeyDown = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                this.props.showDropdownByKey()
+                this._onSave()
                 break
             default:
         }
@@ -67,6 +79,10 @@ class EditVar extends React.Component{
                     autoFocus
                 />
                 <div className="drop-down-menu-separator"/>
+                <div className="drop-down-menu-option" onClick={this._onSave}>
+                    <i className={`drop-down-menu-icon ion-ios-save`}></i>
+                    Save
+                </div>
                 <div className="drop-down-menu-option" onClick={this._onDelete}>
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete

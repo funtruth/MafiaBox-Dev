@@ -48,7 +48,7 @@ class WriteNews extends React.Component{
 
     _select = (newValue) => {
         const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey } = dropdownParams
         
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])

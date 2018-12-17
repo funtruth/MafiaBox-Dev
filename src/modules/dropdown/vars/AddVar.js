@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { variableType } from '../../logic/types'
+
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 
 class AddVar extends React.Component{
     constructor(props){
@@ -30,6 +32,7 @@ class AddVar extends React.Component{
     _confirm = () => {
         const { pageRepo, dropdownParams } = this.props
         const { pageKey } = dropdownParams
+        const { value } = this.state
 
         const pageInfo = pageRepo[pageKey]
         
@@ -37,8 +40,12 @@ class AddVar extends React.Component{
             let varsClone = {}
             Object.assign(varsClone, pageInfo.vars)
             varsClone[this.state.value] = {}
+            let varsValue = {
+                key: value,
+                variableType: variableType.any.key
+            }
     
-            this.props.updatePage(pageKey, 'vars', varsClone)
+            this.props.updatePageByPath(pageKey, 'vars', value, varsValue)
             this.props.showDropdownByKey()
         } else {
 
@@ -82,6 +89,6 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        updatePage,
+        updatePageByPath,
     }
 )(AddVar)

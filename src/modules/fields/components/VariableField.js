@@ -2,10 +2,11 @@ import React from 'react'
 
 import { dropdownType } from '../../dropdown/types';
 import { fieldIcon } from '../defaults'
+import { variableType } from '../../logic/types'
 
 class VariableField extends React.Component{
     _renderItem = (item, index) => {
-        const { pageInfo } = this.props
+        const { pageInfo, field, value } = this.props
         const { pageKey } = pageInfo
 
         const style = {
@@ -14,18 +15,32 @@ class VariableField extends React.Component{
             marginBottom: 6,
         }
 
+        const varType = value[item].variableType || variableType.any
+        
         return (
-            <div
-                key={index}
-                className="property-button menu-onclick"
-                menu-type={dropdownType.editVar}
-                page-key={pageKey}
-                tag-key={item}
-                style={style}
-            >
-                {item || 'Untitled'}
+            <div key={index} className="row">
+                <i 
+                    className={`${variableType[varType].icon || 'ion-md-create'} logic-label menu-onclick`}
+                    menu-type={dropdownType.pickVarType}
+                    field-key={field}
+                    page-key={pageInfo.pageKey}
+                    index-key={item}
+                    current-value={varType}
+                    style={{
+                        color: '#fff',
+                    }}
+                />
+                <div
+                    className="property-button menu-onclick"
+                    menu-type={dropdownType.editVar}
+                    page-key={pageKey}
+                    field-key={field}
+                    tag-key={item}
+                    style={style}
+                >
+                    {item || 'Untitled'}
+                </div>
             </div>
-            
         )
     }
 

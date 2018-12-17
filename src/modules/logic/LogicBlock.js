@@ -13,7 +13,7 @@ import LogicErrors from './components/LogicErrors'
 import LogicNewVars from './components/LogicNewVars'
 import LogicType from './components/LogicType';
 import LogicDownArrow from './components/LogicDownArrow';
-import LogicOptions from './components/LogicOptions'
+//import LogicOptions from './components/LogicOptions'
 import LogicRightArrow from './components/LogicRightArrow';
 import LogicPanels from './components/LogicPanels';
 import LogicObject from './form/LogicObject';
@@ -30,7 +30,7 @@ class LogicBlock extends React.Component{
         if (!value) {
             value = defaultLogic
         }
-
+        
         const rows = [index]
         let pointer = value[index] && value[index].down
 
@@ -62,9 +62,10 @@ class LogicBlock extends React.Component{
                                 pageInfo,
                                 vars,
                             }
-                            const newVars = logicInfo.logicType === logicType.function &&
-                                logicInfo.pageKey && pageRepo[logicInfo.pageKey].vars
                             
+                            const newVars = logicInfo.logicType === logicType.function &&
+                                logicInfo.data && pageRepo[logicInfo.data].vars
+                                
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
                                     <div
