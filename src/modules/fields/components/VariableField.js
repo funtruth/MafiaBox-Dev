@@ -16,14 +16,14 @@ class VariableField extends React.Component{
         }
 
         const varType = value[item].variableType || variableType.any
-        
+
         return (
             <div key={index} className="row">
                 <i 
                     className={`${variableType[varType].icon || 'ion-md-create'} logic-label menu-onclick`}
                     menu-type={dropdownType.pickVarType}
-                    field-key={field}
                     page-key={pageInfo.pageKey}
+                    field-key={field}
                     index-key={item}
                     current-value={varType}
                     style={{
@@ -45,7 +45,7 @@ class VariableField extends React.Component{
     }
 
     _renderFooter() {
-        const { pageInfo } = this.props
+        const { pageInfo, fieldKey } = this.props
         const { pageKey } = pageInfo
 
         const style = {
@@ -63,6 +63,7 @@ class VariableField extends React.Component{
                 className="property-button menu-onclick"
                 menu-type={dropdownType.addVar}
                 page-key={pageKey}
+                field-key={fieldKey}
                 style={style}
             >
                 <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>

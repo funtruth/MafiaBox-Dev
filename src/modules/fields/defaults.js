@@ -43,13 +43,23 @@ export const fieldIcon = {
 }
 
 export const initFieldMap = {
-    [boardType.library]: ['description', 'vars', 'code'],
-    [boardType.roles]: ['description', 'roleTeam', 'roleCharges', 'roleActionMode'],
-    [boardType.flow]: ['description', 'phaseActionMode', 'phaseTriggerMode'],
+    [boardType.library]: ['description0', 'args', 'vars', 'code'],
+    [boardType.roles]: ['description1', 'roleTeam', 'roleCharges', 'roleActionMode'],
+    [boardType.flow]: ['description2', 'phaseActionMode', 'phaseTriggerMode'],
 }
 
 export const initFieldRepo = {
-    description: {
+    description0: {
+        fieldKey: 'description',
+        fieldType: fieldType.text,
+        fieldTitle: 'Description',
+    },
+    description1: {
+        fieldKey: 'description',
+        fieldType: fieldType.text,
+        fieldTitle: 'Description',
+    },
+    description2: {
         fieldKey: 'description',
         fieldType: fieldType.text,
         fieldTitle: 'Description',
@@ -58,6 +68,11 @@ export const initFieldRepo = {
         fieldKey: 'code',
         fieldType: fieldType.code,
         fieldTitle: 'Code Interpretation',
+    },
+    args: {
+        fieldKey: 'args',
+        fieldType: fieldType.vars,
+        fieldTitle: 'Required Variables',
     },
     vars: {
         fieldKey: 'vars',
@@ -90,16 +105,16 @@ export const initFieldRepo = {
         fieldType: fieldType.logic,
         fieldTitle: 'Phase Trigger',
         vars: {
-            e: {
-                key: 'e',
-                variableType: variableType.uid.key,
+            lobby: {
+                key: 'lobby',
+                variableType: variableType.object.key,
             },
             choices: {
                 key: 'choices',
                 variableType: variableType.object.key,
             },
-            roomSnapshot: {
-                key: 'roomSnapshot',
+            gameState: {
+                key: 'gameState',
                 variableType: variableType.object.key,
             },
         }

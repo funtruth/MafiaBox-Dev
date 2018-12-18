@@ -25,9 +25,6 @@ const initialState = {
                 roleId: {
                     dropdownType: dropdownType.pickUpdate,
                 },
-                uid: {
-                    dropdownType: dropdownType.pickUpdate,
-                },
                 dead: {
                     dropdownType: dropdownType.pickUpdate,
                 },

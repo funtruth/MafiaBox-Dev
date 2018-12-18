@@ -2,15 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { valueType, updateType } from '../types';
+import { dropdownType } from '../../dropdown/types'
 
 import { pushData } from '../../dropdown/DropdownReducer'
 
 class LogicPickUpdate extends React.Component{
     _onClick = (info) => {
-        switch(info.updateType) {
-            case updateType.uid:
+        const { room } = this.props
+        const thisType = room.dropdownType
+
+        switch(thisType) {
+            case dropdownType.pickUid:
                 return this.props.pushData(this.props.vars)
-            case updateType.dynamicVal:
+            case dropdownType.pickUpdate:
                 return this.props.pushData(info.dynamic)
             default:
         }
@@ -22,15 +26,11 @@ class LogicPickUpdate extends React.Component{
             case updateType.phase:
                 return <div style={{ pointerEvents: 'none' }}>{pageRepo[item.value].title}</div>
             case updateType.uid:
-                return <div style={{ pointerEvents: 'none' }}>{item.value}</div>
+                return <div style={{ pointerEvents: 'none' }}>{item.value || 'null'}</div>
             case updateType.staticVal:
                 return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title}</div>
             case updateType.dynamicVal:
-                return (
-                    <div style={{ pointerEvents: 'none' }}>
-                        {valueType[item.value].title + ' ' + item.dynamic}
-                    </div>
-                )
+                return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title + ' ' + item.dynamic}</div>
             default:
                 return <div style={{ pointerEvents: 'none', color: '#767676' }}>Select</div>
         }

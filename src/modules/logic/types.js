@@ -65,6 +65,14 @@ export const valueType = {
         icon: 'mdi mdi-null',
         updateType: updateType.staticVal,
     },
+    setTo: {
+        key: 'setTo',
+        index: 1,
+        title: 'set to value',
+        label: 'set to value',
+        icon: 'mdi mdi-numeric',
+        updateType: updateType.dynamicVal,
+    },
     i: {
         key: 'i',
         index: 2,
@@ -169,5 +177,10 @@ export const variableType = {
         key: 'object',
         title: 'Object',
         icon: 'mdi mdi-code-braces'
-    }
+    },
+    array: {
+        key: 'array',
+        title: 'Array',
+        icon: 'mdi mdi-code-brackets'
+    },
 }

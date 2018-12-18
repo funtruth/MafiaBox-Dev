@@ -32,6 +32,7 @@ class PickUid extends React.Component{
                         marginLeft: 'auto',
                         width: 30,
                         textAlign: 'center',
+                        pointerEvents: 'none',
                     }}
                 />}
             </div>
@@ -50,19 +51,15 @@ class PickUid extends React.Component{
         this.props.showDropdownByKey()
     }
 
-    _addItemBelow = () => {
+    _onClear = () => {
         const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
-    }
-
-    _deleteItem = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
-        
-        this.props.deleteItem(indexKey, pageKey, fieldKey)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+            expand: false,
+            value: null,
+            updateType: updateType.uid,
+        })
         this.props.showDropdownByKey()
     }
 
@@ -71,7 +68,18 @@ class PickUid extends React.Component{
         const uids = _.filter(dropdownData, i => i.variableType === variableType.uid.key)
         
         return (
-            uids.map(this._renderItem)
+            uids.length ?
+                <div>
+                    {uids.map(this._renderItem)}
+                    <div className="drop-down-menu-separator"/>
+                    <div className="drop-down-menu-option" onClick={this._onClear}>
+                        <i className={`drop-down-menu-icon mdi mdi-null`}></i>
+                        Null
+                    </div>
+                </div>
+                :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
+                    There are no Unique IDs
+                </div>
         )
     }
 }

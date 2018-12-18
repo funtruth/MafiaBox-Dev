@@ -14,8 +14,8 @@ class StoryMapLib extends React.Component{
 
         this.props.showDropdownByKey(dropdownType.pageLib, {
             ...dropdownParams,
-            pageX: pageX + (searchMenu?208:158),
-            pageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % 28 - 8,
+            pageX: pageX + e.target.offsetWidth,
+            pageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % e.target.offsetHeight - 8,
             hoverKey: key,
             onSelect: this.props.onSelect
         })
@@ -28,25 +28,24 @@ class StoryMapLib extends React.Component{
         stories = _.groupBy(stories, i => i.storyType)
         
         return (
-            <div>
-                {Object.keys(stories).map((item, index) => {
-                    return (
-                        <div
-                            key={item}
-                            className="drop-down-menu-option"
-                            onMouseOver={this._onMouseEnter.bind(this, item)}
-                        >
-                            {storyMap[item].title}
-                            <i
-                                className="ion-ios-play"
-                                style={{
-                                    marginLeft: 'auto',
-                                }}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
+            Object.keys(stories).map((item, index) => {
+                return (
+                    <div
+                        key={item}
+                        className="drop-down-menu-option"
+                        onMouseOver={this._onMouseEnter.bind(this, item)}
+                    >
+                        {storyMap[item].title}
+                        <i
+                            className="ion-ios-play"
+                            style={{
+                                marginLeft: 'auto',
+                                pointerEvents: 'none',
+                            }}
+                        />
+                    </div>
+                )
+            })
         )
     }
 }

@@ -29,7 +29,7 @@ class LogicExpandable extends React.Component{
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
-                <div className="row">
+                <div className="row-nowrap">
                     {!hasPicker || hasUidChild ? <i
                         className={`${expanded ? "mdi mdi-minus-box" : "mdi mdi-plus-box"} common-bubble`}
                         onClick={this._toggle}

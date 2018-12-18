@@ -27,6 +27,14 @@
     font: 520 14px Arial;
 }
 
+.drop-down-item-padding {
+    padding: 6px 12px;
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .drop-down-menu-option {
     padding: 6px 12px;
     cursor: pointer;

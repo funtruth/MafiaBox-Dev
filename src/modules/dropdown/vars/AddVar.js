@@ -30,22 +30,12 @@ class AddVar extends React.Component{
     }
 
     _confirm = () => {
-        const { pageRepo, dropdownParams } = this.props
-        const { pageKey } = dropdownParams
+        const { dropdownParams } = this.props
+        const { pageKey, fieldKey } = dropdownParams
         const { value } = this.state
-
-        const pageInfo = pageRepo[pageKey]
         
         if (true) {
-            let varsClone = {}
-            Object.assign(varsClone, pageInfo.vars)
-            varsClone[this.state.value] = {}
-            let varsValue = {
-                key: value,
-                variableType: variableType.any.key
-            }
-    
-            this.props.updatePageByPath(pageKey, 'vars', value, varsValue)
+            this.props.updatePageByPath(pageKey, fieldKey, value, { key: value, variableType: variableType.any.key })
             this.props.showDropdownByKey()
         } else {
 

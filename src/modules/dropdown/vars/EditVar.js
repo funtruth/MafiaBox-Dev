@@ -14,7 +14,7 @@ class EditVar extends React.Component{
 
     _onSave = () => {
         const { pageRepo, dropdownParams } = this.props
-        const { pageKey, tagKey } = dropdownParams
+        const { pageKey, fieldKey, tagKey } = dropdownParams
 
         if (tagKey === this.state.value) return this.props.showDropdownByKey()
 
@@ -27,19 +27,19 @@ class EditVar extends React.Component{
         }
         delete varsClone[tagKey]
 
-        this.props.updatePage(pageKey, 'vars', varsClone)
+        this.props.updatePage(pageKey, fieldKey, varsClone)
         this.props.showDropdownByKey()
     }
 
     _onDelete = () => {
         const { pageRepo, dropdownParams } = this.props
-        const { pageKey } = dropdownParams
+        const { pageKey, fieldKey } = dropdownParams
 
         let varsClone = {}
         Object.assign(varsClone, pageRepo[pageKey].vars)
         delete varsClone[this.state.value]
 
-        this.props.updatePage(pageKey, 'vars', varsClone)
+        this.props.updatePage(pageKey, fieldKey, varsClone)
         this.props.showDropdownByKey()
     }
 
