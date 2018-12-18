@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
+import { valueType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
-
-import { valueType } from '../../logic/types'
 
 class PickUpdate extends React.Component{
     _renderItem = (item) => {
@@ -12,24 +13,19 @@ class PickUpdate extends React.Component{
         const { currentValue } = dropdownParams
         
         let selected = false
-        if (typeof currentValue === 'string') selected = currentValue === item
+        if (typeof currentValue === 'string') selected = currentValue === item.key
 
-        let itemStyle = {}
-        selected && (itemStyle = {
-            color: selected ? '#fff' : '#b6b6b6',
-        })
-        
         return (
             <div
-                key={item}
+                key={item.key}
                 className="drop-down-menu-option"
-                onClick={this._select.bind(this, item)}
-                style={itemStyle}
+                onClick={this._select.bind(this, item.key)}
+                style={{
+                    color: selected ? '#fff' : '#b6b6b6'
+                }}
             >
-                <i
-                    className={`${valueType[item].icon} drop-down-menu-icon`}
-                />
-                {valueType[item].title}
+                <i className={`${item.icon} drop-down-menu-icon`}/>
+                {item.title}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -46,40 +42,20 @@ class PickUpdate extends React.Component{
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', newValue)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'valueType', newValue)
         this.props.showDropdownByKey()
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
-        let items = [
-            valueType.nC.key,
-            valueType.null.key,
-            valueType.i.key,
-            valueType.iB.key,
-            valueType.d.key,
-            valueType.dB.key,
-        ]
-
+        const items = _.sortBy(valueType, i => i.index)
         return (
-            <div className="drop-down-menu" style={menuStyle}>
-                {items.map(this._renderItem)}
-            </div>
+            items.map(this._renderItem)
         )
     }
 }
 
 export default connect(
-    state => ({
-        dropdownParams: state.dropdown.dropdownParams,
-    }),
+    null,
     {
         updatePageByPath,
         showDropdownByKey,

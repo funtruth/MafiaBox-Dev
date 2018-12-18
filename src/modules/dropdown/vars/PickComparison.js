@@ -55,19 +55,8 @@ class PickComparison extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX + 10,
-            minWidth: 80,
-        }
-
         return (
-            <div className="drop-down-menu-autow" style={menuStyle}>
-                {Object.keys(comparisonType).map(this._renderItem)}
-            </div>
+            Object.keys(comparisonType).map(this._renderItem)
         )
     }
 }
@@ -75,7 +64,6 @@ class PickComparison extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         updatePage,

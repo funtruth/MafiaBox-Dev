@@ -1,8 +1,5 @@
-import _ from 'lodash'
-
 const initialState = {
     dropdownKeys: [],
-    dropdownParams: {},
     dropdownData: null,
 }
 
@@ -12,28 +9,27 @@ const PUSH_DATA = 'dropdown/push-data'
 
 export function showDropdownByKey(key, params) {
     return (dispatch, getState) => {
-        const { dropdownKeys, dropdownParams } = getState().dropdown
+        const { dropdownKeys } = getState().dropdown
 
         if (!key) {
             dispatch({
                 type: SHOW_DROPDOWN_BY_KEY,
-                payload: {
-                    keys: [],
-                    params: {},
-                }
+                payload: [],
             })
         } else {
-            let keys = Array.from(dropdownKeys)
-            keys.push(key)
+            let keysClone = Array.from(dropdownKeys)
+
+            for (var i=0; i<keysClone.length; i++) {
+                if (keysClone[i].key === key) {
+                    keysClone = keysClone.slice(0, i)
+                    break
+                }
+            }
+            keysClone.push({ key, dropdownParams: params })
+
             dispatch({
                 type: SHOW_DROPDOWN_BY_KEY,
-                payload: {
-                    keys: _.uniq(keys),
-                    params: {
-                        ...dropdownParams,
-                        ...params
-                    },
-                }
+                payload: keysClone,
             })
         }  
     }
@@ -65,7 +61,6 @@ export function pushData(obj) {
 export default (state = initialState, action) => {
     switch(action.type){
         case SHOW_DROPDOWN_BY_KEY:
-            return { ...state, dropdownKeys: action.payload.keys, dropdownParams: action.payload.params }
         case POP_HIGHEST_DROPDOWN:
             return { ...state, dropdownKeys: action.payload }
         case PUSH_DATA:

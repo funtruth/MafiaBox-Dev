@@ -25,7 +25,7 @@ class AppWrapper extends React.Component{
     _handleScroll = () => {
         const { dropdownKeys } = this.props
         if (dropdownKeys.length) {
-            if (dropdownKeys[0] === dropdownType.pickVar) return
+            if (dropdownKeys[0].key === dropdownType.pickVar) return
             this.props.showDropdownByKey()
         }
     }
@@ -44,12 +44,13 @@ class AppWrapper extends React.Component{
     }
 
     _handleClick = (e) => {
+        const { dropdownKeys } = this.props
+
         if (e.target.matches('.menu-onclick')) {
-            let menuClick = e.target.getAttribute('menu-type')
-            
+            const menuClick = e.target.getAttribute('menu-type')
             if (menuClick) {
-                if (!this.props.dropdownKeys.length ||
-                    e.target.getAttribute('field-key') !== this.props.dropdownParams.fieldKey) {
+                if (!dropdownKeys.length ||
+                    e.target.getAttribute('field-key') !== dropdownKeys[0].dropdownParams.fieldKey) {
                         this.props.showDropdownByKey(menuClick, {
                             indexKey: e.target.getAttribute('index-key'),
                             tagKey: e.target.getAttribute('tag-key'),
@@ -68,7 +69,7 @@ class AppWrapper extends React.Component{
             //negate the click from closing
         } else {
             if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option')
-                && this.props.dropdownKeys.length) {
+                && dropdownKeys.length) {
                 this.props.showDropdownByKey()
             }
         }
@@ -168,7 +169,6 @@ export default connect(
     state => ({
         storyMap: state.page.storyMap,
         dropdownKeys: state.dropdown.dropdownKeys,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         moveStory,

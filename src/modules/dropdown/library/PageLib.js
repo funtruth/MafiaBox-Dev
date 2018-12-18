@@ -20,7 +20,7 @@ class PageLib extends React.Component{
                 {pages.map((item, index) => {
                     return (
                         <div
-                            key={item}
+                            key={item.pageKey}
                             className="drop-down-menu-option"
                             onClick={this._onClick.bind(this, item)}
                         >
@@ -37,7 +37,6 @@ export default connect(
     state => ({
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         updatePageByPath,

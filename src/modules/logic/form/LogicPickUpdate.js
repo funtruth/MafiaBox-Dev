@@ -14,7 +14,8 @@ class LogicPickUpdate extends React.Component{
     render() {
         const { room, field, pageInfo, logicInfo, item, prefix, vars, pageRepo } = this.props
         const { dropdownType } = room
-        const value = (logicInfo.data[prefix] && logicInfo.data[prefix].value) || valueType.nC.key
+        const value = (logicInfo.data[prefix] && logicInfo.data[prefix].valueType) || valueType.nC.key
+        const number = logicInfo.data[prefix] && logicInfo.data[prefix].value
 
         const ids = value.split('-')
         const isPage = ids[0] === 'phase'
@@ -38,6 +39,7 @@ class LogicPickUpdate extends React.Component{
                     <i className={`${valueType[value].icon} small-icon`}/>}
                 {isVariable &&
                     <div style={{ pointerEvents: 'none' }}>{value}</div>}
+                {number}
             </div>
         )
     }

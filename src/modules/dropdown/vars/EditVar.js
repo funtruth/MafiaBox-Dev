@@ -59,16 +59,8 @@ class EditVar extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 <input
                     className="tag-input menu-voidclick"
                     value={this.state.value}
@@ -94,7 +86,6 @@ class EditVar extends React.Component{
 
 export default connect(
     state => ({
-        dropdownParams: state.dropdown.dropdownParams,
         pageRepo: state.page.pageRepo
     }),
     {

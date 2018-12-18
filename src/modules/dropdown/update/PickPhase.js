@@ -42,12 +42,12 @@ class BoardLib extends React.Component{
     }
 
     render() {
-        const { dropdownParams, pageRepo, boardRepo } = this.props
-        const { pageX, pageY } = dropdownParams
+        const { pageRepo, boardRepo, dropdownParams } = this.props
         const { searchText } = this.state
+        const { pageX, pageY } = dropdownParams
         
         return (
-            <div className="drop-down-menu" style={{ top: pageY, left: pageX }}>
+            <div>
                 <input
                     className="tag-input menu-voidclick"
                     value={this.state.searchText}
@@ -91,7 +91,6 @@ class BoardLib extends React.Component{
 
 export default connect(
     state => ({
-        dropdownParams: state.dropdown.dropdownParams,
         boardRepo: state.page.boardRepo,
         pageRepo: state.page.pageRepo,
         storyMap: state.page.storyMap,

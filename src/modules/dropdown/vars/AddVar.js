@@ -5,6 +5,7 @@ import { variableType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
+import Dropdown from '../components/Dropdown';
 
 class AddVar extends React.Component{
     constructor(props){
@@ -53,16 +54,8 @@ class AddVar extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <Dropdown>
                 <input
                     className="tag-input menu-voidclick"
                     value={this.state.value}
@@ -77,14 +70,13 @@ class AddVar extends React.Component{
                     <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
                     Create
                 </div>
-            </div>
+            </Dropdown>
         )
     }
 }
 
 export default connect(
     state => ({
-        dropdownParams: state.dropdown.dropdownParams,
         pageRepo: state.page.pageRepo,
     }),
     {

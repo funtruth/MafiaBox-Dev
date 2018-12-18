@@ -14,16 +14,8 @@ class TemplateTitleOptions extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-        
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 <div className="drop-down-menu-option" onClick={this._onDelete}>
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete
@@ -34,9 +26,7 @@ class TemplateTitleOptions extends React.Component{
 }
 
 export default connect(
-    state => ({
-        dropdownParams: state.dropdown.dropdownParams,
-    }),
+    null,
     {
         showDropdownByKey,
         deleteField,

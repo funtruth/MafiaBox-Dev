@@ -29,19 +29,14 @@ class EditTag extends React.Component{
 
     render() {
         const { dropdownParams, tagRepo } = this.props
-        const { tagKey, pageX, pageY } = dropdownParams
+        const { tagKey } = dropdownParams
 
         if (!tagKey) return null
         const fieldInfo = tagRepo[tagKey]
         if (!fieldInfo) return null
 
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 <input
                     className="tag-input menu-voidclick"
                     value={fieldInfo.title || ''}
@@ -63,7 +58,6 @@ class EditTag extends React.Component{
 
 export default connect(
     state => ({
-        dropdownParams: state.dropdown.dropdownParams,
         fieldRepo: state.field.fieldRepo,
         tagRepo: state.field.tagRepo,
     }),

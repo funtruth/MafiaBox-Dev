@@ -47,14 +47,7 @@ class PickFieldType extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
+        //TODO proper menu object
         let menu = [
             fieldType.text,
             fieldType.number,
@@ -65,9 +58,7 @@ class PickFieldType extends React.Component{
         ]
 
         return (
-            <div className="drop-down-menu" style={menuStyle}>
-                {menu.map(this._renderItem)}
-            </div>
+            menu.map(this._renderItem)
         )
     }
 }
@@ -75,7 +66,6 @@ class PickFieldType extends React.Component{
 export default connect(
     state => ({
         fieldRepo: state.field.fieldRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         showDropdownByKey,

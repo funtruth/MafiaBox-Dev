@@ -8,8 +8,6 @@ import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
-import Dropdown from '../components/Dropdown'
-
 class PickUid extends React.Component{
     _renderItem = (item) => {
         const { dropdownParams } = this.props
@@ -69,16 +67,13 @@ class PickUid extends React.Component{
         const uids = _.filter(dropdownData, i => i.variableType === variableType.uid.key)
         
         return (
-            <Dropdown>
-                {uids.map(this._renderItem)}
-            </Dropdown>
+            uids.map(this._renderItem)
         )
     }
 }
 
 export default connect(
     state => ({
-        dropdownParams: state.dropdown.dropdownParams,
         dropdownData: state.dropdown.dropdownData,
     }),
     {

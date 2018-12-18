@@ -51,18 +51,8 @@ class PickVarType extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
-                {Object.keys(variableType).map(this._renderItem)}
-            </div>
+            Object.keys(variableType).map(this._renderItem)
         )
     }
 }
@@ -70,7 +60,6 @@ class PickVarType extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         updatePageByPath,

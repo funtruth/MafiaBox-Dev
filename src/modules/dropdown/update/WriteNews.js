@@ -74,14 +74,7 @@ class WriteNews extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
+        //TODO make a proper logicType object
         let logicMenu = [
             logicType.if,
             logicType.else,
@@ -93,7 +86,7 @@ class WriteNews extends React.Component{
         ]
 
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 {logicMenu.map(this._renderItem)}
                 <div className="drop-down-menu-separator"/>
                 <div className="drop-down-menu-option" onClick={this._addItemBelow}>
@@ -112,7 +105,6 @@ class WriteNews extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         updatePage,

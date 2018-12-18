@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class Dropdown extends React.Component{
     render() {
@@ -18,8 +17,4 @@ class Dropdown extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        dropdownParams: state.dropdown.dropdownParams,
-    })
-)(Dropdown)
+export default Dropdown

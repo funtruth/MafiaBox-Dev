@@ -13,16 +13,8 @@ class ClickMenu extends React.Component{
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-        
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 <div className="drop-down-menu-option">
                     <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>
                     Merge
@@ -46,9 +38,7 @@ class ClickMenu extends React.Component{
 }
 
 export default connect(
-    state => ({
-        dropdownParams: state.dropdown.dropdownParams,
-    }),
+    null,
     {
         showModalByKey,
     }

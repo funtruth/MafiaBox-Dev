@@ -15,6 +15,7 @@ class LogicType extends React.Component{
                 field-key={field}
                 index-key={item}
                 page-key={pageInfo.pageKey}
+                current-value={logicInfo.logicType}
                 style={{
                     backgroundColor: (logicInfo.logicType &&
                         logicTypeInfo[logicInfo.logicType].color) ||

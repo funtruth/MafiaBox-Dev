@@ -53,12 +53,9 @@ class PickVar extends React.Component{
     }
 
     render() {
-        const { dropdownParams, dropdownData } = this.props
-        const { pageX, pageY } = dropdownParams
+        const { dropdownData } = this.props
         
         let menuStyle = {
-            top: pageY,
-            left: pageX,
             maxHeight: 200,
             overflow: 'auto',
         }
@@ -66,7 +63,7 @@ class PickVar extends React.Component{
         if (!dropdownData) return null
 
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div style={menuStyle}>
                 {dropdownData.map(this._renderItem)}
             </div>
         )
@@ -76,7 +73,6 @@ class PickVar extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
         dropdownData: state.dropdown.dropdownData,
     }),
     {

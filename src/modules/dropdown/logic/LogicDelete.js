@@ -22,16 +22,8 @@ class LogicDelete extends React.Component {
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-
-        let menuStyle = {
-            top: pageY,
-            left: pageX,
-        }
-
         return (
-            <div className="drop-down-menu" style={menuStyle}>
+            <div>
                 <div className="drop-down-menu-option" onClick={this._deleteItem}>
                     <i className={`drop-down-menu-icon ion-md-close`}></i>
                     Delete Item
@@ -48,7 +40,6 @@ class LogicDelete extends React.Component {
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        dropdownParams: state.dropdown.dropdownParams,
     }),
     {
         showDropdownByKey,

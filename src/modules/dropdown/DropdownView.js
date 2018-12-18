@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
-import PickOperator from './components/PickOperator';
-import LogicDelete from './components/LogicDelete'
+
+import PickOperator from './logic/PickOperator';
+import LogicDelete from './logic/LogicDelete'
 
 import EditTag from './template/EditTag'
 import CreateSomething from './template/CreateSomething'
@@ -26,50 +27,52 @@ import PickPhase from './update/PickPhase'
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
 import WriteNews from './update/WriteNews'
+import Dropdown from './components/Dropdown';
 
 class DropdownView extends React.Component{
-    _renderItem = (dropdownKey, index) => {
-        switch(dropdownKey) {
+    _renderItem = (props) => {
+        switch(props.key) {
             case dropdownType.storyShowMore:
-                return <ClickMenu key={index}/>
+                return <ClickMenu {...props}/>
+                
             case dropdownType.showLogic:
-                return <PickOperator key={index}/>
+                return <PickOperator {...props}/>
             case dropdownType.deleteLogic:
-                return <LogicDelete key={index}/>
+                return <LogicDelete {...props}/>
 
             case dropdownType.showLibrary:
-                return <BoardLib key={index}/>
+                return <BoardLib {...props}/>
 
             case dropdownType.editTag:
-                return <EditTag key={index}/>
+                return <EditTag {...props}/>
             case dropdownType.createSomething:
-                return <CreateSomething key={index}/>
+                return <CreateSomething {...props}/>
             case dropdownType.pickFieldType:
-                return <PickFieldType key={index}/>
+                return <PickFieldType {...props}/>
             case dropdownType.addTemplateField:
-                return <AddTemplateField key={index}/>
+                return <AddTemplateField {...props}/>
             case dropdownType.templateTitleOptions:
-                return <TemplateTitleOptions key={index}/>
+                return <TemplateTitleOptions {...props}/>
                 
             case dropdownType.addVar:
-                return <AddVar key={index}/>
+                return <AddVar {...props}/>
             case dropdownType.editVar:
-                return <EditVar key={index}/>
+                return <EditVar {...props}/>
             case dropdownType.pickVar:
-                return <PickVar key={index}/>
+                return <PickVar {...props}/>
             case dropdownType.pickVarType:
-                return <PickVarType key={index}/>
+                return <PickVarType {...props}/>
             case dropdownType.pickComparison:
-                return <PickComparison key={index}/>
+                return <PickComparison {...props}/>
 
             case dropdownType.pickPhase:
-                return <PickPhase key={index}/>
+                return <PickPhase {...props}/>
             case dropdownType.pickUid:
-                return <PickUid key={index}/>
+                return <PickUid {...props}/>
             case dropdownType.pickUpdate:
-                return <PickUpdate key={index}/>
+                return <PickUpdate {...props}/>
             case dropdownType.writeNews:
-                return <WriteNews key={index}/>
+                return <WriteNews {...props}/>
             default:
                 return null
         }
@@ -79,9 +82,13 @@ class DropdownView extends React.Component{
         const { dropdownKeys } = this.props
         if (!dropdownKeys || dropdownKeys.length === 0) return null
         return (
-            <div>
-                {dropdownKeys.map(this._renderItem)}
-            </div>
+            dropdownKeys.map(item => {
+                return (
+                    <Dropdown {...item}>
+                        {this._renderItem(item)}
+                    </Dropdown>
+                )}
+            )
         )
     }
 }
