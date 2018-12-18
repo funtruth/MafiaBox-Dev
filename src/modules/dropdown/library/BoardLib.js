@@ -3,13 +3,10 @@ import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
-import { fuseType } from '../types'
+import { fuseType, dropdownType } from '../types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
-
-import StoryMapLib from './StoryMapLib';
-import Dropdown from '../components/Dropdown';
 
 class BoardLib extends React.Component{
     constructor(props) {
@@ -17,10 +14,6 @@ class BoardLib extends React.Component{
         this.state = {
             searchText: '',
             results: [],
-            showDropdown: false,
-            nextPageX: 0,
-            nextPageY: 0,
-            hoverKey: null,
         }
         this.fuse = new Fuse(_.toArray(props.pageRepo), fuseType.boardLib)
     }
@@ -35,13 +28,13 @@ class BoardLib extends React.Component{
 
     _onMouseEnter = (key, e) => {
         const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-        if (key === this.state.hoverKey) return
+        const { pageX, pageY, hoverKey } = dropdownParams
+        if (key === hoverKey) return
 
-        this.setState({
-            showDropdown: true,
-            nextPageX: pageX + 208,
-            nextPageY: e.pageY - (e.pageY - pageY - 60) % 28 - 8,
+        this.props.showDropdownByKey(dropdownType.storyMapLib, {
+            ...dropdownParams,
+            pageX: pageX + 208,
+            pageY: e.pageY - (e.pageY - pageY - 60) % 28 - 8,
             hoverKey: key,
         })
     }
@@ -50,13 +43,12 @@ class BoardLib extends React.Component{
         this.setState({
             searchText: e.target.value,
             results: this.fuse.search(e.target.value),
-            showDropdown: false,
         })
     }
 
     render() {
         const { pageRepo, boardRepo } = this.props
-        const { searchText, showDropdown, nextPageX, nextPageY, hoverKey } = this.state
+        const { searchText } = this.state
 
         const boards = _.groupBy(pageRepo, i => i.boardType)
         
@@ -108,14 +100,6 @@ class BoardLib extends React.Component{
                         )
                     })
                 }
-                {showDropdown && <Dropdown pageX={nextPageX} pageY={nextPageY}>
-                    <StoryMapLib
-                        pageX={nextPageX}
-                        pageY={nextPageY}
-                        hoverKey={hoverKey}
-                        onSelect={this._onSelect}
-                    />
-                </Dropdown>}
             </div>
         )
     }
@@ -125,12 +109,10 @@ export default connect(
     state => ({
         boardRepo: state.page.boardRepo,
         pageRepo: state.page.pageRepo,
-        storyMap: state.page.storyMap,
     }),
     {
         showDropdownByKey,
         popHighestDropdown,
         updatePageByPath,
-
     }
 )(BoardLib)

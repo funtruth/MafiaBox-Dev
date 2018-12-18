@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { dropdownType } from './types'
 
 import ClickMenu from './components/ClickMenu'
+import InputValue from './components/InputValue'
 
 import PickOperator from './logic/PickOperator';
 import LogicDelete from './logic/LogicDelete'
@@ -16,6 +17,8 @@ import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import BoardLib from './library/BoardLib';
+import PageLib from './library/PageLib';
+import StoryMapLib from './library/StoryMapLib';
 
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
@@ -34,6 +37,8 @@ class DropdownView extends React.Component{
         switch(props.key) {
             case dropdownType.storyShowMore:
                 return <ClickMenu {...props}/>
+            case dropdownType.inputValue:
+                return <InputValue {...props}/>
                 
             case dropdownType.showLogic:
                 return <PickOperator {...props}/>
@@ -42,6 +47,10 @@ class DropdownView extends React.Component{
 
             case dropdownType.showLibrary:
                 return <BoardLib {...props}/>
+            case dropdownType.pageLib:
+                return <PageLib {...props}/>
+            case dropdownType.storyMapLib:
+                return <StoryMapLib {...props}/>
 
             case dropdownType.editTag:
                 return <EditTag {...props}/>

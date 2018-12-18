@@ -5,7 +5,6 @@ import { variableType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
-import Dropdown from '../components/Dropdown';
 
 class AddVar extends React.Component{
     constructor(props){
@@ -55,7 +54,7 @@ class AddVar extends React.Component{
 
     render() {
         return (
-            <Dropdown>
+            <div>
                 <input
                     className="tag-input menu-voidclick"
                     value={this.state.value}
@@ -70,7 +69,7 @@ class AddVar extends React.Component{
                     <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
                     Create
                 </div>
-            </Dropdown>
+            </div>
         )
     }
 }

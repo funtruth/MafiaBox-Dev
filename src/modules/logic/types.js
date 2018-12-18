@@ -1,5 +1,3 @@
-import { dropdownType } from '../dropdown/types'
-
 export const logicType = {
     none: 'logicType/none',
     if: 'logicType/if',
@@ -44,12 +42,20 @@ export const comparisonType = {
     },
 }
 
+export const updateType = {
+    staticVal: 'updateType/staticVal',
+    dynamicVal: 'updateType/dynamicVal',
+    phase: 'updateType/phase',
+    uid: 'updateType/uid',
+}
+
 export const valueType = {
     nC: {
         key: 'nC',
         index: 0,
         title: 'no change',
         icon: 'mdi mdi-swap-horizontal-bold',
+        updateType: updateType.staticVal,
     },
     null: {
         key: 'null',
@@ -57,32 +63,35 @@ export const valueType = {
         title: 'null',
         label: 'null',
         icon: 'mdi mdi-null',
+        updateType: updateType.staticVal,
     },
     i: {
         key: 'i',
         index: 2,
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
+        updateType: updateType.staticVal,
     },
     iB: {
         key: 'iB',
         index: 3,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
-        dropdownType: dropdownType.pickUpdateValue,
+        updateType: updateType.dynamicVal,
     },
     d: {
         key: 'd',
         index: 4,
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
+        updateType: updateType.staticVal,
     },
     dB: {
         key: 'dB',
         index: 5,
         title: 'decrement by',
         icon: 'ion-md-download',
-        dropdownType: dropdownType.pickUpdateValue,
+        updateType: updateType.dynamicVal,
     },
 }
 

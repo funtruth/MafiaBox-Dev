@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { variableType } from '../../logic/types'
+import { variableType, updateType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
@@ -42,7 +42,11 @@ class PickUid extends React.Component{
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {expand: true, value: item.key})
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+            expand: true,
+            value: item.key,
+            updateType: updateType.uid,
+        })
         this.props.showDropdownByKey()
     }
 

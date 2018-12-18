@@ -16,3 +16,9 @@ code {
 a {
   text-decoration: none;
 }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-apperance: none;
+  margin: 0;
+}

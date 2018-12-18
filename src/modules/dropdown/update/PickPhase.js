@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
 import { boardType } from '../../board/types'
+import { updateType } from '../../logic/types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
@@ -29,7 +30,10 @@ class BoardLib extends React.Component{
         const { dropdownParams } = this.props
         const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', value)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+            value,
+            updateType: updateType.phase,
+        })
         this.props.showDropdownByKey()
     }
 
@@ -42,9 +46,8 @@ class BoardLib extends React.Component{
     }
 
     render() {
-        const { pageRepo, boardRepo, dropdownParams } = this.props
+        const { pageRepo, boardRepo } = this.props
         const { searchText } = this.state
-        const { pageX, pageY } = dropdownParams
         
         return (
             <div>
@@ -77,9 +80,8 @@ class BoardLib extends React.Component{
                             No search results found
                         </div>
                     :<StoryMapLib
+                        {...this.props}
                         searchMenu
-                        pageX={pageX}
-                        pageY={pageY}
                         hoverKey={boardType.flow}
                         onSelect={this._onSelect}
                     />

@@ -59,7 +59,7 @@ class AppWrapper extends React.Component{
                             pageKey: e.target.getAttribute('page-key'),
                             currentValue: e.target.getAttribute('current-value'),
                             pageX: e.pageX - e.offsetX - 8,
-                            pageY: e.pageY - e.offsetY + 28,
+                            pageY: e.pageY - e.offsetY + e.target.offsetHeight,
                         })
                 } else {
                     this.props.showDropdownByKey()

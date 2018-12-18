@@ -2,47 +2,31 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import PageLib from './PageLib'
-import Dropdown from '../components/Dropdown';
+import { dropdownType } from '../types'
+
+import { showDropdownByKey } from '../DropdownReducer'
 
 class StoryMapLib extends React.Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            showDropdown: false,
-            nextPageX: 0,
-            nextPageY: 0,
-            nextHoverKey: null,
-        }
-    }
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.hoverKey !== this.props.hoverKey) {
-            this.setState({
-                showDropdown: false
-            })
-        }
-    }
-
     _onMouseEnter = (key, e) => {
-        const { pageX, pageY, searchMenu } = this.props
-        
+        const { dropdownParams, searchMenu } = this.props
+        const { pageX, pageY } = dropdownParams
         //TODO better alg cause sometimes buggy
-        this.setState({
-            showDropdown: true,
-            nextPageX: pageX + (searchMenu?208:158),
-            nextPageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % 28 - 8,
-            nextHoverKey: key,
+
+        this.props.showDropdownByKey(dropdownType.pageLib, {
+            ...dropdownParams,
+            pageX: pageX + (searchMenu?208:158),
+            pageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % 28 - 8,
+            hoverKey: key,
+            onSelect: this.props.onSelect
         })
     }
 
     render() {
-        const { storyMap, pageRepo, hoverKey } = this.props
-        const { showDropdown, nextPageX, nextPageY, nextHoverKey } = this.state
+        const { storyMap, pageRepo, dropdownParams, hoverKey } = this.props
         
-        let stories = _.filter(pageRepo, i => hoverKey === i.boardType)
+        let stories = _.filter(pageRepo, i => (hoverKey || dropdownParams.hoverKey) === i.boardType)
         stories = _.groupBy(stories, i => i.storyType)
-
+        
         return (
             <div>
                 {Object.keys(stories).map((item, index) => {
@@ -62,14 +46,6 @@ class StoryMapLib extends React.Component{
                         </div>
                     )
                 })}
-                {showDropdown && <Dropdown pageX={nextPageX} pageY={nextPageY}>
-                    <PageLib
-                        pageX={nextPageX}
-                        pageY={nextPageY}
-                        hoverKey={nextHoverKey}
-                        onSelect={this.props.onSelect}
-                    />
-                </Dropdown>}
             </div>
         )
     }
@@ -79,5 +55,8 @@ export default connect(
     state => ({
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
-    })
+    }),
+    {
+        showDropdownByKey
+    }
 )(StoryMapLib)

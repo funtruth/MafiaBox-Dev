@@ -10,6 +10,13 @@ export function genUID(key) {
 export function pathUpdate(args, index, repo) {
     return {
         ...repo[args[index]]||{},
-        [args[index + 1]]: index===args.length-3?args[args.length-1]:pathUpdate(args, index+1, repo[args[index]])
+        [args[index + 1]]: index === args.length - 3 ?
+            typeof args[args.length - 1] === 'object' ?
+                {
+                    ...(repo[args[index]]||{})[args[index + 1]]||{},
+                    ...args[args.length - 1]
+                }
+                :args[args.length - 1]
+            :pathUpdate(args, index + 1, repo[args[index]])
     }
 }
