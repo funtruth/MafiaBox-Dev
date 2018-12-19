@@ -63,7 +63,7 @@ class LogicBlock extends React.Component{
                                 vars,
                             }
                             
-                            const newVars = logicInfo.logicType === logicType.function &&
+                            const newVars = logicInfo.logicType === logicType.function.key &&
                                 logicInfo.data && pageRepo[logicInfo.data].vars
                                 
                             return <Draggable key={item} draggableId={item} index={index}>

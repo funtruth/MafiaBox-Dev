@@ -1,12 +1,60 @@
 export const logicType = {
-    none: 'logicType/none',
-    if: 'logicType/if',
-    else: 'logicType/else',
-    elseif: 'logicType/elseif',
-    operator: 'logicType/operator',
-    function: 'logicType/function',
-    return: 'logicType/return',
-    update: 'logicType/update',
+    none: {
+        key: 'none',
+        index: 0,
+        title: 'none',
+        icon: 'ion-md-create',
+        color: '#767676',
+    },
+    if: {
+        key: 'if',
+        index: 1,
+        title: 'if',
+        icon: 'ion-md-help',
+        color: '#af8c40',
+    },
+    else: {
+        key: 'else',
+        index: 2,
+        title: 'else',
+        icon: 'ion-ios-more',
+        color: '#db4757',
+    },
+    elseif: {
+        key: 'elseif',
+        index: 3,
+        title: 'else if',
+        icon: 'ion-ios-more',
+        color: '#0e7db4',
+    },
+    operator: {
+        key: 'operator',
+        index: 4,
+        title: 'operator',
+        icon: 'ion-md-code-working',
+        color: 'Mediumslateblue'
+    },
+    function: {
+        key: 'function',
+        index: 5,
+        title: 'function',
+        icon: 'ion-md-pulse',
+        color: '#3864ab',
+    },
+    return: {
+        key: 'return',
+        index: 6,
+        title: 'return',
+        icon: 'ion-ios-send',
+        color: '#1e9939',
+    },
+    update: {
+        key: 'update',
+        index: 7,
+        title: 'update',
+        icon: 'mdi mdi-code-braces',
+        color: '#a566b0',
+    },
 }
 
 export const comparisonType = {
@@ -103,52 +151,9 @@ export const valueType = {
     },
 }
 
-export const logicTypeInfo = {
-    [logicType.none]: {
-        title: 'none',
-        icon: 'ion-md-create',
-        color: '#767676',
-    },
-    [logicType.if]: {
-        title: 'if',
-        icon: 'ion-md-help',
-        color: '#af8c40',
-    },
-    [logicType.else]: {
-        title: 'else',
-        icon: 'ion-ios-more',
-        color: '#db4757',
-    },
-    [logicType.elseif]: {
-        title: 'else if',
-        icon: 'ion-ios-more',
-        color: '#0e7db4',
-    },
-    [logicType.operator]: {
-        title: 'operator',
-        icon: 'ion-md-code-working',
-        color: 'Mediumslateblue'
-    },
-    [logicType.function]: {
-        title: 'function',
-        icon: 'ion-md-pulse',
-        color: '#3864ab',
-    },
-    [logicType.return]: {
-        title: 'return',
-        icon: 'ion-ios-send',
-        color: '#1e9939',
-    },
-    [logicType.update]: {
-        title: 'update',
-        icon: 'mdi mdi-code-braces',
-        color: '#a566b0',
-    },
-}
-
 export const defaultLogic = {
     START: {
-        logicType: logicType.none,
+        logicType: logicType.none.key,
     }
 }
 

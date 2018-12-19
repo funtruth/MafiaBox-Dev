@@ -17,25 +17,25 @@ export function compile(key, map) {
     }
 
     //if logicType is else and page selected
-    if (!map[key].logicType === logicType.else && map[key].pageKey) {
+    if (!map[key].logicType === logicType.else.key && map[key].pageKey) {
         addYellow('Else cannot have a condition', errors)
     }
 
     //if logicType needs condition but no condition
-    if (map[key].logicType && (map[key].logicType !== logicType.else) && !map[key].pageKey) {
+    if (map[key].logicType && (map[key].logicType !== logicType.else.key) && !map[key].pageKey) {
         addYellow('Missing condition', errors)
     }
 
     //if parent exists and is an if statement
-    if (parent.key && parent.type && map[key].logicType === logicType.if) {
+    if (parent.key && parent.type && map[key].logicType === logicType.if.key) {
         addYellow('if operator must come first', errors)
     }
 
     //if vertical parent is else or return
     if (parent.type === 'down') {
-        if (map[parent.key].logicType === logicType.else) {
+        if (map[parent.key].logicType === logicType.else.key) {
             addRed('Cannot be after else operator', errors)
-        } else if (map[parent.key].logicType === logicType.return) {
+        } else if (map[parent.key].logicType === logicType.return.key) {
             addRed('Cannot be after return operator', errors)
         }
     }

@@ -6,7 +6,7 @@ import LogicExpandable from './LogicExpandable';
 class LogicObject extends React.Component{
     render() {
         const { logicInfo, room } = this.props
-        const showForm = logicInfo.logicType === logicType.update
+        const showForm = logicInfo.logicType === logicType.update.key
         if (!showForm) return null
 
         return (

@@ -1,24 +1,23 @@
 import React from 'react'
 import { dropdownType } from '../../dropdown/types'
-import { logicTypeInfo } from '../types'
+import { logicType } from '../types'
 
 class LogicType extends React.Component{
     render() {
         const { item, logicInfo, field, pageInfo } = this.props
-        
+        const type = logicInfo.logicType
+
         return (
             <i 
-                className={`${(logicInfo.logicType &&
-                    logicTypeInfo[logicInfo.logicType].icon) ||
+                className={`${(type && logicType[type].icon) ||
                     'ion-md-create'} logic-label menu-onclick`}
                 menu-type={dropdownType.showLogic}
                 field-key={field}
                 index-key={item}
                 page-key={pageInfo.pageKey}
-                current-value={logicInfo.logicType}
+                current-value={type}
                 style={{
-                    backgroundColor: (logicInfo.logicType &&
-                        logicTypeInfo[logicInfo.logicType].color) ||
+                    backgroundColor: (type && logicType[type].color) ||
                         '#767676',
                     color: '#fff',
                 }}

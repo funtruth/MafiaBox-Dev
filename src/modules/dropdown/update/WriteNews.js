@@ -5,8 +5,6 @@ import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
-import { logicType, logicTypeInfo } from '../../logic/types'
-
 class WriteNews extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
@@ -14,17 +12,17 @@ class WriteNews extends React.Component{
 
         return (
             <div
-                key={item}
+                key={item.key}
                 className="drop-down-menu-option"
-                onClick={this._select.bind(this, item)}
+                onClick={this._select}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6',
                 }}
             >
                 <i
-                    className={`${logicTypeInfo[item].icon} drop-down-menu-icon`}
+                    className={`${item.icon} drop-down-menu-icon`}
                 />
-                {logicTypeInfo[item].title}
+                {item.title}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -62,20 +60,9 @@ class WriteNews extends React.Component{
     }
 
     render() {
-        //TODO make a proper logicType object
-        let logicMenu = [
-            logicType.if,
-            logicType.else,
-            logicType.elseif,
-            logicType.operator,
-            logicType.function,
-            logicType.return,
-            logicType.update,
-        ]
-
         return (
             <div>
-                {logicMenu.map(this._renderItem)}
+                {[].map(this._renderItem)}
                 <div className="drop-down-menu-separator"/>
                 <div className="drop-down-menu-option" onClick={this._addItemBelow}>
                     <i className={`drop-down-menu-icon ion-ios-bulb`}></i>

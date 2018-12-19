@@ -16,7 +16,7 @@ class LogicPanels extends React.Component{
     
     render() {
         const { item, field, logicInfo, pageInfo, pageRepo } = this.props
-        const isOperator = logicInfo.logicType === logicType.operator
+        const isOperator = logicInfo.logicType === logicType.operator.key
         
         if (isOperator) return (
             <div>

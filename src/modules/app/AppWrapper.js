@@ -23,6 +23,7 @@ class AppWrapper extends React.Component{
     }
 
     _handleScroll = () => {
+        //TODO not being handled properly, should chek the scroll container
         const { dropdownKeys } = this.props
         if (dropdownKeys.length) {
             if (dropdownKeys[0].key === dropdownType.pickVar) return

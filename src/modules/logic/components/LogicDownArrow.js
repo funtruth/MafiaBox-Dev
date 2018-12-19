@@ -17,8 +17,8 @@ class LogicDownArrow extends React.Component{
     render() {
         const { logicInfo } = this.props
 
-        const hide = logicInfo.logicType === logicType.return ||
-            logicInfo.logicType === logicType.update
+        const hide = logicInfo.logicType === logicType.return.key ||
+            logicInfo.logicType === logicType.update.key
 
         return (
             <i 
