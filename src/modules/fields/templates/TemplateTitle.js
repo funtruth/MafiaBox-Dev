@@ -1,5 +1,5 @@
 import React from 'react'
-import { fieldTypeToTitle } from '../defaults'
+import { fieldType as types } from '../defaults'
 import { dropdownType } from '../../dropdown/types';
 
 class TemplateTitle extends React.Component{
@@ -18,7 +18,7 @@ class TemplateTitle extends React.Component{
                     className="tag-button menu-onclick"
                     menu-type={dropdownType.pickFieldType}
                     field-key={fieldKey}
-                >{fieldTypeToTitle[fieldType]}</div>
+                >{types[fieldType].title}</div>
                 <input
                     className="field-title-input"
                     value={fieldTitle || ''}

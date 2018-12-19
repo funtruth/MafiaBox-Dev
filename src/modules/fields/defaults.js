@@ -2,36 +2,54 @@ import { boardType } from '../board/types'
 import { variableType } from '../logic/types'
 
 export const fieldType = {
-    text: 'fieldType/text',
-    number: 'fieldType/number',
-    code: 'fieldType/code',
-    logic: 'fieldType/logic',
-    tag: 'fieldType/tag',
-    vars: 'fieldType/vars',
-    property: 'fieldType/property',
-    expertTag: 'fieldType/expertTag',
-}
-
-export const fieldTypeToIcon = {
-    [fieldType.text]: 'ion-md-list',
-    [fieldType.number]: 'ion-md-attach',
-    [fieldType.code]: 'ion-md-code',
-    [fieldType.logic]: 'ion-md-options',
-    [fieldType.tag]: 'ion-ios-pricetag',
-    [fieldType.vars]: 'ion-md-planet',
-    [fieldType.property]: 'ion-md-switch',
-    [fieldType.expertTag]: 'ion-ios-pricetags',
-}
-
-export const fieldTypeToTitle = {
-    [fieldType.text]: 'Text',
-    [fieldType.number]: 'Number',
-    [fieldType.code]: 'Code',
-    [fieldType.logic]: 'Logic',
-    [fieldType.tag]: 'Tag',
-    [fieldType.vars]: 'Variables',
-    [fieldType.property]: 'Properties',
-    [fieldType.expertTag]: 'Expert Tag',
+    text: {
+        key: 'text',
+        index: 0,
+        icon: 'ion-md-list',
+        title: 'Text',
+    },
+    number: {
+        key: 'number',
+        index: 1,
+        icon: 'ion-md-attach',
+        title: 'Number',
+    },
+    code: {
+        key: 'code',
+        index: 2,
+        icon: 'ion-md-code',
+        title: 'Code',
+    },
+    logic: {
+        key: 'logic',
+        index: 3,
+        icon: 'ion-md-options',
+        title: 'Logic',
+    },
+    tag: {
+        key: 'tag',
+        index: 4,
+        icon: 'ion-ios-pricetag',
+        title: 'Tag',
+    },
+    vars: {
+        key: 'vars',
+        index: 5,
+        icon: 'ion-md-planet',
+        title: 'Vars',
+    },
+    property: {
+        key: 'property',
+        index: 6,
+        icon: 'ion-md-switch',
+        title: 'Property',
+    },
+    expertTag: {
+        key: 'expertTag',
+        index: 7,
+        icon: 'ion-ios-pricetags',
+        title: 'Export Tag',
+    },
 }
 
 export const fieldIcon = {
@@ -51,58 +69,58 @@ export const initFieldMap = {
 export const initFieldRepo = {
     description0: {
         fieldKey: 'description',
-        fieldType: fieldType.text,
+        fieldType: fieldType.text.key,
         fieldTitle: 'Description',
     },
     description1: {
         fieldKey: 'description',
-        fieldType: fieldType.text,
+        fieldType: fieldType.text.key,
         fieldTitle: 'Description',
     },
     description2: {
         fieldKey: 'description',
-        fieldType: fieldType.text,
+        fieldType: fieldType.text.key,
         fieldTitle: 'Description',
     },
     code: {
         fieldKey: 'code',
-        fieldType: fieldType.code,
+        fieldType: fieldType.code.key,
         fieldTitle: 'Code Interpretation',
     },
     args: {
         fieldKey: 'args',
-        fieldType: fieldType.vars,
+        fieldType: fieldType.vars.key,
         fieldTitle: 'Required Variables',
     },
     vars: {
         fieldKey: 'vars',
-        fieldType: fieldType.vars,
+        fieldType: fieldType.vars.key,
         fieldTitle: 'Declared Variables',
     },
     roleTeam: {
         fieldKey: 'roleTeam',
-        fieldType: fieldType.tag,
+        fieldType: fieldType.tag.key,
         fieldTitle: 'Role Team',
     },
     roleCharges: {
         fieldKey: 'roleCharges',
-        fieldType: fieldType.number,
+        fieldType: fieldType.number.key,
         fieldTitle: 'Role Charges',
     },
     roleActionMode: {
         fieldKey: 'roleActionMode',
-        fieldType: fieldType.logic,
+        fieldType: fieldType.logic.key,
         fieldTitle: 'Role Action Mode',
     },
     phaseActionMode: {
         fieldKey: 'phaseActionMode',
-        fieldType: fieldType.tag,
+        fieldType: fieldType.tag.key,
         fieldTitle: 'Action Mode',
         data: ['phaseActionMode/all', 'phaseActionMode/king', 'phaseActionMode/clown', 'phaseActionMode/none']
     },
     phaseTriggerMode: {
         fieldKey: 'phaseTriggerMode',
-        fieldType: fieldType.logic,
+        fieldType: fieldType.logic.key,
         fieldTitle: 'Phase Trigger',
         vars: {
             lobby: {

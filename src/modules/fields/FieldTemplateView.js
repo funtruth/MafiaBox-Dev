@@ -23,9 +23,9 @@ class FieldTemplateView extends React.Component {
         }
         
         switch(fieldInfo.fieldType) {
-            case fieldType.tag:
+            case fieldType.tag.key:
                 return <TagsView {...props} add="Add Tag"/>
-            case fieldType.property:
+            case fieldType.property.key:
                 return <TagsView {...props} add="Add Property"/>
             default:
                 return null

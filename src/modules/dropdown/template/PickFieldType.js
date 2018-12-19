@@ -1,33 +1,28 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updateField } from '../../fields/FieldReducer'
 
-import { fieldType, fieldTypeToIcon, fieldTypeToTitle } from '../../fields/defaults'
+import { fieldType } from '../../fields/defaults'
 
 class PickFieldType extends React.Component{
     _renderItem = (item) => {
         const { fieldRepo, fieldKey } = this.props
-        
-        const selected = fieldRepo[fieldKey].fieldType === item
-
-        let itemStyle = {}
-        selected && (itemStyle = {
-            color: selected ? '#fff' : '#b6b6b6',
-        })
+        const selected = fieldRepo[fieldKey].fieldType === item.key
 
         return (
             <div
-                key={item}
+                key={item.key}
                 className="drop-down-menu-option"
-                onClick={this._select.bind(this, item)}
-                style={itemStyle}
+                onClick={this._select.bind(this, item.key)}
+                style={{
+                    color: selected ? '#fff' : '#b6b6b6',
+                }}
             >
-                <i
-                    className={`${fieldTypeToIcon[item]} drop-down-menu-icon`}
-                />
-                {fieldTypeToTitle[item]}
+                <i className={`${item.icon} drop-down-menu-icon`}/>
+                {item.title}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -46,18 +41,9 @@ class PickFieldType extends React.Component{
     }
 
     render() {
-        //TODO proper menu object
-        let menu = [
-            fieldType.text,
-            fieldType.number,
-            fieldType.logic,
-            fieldType.tag,
-            fieldType.property,
-            fieldType.vars,
-        ]
-
+        const data = _.orderBy(fieldType, i => i.index)
         return (
-            menu.map(this._renderItem)
+            data.map(this._renderItem)
         )
     }
 }

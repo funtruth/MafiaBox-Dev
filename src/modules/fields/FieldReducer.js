@@ -44,7 +44,7 @@ export function addField(fieldMapKey, text) {
         fieldRepoClone[newItemKey] = {
             fieldKey: newItemKey,
             fieldTitle: text,
-            fieldType: fieldType.text
+            fieldType: fieldType.text.key
         }
 
         dispatch({

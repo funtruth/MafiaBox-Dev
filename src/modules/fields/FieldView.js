@@ -32,24 +32,24 @@ class FieldView extends React.Component {
         }
 
         //if the field has a default that hasn't been set, update
-        if (!pageInfo[fieldKey] && fieldInfo.fieldType === fieldType.logic) {
+        if (!pageInfo[fieldKey] && fieldInfo.fieldType === fieldType.logic.key) {
             this.props.updatePage(pageInfo.pageKey, fieldKey, defaultLogic)
         }
         
         switch(fieldInfo.fieldType) {
-            case fieldType.text:
+            case fieldType.text.key:
                 return <InputField {...props} inputType="text"/>
-            case fieldType.number:
+            case fieldType.number.key:
                 return <InputField {...props} inputType="number"/>
-            case fieldType.code:
+            case fieldType.code.key:
                 return <CodeField {...props}/>
-            case fieldType.logic:
+            case fieldType.logic.key:
                 return <LogicBoard {...props}/>
-            case fieldType.tag:
+            case fieldType.tag.key:
                 return <TagField {...props}/>
-            case fieldType.property:
+            case fieldType.property.key:
                 return <PropertyField {...props}/>
-            case fieldType.vars:
+            case fieldType.vars.key:
                 return <VariableField {...props}/>
             default:
                 return null
