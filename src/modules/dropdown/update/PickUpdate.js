@@ -10,17 +10,13 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
     _onMouseOver = (item, e) => {
-        const { dropdownParams } = this.props
-        const { pageX, pageY, hoverKey, currentValue } = dropdownParams
+        const { hoverKey, currentValue } = this.props
         if (item.key === hoverKey) return
         
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
         //TODO apply e.target.offsetheight to more of these so less hacky
-        this.props.showDropdownByKey(dropdownType.inputValue, {
-            ...dropdownParams,
-            pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+        this.props.showDropdownByKey(dropdownType.inputValue, e, {
             hoverKey: item.key,
             inputText: 'Enter a number',
             type: 'number',
@@ -30,8 +26,7 @@ class PickUpdate extends React.Component{
     }
 
     _select = (item) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value: item.key,
@@ -41,8 +36,7 @@ class PickUpdate extends React.Component{
     }
 
     _selectDynamic = (item, number) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value: item.key,
@@ -53,8 +47,7 @@ class PickUpdate extends React.Component{
     }
     
     _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
+        const { currentValue } = this.props
         
         const selected = typeof currentValue === 'string' && currentValue === item.key
 

@@ -9,34 +9,23 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
     _onMouseOver = (e) => {
-        const { dropdownParams, dropdownData } = this.props
-        const { pageX, pageY, hoverKey, currentValue } = dropdownParams
-        
-
-        
-        //TODO apply e.target.offsetheight to more of these so less hacky
-        this.props.showDropdownByKey(dropdownType.inputValue, {
-            ...dropdownParams,
-            pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+        this.props.showDropdownByKey(dropdownType.inputValue, e, {
             inputText: 'Enter a number',
             type: 'number',
             showValue: true,
-            onSubmit: this._selectDynamic
+            onSubmit: this._setAdjustment
         })
     }
 
     _setAdjustment = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, subfieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'hi')
         this.props.showDropdownByKey()
     }
 
     _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
+        const { currentValue } = this.props
 
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
@@ -63,8 +52,7 @@ class PickVar extends React.Component{
     }
 
     _select = (newValue) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, subfieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, newValue)
         this.props.showDropdownByKey()

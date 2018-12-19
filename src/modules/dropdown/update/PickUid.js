@@ -10,8 +10,7 @@ import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
+        const { currentValue } = this.props
         
         const selected = typeof currentValue === 'string' && currentValue === item
 
@@ -39,8 +38,7 @@ class PickUid extends React.Component{
     }
 
     _select = (item) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             expand: true,
@@ -51,8 +49,7 @@ class PickUid extends React.Component{
     }
 
     _onClear = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             expand: false,

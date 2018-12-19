@@ -29,7 +29,7 @@ class CreateTag extends React.Component{
 
     _confirm = () => {
         if (true) {
-            this.props.addTag(this.props.dropdownParams.fieldKey, this.state.value)
+            this.props.addTag(this.props.fieldKey, this.state.value)
             this.props.showDropdownByKey()
         } else {
 

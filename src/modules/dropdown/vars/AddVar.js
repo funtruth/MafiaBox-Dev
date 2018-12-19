@@ -30,8 +30,7 @@ class AddVar extends React.Component{
     }
 
     _confirm = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey } = dropdownParams
+        const { pageKey, fieldKey } = this.props
         const { value } = this.state
         
         if (true) {

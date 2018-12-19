@@ -8,23 +8,16 @@ import { showDropdownByKey } from '../DropdownReducer'
 
 class StoryMapLib extends React.Component{
     _onMouseEnter = (key, e) => {
-        const { dropdownParams } = this.props
-        const { pageX, pageY } = dropdownParams
-        //TODO better alg cause sometimes buggy
-
-        this.props.showDropdownByKey(dropdownType.pageLib, {
-            ...dropdownParams,
-            pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+        this.props.showDropdownByKey(dropdownType.pageLib, e, {
             hoverKey: key,
             onSelect: this.props.onSelect
         })
     }
 
     render() {
-        const { storyMap, pageRepo, dropdownParams, hoverKey } = this.props
+        const { storyMap, pageRepo, hoverKey } = this.props
         
-        let stories = _.filter(pageRepo, i => (hoverKey || dropdownParams.hoverKey) === i.boardType)
+        let stories = _.filter(pageRepo, i => hoverKey === i.boardType)
         stories = _.groupBy(stories, i => i.storyType)
         
         return (

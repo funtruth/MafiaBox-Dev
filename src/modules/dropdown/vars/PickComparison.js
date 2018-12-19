@@ -4,21 +4,15 @@ import { connect } from 'react-redux'
 import { comparisonType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../page/PageReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 
 class PickComparison extends React.Component{
     _renderItem = (item) => {
-        const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, subfieldKey, indexKey } = dropdownParams
+        const { currentValue } = this.props
 
-        const selected = pageRepo[pageKey] 
-            && pageRepo[pageKey][fieldKey] 
-            && pageRepo[pageKey][fieldKey][indexKey]
-            && pageRepo[pageKey][fieldKey][indexKey].data
-            && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey] === item
+        const selected = typeof currentValue === 'string' && currentValue === item
 
-        let itemStyle = {}
-        itemStyle = {
+        const itemStyle = {
             color: selected ? '#fff' : '#b6b6b6',
             display: 'flex',
             alignItems: 'center',
@@ -42,15 +36,10 @@ class PickComparison extends React.Component{
         )
     }
 
-    _select = (newValue) => {
-        const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, subfieldKey, indexKey } = dropdownParams
-        
-        let valueClone = {}
-        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
+    _select = (value) => {
+        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
 
-        valueClone[indexKey].data[subfieldKey] = newValue
-        this.props.updatePage(pageKey, fieldKey, valueClone)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, value)
         this.props.showDropdownByKey()
     }
 
@@ -66,7 +55,7 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        updatePage,
+        updatePageByPath,
         showDropdownByKey,
     }
 )(PickComparison)

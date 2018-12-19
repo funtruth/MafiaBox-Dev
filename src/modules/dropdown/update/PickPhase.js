@@ -27,8 +27,7 @@ class BoardLib extends React.Component{
     }
 
     _onSelect = (value) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, subfieldKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value,

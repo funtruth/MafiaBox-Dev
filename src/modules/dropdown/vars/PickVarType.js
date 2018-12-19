@@ -8,8 +8,7 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarType extends React.Component{
     _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
+        const { currentValue } = this.props
 
         const selected = typeof currentValue === 'string' && currentValue === item
         
@@ -42,8 +41,7 @@ class PickVarType extends React.Component{
     }
 
     _select = (newValue) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'variableType', newValue)
         this.props.showDropdownByKey()

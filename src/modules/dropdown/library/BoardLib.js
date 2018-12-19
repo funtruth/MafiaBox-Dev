@@ -19,22 +19,16 @@ class BoardLib extends React.Component{
     }
 
     _onSelect = (key) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', key)
         this.props.showDropdownByKey()
     }
 
     _onMouseEnter = (key, e) => {
-        const { dropdownParams } = this.props
-        const { pageX, pageY, hoverKey } = dropdownParams
+        const { hoverKey } = this.props
         if (key === hoverKey) return
-
-        this.props.showDropdownByKey(dropdownType.storyMapLib, {
-            ...dropdownParams,
-            pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+        this.props.showDropdownByKey(dropdownType.storyMapLib, e, {
             hoverKey: key,
         })
     }

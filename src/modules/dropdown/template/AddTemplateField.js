@@ -29,7 +29,7 @@ class AddTemplateField extends React.Component{
 
     _confirm = () => {
         if (true) {
-            this.props.addField(this.props.dropdownParams.fieldKey, this.state.value)
+            this.props.addField(this.props.fieldKey, this.state.value)
             this.props.showDropdownByKey()
         } else {
 

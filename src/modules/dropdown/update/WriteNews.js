@@ -9,26 +9,17 @@ import { logicType, logicTypeInfo } from '../../logic/types'
 
 class WriteNews extends React.Component{
     _renderItem = (item) => {
-        const { pageRepo, dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
-        
-        const selected = pageRepo[pageKey] 
-            && pageRepo[pageKey][fieldKey] 
-            && pageRepo[pageKey][fieldKey][indexKey]
-            && item === pageRepo[pageKey][fieldKey][indexKey].logicType
-
-        let itemStyle = {}
-        selected && (itemStyle = {
-            backgroundColor: selected ? logicTypeInfo[item].color : null,
-            color: selected ? '#fff' : '#b6b6b6',
-        })
+        const { currentValue } = this.props
+        const selected = typeof currentValue === 'string' && currentValue === item.key
 
         return (
             <div
                 key={item}
                 className="drop-down-menu-option"
                 onClick={this._select.bind(this, item)}
-                style={itemStyle}
+                style={{
+                    color: selected ? '#fff' : '#b6b6b6',
+                }}
             >
                 <i
                     className={`${logicTypeInfo[item].icon} drop-down-menu-icon`}
@@ -46,9 +37,8 @@ class WriteNews extends React.Component{
         )
     }
 
-    _select = (newValue) => {
-        const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey } = dropdownParams
+    _select = () => {
+        const { pageKey, fieldKey, pageRepo } = this.props
         
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
@@ -58,16 +48,14 @@ class WriteNews extends React.Component{
     }
 
     _addItemBelow = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()
     }
 
     _deleteItem = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteItem(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()

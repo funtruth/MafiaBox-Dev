@@ -6,16 +6,14 @@ import { deleteItem, deleteLogicTree } from '../../fields/FieldReducer'
 
 class LogicDelete extends React.Component {
     _deleteItem = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteItem(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()
     }
     
     _deleteTree = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteLogicTree(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()

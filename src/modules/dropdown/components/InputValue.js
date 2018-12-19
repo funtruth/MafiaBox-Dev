@@ -5,14 +5,14 @@ class InputValue extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            value: props.dropdownParams.showValue && props.dropdownData
+            value: props.showValue && props.dropdownData
         }
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.dropdownParams.showValue !== this.props.dropdownParams.showValue) {
+        if (newProps.showValue !== this.props.showValue) {
             this.setState({
-                value: newProps.dropdownParams.showValue && newProps.dropdownData
+                value: newProps.showValue && newProps.dropdownData
             })
         }
     }
@@ -33,13 +33,12 @@ class InputValue extends React.Component{
     }
 
     _onSubmit = () => {
-        const { dropdownParams } = this.props
-        dropdownParams.onSubmit(this.state.value)
+        this.props.onSubmit(this.state.value)
     }
 
     render() {
-        const { dropdownParams } = this.props
-        const { type, inputText } = dropdownParams
+        const { type, inputText } = this.props
+
         return (
             <div>
                 <input

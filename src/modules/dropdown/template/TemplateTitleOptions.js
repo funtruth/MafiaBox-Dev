@@ -6,8 +6,7 @@ import { deleteField } from '../../fields/FieldReducer'
 
 class TemplateTitleOptions extends React.Component{
     _onDelete = () => {
-        const { dropdownParams } = this.props
-        const { fieldKey, pageKey } = dropdownParams
+        const { fieldKey, pageKey } = this.props
 
         this.props.deleteField(pageKey, fieldKey)
         this.props.showDropdownByKey()

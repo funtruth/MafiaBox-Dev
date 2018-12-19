@@ -9,8 +9,7 @@ import { logicType, logicTypeInfo } from '../../logic/types'
 
 class PickOperator extends React.Component{
     _renderItem = (item) => {
-        const { dropdownParams } = this.props
-        const { currentValue } = dropdownParams
+        const { currentValue } = this.props
         
         const selected = item === currentValue
 
@@ -38,8 +37,7 @@ class PickOperator extends React.Component{
     }
 
     _select = (newValue) => {
-        const { dropdownParams, pageRepo } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey, pageRepo } = this.props
         
         let valueClone = {}
         Object.assign(valueClone, pageRepo[pageKey][fieldKey])
@@ -59,16 +57,14 @@ class PickOperator extends React.Component{
     }
 
     _addItemBelow = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()
     }
 
     _deleteItem = () => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey } = dropdownParams
+        const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteItem(indexKey, pageKey, fieldKey)
         this.props.showDropdownByKey()

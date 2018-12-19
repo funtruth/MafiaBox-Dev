@@ -6,15 +6,14 @@ import { updateTag, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
     _onDelete = () => {
-        const { dropdownParams } = this.props
-        const { indexKey, fieldKey } = dropdownParams
+        const { indexKey, fieldKey } = this.props
 
         this.props.deleteTag(fieldKey, indexKey)
         this.props.showDropdownByKey()
     }
 
     _onChange = e => {
-        const { tagKey } = this.props.dropdownParams
+        const { tagKey } = this.props
         this.props.updateTag(tagKey, 'title', e.target.value)
     }
 
@@ -28,8 +27,7 @@ class EditTag extends React.Component{
     }
 
     render() {
-        const { dropdownParams, tagRepo } = this.props
-        const { tagKey } = dropdownParams
+        const { tagKey, tagRepo } = this.props
 
         if (!tagKey) return null
         const fieldInfo = tagRepo[tagKey]

@@ -8,8 +8,7 @@ import { fieldType, fieldTypeToIcon, fieldTypeToTitle } from '../../fields/defau
 
 class PickFieldType extends React.Component{
     _renderItem = (item) => {
-        const { fieldRepo, dropdownParams } = this.props
-        const { fieldKey } = dropdownParams
+        const { fieldRepo, fieldKey } = this.props
         
         const selected = fieldRepo[fieldKey].fieldType === item
 
@@ -42,7 +41,7 @@ class PickFieldType extends React.Component{
     }
 
     _select = (newValue) => {
-        this.props.updateField(this.props.dropdownParams.fieldKey, 'fieldType', newValue)
+        this.props.updateField(this.props.fieldKey, 'fieldType', newValue)
         this.props.showDropdownByKey()
     }
 

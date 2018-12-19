@@ -7,8 +7,7 @@ import { showDropdownByKey } from '../DropdownReducer'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
-        const { dropdownParams } = this.props
-        const { pageKey, fieldKey, indexKey, onSelect } = dropdownParams
+        const { pageKey, fieldKey, indexKey, onSelect } = this.props
         
         if (onSelect) return onSelect(item.pageKey)
 
@@ -17,8 +16,7 @@ class PageLib extends React.Component{
     }
 
     render() {
-        const { pageRepo, dropdownParams } = this.props
-        const { hoverKey } = dropdownParams
+        const { pageRepo, hoverKey } = this.props
         
         const pages = _.filter(pageRepo, i => i.storyType === hoverKey)
 
@@ -40,7 +38,6 @@ class PageLib extends React.Component{
 
 export default connect(
     state => ({
-        storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
     }),
     {
