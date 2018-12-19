@@ -9,19 +9,18 @@ import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
-    _showInput = (item, e) => {
+    _onMouseOver = (item, e) => {
         const { dropdownParams } = this.props
         const { pageX, pageY, hoverKey, currentValue } = dropdownParams
         if (item.key === hoverKey) return
         
-        let selected = false
-        if (typeof currentValue === 'string') selected = currentValue === item.key
+        const selected = typeof currentValue === 'string' && currentValue === item.key
         
         //TODO apply e.target.offsetheight to more of these so less hacky
         this.props.showDropdownByKey(dropdownType.inputValue, {
             ...dropdownParams,
             pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - 8) % e.target.offsetHeight - 8,
+            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
             hoverKey: item.key,
             inputText: 'Enter a number',
             type: 'number',
@@ -57,15 +56,14 @@ class PickUpdate extends React.Component{
         const { dropdownParams } = this.props
         const { currentValue } = dropdownParams
         
-        let selected = false
-        if (typeof currentValue === 'string') selected = currentValue === item.key
+        const selected = typeof currentValue === 'string' && currentValue === item.key
 
         if (item.updateType === updateType.dynamicVal) {
             return (
                 <div
                     key={item.key}
                     className="drop-down-menu-option"
-                    onMouseOver={this._showInput.bind(this, item)}
+                    onMouseOver={this._onMouseOver.bind(this, item)}
                     style={{
                         color: selected ? '#fff' : '#b6b6b6'
                     }}

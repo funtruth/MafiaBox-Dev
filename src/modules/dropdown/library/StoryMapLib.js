@@ -8,14 +8,14 @@ import { showDropdownByKey } from '../DropdownReducer'
 
 class StoryMapLib extends React.Component{
     _onMouseEnter = (key, e) => {
-        const { dropdownParams, searchMenu } = this.props
+        const { dropdownParams } = this.props
         const { pageX, pageY } = dropdownParams
         //TODO better alg cause sometimes buggy
 
         this.props.showDropdownByKey(dropdownType.pageLib, {
             ...dropdownParams,
             pageX: pageX + e.target.offsetWidth,
-            pageY: e.pageY - (e.pageY - pageY - (searchMenu?60:8)) % e.target.offsetHeight - 8,
+            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
             hoverKey: key,
             onSelect: this.props.onSelect
         })

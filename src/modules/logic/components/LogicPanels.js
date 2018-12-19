@@ -11,8 +11,7 @@ import { pushData } from '../../dropdown/DropdownReducer'
 class LogicPanels extends React.Component{
     _onClick = () => {
         const { vars } = this.props
-        const varKeys = Object.keys(vars || {})
-        this.props.pushData(varKeys)
+        this.props.pushData(vars)
     }
     
     render() {
@@ -28,6 +27,7 @@ class LogicPanels extends React.Component{
                     subfield-key="var1"
                     index-key={item}
                     page-key={pageInfo.pageKey}
+                    current-value={logicInfo.data.var1}
                     style={{
                         color: logicInfo.data.var1 ? '#fff' : '#868686',
                         borderRadius: '0px 4px 0px 0px',
@@ -45,6 +45,7 @@ class LogicPanels extends React.Component{
                     subfield-key="comparison"
                     index-key={item}
                     page-key={pageInfo.pageKey}
+                    current-value={logicInfo.data.comparison}
                     style={{
                         color: logicInfo.data.comparison ? '#d6d6d6' : '#868686',
                     }}
@@ -60,6 +61,7 @@ class LogicPanels extends React.Component{
                     subfield-key="var2"
                     index-key={item}
                     page-key={pageInfo.pageKey}
+                    current-value={logicInfo.data.var2}
                     style={{
                         color: logicInfo.data.var2 ? '#fff' : '#868686',
                         borderRadius: '0px 0px 4px 0px',
@@ -81,6 +83,7 @@ class LogicPanels extends React.Component{
                 field-key={field}
                 index-key={item}
                 page-key={pageInfo.pageKey}
+                current-value={logicInfo.data}
                 style={{
                     color: hasPage ? '#fff' : '#868686',
                     borderRadius: '0px 4px 4px 0px',

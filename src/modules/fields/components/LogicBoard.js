@@ -11,7 +11,6 @@ class LogicBoard extends React.Component{
     render() {
         const { fieldInfo, fieldKey, value } = this.props
         
-        let parents
         let children = {}
 
         //gather all keys that are children
@@ -21,10 +20,11 @@ class LogicBoard extends React.Component{
         }
         
         //gather all keys that are parents, set index to the first parent
-        parents = _.pickBy(value, (i, key) => !children[key])
+        //TODO show variables in chronological order for dropdown PickVar
+        const parents = _.pickBy(value, (i, key) => !children[key])
         
         if (!value) return null
-        
+
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">

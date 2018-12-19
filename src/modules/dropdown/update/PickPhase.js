@@ -81,7 +81,6 @@ class BoardLib extends React.Component{
                         </div>
                     :<StoryMapLib
                         {...this.props}
-                        searchMenu
                         hoverKey={boardType.flow}
                         onSelect={this._onSelect}
                     />

@@ -13,8 +13,7 @@ class PickUid extends React.Component{
         const { dropdownParams } = this.props
         const { currentValue } = dropdownParams
         
-        let selected = false
-        if (typeof currentValue === 'string') selected = currentValue === item
+        const selected = typeof currentValue === 'string' && currentValue === item
 
         return (
             <div

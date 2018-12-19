@@ -33,8 +33,8 @@ class BoardLib extends React.Component{
 
         this.props.showDropdownByKey(dropdownType.storyMapLib, {
             ...dropdownParams,
-            pageX: pageX + 208,
-            pageY: e.pageY - (e.pageY - pageY - 60) % 28 - 8,
+            pageX: pageX + e.target.offsetWidth,
+            pageY: e.pageY - (e.pageY - pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
             hoverKey: key,
         })
     }
