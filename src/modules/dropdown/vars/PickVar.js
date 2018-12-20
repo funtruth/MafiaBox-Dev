@@ -3,37 +3,31 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { dropdownType } from '../types'
+import { variableType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
-    _onMouseOver = (e) => {
-        this.props.showDropdownByKey(dropdownType.inputValue, e, {
-            inputText: 'Enter a number',
-            type: 'number',
-            showValue: true,
-            onSubmit: this._setAdjustment
-        })
-    }
-
-    _setAdjustment = () => {
+    _onSelect = (value) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'hi')
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
+            [subfieldKey]: value,
+            [subfieldKey + ".adjust"]: null
+        })
         this.props.showDropdownByKey()
     }
 
     _renderItem = (item) => {
         const { currentValue } = this.props
-
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
-                onClick={this._select.bind(this, item.key)}
+                onClick={this._onSelect.bind(this, item.key)}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6'
                 }}
@@ -50,17 +44,49 @@ class PickVar extends React.Component{
             </div>
         )
     }
+    
+    _onConstant = (e) => {
+        this.props.showDropdownByKey(dropdownType.inputValue, e, {
+            inputText: 'Enter a number',
+            type: 'number',
+            showValue: true,
+            onSubmit: this._setConstant
+        })
+    }
 
-    _select = (newValue) => {
+    _setConstant = (value) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, newValue)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
+            [subfieldKey + ".adjust"]: value,
+            [subfieldKey]: null,
+        })
+        this.props.showDropdownByKey()
+    }
+
+    _onAdjust = (show, e) => {
+        if (!show) return
+        this.props.showDropdownByKey(dropdownType.inputValue, e, {
+            inputText: 'Enter a number',
+            type: 'number',
+            showValue: true,
+            onSubmit: this._setAdjustment
+        })
+    }
+
+    _setAdjustment = (value) => {
+        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
+        
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey + ".adjust", value)
         this.props.showDropdownByKey()
     }
 
     render() {
-        const { dropdownData } = this.props
+        const { dropdownData, currentValue } = this.props
         const vars = _.toArray(dropdownData)
+
+        const isNumber = dropdownData[currentValue] &&
+            dropdownData[currentValue].variableType === variableType.number.key
 
         let menuStyle = {
             maxHeight: 200,
@@ -77,7 +103,14 @@ class PickVar extends React.Component{
                 <div className="drop-down-menu-separator"/>
                 <div
                     className="drop-down-menu-option"
-                    onMouseOver={this._onMouseOver}
+                    onMouseOver={this._onConstant}
+                >
+                    <i className={`drop-down-menu-icon mdi mdi-alpha-c-box`}></i>
+                    Constant
+                </div>
+                <div
+                    className="drop-down-menu-option"
+                    onMouseOver={this._onAdjust.bind(this, isNumber)}
                 >
                     <i className={`drop-down-menu-icon mdi mdi-numeric`}></i>
                     Adjust by

@@ -15,7 +15,6 @@ class PickUpdate extends React.Component{
         
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
-        //TODO apply e.target.offsetheight to more of these so less hacky
         this.props.showDropdownByKey(dropdownType.inputValue, e, {
             hoverKey: item.key,
             inputText: 'Enter a number',
