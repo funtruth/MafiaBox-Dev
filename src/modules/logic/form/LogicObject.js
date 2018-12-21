@@ -5,17 +5,17 @@ import LogicExpandable from './LogicExpandable';
 
 class LogicObject extends React.Component{
     render() {
-        const { logicInfo, room } = this.props
+        const { logicInfo, updates } = this.props
         const showForm = logicInfo.logicType === logicType.update.key
         if (!showForm) return null
 
         return (
-            Object.keys(room).map((property, index) => (
+            Object.keys(updates).map((property, index) => (
                 <LogicExpandable
                     {...this.props}
                     key={index}
                     property={property}
-                    room={room[property]}
+                    updates={updates[property]}
                     prefix={property}
                 />
             ))

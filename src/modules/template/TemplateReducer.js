@@ -1,7 +1,7 @@
 import { dropdownType } from '../dropdown/types'
 
 const initialState = {
-    room: {
+    updates: {
         gameState: {
             phase: {
                 dropdownType: dropdownType.pickPhase,

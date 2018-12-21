@@ -8,8 +8,8 @@ import { pushData } from '../../dropdown/DropdownReducer'
 
 class LogicPickUpdate extends React.Component{
     _onClick = (info) => {
-        const { room } = this.props
-        const thisType = room.dropdownType
+        const { updates } = this.props
+        const thisType = updates.dropdownType
 
         switch(thisType) {
             case dropdownType.pickUid:
@@ -37,8 +37,8 @@ class LogicPickUpdate extends React.Component{
     }
 
     render() {
-        const { room, field, pageInfo, logicInfo, item, prefix } = this.props
-        const { dropdownType } = room
+        const { updates, field, pageInfo, logicInfo, item, prefix } = this.props
+        const { dropdownType } = updates
         const info = logicInfo.data[prefix] || {}
         
         return (
