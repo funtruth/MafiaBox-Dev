@@ -29,6 +29,7 @@ import PickComparison from './vars/PickComparison'
 import PickPhase from './update/PickPhase'
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
+import AddUpdateField from './update/AddUpdateField'
 import WriteNews from './update/WriteNews'
 import Dropdown from './components/Dropdown';
 
@@ -80,6 +81,8 @@ class DropdownView extends React.Component{
                 return <PickUid {...props}/>
             case dropdownType.pickUpdate:
                 return <PickUpdate {...props}/>
+            case dropdownType.addUpdateField:
+                return <AddUpdateField {...props}/>
             case dropdownType.writeNews:
                 return <WriteNews {...props}/>
             default:

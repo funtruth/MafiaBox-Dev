@@ -22,6 +22,7 @@ export const dropdownType = {
     pickComparison: 'dropdownType/pick-comparison',
 
     pickUpdate: 'dropdownType/pick-update',
+    addUpdateField: 'dropdownType/add-update-field',
     pickUpdateValue: 'dropdownType/pick-update-value',
     pickPhase: 'dropdownType/pick-phase',
     pickUid: 'dropdownType/pick-uid',

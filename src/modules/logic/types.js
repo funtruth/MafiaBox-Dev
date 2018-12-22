@@ -98,19 +98,12 @@ export const updateType = {
 }
 
 export const valueType = {
-    nC: {
-        key: 'nC',
-        index: 0,
-        title: 'no change',
-        icon: 'mdi mdi-swap-horizontal-bold',
-        updateType: updateType.staticVal,
-    },
     null: {
         key: 'null',
         index: 1,
         title: 'null',
         label: 'null',
-        icon: 'mdi mdi-null',
+        icon: 'mdi mdi-swap-horizontal-bold',
         updateType: updateType.staticVal,
     },
     setTo: {

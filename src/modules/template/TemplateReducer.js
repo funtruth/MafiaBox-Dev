@@ -3,42 +3,22 @@ import { dropdownType } from '../dropdown/types'
 const initialState = {
     updates: {
         gameState: {
-            phase: {
-                dropdownType: dropdownType.pickPhase,
-            },
-            counter1: {
-                dropdownType: dropdownType.pickUpdate,
-            },
-            veto: {
-                dropdownType: dropdownType.pickUpdate,
-            },
-            nominate: {
-                dropdownType: dropdownType.pickUid,
-            },
+            phase: dropdownType.pickPhase,
+            counter1: dropdownType.pickUpdate,
+            veto: dropdownType.pickUpdate,
+            nominate: dropdownType.pickUid,
         },
         lobby: {
             dropdownType: dropdownType.pickUid,
             "/uid/": {
-                name: {
-                    dropdownType: dropdownType.pickUpdate,
-                },
-                roleId: {
-                    dropdownType: dropdownType.pickUpdate,
-                },
-                dead: {
-                    dropdownType: dropdownType.pickUpdate,
-                },
-                health: {
-                    dropdownType: dropdownType.pickUpdate,
-                },
+                name: dropdownType.pickUpdate,
+                roleId: dropdownType.pickUpdate,
+                dead: dropdownType.pickUpdate,
+                health: dropdownType.pickUpdate,
             }
         },
-        choice: {
-            dropdownType: dropdownType.pickUpdate,
-        },
-        news: {
-            dropdownType: dropdownType.writeNews,
-        },
+        choice: dropdownType.pickUpdate,
+        news: dropdownType.writeNews,
     },
 }
 

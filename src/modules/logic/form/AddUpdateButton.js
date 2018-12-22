@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { valueType, updateType } from '../types';
 import { dropdownType } from '../../dropdown/types'
 
 import { pushData } from '../../dropdown/DropdownReducer'
 
-class LogicPickUpdate extends React.Component{
+class AddUpdateButton extends React.Component{
     _onClick = (info) => {
         const { updates } = this.props
         const thisType = updates.dropdownType
@@ -19,39 +18,24 @@ class LogicPickUpdate extends React.Component{
             default:
         }
     }
-
-    _renderItem = (item) => {
-        const { pageRepo } = this.props
-        switch(item.updateType) {
-            case updateType.phase:
-                return <div style={{ pointerEvents: 'none' }}>{pageRepo[item.value].title}</div>
-            case updateType.uid:
-                return <div style={{ pointerEvents: 'none' }}>{item.value || 'null'}</div>
-            case updateType.staticVal:
-                return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title}</div>
-            case updateType.dynamicVal:
-                return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title + ' ' + item.dynamic}</div>
-            default:
-                return <div style={{ pointerEvents: 'none', color: '#767676' }}>Select</div>
-        }
-    }
-
+    
     render() {
-        const { updates, field, pageInfo, logicInfo, item, prefix } = this.props
+        const { field, pageInfo, logicInfo, item, prefix, updates } = this.props
         const info = logicInfo.data[prefix] || {}
         
         return (
             <div
                 className="logic-pick-update menu-onclick highlight"
-                menu-type={updates}
+                menu-type={(updates && updates.dropdownType) || dropdownType.addUpdateField}
                 page-key={pageInfo.pageKey}
-                index-key={item}
                 field-key={field}
+                index-key={item}
                 subfield-key={prefix}
                 current-value={info.value}
                 onClick={this._onClick.bind(this, info)}
             >
-                {this._renderItem(info)}
+                <div style={{ pointerEvents: 'none', color: '#767676' }}>
+                    Add</div>
             </div>
         )
     }
@@ -64,4 +48,4 @@ export default connect(
     {
         pushData,
     }
-)(LogicPickUpdate)
+)(AddUpdateButton)
