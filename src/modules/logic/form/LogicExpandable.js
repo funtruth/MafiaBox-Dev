@@ -11,7 +11,6 @@ class LogicExpandable extends React.Component{
         const { pageInfo, field, item, prefix } = this.props
         const { pageKey } = pageInfo
 
-        console.log(prefix)
         this.props.updatePageByPath(pageKey, field, item, 'data', prefix, {
             expand: !pageInfo[field][item].data ||
                 !pageInfo[field][item].data[prefix] ||
@@ -20,7 +19,7 @@ class LogicExpandable extends React.Component{
     }
 
     render() {
-        const { pageInfo, logicInfo, field, item, nested,
+        const { pageInfo, field, item, nested,
             property, updates, prefix } = this.props
             
         const expanded = pageInfo[field][item].data &&

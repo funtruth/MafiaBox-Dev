@@ -17,8 +17,14 @@ const initialState = {
                 health: dropdownType.pickUpdate,
             }
         },
-        choice: dropdownType.pickUpdate,
+        choices: dropdownType.pickUpdate,
         news: dropdownType.writeNews,
+        events: {
+            dropdownType: dropdownType.pickUid,
+            "/uid/": {
+                message: dropdownType.pickUpdate,
+            }
+        }
     },
 }
 
