@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { fieldIcon } from '../defaults'
 import { defaultLogic } from '../../logic/types';
 
 import { getCode } from '../../logic/LogicReducer'
@@ -15,7 +14,7 @@ require('codemirror/mode/javascript/javascript')
 
 class LogicBoard extends React.Component{
     render() {
-        const { fieldInfo, fieldKey, value } = this.props
+        const { fieldInfo, value } = this.props
         
         let children = {}
 
@@ -33,31 +32,25 @@ class LogicBoard extends React.Component{
         if (!value) return null
         
         return (
-            <div className="field-item" style={{ marginBottom: 4 }}>
-                <div className="page-field-label">
-                    <i className={`story-option ${fieldIcon.logic}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
-                </div>
-                <div className="logic-board">
-                    <LogicArgs {...this.props}/>
-                    {Object.keys(parents).map((item, index) => (
-                        <LogicBlock
-                            {...this.props}
-                            key={index}
-                            value={value || defaultLogic}
-                            index={item}
-                            vars={fieldInfo.vars}
-                        />
-                    ))}
-                    <CodeMirror
-                        value={code}
-                        options={{
-                            mode: 'javascript',
-                            theme: 'monokai',
-                            lineNumbers: true
-                        }}
+            <div className="logic-board">
+                <LogicArgs {...this.props}/>
+                {Object.keys(parents).map((item, index) => (
+                    <LogicBlock
+                        {...this.props}
+                        key={index}
+                        value={value || defaultLogic}
+                        index={item}
+                        vars={fieldInfo.vars}
                     />
-                </div>
+                ))}
+                <CodeMirror
+                    value={code}
+                    options={{
+                        mode: 'javascript',
+                        theme: 'monokai',
+                        lineNumbers: true
+                    }}
+                />
             </div>
         )
     }

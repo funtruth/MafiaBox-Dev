@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { dropdownType } from '../../dropdown/types';
-import { fieldIcon } from '../defaults'
 import { variableType } from '../../logic/types'
 
 class VariableField extends React.Component{
@@ -73,14 +72,10 @@ class VariableField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, value, fieldKey } = this.props
+        const { value } = this.props
         
         return (
-            <div className="field-item">
-                <div className="page-field-label">
-                    <i className={`story-option ${fieldIcon.tag}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
-                </div>
+            <div>
                 <div className="row">
                     {value && Object.keys(value).map(this._renderItem)}
                 </div>

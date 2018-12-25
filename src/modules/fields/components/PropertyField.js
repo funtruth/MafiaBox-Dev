@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fieldIcon } from '../defaults'
 
 class TagField extends React.Component{
     _renderItem = (tagKey) => {
@@ -31,18 +30,12 @@ class TagField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, fieldKey, data } = this.props
+        const { data } = this.props
         if (!data) return null
         
         return (
-            <div className="field-item" style={{ marginBottom: 4 }}>
-                <div className="page-field-label">
-                    <i className={`story-option ${fieldIcon.tag}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
-                </div>
-                <div className="row">
-                    {data.map(this._renderItem)}
-                </div>
+            <div className="row">
+                {data.map(this._renderItem)}
             </div>
         )
     }

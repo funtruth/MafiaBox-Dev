@@ -30,6 +30,7 @@ class LogicExpandable extends React.Component{
         const hasAttr = attributes.length > 0
         const isField = typeof updates === 'string'
         const isUidField = updates && updates['/uid/']
+        const isVarField = property.charAt(0) === '$'
         const isAdder = !isField
         
         return (
@@ -43,7 +44,7 @@ class LogicExpandable extends React.Component{
                         style={{ opacity: 0 }}
                     />}
                     <div className="common-bubble --grey27" onClick={this._toggle}>
-                        {property}
+                        {isVarField ? property.substring(1) : property}
                     </div>
                     {isField && <LogicPickUpdate {...this.props}/>}
                     {isAdder && <AddUpdateButton {...this.props}/>}

@@ -40,7 +40,7 @@ class PickUid extends React.Component{
     _select = (item) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.${item.key}`, 'updateType', updateType.uid)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.$${item.key}`, 'updateType', updateType.uid)
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'expand', true)
         this.props.showDropdownByKey()
     }

@@ -1,8 +1,7 @@
 import { logicType, comparisonType } from './types'
 var beautify_js = require('js-beautify');
 
-const initialState = {
-}
+const initialState = {}
 
 export function getCode(key, library) {
     return (dispatch, getState) => {
@@ -25,7 +24,15 @@ export function getCode(key, library) {
                 codeCurrent = data
                 break
             case logicType.update.key:
-                codeCurrent = data
+                for (var field in data) {
+                    if (!data[field].value) continue
+                    codeCurrent = codeCurrent.concat(
+                        `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                        .join('/')}\`]:${typeof data[field].value === 'string' ?
+                            `'${data[field].value}'`
+                            :`${data[field].value}`},\n`
+                    )
+                }
                 break
             case logicType.none.key:
             case logicType.else.key:
@@ -56,7 +63,7 @@ export function getCode(key, library) {
                 codeBody = `return ${codeCurrent};`
                 break
             case logicType.update.key:
-                codeBody = `database.push({${codeCurrent}});`
+                codeBody = `database.update({${codeCurrent}});`
                 break
             case logicType.none.key:
             default:

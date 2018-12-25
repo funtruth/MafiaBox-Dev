@@ -48,22 +48,20 @@ export const fieldType = {
         key: 'expertTag',
         index: 7,
         icon: 'ion-ios-pricetags',
-        title: 'Export Tag',
+        title: 'Expert Tag',
     },
-}
-
-export const fieldIcon = {
-    text: 'ion-md-list',
-    tag: 'ion-ios-pricetag',
-    code: 'ion-md-code',
-    logic: 'ion-md-options',
-    expertTag: 'ion-ios-pricetags',
+    strings: {
+        key: 'strings',
+        index: 8,
+        icon: 'mdi mdi-code-string',
+        title: 'String Maker',
+    },
 }
 
 export const initFieldMap = {
     [boardType.library]: ['description0', 'args', 'vars', 'code'],
     [boardType.roles]: ['description1', 'roleTeam', 'roleCharges', 'roleActionMode'],
-    [boardType.flow]: ['description2', 'phaseActionMode', 'phaseTriggerMode'],
+    [boardType.flow]: ['description2', 'phaseActionMode', 'phaseStrings', 'phaseTriggerMode'],
 }
 
 export const initFieldRepo = {
@@ -137,6 +135,11 @@ export const initFieldRepo = {
             },
         }
     },
+    phaseStrings: {
+        fieldKey: 'phaseStrings',
+        fieldType: fieldType.strings.key,
+        fieldTitle: 'Strings',
+    }
 }
 
 export const initTagRepo = {
