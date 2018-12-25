@@ -6,7 +6,7 @@ import { variableType } from '../../logic/types'
 
 class VariableField extends React.Component{
     _renderItem = (item, index) => {
-        const { pageInfo, field, value } = this.props
+        const { pageInfo, fieldKey, value } = this.props
         const { pageKey } = pageInfo
 
         const style = {
@@ -23,7 +23,7 @@ class VariableField extends React.Component{
                     className={`${variableType[varType].icon || 'ion-md-create'} logic-label menu-onclick`}
                     menu-type={dropdownType.pickVarType}
                     page-key={pageInfo.pageKey}
-                    field-key={field}
+                    field-key={fieldKey}
                     index-key={item}
                     current-value={varType}
                     style={{
@@ -34,7 +34,7 @@ class VariableField extends React.Component{
                     className="property-button menu-onclick"
                     menu-type={dropdownType.editVar}
                     page-key={pageKey}
-                    field-key={field}
+                    field-key={fieldKey}
                     tag-key={item}
                     style={style}
                 >
@@ -73,8 +73,7 @@ class VariableField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, value } = this.props
-        const { fieldKey } = fieldInfo
+        const { fieldInfo, value, fieldKey } = this.props
         
         return (
             <div className="field-item">

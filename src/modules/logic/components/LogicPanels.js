@@ -39,7 +39,7 @@ class LogicPanels extends React.Component{
                             onClick={this._onClick}
                         >
                             <div className="text-ellipsis">
-                                {(data.var1 && data['var1.adjust'] && data.var1 + " + " + data['var1.adjust']) ||
+                                {(data.var1 && data['var1.adjust'] && `${data.var1} + ${data['var1.adjust']}`) ||
                                     data.var1 || data['var1.adjust'] || 'Variable'}
                             </div> 
                         </div>
@@ -74,7 +74,7 @@ class LogicPanels extends React.Component{
                             onClick={this._onClick}
                         >
                             <div className="text-ellipsis">
-                                {(data.var2 && data['var2.adjust'] && data.var2 + " + " + data['var2.adjust']) ||
+                                {(data.var2 && data['var2.adjust'] && `${data.var2} + ${data['var2.adjust']}`) ||
                                     data.var2 || data['var2.adjust'] || 'Variable'}
                             </div>
                         </div>

@@ -21,6 +21,7 @@ class PickOperator extends React.Component{
                 onClick={this._select.bind(this, item.key)}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6',
+                    backgroundColor: selected && item.color,
                 }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>

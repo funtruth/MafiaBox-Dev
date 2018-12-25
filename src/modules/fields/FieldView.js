@@ -16,19 +16,17 @@ import VariableField from './components/VariableField'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
-        const { pageInfo, fieldRepo, updatePage } = this.props
+        const { pageInfo, fieldRepo } = this.props
         const fieldInfo = fieldRepo[item]
         const { fieldKey, data } = fieldInfo
         
         const props = {
             key: fieldKey,
-            field: fieldKey,
             fieldKey,
             value: pageInfo[fieldKey],
             data,
             pageInfo,
             fieldInfo,
-            updatePage,
         }
 
         //if the field has a default that hasn't been set, update
@@ -58,17 +56,15 @@ class FieldView extends React.Component {
     }
 
     render() {
-        const { pageInfo } = this.props
+        const { pageInfo, fieldMap } = this.props
         const { boardType } = pageInfo
         if (!boardType) return null
         
-        const fields = this.props.fieldMap[boardType]
+        const fields = fieldMap[boardType]
         if (!fields) return null
 
         return (
-            <div>
-                {fields.map(this._renderItem)}
-            </div>
+            fields.map(this._renderItem)
         )
     }
 }

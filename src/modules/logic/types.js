@@ -13,19 +13,19 @@ export const logicType = {
         icon: 'ion-md-help',
         color: '#af8c40',
     },
-    else: {
-        key: 'else',
-        index: 2,
-        title: 'else',
-        icon: 'ion-ios-more',
-        color: '#db4757',
-    },
     elseif: {
         key: 'elseif',
-        index: 3,
+        index: 2,
         title: 'else if',
         icon: 'ion-ios-more',
         color: '#0e7db4',
+    },
+    else: {
+        key: 'else',
+        index: 3,
+        title: 'else',
+        icon: 'ion-ios-more',
+        color: '#db4757',
     },
     operator: {
         key: 'operator',
@@ -58,33 +58,33 @@ export const logicType = {
 }
 
 export const comparisonType = {
-    e: {
-        key: 'e',
+    equal: {
+        key: 'equal',
         code: '===',
         title: '===',
     },
-    nE: {
-        key: 'nE',
+    notEqual: {
+        key: 'notEqual',
         code: '!==',
         title: '!==',
     },
-    gT: {
-        key: 'gT',
+    greaterThan: {
+        key: 'greaterThan',
         code: '>',
         title: '>',
     },
-    gTOET: {
-        key: 'gTOET',
+    greaterThanOrEqualTo: {
+        key: 'greaterThanOrEqualTo',
         code: '>=',
         title: '≥',
     },
-    lT: {
-        key: 'lT',
+    lessThan: {
+        key: 'lessThan',
         code: '<',
         title: '>',
     },
-    lTOET: {
-        key: 'lTOET',
+    lessThanOrEqualTo: {
+        key: 'lessThanOrEqualTo',
         code: '<=',
         title: '≤',
     },

@@ -25,7 +25,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        let { field, pageInfo, pageRepo, value, index, vars, updates } = this.props
+        let { fieldKey, pageInfo, pageRepo, value, index, vars, updates } = this.props
         if (!pageInfo) return null
         if (!value) {
             value = defaultLogic
@@ -42,7 +42,7 @@ class LogicBlock extends React.Component{
         
         return (
             <Droppable
-                droppableId={`CIRCUIT/${pageInfo.pageKey}/${field}/${index}/${this.rng}`}
+                droppableId={`CIRCUIT/${pageInfo.pageKey}/${fieldKey}/${index}/${this.rng}`}
                 type={`ROW/${index}`}
             >
                 {(provided, snapshot) => (
@@ -58,7 +58,7 @@ class LogicBlock extends React.Component{
                             const iprops = {
                                 item,
                                 logicInfo,
-                                field,
+                                field: fieldKey,
                                 pageInfo,
                                 vars,
                             }

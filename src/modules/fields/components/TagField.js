@@ -21,19 +21,19 @@ class TagField extends React.Component{
     }
 
     _onClick = key => {
-        const { field, pageInfo } = this.props
-        this.props.updatePage(pageInfo.pageKey, field, key)
+        const { fieldKey, pageInfo } = this.props
+        this.props.updatePage(pageInfo.pageKey, fieldKey, key)
     }
 
     render() {
-        const { fieldInfo, field, data } = this.props
+        const { fieldInfo, fieldKey, data } = this.props
         if (!data) return null
         
         return (
             <div className="field-item" style={{ marginBottom: 4 }}>
                 <div className="page-field-label">
                     <i className={`story-option ${fieldIcon.tag}`} style={{ width: 16 }}></i>
-                    {(fieldInfo && fieldInfo.fieldTitle) || field}
+                    {(fieldInfo && fieldInfo.fieldTitle) || fieldKey}
                 </div>
                 <div className="row">
                     {fieldInfo.data.map(this._renderItem)}
