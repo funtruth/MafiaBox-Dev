@@ -1,9 +1,10 @@
 import React from 'react'
-import { fieldIcon } from '../defaults'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import { fieldIcon } from '../defaults'
 import { defaultLogic } from '../../logic/types';
-import * as maptool from '../../logic/maptool'
+
 import { getCode } from '../../logic/LogicReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
@@ -27,7 +28,7 @@ class LogicBoard extends React.Component{
         //gather all keys that are parents, set index to the first parent
         //TODO show variables in chronological order for dropdown PickVar
         const parents = _.pickBy(value, (i, key) => !children[key])
-        const code = getCode(Object.keys(parents)[0], value)
+        const code = this.props.getCode(Object.keys(parents)[0], value)
 
         if (!value) return null
         
@@ -62,4 +63,9 @@ class LogicBoard extends React.Component{
     }
 }
 
-export default LogicBoard
+export default connect(
+    null,
+    {
+        getCode,
+    }
+)(LogicBoard)

@@ -5,7 +5,6 @@ export const logicType = {
         title: 'none',
         icon: 'ion-md-create',
         color: '#767676',
-        code: () => ''
     },
     if: {
         key: 'if',
@@ -13,7 +12,6 @@ export const logicType = {
         title: 'if',
         icon: 'ion-md-help',
         color: '#af8c40',
-        code: (data, right) => `if(${data}){${right}}`
     },
     else: {
         key: 'else',
@@ -21,7 +19,6 @@ export const logicType = {
         title: 'else',
         icon: 'ion-ios-more',
         color: '#db4757',
-        code: (data, right) => `else{${right}}`
     },
     elseif: {
         key: 'elseif',
@@ -29,7 +26,6 @@ export const logicType = {
         title: 'else if',
         icon: 'ion-ios-more',
         color: '#0e7db4',
-        code: (data, right) => `else if(${data}){${right}}`
     },
     operator: {
         key: 'operator',
@@ -37,7 +33,6 @@ export const logicType = {
         title: 'operator',
         icon: 'ion-md-code-working',
         color: 'Mediumslateblue',
-        code: (data, right) => `if(${data.var1} ${data.comparison} ${data.var2}){${right}}`
     },
     function: {
         key: 'function',
@@ -45,7 +40,6 @@ export const logicType = {
         title: 'function',
         icon: 'ion-md-pulse',
         color: '#3864ab',
-        code: (data, right) => `${data};${right};`
     },
     return: {
         key: 'return',
@@ -53,7 +47,6 @@ export const logicType = {
         title: 'return',
         icon: 'ion-ios-send',
         color: '#1e9939',
-        code: (data, right) => `return ${data};`
     },
     update: {
         key: 'update',
@@ -61,7 +54,6 @@ export const logicType = {
         title: 'update',
         icon: 'mdi mdi-code-braces',
         color: '#a566b0',
-        code: (data, right) => `database.push({${data}});`
     },
 }
 
