@@ -105,11 +105,11 @@ class AppWrapper extends React.Component{
             }
         } else if (source.droppableId.indexOf('TEMPLATE') !== -1) {
             if (source.droppableId === destination.droppableId) {
-                let sources = source.droppableId.split('-')
-                let fieldMapKey = sources[1]
+                const sources = source.droppableId.split('-')
+                const boardType = sources[1]
 
                 this.props.moveField(
-                    fieldMapKey,
+                    boardType,
                     source.index,
                     destination.index,
                 )

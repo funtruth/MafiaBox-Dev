@@ -12,17 +12,16 @@ import TagsView from './templates/TagsView';
 import TemplateTitle from './templates/TemplateTitle';
 
 class FieldTemplateView extends React.Component {
-    _renderItem = (fieldKey) => {
-        const { fieldRepo, updateField } = this.props
-        const fieldInfo = fieldRepo[fieldKey]
+    _renderItem = (item) => {
+        const { updateField } = this.props
         
         const props = {
-            key: fieldKey,
-            fieldInfo,
+            key: item.key,
+            fieldInfo: item,
             updateField,
         }
         
-        switch(fieldInfo.fieldType) {
+        switch(item.fieldType) {
             case fieldType.tag.key:
                 return <TagsView {...props} add="Add Tag"/>
             case fieldType.property.key:
@@ -34,18 +33,17 @@ class FieldTemplateView extends React.Component {
     }
 
     render() {
-        const { pageInfo, fieldMapKey,
-            fieldRepo, updateField } = this.props
+        const { pageInfo, boardType, updateField } = this.props
             
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Droppable droppableId={`TEMPLATE-${fieldMapKey}`} type="TEMPLATE">
+                <Droppable droppableId={`TEMPLATE-${boardType}`} type="TEMPLATE">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
                         >
                             {pageInfo.map((item, index) => (
-                                <Draggable key={item} draggableId={item} index={index}>
+                                <Draggable key={item.key} draggableId={item.key} index={index}>
                                     {(provided, snapshot) => (
                                         <div
                                             ref={provided.innerRef}
@@ -54,8 +52,8 @@ class FieldTemplateView extends React.Component {
                                         >
                                             <div className="highlight" style={{ padding: '2px 6px', borderRadius: 2 }}>
                                                 <TemplateTitle
-                                                    fieldMapKey={fieldMapKey}
-                                                    fieldInfo={fieldRepo[item]}
+                                                    boardType={boardType}
+                                                    fieldInfo={item}
                                                     updateField={updateField}
                                                 />
                                                 {this._renderItem(item)}
@@ -73,7 +71,7 @@ class FieldTemplateView extends React.Component {
                 <div
                     className="add-button menu-onclick"
                     menu-type={dropdownType.addTemplateField}
-                    field-key={fieldMapKey}
+                    field-key={boardType}
                 >
                     Add Field
                 </div>

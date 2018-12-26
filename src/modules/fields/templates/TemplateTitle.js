@@ -9,7 +9,7 @@ class TemplateTitle extends React.Component{
     }
 
     render() {
-        const { fieldInfo, fieldMapKey } = this.props
+        const { fieldInfo, boardType } = this.props
         const { fieldKey, fieldTitle, fieldType } = fieldInfo
 
         return (
@@ -30,7 +30,7 @@ class TemplateTitle extends React.Component{
                 <i className="story-option ion-ios-more menu-onclick"
                     menu-type={dropdownType.templateTitleOptions}
                     field-key={fieldKey}
-                    page-key={fieldMapKey}
+                    page-key={boardType}
                     style={{
                         fontSize: 16,
                         marginLeft: 'auto',

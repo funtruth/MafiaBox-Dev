@@ -30,7 +30,7 @@ import PickPhase from './update/PickPhase'
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
-import WriteNews from './update/WriteNews'
+import PickNews from './update/PickNews'
 import Dropdown from './components/Dropdown';
 
 class DropdownView extends React.Component{
@@ -84,7 +84,7 @@ class DropdownView extends React.Component{
             case dropdownType.addUpdateField:
                 return <AddUpdateField {...props}/>
             case dropdownType.writeNews:
-                return <WriteNews {...props}/>
+                return <PickNews {...props}/>
             default:
                 return null
         }

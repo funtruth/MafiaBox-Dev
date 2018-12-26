@@ -56,68 +56,100 @@ export const fieldType = {
         icon: 'mdi mdi-code-string',
         title: 'String Maker',
     },
-}
-
-export const initFieldMap = {
-    [boardType.library]: ['description0', 'args', 'vars', 'code'],
-    [boardType.roles]: ['description1', 'roleTeam', 'roleCharges', 'roleActionMode'],
-    [boardType.flow]: ['description2', 'phaseActionMode', 'phaseStrings', 'phaseTriggerMode'],
+    choices: {
+        key: 'choices',
+        index: 9,
+        icon: 'mdi mdi-source-branch',
+        title: 'Choices',
+    },
 }
 
 export const initFieldRepo = {
     description0: {
-        fieldKey: 'description',
+        key: 'description0',
+        fieldKey: 'description0',
+        index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
+        boardType: boardType.library,
     },
     description1: {
-        fieldKey: 'description',
+        key: 'description1',
+        fieldKey: 'description1',
+        index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
+        boardType: boardType.roles,
     },
     description2: {
-        fieldKey: 'description',
+        key: 'description2',
+        fieldKey: 'description2',
+        index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
+        boardType: boardType.flow,
     },
     code: {
+        key: 'code',
         fieldKey: 'code',
+        index: 0,
         fieldType: fieldType.code.key,
         fieldTitle: 'Code Interpretation',
+        boardType: boardType.library,
     },
     args: {
+        key: 'args',
         fieldKey: 'args',
+        index: 0,
         fieldType: fieldType.vars.key,
         fieldTitle: 'Required Variables',
+        boardType: boardType.library,
     },
     vars: {
+        key: 'vars',
         fieldKey: 'vars',
+        index: 0,
         fieldType: fieldType.vars.key,
         fieldTitle: 'Declared Variables',
+        boardType: boardType.library,
     },
     roleTeam: {
+        key: 'roleTeam',
         fieldKey: 'roleTeam',
+        index: 1,
         fieldType: fieldType.tag.key,
         fieldTitle: 'Role Team',
+        boardType: boardType.roles,
     },
     roleCharges: {
+        key: 'roleCharges',
         fieldKey: 'roleCharges',
+        index: 2,
         fieldType: fieldType.number.key,
         fieldTitle: 'Role Charges',
+        boardType: boardType.roles,
     },
     roleActionMode: {
+        key: 'roleActionMode',
         fieldKey: 'roleActionMode',
+        index: 3,
         fieldType: fieldType.logic.key,
         fieldTitle: 'Role Action Mode',
+        boardType: boardType.roles,
     },
     phaseActionMode: {
+        key: 'phaseActionMode',
         fieldKey: 'phaseActionMode',
+        index: 1,
         fieldType: fieldType.tag.key,
         fieldTitle: 'Action Mode',
-        data: ['phaseActionMode/all', 'phaseActionMode/king', 'phaseActionMode/clown', 'phaseActionMode/none']
+        data: ['phaseActionMode/all', 'phaseActionMode/king', 'phaseActionMode/clown', 'phaseActionMode/none'],
+        boardType: boardType.flow,
     },
     phaseTriggerMode: {
+        key: 'phaseTriggerMode',
         fieldKey: 'phaseTriggerMode',
+        index: 4,
         fieldType: fieldType.logic.key,
         fieldTitle: 'Phase Trigger',
         vars: {
@@ -133,12 +165,24 @@ export const initFieldRepo = {
                 key: 'gameState',
                 variableType: variableType.object.key,
             },
-        }
+        },
+        boardType: boardType.flow,
     },
     phaseStrings: {
+        key: 'phaseStrings',
         fieldKey: 'phaseStrings',
+        index: 2,
         fieldType: fieldType.strings.key,
         fieldTitle: 'Strings',
+        boardType: boardType.flow,
+    },
+    phaseChoices: {
+        key: 'phaseChoices',
+        fieldKey: 'phaseChoices',
+        index: 3,
+        fieldType: fieldType.choices.key,
+        fieldTitle: 'Phase Choices',
+        boardType: boardType.flow,
     }
 }
 

@@ -4,11 +4,11 @@ import FieldTemplateView from '../fields/FieldTemplateView';
 class WindowTemplateView extends React.Component {
     render() {
         const { match } = this.props
-        const { fieldMapKey } = match.params
+        const { boardType } = match.params
 
         return (
             <div className="story-view">
-                <FieldTemplateView fieldMapKey={fieldMapKey}/>
+                <FieldTemplateView boardType={boardType}/>
             </div>
         )
     }

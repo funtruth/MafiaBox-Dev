@@ -48,28 +48,28 @@ class HeaderView extends React.Component{
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', fieldMapKey: boardType.library, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.library, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathKey.board:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', fieldMapKey: boardType.roles, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.roles, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathKey.flow:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', fieldMapKey: boardType.flow, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.flow, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathKey.events:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', fieldMapKey: boardType.events, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.events, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             default:
@@ -85,7 +85,7 @@ class HeaderView extends React.Component{
 
     _onClick = (item) => {
         const { storyMap } = this.props
-        const { key, fieldMapKey } = item
+        const { key, boardType } = item
 
         //adds item to first story of board
         let mapKey
@@ -110,7 +110,7 @@ class HeaderView extends React.Component{
                 return this.props.showModalByKey(modalType.addNewField)
             case 'editTemplate':
                 return this.props.showModalByKey(modalType.showTemplate, {
-                    fieldMapKey: fieldMapKey
+                    boardType
                 })
             default:
         }

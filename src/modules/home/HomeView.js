@@ -26,7 +26,7 @@ class HomeView extends React.Component{
                         <Route exact path="/library" component={LibraryView}/>
                         <Route exact path="/board" component={StoryView}/>
                         <Route exact path="/board/:pageKey" component={WindowPageView}/>
-                        <Route exact path="/defaults/:fieldMapKey" component={WindowTemplateView}/>
+                        <Route exact path="/defaults/:boardType" component={WindowTemplateView}/>
                         <Route exact path="/flow" component={FlowView}/>
                         <Route exact path="/flow/:pageKey" component={WindowPageView}/>
                         <Route exact path="/events" component={EventView}/>

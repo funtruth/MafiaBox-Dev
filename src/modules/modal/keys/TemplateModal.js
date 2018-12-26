@@ -5,11 +5,11 @@ import TemplateView from '../../template/TemplateView'
 class TemplateModal extends React.Component {
     render() {
         const { modalParams } = this.props
-        const { fieldMapKey } = modalParams
+        const { boardType } = modalParams
 
         return (
             <div className="modal-page">
-                <TemplateView fieldMapKey={fieldMapKey}/>
+                <TemplateView boardType={boardType}/>
             </div>
         )
     }

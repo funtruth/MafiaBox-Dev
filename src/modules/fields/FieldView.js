@@ -1,6 +1,7 @@
 import React from 'react'
 import './field.css'
 import { connect } from 'react-redux';
+import _ from 'lodash'
 
 import { fieldType } from './defaults'
 import { defaultLogic } from '../logic/types';
@@ -18,7 +19,7 @@ import StringMaker from './components/StringMaker'
 class FieldView extends React.Component {
     _renderItem = (item) => {
         const { pageInfo, fieldRepo, updatePageByPath } = this.props
-        const fieldInfo = fieldRepo[item]
+        const fieldInfo = fieldRepo[item.key]
         const { fieldKey, data } = fieldInfo
         
         const props = {
@@ -60,21 +61,21 @@ class FieldView extends React.Component {
     }
 
     render() {
-        const { pageInfo, fieldMap, fieldRepo } = this.props
+        const { pageInfo, fieldRepo } = this.props
         const { boardType } = pageInfo
         if (!boardType) return null
         
-        const fields = fieldMap[boardType]
-        if (!fields) return null
+        let fields = _.filter(fieldRepo, i => i.boardType === boardType)
+        fields = _.sortBy(fields, i => i.index)
+        if (!fields.length) return null
 
         return (
             fields.map((item, index) => {
-                const fieldInfo = fieldRepo[item]
                 return (
                     <div key={index} className="field-item" style={{ marginBottom: 4 }}>
                         <div className="page-field-label">
-                            <i className={`story-option ${fieldType[fieldInfo.fieldType].icon}`} style={{ width: 16 }}></i>
-                            {fieldInfo.fieldTitle}
+                            <i className={`story-option ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
+                            {item.fieldTitle}
                         </div>
                         {this._renderItem(item)}
                     </div>
@@ -86,7 +87,6 @@ class FieldView extends React.Component {
 
 export default connect(
     state => ({
-        fieldMap: state.field.fieldMap,
         fieldRepo: state.field.fieldRepo,
     }),
     {

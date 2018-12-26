@@ -5,7 +5,7 @@ import { showDropdownByKey } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
-class WriteNews extends React.Component{
+class PickNews extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
         const selected = typeof currentValue === 'string' && currentValue === item.key
@@ -80,6 +80,7 @@ class WriteNews extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
+        fieldRepo: state.field.fieldRepo,
     }),
     {
         updatePage,
@@ -87,4 +88,4 @@ export default connect(
         addItemBelowOf,
         deleteItem,
     }
-)(WriteNews)
+)(PickNews)

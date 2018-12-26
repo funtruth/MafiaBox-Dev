@@ -5,10 +5,9 @@ import { updatePage } from '../page/PageReducer'
 
 import { fieldType } from './defaults'
 import { defaultLogic } from '../logic/types'
-import { initFieldMap, initFieldRepo, initTagRepo } from './defaults'
+import { initFieldRepo, initTagRepo } from './defaults'
 
 const initialState = {
-    fieldMap: initFieldMap,
     fieldRepo: initFieldRepo,
     tagRepo: initTagRepo,
     defaultLogic,
@@ -25,13 +24,13 @@ const UPDATE_TAG = 'field/update-tag'
 const MOVE_TAG_WITHIN_FIELD = 'field/move-tag-within-field'
 const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
-//add field to the current fieldMap
-export function addField(fieldMapKey, text) {
+export function addField(boardType, text) {
     return (dispatch, getState) => {
-        const { fieldMap, fieldRepo } = getState().field
+        const { fieldRepo } = getState().field
 
-        let fieldMapClone = {}
-        Object.assign(fieldMapClone, fieldMap)
+        //get index of new field, equal to length of existing fields
+        const index = _.filter(fieldRepo, i => i.boardType === boardType).length
+        
         let fieldRepoClone = {}
         Object.assign(fieldRepoClone, fieldRepo)
 
@@ -40,69 +39,69 @@ export function addField(fieldMapKey, text) {
             newItemKey = helpers.genUID('field')
         }
 
-        fieldMapClone[fieldMapKey].push(newItemKey)
         fieldRepoClone[newItemKey] = {
+            key: newItemKey,
             fieldKey: newItemKey,
             fieldTitle: text,
-            fieldType: fieldType.text.key
+            fieldType: fieldType.text.key,
+            boardType,
+            index,
         }
 
         dispatch({
             type: ADD_FIELD,
-            payload: {
-                fieldMap: fieldMapClone,
-                fieldRepo: fieldRepoClone,
-            }
+            payload: fieldRepoClone,
         })
     }
 }
 
-//delete field from current fieldMap, delete from fieldRepo, and delete related tags from tagRepo
-export function deleteField(fieldMapKey, fieldKey) {
+export function deleteField(fieldKey) {
     return (dispatch, getState) => {
-        const { fieldMap, fieldRepo, tagRepo } = getState().field
+        const { fieldRepo } = getState().field
 
-        let fieldMapClone = {}
-        Object.assign(fieldMapClone, fieldMap)
-        let fieldRepoClone = {}
-        Object.assign(fieldRepoClone, fieldRepo)
-        let tagRepoClone = {}
-        Object.assign(tagRepoClone, tagRepo)
+        //get the affected boardType
+        const boardTarget = fieldRepo[fieldKey].boardType
 
-        _.remove(fieldMapClone[fieldMapKey], i => i === fieldKey)
-
-        if (fieldRepo[fieldKey].data) {
-            for (var i=0; i<fieldRepo[fieldKey].data.length; i++) {
-                delete tagRepoClone[fieldRepo[fieldKey].data[i]]
-            }
-        }
-
-        delete fieldRepoClone[fieldKey]
+        //get items in fieldRepo that may be affected
+        let relatedRepo = _.filterBy(fieldRepo, i => i.boardType === boardTarget)
+        relatedRepo = _.sortBy(relatedRepo, i => i.index)
+        
+        //remove the deleted field, re-index, and re-key (into object)
+        _.remove(relatedRepo, i => i.key === fieldKey)
+        relatedRepo.map((item, index) => item.index = index)
+        const repoClone = _.keyBy(relatedRepo, i => i.key)
 
         dispatch({
             type: DELETE_FIELD,
             payload: {
-                fieldMap: fieldMapClone,
-                fieldRepo: fieldRepoClone,
-                tagRepo: tagRepoClone,
+                ...fieldRepo,
+                ...repoClone,
             }
         })
     }
 }
 
-export function moveField(fieldMapKey, startIndex, endIndex) {
+export function moveField(boardType, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { fieldMap } = getState().field
+        const { fieldRepo } = getState().field
         
-        let dataClone = Array.from(fieldMap[fieldMapKey])
-        let [removed] = dataClone.splice(startIndex, 1)
-        dataClone.splice(endIndex, 0, removed)
+        //get items in fieldRepo that may be affected
+        let relatedRepo = _.filter(fieldRepo, i => i.boardType === boardType)
+        relatedRepo = _.sortBy(relatedRepo, i => i.index)
+
+        //move the item within the array
+        const [removed] = relatedRepo.splice(startIndex, 1)
+        relatedRepo.splice(endIndex, 0, removed)
+
+        //re-index and turn back into an object
+        relatedRepo.map((item, index) => item.index = index)
+        const repoClone = _.keyBy(relatedRepo, i => i.key)
 
         dispatch({
             type: MOVE_FIELD,
             payload: {
-                key: fieldMapKey,
-                data: dataClone
+                ...fieldRepo,
+                ...repoClone,
             }
         })
     }
@@ -385,11 +384,11 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_FIELD:
-            return { ...state, fieldMap: action.payload.fieldMap, fieldRepo: action.payload.fieldRepo }
+            return { ...state, fieldRepo: action.payload }
         case UPDATE_FIELD:
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
         case MOVE_FIELD:
-            return { ...state, fieldMap: { ...state.fieldMap, [action.payload.key]: action.payload.data }}
+            return { ...state, fieldRepo: action.payload }
         case DELETE_FIELD:
             return { ...state, ...action.payload }
 
