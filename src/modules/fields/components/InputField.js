@@ -5,7 +5,7 @@ class InputField extends React.Component{
         const { pageInfo, fieldKey } = this.props
         const { pageKey } = pageInfo
 
-        this.props.updatePage(pageKey, fieldKey, e.target.value)
+        this.props.updatePageByPath(pageKey, fieldKey, e.target.value)
     }
 
     render() {

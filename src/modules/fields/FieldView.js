@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { fieldType } from './defaults'
 import { defaultLogic } from '../logic/types';
 
-import { updatePage } from '../page/PageReducer'
+import { updatePageByPath } from '../page/PageReducer'
 
 import InputField from './components/InputField'
 import TagField from './components/TagField';
@@ -17,7 +17,7 @@ import StringMaker from './components/StringMaker'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
-        const { pageInfo, fieldRepo } = this.props
+        const { pageInfo, fieldRepo, updatePageByPath } = this.props
         const fieldInfo = fieldRepo[item]
         const { fieldKey, data } = fieldInfo
         
@@ -28,11 +28,12 @@ class FieldView extends React.Component {
             data,
             pageInfo,
             fieldInfo,
+            updatePageByPath,
         }
 
         //if the field has a default that hasn't been set, update
         if (!pageInfo[fieldKey] && fieldInfo.fieldType === fieldType.logic.key) {
-            this.props.updatePage(pageInfo.pageKey, fieldKey, defaultLogic)
+            this.props.updatePageByPath(pageInfo.pageKey, fieldKey, defaultLogic)
         }
         
         switch(fieldInfo.fieldType) {
@@ -89,6 +90,6 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        updatePage,
+        updatePageByPath,
     }
 )(FieldView)

@@ -46,6 +46,14 @@
     justify-content: center;
 }
 
+.common-cont {
+    color: #d6d6d6;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font: 300 13px Arial;
+    display: inline-block;
+}
+
 .small-icon {
     color: #d6d6d6;
     font-size: 13px;

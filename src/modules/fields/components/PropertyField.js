@@ -26,7 +26,7 @@ class TagField extends React.Component{
         Object.assign(dataClone, value)
         dataClone[tagKey] = !dataClone[tagKey]
 
-        this.props.updatePage(pageKey, fieldKey, dataClone)
+        this.props.updatePageByPath(pageKey, fieldKey, dataClone)
     }
 
     render() {
