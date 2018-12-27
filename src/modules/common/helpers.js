@@ -18,6 +18,6 @@ export function pathUpdate(args, index, repo) {
                     ...args[args.length - 1]
                 }
                 :args[args.length - 1]
-            :pathUpdate(args, index + 1, repo[args[index]])
+            :pathUpdate(args, index + 1, repo[args[index]]||{})
     }
 }

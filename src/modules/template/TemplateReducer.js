@@ -18,7 +18,9 @@ const initialState = {
             }
         },
         choices: dropdownType.pickUpdate,
-        news: dropdownType.writeNews,
+        news: {
+            dropdownType: dropdownType.writeNews,
+        },
         events: {
             dropdownType: dropdownType.pickUid,
             "/uid/": {

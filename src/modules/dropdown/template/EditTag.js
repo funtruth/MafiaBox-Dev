@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateField, deleteTag } from '../../fields/FieldReducer'
+import { updateFieldByPath, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
     constructor(props) {
@@ -20,7 +20,7 @@ class EditTag extends React.Component{
 
     _onChange = e => {
         const { tagKey, fieldKey } = this.props
-        this.props.updateField(fieldKey, 'data', tagKey, 'title', e.target.value)
+        this.props.updateFieldByPath(fieldKey, 'data', tagKey, 'title', e.target.value)
     }
 
     _onKeyDown = e => {
@@ -66,7 +66,7 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        updateField,
+        updateFieldByPath,
         deleteTag,
     }
 )(EditTag)

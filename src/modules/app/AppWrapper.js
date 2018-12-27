@@ -82,8 +82,11 @@ class AppWrapper extends React.Component{
             return;
         }
 
+        if (source.index === destination.index && source.droppableId === destination.droppableId) {
+            return;
+        }
+
         if (source.droppableId === 'board') {
-            if (source.index === destination.index) return
             this.props.moveStory(
                 source.index,
                 destination.index,
@@ -115,28 +118,14 @@ class AppWrapper extends React.Component{
                 )
             }
         } else if (source.droppableId.indexOf('TAG') !== -1) {
-            if (source.droppableId === destination.droppableId) {
-                let sources = source.droppableId.split('/')
-                let fieldKey = sources[1]
+            let sources = source.droppableId.split('/')
+            let fieldKey = sources[1]
 
-                this.props.moveTagWithinField(
-                    fieldKey,
-                    source.index,
-                    destination.index,
-                )
-            } else {
-                let sources = source.droppableId.split('/')
-                let dests = destination.droppableId.split('/')
-                let startFieldKey = sources[1]
-                let endFieldKey = dests[1]
-
-                this.props.moveTagToOtherField(
-                    startFieldKey,
-                    endFieldKey,
-                    source.index,
-                    destination.index
-                )
-            }
+            this.props.moveTagWithinField(
+                fieldKey,
+                source.index,
+                destination.index,
+            )
         } else {
             if (source.droppableId === destination.droppableId) {
                 this.props.movePageWithinMap(

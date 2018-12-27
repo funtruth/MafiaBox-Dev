@@ -74,7 +74,7 @@ class TagsView extends React.Component{
         
         return (
             <div>
-                <Droppable droppableId={`TAG/${fieldKey}`} type="TEMPLATE-TAG" direction="horizontal">
+                <Droppable droppableId={`TAG/${fieldKey}`} type={`TEMPLATE-TAG/${fieldKey}`} direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}

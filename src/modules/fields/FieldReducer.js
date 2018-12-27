@@ -17,7 +17,6 @@ const UPDATE_FIELD = 'field/update-field'
 const MOVE_FIELD = 'field/move-field'
 const DELETE_FIELD = 'field/delete-field'
 
-const MOVE_TAG_WITHIN_FIELD = 'field/move-tag-within-field'
 const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
 export function addField(boardType, text) {
@@ -171,7 +170,6 @@ export function deleteTag(fieldKey, tagKey) {
         _.sortBy(dataClone, i => i.index)
             .map((item, index) => dataClone[item.key].index = index)
 
-            console.log(dataClone, {fieldKey})
         dispatch(updateField(fieldKey, 'data', dataClone))
     }
 }
@@ -180,20 +178,19 @@ export function moveTagWithinField(fieldKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { fieldRepo } = getState().field
         
-        let dataClone = Array.from(fieldRepo[fieldKey].data)
-        let [removed] = dataClone.splice(startIndex, 1)
-        dataClone.splice(endIndex, 0, removed)
+        let dataClone = {}
+        Object.assign(dataClone, fieldRepo[fieldKey].data)
 
-        dispatch({
-            type: MOVE_TAG_WITHIN_FIELD,
-            payload: {
-                key: fieldKey,
-                data: {
-                    ...fieldRepo[fieldKey],
-                    data: dataClone
-                },
-            }
-        })
+        //relocate tag
+        let dataSorted = _.sortBy(dataClone, i => i.index)
+        const [removed] = dataSorted.splice(startIndex, 1)
+        dataSorted.splice(endIndex, 0, removed)
+
+        //re-index and assign keys
+        dataSorted.map((item, index) => item.index = index)
+        dataClone = _.keyBy(dataSorted, i => i.key)
+        
+        dispatch(updateFieldByPath(fieldKey, 'data', dataClone))
     }
 }
 
@@ -386,8 +383,6 @@ export default (state = initialState, action) => {
         case DELETE_FIELD:
             return { ...state, ...action.payload }
 
-        case MOVE_TAG_WITHIN_FIELD:
-            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.key]: action.payload.data }}
         case MOVE_TAG_TO_OTHER_FIELD:
             return { ...state, fieldRepo: action.payload }
         default:

@@ -1,28 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
+import { fieldType } from '../../fields/defaults'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updatePage } from '../../page/PageReducer'
-import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
+import { updatePageByPath } from '../../page/PageReducer'
 
 class PickNews extends React.Component{
-    _renderItem = (item) => {
+    _renderItem = (item, index) => {
         const { currentValue } = this.props
-        const selected = typeof currentValue === 'string' && currentValue === item.key
+        const selected = typeof currentValue === 'string' && currentValue === item.value
 
         return (
             <div
-                key={item.key}
+                key={index}
                 className="drop-down-menu-option"
-                onClick={this._select}
+                onClick={this._select.bind(this, item)}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6',
+                    maxWidth: 200,
                 }}
             >
-                <i
-                    className={`${item.icon} drop-down-menu-icon`}
-                />
-                {item.title}
+                <div className="text-ellipsis">
+                    {item.value}
+                </div>
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -35,43 +37,25 @@ class PickNews extends React.Component{
         )
     }
 
-    _select = () => {
-        const { pageKey, fieldKey, pageRepo } = this.props
+    _select = (item) => {
+        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
-        let valueClone = {}
-        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
-        
-        this.props.updatePage(pageKey, fieldKey, valueClone)
-        this.props.showDropdownByKey()
-    }
-
-    _addItemBelow = () => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
-    }
-
-    _deleteItem = () => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.deleteItem(indexKey, pageKey, fieldKey)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, item)
         this.props.showDropdownByKey()
     }
 
     render() {
+        const { pageRepo, pageKey, fieldRepo } = this.props
+        
+        const stringKeys = _.filter(Object.keys(pageRepo[pageKey]),
+            i => fieldRepo[i] && fieldRepo[i].fieldType === fieldType.strings.key)
+        let stringArr = []
+        stringKeys.map(i => stringArr = stringArr.concat(_.toArray(pageRepo[pageKey][i])))
+        
         return (
             <div>
-                {[].map(this._renderItem)}
+                {stringArr.map(this._renderItem)}
                 <div className="drop-down-menu-separator"/>
-                <div className="drop-down-menu-option" onClick={this._addItemBelow}>
-                    <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
-                    Add Logic
-                </div>
-                <div className="drop-down-menu-option" onClick={this._deleteItem}>
-                    <i className={`drop-down-menu-icon ion-md-close`}></i>
-                    Delete
-                </div>
             </div>
         )
     }
@@ -83,9 +67,7 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        updatePage,
+        updatePageByPath,
         showDropdownByKey,
-        addItemBelowOf,
-        deleteItem,
     }
 )(PickNews)

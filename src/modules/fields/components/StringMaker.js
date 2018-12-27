@@ -31,7 +31,7 @@ class StringMaker extends React.Component{
         this.setState({
             mode: EDIT_MODE,
             target: item,
-            value: this.props.value[item]
+            value: this.props.value[item].value,
         })
     }
 
@@ -39,17 +39,14 @@ class StringMaker extends React.Component{
         const { pageInfo, fieldKey, value } = this.props
         const { pageKey } = pageInfo
 
-        if (this.state.target) {
-            this.props.updatePageByPath(pageKey, fieldKey, this.state.target, this.state.value)
-            this.setState({
-                mode: VIEW_MODE,
-            })
-        } else {
-            this.props.updatePageByPath(pageKey, fieldKey, Object.keys(value || {}).length, this.state.value)
-            this.setState({
-                mode: VIEW_MODE,
-            })
-        }
+        const target = this.state.target || Object.keys(value || {}).length
+
+        console.log({pageKey, fieldKey})
+        this.props.updatePageByPath(pageKey, fieldKey, target, 'value', this.state.value)
+
+        this.setState({
+            mode: VIEW_MODE,
+        })
     }
 
     _onChange = e => {
@@ -79,10 +76,16 @@ class StringMaker extends React.Component{
                     >
                         View
                     </div>
-                    <div className="page-field-label" onClick={this._showEditMode}>
+                    <div 
+                        className="page-field-label"
+                        onClick={this._showEditMode}
+                    >
                         Edit
                     </div>
-                    <div className="page-field-label" onClick={this._onSave}>
+                    <div
+                        className="page-field-label"
+                        onClick={this._onSave}
+                    >
                         Save
                     </div>
                 </div>
@@ -99,21 +102,19 @@ class StringMaker extends React.Component{
                                         marginTop: 6,
                                         marginRight: 10,
                                     }}
-                                >{value[item]}</div>
+                                >{value[item].value}</div>
                             )
                         })}
                     </div>
                     :<div>
-                        <div
-                            className="textarea"
+                        <textarea
+                            value={this.state.value || ''}
                             onChange={this._onChange}
                             onKeyDown={this._onKeyPress}
-                            contentEditable="true"
-                            suppressContentEditableWarning="true"
                             style={{
                                 marginTop: 6,
                             }}
-                        >{this.state.value || ''}</div>
+                        />
                     </div>
                 }
             </div>
