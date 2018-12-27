@@ -5,11 +5,10 @@ import { updatePage } from '../page/PageReducer'
 
 import { fieldType } from './defaults'
 import { defaultLogic } from '../logic/types'
-import { initFieldRepo, initTagRepo } from './defaults'
+import { initFieldRepo } from './defaults'
 
 const initialState = {
     fieldRepo: initFieldRepo,
-    tagRepo: initTagRepo,
     defaultLogic,
 }
 
@@ -18,9 +17,6 @@ const UPDATE_FIELD = 'field/update-field'
 const MOVE_FIELD = 'field/move-field'
 const DELETE_FIELD = 'field/delete-field'
 
-const ADD_TAG = 'field/add-tag'
-const DELETE_TAG = 'field/delete-tag'
-const UPDATE_TAG = 'field/update-tag'
 const MOVE_TAG_WITHIN_FIELD = 'field/move-tag-within-field'
 const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
@@ -122,63 +118,61 @@ export function updateField(fieldKey, field, newValue) {
     }
 }
 
+export function updateFieldByPath() {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().field
+        
+        const fieldInfo = helpers.pathUpdate(arguments, 0, fieldRepo)
+        if (!fieldInfo) return
+
+        dispatch({
+            type: UPDATE_FIELD,
+            payload: fieldInfo
+        })
+    }
+}
+
 export function addTag(fieldKey, text) {
     return (dispatch, getState) => {
-        const { fieldRepo, tagRepo } = getState().field
+        const { fieldRepo } = getState().field
 
-        let dataClone = Array.from(fieldRepo[fieldKey].data || [])
+        //clone data field for tags
+        let dataClone = {}
+        Object.assign(dataClone, fieldRepo[fieldKey].data)
+
+        //calculate new item index
+        const index = Object.keys(dataClone).length
         
         let newItemKey = helpers.genUID('tag')
-        while(tagRepo[newItemKey]) {
+        while(dataClone[newItemKey]) {
             newItemKey = helpers.genUID('tag')
         }
 
-        dataClone.push(newItemKey)
+        dataClone[newItemKey] = {
+            key: newItemKey,
+            title: text,
+            index,
+        }
         
         dispatch(updateField(fieldKey, 'data', dataClone))
-
-        dispatch({
-            type: ADD_TAG,
-            payload: {
-                tagKey: newItemKey,
-                title: text
-            }
-        })
     }
 }
 
-export function deleteTag(fieldKey, index) {
+export function deleteTag(fieldKey, tagKey) {
     return (dispatch, getState) => {
-        const { fieldRepo, tagRepo } = getState().field
+        const { fieldRepo } = getState().field
 
-        let dataClone = Array.from(fieldRepo[fieldKey].data || [])
-        const [removed] = dataClone.splice(index, 1)
+        //clone tags data and delete tag
+        let dataClone = {}
+        Object.assign(dataClone, fieldRepo[fieldKey].data)
+        delete dataClone[tagKey]
 
-        let tagRepoClone = {}
-        Object.assign(tagRepoClone, tagRepo)
-        delete tagRepoClone[removed]
+        //re-index
+        _.sortBy(dataClone, i => i.index)
+            .map((item, index) => dataClone[item.key].index = index)
 
+            console.log(dataClone, {fieldKey})
         dispatch(updateField(fieldKey, 'data', dataClone))
-
-        dispatch({
-            type: DELETE_TAG,
-            payload: tagRepoClone,
-        })
-    }
-}
-
-export function updateTag(tagKey, field, newValue) {
-    return (dispatch, getState) => {
-        const { tagRepo } = getState().field
-        let tagInfo = {
-            ...tagRepo[tagKey],
-            [field]: newValue,
-        }
-
-        dispatch({
-            type: UPDATE_TAG,
-            payload: tagInfo
-        })
     }
 }
 
@@ -386,18 +380,12 @@ export default (state = initialState, action) => {
         case ADD_FIELD:
             return { ...state, fieldRepo: action.payload }
         case UPDATE_FIELD:
-            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.fieldKey]: action.payload } }
+            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.key]: action.payload } }
         case MOVE_FIELD:
             return { ...state, fieldRepo: action.payload }
         case DELETE_FIELD:
             return { ...state, ...action.payload }
 
-        case ADD_TAG:
-            return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
-        case DELETE_TAG:
-            return { ...state, tagRepo: action.payload }
-        case UPDATE_TAG:
-            return { ...state, tagRepo: { ...state.tagRepo, [action.payload.tagKey]: action.payload }}
         case MOVE_TAG_WITHIN_FIELD:
             return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.key]: action.payload.data }}
         case MOVE_TAG_TO_OTHER_FIELD:

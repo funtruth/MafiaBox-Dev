@@ -10,7 +10,7 @@ export const dropdownType = {
     deleteLogic: 'dropdownType/delete-logic',
 
     editTag: 'dropdownType/edit-tag',
-    createSomething: 'dropdownType/create-something',
+    addTag: 'dropdownType/add-tag',
     pickFieldType: 'dropdownType/pick-field-type',
     addTemplateField: 'dropdownType/add-template-field',
     templateTitleOptions: 'dropdownType/template-title-options',

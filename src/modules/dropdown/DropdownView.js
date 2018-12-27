@@ -11,7 +11,7 @@ import PickOperator from './logic/PickOperator';
 import LogicDelete from './logic/LogicDelete'
 
 import EditTag from './template/EditTag'
-import CreateSomething from './template/CreateSomething'
+import AddTag from './template/AddTag'
 import PickFieldType from './template/PickFieldType'
 import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
@@ -55,8 +55,8 @@ class DropdownView extends React.Component{
 
             case dropdownType.editTag:
                 return <EditTag {...props}/>
-            case dropdownType.createSomething:
-                return <CreateSomething {...props}/>
+            case dropdownType.addTag:
+                return <AddTag {...props}/>
             case dropdownType.pickFieldType:
                 return <PickFieldType {...props}/>
             case dropdownType.addTemplateField:

@@ -7,6 +7,7 @@ export function genUID(key) {
 }
 
 //updates a property deep inside an object and returns the entire object
+//WARNING: cannot delete properties (THIS IS A FEATURE)
 export function pathUpdate(args, index, repo) {
     return {
         ...repo[args[index]]||{},

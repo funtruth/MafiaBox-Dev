@@ -184,6 +184,7 @@ export function updatePageByPath() {
         const { pageRepo } = getState().page
         
         const pageInfo = helpers.pathUpdate(arguments, 0, pageRepo)
+        console.log(pageInfo)
         if (!pageInfo) return
 
         dispatch({

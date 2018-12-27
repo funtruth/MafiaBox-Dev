@@ -1,25 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import _ from 'lodash'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
-import { addTag } from '../FieldReducer'
 import { dropdownType } from '../../dropdown/types';
-
-const ADD_NEW_TAG = 'add-new-tag'
 
 class TagsView extends React.Component{
     _renderItem = (item, index) => {
-        const { tagRepo, fieldInfo } = this.props
-        const tagInfo = tagRepo[item]
+        const { fieldInfo } = this.props
 
         const style = {
             backgroundColor: 'rgba(40, 43, 48,1)',
-            color: tagInfo && tagInfo.title ? '#fff' : '#969696',
+            color: item.title ? '#fff' : '#969696',
             marginBottom: 6,
         }
-
+        
         return (
-            <Draggable key={item} draggableId={item} index={index}>
+            <Draggable key={item.key} draggableId={item.key} index={index}>
                 {(provided, snapshot) => (
                     <div
                         ref={provided.innerRef}
@@ -33,10 +29,10 @@ class TagsView extends React.Component{
                         className="property-button menu-onclick"
                         menu-type={dropdownType.editTag}
                         index-key={index}
-                        tag-key={item}
+                        tag-key={item.key}
                         field-key={fieldInfo.fieldKey}
                     >
-                        {(tagInfo && tagInfo.title) || 'Untitled'}
+                        {item.title || 'Untitled'}
                     </div>
                 )}
             </Draggable>
@@ -60,8 +56,7 @@ class TagsView extends React.Component{
         return (
             <div
                 className="property-button menu-onclick"
-                menu-type={dropdownType.createSomething}
-                tag-key={ADD_NEW_TAG}
+                menu-type={dropdownType.addTag}
                 field-key={fieldInfo.fieldKey}
                 style={style}
             >
@@ -74,6 +69,8 @@ class TagsView extends React.Component{
     render() {
         const { fieldInfo } = this.props
         const { fieldKey, data } = fieldInfo
+
+        const tags = _.sortBy(data, i => i.index)
         
         return (
             <div>
@@ -83,7 +80,7 @@ class TagsView extends React.Component{
                             ref={provided.innerRef}
                             className="row"
                         >
-                            {(data || []).map(this._renderItem)}
+                            {tags.map(this._renderItem)}
                             {provided.placeholder}
                         </div>
                     )}
@@ -94,12 +91,4 @@ class TagsView extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        tagRepo: state.field.tagRepo,
-        fieldRepo: state.field.fieldRepo,
-    }),
-    {
-        addTag,
-    }
-)(TagsView)
+export default TagsView

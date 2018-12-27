@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { showDropdownByKey } from '../DropdownReducer'
 import { addTag } from '../../fields/FieldReducer'
 
-class CreateTag extends React.Component{
+class AddTag extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -59,12 +59,9 @@ class CreateTag extends React.Component{
 }
 
 export default connect(
-    state => ({
-        fieldRepo: state.field.fieldRepo,
-        tagRepo: state.field.tagRepo,
-    }),
+    null,
     {
         showDropdownByKey,
         addTag,
     }
-)(CreateTag)
+)(AddTag)

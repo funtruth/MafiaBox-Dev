@@ -143,7 +143,28 @@ export const initFieldRepo = {
         index: 1,
         fieldType: fieldType.tag.key,
         fieldTitle: 'Action Mode',
-        data: ['phaseActionMode/all', 'phaseActionMode/king', 'phaseActionMode/clown', 'phaseActionMode/none'],
+        data: {
+            all: {
+                key: 'all',
+                index: 0,
+                title: 'All',
+            },
+            king: {
+                key: 'king',
+                index: 1,
+                title: 'King',
+            },
+            clown: {
+                key: 'clown',
+                index: 2,
+                title: 'Clown',
+            },
+            none: {
+                key: 'none',
+                index: 3,
+                title: 'None',
+            },
+        },
         boardType: boardType.flow,
     },
     phaseTriggerMode: {
@@ -184,35 +205,4 @@ export const initFieldRepo = {
         fieldTitle: 'Phase Choices',
         boardType: boardType.flow,
     }
-}
-
-export const initTagRepo = {
-    'phaseActionMode/all': {
-        tagKey: 'phaseActionMode/all',
-        title: 'All',
-    },
-    'phaseActionMode/king': {
-        tagKey: 'phaseActionMode/king',
-        title: 'King',
-    },
-    'phaseActionMode/clown': {
-        tagKey: 'phaseActionMode/clown',
-        title: 'Clown',
-    },
-    'phaseActionMode/none': {
-        tagKey: 'phaseActionMode/none',
-        title: 'None',
-    },
-    'phaseTriggerType/none': {
-        tagkey: 'phaseTriggerType/none',
-        title: 'None',
-    },
-    'phaseTriggerType/allReady': {
-        tagkey: 'phaseTriggerType/allReady',
-        title: 'None',
-    },
-    'phaseTriggerType/majority': {
-        tagkey: 'phaseTriggerType/majority',
-        title: 'None',
-    },
 }

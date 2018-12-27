@@ -59,10 +59,7 @@ class AddTemplateField extends React.Component{
 }
 
 export default connect(
-    state => ({
-        fieldRepo: state.field.fieldRepo,
-        tagRepo: state.field.tagRepo,
-    }),
+    null,
     {
         showDropdownByKey,
         addField,

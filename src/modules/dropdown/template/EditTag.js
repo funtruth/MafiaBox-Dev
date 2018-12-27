@@ -2,19 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showDropdownByKey } from '../DropdownReducer'
-import { updateTag, deleteTag } from '../../fields/FieldReducer'
+import { updateField, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            
+        }
+    }
     _onDelete = () => {
-        const { indexKey, fieldKey } = this.props
+        const { tagKey, fieldKey } = this.props
 
-        this.props.deleteTag(fieldKey, indexKey)
+        this.props.deleteTag(fieldKey, tagKey)
         this.props.showDropdownByKey()
     }
 
     _onChange = e => {
-        const { tagKey } = this.props
-        this.props.updateTag(tagKey, 'title', e.target.value)
+        const { tagKey, fieldKey } = this.props
+        this.props.updateField(fieldKey, 'data', tagKey, 'title', e.target.value)
     }
 
     _onKeyDown = e => {
@@ -27,10 +33,10 @@ class EditTag extends React.Component{
     }
 
     render() {
-        const { tagKey, tagRepo } = this.props
+        const { tagKey, fieldRepo, fieldKey } = this.props
 
         if (!tagKey) return null
-        const fieldInfo = tagRepo[tagKey]
+        const fieldInfo = fieldRepo[fieldKey].data[tagKey]
         if (!fieldInfo) return null
 
         return (
@@ -57,11 +63,10 @@ class EditTag extends React.Component{
 export default connect(
     state => ({
         fieldRepo: state.field.fieldRepo,
-        tagRepo: state.field.tagRepo,
     }),
     {
         showDropdownByKey,
-        updateTag,
+        updateField,
         deleteTag,
     }
 )(EditTag)

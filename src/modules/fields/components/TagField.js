@@ -1,20 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import _ from 'lodash'
 
 class TagField extends React.Component{
-    _renderItem = (tagKey) => {
-        const { value, field, tagRepo } = this.props
-        const item = tagRepo[tagKey]
+    _renderItem = (item) => {
+        const { value, fieldKey } = this.props
         
-        const active = field && tagKey === value
-        const style = {
-            backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
-        }
-        
+        const active = fieldKey && item.key === value
 
         return (
-            <div key={tagKey} className="property-button" style={style} onClick={this._onClick.bind(this, tagKey)}>
-                {(item && item.title) || 'Untitled'}
+            <div
+                key={item.key}
+                className="property-button"
+                style={{
+                    backgroundColor: active ?
+                        (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
+                }}
+                onClick={this._onClick.bind(this, item.key)}
+            >
+                {item.title || 'Untitled'}
             </div>
         )
     }
@@ -25,19 +28,17 @@ class TagField extends React.Component{
     }
 
     render() {
-        const { fieldInfo, data } = this.props
+        const { data } = this.props
         if (!data) return null
+
+        const tags = _.sortBy(data, i => i.index)
         
         return (
             <div className="row">
-                {fieldInfo.data.map(this._renderItem)}
+                {tags.map(this._renderItem)}
             </div>
         )
     }
 }
 
-export default connect(
-    state => ({
-        tagRepo: state.field.tagRepo,
-    }),
-)(TagField)
+export default TagField
