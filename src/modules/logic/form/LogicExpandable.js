@@ -20,7 +20,7 @@ class LogicExpandable extends React.Component{
 
     render() {
         const { pageInfo, field, item, nested,
-            property, updates, prefix } = this.props
+            property, updates, updateRefs, prefix } = this.props
             
         const expanded = pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
@@ -32,6 +32,8 @@ class LogicExpandable extends React.Component{
         const isUidField = updates && updates['/uid/']
         const isVarField = property.charAt(0) === '$'
         const isAdder = !isField
+
+        const config = proptool.getUpdateConfig(prefix, updateRefs)
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
@@ -67,7 +69,9 @@ class LogicExpandable extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        updateRefs: state.template.updateRefs,
+    }),
     {
         updatePageByPath,
     }

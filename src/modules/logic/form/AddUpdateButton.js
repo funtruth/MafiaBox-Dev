@@ -28,8 +28,8 @@ class AddUpdateButton extends React.Component{
                 className="logic-pick-update menu-onclick highlight"
                 menu-type={(updates && updates.dropdownType) || dropdownType.addUpdateField}
                 page-key={pageInfo.pageKey}
-                field-key={field}
                 index-key={item}
+                field-key={field}
                 subfield-key={prefix}
                 current-value={info.value}
                 onClick={this._onClick.bind(this, info)}
@@ -42,9 +42,7 @@ class AddUpdateButton extends React.Component{
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
+    null,
     {
         pushData,
     }

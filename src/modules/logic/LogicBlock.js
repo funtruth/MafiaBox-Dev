@@ -25,7 +25,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        let { fieldKey, pageInfo, pageRepo, value, index, vars, updates } = this.props
+        let { fieldKey, pageInfo, pageRepo, value, index, vars } = this.props
         if (!pageInfo) return null
         if (!value) {
             value = defaultLogic
@@ -88,7 +88,7 @@ class LogicBlock extends React.Component{
                                                 <LogicPanels {...iprops}/>
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
-                                            <LogicObject {...iprops} updates={updates}/>
+                                            <LogicObject {...iprops}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>
@@ -121,6 +121,5 @@ class LogicBlock extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        updates: state.template.updates,
     })
 )(LogicBlock)

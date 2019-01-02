@@ -39,3 +39,28 @@ export function getExistingFields(prefix, library) {
     
     return _.uniq(fields)
 }
+
+//returns the proper update config to LogicExpandable using prefix
+export function getUpdateConfig(prefix, updateRefs) {
+    const parts = prefix.split('.')
+
+    for (var ref in updateRefs) {
+        const refParts = ref.split('.')
+
+        if (parts.length !== refParts.length) continue
+
+        let match = true
+        for (var i=0; i<refParts.length; i++) {
+            if (parts[i] !== refParts[i] && refParts[i] !== '$') {
+                match = false
+                break
+            }
+        }
+
+        if (match) {
+            return updateRefs[ref]
+        }
+    }
+
+    return null
+}
