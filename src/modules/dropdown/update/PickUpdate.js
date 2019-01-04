@@ -10,9 +10,9 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
     _onMouseOver = (item, e) => {
-        const { hoverKey, currentValue } = this.props
+        const { hoverKey, currentValue, attach } = this.props
         if (item.key === hoverKey) return
-        
+        console.log(this.props)
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
         this.props.showDropdownByKey(dropdownType.inputValue, e, {
@@ -20,6 +20,7 @@ class PickUpdate extends React.Component{
             inputText: 'Enter a number',
             type: 'number',
             showValue: selected,
+            attach: '',
             onSubmit: this._selectDynamic.bind(this, item)
         })
     }

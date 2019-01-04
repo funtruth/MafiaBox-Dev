@@ -59,6 +59,7 @@ class AppWrapper extends React.Component{
                             subfieldKey: e.target.getAttribute('subfield-key'),
                             pageKey: e.target.getAttribute('page-key'),
                             currentValue: e.target.getAttribute('current-value'),
+                            attach: JSON.parse(e.target.getAttribute('attach')),
                         })
                 } else {
                     this.props.showDropdownByKey()

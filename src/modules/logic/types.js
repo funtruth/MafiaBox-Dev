@@ -90,11 +90,11 @@ export const comparisonType = {
     },
 }
 
-export const updateType = {
-    staticVal: 'updateType/staticVal',
-    dynamicVal: 'updateType/dynamicVal',
-    phase: 'updateType/phase',
-    uid: 'updateType/uid',
+export const valueType = {
+    staticVal: 'valueType/staticVal',
+    dynamicVal: 'valueType/dynamicVal',
+    phase: 'valueType/phase',
+    uid: 'valueType/uid',
 }
 
 export const valueType = {
@@ -104,7 +104,7 @@ export const valueType = {
         title: 'null',
         label: 'null',
         icon: 'mdi mdi-swap-horizontal-bold',
-        updateType: updateType.staticVal,
+        valueType: valueType.staticVal,
     },
     setTo: {
         key: 'setTo',
@@ -112,35 +112,35 @@ export const valueType = {
         title: 'set to value',
         label: 'set to value',
         icon: 'mdi mdi-numeric',
-        updateType: updateType.dynamicVal,
+        valueType: valueType.dynamicVal,
     },
     i: {
         key: 'i',
         index: 2,
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
-        updateType: updateType.staticVal,
+        valueType: valueType.staticVal,
     },
     iB: {
         key: 'iB',
         index: 3,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
-        updateType: updateType.dynamicVal,
+        valueType: valueType.dynamicVal,
     },
     d: {
         key: 'd',
         index: 4,
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
-        updateType: updateType.staticVal,
+        valueType: valueType.staticVal,
     },
     dB: {
         key: 'dB',
         index: 5,
         title: 'decrement by',
         icon: 'ion-md-download',
-        updateType: updateType.dynamicVal,
+        valueType: valueType.dynamicVal,
     },
 }
 

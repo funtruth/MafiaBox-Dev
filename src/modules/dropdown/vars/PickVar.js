@@ -82,18 +82,18 @@ class PickVar extends React.Component{
     }
 
     render() {
-        const { dropdownData, currentValue } = this.props
-        const vars = _.toArray(dropdownData)
+        const { attach, currentValue } = this.props
+        const vars = _.toArray(attach)
 
-        const isNumber = dropdownData[currentValue] &&
-            dropdownData[currentValue].variableType === variableType.number.key
+        const isNumber = attach[currentValue] &&
+            attach[currentValue].variableType === variableType.number.key
 
         let menuStyle = {
             maxHeight: 200,
             overflow: 'auto',
         }
 
-        if (!dropdownData) return null
+        if (!attach) return null
 
         return (
             <div>
@@ -121,9 +121,7 @@ class PickVar extends React.Component{
 }
 
 export default connect(
-    state => ({
-        dropdownData: state.dropdown.dropdownData,
-    }),
+    null,
     {
         updatePageByPath,
         showDropdownByKey,

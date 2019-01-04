@@ -1,27 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { dropdownType } from '../../dropdown/types'
 
-import { pushData } from '../../dropdown/DropdownReducer'
-
 class AddUpdateButton extends React.Component{
-    _onClick = (info) => {
-        const { updates } = this.props
-        const thisType = updates.dropdownType
+    render() {
+        const { field, pageInfo, logicInfo, item, prefix, updates, vars } = this.props
+        const info = logicInfo.data[prefix] || {}
 
-        switch(thisType) {
+        let attachments = ""
+        switch(updates.dropdownType) {
             case dropdownType.pickUid:
-                return this.props.pushData(this.props.vars)
+                attachments = vars
+                break
             case dropdownType.pickUpdate:
-                return this.props.pushData(info.dynamic)
+                attachments = info.dynamic
+                break
             default:
         }
-    }
-    
-    render() {
-        const { field, pageInfo, logicInfo, item, prefix, updates } = this.props
-        const info = logicInfo.data[prefix] || {}
         
         return (
             <div
@@ -32,7 +27,7 @@ class AddUpdateButton extends React.Component{
                 field-key={field}
                 subfield-key={prefix}
                 current-value={info.value}
-                onClick={this._onClick.bind(this, info)}
+                attach={JSON.stringify(attachments)}
             >
                 <div style={{ pointerEvents: 'none', color: '#767676' }}>
                     Add</div>
@@ -41,9 +36,4 @@ class AddUpdateButton extends React.Component{
     }
 }
 
-export default connect(
-    null,
-    {
-        pushData,
-    }
-)(AddUpdateButton)
+export default AddUpdateButton

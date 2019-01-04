@@ -1,18 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class InputValue extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            value: props.showValue && props.dropdownData
+            value: props.showValue && props.attach
         }
     }
 
     componentWillReceiveProps(newProps) {
         if (newProps.showValue !== this.props.showValue) {
             this.setState({
-                value: newProps.showValue && newProps.dropdownData
+                value: newProps.showValue && newProps.attach
             })
         }
     }
@@ -38,6 +37,7 @@ class InputValue extends React.Component{
 
     render() {
         const { type, inputText } = this.props
+        console.log(this.props)
 
         return (
             <div>
@@ -60,8 +60,4 @@ class InputValue extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        dropdownData: state.dropdown.dropdownData,
-    }),
-)(InputValue)
+export default InputValue

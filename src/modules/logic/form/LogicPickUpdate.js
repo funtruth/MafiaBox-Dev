@@ -4,22 +4,7 @@ import { connect } from 'react-redux'
 import { valueType, updateType } from '../types';
 import { dropdownType } from '../../dropdown/types'
 
-import { pushData } from '../../dropdown/DropdownReducer'
-
 class LogicPickUpdate extends React.Component{
-    _onClick = (info) => {
-        const { updates } = this.props
-        const thisType = updates.dropdownType
-
-        switch(thisType) {
-            case dropdownType.pickUid:
-                return this.props.pushData(this.props.vars)
-            case dropdownType.pickUpdate:
-                return this.props.pushData(info.dynamic)
-            default:
-        }
-    }
-
     _renderItem = (item) => {
         const { pageRepo } = this.props
         switch(item.updateType) {
@@ -37,8 +22,20 @@ class LogicPickUpdate extends React.Component{
     }
 
     render() {
-        const { updates, field, pageInfo, logicInfo, item, prefix } = this.props
+        const { updates, field, pageInfo, logicInfo, item, prefix, vars } = this.props
         const info = logicInfo.data[prefix] || {}
+
+        console.log('logicPickUpdate', this.props)
+        let attachments = ""
+        switch(updates.dropdownType) {
+            case dropdownType.pickUid:
+                attachments = vars
+                break
+            case dropdownType.pickUpdate:
+                attachments = info.dynamic
+                break
+            default:
+        }
         
         return (
             <div
@@ -49,7 +46,7 @@ class LogicPickUpdate extends React.Component{
                 field-key={field}
                 subfield-key={prefix}
                 current-value={info.value}
-                onClick={this._onClick.bind(this, info)}
+                attach={JSON.stringify(attachments)}
             >
                 {this._renderItem(info)}
             </div>
@@ -61,7 +58,4 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
     }),
-    {
-        pushData,
-    }
 )(LogicPickUpdate)

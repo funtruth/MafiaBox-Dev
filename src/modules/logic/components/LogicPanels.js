@@ -5,23 +5,17 @@ import { logicType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 import { comparisonType } from '../types'
 
-import { addItemBelowOf } from '../../fields/FieldReducer'
-import { pushData } from '../../dropdown/DropdownReducer'
-
 class LogicPanels extends React.Component{
-    _onClick = () => {
-        const { vars } = this.props
-        this.props.pushData(vars)
-    }
-    
     //TODO needs major refactoring
     render() {
-        const { item, field, logicInfo, pageInfo, pageRepo } = this.props
+        const { item, field, logicInfo, pageInfo, pageRepo, vars } = this.props
         const { pageKey } = pageInfo
         const { data } = logicInfo
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
+                const attachments = JSON.stringify(vars)
+                
                 return (
                     <div>
                         <div
@@ -36,7 +30,7 @@ class LogicPanels extends React.Component{
                                 color: (data.var1 || data[`var1.adjust`]) ? '#fff' : '#868686',
                                 borderRadius: '0px 4px 0px 0px',
                             }}
-                            onClick={this._onClick}
+                            attach={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var1 && data['var1.adjust'] && `${data.var1} + ${data['var1.adjust']}`) ||
@@ -71,7 +65,7 @@ class LogicPanels extends React.Component{
                                 color: (data.var2 || data['var2.adjust']) ? '#fff' : '#868686',
                                 borderRadius: '0px 0px 4px 0px',
                             }}
-                            onClick={this._onClick}
+                            attach={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var2 && data['var2.adjust'] && `${data.var2} + ${data['var2.adjust']}`) ||
@@ -126,8 +120,4 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
     }),
-    {
-        addItemBelowOf,
-        pushData,
-    }
 )(LogicPanels)

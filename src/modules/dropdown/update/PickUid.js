@@ -57,8 +57,8 @@ class PickUid extends React.Component{
     }
 
     render() {
-        const { dropdownData } = this.props
-        const uids = _.filter(dropdownData, i => i.variableType === variableType.uid.key)
+        const { attach } = this.props
+        const uids = _.filter(attach, i => i.variableType === variableType.uid.key)
         
         return (
             uids.length ?
@@ -78,9 +78,7 @@ class PickUid extends React.Component{
 }
 
 export default connect(
-    state => ({
-        dropdownData: state.dropdown.dropdownData,
-    }),
+    null,
     {
         updatePageByPath,
         showDropdownByKey,
