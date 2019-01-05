@@ -1,33 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { valueType, updateType } from '../types';
+import { updateType, valueType } from '../types';
 import { dropdownType } from '../../dropdown/types'
 
-class LogicPickUpdate extends React.Component{
+class UpdateButton extends React.Component{
     _renderItem = (item) => {
-        const { pageRepo } = this.props
-        switch(item.updateType) {
-            case updateType.phase:
+        const { pageRepo, config } = this.props
+        switch(item.valueType) {
+            case valueType.page:
                 return <div style={{ pointerEvents: 'none' }}>{pageRepo[item.value].title}</div>
-            case updateType.uid:
+            case valueType.uid:
                 return <div style={{ pointerEvents: 'none' }}>{item.value || 'null'}</div>
-            case updateType.staticVal:
-                return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title}</div>
-            case updateType.dynamicVal:
-                return <div style={{ pointerEvents: 'none' }}>{valueType[item.value].title + ' ' + item.dynamic}</div>
+            case valueType.staticVal:
+                return <div style={{ pointerEvents: 'none' }}>{updateType[item.value].title}</div>
+            case valueType.dynamicVal:
+                return <div style={{ pointerEvents: 'none' }}>{updateType[item.value].title + ' ' + item.dynamic}</div>
             default:
-                return <div style={{ pointerEvents: 'none', color: '#767676' }}>Select</div>
+                return <div style={{ pointerEvents: 'none', color: '#767676' }}>{config.action}</div>
         }
     }
 
     render() {
-        const { updates, field, pageInfo, logicInfo, item, prefix, vars } = this.props
+        const { config, field, pageInfo, logicInfo, item, prefix, vars } = this.props
         const info = logicInfo.data[prefix] || {}
 
-        console.log('logicPickUpdate', this.props)
+        console.log({config, info})
         let attachments = ""
-        switch(updates.dropdownType) {
+        switch(config.dropdown) {
             case dropdownType.pickUid:
                 attachments = vars
                 break
@@ -40,7 +40,7 @@ class LogicPickUpdate extends React.Component{
         return (
             <div
                 className="logic-pick-update menu-onclick highlight"
-                menu-type={updates}
+                menu-type={config.dropdown}
                 page-key={pageInfo.pageKey}
                 index-key={item}
                 field-key={field}
@@ -58,4 +58,4 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
     }),
-)(LogicPickUpdate)
+)(UpdateButton)

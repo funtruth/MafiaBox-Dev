@@ -135,6 +135,16 @@ export const initFieldRepo = {
         index: 3,
         fieldType: fieldType.logic.key,
         fieldTitle: 'Role Action Mode',
+        vars: {
+            user: {
+                key: 'user',
+                variableType: variableType.object.key,
+            },
+            target: {
+                key: 'target',
+                variableType: variableType.object.key,
+            },
+        },
         boardType: boardType.roles,
     },
     phaseActionMode: {

@@ -7,11 +7,12 @@ import LogicExpandable from './LogicExpandable';
 
 class LogicObject extends React.Component{
     render() {
-        const { logicInfo, updates, updateRefs } = this.props
+        const { logicInfo, updateRefs } = this.props
 
         const showForm = logicInfo.logicType === logicType.update.key
         if (!showForm) return null
 
+        //render an expandable for each basic property (without any .'s)
         return (
             _.filter(Object.keys(updateRefs), i => i.indexOf('.') === -1)
                 .map((property, index) => (
@@ -19,7 +20,6 @@ class LogicObject extends React.Component{
                         {...this.props}
                         key={index}
                         property={property}
-                        updates={updates[property]}
                         prefix={property}
                     />
                 ))
@@ -29,7 +29,6 @@ class LogicObject extends React.Component{
 
 export default connect(
     state => ({
-        updates: state.template.updates,
         updateRefs: state.template.updateRefs,
     })
 )(LogicObject)

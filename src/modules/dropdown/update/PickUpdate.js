@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { valueType, updateType } from '../../logic/types'
+import { updateType, valueType } from '../../logic/types'
 import { dropdownType } from '../types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
@@ -30,7 +30,7 @@ class PickUpdate extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value: item.key,
-            updateType: item.updateType
+            valueType: item.valueType
         })
         this.props.showDropdownByKey()
     }
@@ -41,7 +41,7 @@ class PickUpdate extends React.Component{
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value: item.key,
             dynamic: number,
-            updateType: item.updateType,
+            valueType: item.valueType,
         })
         this.props.showDropdownByKey()
     }
@@ -51,7 +51,7 @@ class PickUpdate extends React.Component{
         
         const selected = typeof currentValue === 'string' && currentValue === item.key
 
-        if (item.updateType === updateType.dynamicVal) {
+        if (item.valueType === valueType.dynamicVal) {
             return (
                 <div
                     key={item.key}
@@ -100,7 +100,7 @@ class PickUpdate extends React.Component{
     }
 
     render() {
-        const items = _.sortBy(valueType, i => i.index)
+        const items = _.sortBy(updateType, i => i.index)
         return (
             items.map(this._renderItem)
         )

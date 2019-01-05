@@ -93,11 +93,12 @@ export const comparisonType = {
 export const valueType = {
     staticVal: 'valueType/staticVal',
     dynamicVal: 'valueType/dynamicVal',
-    phase: 'valueType/phase',
+    page: 'valueType/page',
     uid: 'valueType/uid',
 }
 
-export const valueType = {
+//possible static and dynamic update types
+export const updateType = {
     null: {
         key: 'null',
         index: 1,
@@ -114,29 +115,29 @@ export const valueType = {
         icon: 'mdi mdi-numeric',
         valueType: valueType.dynamicVal,
     },
-    i: {
-        key: 'i',
+    incr: {
+        key: 'incr',
         index: 2,
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
         valueType: valueType.staticVal,
     },
-    iB: {
-        key: 'iB',
+    incrBy: {
+        key: 'incrBy',
         index: 3,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
         valueType: valueType.dynamicVal,
     },
-    d: {
-        key: 'd',
+    decr: {
+        key: 'decr',
         index: 4,
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
         valueType: valueType.staticVal,
     },
-    dB: {
-        key: 'dB',
+    decrBy: {
+        key: 'decrBy',
         index: 5,
         title: 'decrement by',
         icon: 'ion-md-download',

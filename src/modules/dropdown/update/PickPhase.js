@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
 import { boardType } from '../../board/types'
-import { updateType } from '../../logic/types'
+import { valueType } from '../../logic/types'
 
 import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
@@ -31,7 +31,7 @@ class BoardLib extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             value,
-            updateType: updateType.phase,
+            valueType: valueType.page,
         })
         this.props.showDropdownByKey()
     }

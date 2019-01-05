@@ -1,78 +1,62 @@
 import { dropdownType } from '../dropdown/types'
 
 const initialState = {
-    updates: {
-        gameState: {
-            phase: dropdownType.pickPhase,
-            counter1: dropdownType.pickUpdate,
-            veto: dropdownType.pickUpdate,
-            nominate: dropdownType.pickUid,
-        },
-        lobby: {
-            dropdownType: dropdownType.pickUid,
-            "/uid/": {
-                name: dropdownType.pickUpdate,
-                roleId: dropdownType.pickUpdate,
-                dead: dropdownType.pickUpdate,
-                health: dropdownType.pickUpdate,
-            }
-        },
-        choices: dropdownType.pickUpdate,
-        news: {
-            dropdownType: dropdownType.writeNews,
-        },
-        events: {
-            dropdownType: dropdownType.pickUid,
-            "/uid/": {
-                message: dropdownType.pickUpdate,
-            }
-        }
-    },
     updateRefs: {
         'gameState': {
             dropdown: dropdownType.addUpdateField,
+            action: 'Add',
         },
         'gameState.phase': {
             dropdown: dropdownType.pickPhase,
+            action: 'Select',
         },
         'gameState.counter': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'gameState.veto': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'gameState.nominate': {
             dropdown: dropdownType.pickUid,
+            action: 'Add',
         },
         'gameState.nominate.$': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Add',
         },
         'lobby': {
             dropdown: dropdownType.pickUid,
+            action: 'Select',
         },
         'lobby.$': {
             dropdown: dropdownType.addUpdateField,
+            action: 'Add',
         },
         'lobby.$.name': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'lobby.$.roleId': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'lobby.$.health': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'lobby.$.dead': {
             dropdown: dropdownType.pickUpdate,
+            action: 'Select',
         },
         'choices': {
             dropdown: dropdownType.pickUpdate,
-        },
-        'news': {
-            dropdownType: dropdownType.writeNews,
+            action: 'Select',
         },
         'events': {
-            dropdown: dropdownType.pickUpdate,
+            dropdown: dropdownType.writeNews,
+            action: 'Add',
         },
     }
 }

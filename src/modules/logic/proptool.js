@@ -1,23 +1,7 @@
 import _ from 'lodash'
 
-export function getUpdateFields(prefix, library) {
-    const props = prefix.split('.')
-
-    let libClone = {}
-    Object.assign(libClone, library)
-    for (var i=0; i<props.length; i++) {
-        if (!libClone[props[i]] && !libClone['/uid/']) {
-            console.warn(`Field ${props[i]} does not exist in library.`)
-            return []
-        }
-        libClone = libClone[props[i]] || libClone['/uid/']
-    }
-
-    return Object.keys(libClone)
-}
-
 //library refers to the data object in the logic item
-export function getExistingFields(prefix, library) {
+export function getSubfields(prefix, library) {
     const parts = prefix.split('.')
     let fields = []
     

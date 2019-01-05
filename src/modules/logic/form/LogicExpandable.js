@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import * as proptool from '../proptool'
 
 import { updatePageByPath } from '../../page/PageReducer'
-import LogicPickUpdate from './LogicPickUpdate';
-import AddUpdateButton from './AddUpdateButton';
+import UpdateButton from './UpdateButton'
 
 class LogicExpandable extends React.Component{
     _toggle = () => {
@@ -20,20 +19,18 @@ class LogicExpandable extends React.Component{
 
     render() {
         const { pageInfo, field, item, nested,
-            property, updates, updateRefs, prefix } = this.props
+            property, updateRefs, prefix } = this.props
             
         const expanded = pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
             pageInfo[field][item].data[prefix].expand
             
-        const attributes = proptool.getExistingFields(prefix, pageInfo[field][item].data)
+        const attributes = proptool.getSubfields(prefix, pageInfo[field][item].data)
         const hasAttr = attributes.length > 0
-        const isField = typeof updates === 'string'
-        const isUidField = updates && updates['/uid/']
         const isVarField = property.charAt(0) === '$'
-        const isAdder = !isField
 
         const config = proptool.getUpdateConfig(prefix, updateRefs)
+        console.log({prefix, config})
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
@@ -48,8 +45,7 @@ class LogicExpandable extends React.Component{
                     <div className="common-bubble --grey27" onClick={this._toggle}>
                         {isVarField ? property.substring(1) : property}
                     </div>
-                    {isField && <LogicPickUpdate {...this.props}/>}
-                    {isAdder && <AddUpdateButton {...this.props}/>}
+                    <UpdateButton {...this.props} config={config}/>
                 </div>
                 {expanded &&
                     attributes.map((property, index) => (
@@ -58,7 +54,6 @@ class LogicExpandable extends React.Component{
                             nested
                             key={index}
                             property={property}
-                            updates={updates[isUidField ? '/uid/' : property]}
                             prefix={prefix + "." + property}
                         />
                     ))
