@@ -45,7 +45,7 @@ export const initStoryMap = {
         key: 'main',
         index: 0,
         title: 'Main',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
         palette: 'palette-yellow',
         default: true,
     },
@@ -53,7 +53,7 @@ export const initStoryMap = {
         key: 'unique',
         index: 1,
         title: 'Unique',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
         palette: 'palette-blue',
         default: true,
     },
@@ -61,7 +61,7 @@ export const initStoryMap = {
         key: 'endState',
         index: 2,
         title: 'End State',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
         palette: 'palette-blue',
         default: true,
     },
@@ -74,7 +74,7 @@ export const initBoardRepo = {
     [boardType.roles]: {
         title: 'Roles',
     },
-    [boardType.flow]: {
+    [boardType.phases]: {
         title: 'Phases',
     },
     [boardType.events]: {

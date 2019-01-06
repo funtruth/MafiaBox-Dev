@@ -27,6 +27,8 @@ export const dropdownType = {
     pickPhase: 'dropdownType/pick-phase',
     pickUid: 'dropdownType/pick-uid',
     writeNews: 'dropdownType/write-news',
+    pickBoolean: 'dropdownType/pick-boolean',
+    pickRole: 'dropdownType/pick-role',
 }
 
 export const fuseType = {

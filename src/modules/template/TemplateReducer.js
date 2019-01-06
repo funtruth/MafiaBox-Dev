@@ -25,6 +25,7 @@ const initialState = {
         'gameState.nominate.$': {
             dropdown: dropdownType.pickUpdate,
             action: 'Add',
+            hideButton: true,
         },
         'lobby': {
             dropdown: dropdownType.pickUid,
@@ -34,12 +35,8 @@ const initialState = {
             dropdown: dropdownType.addUpdateField,
             action: 'Add',
         },
-        'lobby.$.name': {
-            dropdown: dropdownType.pickUpdate,
-            action: 'Select',
-        },
         'lobby.$.roleId': {
-            dropdown: dropdownType.pickUpdate,
+            dropdown: dropdownType.pickRole,
             action: 'Select',
         },
         'lobby.$.health': {
@@ -47,7 +44,7 @@ const initialState = {
             action: 'Select',
         },
         'lobby.$.dead': {
-            dropdown: dropdownType.pickUpdate,
+            dropdown: dropdownType.pickBoolean,
             action: 'Select',
         },
         'choices': {

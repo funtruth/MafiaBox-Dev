@@ -1,6 +1,6 @@
 export const boardType = {
     library: 'boardType/library',
     roles: 'boardType/roles',
-    flow: 'boardType/flow',
+    phases: 'boardType/phases',
     events: 'boardType/events',
 }

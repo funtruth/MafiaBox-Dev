@@ -24,11 +24,11 @@ class HomeView extends React.Component{
                     <div>
                         <Route exact path="/" component={LandingView}/>
                         <Route exact path="/library" component={LibraryView}/>
-                        <Route exact path="/board" component={StoryView}/>
-                        <Route exact path="/board/:pageKey" component={WindowPageView}/>
+                        <Route exact path="/roles" component={StoryView}/>
+                        <Route exact path="/roles/:pageKey" component={WindowPageView}/>
                         <Route exact path="/defaults/:boardType" component={WindowTemplateView}/>
-                        <Route exact path="/flow" component={FlowView}/>
-                        <Route exact path="/flow/:pageKey" component={WindowPageView}/>
+                        <Route exact path="/phases" component={FlowView}/>
+                        <Route exact path="/phases/:pageKey" component={WindowPageView}/>
                         <Route exact path="/events" component={EventView}/>
                         <Route exact path="/testhub" component={TestHubView}/>
                     </div>

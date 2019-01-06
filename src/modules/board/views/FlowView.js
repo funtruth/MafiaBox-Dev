@@ -5,7 +5,7 @@ import StoryBoard from '../StoryBoard'
 class FlowView extends React.Component{
     render() {
         return (
-            <StoryBoard boardType={boardType.flow}/>
+            <StoryBoard boardType={boardType.phases}/>
         )
     }
 }

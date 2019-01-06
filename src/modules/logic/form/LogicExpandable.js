@@ -44,7 +44,7 @@ class LogicExpandable extends React.Component{
                     <div className={`common-bubble ${isVarField?'--var':'--grey27'}`} onClick={this._toggle}>
                         {isVarField ? property.substring(1) : property}
                     </div>
-                    <UpdateButton {...this.props} config={config}/>
+                    {!config.hideButton && <UpdateButton {...this.props} config={config}/>}
                 </div>
                 {expanded &&
                     attributes.map((property, index) => (

@@ -90,6 +90,11 @@ export const comparisonType = {
     },
 }
 
+export const updateFamilyType = {
+    number: 'family/number',
+    boolean: 'family/boolean',
+}
+
 export const valueType = {
     staticVal: 'valueType/staticVal',
     dynamicVal: 'valueType/dynamicVal',
@@ -101,7 +106,8 @@ export const valueType = {
 export const updateType = {
     null: {
         key: 'null',
-        index: 1,
+        index: 0,
+        family: updateFamilyType.number,
         title: 'null',
         label: 'null',
         icon: 'mdi mdi-swap-horizontal-bold',
@@ -110,6 +116,7 @@ export const updateType = {
     setTo: {
         key: 'setTo',
         index: 1,
+        family: updateFamilyType.number,
         title: 'set to value',
         label: 'set to value',
         icon: 'mdi mdi-numeric',
@@ -118,6 +125,7 @@ export const updateType = {
     incr: {
         key: 'incr',
         index: 2,
+        family: updateFamilyType.number,
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
         valueType: valueType.staticVal,
@@ -125,6 +133,7 @@ export const updateType = {
     incrBy: {
         key: 'incrBy',
         index: 3,
+        family: updateFamilyType.number,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
         valueType: valueType.dynamicVal,
@@ -132,6 +141,7 @@ export const updateType = {
     decr: {
         key: 'decr',
         index: 4,
+        family: updateFamilyType.number,
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
         valueType: valueType.staticVal,
@@ -139,10 +149,27 @@ export const updateType = {
     decrBy: {
         key: 'decrBy',
         index: 5,
+        family: updateFamilyType.number,
         title: 'decrement by',
         icon: 'ion-md-download',
         valueType: valueType.dynamicVal,
     },
+    true: {
+        key: 'true',
+        index: 6,
+        family: updateFamilyType.boolean,
+        title: 'true',
+        icon: 'mdi mdi-code-tags-check',
+        valueType: valueType.staticVal,
+    },
+    false: {
+        key: 'false',
+        index: 7,
+        family: updateFamilyType.boolean,
+        title: 'false',
+        icon: 'mdi mdi-close-box-outline',
+        valueType: valueType.staticVal,
+    }
 }
 
 export const defaultLogic = {

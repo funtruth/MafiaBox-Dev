@@ -1,11 +1,12 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { navigate } from '../navigation/NavReducer'
 
 import { heights } from '../common/dim'
-import { pathToLabel, pathToSublabel, sideBarList } from '../navigation/paths'
+import { pathType } from '../navigation/paths'
 
 class SideBarView extends React.Component{
     state = {
@@ -24,18 +25,22 @@ class SideBarView extends React.Component{
         const { location } = this.props
         let path = location.pathname
         let paths = path.split('/')
-        let selected = item === paths[1]
+        let selected = item.key === paths[1]
 
         return (
-            <div key={item} className={selected ? "list-item-selected" : "list-item"} onClick={this._onClick.bind(this, item)}>
-                <div style={styles.title}>{pathToLabel[item]}</div>
-                <div style={styles.desc}>{pathToSublabel[item]}</div>
+            <div
+                key={item.key}
+                className={selected ? "list-item-selected" : "list-item"}
+                onClick={this._onClick.bind(this, item)}
+            >
+                <div style={styles.title}>{item.label}</div>
+                <div style={styles.desc}>{item.desc}</div>
             </div>
         )
     }
 
     _onClick = (item) => {
-        this.props.navigate(`/${item}`)
+        this.props.navigate(`/${item.key}`)
     }
 
     _redirect() {
@@ -51,6 +56,8 @@ class SideBarView extends React.Component{
     }
 
     render() {
+        const items = _.sortBy(pathType, i => i.index)
+
         return (
             <div className="side-bar-view">
                 {this._redirect()}
@@ -59,7 +66,7 @@ class SideBarView extends React.Component{
                 </div>
 
                 <div className="scrollable-y">
-                    {sideBarList.map(this._renderItem)}
+                    {items.map(this._renderItem)}
                 </div>
             </div>
         )

@@ -3,6 +3,7 @@ import './dropdown.css'
 import { connect } from 'react-redux'
 
 import { dropdownType } from './types'
+import { boardType } from '../board/types'
 
 import ClickMenu from './components/ClickMenu'
 import InputValue from './components/InputValue'
@@ -26,12 +27,13 @@ import PickVar from './vars/PickVar'
 import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
-import PickPhase from './update/PickPhase'
+import PickBoolean from './update/PickBoolean'
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
 import PickNews from './update/PickNews'
 import Dropdown from './components/Dropdown';
+import SearchBoard from './update/SearchBoard';
 
 class DropdownView extends React.Component{
     _renderItem = (props) => {
@@ -76,11 +78,15 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
 
             case dropdownType.pickPhase:
-                return <PickPhase {...props}/>
+                return <SearchBoard {...props} boardType={boardType.flow}/>
+            case dropdownType.pickRole:
+                return <SearchBoard {...props} boardType={boardType.roles}/>
             case dropdownType.pickUid:
                 return <PickUid {...props}/>
             case dropdownType.pickUpdate:
                 return <PickUpdate {...props}/>
+            case dropdownType.pickBoolean: 
+                return <PickBoolean {...props}/>
             case dropdownType.addUpdateField:
                 return <AddUpdateField {...props}/>
             case dropdownType.writeNews:

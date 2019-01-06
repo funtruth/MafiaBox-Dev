@@ -87,7 +87,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
     },
     code: {
         key: 'code',
@@ -175,7 +175,7 @@ export const initFieldRepo = {
                 title: 'None',
             },
         },
-        boardType: boardType.flow,
+        boardType: boardType.phases,
     },
     phaseTriggerMode: {
         key: 'phaseTriggerMode',
@@ -197,7 +197,7 @@ export const initFieldRepo = {
                 variableType: variableType.object.key,
             },
         },
-        boardType: boardType.flow,
+        boardType: boardType.phases,
     },
     phaseStrings: {
         key: 'phaseStrings',
@@ -205,7 +205,7 @@ export const initFieldRepo = {
         index: 2,
         fieldType: fieldType.strings.key,
         fieldTitle: 'Strings',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
     },
     phaseChoices: {
         key: 'phaseChoices',
@@ -213,6 +213,6 @@ export const initFieldRepo = {
         index: 3,
         fieldType: fieldType.choices.key,
         fieldTitle: 'Phase Choices',
-        boardType: boardType.flow,
+        boardType: boardType.phases,
     }
 }

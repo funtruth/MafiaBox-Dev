@@ -4,26 +4,21 @@ import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
-import { boardType } from '../../board/types'
 import { valueType } from '../../logic/types'
 
-import { showDropdownByKey, popDropdown } from '../DropdownReducer'
+import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from '../library/StoryMapLib';
 
-class BoardLib extends React.Component{
+class SearchBoard extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
             searchText: '',
             results: [],
-            showDropdown: false,
-            nextPageX: 0,
-            nextPageY: 0,
-            hoverKey: null,
         }
-        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === boardType.flow), fuseType.boardLib)
+        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === props.boardType), fuseType.boardLib)
     }
 
     _onSelect = (value) => {
@@ -40,12 +35,11 @@ class BoardLib extends React.Component{
         this.setState({
             searchText: e.target.value,
             results: this.fuse.search(e.target.value),
-            showDropdown: false,
         })
     }
 
     render() {
-        const { pageRepo, boardRepo } = this.props
+        const { pageRepo, boardRepo, boardType } = this.props
         const { searchText } = this.state
         
         return (
@@ -80,7 +74,7 @@ class BoardLib extends React.Component{
                         </div>
                     :<StoryMapLib
                         {...this.props}
-                        hoverKey={boardType.flow}
+                        hoverKey={boardType}
                         onSelect={this._onSelect}
                     />
                 }
@@ -97,8 +91,7 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        popDropdown,
+        popDropdownByKey,
         updatePageByPath,
-
     }
-)(BoardLib)
+)(SearchBoard)

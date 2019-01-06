@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { updateType, valueType } from '../../logic/types'
+import { updateType, valueType, updateFamilyType } from '../../logic/types'
 import { dropdownType } from '../types'
 
 import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
@@ -26,7 +26,6 @@ class PickUpdate extends React.Component{
     }
 
     _onMouseOut = e => {
-        console.log({target: e.target})
         this.props.popDropdownByKey(dropdownType.inputValue)
     }
 
@@ -106,7 +105,8 @@ class PickUpdate extends React.Component{
     }
 
     render() {
-        const items = _.sortBy(updateType, i => i.index)
+        let items = _.filter(updateType, i => i.family === updateFamilyType.number)
+        items = _.sortBy(items, i => i.index)
         return (
             items.map(this._renderItem)
         )

@@ -7,7 +7,7 @@ import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/modalConfig'
 import { boardType } from '../board/types'
-import { pathKey, pathToLabel } from '../navigation/paths'
+import { pathType } from '../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {
@@ -26,7 +26,7 @@ class HeaderView extends React.Component{
     }
 
     _getPathTitle(key) {
-        if (pathToLabel[key]) return pathToLabel[key]
+        if (pathType[key]) return pathType[key].label
         else return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
     }
 
@@ -44,28 +44,28 @@ class HeaderView extends React.Component{
         ]
         
         switch(paths[1]) {
-            case pathKey.library:
+            case pathType.library.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                     { key: 'editTemplate', boardType: boardType.library, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathKey.board:
+            case pathType.roles.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                     { key: 'editTemplate', boardType: boardType.roles, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathKey.flow:
+            case pathType.phases.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', boardType: boardType.flow, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.phases, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathKey.events:
+            case pathType.events.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
@@ -133,7 +133,7 @@ class HeaderView extends React.Component{
     _renderPath() {
         const { pathname } = this.props.location
         let paths = pathname.split('/')
-
+        
         return (
             <div className="row" style={{ marginRight: 'auto' }}>
                 {paths.map((item, index) => (

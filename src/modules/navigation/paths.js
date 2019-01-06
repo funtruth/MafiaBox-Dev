@@ -1,27 +1,32 @@
-export const pathKey = {
-    library: 'library',
-    board: 'board',
-    flow: 'flow',
-    events: 'events',
-    testhub: 'testhub',
+export const pathType = {
+    library: {
+        key: 'library',
+        index: 0,
+        label: 'Library',
+        desc: 'View all definitions',
+    },
+    roles: {
+        key: 'roles',
+        index: 1,
+        label: 'Roles',
+        desc: 'Organize your roles',
+    },
+    phases: {
+        key: 'phases',
+        index: 2,
+        label: 'Phases',
+        desc: 'Set up game phases',
+    },
+    events: {
+        key: 'events',
+        index: 3,
+        label: 'Events',
+        desc: 'Game event listeners',
+    },
+    testhub: {
+        key: 'testhub',
+        index: 4,
+        label: 'Testhub',
+        desc: 'Test a game phase',
+    },
 }
-
-export const pathToLabel = {
-    library: 'Library',
-    board: 'Roles',
-    flow: 'Phases',
-    events: 'Events',
-    testhub: 'Testhub',
-}
-
-export const pathToSublabel = {
-    library: 'View all definitions',
-    board: 'Organize your roles',
-    flow: 'Set up game phases',
-    events: 'Game event listeners',
-    testhub: 'Test a game phase',
-}
-
-export const sideBarList = ['library', 'board', 'flow', 'events', 'testhub']
-
-export const refMenuList = ['library', 'board', 'flow', 'events']
