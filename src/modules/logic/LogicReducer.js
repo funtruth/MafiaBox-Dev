@@ -1,4 +1,4 @@
-import { logicType, comparisonType } from './types'
+import { logicType, comparisonType, returnType } from './types'
 var beautify_js = require('js-beautify');
 
 const initialState = {}
@@ -21,16 +21,17 @@ export function getCode(key, library) {
                 codeCurrent = `${data.var1 || ''}${data['var1.adjust'] || ''}${(data.comparison && comparisonType[data.comparison].code) || ''}${data.var2 || ''}${data['var2.adjust'] || ''}`
                 break
             case logicType.return.key:
-                codeCurrent = data
+                codeCurrent = returnType[data].code
                 break
             case logicType.update.key:
                 for (var field in data) {
                     if (!data[field].value) continue
+                    //TODO needs to add another line for local changes for some, ex: lobby.uid.dead = true
                     codeCurrent = codeCurrent.concat(
                         `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                        .join('/')}\`]:${typeof data[field].value === 'string' ?
+                        .join('/')}\`]=${typeof data[field].value === 'string' ?
                             `'${data[field].value}'`
-                            :`${data[field].value}`},\n`
+                            :`${data[field].value}`}\n`
                     )
                 }
                 break
@@ -63,7 +64,7 @@ export function getCode(key, library) {
                 codeBody = `return ${codeCurrent};`
                 break
             case logicType.update.key:
-                codeBody = `database.update({${codeCurrent}});`
+                codeBody = `updates${codeCurrent};${codeRight}`
                 break
             case logicType.none.key:
             default:

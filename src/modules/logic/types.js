@@ -41,19 +41,19 @@ export const logicType = {
         icon: 'ion-md-pulse',
         color: '#3864ab',
     },
-    return: {
-        key: 'return',
-        index: 6,
-        title: 'return',
-        icon: 'ion-ios-send',
-        color: '#1e9939',
-    },
     update: {
         key: 'update',
-        index: 7,
+        index: 6,
         title: 'update',
         icon: 'mdi mdi-code-braces',
         color: '#a566b0',
+    },
+    return: {
+        key: 'return',
+        index: 7,
+        title: 'return',
+        icon: 'ion-ios-send',
+        color: '#1e9939',
     },
 }
 
@@ -209,4 +209,28 @@ export const variableType = {
         title: 'Array',
         icon: 'mdi mdi-code-brackets'
     },
+}
+
+export const returnType = {
+    true: {
+        key: 'true',
+        index: 0,
+        title: 'true',
+        icon: 'mdi mdi-code-tags-check',
+        code: 'true',
+    },
+    false: {
+        key: 'false',
+        index: 1,
+        title: 'false',
+        icon: 'mdi mdi-close-box-outline',
+        code: 'false',
+    },
+    push: {
+        key: 'push',
+        index: 2,
+        title: 'push updates',
+        icon: 'mdi mdi-firebase',
+        code: 'database.update(updates)',
+    }
 }

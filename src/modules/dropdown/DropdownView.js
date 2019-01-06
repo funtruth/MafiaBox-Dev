@@ -10,6 +10,7 @@ import InputValue from './components/InputValue'
 
 import PickOperator from './logic/PickOperator';
 import LogicDelete from './logic/LogicDelete'
+import ReturnTypes from './logic/ReturnTypes';
 
 import EditTag from './template/EditTag'
 import AddTag from './template/AddTag'
@@ -47,6 +48,8 @@ class DropdownView extends React.Component{
                 return <PickOperator {...props}/>
             case dropdownType.deleteLogic:
                 return <LogicDelete {...props}/>
+            case dropdownType.returnTypes:
+                return <ReturnTypes {...props}/>
 
             case dropdownType.showLibrary:
                 return <BoardLib {...props}/>

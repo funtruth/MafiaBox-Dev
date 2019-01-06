@@ -16,8 +16,7 @@ class LogicRightArrow extends React.Component{
     render() {
         const { logicInfo } = this.props
 
-        const hide = logicInfo.logicType === logicType.return.key ||
-            logicInfo.logicType === logicType.update.key
+        const hide = logicInfo.logicType === logicType.return.key
         if (hide) return null
 
         return (

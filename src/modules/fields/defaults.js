@@ -119,6 +119,23 @@ export const initFieldRepo = {
         index: 1,
         fieldType: fieldType.tag.key,
         fieldTitle: 'Role Team',
+        data: {
+            town: {
+                key: 'town',
+                index: 0,
+                title: 'Town',
+            },
+            mafia: {
+                key: 'mafia',
+                index: 1,
+                title: 'Mafia',
+            },
+            neutral: {
+                key: 'neutral',
+                index: 2,
+                title: 'Neutral',
+            },
+        },
         boardType: boardType.roles,
     },
     roleCharges: {

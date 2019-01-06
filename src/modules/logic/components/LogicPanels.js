@@ -113,6 +113,23 @@ class LogicPanels extends React.Component{
                         </div>
                     </div>
                 )
+            case logicType.return.key:
+                return (
+                    <div
+                        className="logic-button menu-onclick"
+                        menu-type={dropdownType.returnTypes}
+                        field-key={field}
+                        index-key={item}
+                        page-key={pageKey}
+                        current-value={data}
+                        style={{
+                            color: '#fff',
+                            borderRadius: '0px 4px 4px 0px',
+                        }}
+                    >
+                        {data}
+                    </div>
+                )
             default:
                 return (
                     <div
