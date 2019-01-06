@@ -40,6 +40,10 @@ const initialState = {
             action: 'Select',
         },
         'lobby.$.health': {
+            dropdown: dropdownType.pickUid,
+            action: 'Add',
+        },
+        'lobby.$.health.$': {
             dropdown: dropdownType.pickUpdate,
             action: 'Select',
         },

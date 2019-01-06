@@ -27,7 +27,7 @@ class LogicBoard extends React.Component{
         //gather all keys that are parents, set index to the first parent
         //TODO show variables in chronological order for dropdown PickVar
         const parents = _.pickBy(value, (i, key) => !children[key])
-        const code = this.props.getCode(Object.keys(parents)[0], value)
+        const code = this.props.getCode(fieldInfo, Object.keys(parents)[0], value)
 
         if (!value) return null
         
