@@ -7,7 +7,7 @@ import { fuseType } from '../types'
 import { boardType } from '../../board/types'
 import { valueType } from '../../logic/types'
 
-import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
+import { showDropdownByKey, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from '../library/StoryMapLib';
@@ -97,7 +97,7 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        popHighestDropdown,
+        popDropdown,
         updatePageByPath,
 
     }

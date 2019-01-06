@@ -2,8 +2,7 @@ const initialState = {
     dropdownKeys: [],
 }
 
-const SHOW_DROPDOWN_BY_KEY = 'dropdown/show-dropdown-by-key'
-const POP_HIGHEST_DROPDOWN = 'dropdown/pop-highest-dropdown'
+const UPDATE_KEYS = 'dropdown/update-keys'
 
 export function showDropdownByKey(key, e, params={}) {
     return (dispatch, getState) => {
@@ -11,7 +10,7 @@ export function showDropdownByKey(key, e, params={}) {
 
         if (!key) {
             dispatch({
-                type: SHOW_DROPDOWN_BY_KEY,
+                type: UPDATE_KEYS,
                 payload: [],
             })
         } else {
@@ -43,14 +42,14 @@ export function showDropdownByKey(key, e, params={}) {
             }
 
             dispatch({
-                type: SHOW_DROPDOWN_BY_KEY,
+                type: UPDATE_KEYS,
                 payload: keysClone,
             })
         }  
     }
 }
 
-export function popHighestDropdown() {
+export function popDropdown() {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 
@@ -58,16 +57,37 @@ export function popHighestDropdown() {
         keys.pop()
 
         dispatch({
-            type: POP_HIGHEST_DROPDOWN,
+            type: UPDATE_KEYS,
             payload: keys
         })
     }
 }
 
+export function popDropdownByKey(key) {
+    return (dispatch, getState) => {
+        const { dropdownKeys } = getState().dropdown
+
+        if (key) {
+            let keysClone = Array.from(dropdownKeys)
+
+            for (var i=0; i<keysClone.length; i++) {
+                if (keysClone[i].key === key) {
+                    keysClone = keysClone.slice(0, i)
+                    break
+                }
+            }
+
+            dispatch({
+                type: UPDATE_KEYS,
+                payload: keysClone,
+            })
+        }  
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
-        case SHOW_DROPDOWN_BY_KEY:
-        case POP_HIGHEST_DROPDOWN:
+        case UPDATE_KEYS:
             return { ...state, dropdownKeys: action.payload }
         default:
             return state;

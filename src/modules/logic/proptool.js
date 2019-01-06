@@ -10,7 +10,7 @@ export function getSubfields(prefix, library) {
         let match = true
 
         for (var i=0; i<parts.length; i++) {
-            if (newParts[i] !== parts[i]) {
+            if (newParts[i] !== parts[i] && newParts[i] !== '$') {
                 match = false
                 break
             }

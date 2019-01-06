@@ -37,7 +37,6 @@ class InputValue extends React.Component{
 
     render() {
         const { type, inputText } = this.props
-        console.log(this.props)
 
         return (
             <div>

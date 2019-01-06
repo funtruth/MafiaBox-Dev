@@ -15,7 +15,7 @@ class LogicArgs extends React.Component{
                 {Object.keys(vars).map((item, index) => (
                     <div
                         key={index}
-                        className="logic-new-var"
+                        className="logic-new-var --var"
                         style={{
                             marginTop: 2,
                         }}

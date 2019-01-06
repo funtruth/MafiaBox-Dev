@@ -30,7 +30,6 @@ class LogicExpandable extends React.Component{
         const isVarField = property.charAt(0) === '$'
 
         const config = proptool.getUpdateConfig(prefix, updateRefs)
-        console.log({prefix, config})
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
@@ -42,7 +41,7 @@ class LogicExpandable extends React.Component{
                         className="mdi mdi-plus-box common-bubble"
                         style={{ opacity: 0 }}
                     />}
-                    <div className="common-bubble --grey27" onClick={this._toggle}>
+                    <div className={`common-bubble ${isVarField?'--var':'--grey27'}`} onClick={this._toggle}>
                         {isVarField ? property.substring(1) : property}
                     </div>
                     <UpdateButton {...this.props} config={config}/>

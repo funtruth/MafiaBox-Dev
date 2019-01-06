@@ -28,7 +28,7 @@ const initialState = {
         },
         'lobby': {
             dropdown: dropdownType.pickUid,
-            action: 'Select',
+            action: 'Add',
         },
         'lobby.$': {
             dropdown: dropdownType.addUpdateField,

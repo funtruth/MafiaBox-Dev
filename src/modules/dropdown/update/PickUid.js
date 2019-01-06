@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { variableType, valueType } from '../../logic/types'
+import { variableType } from '../../logic/types'
 
 import { showDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
-import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
@@ -40,19 +39,8 @@ class PickUid extends React.Component{
     _select = (item) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.$${item.key}`, 'valueType', valueType.uid)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.$${item.key}`, 'value', '')
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'expand', true)
-        this.props.showDropdownByKey()
-    }
-
-    _onClear = () => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-            expand: false,
-            value: null,
-            valueType: valueType.uid,
-        })
         this.props.showDropdownByKey()
     }
 
@@ -64,11 +52,6 @@ class PickUid extends React.Component{
             uids.length ?
                 <div>
                     {uids.map(this._renderItem)}
-                    <div className="drop-down-menu-separator"/>
-                    <div className="drop-down-menu-option" onClick={this._onClear}>
-                        <i className={`drop-down-menu-icon mdi mdi-null`}></i>
-                        Null
-                    </div>
                 </div>
                 :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                     There are no Unique IDs
@@ -82,7 +65,5 @@ export default connect(
     {
         updatePageByPath,
         showDropdownByKey,
-        addItemBelowOf,
-        deleteItem,
     }
 )(PickUid)

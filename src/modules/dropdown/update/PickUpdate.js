@@ -5,14 +5,14 @@ import _ from 'lodash'
 import { updateType, valueType } from '../../logic/types'
 import { dropdownType } from '../types'
 
-import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
+import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
     _onMouseOver = (item, e) => {
         const { hoverKey, currentValue, attach } = this.props
         if (item.key === hoverKey) return
-        console.log(this.props)
+        
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
         this.props.showDropdownByKey(dropdownType.inputValue, e, {
@@ -20,9 +20,14 @@ class PickUpdate extends React.Component{
             inputText: 'Enter a number',
             type: 'number',
             showValue: selected,
-            attach: '',
+            attach,
             onSubmit: this._selectDynamic.bind(this, item)
         })
+    }
+
+    _onMouseOut = e => {
+        console.log({target: e.target})
+        this.props.popDropdownByKey(dropdownType.inputValue)
     }
 
     _select = (item) => {
@@ -81,6 +86,7 @@ class PickUpdate extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 onClick={this._select.bind(this, item)}
+                onMouseOver={this._onMouseOut}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6'
                 }}
@@ -112,6 +118,6 @@ export default connect(
     {
         updatePageByPath,
         showDropdownByKey,
-        popHighestDropdown,
+        popDropdownByKey,
     }
 )(PickUpdate)

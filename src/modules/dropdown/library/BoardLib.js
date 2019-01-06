@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { showDropdownByKey, popHighestDropdown } from '../DropdownReducer'
+import { showDropdownByKey, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class BoardLib extends React.Component{
@@ -107,7 +107,7 @@ export default connect(
     }),
     {
         showDropdownByKey,
-        popHighestDropdown,
+        popDropdown,
         updatePageByPath,
     }
 )(BoardLib)
