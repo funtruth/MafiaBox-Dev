@@ -18,16 +18,21 @@ class SearchBoard extends React.Component{
             searchText: '',
             results: [],
         }
-        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === props.boardType), fuseType.boardLib)
+        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === props.boardType), fuseType.searchBoard)
     }
 
     _onSelect = (value) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-            value,
-            valueType: valueType.page,
-        })
+        if (subfieldKey) {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+                value,
+                valueType: valueType.page,
+            })
+        } else {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', value)
+        }
+            
         this.props.showDropdownByKey()
     }
 

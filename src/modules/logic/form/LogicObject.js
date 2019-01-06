@@ -8,7 +8,7 @@ import LogicExpandable from './LogicExpandable';
 class LogicObject extends React.Component{
     render() {
         const { logicInfo, updateRefs } = this.props
-        console.log(logicInfo)
+        
         const showForm = logicInfo.logicType === logicType.update.key
         if (!showForm) return null
 

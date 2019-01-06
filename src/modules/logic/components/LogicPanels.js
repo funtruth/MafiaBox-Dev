@@ -11,6 +11,8 @@ class LogicPanels extends React.Component{
         const { item, field, logicInfo, pageInfo, pageRepo, vars } = this.props
         const { pageKey } = pageInfo
         const { data } = logicInfo
+        
+        const hasPage = pageRepo[data]
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
@@ -89,8 +91,29 @@ class LogicPanels extends React.Component{
                         </div>
                     </div>
                 )
+            case logicType.function.key:
+                return (
+                    <div
+                        className="logic-button menu-onclick"
+                        menu-type={dropdownType.pickLibrary}
+                        field-key={field}
+                        index-key={item}
+                        page-key={pageKey}
+                        current-value={data}
+                        style={{
+                            color: hasPage ? '#fff' : '#868686',
+                            borderRadius: '0px 4px 4px 0px',
+                        }}
+                    >
+                        <div className="text-ellipsis">
+                            {hasPage ? 
+                                pageRepo[data].title
+                                :'Empty'
+                            }
+                        </div>
+                    </div>
+                )
             default:
-                const hasPage = pageRepo[data]
                 return (
                     <div
                         className="logic-button menu-onclick"

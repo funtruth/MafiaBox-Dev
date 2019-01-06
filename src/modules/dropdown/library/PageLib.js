@@ -28,7 +28,7 @@ class PageLib extends React.Component{
                         className="drop-down-menu-option"
                         onClick={this._onClick.bind(this, item)}
                     >
-                        {pageRepo[item.pageKey].title}
+                        {pageRepo[item.pageKey].title || 'Untitled'}
                     </div>
                 )
             })

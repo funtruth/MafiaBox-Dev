@@ -41,7 +41,6 @@ class StringMaker extends React.Component{
 
         const target = this.state.target || Object.keys(value || {}).length
 
-        console.log({pageKey, fieldKey})
         this.props.updatePageByPath(pageKey, fieldKey, target, 'value', this.state.value)
 
         this.setState({

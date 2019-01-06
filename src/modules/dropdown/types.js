@@ -29,10 +29,11 @@ export const dropdownType = {
     writeNews: 'dropdownType/write-news',
     pickBoolean: 'dropdownType/pick-boolean',
     pickRole: 'dropdownType/pick-role',
+    pickLibrary: 'dropdownType/pick-library',
 }
 
 export const fuseType = {
-    boardLib: {
+    searchBoard: {
         shouldSort: true,
         threshold: 0.5,
         location: 0,

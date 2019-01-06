@@ -49,6 +49,7 @@ class PickNews extends React.Component{
         
         const stringKeys = _.filter(Object.keys(pageRepo[pageKey]),
             i => fieldRepo[i] && fieldRepo[i].fieldType === fieldType.strings.key)
+            
         let stringArr = []
         stringKeys.map(i => stringArr = stringArr.concat(_.toArray(pageRepo[pageKey][i])))
         

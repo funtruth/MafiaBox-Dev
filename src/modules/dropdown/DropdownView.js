@@ -81,6 +81,8 @@ class DropdownView extends React.Component{
                 return <SearchBoard {...props} boardType={boardType.flow}/>
             case dropdownType.pickRole:
                 return <SearchBoard {...props} boardType={boardType.roles}/>
+            case dropdownType.pickLibrary:
+                return <SearchBoard {...props} boardType={boardType.library}/>
             case dropdownType.pickUid:
                 return <PickUid {...props}/>
             case dropdownType.pickUpdate:

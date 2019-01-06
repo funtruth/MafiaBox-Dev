@@ -15,7 +15,7 @@ class BoardLib extends React.Component{
             searchText: '',
             results: [],
         }
-        this.fuse = new Fuse(_.toArray(props.pageRepo), fuseType.boardLib)
+        this.fuse = new Fuse(_.toArray(props.pageRepo), fuseType.searchBoard)
     }
 
     _onSelect = (key) => {
