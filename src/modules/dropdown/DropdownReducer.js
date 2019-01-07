@@ -21,7 +21,7 @@ export function showDropdown(key, e, params={}) {
 
             if (params.forcedKey) {
                 for (var i=0; i<keysClone.length; i++) {
-                    if (keysClone[i].key === key) {
+                    if (keysClone[i].forcedKey === params.forcedKey) {
                         keysClone = keysClone.slice(0, i)
                         break
                     }
@@ -61,7 +61,8 @@ export function popDropdown(key) {
         if (key) {
             let keysClone = Array.from(dropdownKeys)
 
-            for (var i=0; i<keysClone.length; i++) {
+            //starts from the highest dropdown, will not work with 3 dropdowns of SAME KEY
+            for (var i=keysClone.length - 1; i>=0; i--) {
                 if (keysClone[i].key === key) {
                     keysClone = keysClone.slice(0, i)
                     break

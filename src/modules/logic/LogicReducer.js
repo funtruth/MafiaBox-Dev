@@ -34,7 +34,6 @@ function recursive(key, library) {
             for (var field in data) {
                 if (!data[field].value) continue
                 
-                //TODO needs to add another line for local changes for some, ex: lobby.uid.dead = true
                 codeCurrent = codeCurrent.concat(
                     `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=${typeof data[field].value === 'string' ?
@@ -45,7 +44,15 @@ function recursive(key, library) {
                 )
             }
             break
-        case logicType.none.key:
+        case logicType.transient.key:
+            for (var field1 in data) {
+                if (!data[field1].value) continue
+
+                codeCurrent = codeCurrent.concat(
+                    `${field1}=${data[field1].value}\n`
+                )
+            }
+            break
         case logicType.else.key:
         case logicType.function.key:
         default:
@@ -76,7 +83,9 @@ function recursive(key, library) {
         case logicType.update.key:
             codeBody = `updates${codeCurrent};${codeRight}`
             break
-        case logicType.none.key:
+        case logicType.transient.key:
+            codeBody = `${codeCurrent};${codeRight};`
+            break
         default:
             codeBody = ''
     }

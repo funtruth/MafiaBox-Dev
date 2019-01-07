@@ -39,6 +39,7 @@ const initialState = {
             dropdown: dropdownType.pickUid,
             action: 'Add',
             updatable: true,
+            transient: true,
             variableType: variableType.object.key,
         },
         'lobby.$': {
@@ -55,6 +56,7 @@ const initialState = {
             dropdown: dropdownType.pickUpdate,
             action: 'Select',
             updatable: true,
+            transient: true,
             variableType: variableType.object.key,
         },
         'events': {
@@ -94,6 +96,11 @@ const initialState = {
             dropdown: dropdownType.pickRole,
             action: 'Select',
             variableType: variableType.string.key,
+        },
+        'role.suspicious': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            variableType: variableType.boolean.key,
         },
         'health': {
             dropdown: dropdownType.pickUid,

@@ -1,11 +1,4 @@
 export const logicType = {
-    none: {
-        key: 'none',
-        index: 0,
-        title: 'none',
-        icon: 'ion-md-create',
-        color: '#767676',
-    },
     if: {
         key: 'if',
         index: 1,
@@ -47,6 +40,13 @@ export const logicType = {
         title: 'update',
         icon: 'mdi mdi-code-braces',
         color: '#a566b0',
+    },
+    transient: {
+        key: 'transient',
+        index: 7,
+        title: 'transient',
+        icon: 'mdi mdi-timeline-text',
+        color: '#eF9000',
     },
     return: {
         key: 'return',
@@ -182,7 +182,7 @@ export const updateType = {
 
 export const defaultLogic = {
     START: {
-        logicType: logicType.none.key,
+        logicType: '',
     }
 }
 

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
-import { variableType } from '../../logic/types'
 
 import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
@@ -20,25 +19,26 @@ class PickVarProp extends React.Component{
     }
 
     _onShowProps = (item, e) => {
-        const { prefix } = this.props
+        const { prefix, forcedKey } = this.props
         
         this.props.showDropdown(dropdownType.pickVarProp, e, {
             prefix: `${prefix}.${item}`,
-            forcedKey: dropdownType.pickVarProp,
+            forcedKey: (forcedKey || 0) + 1,
         })
     }
     
     _onMouseOut = (dropdownType, e) => {
-        //if NOT leaving from right side
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
             this.props.popDropdown(dropdownType)
         }
     }
 
     _renderItem = (item) => {
-        const { currentValue, prefix } = this.props
+        const { currentValue, prefix, updateRef } = this.props
         const selected = typeof currentValue === 'string' && currentValue === `${prefix}.${item}`
-        const isObject = item.variableType === variableType.object.key
+        
+        const vars = proptool.getSubfields(`${prefix}.${item}`, updateRef)
+        const isObject = vars.length > 0
         
         return (
             <div
@@ -74,7 +74,6 @@ class PickVarProp extends React.Component{
         const { updateRef, prefix } = this.props
         const vars = proptool.getSubfields(prefix, updateRef)
         
-        //TODO i don't like this as an array
         let menuStyle = {
             maxHeight: 200,
             overflow: 'auto',
