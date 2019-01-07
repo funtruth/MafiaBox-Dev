@@ -41,8 +41,7 @@ class PickOperator extends React.Component{
     _select = (newValue) => {
         const { pageKey, fieldKey, indexKey, pageRepo } = this.props
         
-        let valueClone = {}
-        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
+        let valueClone = Object.assign({}, pageRepo[pageKey][fieldKey])
 
         valueClone[indexKey].logicType = newValue
         switch(newValue) {

@@ -15,8 +15,8 @@ class AddUpdateField extends React.Component{
     }
 
     render() {
-        const { subfieldKey, updateRefs } = this.props
-        const items = proptool.getSubfields(subfieldKey, updateRefs)
+        const { subfieldKey, updateRef } = this.props
+        const items = proptool.getSubfields(subfieldKey, updateRef)
 
         return (
             items.map(item => {
@@ -39,7 +39,8 @@ class AddUpdateField extends React.Component{
 
 export default connect(
     state => ({
-        updateRefs: state.template.updateRefs,
+        updateRef: proptool.addPlayerRef(state.template),
+        playerRef: state.template.playerRef,
     }),
     {
         updatePageByPath,

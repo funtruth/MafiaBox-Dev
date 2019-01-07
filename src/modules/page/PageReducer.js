@@ -31,8 +31,7 @@ export function addStory(title, boardType) {
             storyKey = helpers.genUID('story')
         }
 
-        let storyMapClone = {}
-        Object.assign(storyMapClone, storyMap)
+        let storyMapClone = Object.assign({}, storyMap)
         storyMapClone[storyKey] = {
             key: storyKey,
             title,
@@ -90,8 +89,7 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
-        let pageRepoClone = {}
-        Object.assign(pageRepoClone, pageRepo)
+        let pageRepoClone = Object.assign({}, pageRepo)
 
         let relatedPages = _.filter(pageRepo, i => i.storyType === mapKey)
         relatedPages = _.sortBy(relatedPages, i => i.index)
@@ -114,8 +112,7 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
 
-        let pageRepoClone = {}
-        Object.assign(pageRepoClone, pageRepo)
+        let pageRepoClone = Object.assign({}, pageRepo)
 
         let startPages = _.filter(pageRepo, i => i.storyType === startMapKey)
         startPages = _.sortBy(startPages, i => i.index)
@@ -152,9 +149,8 @@ export function addPageToRepo(obj) {
 export function removePage(pageKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        let pageRepoClone = {}
         
-        Object.assign(pageRepoClone, pageRepo)
+        let pageRepoClone = Object.assign({}, pageRepo)
         delete pageRepoClone[pageKey]
 
         dispatch({

@@ -26,8 +26,7 @@ class PropertyField extends React.Component{
         const { fieldKey, value, pageInfo } = this.props
         const { pageKey } = pageInfo
 
-        let dataClone = {}
-        Object.assign(dataClone, value)
+        let dataClone = Object.assign({}, value)
         dataClone[tagKey] = !dataClone[tagKey]
 
         this.props.updatePageByPath(pageKey, fieldKey, dataClone)

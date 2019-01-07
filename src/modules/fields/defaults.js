@@ -155,11 +155,11 @@ export const initFieldRepo = {
         vars: {
             user: {
                 key: 'user',
-                variableType: variableType.uid.key,
+                variableType: variableType.object.key,
             },
             target: {
                 key: 'target',
-                variableType: variableType.uid.key,
+                variableType: variableType.object.key,
             },
         },
         boardType: boardType.roles,

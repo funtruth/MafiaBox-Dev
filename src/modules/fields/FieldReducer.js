@@ -26,8 +26,7 @@ export function addField(boardType, text) {
         //get index of new field, equal to length of existing fields
         const index = _.filter(fieldRepo, i => i.boardType === boardType).length
         
-        let fieldRepoClone = {}
-        Object.assign(fieldRepoClone, fieldRepo)
+        let fieldRepoClone = Object.assign({}, fieldRepo)
 
         let newItemKey = helpers.genUID('field')
         while(fieldRepo[newItemKey]) {
@@ -136,8 +135,7 @@ export function addTag(fieldKey, text) {
         const { fieldRepo } = getState().field
 
         //clone data field for tags
-        let dataClone = {}
-        Object.assign(dataClone, fieldRepo[fieldKey].data)
+        let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
 
         //calculate new item index
         const index = Object.keys(dataClone).length
@@ -162,8 +160,7 @@ export function deleteTag(fieldKey, tagKey) {
         const { fieldRepo } = getState().field
 
         //clone tags data and delete tag
-        let dataClone = {}
-        Object.assign(dataClone, fieldRepo[fieldKey].data)
+        let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
         delete dataClone[tagKey]
 
         //re-index
@@ -178,8 +175,7 @@ export function moveTagWithinField(fieldKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { fieldRepo } = getState().field
         
-        let dataClone = {}
-        Object.assign(dataClone, fieldRepo[fieldKey].data)
+        let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
 
         //relocate tag
         let dataSorted = _.sortBy(dataClone, i => i.index)
@@ -198,8 +194,7 @@ export function moveTagToOtherField(startFieldKey, endFieldKey, startIndex, endI
     return (dispatch, getState) => {
         const { fieldRepo } = getState().field
 
-        let fieldRepoClone = {}
-        Object.assign(fieldRepoClone, fieldRepo)
+        let fieldRepoClone = Object.assign({}, fieldRepo)
 
         let startFieldData = Array.from(fieldRepoClone[startFieldKey].data)
         let endFieldData = Array.from(fieldRepoClone[endFieldKey].data)
@@ -342,8 +337,8 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
 export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        let valueClone = {}
-        Object.assign(valueClone, pageRepo[pageKey][fieldKey])
+        
+        let valueClone = Object.assign({}, pageRepo[pageKey][fieldKey])
         
         //make array of all rows
         let rows = [origin]

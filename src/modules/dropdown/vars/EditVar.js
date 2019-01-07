@@ -17,8 +17,7 @@ class EditVar extends React.Component{
 
         if (tagKey === this.state.value) return this.props.showDropdown()
 
-        let varsClone = {}
-        Object.assign(varsClone, pageRepo[pageKey].vars)
+        let varsClone = Object.assign({}, pageRepo[pageKey].vars)
 
         varsClone[this.state.value] = {
             ...varsClone[tagKey],
@@ -33,8 +32,7 @@ class EditVar extends React.Component{
     _onDelete = () => {
         const { pageRepo, pageKey, fieldKey } = this.props
 
-        let varsClone = {}
-        Object.assign(varsClone, pageRepo[pageKey].vars)
+        let varsClone = Object.assign({}, pageRepo[pageKey].vars)
         delete varsClone[this.state.value]
 
         this.props.updatePage(pageKey, fieldKey, varsClone)

@@ -71,8 +71,8 @@ class PickVarProp extends React.Component{
     }
     
     render() {
-        const { updateRefs, prefix } = this.props
-        const vars = proptool.getSubfields(prefix, updateRefs)
+        const { updateRef, prefix } = this.props
+        const vars = proptool.getSubfields(prefix, updateRef)
         
         //TODO i don't like this as an array
         let menuStyle = {
@@ -95,7 +95,7 @@ class PickVarProp extends React.Component{
 
 export default connect(
     state => ({
-        updateRefs: state.template.updateRefs,
+        updateRef: proptool.addPlayerRef(state.template),
     }),
     {
         updatePageByPath,

@@ -2,10 +2,11 @@ import { dropdownType } from '../dropdown/types'
 import { variableType } from '../logic/types'
 
 const initialState = {
-    updateRefs: {
+    updateRef: {
         'gameState': {
             dropdown: dropdownType.addUpdateField,
             action: 'Add',
+            updatable: true,
             variableType: variableType.object.key,
         },
         'gameState.phase': {
@@ -37,6 +38,7 @@ const initialState = {
         'lobby': {
             dropdown: dropdownType.pickUid,
             action: 'Add',
+            updatable: true,
             variableType: variableType.object.key,
         },
         'lobby.$': {
@@ -44,40 +46,69 @@ const initialState = {
             action: 'Add',
             variableType: variableType.uid.key,
         },
-        'lobby.$.role': {
+        'lobby.$.$player': {
             dropdown: dropdownType.addUpdateField,
             action: 'Add',
-            variableType: variableType.object.key,
-        },
-        'lobby.$.role.roleId': {
-            dropdown: dropdownType.pickRole,
-            action: 'Select',
-            variableType: variableType.string.key,
-        },
-        'lobby.$.health': {
-            dropdown: dropdownType.pickUid,
-            action: 'Add',
-            variableType: variableType.object.key,
-        },
-        'lobby.$.health.$': {
-            dropdown: dropdownType.pickUpdate,
-            action: 'Select',
             variableType: variableType.uid.key,
-        },
-        'lobby.$.dead': {
-            dropdown: dropdownType.pickBoolean,
-            action: 'Select',
-            variableType: variableType.boolean,
         },
         'choices': {
             dropdown: dropdownType.pickUpdate,
             action: 'Select',
+            updatable: true,
             variableType: variableType.object.key,
         },
         'events': {
             dropdown: dropdownType.writeNews,
             action: 'Add',
+            updatable: true,
             variableType: variableType.object.key,
+        },
+        'user': {
+            dropdown: dropdownType.addUpdateField,
+            action: 'Add',
+            variableType: variableType.uid.key,
+        },
+        'user.$player': {
+            dropdown: dropdownType.addUpdateField,
+            action: 'Add',
+            variableType: variableType.uid.key,
+        },
+        'target': {
+            dropdown: dropdownType.addUpdateField,
+            action: 'Add',
+            variableType: variableType.uid.key,
+        },
+        'target.$player': {
+            dropdown: dropdownType.addUpdateField,
+            action: 'Add',
+            variableType: variableType.uid.key,
+        },
+    },
+    playerRef: {
+        'role': {
+            dropdown: dropdownType.addUpdateField,
+            action: 'Add',
+            variableType: variableType.object.key,
+        },
+        'role.roleId': {
+            dropdown: dropdownType.pickRole,
+            action: 'Select',
+            variableType: variableType.string.key,
+        },
+        'health': {
+            dropdown: dropdownType.pickUid,
+            action: 'Add',
+            variableType: variableType.object.key,
+        },
+        'health.$': {
+            dropdown: dropdownType.pickUpdate,
+            action: 'Select',
+            variableType: variableType.uid.key,
+        },
+        'dead': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            variableType: variableType.boolean,
         },
     }
 }

@@ -20,11 +20,15 @@ class LogicRightArrow extends React.Component{
         if (hide) return null
 
         return (
-            <i
-                className="ion-ios-fastforward logic-button-right"
+            <div
+                className="logic-button-right"
                 data-tip="Add another operator"
                 onClick={this._onClick}
-            />
+            >
+                <i
+                    className="ion-ios-fastforward"
+                />
+            </div>
         )
     }
 }

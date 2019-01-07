@@ -28,7 +28,7 @@ function recursive(key, library) {
             codeCurrent = `${data.var1 || ''}${data['var1.adjust'] || ''}${(data.comparison && comparisonType[data.comparison].code) || ''}${data.var2 || ''}${data['var2.adjust'] || ''}`
             break
         case logicType.return.key:
-            codeCurrent = returnType[data].code
+            codeCurrent = returnType[data] ? returnType[data].code : ''
             break
         case logicType.update.key:
             for (var field in data) {
