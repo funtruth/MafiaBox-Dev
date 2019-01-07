@@ -5,34 +5,57 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
-    _onSelect = (value) => {
+    _onSelect = (item) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey]: value,
-            [subfieldKey + ".adjust"]: null
+            [subfieldKey]: item.key,
+            [`${subfieldKey}.adjust`]: null
         })
         this.props.showDropdownByKey()
+    }
+
+    _onShowProps = (item, e) => {
+        this.props.showDropdownByKey(dropdownType.pickVarProp, e, {
+            prefix: item.key,
+            forcedKey: dropdownType.pickVar,
+        })
+    }
+    
+    _onMouseOut = (dropdownType, e) => {
+        //if NOT leaving from right side
+        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
+            this.props.popDropdownByKey(dropdownType)
+        }
     }
 
     _renderItem = (item) => {
         const { currentValue } = this.props
         const selected = typeof currentValue === 'string' && currentValue === item.key
-        
+        const isObject = item.variableType === variableType.object.key
+
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
-                onClick={this._onSelect.bind(this, item.key)}
+                onClick={isObject ? undefined : this._onSelect.bind(this, item)}
+                onMouseOver={isObject && this._onShowProps.bind(this, item)}
+                onMouseOut={isObject && this._onMouseOut.bind(this, dropdownType.pickVarProp)}
                 style={{
-                    color: selected ? '#fff' : '#b6b6b6'
+                    color: selected ? '#fff' : '#b6b6b6',
                 }}
             >
                 {item.key}
+                {isObject && <i
+                    className="ion-ios-play"
+                    style={{
+                        marginLeft: 'auto',
+                    }}
+                />}
                 {selected && <i
                     className="ion-md-checkmark"
                     style={{
@@ -50,7 +73,8 @@ class PickVar extends React.Component{
             inputText: 'Enter a number',
             type: 'number',
             showValue: true,
-            onSubmit: this._setConstant
+            onSubmit: this._setConstant,
+            forcedKey: dropdownType.pickVar,
         })
     }
 
@@ -58,20 +82,24 @@ class PickVar extends React.Component{
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey + ".adjust"]: value,
             [subfieldKey]: null,
+            [`${subfieldKey}.adjust`]: value,
         })
         this.props.showDropdownByKey()
     }
 
     _onAdjust = (show, e) => {
-        if (!show) return
-        this.props.showDropdownByKey(dropdownType.inputValue, e, {
-            inputText: 'Enter a number',
-            type: 'number',
-            showValue: true,
-            onSubmit: this._setAdjustment
-        })
+        if (!show) {
+            this.props.popDropdownByKey(dropdownType.inputValue)
+        } else {
+            this.props.showDropdownByKey(dropdownType.inputValue, e, {
+                inputText: 'Enter a number',
+                type: 'number',
+                showValue: true,
+                onSubmit: this._setAdjustment,
+                forcedKey: dropdownType.pickVar,
+            })
+        }
     }
 
     _setAdjustment = (value) => {
@@ -104,6 +132,7 @@ class PickVar extends React.Component{
                 <div
                     className="drop-down-menu-option"
                     onMouseOver={this._onConstant}
+                    onMouseOut={this._onMouseOut.bind(this, dropdownType.inputValue)}
                 >
                     <i className={`drop-down-menu-icon mdi mdi-alpha-c-box`}></i>
                     Constant
@@ -125,5 +154,6 @@ export default connect(
     {
         updatePageByPath,
         showDropdownByKey,
+        popDropdownByKey,
     }
 )(PickVar)

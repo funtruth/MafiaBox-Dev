@@ -1,4 +1,4 @@
-import { logicType, comparisonType, returnType } from './types'
+import { logicType, comparisonType, returnType, updateType } from './types'
 var beautify_js = require('js-beautify');
 
 const initialState = {}
@@ -33,11 +33,14 @@ function recursive(key, library) {
         case logicType.update.key:
             for (var field in data) {
                 if (!data[field].value) continue
+                
                 //TODO needs to add another line for local changes for some, ex: lobby.uid.dead = true
                 codeCurrent = codeCurrent.concat(
                     `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=${typeof data[field].value === 'string' ?
-                        `'${data[field].value}'`
+                        updateType[data[field].value] ?
+                            updateType[data[field].value].code(data, field)
+                            :`'${data[field].value}'`
                         :`${data[field].value}`}\n`
                 )
             }

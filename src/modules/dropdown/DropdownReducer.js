@@ -1,9 +1,14 @@
+import _ from 'lodash'
+
 const initialState = {
     dropdownKeys: [],
 }
 
 const UPDATE_KEYS = 'dropdown/update-keys'
 
+/* CONFIG PASSED AS PARAMS
+    forcedKey: removes any other dropdowns that have the same forcedKey
+*/
 export function showDropdownByKey(key, e, params={}) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
@@ -21,6 +26,10 @@ export function showDropdownByKey(key, e, params={}) {
                     keysClone = keysClone.slice(0, i)
                     break
                 }
+            }
+
+            if (params.forcedKey) {
+                keysClone = _.filter(keysClone, i => params.forcedKey !== i.forcedKey)
             }
 
             if (keysClone.length) {

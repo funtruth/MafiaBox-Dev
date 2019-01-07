@@ -112,6 +112,7 @@ export const updateType = {
         label: 'null',
         icon: 'mdi mdi-swap-horizontal-bold',
         valueType: valueType.staticVal,
+        code: () => 'null',
     },
     setTo: {
         key: 'setTo',
@@ -121,6 +122,7 @@ export const updateType = {
         label: 'set to value',
         icon: 'mdi mdi-numeric',
         valueType: valueType.dynamicVal,
+        code: (data, field) => `${data[field].dynamic}`,
     },
     incr: {
         key: 'incr',
@@ -129,6 +131,7 @@ export const updateType = {
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
         valueType: valueType.staticVal,
+        code: (data, field) => `${field} + 1`,
     },
     incrBy: {
         key: 'incrBy',
@@ -137,6 +140,7 @@ export const updateType = {
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
         valueType: valueType.dynamicVal,
+        code: (data, field) => `${field} + ${data[field].dynamic}`,
     },
     decr: {
         key: 'decr',
@@ -145,6 +149,7 @@ export const updateType = {
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
         valueType: valueType.staticVal,
+        code: (data, field) => `${field} - 1`,
     },
     decrBy: {
         key: 'decrBy',
@@ -153,6 +158,7 @@ export const updateType = {
         title: 'decrement by',
         icon: 'ion-md-download',
         valueType: valueType.dynamicVal,
+        code: (data, field) => `${field} - ${data[field].dynamic}`,
     },
     true: {
         key: 'true',
@@ -161,6 +167,7 @@ export const updateType = {
         title: 'true',
         icon: 'mdi mdi-code-tags-check',
         valueType: valueType.staticVal,
+        code: () => 'true',
     },
     false: {
         key: 'false',
@@ -169,6 +176,7 @@ export const updateType = {
         title: 'false',
         icon: 'mdi mdi-close-box-outline',
         valueType: valueType.staticVal,
+        code: () => 'false',
     }
 }
 
@@ -193,6 +201,11 @@ export const variableType = {
         key: 'string',
         title: 'String',
         icon: 'mdi mdi-code-string'
+    },
+    boolean: {
+        key: 'boolean',
+        title: 'Boolean',
+        icon: 'mdi mdi-nintendo-switch',
     },
     uid: {
         key: 'uid',

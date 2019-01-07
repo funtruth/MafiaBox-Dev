@@ -25,6 +25,7 @@ import StoryMapLib from './library/StoryMapLib';
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
 import PickVar from './vars/PickVar'
+import PickVarProp from './vars/PickVarProp'
 import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
@@ -75,6 +76,8 @@ class DropdownView extends React.Component{
                 return <EditVar {...props}/>
             case dropdownType.pickVar:
                 return <PickVar {...props}/>
+            case dropdownType.pickVarProp:
+                return <PickVarProp {...props}/>
             case dropdownType.pickVarType:
                 return <PickVarType {...props}/>
             case dropdownType.pickComparison:
