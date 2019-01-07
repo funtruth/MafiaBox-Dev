@@ -7,7 +7,7 @@ import { dropdownType } from '../dropdown/types';
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
 import { showModalByKey } from '../modal/ModalReducer'
-import { showDropdownByKey } from '../dropdown/DropdownReducer'
+import { showDropdown } from '../dropdown/DropdownReducer'
 
 class AppWrapper extends React.Component{
     componentDidMount() {
@@ -27,7 +27,7 @@ class AppWrapper extends React.Component{
         const { dropdownKeys } = this.props
         if (dropdownKeys.length) {
             if (dropdownKeys[0].key === dropdownType.pickVar) return
-            this.props.showDropdownByKey()
+            this.props.showDropdown()
         }
     }
 
@@ -37,7 +37,7 @@ class AppWrapper extends React.Component{
                 return
             case 'Escape':
                 if (this.props.dropdownKeys.length) {
-                    return this.props.showDropdownByKey()
+                    return this.props.showDropdown()
                 }
                 return this.props.showModalByKey()
             default:
@@ -52,7 +52,7 @@ class AppWrapper extends React.Component{
             if (menuClick) {
                 if (!dropdownKeys.length ||
                     e.target.getAttribute('field-key') !== dropdownKeys[0].fieldKey) {
-                        this.props.showDropdownByKey(menuClick, e, {
+                        this.props.showDropdown(menuClick, e, {
                             indexKey: e.target.getAttribute('index-key'),
                             tagKey: e.target.getAttribute('tag-key'),
                             fieldKey: e.target.getAttribute('field-key'),
@@ -62,7 +62,7 @@ class AppWrapper extends React.Component{
                             attach: JSON.parse(e.target.getAttribute('attach')),
                         })
                 } else {
-                    this.props.showDropdownByKey()
+                    this.props.showDropdown()
                 }
             }
         } else if (e.target.matches('.menu-voidclick')) {
@@ -70,7 +70,7 @@ class AppWrapper extends React.Component{
         } else {
             if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option')
                 && dropdownKeys.length) {
-                this.props.showDropdownByKey()
+                this.props.showDropdown()
             }
         }
     }
@@ -163,7 +163,7 @@ export default connect(
         moveStory,
         movePageWithinMap,
         movePageToOtherMap,
-        showDropdownByKey,
+        showDropdown,
         showModalByKey,
         moveLogic,
         moveField,

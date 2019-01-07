@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
@@ -55,21 +55,21 @@ class PickOperator extends React.Component{
         }
         
         this.props.updatePage(pageKey, fieldKey, valueClone)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _addItemBelow = () => {
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _deleteItem = () => {
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteItem(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -98,7 +98,7 @@ export default connect(
     }),
     {
         updatePage,
-        showDropdownByKey,
+        showDropdown,
         addItemBelowOf,
         deleteItem,
     }

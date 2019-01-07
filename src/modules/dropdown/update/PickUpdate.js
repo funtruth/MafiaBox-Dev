@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { updateType, valueType, updateFamilyType } from '../../logic/types'
 import { dropdownType } from '../types'
 
-import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
+import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
@@ -15,7 +15,7 @@ class PickUpdate extends React.Component{
         
         const selected = typeof currentValue === 'string' && currentValue === item.key
         
-        this.props.showDropdownByKey(dropdownType.inputValue, e, {
+        this.props.showDropdown(dropdownType.inputValue, e, {
             hoverKey: item.key,
             inputText: 'Enter a number',
             type: 'number',
@@ -26,7 +26,7 @@ class PickUpdate extends React.Component{
     }
 
     _onMouseOut = e => {
-        this.props.popDropdownByKey(dropdownType.inputValue)
+        this.props.popDropdown(dropdownType.inputValue)
     }
 
     _select = (item) => {
@@ -36,7 +36,7 @@ class PickUpdate extends React.Component{
             value: item.key,
             valueType: item.valueType
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _selectDynamic = (item, number) => {
@@ -47,7 +47,7 @@ class PickUpdate extends React.Component{
             dynamic: number,
             valueType: item.valueType,
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
     
     _renderItem = (item) => {
@@ -117,7 +117,7 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdownByKey,
-        popDropdownByKey,
+        showDropdown,
+        popDropdown,
     }
 )(PickUpdate)

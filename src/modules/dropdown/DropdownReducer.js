@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 const initialState = {
     dropdownKeys: [],
 }
@@ -9,7 +7,7 @@ const UPDATE_KEYS = 'dropdown/update-keys'
 /* CONFIG PASSED AS PARAMS
     forcedKey: removes any other dropdowns that have the same forcedKey
 */
-export function showDropdownByKey(key, e, params={}) {
+export function showDropdown(key, e, params={}) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 
@@ -21,15 +19,13 @@ export function showDropdownByKey(key, e, params={}) {
         } else {
             let keysClone = Array.from(dropdownKeys)
 
-            for (var i=0; i<keysClone.length; i++) {
-                if (keysClone[i].key === key) {
-                    keysClone = keysClone.slice(0, i)
-                    break
-                }
-            }
-
             if (params.forcedKey) {
-                keysClone = _.filter(keysClone, i => params.forcedKey !== i.forcedKey)
+                for (var i=0; i<keysClone.length; i++) {
+                    if (keysClone[i].key === key) {
+                        keysClone = keysClone.slice(0, i)
+                        break
+                    }
+                }
             }
 
             if (keysClone.length) {
@@ -58,21 +54,7 @@ export function showDropdownByKey(key, e, params={}) {
     }
 }
 
-export function popDropdown() {
-    return (dispatch, getState) => {
-        const { dropdownKeys } = getState().dropdown
-
-        let keys = Array.from(dropdownKeys)
-        keys.pop()
-
-        dispatch({
-            type: UPDATE_KEYS,
-            payload: keys
-        })
-    }
-}
-
-export function popDropdownByKey(key) {
+export function popDropdown(key) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 

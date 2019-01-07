@@ -47,17 +47,27 @@ class StoryList extends React.Component{
             <div>
                 <div className="story-title">
                     <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
-                    <i
-                        className="story-option ion-ios-more menu-onclick"
+                    
+                    <div
+                        className="story-option menu-onclick"
                         menu-type={dropdownType.storyShowMore}
                         field-key={index}
-                        style={styles.moreIcon}
-                    ></i>
-                    <i
-                        className="story-option ion-ios-add"
-                        style={styles.addIcon}
+                    >
+                        <i
+                            className="ion-ios-more"
+                            style={styles.moreIcon}
+                        ></i>
+                    </div>
+                    <div
+                        className="story-option"
                         onClick={this._onAdd.bind(this, itemCount)}
-                    ></i>
+                    >
+                        <i
+                            className="ion-ios-add"
+                            style={styles.addIcon}
+                        ></i>
+                    </div>
+                    
                 </div>
                 <Droppable droppableId={item.key} type="ITEM">
                     {(provided, snapshot) => (

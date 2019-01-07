@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { showDropdownByKey, popDropdown } from '../DropdownReducer'
+import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class BoardLib extends React.Component{
@@ -22,15 +22,22 @@ class BoardLib extends React.Component{
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', key)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onMouseEnter = (key, e) => {
         const { hoverKey } = this.props
         if (key === hoverKey) return
-        this.props.showDropdownByKey(dropdownType.storyMapLib, e, {
+        this.props.showDropdown(dropdownType.storyMapLib, e, {
             hoverKey: key,
+            forcedKey: dropdownType.showLibrary,
         })
+    }
+
+    _onMouseOut = (e) => {
+        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
+            this.props.popDropdown(dropdownType.storyMapLib)
+        }
     }
 
     _onType = (e) => {
@@ -82,6 +89,7 @@ class BoardLib extends React.Component{
                                 key={item}
                                 className="drop-down-menu-option"
                                 onMouseOver={this._onMouseEnter.bind(this, item)}
+                                onMouseOut={this._onMouseOut}
                             >
                                 {boardRepo[item].title}
                                 <i
@@ -106,7 +114,7 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         popDropdown,
         updatePageByPath,
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 
 class EditVar extends React.Component{
@@ -15,7 +15,7 @@ class EditVar extends React.Component{
     _onSave = () => {
         const { pageRepo, pageKey, fieldKey, tagKey } = this.props
 
-        if (tagKey === this.state.value) return this.props.showDropdownByKey()
+        if (tagKey === this.state.value) return this.props.showDropdown()
 
         let varsClone = {}
         Object.assign(varsClone, pageRepo[pageKey].vars)
@@ -27,7 +27,7 @@ class EditVar extends React.Component{
         delete varsClone[tagKey]
 
         this.props.updatePage(pageKey, fieldKey, varsClone)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onDelete = () => {
@@ -38,7 +38,7 @@ class EditVar extends React.Component{
         delete varsClone[this.state.value]
 
         this.props.updatePage(pageKey, fieldKey, varsClone)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onChange = e => {
@@ -87,7 +87,7 @@ export default connect(
         pageRepo: state.page.pageRepo
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         updatePage,
     }
 )(EditVar)

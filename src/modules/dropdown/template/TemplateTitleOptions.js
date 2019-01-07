@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../../dropdown/DropdownReducer'
+import { showDropdown } from '../../dropdown/DropdownReducer'
 import { deleteField } from '../../fields/FieldReducer'
 
 class TemplateTitleOptions extends React.Component{
@@ -9,7 +9,7 @@ class TemplateTitleOptions extends React.Component{
         const { fieldKey } = this.props
 
         this.props.deleteField(fieldKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -27,7 +27,7 @@ class TemplateTitleOptions extends React.Component{
 export default connect(
     null,
     {
-        showDropdownByKey,
+        showDropdown,
         deleteField,
     }
 )(TemplateTitleOptions)

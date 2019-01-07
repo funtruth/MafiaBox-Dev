@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { addField } from '../../fields/FieldReducer'
 
 class AddTemplateField extends React.Component{
@@ -30,7 +30,7 @@ class AddTemplateField extends React.Component{
     _confirm = () => {
         if (true) {
             this.props.addField(this.props.fieldKey, this.state.value)
-            this.props.showDropdownByKey()
+            this.props.showDropdown()
         } else {
 
         }
@@ -61,7 +61,7 @@ class AddTemplateField extends React.Component{
 export default connect(
     null,
     {
-        showDropdownByKey,
+        showDropdown,
         addField,
     }
 )(AddTemplateField)

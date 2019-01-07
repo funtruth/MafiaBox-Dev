@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updateField } from '../../fields/FieldReducer'
 
 import { fieldType } from '../../fields/defaults'
@@ -37,7 +37,7 @@ class PickFieldType extends React.Component{
 
     _select = (newValue) => {
         this.props.updateField(this.props.fieldKey, 'fieldType', newValue)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -53,7 +53,7 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         updateField,
     }
 )(PickFieldType)

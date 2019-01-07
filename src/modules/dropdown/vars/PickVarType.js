@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { variableType } from '../../logic/types'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarType extends React.Component{
@@ -44,7 +44,7 @@ class PickVarType extends React.Component{
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'variableType', newValue)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -60,6 +60,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(PickVarType)

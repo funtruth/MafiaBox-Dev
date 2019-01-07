@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { comparisonType } from '../../logic/types'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickComparison extends React.Component{
@@ -40,7 +40,7 @@ class PickComparison extends React.Component{
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
 
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, value)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -56,6 +56,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(PickComparison)

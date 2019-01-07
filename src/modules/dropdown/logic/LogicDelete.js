@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { deleteItem, deleteLogicTree } from '../../fields/FieldReducer'
 
 class LogicDelete extends React.Component {
@@ -9,14 +9,14 @@ class LogicDelete extends React.Component {
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteItem(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
     
     _deleteTree = () => {
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.deleteLogicTree(indexKey, pageKey, fieldKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -40,7 +40,7 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         deleteItem,
         deleteLogicTree,
     }

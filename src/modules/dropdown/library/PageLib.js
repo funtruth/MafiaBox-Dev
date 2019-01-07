@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { updatePageByPath } from '../../page/PageReducer'
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
@@ -12,7 +12,7 @@ class PageLib extends React.Component{
         if (onSelect) return onSelect(item.pageKey)
 
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', item.pageKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -42,6 +42,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(PageLib)

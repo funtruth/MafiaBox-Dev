@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { updateType, updateFamilyType } from '../../logic/types'
 
-import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
+import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickBoolean extends React.Component{
@@ -15,7 +15,7 @@ class PickBoolean extends React.Component{
             value: item.key,
             valueType: item.valueType
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _renderItem = (item) => {
@@ -58,7 +58,7 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdownByKey,
-        popDropdownByKey,
+        showDropdown,
+        popDropdown,
     }
 )(PickBoolean)

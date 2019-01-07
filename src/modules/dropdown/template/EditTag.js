@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updateFieldByPath, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
@@ -15,7 +15,7 @@ class EditTag extends React.Component{
         const { tagKey, fieldKey } = this.props
 
         this.props.deleteTag(fieldKey, tagKey)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onChange = e => {
@@ -26,7 +26,7 @@ class EditTag extends React.Component{
     _onKeyDown = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                this.props.showDropdownByKey()
+                this.props.showDropdown()
                 break
             default:
         }
@@ -65,7 +65,7 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         updateFieldByPath,
         deleteTag,
     }

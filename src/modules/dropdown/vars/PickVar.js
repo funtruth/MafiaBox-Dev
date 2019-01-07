@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
+import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
@@ -16,11 +16,11 @@ class PickVar extends React.Component{
             [subfieldKey]: item.key,
             [`${subfieldKey}.adjust`]: null
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onShowProps = (item, e) => {
-        this.props.showDropdownByKey(dropdownType.pickVarProp, e, {
+        this.props.showDropdown(dropdownType.pickVarProp, e, {
             prefix: item.key,
             forcedKey: dropdownType.pickVar,
         })
@@ -29,7 +29,7 @@ class PickVar extends React.Component{
     _onMouseOut = (dropdownType, e) => {
         //if NOT leaving from right side
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownByKey(dropdownType)
+            this.props.popDropdown(dropdownType)
         }
     }
 
@@ -43,8 +43,8 @@ class PickVar extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
-                onMouseOver={isObject && this._onShowProps.bind(this, item)}
-                onMouseOut={isObject && this._onMouseOut.bind(this, dropdownType.pickVarProp)}
+                onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
+                onMouseOut={isObject ? this._onMouseOut.bind(this, dropdownType.pickVarProp) : undefined}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6',
                 }}
@@ -69,7 +69,7 @@ class PickVar extends React.Component{
     }
     
     _onConstant = (e) => {
-        this.props.showDropdownByKey(dropdownType.inputValue, e, {
+        this.props.showDropdown(dropdownType.inputValue, e, {
             inputText: 'Enter a number',
             type: 'number',
             showValue: true,
@@ -85,14 +85,14 @@ class PickVar extends React.Component{
             [subfieldKey]: null,
             [`${subfieldKey}.adjust`]: value,
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     _onAdjust = (show, e) => {
         if (!show) {
-            this.props.popDropdownByKey(dropdownType.inputValue)
+            this.props.popDropdown(dropdownType.inputValue)
         } else {
-            this.props.showDropdownByKey(dropdownType.inputValue, e, {
+            this.props.showDropdown(dropdownType.inputValue, e, {
                 inputText: 'Enter a number',
                 type: 'number',
                 showValue: true,
@@ -106,7 +106,7 @@ class PickVar extends React.Component{
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey + ".adjust", value)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -153,7 +153,7 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdownByKey,
-        popDropdownByKey,
+        showDropdown,
+        popDropdown,
     }
 )(PickVar)

@@ -5,7 +5,7 @@ import * as proptool from '../../logic/proptool'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { showDropdownByKey, popDropdownByKey } from '../DropdownReducer'
+import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarProp extends React.Component{
@@ -16,7 +16,23 @@ class PickVarProp extends React.Component{
             [subfieldKey]: `${prefix}.${item}`,
             [`${subfieldKey}.adjust`]: null
         })
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
+    }
+
+    _onShowProps = (item, e) => {
+        const { prefix } = this.props
+        
+        this.props.showDropdown(dropdownType.pickVarProp, e, {
+            prefix: `${prefix}.${item}`,
+            forcedKey: dropdownType.pickVarProp,
+        })
+    }
+    
+    _onMouseOut = (dropdownType, e) => {
+        //if NOT leaving from right side
+        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
+            this.props.popDropdown(dropdownType)
+        }
     }
 
     _renderItem = (item) => {
@@ -29,6 +45,8 @@ class PickVarProp extends React.Component{
                 key={item}
                 className="drop-down-menu-option"
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
+                onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
+                onMouseOut={isObject ? this._onMouseOut.bind(this, dropdownType.pickVarProp) : undefined}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6'
                 }}
@@ -55,7 +73,7 @@ class PickVarProp extends React.Component{
     render() {
         const { updateRefs, prefix } = this.props
         const vars = proptool.getSubfields(prefix, updateRefs)
-        console.log(this.props)
+        
         //TODO i don't like this as an array
         let menuStyle = {
             maxHeight: 200,
@@ -81,7 +99,7 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
-        popDropdownByKey,
+        showDropdown,
+        popDropdown,
     }
 )(PickVarProp)

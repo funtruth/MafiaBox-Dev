@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { addTag } from '../../fields/FieldReducer'
 
 class AddTag extends React.Component{
@@ -30,7 +30,7 @@ class AddTag extends React.Component{
     _confirm = () => {
         if (true) {
             this.props.addTag(this.props.fieldKey, this.state.value)
-            this.props.showDropdownByKey()
+            this.props.showDropdown()
         } else {
 
         }
@@ -61,7 +61,7 @@ class AddTag extends React.Component{
 export default connect(
     null,
     {
-        showDropdownByKey,
+        showDropdown,
         addTag,
     }
 )(AddTag)

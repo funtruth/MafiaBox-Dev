@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class AddUpdateField extends React.Component{
@@ -11,7 +11,7 @@ class AddUpdateField extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.${item}`, 'value', '')
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'expand', true)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -43,6 +43,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(AddUpdateField)

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { variableType } from '../../logic/types'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class AddVar extends React.Component{
@@ -35,7 +35,7 @@ class AddVar extends React.Component{
         
         if (true) {
             this.props.updatePageByPath(pageKey, fieldKey, value, { key: value, variableType: variableType.any.key })
-            this.props.showDropdownByKey()
+            this.props.showDropdown()
         } else {
 
         }
@@ -68,7 +68,7 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdownByKey,
+        showDropdown,
         updatePageByPath,
     }
 )(AddVar)

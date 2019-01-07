@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import { returnType } from '../../logic/types'
@@ -41,7 +41,7 @@ class ReturnTypes extends React.Component{
         const { pageKey, fieldKey, indexKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', newValue)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -57,6 +57,6 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(ReturnTypes)

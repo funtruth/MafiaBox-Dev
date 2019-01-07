@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { fieldType } from '../../fields/defaults'
 
-import { showDropdownByKey } from '../DropdownReducer'
+import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickNews extends React.Component{
@@ -41,7 +41,7 @@ class PickNews extends React.Component{
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, item)
-        this.props.showDropdownByKey()
+        this.props.showDropdown()
     }
 
     render() {
@@ -69,6 +69,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdownByKey,
+        showDropdown,
     }
 )(PickNews)
