@@ -30,8 +30,6 @@ const initialState = {
             variableType: variableType.object.key,
         },
         'gameState.nominate.$': {
-            dropdown: dropdownType.pickUpdate,
-            action: 'Add',
             hideButton: true,
             variableType: variableType.uid.key,
         },
@@ -53,37 +51,21 @@ const initialState = {
             variableType: variableType.uid.key,
         },
         'choices': {
-            dropdown: dropdownType.pickUpdate,
-            action: 'Select',
+            dropdown: dropdownType.pickUid,
+            action: 'Add',
             updatable: true,
             transient: true,
             variableType: variableType.object.key,
+        },
+        'choices.$': {
+            hideButton: true,
+            variableType: variableType.uid.key,
         },
         'events': {
             dropdown: dropdownType.writeNews,
             action: 'Add',
             updatable: true,
             variableType: variableType.object.key,
-        },
-        'user': {
-            dropdown: dropdownType.addUpdateField,
-            action: 'Add',
-            variableType: variableType.uid.key,
-        },
-        'user.$player': {
-            dropdown: dropdownType.addUpdateField,
-            action: 'Add',
-            variableType: variableType.uid.key,
-        },
-        'target': {
-            dropdown: dropdownType.addUpdateField,
-            action: 'Add',
-            variableType: variableType.uid.key,
-        },
-        'target.$player': {
-            dropdown: dropdownType.addUpdateField,
-            action: 'Add',
-            variableType: variableType.uid.key,
         },
     },
     playerRef: {

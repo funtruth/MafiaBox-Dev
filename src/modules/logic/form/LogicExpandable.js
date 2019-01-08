@@ -42,7 +42,7 @@ class LogicExpandable extends React.Component{
                         style={{ opacity: 0 }}
                     />}
                     <div className={`common-bubble ${isVarField?'--var':'--grey27'}`} onClick={this._toggle}>
-                        {isVarField ? property.substring(1) : property}
+                        {property}
                     </div>
                     {!config.hideButton && <UpdateButton {...this.props} config={config}/>}
                 </div>

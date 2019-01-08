@@ -25,7 +25,7 @@ function recursive(key, library) {
             codeCurrent = data
             break
         case logicType.operator.key:
-            codeCurrent = `${data.var1 || ''}${data['var1.adjust'] || ''}${(data.comparison && comparisonType[data.comparison].code) || ''}${data.var2 || ''}${data['var2.adjust'] || ''}`
+            codeCurrent = convertPropertyFields(`${data.var1||''}${data['var1.adjust']||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data['var2.adjust']||''}`)
             break
         case logicType.return.key:
             codeCurrent = returnType[data] ? returnType[data].code : ''
@@ -38,7 +38,7 @@ function recursive(key, library) {
                     `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=${typeof data[field].value === 'string' ?
                         updateType[data[field].value] ?
-                            updateType[data[field].value].code(data, field)
+                            updateType[data[field].value].code(data, convertPropertyFields(field))
                             :`'${data[field].value}'`
                         :`${data[field].value}`}\n`
                 )
@@ -49,7 +49,7 @@ function recursive(key, library) {
                 if (!data[field1].value) continue
 
                 codeCurrent = codeCurrent.concat(
-                    `${field1}=${data[field1].value}\n`
+                    `${convertPropertyFields(field1)}=${data[field1].value}\n`
                 )
             }
             break
@@ -93,6 +93,20 @@ function recursive(key, library) {
     let codeDown = library[key].down ? recursive(library[key].down, library) : ''
 
     return `${codeBody}${codeDown}`
+}
+
+function convertPropertyFields(string) {
+    let parts = string.split('.')
+
+    for (var i=0; i<parts.length; i++) {
+        if (parts[i].charAt(0) === '$') {
+            parts[i] = `${parts[i]}]`
+        }
+    }
+
+    parts = parts.join('.').replace(/\.\$/g, '[')
+
+    return parts
 }
 
 export default (state = initialState, action) => {

@@ -108,7 +108,7 @@ class PickVar extends React.Component{
     _setAdjustment = (value) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey + ".adjust", value)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.adjust`, value)
         this.props.showDropdown()
     }
 

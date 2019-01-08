@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
+import { variableType } from '../../logic/types'
 
 import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
@@ -71,8 +73,9 @@ class PickVarProp extends React.Component{
     }
     
     render() {
-        const { updateRef, prefix } = this.props
-        const vars = proptool.getSubfields(prefix, updateRef)
+        const { updateRef, prefix, attach } = this.props
+        const subfields = proptool.getSubfields(prefix, updateRef)
+        const uids = _.filter(attach, i => i.variableType === variableType.uid.key)
         
         let menuStyle = {
             maxHeight: 200,
@@ -81,8 +84,10 @@ class PickVarProp extends React.Component{
 
         return (
             <div style={menuStyle}>
-                {vars.length ?
-                    vars.map(this._renderItem)
+                {subfields.length ?
+                    subfields[0] === '$' ?
+                        uids.map(item => this._renderItem(`$${item.key}`))
+                        :subfields.map(this._renderItem)
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                         There are no props
                     </div>
