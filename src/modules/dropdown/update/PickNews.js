@@ -25,14 +25,7 @@ class PickNews extends React.Component{
                 <div className="text-ellipsis">
                     {item.value}
                 </div>
-                {selected && <i
-                    className="ion-md-checkmark"
-                    style={{
-                        marginLeft: 'auto',
-                        width: 30,
-                        textAlign: 'center',
-                    }}
-                />}
+                {selected && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

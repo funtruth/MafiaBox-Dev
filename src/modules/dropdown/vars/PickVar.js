@@ -57,14 +57,7 @@ class PickVar extends React.Component{
                         marginLeft: 'auto',
                     }}
                 />}
-                {selected && <i
-                    className="ion-md-checkmark"
-                    style={{
-                        marginLeft: 'auto',
-                        width: 30,
-                        textAlign: 'center',
-                    }}
-                />}
+                {selected && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

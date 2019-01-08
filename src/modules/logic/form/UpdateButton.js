@@ -8,7 +8,7 @@ class UpdateButton extends React.Component{
     render() {
         const { config, field, pageInfo, logicInfo, item, prefix, vars, pageRepo } = this.props
         const info = logicInfo.data[prefix] || {}
-
+        console.log({info})
         let buttonText = ""
         switch(info.valueType) {
             case valueType.page:
@@ -22,6 +22,9 @@ class UpdateButton extends React.Component{
                 break
             case valueType.dynamicVal:
                 buttonText = `${updateType[info.value].title} ${info.dynamic}`
+                break
+            case valueType.health:
+                buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
                 break
             default:
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>

@@ -28,14 +28,12 @@ class PickVarType extends React.Component{
                 onClick={this._select.bind(this, item)}
                 style={itemStyle}
             >
-                <i
-                    className={`${variableType[item].icon} drop-down-menu-icon`}
-                />
+                <i className={`${variableType[item].icon} drop-down-menu-icon`}/>
                 {variableType[item].title}
-                {selected ? <i
-                    className="ion-md-checkmark"
-                    style={{ marginLeft: 'auto', width: 30, textAlign: 'center' }}
-                />:<div style={{ width: 30, marginLeft: 'auto' }}/>}
+                {selected ?
+                    <i className="ion-md-checkmark"/>
+                    :<div style={{ width: 30, marginLeft: 'auto' }}/>
+                }
             </div>
         )
     }

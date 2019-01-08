@@ -34,6 +34,8 @@ import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
 import PickNews from './update/PickNews'
+import PickHealth from './update/PickHealth'
+
 import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
 
@@ -99,6 +101,8 @@ class DropdownView extends React.Component{
                 return <AddUpdateField {...props}/>
             case dropdownType.writeNews:
                 return <PickNews {...props}/>
+            case dropdownType.pickHealth:
+                return <PickHealth {...props}/>
             default:
                 return null
         }

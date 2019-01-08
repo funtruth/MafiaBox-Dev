@@ -7,7 +7,7 @@ import { updateType, updateFamilyType } from '../../logic/types'
 import { showDropdown, popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
-class PickBoolean extends React.Component{
+class PickHealth extends React.Component{
     _select = (item) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
@@ -39,8 +39,9 @@ class PickBoolean extends React.Component{
     }
 
     render() {
-        let items = _.filter(updateType, i => i.family === updateFamilyType.boolean)
+        let items = _.filter(updateType, i => i.family === updateFamilyType.health)
         items = _.sortBy(items, i => i.index)
+
         return (
             items.map(this._renderItem)
         )
@@ -54,4 +55,4 @@ export default connect(
         showDropdown,
         popDropdown,
     }
-)(PickBoolean)
+)(PickHealth)

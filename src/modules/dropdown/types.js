@@ -28,6 +28,7 @@ export const dropdownType = {
     pickUpdateValue: 'dropdownType/pick-update-value',
     pickPhase: 'dropdownType/pick-phase',
     pickUid: 'dropdownType/pick-uid',
+    pickHealth: 'dropdownType/pick-health',
     writeNews: 'dropdownType/write-news',
     pickBoolean: 'dropdownType/pick-boolean',
     pickRole: 'dropdownType/pick-role',

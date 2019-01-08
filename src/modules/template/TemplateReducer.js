@@ -90,7 +90,7 @@ const initialState = {
             variableType: variableType.object.key,
         },
         'health.$': {
-            dropdown: dropdownType.pickUpdate,
+            dropdown: dropdownType.pickHealth,
             action: 'Select',
             variableType: variableType.uid.key,
         },

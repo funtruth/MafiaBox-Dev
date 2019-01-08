@@ -28,10 +28,10 @@ class PickComparison extends React.Component{
                 style={itemStyle}
             >
                 {comparisonType[item].title}
-                {selected ? <i
-                    className="ion-md-checkmark"
-                    style={{ marginLeft: 'auto', width: 30, textAlign: 'center' }}
-                />:<div style={{ width: 30, marginLeft: 'auto' }}/>}
+                {selected ?
+                    <i className="ion-md-checkmark"/>
+                    :<div style={{ width: 20, marginLeft: 'auto' }}/>
+                }
             </div>
         )
     }

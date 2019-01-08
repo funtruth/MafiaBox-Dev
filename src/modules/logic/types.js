@@ -93,6 +93,7 @@ export const comparisonType = {
 export const updateFamilyType = {
     number: 'family/number',
     boolean: 'family/boolean',
+    health: 'family/health',
 }
 
 export const valueType = {
@@ -100,6 +101,7 @@ export const valueType = {
     dynamicVal: 'valueType/dynamicVal',
     page: 'valueType/page',
     uid: 'valueType/uid',
+    health: 'valueType/health',
 }
 
 //possible static and dynamic update types
@@ -177,7 +179,67 @@ export const updateType = {
         icon: 'mdi mdi-close-box-outline',
         valueType: valueType.staticVal,
         code: () => 'false',
-    }
+    },
+    attack1: {
+        key: 'attack1',
+        index: 0,
+        family: updateFamilyType.health,
+        title: 'Basic Attack',
+        label: ['mdi mdi-sword'],
+        icon: 'mdi mdi-sword',
+        valueType: valueType.health,
+        code: () => '-1',
+    },
+    attack2: {
+        key: 'attack2',
+        index: 1,
+        family: updateFamilyType.health,
+        title: 'Strong Attack',
+        label: ['mdi mdi-sword', 'mdi mdi-sword'],
+        icon: 'mdi mdi-sword',
+        valueType: valueType.health,
+        code: () => '-2',
+    },
+    attack3: {
+        key: 'attack3',
+        index: 2,
+        family: updateFamilyType.health,
+        title: 'Superior Attack',
+        label: ['mdi mdi-sword', 'mdi mdi-sword', 'mdi mdi-sword'],
+        icon: 'mdi mdi-sword',
+        valueType: valueType.health,
+        code: () => '-100',
+    },
+    defend1: {
+        key: 'defend1',
+        index: 3,
+        family: updateFamilyType.health,
+        title: 'Basic Defense',
+        label: ['mdi mdi-shield-half-full'],
+        icon: 'mdi mdi-shield-half-full',
+        valueType: valueType.health,
+        code: () => '1',
+    },
+    defend2: {
+        key: 'defend2',
+        index: 4,
+        family: updateFamilyType.health,
+        title: 'Strong Defense',
+        label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
+        icon: 'mdi mdi-shield',
+        valueType: valueType.health,
+        code: () => '2',
+    },
+    defend3: {
+        key: 'defend3',
+        index: 5,
+        family: updateFamilyType.health,
+        title: 'Superior Defense',
+        label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
+        icon: 'mdi mdi-shield-plus',
+        valueType: valueType.health,
+        code: () => '100',
+    },
 }
 
 export const defaultLogic = {

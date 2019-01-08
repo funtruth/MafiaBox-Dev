@@ -59,3 +59,9 @@
     font-size: 13px;
     pointer-events: none;
 }
+
+.ion-md-checkmark {
+    margin-left: auto;
+    width: 20px;
+    text-align: center;
+}

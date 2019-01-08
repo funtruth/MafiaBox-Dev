@@ -23,15 +23,7 @@ class PickUid extends React.Component{
                 }}
             >
                 {item.key}
-                {selected && <i
-                    className="ion-md-checkmark"
-                    style={{
-                        marginLeft: 'auto',
-                        width: 30,
-                        textAlign: 'center',
-                        pointerEvents: 'none',
-                    }}
-                />}
+                {selected && <i className="ion-md-checkmark"/>}
             </div>
         )
     }
