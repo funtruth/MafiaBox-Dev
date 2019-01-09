@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../../dropdown/DropdownReducer'
 import { deleteField } from '../../fields/FieldReducer'
 
 class TemplateTitleOptions extends React.Component{
@@ -27,7 +26,6 @@ class TemplateTitleOptions extends React.Component{
 export default connect(
     null,
     {
-        showDropdown,
         deleteField,
     }
 )(TemplateTitleOptions)

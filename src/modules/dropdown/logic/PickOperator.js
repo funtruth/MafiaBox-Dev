@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
 
@@ -91,7 +90,6 @@ export default connect(
     }),
     {
         updatePage,
-        showDropdown,
         addItemBelowOf,
         deleteItem,
     }

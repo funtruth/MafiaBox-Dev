@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../DropdownReducer'
 import { addTag } from '../../fields/FieldReducer'
 
 class AddTag extends React.Component{
@@ -61,7 +60,6 @@ class AddTag extends React.Component{
 export default connect(
     null,
     {
-        showDropdown,
         addTag,
     }
 )(AddTag)

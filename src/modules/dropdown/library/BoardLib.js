@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class BoardLib extends React.Component{
@@ -30,7 +30,6 @@ class BoardLib extends React.Component{
         if (key === hoverKey) return
         this.props.showDropdown(dropdownType.storyMapLib, e, {
             hoverKey: key,
-            forcedKey: dropdownType.showLibrary,
         })
     }
 
@@ -114,7 +113,6 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdown,
         popDropdown,
         updatePageByPath,
     }

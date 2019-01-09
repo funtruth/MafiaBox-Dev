@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { comparisonType } from '../../logic/types'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickComparison extends React.Component{
@@ -51,11 +50,8 @@ class PickComparison extends React.Component{
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
+    null,
     {
         updatePageByPath,
-        showDropdown,
     }
 )(PickComparison)

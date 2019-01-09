@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import { fieldType } from '../../fields/defaults'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickNews extends React.Component{
@@ -62,6 +61,5 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdown,
     }
 )(PickNews)

@@ -4,10 +4,7 @@ const initialState = {
 
 const UPDATE_KEYS = 'dropdown/update-keys'
 
-/* CONFIG PASSED AS PARAMS
-    forcedKey: removes any other dropdowns that have the same forcedKey
-*/
-export function showDropdown(key, e, params={}) {
+export function showDropdown(key, e, params={}, index=0) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 
@@ -17,16 +14,7 @@ export function showDropdown(key, e, params={}) {
                 payload: [],
             })
         } else {
-            let keysClone = Array.from(dropdownKeys)
-
-            if (params.forcedKey) {
-                for (var i=0; i<keysClone.length; i++) {
-                    if (keysClone[i].forcedKey === params.forcedKey) {
-                        keysClone = keysClone.slice(0, i)
-                        break
-                    }
-                }
-            }
+            let keysClone = Array.from(dropdownKeys).slice(0, index + 1)
 
             if (keysClone.length) {
                 let prev = keysClone[keysClone.length - 1]

@@ -5,7 +5,7 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
@@ -20,10 +20,8 @@ class PickVar extends React.Component{
     }
 
     _onShowProps = (item, e) => {
-        const { forcedKey } = this.props
         this.props.showDropdown(dropdownType.pickVarProp, e, {
             prefix: item.key,
-            forcedKey: (forcedKey || 0) + 1,
         })
     }
     
@@ -63,13 +61,11 @@ class PickVar extends React.Component{
     }
     
     _onConstant = (e) => {
-        const { forcedKey } = this.props
         this.props.showDropdown(dropdownType.inputValue, e, {
             inputText: 'Enter a number',
             type: 'number',
             showValue: true,
             onSubmit: this._setConstant,
-            forcedKey: (forcedKey || 0) + 1,
         })
     }
 
@@ -84,7 +80,6 @@ class PickVar extends React.Component{
     }
 
     _onAdjust = (show, e) => {
-        const { forcedKey } = this.props
         if (!show) {
             this.props.popDropdown(dropdownType.inputValue)
         } else {
@@ -93,7 +88,6 @@ class PickVar extends React.Component{
                 type: 'number',
                 showValue: true,
                 onSubmit: this._setAdjustment,
-                forcedKey: (forcedKey || 0) + 1,
             })
         }
     }
@@ -149,7 +143,6 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdown,
         popDropdown,
     }
 )(PickVar)

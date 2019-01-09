@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import { variableType } from '../../logic/types'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUid extends React.Component{
@@ -56,6 +55,5 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdown,
     }
 )(PickUid)

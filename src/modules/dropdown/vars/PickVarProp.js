@@ -6,7 +6,7 @@ import * as proptool from '../../logic/proptool'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarProp extends React.Component{
@@ -21,11 +21,10 @@ class PickVarProp extends React.Component{
     }
 
     _onShowProps = (item, e) => {
-        const { prefix, forcedKey } = this.props
+        const { prefix } = this.props
         
         this.props.showDropdown(dropdownType.pickVarProp, e, {
             prefix: `${prefix}.${item}`,
-            forcedKey: (forcedKey || 0) + 1,
         })
     }
     
@@ -96,7 +95,6 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdown,
         popDropdown,
     }
 )(PickVarProp)

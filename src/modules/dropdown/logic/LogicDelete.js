@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../DropdownReducer'
 import { deleteItem, deleteLogicTree } from '../../fields/FieldReducer'
 
 class LogicDelete extends React.Component {
@@ -40,7 +39,6 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdown,
         deleteItem,
         deleteLogicTree,
     }

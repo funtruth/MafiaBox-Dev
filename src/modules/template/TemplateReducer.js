@@ -77,16 +77,27 @@ const initialState = {
         'role.roleId': {
             dropdown: dropdownType.pickRole,
             action: 'Select',
+            updatable: true,
+            transient: true,
             variableType: variableType.string.key,
         },
         'role.suspicious': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
+            updatable: true,
+            transient: true,
+            variableType: variableType.boolean.key,
+        },
+        'role.trigger': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            transient: true,
             variableType: variableType.boolean.key,
         },
         'health': {
             dropdown: dropdownType.pickUid,
             action: 'Add',
+            updatable: true,
             variableType: variableType.object.key,
         },
         'health.$': {
@@ -97,6 +108,8 @@ const initialState = {
         'dead': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
+            updatable: true,
+            transient: true,
             variableType: variableType.boolean,
         },
     }

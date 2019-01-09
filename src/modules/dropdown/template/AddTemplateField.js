@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../DropdownReducer'
 import { addField } from '../../fields/FieldReducer'
 
 class AddTemplateField extends React.Component{
@@ -61,7 +60,6 @@ class AddTemplateField extends React.Component{
 export default connect(
     null,
     {
-        showDropdown,
         addField,
     }
 )(AddTemplateField)

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { updatePageByPath } from '../../page/PageReducer'
-import { showDropdown } from '../DropdownReducer'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
@@ -42,6 +41,5 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdown,
     }
 )(PageLib)

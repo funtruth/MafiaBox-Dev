@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import { returnType } from '../../logic/types'
@@ -50,6 +49,5 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdown,
     }
 )(ReturnTypes)

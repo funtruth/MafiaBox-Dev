@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../DropdownReducer'
 import { updateFieldByPath, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
@@ -65,7 +64,6 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        showDropdown,
         updateFieldByPath,
         deleteTag,
     }

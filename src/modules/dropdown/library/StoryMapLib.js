@@ -4,14 +4,13 @@ import _ from 'lodash'
 
 import { dropdownType } from '../types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 
 class StoryMapLib extends React.Component{
     _onMouseEnter = (key, e) => {
         this.props.showDropdown(dropdownType.pageLib, e, {
             hoverKey: key,
             onSelect: this.props.onSelect,
-            forcedKey: dropdownType.storyMapLib,
         })
     }
 
@@ -57,7 +56,6 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        showDropdown,
         popDropdown,
     }
 )(StoryMapLib)

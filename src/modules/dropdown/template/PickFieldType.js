@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { showDropdown } from '../DropdownReducer'
 import { updateField } from '../../fields/FieldReducer'
 
 import { fieldType } from '../../fields/defaults'
@@ -46,7 +45,6 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        showDropdown,
         updateField,
     }
 )(PickFieldType)

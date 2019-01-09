@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { variableType } from '../../logic/types'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarType extends React.Component{
@@ -58,6 +57,5 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdown,
     }
 )(PickVarType)

@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { updateType, updateFamilyType } from '../../logic/types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickBoolean extends React.Component{
@@ -51,7 +51,6 @@ export default connect(
     null,
     {
         updatePageByPath,
-        showDropdown,
         popDropdown,
     }
 )(PickBoolean)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePage } from '../../page/PageReducer'
 
 class EditVar extends React.Component{
@@ -85,7 +84,6 @@ export default connect(
         pageRepo: state.page.pageRepo
     }),
     {
-        showDropdown,
         updatePage,
     }
 )(EditVar)

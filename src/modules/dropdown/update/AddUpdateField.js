@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
-import { showDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class AddUpdateField extends React.Component{
@@ -44,6 +43,5 @@ export default connect(
     }),
     {
         updatePageByPath,
-        showDropdown,
     }
 )(AddUpdateField)

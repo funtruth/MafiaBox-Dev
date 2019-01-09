@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { fuseType } from '../types'
 import { valueType } from '../../logic/types'
 
-import { showDropdown, popDropdown } from '../DropdownReducer'
+import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from '../library/StoryMapLib';
@@ -95,7 +95,6 @@ export default connect(
         storyMap: state.page.storyMap,
     }),
     {
-        showDropdown,
         popDropdown,
         updatePageByPath,
     }

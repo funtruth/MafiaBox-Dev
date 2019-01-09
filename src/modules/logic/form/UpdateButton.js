@@ -8,7 +8,7 @@ class UpdateButton extends React.Component{
     render() {
         const { config, field, pageInfo, logicInfo, item, prefix, vars, pageRepo } = this.props
         const info = logicInfo.data[prefix] || {}
-        console.log({info})
+        
         let buttonText = ""
         switch(info.valueType) {
             case valueType.page:
