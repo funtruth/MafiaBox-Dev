@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
+import * as helpers from '../common/helpers'
 
 import { dropdownType } from '../dropdown/types';
 
@@ -68,10 +69,8 @@ class AppWrapper extends React.Component{
                     this.props.showDropdown()
                 }
             }
-        } else {
-            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && dropdownKeys.length) {
-                this.props.showDropdown()
-            }
+        } else if (!helpers.isElementDropdown(e.target)) {
+            this.props.showDropdown()
         }
     }
 

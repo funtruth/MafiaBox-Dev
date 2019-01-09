@@ -5,6 +5,7 @@ import _ from 'lodash'
 import { updateType, updateFamilyType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
+import UpdateType from './UpdateType';
 
 class PickBoolean extends React.Component{
     _select = (item) => {
@@ -39,7 +40,10 @@ class PickBoolean extends React.Component{
         let items = _.filter(updateType, i => i.family === updateFamilyType.boolean)
         items = _.sortBy(items, i => i.index)
         return (
-            items.map(this._renderItem)
+            <div>
+                {items.map(this._renderItem)}
+                <UpdateType/>
+            </div>
         )
     }
 }

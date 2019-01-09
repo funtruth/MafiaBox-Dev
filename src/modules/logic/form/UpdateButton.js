@@ -48,7 +48,8 @@ class UpdateButton extends React.Component{
 
         return (
             <div
-                className="logic-pick-update menu-onclick highlight"
+                className="logic-pick-update menu-onclick"
+                highlight="true"
                 menu-type={config.dropdown}
                 page-key={pageInfo.pageKey}
                 index-key={item}

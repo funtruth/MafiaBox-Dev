@@ -44,6 +44,17 @@
     color: #b6b6b6;
 }
 
+.drop-down-icon-only {
+    padding: 6px 0px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #b6b6b6;
+    width: 50%;
+}
+
 .drop-down-menu-option[chosen=true] {
     color: #fff;
 }

@@ -113,11 +113,33 @@ const initialState = {
             transient: true,
             variableType: variableType.boolean,
         },
+    },
+    update: false,
+    mutate: false,
+}
+
+const TOGGLE_UPDATE_TYPE = 'template/toggle-update-type'
+
+export function toggleUpdateType(type) {
+    return (dispatch) => {
+        switch(type) {
+            case 'update':
+            case 'mutate':
+                dispatch({
+                    type: TOGGLE_UPDATE_TYPE,
+                    payload: type
+                })
+                break
+            default:
+        }
+
     }
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case TOGGLE_UPDATE_TYPE:
+            return { ...state, [action.payload]: !state[action.payload]}
         default:
             return state;
     }

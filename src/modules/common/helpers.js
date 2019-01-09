@@ -21,3 +21,16 @@ export function pathUpdate(args, index, repo) {
             :pathUpdate(args, index + 1, repo[args[index]]||{})
     }
 }
+
+export function isElementDropdown(target) {
+    let isDropdown = target.className === 'drop-down-menu'
+
+    while(target.parentElement && !isDropdown) {
+        if (target.parentElement.className === 'drop-down-menu') {
+            isDropdown = true
+        } else {
+            target = target.parentElement
+        }
+    }
+    return isDropdown
+}

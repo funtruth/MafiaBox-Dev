@@ -12,6 +12,11 @@ div {
   outline-style: none;
 }
 
+div[highlight]:hover {
+    background-color: hsla(0,0%,100%,.1);
+    cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -29,6 +34,10 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-apperance: none;
   margin: 0;
+}
+
+input[type=checkbox] {
+  margin-right: 8px;
 }
 
 textarea {

@@ -50,7 +50,7 @@ class FieldTemplateView extends React.Component {
                                             {...provided.draggableProps}
                                             {...provided.dragHandleProps}
                                         >
-                                            <div className="highlight" style={{ padding: '2px 6px', borderRadius: 2 }}>
+                                            <div highlight="true" style={{ padding: '2px 6px', borderRadius: 2 }}>
                                                 <TemplateTitle
                                                     boardType={boardType}
                                                     fieldInfo={item}
