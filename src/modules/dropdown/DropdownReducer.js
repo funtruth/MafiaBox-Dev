@@ -42,26 +42,16 @@ export function showDropdown(key, e, params={}, index=0) {
     }
 }
 
-export function popDropdown(key) {
+export function popDropdown(index) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 
-        if (key) {
-            let keysClone = Array.from(dropdownKeys)
+        const keysClone = Array.from(dropdownKeys).slice(0, index + 1)
 
-            //starts from the highest dropdown, will not work with 3 dropdowns of SAME KEY
-            for (var i=keysClone.length - 1; i>=0; i--) {
-                if (keysClone[i].key === key) {
-                    keysClone = keysClone.slice(0, i)
-                    break
-                }
-            }
-
-            dispatch({
-                type: UPDATE_KEYS,
-                payload: keysClone,
-            })
-        }  
+        dispatch({
+            type: UPDATE_KEYS,
+            payload: keysClone,
+        })
     }
 }
 

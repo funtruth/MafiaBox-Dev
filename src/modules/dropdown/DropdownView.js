@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { dropdownType } from './types'
 import { boardType } from '../board/types'
-import { showDropdown } from './DropdownReducer'
+import { showDropdown, popDropdown } from './DropdownReducer'
 
 import ClickMenu from './components/ClickMenu'
 import InputValue from './components/InputValue'
@@ -42,9 +42,8 @@ import SearchBoard from './update/SearchBoard';
 
 class DropdownView extends React.Component{
     _renderItem = (props, index) => {
-        props.showDropdown = (key, e, params) => {
-            this.props.showDropdown(key, e, params, index)
-        }
+        props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
+        props.popDropdown = () => this.props.popDropdown(index)
 
         switch(props.key) {
             case dropdownType.storyShowMore:
@@ -134,5 +133,6 @@ export default connect(
     }),
     {
         showDropdown,
+        popDropdown,
     }
 )(DropdownView)

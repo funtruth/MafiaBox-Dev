@@ -6,7 +6,6 @@ import * as proptool from '../../logic/proptool'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVarProp extends React.Component{
@@ -28,9 +27,9 @@ class PickVarProp extends React.Component{
         })
     }
     
-    _onMouseOut = (dropdownType, e) => {
+    _onMouseOut = e => {
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown(dropdownType)
+            this.props.popDropdown()
         }
     }
 
@@ -47,7 +46,7 @@ class PickVarProp extends React.Component{
                 className="drop-down-menu-option"
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
                 onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
-                onMouseOut={isObject ? this._onMouseOut.bind(this, dropdownType.pickVarProp) : undefined}
+                onMouseOut={isObject ? this._onMouseOut : undefined}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6'
                 }}
@@ -95,6 +94,5 @@ export default connect(
     }),
     {
         updatePageByPath,
-        popDropdown,
     }
 )(PickVarProp)

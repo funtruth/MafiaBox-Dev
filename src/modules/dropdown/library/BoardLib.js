@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class BoardLib extends React.Component{
@@ -35,7 +34,7 @@ class BoardLib extends React.Component{
 
     _onMouseOut = (e) => {
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown(dropdownType.storyMapLib)
+            this.props.popDropdown()
         }
     }
 
@@ -113,7 +112,6 @@ export default connect(
         pageRepo: state.page.pageRepo,
     }),
     {
-        popDropdown,
         updatePageByPath,
     }
 )(BoardLib)

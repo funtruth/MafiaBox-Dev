@@ -5,7 +5,6 @@ import _ from 'lodash'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickVar extends React.Component{
@@ -25,10 +24,10 @@ class PickVar extends React.Component{
         })
     }
     
-    _onMouseOut = (dropdownType, e) => {
+    _onMouseOut = e => {
         //if NOT leaving from right side
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown(dropdownType)
+            this.props.popDropdown()
         }
     }
 
@@ -43,7 +42,7 @@ class PickVar extends React.Component{
                 className="drop-down-menu-option"
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
                 onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
-                onMouseOut={isObject ? this._onMouseOut.bind(this, dropdownType.pickVarProp) : undefined}
+                onMouseOut={isObject ? this._onMouseOut : undefined}
                 style={{
                     color: selected ? '#fff' : '#b6b6b6',
                 }}
@@ -122,7 +121,7 @@ class PickVar extends React.Component{
                 <div
                     className="drop-down-menu-option"
                     onMouseOver={this._onConstant}
-                    onMouseOut={this._onMouseOut.bind(this, dropdownType.inputValue)}
+                    onMouseOut={this._onMouseOut}
                 >
                     <i className={`drop-down-menu-icon mdi mdi-alpha-c-box`}></i>
                     Constant
@@ -143,6 +142,5 @@ export default connect(
     null,
     {
         updatePageByPath,
-        popDropdown,
     }
 )(PickVar)

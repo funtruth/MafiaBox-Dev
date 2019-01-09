@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import { updateType, updateFamilyType } from '../../logic/types'
 
-import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickHealth extends React.Component{
@@ -52,6 +51,5 @@ export default connect(
     null,
     {
         updatePageByPath,
-        popDropdown,
     }
 )(PickHealth)

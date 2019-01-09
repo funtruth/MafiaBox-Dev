@@ -5,7 +5,6 @@ import _ from 'lodash'
 import { updateType, valueType, updateFamilyType } from '../../logic/types'
 import { dropdownType } from '../types'
 
-import { popDropdown } from '../DropdownReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
 class PickUpdate extends React.Component{
@@ -25,8 +24,8 @@ class PickUpdate extends React.Component{
         })
     }
 
-    _onMouseOut = e => {
-        this.props.popDropdown(dropdownType.inputValue)
+    _onMouseOut = () => {
+        this.props.popDropdown()
     }
 
     _select = (item) => {
@@ -102,6 +101,5 @@ export default connect(
     null,
     {
         updatePageByPath,
-        popDropdown,
     }
 )(PickUpdate)

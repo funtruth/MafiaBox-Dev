@@ -4,8 +4,6 @@ import _ from 'lodash'
 
 import { dropdownType } from '../types'
 
-import { popDropdown } from '../DropdownReducer'
-
 class StoryMapLib extends React.Component{
     _onMouseEnter = (key, e) => {
         this.props.showDropdown(dropdownType.pageLib, e, {
@@ -16,7 +14,7 @@ class StoryMapLib extends React.Component{
 
     _onMouseOut = e => {
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown(dropdownType.pageLib)
+            this.props.popDropdown()
         }
     }
 
@@ -55,7 +53,4 @@ export default connect(
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
     }),
-    {
-        popDropdown,
-    }
 )(StoryMapLib)
