@@ -52,8 +52,8 @@ class LogicExpandable extends React.Component{
                             {...this.props}
                             nested
                             key={index}
-                            property={property}
-                            prefix={prefix + "." + property}
+                            property={property.subfield}
+                            prefix={prefix + "." + property.subfield}
                         />
                     ))
                 }

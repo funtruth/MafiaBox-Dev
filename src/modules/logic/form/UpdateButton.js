@@ -30,13 +30,18 @@ class UpdateButton extends React.Component{
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
-        let attachments = ""
+        let attachments = "", attachVar = ""
         switch(config.dropdown) {
             case dropdownType.pickUid:
                 attachments = vars
+                attachVar = vars
                 break
             case dropdownType.pickUpdate:
                 attachments = info.dynamic
+                break
+            case dropdownType.addUpdateField:
+                attachments = logicInfo.data
+                attachVar = vars
                 break
             default:
         }
@@ -51,6 +56,7 @@ class UpdateButton extends React.Component{
                 subfield-key={prefix}
                 current-value={info.value}
                 attach={JSON.stringify(attachments)}
+                attach-var={JSON.stringify(attachVar)}
             >
                 <div style={{ pointerEvents: 'none' }}>
                     {buttonText}

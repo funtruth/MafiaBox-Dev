@@ -7,6 +7,8 @@ import { variableType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import DropParent from '../components/DropParent'
+
 class PickVar extends React.Component{
     _onSelect = (item) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
@@ -18,52 +20,36 @@ class PickVar extends React.Component{
         this.props.showDropdown()
     }
 
-    _onShowProps = (item, e) => {
-        this.props.showDropdown(dropdownType.pickVarProp, e, {
-            prefix: item.key,
-        })
-    }
-    
-    _onMouseOut = e => {
-        //if NOT leaving from right side
-        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownTo()
-        }
-    }
-
     _renderItem = (item) => {
         const { currentValue } = this.props
         const chosen = typeof currentValue === 'string' && currentValue === item.key
         const isObject = item.variableType === variableType.object.key
+
+        if (isObject) {
+            return (
+                <DropParent
+                    {...this.props}
+                    key={item.key}
+                    dropdownType={dropdownType.pickVarProp}
+                    params={{
+                        prefix: item.key,
+                    }}
+                    text={item.key}
+                />
+            )
+        }
 
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={isObject ? undefined : this._onSelect.bind(this, item)}
-                onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
-                onMouseOut={isObject ? this._onMouseOut : undefined}
+                onClick={this._onSelect.bind(this, item)}
             >
                 {item.key}
-                {isObject && <i
-                    className="ion-ios-play"
-                    style={{
-                        marginLeft: 'auto',
-                    }}
-                />}
                 {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
-    }
-    
-    _onConstant = (e) => {
-        this.props.showDropdown(dropdownType.inputValue, e, {
-            inputText: 'Enter a number',
-            type: 'number',
-            showValue: true,
-            onSubmit: this._setConstant,
-        })
     }
 
     _setConstant = (value) => {
@@ -76,19 +62,6 @@ class PickVar extends React.Component{
         this.props.showDropdown()
     }
 
-    _onAdjust = (show, e) => {
-        if (!show) {
-            this.props.popDropdownTo(dropdownType.inputValue)
-        } else {
-            this.props.showDropdown(dropdownType.inputValue, e, {
-                inputText: 'Enter a number',
-                type: 'number',
-                showValue: true,
-                onSubmit: this._setAdjustment,
-            })
-        }
-    }
-
     _setAdjustment = (value) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
@@ -97,40 +70,48 @@ class PickVar extends React.Component{
     }
 
     render() {
-        const { attach, currentValue } = this.props
-        const vars = _.toArray(attach)
+        const { attachVar, currentValue } = this.props
+        const vars = _.toArray(attachVar)
 
-        const isNumber = attach[currentValue] &&
-            attach[currentValue].variableType === variableType.number.key
+        const isNumber = attachVar[currentValue] &&
+            attachVar[currentValue].variableType === variableType.number.key
 
         let menuStyle = {
             maxHeight: 200,
             overflow: 'auto',
         }
 
-        if (!attach) return null
-
+        if (!attachVar) return null
         return (
             <div>
                 <div style={menuStyle}>
                     {vars.map(this._renderItem)}
                 </div>
                 <div className="drop-down-menu-separator"/>
-                <div
-                    className="drop-down-menu-option"
-                    onMouseOver={this._onConstant}
-                    onMouseOut={this._onMouseOut}
-                >
-                    <i className={`drop-down-menu-icon mdi mdi-alpha-c-box`}></i>
-                    Constant
-                </div>
-                <div
-                    className="drop-down-menu-option"
-                    onMouseOver={this._onAdjust.bind(this, isNumber)}
-                >
-                    <i className={`drop-down-menu-icon mdi mdi-numeric`}></i>
-                    Adjust by
-                </div>
+                <DropParent
+                    {...this.props}
+                    dropdownType={dropdownType.inputValue}
+                    params={{
+                        inputText: 'Enter a number',
+                        type: 'number',
+                        showValue: true,
+                        onSubmit: this._setConstant,
+                    }}
+                    icon="mdi mdi-alpha-c-box"
+                    text="Constant"
+                />
+                <DropParent
+                    {...this.props}
+                    dropdownType={isNumber && dropdownType.inputValue}
+                    params={{
+                        inputText: 'Enter a number',
+                        type: 'number',
+                        showValue: true,
+                        onSubmit: this._setAdjustment,
+                    }}
+                    icon="mdi mdi-numeric"
+                    text="Adjust by"
+                />
             </div>
         )
     }

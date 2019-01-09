@@ -7,27 +7,9 @@ import { dropdownType } from '../types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import DropParent from '../components/DropParent'
+
 class PickUpdate extends React.Component{
-    _onMouseOver = (item, e) => {
-        const { hoverKey, currentValue, attach } = this.props
-        if (item.key === hoverKey) return
-        
-        const chosen = typeof currentValue === 'string' && currentValue === item.key
-        
-        this.props.showDropdown(dropdownType.inputValue, e, {
-            hoverKey: item.key,
-            inputText: 'Enter a number',
-            type: 'number',
-            showValue: chosen,
-            attach,
-            onSubmit: this._selectDynamic.bind(this, item)
-        })
-    }
-
-    _onMouseOut = () => {
-        this.props.popDropdownTo()
-    }
-
     _select = (item) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
@@ -50,22 +32,28 @@ class PickUpdate extends React.Component{
     }
     
     _renderItem = (item) => {
-        const { currentValue } = this.props
+        const { currentValue, attach } = this.props
         
         const chosen = typeof currentValue === 'string' && currentValue === item.key
 
         if (item.valueType === valueType.dynamicVal) {
             return (
-                <div
+                <DropParent
+                    {...this.props}
                     key={item.key}
-                    className="drop-down-menu-option"
-                    chosen={chosen.toString()}
-                    onMouseOver={this._onMouseOver.bind(this, item)}
-                >
-                    <i className={`${item.icon} drop-down-menu-icon`}/>
-                    {item.title}
-                    {chosen && <i className="ion-md-checkmark"/>}
-                </div>
+                    dropdownType={dropdownType.inputValue}
+                    params={{
+                        hoverKey: item.key,
+                        inputText: 'Enter a number',
+                        type: 'number',
+                        showValue: chosen,
+                        attach,
+                        onSubmit: this._selectDynamic.bind(this, item)
+                    }}
+                    icon={item.icon}
+                    text={item.title}
+                    chosen={chosen}
+                />
             )
         }
 
@@ -75,7 +63,6 @@ class PickUpdate extends React.Component{
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
-                onMouseOver={this._onMouseOut}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}

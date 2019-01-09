@@ -32,7 +32,7 @@ class LogicPanels extends React.Component{
                                 color: (data.var1 || data[`var1.adjust`]) ? '#fff' : '#868686',
                                 borderRadius: '0px 4px 0px 0px',
                             }}
-                            attach={attachments}
+                            attach-var={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var1 && data['var1.adjust'] && `${data.var1} + ${data['var1.adjust']}`) ||
@@ -67,7 +67,7 @@ class LogicPanels extends React.Component{
                                 color: (data.var2 || data['var2.adjust']) ? '#fff' : '#868686',
                                 borderRadius: '0px 0px 4px 0px',
                             }}
-                            attach={attachments}
+                            attach-var={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var2 && data['var2.adjust'] && `${data.var2} + ${data['var2.adjust']}`) ||

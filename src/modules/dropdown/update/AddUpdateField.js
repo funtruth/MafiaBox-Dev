@@ -2,31 +2,28 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
-import { updatePageByPath } from '../../page/PageReducer'
+import DropParent from '../components/DropParent';
 
 class AddUpdateField extends React.Component{
-    _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.${item}`, 'value', '')
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'expand', true)
-        this.props.showDropdown()
-    }
-
     render() {
-        const { subfieldKey, updateRef } = this.props
+        const { subfieldKey, updateRef, attach } = this.props
         const items = proptool.getSubfields(subfieldKey, updateRef)
-
+        
         return (
             items.map(item => {
+                const newKey = `${subfieldKey}.${item.subfield}`
+
                 return (
-                    <div
-                        key={item}
-                        className="drop-down-menu-option"
-                        onClick={this._select.bind(this, item)}
-                    >
-                        {item}
-                    </div>
+                    <DropParent
+                        {...this.props}
+                        key={item.subfield}
+                        dropdownType={item.dropdown}
+                        params={{
+                            subfieldKey: newKey,
+                            currentValue: attach[newKey] && attach[newKey].value,
+                        }}
+                        text={item.subfield}
+                    />
                 )
             })
         )
@@ -38,7 +35,4 @@ export default connect(
         updateRef: proptool.addPlayerRef(state.template),
         playerRef: state.template.playerRef,
     }),
-    {
-        updatePageByPath,
-    }
 )(AddUpdateField)

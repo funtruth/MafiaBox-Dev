@@ -90,7 +90,7 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
 
             case dropdownType.pickPhase:
-                return <SearchBoard {...props} boardType={boardType.flow}/>
+                return <SearchBoard {...props} boardType={boardType.phases}/>
             case dropdownType.pickRole:
                 return <SearchBoard {...props} boardType={boardType.roles}/>
             case dropdownType.pickLibrary:

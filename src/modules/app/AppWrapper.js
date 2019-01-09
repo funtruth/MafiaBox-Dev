@@ -60,6 +60,7 @@ class AppWrapper extends React.Component{
                             pageKey: e.target.getAttribute('page-key'),
                             currentValue: e.target.getAttribute('current-value'),
                             attach: JSON.parse(e.target.getAttribute('attach')),
+                            attachVar: JSON.parse(e.target.getAttribute('attach-var')),
                         })
                 } else {
                     this.props.showDropdown()

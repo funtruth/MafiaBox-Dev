@@ -34,8 +34,8 @@ class PickUid extends React.Component{
     }
 
     render() {
-        const { attach } = this.props
-        const uids = _.filter(attach, i => i.variableType === variableType.uid.key)
+        const { attachVar } = this.props
+        const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
         
         return (
             uids.length ?

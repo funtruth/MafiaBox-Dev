@@ -13,7 +13,7 @@ class PickVarProp extends React.Component{
         const { pageKey, fieldKey, subfieldKey, indexKey, prefix } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey]: `${prefix}.${item}`,
+            [subfieldKey]: `${prefix}.${item.subfield}`,
             [`${subfieldKey}.adjust`]: null
         })
         this.props.showDropdown()
@@ -23,7 +23,7 @@ class PickVarProp extends React.Component{
         const { prefix } = this.props
         
         this.props.showDropdown(dropdownType.pickVarProp, e, {
-            prefix: `${prefix}.${item}`,
+            prefix: `${prefix}.${item.subfield}`,
         })
     }
     
@@ -74,9 +74,9 @@ class PickVarProp extends React.Component{
         return (
             <div style={menuStyle}>
                 {subfields.length ?
-                    subfields[0] === '$' ?
+                    subfields[0].subfield === '$' ?
                         uids.map(item => this._renderItem(`$${item.key}`))
-                        :subfields.map(this._renderItem)
+                        :subfields.map(item => this._renderItem(item.subfield))
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                         There are no props
                     </div>

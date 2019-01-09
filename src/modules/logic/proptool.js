@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 //returns properties of prefix existing in updateRef
 export function getSubfields(prefix, updateRef) {
     const parts = prefix.split('.')
@@ -9,6 +7,8 @@ export function getSubfields(prefix, updateRef) {
         const newParts = key.split('.')
         let match = true
 
+        if (newParts.length !== parts.length + 1) continue
+
         for (var i=0; i<parts.length; i++) {
             if (newParts[i] !== parts[i] && newParts[i] !== '$') {
                 match = false
@@ -16,12 +16,15 @@ export function getSubfields(prefix, updateRef) {
             }
         }
 
-        if (match && newParts[parts.length]) {
-            fields.push(newParts[parts.length])
+        if (match) {
+            fields.push({
+                ...updateRef[key],
+                subfield: newParts[parts.length]
+            })
         }
     }
     
-    return _.uniq(fields)
+    return fields
 }
 
 //returns the proper update config to LogicExpandable using prefix
