@@ -35,7 +35,7 @@ class PickVarProp extends React.Component{
 
     _renderItem = (item) => {
         const { currentValue, prefix, updateRef } = this.props
-        const selected = typeof currentValue === 'string' && currentValue === `${prefix}.${item}`
+        const chosen = typeof currentValue === 'string' && currentValue === `${prefix}.${item}`
         
         const vars = proptool.getSubfields(`${prefix}.${item}`, updateRef)
         const isObject = vars.length > 0
@@ -44,12 +44,10 @@ class PickVarProp extends React.Component{
             <div
                 key={item}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
                 onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
                 onMouseOut={isObject ? this._onMouseOut : undefined}
-                style={{
-                    color: selected ? '#fff' : '#b6b6b6'
-                }}
             >
                 {item}
                 {isObject && <i
@@ -58,7 +56,7 @@ class PickVarProp extends React.Component{
                         marginLeft: 'auto',
                     }}
                 />}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

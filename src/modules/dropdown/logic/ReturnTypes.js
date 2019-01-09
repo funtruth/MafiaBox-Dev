@@ -10,21 +10,21 @@ class ReturnTypes extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
         
-        const selected = item.key === currentValue
+        const chosen = item.key === currentValue
 
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item.key)}
                 style={{
-                    color: selected ? '#fff' : '#b6b6b6',
-                    backgroundColor: selected && item.color,
+                    backgroundColor: chosen && item.color,
                 }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

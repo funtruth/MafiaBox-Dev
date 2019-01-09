@@ -10,19 +10,17 @@ class PickUid extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
         
-        const selected = typeof currentValue === 'string' && currentValue === item
+        const chosen = typeof currentValue === 'string' && currentValue === item
 
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
-                style={{
-                    color: selected ? '#fff' : '#b6b6b6',
-                }}
             >
                 {item.key}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

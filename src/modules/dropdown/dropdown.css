@@ -41,6 +41,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: #b6b6b6;
+}
+
+.drop-down-menu-option[chosen=true] {
+    color: #fff;
 }
 
 .drop-down-menu-option:hover {

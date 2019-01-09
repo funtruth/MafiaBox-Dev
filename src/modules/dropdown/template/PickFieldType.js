@@ -9,20 +9,18 @@ import { fieldType } from '../../fields/defaults'
 class PickFieldType extends React.Component{
     _renderItem = (item) => {
         const { fieldRepo, fieldKey } = this.props
-        const selected = fieldRepo[fieldKey].fieldType === item.key
+        const chosen = fieldRepo[fieldKey].fieldType === item.key
 
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item.key)}
-                style={{
-                    color: selected ? '#fff' : '#b6b6b6',
-                }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

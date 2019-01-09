@@ -24,9 +24,6 @@ class AddUpdateField extends React.Component{
                         key={item}
                         className="drop-down-menu-option"
                         onClick={this._select.bind(this, item)}
-                        style={{
-                            color: '#b6b6b6'
-                        }}
                     >
                         {item}
                     </div>

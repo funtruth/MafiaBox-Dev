@@ -9,11 +9,9 @@ class PickVarType extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
 
-        const selected = typeof currentValue === 'string' && currentValue === item
+        const chosen = typeof currentValue === 'string' && currentValue === item
         
-        let itemStyle = {}
-        itemStyle = {
-            color: selected ? '#fff' : '#b6b6b6',
+        const itemStyle = {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -24,12 +22,13 @@ class PickVarType extends React.Component{
             <div
                 key={item}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
                 style={itemStyle}
             >
                 <i className={`${variableType[item].icon} drop-down-menu-icon`}/>
                 {variableType[item].title}
-                {selected ?
+                {chosen ?
                     <i className="ion-md-checkmark"/>
                     :<div style={{ width: 30, marginLeft: 'auto' }}/>
                 }

@@ -9,22 +9,22 @@ import { updatePageByPath } from '../../page/PageReducer'
 class PickNews extends React.Component{
     _renderItem = (item, index) => {
         const { currentValue } = this.props
-        const selected = typeof currentValue === 'string' && currentValue === item.value
+        const chosen = typeof currentValue === 'string' && currentValue === item.value
 
         return (
             <div
                 key={index}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
                 style={{
-                    color: selected ? '#fff' : '#b6b6b6',
                     maxWidth: 200,
                 }}
             >
                 <div className="text-ellipsis">
                     {item.value}
                 </div>
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

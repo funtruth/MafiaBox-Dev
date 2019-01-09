@@ -12,13 +12,13 @@ class PickUpdate extends React.Component{
         const { hoverKey, currentValue, attach } = this.props
         if (item.key === hoverKey) return
         
-        const selected = typeof currentValue === 'string' && currentValue === item.key
+        const chosen = typeof currentValue === 'string' && currentValue === item.key
         
         this.props.showDropdown(dropdownType.inputValue, e, {
             hoverKey: item.key,
             inputText: 'Enter a number',
             type: 'number',
-            showValue: selected,
+            showValue: chosen,
             attach,
             onSubmit: this._selectDynamic.bind(this, item)
         })
@@ -52,21 +52,19 @@ class PickUpdate extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
         
-        const selected = typeof currentValue === 'string' && currentValue === item.key
+        const chosen = typeof currentValue === 'string' && currentValue === item.key
 
         if (item.valueType === valueType.dynamicVal) {
             return (
                 <div
                     key={item.key}
                     className="drop-down-menu-option"
+                    chosen={chosen.toString()}
                     onMouseOver={this._onMouseOver.bind(this, item)}
-                    style={{
-                        color: selected ? '#fff' : '#b6b6b6'
-                    }}
                 >
                     <i className={`${item.icon} drop-down-menu-icon`}/>
                     {item.title}
-                    {selected && <i className="ion-md-checkmark"/>}
+                    {chosen && <i className="ion-md-checkmark"/>}
                 </div>
             )
         }
@@ -75,15 +73,13 @@ class PickUpdate extends React.Component{
             <div
                 key={item.key}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
                 onMouseOver={this._onMouseOut}
-                style={{
-                    color: selected ? '#fff' : '#b6b6b6'
-                }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

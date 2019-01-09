@@ -33,19 +33,17 @@ class PickVar extends React.Component{
 
     _renderItem = (item) => {
         const { currentValue } = this.props
-        const selected = typeof currentValue === 'string' && currentValue === item.key
+        const chosen = typeof currentValue === 'string' && currentValue === item.key
         const isObject = item.variableType === variableType.object.key
 
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={isObject ? undefined : this._onSelect.bind(this, item)}
                 onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
                 onMouseOut={isObject ? this._onMouseOut : undefined}
-                style={{
-                    color: selected ? '#fff' : '#b6b6b6',
-                }}
             >
                 {item.key}
                 {isObject && <i
@@ -54,7 +52,7 @@ class PickVar extends React.Component{
                         marginLeft: 'auto',
                     }}
                 />}
-                {selected && <i className="ion-md-checkmark"/>}
+                {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }

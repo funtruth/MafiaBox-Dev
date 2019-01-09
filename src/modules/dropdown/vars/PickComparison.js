@@ -9,10 +9,9 @@ class PickComparison extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
 
-        const selected = typeof currentValue === 'string' && currentValue === item
+        const chosen = typeof currentValue === 'string' && currentValue === item
 
         const itemStyle = {
-            color: selected ? '#fff' : '#b6b6b6',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -23,11 +22,12 @@ class PickComparison extends React.Component{
             <div
                 key={item}
                 className="drop-down-menu-option"
+                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
                 style={itemStyle}
             >
                 {comparisonType[item].title}
-                {selected ?
+                {chosen ?
                     <i className="ion-md-checkmark"/>
                     :<div style={{ width: 20, marginLeft: 'auto' }}/>
                 }
