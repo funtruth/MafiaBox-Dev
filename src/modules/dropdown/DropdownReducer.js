@@ -42,7 +42,7 @@ export function showDropdown(key, e, params={}, index=0) {
     }
 }
 
-export function popDropdown(index) {
+export function popDropdownTo(index) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 

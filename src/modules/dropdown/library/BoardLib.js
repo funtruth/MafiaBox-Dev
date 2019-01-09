@@ -34,7 +34,7 @@ class BoardLib extends React.Component{
 
     _onMouseOut = (e) => {
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown()
+            this.props.popDropdownTo()
         }
     }
 

@@ -25,7 +25,7 @@ class PickUpdate extends React.Component{
     }
 
     _onMouseOut = () => {
-        this.props.popDropdown()
+        this.props.popDropdownTo()
     }
 
     _select = (item) => {

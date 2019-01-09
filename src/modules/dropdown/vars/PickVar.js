@@ -27,7 +27,7 @@ class PickVar extends React.Component{
     _onMouseOut = e => {
         //if NOT leaving from right side
         if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdown()
+            this.props.popDropdownTo()
         }
     }
 
@@ -80,7 +80,7 @@ class PickVar extends React.Component{
 
     _onAdjust = (show, e) => {
         if (!show) {
-            this.props.popDropdown(dropdownType.inputValue)
+            this.props.popDropdownTo(dropdownType.inputValue)
         } else {
             this.props.showDropdown(dropdownType.inputValue, e, {
                 inputText: 'Enter a number',
