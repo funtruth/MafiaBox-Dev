@@ -13,8 +13,8 @@ class PickUid extends React.Component{
     _renderItem = (item) => {
         const { currentValue, updateRef, subfieldKey, attach } = this.props
         const newKey = `${subfieldKey}.$${item.key}`
-        const config = proptool.getUpdateConfig(newKey, updateRef)
         
+        const config = proptool.getUpdateConfig(newKey, updateRef)
         const chosen = typeof currentValue === 'string' && currentValue === item
 
         if (config.hideButton) {
@@ -50,7 +50,6 @@ class PickUid extends React.Component{
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.$${item.key}`, 'value', '')
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'expand', true)
         this.props.showDropdown()
     }
 

@@ -5,7 +5,7 @@ import { updatePageByPath } from '../../page/PageReducer'
 import { toggleUpdateType } from '../../template/TemplateReducer'
 
 class UpdateType extends React.Component{
-    _handleClick = (type, e) => {
+    _handleClick = type => {
         this.props.toggleUpdateType(type)
     }
 
@@ -17,6 +17,7 @@ class UpdateType extends React.Component{
                 <div className="drop-down-menu-separator"/>
                 <div
                     className="drop-down-menu-option"
+                    chosen={update.toString()}
                     onClick={this._handleClick.bind(this, 'update')}
                 >
                     <input type="checkbox" checked={update} readOnly/>
@@ -24,6 +25,7 @@ class UpdateType extends React.Component{
                 </div>
                 <div
                     className="drop-down-menu-option"
+                    chosen={mutate.toString()}
                     onClick={this._handleClick.bind(this, 'mutate')}
                 >
                     <input type="checkbox" checked={mutate} readOnly/>

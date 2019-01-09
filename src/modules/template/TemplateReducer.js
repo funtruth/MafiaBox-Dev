@@ -59,7 +59,11 @@ const initialState = {
         },
         'choices.$': {
             dropdown: dropdownType.pickUid,
-            action: 'Select',
+            action: 'Add',
+            variableType: variableType.uid.key,
+        },
+        'choices.$.$': {
+            hideButton: true,
             variableType: variableType.uid.key,
         },
         'events': {

@@ -21,9 +21,13 @@ class LogicExpandable extends React.Component{
         const { pageInfo, field, item, nested,
             property, updateRef, prefix } = this.props
             
-        const expanded = pageInfo[field][item].data &&
+        //TODO oof
+        const expanded = (pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
-            pageInfo[field][item].data[prefix].expand
+            pageInfo[field][item].data[prefix].expand)
+            || !pageInfo[field][item].data
+            || !pageInfo[field][item].data[prefix]
+            || pageInfo[field][item].data[prefix].expand !== false
             
         const attributes = proptool.getSubfields(prefix, pageInfo[field][item].data)
         const hasAttr = attributes.length > 0
@@ -34,13 +38,18 @@ class LogicExpandable extends React.Component{
         return (
             <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
                 <div className="row-nowrap">
-                    {hasAttr ? <i
-                        className={`${expanded ? "mdi mdi-minus-box" : "mdi mdi-plus-box"} common-bubble`}
-                        onClick={this._toggle}
-                    />:<i
-                        className="mdi mdi-plus-box common-bubble"
-                        style={{ opacity: 0 }}
-                    />}
+                    {hasAttr ? 
+                        <div
+                            className="common-bubble"
+                            onClick={this._toggle}
+                        >
+                            <i className={expanded ? "mdi mdi-minus-box" : "mdi mdi-plus-box"}/>
+                        </div>
+                        :<i
+                            className="mdi mdi-plus-box common-bubble"
+                            style={{ opacity: 0 }}
+                        />
+                    }
                     <div className={`common-bubble ${isVarField?'--var':'--grey27'}`} onClick={this._toggle}>
                         {property}
                     </div>
