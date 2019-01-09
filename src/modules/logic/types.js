@@ -41,13 +41,6 @@ export const logicType = {
         icon: 'mdi mdi-code-braces',
         color: '#a566b0',
     },
-    transient: {
-        key: 'transient',
-        index: 7,
-        title: 'transient',
-        icon: 'mdi mdi-timeline-text',
-        color: '#eF9000',
-    },
     return: {
         key: 'return',
         index: 7,

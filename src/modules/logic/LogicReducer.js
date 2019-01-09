@@ -35,16 +35,16 @@ function recursive(key, library) {
                 if (!data[field].value) continue
                 
                 codeCurrent = codeCurrent.concat(
-                    `[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                    `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=${typeof data[field].value === 'string' ?
                         updateType[data[field].value] ?
                             updateType[data[field].value].code(data, convertPropertyFields(field))
                             :`'${data[field].value}'`
-                        :`${data[field].value}`}\n`
+                        :`${data[field].value}`};`
                 )
             }
             break
-        case logicType.transient.key:
+        /*case logicType.transient.key:
             for (var field1 in data) {
                 if (!data[field1].value) continue
 
@@ -52,7 +52,7 @@ function recursive(key, library) {
                     `${convertPropertyFields(field1)}=${data[field1].value}\n`
                 )
             }
-            break
+            break*/
         case logicType.else.key:
         case logicType.function.key:
         default:
@@ -81,10 +81,7 @@ function recursive(key, library) {
             codeBody = `return ${codeCurrent};`
             break
         case logicType.update.key:
-            codeBody = `updates${codeCurrent};${codeRight}`
-            break
-        case logicType.transient.key:
-            codeBody = `${codeCurrent};${codeRight};`
+            codeBody = `${codeCurrent}${codeRight}`
             break
         default:
             codeBody = ''

@@ -12,12 +12,14 @@ import { showDropdown } from '../dropdown/DropdownReducer'
 class AppWrapper extends React.Component{
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
+        window.addEventListener('contextmenu', this._handleClick)
         window.addEventListener('scroll', this._handleScroll, true)
         window.addEventListener('keyup', this._onKeyPress)
     }
 
     componentWillUnmount() {
         window.removeEventListener('click', this._handleClick)
+        window.removeEventListener('contextmenu', this._handleClick)
         window.removeEventListener('scroll', this._handleScroll, false)
         window.removeEventListener('keyup', this._onKeyPress)
     }
@@ -46,7 +48,7 @@ class AppWrapper extends React.Component{
 
     _handleClick = (e) => {
         const { dropdownKeys } = this.props
-
+        
         if (e.target.matches('.menu-onclick')) {
             const menuClick = e.target.getAttribute('menu-type')
             if (menuClick) {
@@ -66,11 +68,8 @@ class AppWrapper extends React.Component{
                     this.props.showDropdown()
                 }
             }
-        } else if (e.target.matches('.menu-voidclick')) {
-            //negate the click from closing
         } else {
-            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option')
-                && dropdownKeys.length) {
+            if (!e.target.matches('.drop-down-menu') && !e.target.matches('.drop-down-menu-option') && dropdownKeys.length) {
                 this.props.showDropdown()
             }
         }

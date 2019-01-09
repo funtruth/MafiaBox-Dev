@@ -33,6 +33,5 @@ class AddUpdateField extends React.Component{
 export default connect(
     state => ({
         updateRef: proptool.addPlayerRef(state.template),
-        playerRef: state.template.playerRef,
     }),
 )(AddUpdateField)

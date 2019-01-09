@@ -8,29 +8,17 @@ import { variableType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import DropParent from '../components/DropParent'
+
 class PickVarProp extends React.Component{
     _onSelect = (item) => {
         const { pageKey, fieldKey, subfieldKey, indexKey, prefix } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey]: `${prefix}.${item.subfield}`,
+            [subfieldKey]: `${prefix}.${item}`,
             [`${subfieldKey}.adjust`]: null
         })
         this.props.showDropdown()
-    }
-
-    _onShowProps = (item, e) => {
-        const { prefix } = this.props
-        
-        this.props.showDropdown(dropdownType.pickVarProp, e, {
-            prefix: `${prefix}.${item.subfield}`,
-        })
-    }
-    
-    _onMouseOut = e => {
-        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownTo()
-        }
     }
 
     _renderItem = (item) => {
@@ -40,31 +28,37 @@ class PickVarProp extends React.Component{
         const vars = proptool.getSubfields(`${prefix}.${item}`, updateRef)
         const isObject = vars.length > 0
         
+        if (isObject) {
+            return (
+                <DropParent
+                    {...this.props}
+                    key={item}
+                    dropdownType={dropdownType.pickVarProp}
+                    params={{
+                        prefix: `${prefix}.${item}`,
+                    }}
+                    text={item}
+                />
+            )
+        }
+
         return (
             <div
                 key={item}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={isObject ? undefined : this._onSelect.bind(this, item)}
-                onMouseOver={isObject ? this._onShowProps.bind(this, item) : undefined}
-                onMouseOut={isObject ? this._onMouseOut : undefined}
+                onClick={this._onSelect.bind(this, item)}
             >
                 {item}
-                {isObject && <i
-                    className="ion-ios-play"
-                    style={{
-                        marginLeft: 'auto',
-                    }}
-                />}
                 {chosen && <i className="ion-md-checkmark"/>}
             </div>
         )
     }
     
     render() {
-        const { updateRef, prefix, attach } = this.props
+        const { updateRef, prefix, attachVar } = this.props
         const subfields = proptool.getSubfields(prefix, updateRef)
-        const uids = _.filter(attach, i => i.variableType === variableType.uid.key)
+        const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
         
         let menuStyle = {
             maxHeight: 200,

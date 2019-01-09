@@ -4,20 +4,9 @@ import _ from 'lodash'
 
 import { dropdownType } from '../types'
 
+import DropParent from '../components/DropParent'
+
 class StoryMapLib extends React.Component{
-    _onMouseEnter = (key, e) => {
-        this.props.showDropdown(dropdownType.pageLib, e, {
-            hoverKey: key,
-            onSelect: this.props.onSelect,
-        })
-    }
-
-    _onMouseOut = e => {
-        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownTo()
-        }
-    }
-
     render() {
         const { storyMap, pageRepo, hoverKey } = this.props
         
@@ -27,21 +16,16 @@ class StoryMapLib extends React.Component{
         return (
             Object.keys(stories).map((item, index) => {
                 return (
-                    <div
+                    <DropParent
+                        {...this.props}
                         key={item}
-                        className="drop-down-menu-option"
-                        onMouseOver={this._onMouseEnter.bind(this, item)}
-                        onMouseOut={this._onMouseOut}
-                    >
-                        {storyMap[item].title}
-                        <i
-                            className="ion-ios-play"
-                            style={{
-                                marginLeft: 'auto',
-                                pointerEvents: 'none',
-                            }}
-                        />
-                    </div>
+                        dropdownType={dropdownType.pageLib}
+                        params={{
+                            hoverKey: item,
+                            onSelect: this.props.onSelect,
+                        }}
+                        text={storyMap[item].title}
+                    />
                 )
             })
         )

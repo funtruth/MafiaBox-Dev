@@ -7,6 +7,8 @@ import { fuseType, dropdownType } from '../types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import DropParent from '../components/DropParent'
+
 class BoardLib extends React.Component{
     constructor(props) {
         super(props)
@@ -22,20 +24,6 @@ class BoardLib extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', key)
         this.props.showDropdown()
-    }
-
-    _onMouseEnter = (key, e) => {
-        const { hoverKey } = this.props
-        if (key === hoverKey) return
-        this.props.showDropdown(dropdownType.storyMapLib, e, {
-            hoverKey: key,
-        })
-    }
-
-    _onMouseOut = (e) => {
-        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownTo()
-        }
     }
 
     _onType = (e) => {
@@ -83,21 +71,15 @@ class BoardLib extends React.Component{
                         </div>
                     :Object.keys(boards).map((item, index) => {
                         return (
-                            <div
+                            <DropParent
+                                {...this.props}
                                 key={item}
-                                className="drop-down-menu-option"
-                                onMouseOver={this._onMouseEnter.bind(this, item)}
-                                onMouseOut={this._onMouseOut}
-                            >
-                                {boardRepo[item].title}
-                                <i
-                                    className="ion-ios-play"
-                                    style={{
-                                        marginLeft: 'auto',
-                                        pointerEvents: 'none',
-                                    }}
-                                />
-                            </div>
+                                dropdownType={dropdownType.storyMapLib}
+                                params={{
+                                    hoverKey: item,
+                                }}
+                                text={boardRepo[item].title}
+                            />
                         )
                     })
                 }

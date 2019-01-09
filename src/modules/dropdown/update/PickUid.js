@@ -1,28 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import * as proptool from '../../logic/proptool'
 
 import { variableType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import DropParent from '../components/DropParent'
+
 class PickUid extends React.Component{
     _renderItem = (item) => {
-        const { currentValue } = this.props
+        const { currentValue, updateRef, subfieldKey, attach } = this.props
+        const newKey = `${subfieldKey}.$${item.key}`
+        const config = proptool.getUpdateConfig(newKey, updateRef)
         
         const chosen = typeof currentValue === 'string' && currentValue === item
 
+        if (config.hideButton) {
+            return (
+                <div
+                    key={item.key}
+                    className="drop-down-menu-option"
+                    chosen={chosen.toString()}
+                    onClick={this._select.bind(this, item)}
+                >
+                    {item.key}
+                    {chosen && <i className="ion-md-checkmark"/>}
+                </div>
+            )
+        }
+    
         return (
-            <div
+            <DropParent
+                {...this.props}
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
-                onClick={this._select.bind(this, item)}
-            >
-                {item.key}
-                {chosen && <i className="ion-md-checkmark"/>}
-            </div>
+                dropdownType={config.dropdown}
+                params={{
+                    subfieldKey: newKey,
+                    currentValue: attach[newKey] && attach[newKey].value,
+                }}
+                text={item.key}
+            />
         )
+        
     }
 
     _select = (item) => {
@@ -50,7 +71,9 @@ class PickUid extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        updateRef: proptool.addPlayerRef(state.template),
+    }),
     {
         updatePageByPath,
     }

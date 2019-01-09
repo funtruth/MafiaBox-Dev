@@ -10,22 +10,11 @@ class LogicObject extends React.Component{
     render() {
         const { logicInfo, updateRef } = this.props
         
-        const show = logicInfo.logicType === logicType.update.key || logicInfo.logicType === logicType.transient.key
+        const show = logicInfo.logicType === logicType.update.key
         if (!show) return null
 
-        let filterBy
-        switch (logicInfo.logicType) {
-            case logicType.update.key:
-                filterBy = 'updatable'
-                break
-            case logicType.transient.key:
-                filterBy = 'transient'
-                break
-            default:
-        }
-
         return (
-            _.filter(Object.keys(updateRef), i => updateRef[i][filterBy])
+            _.filter(Object.keys(updateRef), i => i.indexOf('.') === -1)
                 .map((property, index) => (
                     <LogicExpandable
                         {...this.props}
