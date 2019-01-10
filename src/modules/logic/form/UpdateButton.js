@@ -5,7 +5,7 @@ import { updateType, valueType } from '../types';
 
 class UpdateButton extends React.Component{
     render() {
-        const { config, field, pageInfo, logicInfo, item, prefix, vars, pageRepo } = this.props
+        const { config, pageKey, fieldKey, indexKey, logicInfo, prefix, vars, pageRepo } = this.props
         const info = logicInfo.data[prefix] || {}
         
         let buttonText = ""
@@ -34,9 +34,9 @@ class UpdateButton extends React.Component{
                 className="logic-pick-update app-onclick"
                 highlight="true"
                 menu-type={config.dropdown}
-                page-key={pageInfo.pageKey}
-                index-key={item}
-                field-key={field}
+                page-key={pageKey}
+                index-key={indexKey}
+                field-key={fieldKey}
                 subfield-key={prefix}
                 current-value={info.value}
                 attach={JSON.stringify(logicInfo.data)}

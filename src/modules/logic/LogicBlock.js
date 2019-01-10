@@ -25,7 +25,9 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        let { fieldKey, pageInfo, pageRepo, value, index, vars } = this.props
+        const { pageKey, fieldKey, pageInfo, pageRepo, index, vars } = this.props
+        let { value } = this.props
+
         if (!pageInfo) return null
         if (!value) {
             value = defaultLogic
@@ -42,7 +44,7 @@ class LogicBlock extends React.Component{
         
         return (
             <Droppable
-                droppableId={`CIRCUIT/${pageInfo.pageKey}/${fieldKey}/${index}/${this.rng}`}
+                droppableId={`CIRCUIT/${pageKey}/${fieldKey}/${index}/${this.rng}`}
                 type={`ROW/${index}`}
             >
                 {(provided, snapshot) => (
@@ -56,15 +58,17 @@ class LogicBlock extends React.Component{
                             const errors = maptool.compile(item, value)
                             const collapsed = logicInfo.collapsed
                             const iprops = {
-                                item,
+                                indexKey: item,
                                 logicInfo,
-                                field: fieldKey,
-                                pageInfo,
+                                pageKey,
+                                fieldKey,
                                 vars,
                             }
+                            console.log('we want these props', iprops, {realProps: this.props})
                             
                             const newVars = logicInfo.logicType === logicType.function.key &&
                                 logicInfo.data && pageRepo[logicInfo.data].vars
+                            const showObject = logicInfo.logicType === logicType.update.key
                                 
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -88,7 +92,7 @@ class LogicBlock extends React.Component{
                                                 <LogicPanels {...iprops}/>
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
-                                            <LogicObject {...iprops}/>
+                                            {showObject && <LogicObject {...iprops}/>}
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>

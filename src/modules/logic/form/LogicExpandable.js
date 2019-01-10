@@ -7,33 +7,28 @@ import UpdateButton from './UpdateButton'
 
 class LogicExpandable extends React.Component{
     _toggle = () => {
-        const { pageInfo, field, item, prefix } = this.props
-        const { pageKey } = pageInfo
+        const { pageKey, fieldKey, indexKey, logicInfo, prefix } = this.props
 
-        this.props.updatePageByPath(pageKey, field, item, 'data', prefix, {
-            hide: !pageInfo[field][item].data ||
-                !pageInfo[field][item].data[prefix] ||
-                !pageInfo[field][item].data[prefix].hide
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', prefix, {
+            hide: !logicInfo.data ||
+                !logicInfo.data[prefix] ||
+                !logicInfo.data[prefix].hide
         })
     }
 
     render() {
-        const { pageInfo, field, item, nested,
-            property, updateRef, prefix } = this.props
+        const { logicInfo, nested, property, updateRef, prefix } = this.props
+    
+        const hidden = logicInfo.data && logicInfo.data[prefix] && logicInfo.data[prefix].hide
             
-        //TODO oof
-        const hidden = pageInfo[field][item].data &&
-            pageInfo[field][item].data[prefix] &&
-            pageInfo[field][item].data[prefix].hide
-            
-        const attributes = proptool.getSubfields(prefix, pageInfo[field][item].data)
+        const attributes = proptool.getSubfields(prefix, logicInfo.data)
         const hasAttr = attributes.length > 0
         const isVarField = property.charAt(0) === '$'
 
         const config = proptool.getUpdateConfig(prefix, updateRef)
         
         return (
-            <div style={{ marginTop: 2, marginLeft: nested?12:0 }}>
+            <div style={{ marginTop: 2, marginLeft: nested ? 12 : 0 }}>
                 <div className="row-nowrap">
                     {hasAttr ? 
                         <div

@@ -18,12 +18,13 @@ import StringMaker from './components/StringMaker'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
-        const { pageInfo, fieldRepo, updatePageByPath } = this.props
+        const { pageKey, pageInfo, fieldRepo, updatePageByPath } = this.props
         const fieldInfo = fieldRepo[item.key]
         const { fieldKey, data } = fieldInfo
         
         const props = {
             key: fieldKey,
+            pageKey,
             fieldKey,
             value: pageInfo[fieldKey],
             data,

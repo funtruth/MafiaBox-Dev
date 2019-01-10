@@ -33,6 +33,7 @@ class PageView extends React.Component {
                         updatePage={this.props.updatePage}
                     />
                     <FieldView
+                        pageKey={pageKey}
                         pageInfo={pageInfo}
                     />
                 </div>

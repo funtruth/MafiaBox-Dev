@@ -48,15 +48,19 @@ class AppWrapper extends React.Component{
     }
 
     _handleClick = (e) => {
+        //TODO handling still needs a bit of work
         if (helpers.isAppClickCancelled(e.target)) {
-            return
+            //return
         }
 
+        //check if clicking on a modal background
         if (e.target.classList.contains('modal')) {
             this.props.showModal()
+            this.props.showDropdown()
             return
         }
 
+        //if click is not inside a dropdown element, close any dropdowns
         if (!helpers.isElementDropdown(e.target)) {
             this.props.showDropdown()
         }

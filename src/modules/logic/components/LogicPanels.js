@@ -8,8 +8,7 @@ import { comparisonType } from '../types'
 class LogicPanels extends React.Component{
     //TODO needs major refactoring
     render() {
-        const { item, field, logicInfo, pageInfo, pageRepo, vars } = this.props
-        const { pageKey } = pageInfo
+        const { pageKey, fieldKey, indexKey, logicInfo, pageRepo, vars } = this.props
         const { data } = logicInfo
         
         const hasPage = pageRepo[data]
@@ -23,9 +22,9 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
-                            field-key={field}
+                            field-key={fieldKey}
                             subfield-key="var1"
-                            index-key={item}
+                            index-key={indexKey}
                             page-key={pageKey}
                             current-value={data.var1}
                             style={{
@@ -42,9 +41,9 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickComparison}
-                            field-key={field}
+                            field-key={fieldKey}
                             subfield-key="comparison"
-                            index-key={item}
+                            index-key={indexKey}
                             page-key={pageKey}
                             current-value={data.comparison}
                             style={{
@@ -58,9 +57,9 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
-                            field-key={field}
+                            field-key={fieldKey}
                             subfield-key="var2"
-                            index-key={item}
+                            index-key={indexKey}
                             page-key={pageKey}
                             current-value={data.var2}
                             style={{
@@ -96,8 +95,8 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.pickLibrary}
-                        field-key={field}
-                        index-key={item}
+                        field-key={fieldKey}
+                        index-key={indexKey}
                         page-key={pageKey}
                         current-value={data}
                         style={{
@@ -118,8 +117,8 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.returnTypes}
-                        field-key={field}
-                        index-key={item}
+                        field-key={fieldKey}
+                        index-key={indexKey}
                         page-key={pageKey}
                         current-value={data}
                         style={{
@@ -135,8 +134,8 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.showLibrary}
-                        field-key={field}
-                        index-key={item}
+                        field-key={fieldKey}
+                        index-key={indexKey}
                         page-key={pageKey}
                         current-value={data}
                         style={{

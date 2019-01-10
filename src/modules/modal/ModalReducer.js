@@ -1,3 +1,5 @@
+import * as helpers from '../common/helpers'
+
 const initialState = {
     modalKeys: [],
 }
@@ -17,15 +19,17 @@ export function showModal(key, params={}) {
             if (keysClone.length) {
                 keysClone.push({
                     ...keysClone[keysClone.length - 1],
+                    ...dropdownKeys[dropdownKeys.length - 1],
                     key,
                     ...params,
-                    zIndex: keysClone.length + dropdownKeys.length + 2,
+                    zIndex: helpers.getZIndex(keysClone, dropdownKeys),
                 })
             } else {
                 keysClone.push({
+                    ...dropdownKeys[dropdownKeys.length - 1],
                     key,
                     ...params,
-                    zIndex: keysClone.length + dropdownKeys.length + 2,
+                    zIndex: helpers.getZIndex(keysClone, dropdownKeys),
                 })
             }
         }

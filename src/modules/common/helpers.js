@@ -37,21 +37,6 @@ export function isElementDropdown(target) {
     return isDropdown
 }
 
-//returns boolean if element is a modal
-export function isElementModal(target) {
-    let isModal = target.className === 'modal'
-
-    while(target.parentElement && !isModal) {
-        if (target.parentElement.className === 'modal') {
-            isModal = true
-        } else {
-            target = target.parentElement
-        }
-    }
-
-    return isModal
-}
-
 export function isAppClickCancelled(target) {
     let isCancel = false
 
@@ -64,4 +49,11 @@ export function isAppClickCancelled(target) {
     }
 
     return isCancel
+}
+
+export function getZIndex(a, b) {
+    return Math.max(
+        a[a.length - 1] ? a[a.length - 1].zIndex : 1,
+        b[b.length - 1] ? b[b.length - 1].zIndex : 1,
+        1, ) + 1
 }

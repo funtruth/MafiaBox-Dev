@@ -1,7 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import * as proptool from '../../logic/proptool'
 
 import { showModal } from '../ModalReducer'
+
+import LogicObject from '../../logic/form/LogicObject';
 
 class EditTrigger extends React.Component {
     constructor(props) {
@@ -33,6 +36,17 @@ class EditTrigger extends React.Component {
     }
 
     render() {
+        const { pageKey, fieldKey, indexKey, attach, attachVar } = this.props
+        const iprops = {
+            indexKey,
+            logicInfo: {
+                data: attach,
+            },
+            pageKey,
+            fieldKey,
+            vars: attachVar,
+        }
+        
         return (
             <div
                 cancel-appclick="true"
@@ -44,14 +58,7 @@ class EditTrigger extends React.Component {
                     <div className="modal-subtitle">
                         {`Choose a label for your new field.`}
                     </div>
-                    <input
-                        className="add-role-input"
-                        placeholder="Name, Action ..."
-                        style={{ marginTop: 5 }}
-                        onChange={this._onChange}
-                        value={this.state.value}
-                        autoFocus
-                    />
+                    <LogicObject {...iprops}/>
                 </div>
                 <div className="row dark-grey modal-options">
                     <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={this._onCancel}>
@@ -67,7 +74,9 @@ class EditTrigger extends React.Component {
 }
 
 export default connect(
-    null,
+    state => ({ 
+        updateRef: proptool.addPlayerRef(state.template),
+    }),
     {
         showModal,
     }

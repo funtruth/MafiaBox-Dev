@@ -1,3 +1,5 @@
+import * as helpers from '../common/helpers'
+
 const initialState = {
     dropdownKeys: [],
 }
@@ -25,7 +27,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     ...params,
                     pageX: prev.pageX + e.target.offsetWidth,
                     pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
-                    zIndex: keysClone.length + modalKeys.length + 2,
+                    zIndex: helpers.getZIndex(keysClone, modalKeys),
                 })
             } else {
                 keysClone.push({
@@ -33,7 +35,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     ...params,
                     pageX: e.pageX - e.offsetX - 8,
                     pageY: e.pageY - e.offsetY + e.target.offsetHeight,
-                    zIndex: keysClone.length + modalKeys.length + 2,
+                    zIndex: helpers.getZIndex(keysClone, modalKeys),
                 })
             }
 

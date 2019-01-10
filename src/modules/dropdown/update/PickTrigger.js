@@ -20,6 +20,7 @@ class PickTrigger extends React.Component{
 
     _addTrigger = () => {
         this.props.showModal(modalType.editTrigger)
+        this.props.showDropdown()
     }
 
     _renderItem = (item) => {

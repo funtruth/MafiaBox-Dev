@@ -7,10 +7,10 @@ import { addItemToRightOf } from '../../fields/FieldReducer'
 
 class LogicRightArrow extends React.Component{
     _onClick = () => {
-        const { item, field, pageInfo } = this.props
+        const { item, fieldKey, pageInfo } = this.props
         const { pageKey } = pageInfo
         
-        this.props.addItemToRightOf(item, pageKey, field)
+        this.props.addItemToRightOf(item, pageKey, fieldKey)
     }
 
     render() {
