@@ -2,15 +2,16 @@ import React from 'react'
 
 class Dropdown extends React.Component{
     render() {
-        const { children, pageX, pageY } = this.props
+        const { children, pageX, pageY, zIndex } = this.props
         
         return (
             <div
                 className="drop-down-menu" 
                 style={{
+                    position: 'fixed',
                     top: pageY,
                     left: pageX,
-                    position: 'fixed'
+                    zIndex,
                 }}>
                 {children}
             </div>

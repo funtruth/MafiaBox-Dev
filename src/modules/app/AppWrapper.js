@@ -48,33 +48,34 @@ class AppWrapper extends React.Component{
     }
 
     _handleClick = (e) => {
-        const { dropdownKeys } = this.props
-        
+        if (helpers.isAppClickCancelled(e.target)) {
+            return
+        }
+
+        if (e.target.classList.contains('modal')) {
+            this.props.showModal()
+            return
+        }
+
+        if (!helpers.isElementDropdown(e.target)) {
+            this.props.showDropdown()
+        }
+
         if (e.target.matches('.app-onclick')) {
             const menuClick = e.target.getAttribute('menu-type')
+            
             if (menuClick) {
-                if (!dropdownKeys.length ||
-                    e.target.getAttribute('field-key') !== dropdownKeys[0].fieldKey) {
-                        this.props.showDropdown(menuClick, e, {
-                            indexKey: e.target.getAttribute('index-key'),
-                            tagKey: e.target.getAttribute('tag-key'),
-                            fieldKey: e.target.getAttribute('field-key'),
-                            subfieldKey: e.target.getAttribute('subfield-key'),
-                            pageKey: e.target.getAttribute('page-key'),
-                            currentValue: e.target.getAttribute('current-value'),
-                            attach: JSON.parse(e.target.getAttribute('attach')),
-                            attachVar: JSON.parse(e.target.getAttribute('attach-var')),
-                        })
-                } else {
-                    this.props.showDropdown()
-                }
+                this.props.showDropdown(menuClick, e, {
+                    indexKey: e.target.getAttribute('index-key'),
+                    tagKey: e.target.getAttribute('tag-key'),
+                    fieldKey: e.target.getAttribute('field-key'),
+                    subfieldKey: e.target.getAttribute('subfield-key'),
+                    pageKey: e.target.getAttribute('page-key'),
+                    currentValue: e.target.getAttribute('current-value'),
+                    attach: JSON.parse(e.target.getAttribute('attach')),
+                    attachVar: JSON.parse(e.target.getAttribute('attach-var')),
+                })
             }
-
-            if (e.target.classList.contains('modal')) {
-                this.props.showModal()
-            }
-        } else if (!helpers.isElementDropdown(e.target)) {
-            this.props.showDropdown()
         }
     }
 

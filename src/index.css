@@ -17,6 +17,10 @@ div[highlight]:hover {
     cursor: pointer;
 }
 
+div[empty] {
+  color: #666666
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

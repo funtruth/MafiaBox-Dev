@@ -121,11 +121,9 @@ const initialState = {
             variableType: variableType.boolean,
         },
         'trigger': {
-            dropdown: dropdownType.pickBoolean,
+            dropdown: dropdownType.pickTrigger,
             action: 'Select',
-            update: false,
-            mutate: true,
-            variableType: variableType.boolean.key,
+            variableType: variableType.uid.key,
         },
         'trigger.$update': {
             dropdown: dropdownType.pickBoolean,

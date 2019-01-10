@@ -7,6 +7,7 @@ const UPDATE_KEYS = 'dropdown/update-keys'
 export function showDropdown(key, e, params={}, index=0) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
+        const { modalKeys } = getState().modal
 
         if (!key) {
             dispatch({
@@ -24,6 +25,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     ...params,
                     pageX: prev.pageX + e.target.offsetWidth,
                     pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+                    zIndex: keysClone.length + modalKeys.length + 2,
                 })
             } else {
                 keysClone.push({
@@ -31,6 +33,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     ...params,
                     pageX: e.pageX - e.offsetX - 8,
                     pageY: e.pageY - e.offsetY + e.target.offsetHeight,
+                    zIndex: keysClone.length + modalKeys.length + 2,
                 })
             }
 

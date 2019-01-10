@@ -4,7 +4,6 @@
     border-radius: 4px;
     min-width: 160px;
     padding: 8px 0px;
-    z-index: 7;
     user-select: none;
 
     animation: fadein 0.2s, scalein 0.2s;
@@ -19,7 +18,6 @@
     background-color: rgba(54, 57, 64, 1);
     border-radius: 4px;
     padding: 8px 0px;
-    z-index: 7;
 
     animation: fadein 0.2s, scalein 0.2s;
     -webkit-animation: fadein 0.2s, scalein 0.2s;

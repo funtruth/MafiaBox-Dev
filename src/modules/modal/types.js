@@ -7,4 +7,6 @@ export const modalType = {
 
     showPage: 'modalType/show-page',
     showTemplate: 'modalType/show-template',
+
+    editTrigger: 'modalType/edit-trigger',
 }

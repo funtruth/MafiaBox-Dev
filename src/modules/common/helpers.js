@@ -22,6 +22,7 @@ export function pathUpdate(args, index, repo) {
     }
 }
 
+//returns boolean if element is a dropdown
 export function isElementDropdown(target) {
     let isDropdown = target.className === 'drop-down-menu'
 
@@ -32,5 +33,35 @@ export function isElementDropdown(target) {
             target = target.parentElement
         }
     }
+    
     return isDropdown
+}
+
+//returns boolean if element is a modal
+export function isElementModal(target) {
+    let isModal = target.className === 'modal'
+
+    while(target.parentElement && !isModal) {
+        if (target.parentElement.className === 'modal') {
+            isModal = true
+        } else {
+            target = target.parentElement
+        }
+    }
+
+    return isModal
+}
+
+export function isAppClickCancelled(target) {
+    let isCancel = false
+
+    while(target.parentElement && !isCancel) {
+        if (target.parentElement.getAttribute('cancel-appclick')) {
+            isCancel = true
+        } else {
+            target = target.parentElement
+        }
+    }
+
+    return isCancel
 }

@@ -6,6 +6,9 @@ import { dropdownType } from './types'
 import { boardType } from '../board/types'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 
+import Dropdown from './components/Dropdown';
+import SearchBoard from './update/SearchBoard';
+
 import ClickMenu from './components/ClickMenu'
 import InputValue from './components/InputValue'
 
@@ -36,9 +39,7 @@ import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
 import PickNews from './update/PickNews'
 import PickHealth from './update/PickHealth'
-
-import Dropdown from './components/Dropdown';
-import SearchBoard from './update/SearchBoard';
+import PickTrigger from './update/PickTrigger';
 
 class DropdownView extends React.Component{
     _renderItem = (props, index) => {
@@ -107,6 +108,8 @@ class DropdownView extends React.Component{
                 return <PickNews {...props}/>
             case dropdownType.pickHealth:
                 return <PickHealth {...props}/>
+            case dropdownType.pickTrigger:
+                return <PickTrigger {...props}/>
             default:
                 return null
         }

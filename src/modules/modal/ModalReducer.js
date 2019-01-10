@@ -7,6 +7,8 @@ const UPDATE_MODAL_KEYS = 'modal/update-modal-keys'
 export function showModal(key, params={}) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
+        const { dropdownKeys } = getState().dropdown
+
         let keysClone = Array.from(modalKeys)
 
         if (!key) {
@@ -17,11 +19,13 @@ export function showModal(key, params={}) {
                     ...keysClone[keysClone.length - 1],
                     key,
                     ...params,
+                    zIndex: keysClone.length + dropdownKeys.length + 2,
                 })
             } else {
                 keysClone.push({
                     key,
                     ...params,
+                    zIndex: keysClone.length + dropdownKeys.length + 2,
                 })
             }
         }

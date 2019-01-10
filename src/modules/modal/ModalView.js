@@ -6,13 +6,16 @@ import { showModal } from './ModalReducer'
 
 import { modalType } from './types'
 
+import Modal from './components/Modal';
+
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
-import Modal from './components/Modal';
+
+import EditTrigger from './trigger/EditTrigger'
 
 class ModalView extends React.Component {
     _renderItem(item) {
@@ -30,6 +33,9 @@ class ModalView extends React.Component {
                 return <PageModal {...item}/>
             case modalType.showTemplate:
                 return <TemplateModal {...item}/>
+            
+            case modalType.editTrigger:
+                return <EditTrigger {...item}/>
             default:
                 return null
         }
@@ -42,7 +48,7 @@ class ModalView extends React.Component {
         return (
             modalKeys.map((item, index) => {
                 return (
-                    <Modal key={index}>
+                    <Modal {...item} key={index}>
                         {this._renderItem(item)}
                     </Modal>
                 )

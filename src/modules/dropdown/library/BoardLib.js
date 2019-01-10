@@ -66,7 +66,7 @@ class BoardLib extends React.Component{
                                 </div>
                             )
                         })
-                        :<div className="drop-down-menu-option" style={{ color: '#666666' }}>
+                        :<div className="drop-down-menu-option" empty="true">
                             No search results found
                         </div>
                     :Object.keys(boards).map((item, index) => {
