@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
-import { variableType } from '../../logic/types'
+import { variableType, valueType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
@@ -17,7 +17,7 @@ class PickUid extends React.Component{
         const config = proptool.getUpdateConfig(newKey, updateRef)
         const chosen = typeof currentValue === 'string' && currentValue === item
 
-        if (config.hideButton) {
+        if (!config || config.hideButton) {
             return (
                 <div
                     key={item.key}
@@ -49,7 +49,10 @@ class PickUid extends React.Component{
     _select = (item) => {
         const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.$${item.key}`, 'value', '')
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}`, {
+            value: `$${item.key}`,
+            valueType: valueType.uid,
+        })
         this.props.showDropdown()
     }
 

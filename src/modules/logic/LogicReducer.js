@@ -33,26 +33,21 @@ function recursive(key, library) {
         case logicType.update.key:
             for (var field in data) {
                 if (!data[field].value) continue
+
+                if (data[field].update) {
+                    codeCurrent = codeCurrent.concat(
+                        `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                        .join('/')}\`]=${convertValue(data, field)};`
+                    )
+                }
                 
-                codeCurrent = codeCurrent.concat(
-                    `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                    .join('/')}\`]=${typeof data[field].value === 'string' ?
-                        updateType[data[field].value] ?
-                            updateType[data[field].value].code(data, convertPropertyFields(field))
-                            :`'${data[field].value}'`
-                        :`${data[field].value}`};`
-                )
+                if (data[field].mutate) {
+                    codeCurrent = codeCurrent.concat(
+                        `${convertPropertyFields(field)}=${convertValue(data, field)};`
+                    )
+                }
             }
             break
-        /*case logicType.transient.key:
-            for (var field1 in data) {
-                if (!data[field1].value) continue
-
-                codeCurrent = codeCurrent.concat(
-                    `${convertPropertyFields(field1)}=${data[field1].value}\n`
-                )
-            }
-            break*/
         case logicType.else.key:
         case logicType.function.key:
         default:
@@ -92,6 +87,7 @@ function recursive(key, library) {
     return `${codeBody}${codeDown}`
 }
 
+//replace variable properties from foo.$bar to foo[bar]
 function convertPropertyFields(string) {
     let parts = string.split('.')
 
@@ -104,6 +100,15 @@ function convertPropertyFields(string) {
     parts = parts.join('.').replace(/\.\$/g, '[')
 
     return parts
+}
+
+//handles data value formatting on the right side of the =
+function convertValue(data, field) {
+    return typeof data[field].value === 'string' ?
+        updateType[data[field].value] ?
+            updateType[data[field].value].code(data, convertPropertyFields(field))
+            :`'${data[field].value}'`
+        :`${data[field].value}`
 }
 
 export default (state = initialState, action) => {

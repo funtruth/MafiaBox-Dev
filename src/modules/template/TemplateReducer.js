@@ -65,10 +65,6 @@ const initialState = {
             action: 'Add',
             variableType: variableType.uid.key,
         },
-        'choices.$.$': {
-            hideButton: true,
-            variableType: variableType.uid.key,
-        },
         'events': {
             dropdown: dropdownType.writeNews,
             action: 'Add',
