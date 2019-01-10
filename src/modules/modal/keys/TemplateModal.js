@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import TemplateView from '../../template/TemplateView'
 
 class TemplateModal extends React.Component {
     render() {
-        const { modalParams } = this.props
-        const { boardType } = modalParams
+        const { boardType } = this.props
 
         return (
             <div className="modal-page">
@@ -15,8 +13,4 @@ class TemplateModal extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
-        modalParams: state.modal.modalParams,
-    })
-)(TemplateModal)
+export default TemplateModal

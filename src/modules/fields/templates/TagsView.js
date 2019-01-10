@@ -26,7 +26,7 @@ class TagsView extends React.Component{
                             ...style
                         }}
 
-                        className="property-button menu-onclick"
+                        className="property-button app-onclick"
                         menu-type={dropdownType.editTag}
                         index-key={index}
                         tag-key={item.key}
@@ -55,7 +55,7 @@ class TagsView extends React.Component{
 
         return (
             <div
-                className="property-button menu-onclick"
+                className="property-button app-onclick"
                 menu-type={dropdownType.addTag}
                 field-key={fieldInfo.fieldKey}
                 style={style}

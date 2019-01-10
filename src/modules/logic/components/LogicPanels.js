@@ -21,7 +21,7 @@ class LogicPanels extends React.Component{
                 return (
                     <div>
                         <div
-                            className="logic-button menu-onclick"
+                            className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
                             field-key={field}
                             subfield-key="var1"
@@ -40,7 +40,7 @@ class LogicPanels extends React.Component{
                             </div> 
                         </div>
                         <div
-                            className="logic-button menu-onclick"
+                            className="logic-button app-onclick"
                             menu-type={dropdownType.pickComparison}
                             field-key={field}
                             subfield-key="comparison"
@@ -56,7 +56,7 @@ class LogicPanels extends React.Component{
                             </div>
                         </div>
                         <div
-                            className="logic-button menu-onclick"
+                            className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
                             field-key={field}
                             subfield-key="var2"
@@ -94,7 +94,7 @@ class LogicPanels extends React.Component{
             case logicType.function.key:
                 return (
                     <div
-                        className="logic-button menu-onclick"
+                        className="logic-button app-onclick"
                         menu-type={dropdownType.pickLibrary}
                         field-key={field}
                         index-key={item}
@@ -116,7 +116,7 @@ class LogicPanels extends React.Component{
             case logicType.return.key:
                 return (
                     <div
-                        className="logic-button menu-onclick"
+                        className="logic-button app-onclick"
                         menu-type={dropdownType.returnTypes}
                         field-key={field}
                         index-key={item}
@@ -133,7 +133,7 @@ class LogicPanels extends React.Component{
             default:
                 return (
                     <div
-                        className="logic-button menu-onclick"
+                        className="logic-button app-onclick"
                         menu-type={dropdownType.showLibrary}
                         field-key={field}
                         index-key={item}

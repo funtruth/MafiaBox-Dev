@@ -15,7 +15,7 @@ class TemplateTitle extends React.Component{
         return (
             <div className="row" style={{ alignItems: 'center' }}>
                 <div
-                    className="tag-button menu-onclick"
+                    className="tag-button app-onclick"
                     menu-type={dropdownType.pickFieldType}
                     field-key={fieldKey}
                 >{types[fieldType].title}</div>
@@ -27,7 +27,7 @@ class TemplateTitle extends React.Component{
                     type="text"
                 >
                 </input>
-                <i className="story-option ion-ios-more menu-onclick"
+                <i className="story-option ion-ios-more app-onclick"
                     menu-type={dropdownType.templateTitleOptions}
                     field-key={fieldKey}
                     page-key={boardType}

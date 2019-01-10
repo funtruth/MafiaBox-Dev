@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import PageView from '../../page/PageView'
 
 class PageModal extends React.Component {
     render() {
-        const { modalParams } = this.props
-        const { pageKey } = modalParams
+        const { pageKey } = this.props
 
         return (
             <div className="modal-page">
@@ -15,8 +13,4 @@ class PageModal extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
-        modalParams: state.modal.modalParams,
-    })
-)(PageModal)
+export default PageModal

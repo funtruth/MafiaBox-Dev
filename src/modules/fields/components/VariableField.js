@@ -19,7 +19,7 @@ class VariableField extends React.Component{
         return (
             <div key={index} className="row">
                 <i 
-                    className={`${variableType[varType].icon || 'ion-md-create'} logic-label menu-onclick`}
+                    className={`${variableType[varType].icon || 'ion-md-create'} logic-label app-onclick`}
                     menu-type={dropdownType.pickVarType}
                     page-key={pageInfo.pageKey}
                     field-key={fieldKey}
@@ -30,7 +30,7 @@ class VariableField extends React.Component{
                     }}
                 />
                 <div
-                    className="property-button menu-onclick"
+                    className="property-button app-onclick"
                     menu-type={dropdownType.editVar}
                     page-key={pageKey}
                     field-key={fieldKey}
@@ -59,7 +59,7 @@ class VariableField extends React.Component{
 
         return (
             <div
-                className="property-button menu-onclick"
+                className="property-button app-onclick"
                 menu-type={dropdownType.addVar}
                 page-key={pageKey}
                 field-key={fieldKey}

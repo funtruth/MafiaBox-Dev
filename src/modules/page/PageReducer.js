@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import * as helpers from '../common/helpers'
-import { modalType } from '../modal/modalConfig'
-import { showModalByKey } from '../modal/ModalReducer';
+import { modalType } from '../modal/types'
+import { showModal } from '../modal/ModalReducer';
 
 import { initStoryMap, initBoardRepo } from './defaults'
 
@@ -81,7 +81,7 @@ export function addPageToMap(mapKey, itemCount, boardType) {
             type: ADD_PAGE_TO_REPO,
             payload: pageInfo
         })
-        dispatch(showModalByKey(modalType.showPage, { pageKey }))
+        dispatch(showModal(modalType.showPage, { pageKey }))
     }
 }
 

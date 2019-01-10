@@ -10,7 +10,7 @@ class LogicType extends React.Component{
         return (
             <i 
                 className={`${(type && logicType[type].icon) ||
-                    'ion-md-create'} logic-label menu-onclick`}
+                    'ion-md-create'} logic-label app-onclick`}
                 menu-type={dropdownType.showLogic}
                 field-key={field}
                 index-key={item}

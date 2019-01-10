@@ -1,22 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../ModalReducer'
+import { showModal } from '../ModalReducer'
 import { navigate } from '../../navigation/NavReducer'
 
 class DeleteStory extends React.Component {
     _onCancel = () => {
-        this.props.showModalByKey()
+        this.props.showModal()
     }
 
     _onDelete = () => {
         //TODO delete story
-        this.props.showModalByKey()
+        this.props.showModal()
     }
 
     render() {
-        const { modalParams, pageRepo } = this.props
-        const { storyIndex } = modalParams
+        const { storyIndex, pageRepo } = this.props
         
         return (
             <div>
@@ -43,11 +42,10 @@ class DeleteStory extends React.Component {
 
 export default connect(
     state => ({
-        modalParams: state.modal.modalParams,
         pageRepo: state.page.pageRepo,
     }),
     {
-        showModalByKey,
+        showModal,
         navigate,
     }
 )(DeleteStory)

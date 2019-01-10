@@ -2,9 +2,9 @@ import React from 'react'
 import './modals.css'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from './ModalReducer'
+import { showModal } from './ModalReducer'
 
-import { modalType } from './modalConfig'
+import { modalType } from './types'
 
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
@@ -12,54 +12,50 @@ import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
+import Modal from './components/Modal';
 
 class ModalView extends React.Component {
-    _renderModal(key) {
-        switch(key) {
+    _renderItem(item) {
+        switch(item.key) {
             case modalType.deleteRole:
-                return <DeleteRole/>
+                return <DeleteRole {...item}/>
             case modalType.addNewStory:
-                return <AddNewStory/>
+                return <AddNewStory {...item}/>
             case modalType.addNewField:
-                return <AddNewField/>
+                return <AddNewField {...item}/>
             case modalType.deleteStory:
-                return <DeleteStory/>
+                return <DeleteStory {...item}/>
 
             case modalType.showPage:
-                return <PageModal/>
+                return <PageModal {...item}/>
             case modalType.showTemplate:
-                return <TemplateModal/>
+                return <TemplateModal {...item}/>
             default:
                 return null
         }
     }
 
-    _onClose = (e) => {
-        let origin = e.srcElement || e.target
-        if (origin.className === 'modal') {
-            this.props.showModalByKey()
-        }
-    }
-
     render() {
-        const { modalKey } = this.props
-        if (!modalKey) return null
+        const { modalKeys } = this.props
+        if (!modalKeys.length) return null
         
         return (
-            <div className="modal" onClick={this._onClose}>
-                <div className="modal-child">
-                    {this._renderModal(modalKey)}
-                </div>
-            </div>
+            modalKeys.map((item, index) => {
+                return (
+                    <Modal key={index}>
+                        {this._renderItem(item)}
+                    </Modal>
+                )
+            })
         )
     }
 }
 
 export default connect(
     state => ({
-        modalKey: state.modal.modalKey,
+        modalKeys: state.modal.modalKeys,
     }),
     {
-        showModalByKey,
+        showModal,
     }
 )(ModalView)

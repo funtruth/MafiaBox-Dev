@@ -20,7 +20,7 @@ class LogicOptions extends React.Component{
         return (
             <div style={{ textAlign: 'center' }}>
                 <i 
-                    className="ion-md-close logic-option menu-onclick"
+                    className="ion-md-close logic-option app-onclick"
                     menu-type={dropdownType.deleteLogic}
                     field-key={field}
                     index-key={item}

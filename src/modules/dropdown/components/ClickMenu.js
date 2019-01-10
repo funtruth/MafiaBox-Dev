@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../../modal/ModalReducer'
+import { showModal } from '../../modal/ModalReducer'
 
-import { modalType } from '../../modal/modalConfig'
+import { modalType } from '../../modal/types'
 
 class ClickMenu extends React.Component{
     _onDelete = () => {
-        this.props.showModalByKey(modalType.deleteStory, {
+        this.props.showModal(modalType.deleteStory, {
             fieldKey: this.props.fieldKey,
         })
     }
@@ -40,6 +40,6 @@ class ClickMenu extends React.Component{
 export default connect(
     null,
     {
-        showModalByKey,
+        showModal,
     }
 )(ClickMenu)

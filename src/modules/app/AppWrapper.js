@@ -7,7 +7,7 @@ import { dropdownType } from '../dropdown/types';
 
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
-import { showModalByKey } from '../modal/ModalReducer'
+import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
 
 class AppWrapper extends React.Component{
@@ -42,7 +42,7 @@ class AppWrapper extends React.Component{
                 if (this.props.dropdownKeys.length) {
                     return this.props.showDropdown()
                 }
-                return this.props.showModalByKey()
+                return this.props.showModal()
             default:
         }
     }
@@ -50,7 +50,7 @@ class AppWrapper extends React.Component{
     _handleClick = (e) => {
         const { dropdownKeys } = this.props
         
-        if (e.target.matches('.menu-onclick')) {
+        if (e.target.matches('.app-onclick')) {
             const menuClick = e.target.getAttribute('menu-type')
             if (menuClick) {
                 if (!dropdownKeys.length ||
@@ -68,6 +68,10 @@ class AppWrapper extends React.Component{
                 } else {
                     this.props.showDropdown()
                 }
+            }
+
+            if (e.target.classList.contains('modal')) {
+                this.props.showModal()
             }
         } else if (!helpers.isElementDropdown(e.target)) {
             this.props.showDropdown()
@@ -163,7 +167,7 @@ export default connect(
         movePageWithinMap,
         movePageToOtherMap,
         showDropdown,
-        showModalByKey,
+        showModal,
         moveLogic,
         moveField,
         moveTagToOtherField,

@@ -1,31 +1,32 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../ModalReducer'
+import { showModal } from '../ModalReducer'
 import { navigate } from '../../navigation/NavReducer'
 
 class CloseWindow extends React.Component {
     _onCancel = () => {
-        this.props.showModalByKey()
+        this.props.showModal()
     }
 
     _onDelete = () => {
-        this.props.deleteRole(this.props.modalParams.roleId)
-        this.props.showModalByKey()
+        const { roleId } = this.props
+        this.props.deleteRole(roleId)
+        this.props.showModal()
         this.props.navigate('/board')
     }
 
     render() {
-        const { modalParams } = this.props
+        const { roleName } = this.props
         
         return (
             <div>
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`Delete "${modalParams.roleName}"?`}
+                        {`Delete "${roleName}"?`}
                     </div>
                     <div className="modal-subtitle">
-                        {`Are you sure you want to delete ${modalParams.roleName}?`}
+                        {`Are you sure you want to delete ${roleName}?`}
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
@@ -42,11 +43,9 @@ class CloseWindow extends React.Component {
 }
 
 export default connect(
-    state => ({
-        modalParams: state.modal.modalParams,
-    }),
+    null,
     {
-        showModalByKey,
+        showModal,
         navigate,
     }
 )(CloseWindow)

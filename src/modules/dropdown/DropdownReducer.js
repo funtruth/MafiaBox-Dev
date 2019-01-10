@@ -17,7 +17,7 @@ export function showDropdown(key, e, params={}, index=0) {
             let keysClone = Array.from(dropdownKeys).slice(0, index + 1)
 
             if (keysClone.length) {
-                let prev = keysClone[keysClone.length - 1]
+                const prev = keysClone[keysClone.length - 1]
                 keysClone.push({
                     ...prev,
                     key,

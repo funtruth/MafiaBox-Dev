@@ -11,9 +11,9 @@ class LogicExpandable extends React.Component{
         const { pageKey } = pageInfo
 
         this.props.updatePageByPath(pageKey, field, item, 'data', prefix, {
-            expand: !pageInfo[field][item].data ||
+            hide: !pageInfo[field][item].data ||
                 !pageInfo[field][item].data[prefix] ||
-                !pageInfo[field][item].data[prefix].expand
+                !pageInfo[field][item].data[prefix].hide
         })
     }
 
@@ -22,12 +22,9 @@ class LogicExpandable extends React.Component{
             property, updateRef, prefix } = this.props
             
         //TODO oof
-        const expanded = (pageInfo[field][item].data &&
+        const hidden = pageInfo[field][item].data &&
             pageInfo[field][item].data[prefix] &&
-            pageInfo[field][item].data[prefix].expand)
-            || !pageInfo[field][item].data
-            || !pageInfo[field][item].data[prefix]
-            || pageInfo[field][item].data[prefix].expand !== false
+            pageInfo[field][item].data[prefix].hide
             
         const attributes = proptool.getSubfields(prefix, pageInfo[field][item].data)
         const hasAttr = attributes.length > 0
@@ -43,7 +40,7 @@ class LogicExpandable extends React.Component{
                             className="common-bubble"
                             onClick={this._toggle}
                         >
-                            <i className={expanded ? "mdi mdi-minus-box" : "mdi mdi-plus-box"}/>
+                            <i className={hidden ? "mdi mdi-plus-box" : "mdi mdi-minus-box"}/>
                         </div>
                         :<i
                             className="mdi mdi-plus-box common-bubble"
@@ -55,7 +52,7 @@ class LogicExpandable extends React.Component{
                     </div>
                     {!config.hideButton && <UpdateButton {...this.props} config={config}/>}
                 </div>
-                {expanded &&
+                {!hidden &&
                     attributes.map((property, index) => (
                         <LogicExpandable
                             {...this.props}

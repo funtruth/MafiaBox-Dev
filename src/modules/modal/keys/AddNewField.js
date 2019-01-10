@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../ModalReducer'
+import { showModal } from '../ModalReducer'
 
 class AddNewField extends React.Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class AddNewField extends React.Component {
     }
     
     _onCancel = () => {
-        this.props.showModalByKey()
+        this.props.showModal()
     }
 
     _onSave = () => {
@@ -20,7 +20,7 @@ class AddNewField extends React.Component {
 
         if (value && value.trim()) {
             //TODO add new story
-            this.props.showModalByKey()
+            this.props.showModal()
         } else {
             //highlight red.
         }
@@ -67,6 +67,6 @@ class AddNewField extends React.Component {
 export default connect(
     null,
     {
-        showModalByKey,
+        showModal,
     }
 )(AddNewField)

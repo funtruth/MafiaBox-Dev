@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModalByKey } from '../modal/ModalReducer'
+import { showModal } from '../modal/ModalReducer'
 import { navigate, goBack } from '../navigation/NavReducer'
 import { addPageToMap } from '../page/PageReducer'
 
-import { modalType } from '../modal/modalConfig'
+import { modalType } from '../modal/types'
 import { boardType } from '../board/types'
 import { pathType } from '../navigation/paths'
 
@@ -103,13 +103,13 @@ class HeaderView extends React.Component{
             case 'addPage':
                 return this.props.addPageToMap(mapKey, boardType[this.state.mainPath])
             case 'addStory':
-                return this.props.showModalByKey(modalType.addNewStory, {
+                return this.props.showModal(modalType.addNewStory, {
                     boardType: boardType[this.state.mainPath]
                 })
             case 'createField':
-                return this.props.showModalByKey(modalType.addNewField)
+                return this.props.showModal(modalType.addNewField)
             case 'editTemplate':
-                return this.props.showModalByKey(modalType.showTemplate, {
+                return this.props.showModal(modalType.showTemplate, {
                     boardType
                 })
             default:
@@ -166,7 +166,7 @@ export default connect(
     }),
     {
         addPageToMap,
-        showModalByKey,
+        showModal,
         navigate,
         goBack,
     }

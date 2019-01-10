@@ -39,8 +39,6 @@ const initialState = {
         'lobby': {
             dropdown: dropdownType.pickUid,
             action: 'Add',
-            updatable: true,
-            transient: true,
             variableType: variableType.object.key,
         },
         'lobby.$': {
@@ -56,8 +54,6 @@ const initialState = {
         'choices': {
             dropdown: dropdownType.pickUid,
             action: 'Add',
-            updatable: true,
-            transient: true,
             variableType: variableType.object.key,
         },
         'choices.$': {
@@ -68,7 +64,6 @@ const initialState = {
         'events': {
             dropdown: dropdownType.writeNews,
             action: 'Add',
-            updatable: true,
             variableType: variableType.object.key,
         },
     },
@@ -81,8 +76,8 @@ const initialState = {
         'role.roleId': {
             dropdown: dropdownType.pickRole,
             action: 'Select',
-            updatable: true,
-            transient: true,
+            update: true,
+            mutate: true,
             variableType: variableType.string.key,
         },
         'role.suspicious': {
@@ -92,7 +87,14 @@ const initialState = {
             mutate: true,
             variableType: variableType.boolean.key,
         },
-        'role.trigger': {
+        'role.focus': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            update: false,
+            mutate: true,
+            variableType: variableType.boolean.key,
+        },
+        'role.sneak': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
             update: false,
@@ -102,7 +104,6 @@ const initialState = {
         'health': {
             dropdown: dropdownType.pickUid,
             action: 'Add',
-            updatable: true,
             variableType: variableType.object.key,
         },
         'health.$': {
@@ -118,6 +119,20 @@ const initialState = {
             update: true,
             mutate: true,
             variableType: variableType.boolean,
+        },
+        'trigger': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            update: false,
+            mutate: true,
+            variableType: variableType.boolean.key,
+        },
+        'trigger.$update': {
+            dropdown: dropdownType.pickBoolean,
+            action: 'Select',
+            update: false,
+            mutate: true,
+            variableType: variableType.boolean.key,
         },
     },
     update: false,

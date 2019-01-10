@@ -69,7 +69,7 @@ class FieldTemplateView extends React.Component {
                     )}
                 </Droppable>
                 <div
-                    className="add-button menu-onclick"
+                    className="add-button app-onclick"
                     menu-type={dropdownType.addTemplateField}
                     field-key={boardType}
                 >

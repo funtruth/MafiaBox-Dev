@@ -3,10 +3,10 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { modalType } from '../../modal/modalConfig'
+import { modalType } from '../../modal/types'
 import { dropdownType } from '../../dropdown/types'
 
-import { showModalByKey } from '../../modal/ModalReducer'
+import { showModal } from '../../modal/ModalReducer'
 import { addPageToMap } from '../../page/PageReducer'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
@@ -31,7 +31,7 @@ class StoryList extends React.Component{
 
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.showModalByKey(modalType.showPage, { pageKey: item })
+            this.props.showModal(modalType.showPage, { pageKey: item })
         }
     }
 
@@ -49,7 +49,7 @@ class StoryList extends React.Component{
                     <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
                     
                     <div
-                        className="story-option menu-onclick"
+                        className="story-option app-onclick"
                         menu-type={dropdownType.storyShowMore}
                         field-key={index}
                     >
@@ -134,7 +134,7 @@ const styles = {
 export default connect(
     null,
     {
-        showModalByKey,
+        showModal,
         addPageToMap,
     }
 )(StoryList)
