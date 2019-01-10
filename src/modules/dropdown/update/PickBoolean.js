@@ -9,18 +9,20 @@ import UpdateType from './UpdateType';
 
 class PickBoolean extends React.Component{
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, update, mutate } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+            update, mutate,
             value: item.key,
-            valueType: item.valueType
+            valueType: item.valueType,
         })
         this.props.showDropdown()
     }
 
     _renderItem = (item) => {
-        const { currentValue } = this.props
-        const chosen = typeof currentValue === 'string' && currentValue === item.key
+        const { attach, subfieldKey } = this.props
+        const value = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof value === 'string' && value === item.key
 
         return (
             <div
@@ -39,17 +41,21 @@ class PickBoolean extends React.Component{
     render() {
         let items = _.filter(updateType, i => i.family === updateFamilyType.boolean)
         items = _.sortBy(items, i => i.index)
+        
         return (
             <div>
                 {items.map(this._renderItem)}
-                <UpdateType/>
+                <UpdateType {...this.props}/>
             </div>
         )
     }
 }
 
 export default connect(
-    null,
+    state => ({
+        update: state.template.update,
+        mutate: state.template.mutate,
+    }),
     {
         updatePageByPath,
     }

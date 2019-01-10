@@ -189,6 +189,15 @@ export function updatePageByPath() {
     }
 }
 
+/*TODO?????
+export function updatePageByProps(props) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        const pageInfo = helpers.pathUpdate()
+    }
+}*/
+
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 

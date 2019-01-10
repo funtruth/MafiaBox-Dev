@@ -6,11 +6,14 @@ import { updateType, updateFamilyType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
+import UpdateType from './UpdateType'
+
 class PickHealth extends React.Component{
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, update, mutate } = this.props
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+            update, mutate,
             value: item.key,
             valueType: item.valueType
         })
@@ -40,13 +43,19 @@ class PickHealth extends React.Component{
         items = _.sortBy(items, i => i.index)
 
         return (
-            items.map(this._renderItem)
+            <div>
+                {items.map(this._renderItem)}
+                <UpdateType {...this.props}/>
+            </div>
         )
     }
 }
 
 export default connect(
-    null,
+    state => ({
+        update: state.template.update,
+        mutate: state.template.mutate,
+    }),
     {
         updatePageByPath,
     }

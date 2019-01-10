@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { updateType, valueType } from '../types';
-import { dropdownType } from '../../dropdown/types';
 
 class UpdateButton extends React.Component{
     render() {
@@ -30,22 +29,6 @@ class UpdateButton extends React.Component{
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
-        let attachments = "", attachVar = ""
-        switch(config.dropdown) {
-            case dropdownType.pickUid:
-                attachments = vars
-                attachVar = vars
-                break
-            case dropdownType.pickUpdate:
-                attachments = info.dynamic
-                break
-            case dropdownType.addUpdateField:
-                attachments = logicInfo.data
-                attachVar = vars
-                break
-            default:
-        }
-
         return (
             <div
                 className="logic-pick-update menu-onclick"
@@ -56,8 +39,8 @@ class UpdateButton extends React.Component{
                 field-key={field}
                 subfield-key={prefix}
                 current-value={info.value}
-                attach={JSON.stringify(attachments)}
-                attach-var={JSON.stringify(attachVar)}
+                attach={JSON.stringify(logicInfo.data)}
+                attach-var={JSON.stringify(vars)}
             >
                 <div style={{ pointerEvents: 'none' }}>
                     {buttonText}

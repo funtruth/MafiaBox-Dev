@@ -6,7 +6,7 @@ import DropParent from '../components/DropParent';
 
 class AddUpdateField extends React.Component{
     render() {
-        const { subfieldKey, updateRef, attach } = this.props
+        const { subfieldKey, updateRef } = this.props
         const items = proptool.getSubfields(subfieldKey, updateRef)
         
         return (
@@ -20,7 +20,6 @@ class AddUpdateField extends React.Component{
                         dropdownType={item.dropdown}
                         params={{
                             subfieldKey: newKey,
-                            currentValue: attach[newKey] && attach[newKey].value,
                         }}
                         text={item.subfield}
                     />

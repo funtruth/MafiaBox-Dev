@@ -6,7 +6,6 @@ const initialState = {
         'gameState': {
             dropdown: dropdownType.addUpdateField,
             action: 'Add',
-            updatable: true,
             variableType: variableType.object.key,
         },
         'gameState.phase': {
@@ -17,11 +16,15 @@ const initialState = {
         'gameState.counter': {
             dropdown: dropdownType.pickUpdate,
             action: 'Select',
+            update: true,
+            mutate: false,
             variableType: variableType.number.key,
         },
         'gameState.veto': {
             dropdown: dropdownType.pickUpdate,
             action: 'Select',
+            update: true,
+            mutate: false,
             variableType: variableType.number.key,
         },
         'gameState.nominate': {
@@ -89,14 +92,15 @@ const initialState = {
         'role.suspicious': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
-            updatable: true,
-            transient: true,
+            update: false,
+            mutate: true,
             variableType: variableType.boolean.key,
         },
         'role.trigger': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
-            transient: true,
+            update: false,
+            mutate: true,
             variableType: variableType.boolean.key,
         },
         'health': {
@@ -108,13 +112,15 @@ const initialState = {
         'health.$': {
             dropdown: dropdownType.pickHealth,
             action: 'Select',
+            update: true,
+            mutate: false,
             variableType: variableType.uid.key,
         },
         'dead': {
             dropdown: dropdownType.pickBoolean,
             action: 'Select',
-            updatable: true,
-            transient: true,
+            update: true,
+            mutate: true,
             variableType: variableType.boolean,
         },
     },
@@ -122,7 +128,26 @@ const initialState = {
     mutate: false,
 }
 
+const INIT_UPDATE_TYPE = 'template/init-update-type'
 const TOGGLE_UPDATE_TYPE = 'template/toggle-update-type'
+
+export function initUpdateType(types) {
+    return (dispatch, getState) => {
+        const template = getState().template
+
+        let updates = {}
+        for (var key in types) {
+            if (key in template) {
+                updates[key] = types[key]
+            }
+        }
+
+        dispatch({
+            type: INIT_UPDATE_TYPE,
+            payload: updates,
+        })
+    }
+}
 
 export function toggleUpdateType(type) {
     return (dispatch) => {
@@ -142,8 +167,10 @@ export function toggleUpdateType(type) {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case INIT_UPDATE_TYPE:  
+            return { ...state, ...action.payload }
         case TOGGLE_UPDATE_TYPE:
-            return { ...state, [action.payload]: !state[action.payload]}
+            return { ...state, [action.payload]: !state[action.payload] }
         default:
             return state;
     }
