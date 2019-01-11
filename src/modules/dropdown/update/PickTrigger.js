@@ -13,7 +13,7 @@ class PickTrigger extends React.Component{
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
             update, mutate,
             value: item.key,
-            valueType: item.valueType,
+            updateViewType: item.updateViewType,
         })
         this.props.showDropdown()
     }
@@ -24,45 +24,38 @@ class PickTrigger extends React.Component{
     }
 
     _renderItem = (item) => {
-        const { attach, subfieldKey } = this.props
-        const value = attach[subfieldKey] && attach[subfieldKey].value
-        const chosen = typeof value === 'string' && value === item.key
-
         return (
             <div
                 key={item.key}
                 className="drop-down-menu-option"
-                chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
             >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
-                {item.title}
-                {chosen && <i className="ion-md-checkmark"/>}
+                <i className="mdi mdi-flag drop-down-menu-icon"/>
+                trigger
             </div>
         )
     }
 
     render() {
         const { subfieldKey, attach } = this.props
-        const items = proptool.getSubfields(subfieldKey, attach)
+        const value = attach[subfieldKey].value
         
         return (
-            <div>
-                {items.length ?
-                    items.map(this._renderItem)
-                    :<div className="drop-down-menu-option" empty="true">
-                        No existing triggers
-                    </div>
-                }
-                <div className="drop-down-menu-separator"/>
+            Object.keys(value).length ?
                 <div
                     className="drop-down-menu-option"
                     onClick={this._addTrigger}
                 >
-                    <i className="drop-down-menu-icon mdi mdi-flag-plus"/>
-                    add trigger
+                    <i className="drop-down-menu-icon mdi mdi-flag"/>
+                    edit trigger
                 </div>
-            </div>
+                :<div
+                    className="drop-down-menu-option"
+                    onClick={this._addTrigger}
+                >
+                    <i className="drop-down-menu-icon mdi mdi-flag-plus"/>
+                    create trigger
+                </div>
         )
     }
 }

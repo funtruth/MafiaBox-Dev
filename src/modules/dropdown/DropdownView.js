@@ -1,10 +1,12 @@
 import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
+import * as proptool from '../logic/proptool'
 
 import { dropdownType } from './types'
 import { boardType } from '../board/types'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
+import { updatePageByPath } from '../page/PageReducer'
 
 import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
@@ -45,6 +47,43 @@ class DropdownView extends React.Component{
     _renderItem = (props, index) => {
         props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
         props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
+
+        //Special deep updates
+        switch(props.key) {
+            case dropdownType.pickUid:
+            case dropdownType.pickUpdate:
+            case dropdownType.pickBoolean:
+            case dropdownType.pickHealth:
+                props.updatePage = (value) => {
+                    if (proptool.isTrigger(props.currentValue || '')) {
+                        this.props.updatePageByPath(
+                            props.pageKey,
+                            props.fieldKey,
+                            props.indexKey,
+                            'data',
+                            props.currentValue,
+                            'value',
+                            props.subfieldKey,
+                            {
+                                update: props.update,
+                                mutate: props.mutate,
+                                ...value,
+                            },
+                        )
+                    } else {
+                        this.props.updatePageByPath(
+                            props.pageKey,
+                            props.fieldKey,
+                            props.indexKey,
+                            'data',
+                            props.subfieldKey,
+                            value,
+                        )
+                    }
+                }
+                break
+            default:
+        }
 
         switch(props.key) {
             case dropdownType.storyShowMore:
@@ -90,7 +129,6 @@ class DropdownView extends React.Component{
             case dropdownType.pickComparison:
                 return <PickComparison {...props}/>
 
-            //these write directly
             case dropdownType.pickPhase:
                 return <SearchBoard {...props} boardType={boardType.phases}/>
             case dropdownType.pickRole:
@@ -140,5 +178,6 @@ export default connect(
     {
         showDropdown,
         popDropdownTo,
+        updatePageByPath,
     }
 )(DropdownView)

@@ -7,10 +7,8 @@ import { addItemToRightOf } from '../../fields/FieldReducer'
 
 class LogicRightArrow extends React.Component{
     _onClick = () => {
-        const { item, fieldKey, pageInfo } = this.props
-        const { pageKey } = pageInfo
-        
-        this.props.addItemToRightOf(item, pageKey, fieldKey)
+        const { indexKey, pageKey, fieldKey } = this.props
+        this.props.addItemToRightOf(indexKey, pageKey, fieldKey)
     }
 
     render() {
@@ -25,9 +23,7 @@ class LogicRightArrow extends React.Component{
                 data-tip="Add another operator"
                 onClick={this._onClick}
             >
-                <i
-                    className="ion-ios-fastforward"
-                />
+                <i className="ion-ios-fastforward"/>
             </div>
         )
     }

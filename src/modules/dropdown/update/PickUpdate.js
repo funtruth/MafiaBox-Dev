@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { updateType, valueType, updateFamilyType } from '../../logic/types'
+import { updateType, updateViewType, updateFamilyType } from '../../logic/types'
 import { dropdownType } from '../types'
 
 import { updatePageByPath } from '../../page/PageReducer'
@@ -12,23 +12,18 @@ import UpdateType from './UpdateType'
 
 class PickUpdate extends React.Component{
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, update, mutate } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-            update, mutate,
+        this.props.updatePage({
             value: item.key,
-            valueType: item.valueType
+            updateViewType: item.updateViewType,
         })
         this.props.showDropdown()
     }
 
     _selectDynamic = (item, number) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+        this.props.updatePage({
             value: item.key,
             dynamic: number,
-            valueType: item.valueType,
+            updateViewType: item.updateViewType,
         })
         this.props.showDropdown()
     }
@@ -38,7 +33,7 @@ class PickUpdate extends React.Component{
         
         const chosen = typeof currentValue === 'string' && currentValue === item.key
 
-        if (item.valueType === valueType.dynamicVal) {
+        if (item.updateViewType === updateViewType.dynamicVal) {
             return (
                 <DropParent
                     {...this.props}

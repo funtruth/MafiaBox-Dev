@@ -4,7 +4,7 @@ import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
-import { valueType } from '../../logic/types'
+import { updateViewType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
@@ -26,7 +26,7 @@ class SearchBoard extends React.Component{
         if (subfieldKey) {
             this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
                 value,
-                valueType: valueType.page,
+                updateViewType: updateViewType.page,
             })
         } else {
             this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', value)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateType, valueType } from '../types';
+import { updateType, updateViewType } from '../types';
 
 class UpdateButton extends React.Component{
     render() {
@@ -10,21 +10,24 @@ class UpdateButton extends React.Component{
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
         
         let buttonText = ""
-        switch(info.valueType) {
-            case valueType.page:
+        switch(info.updateViewType) {
+            case updateViewType.page:
                 buttonText = pageRepo[info.value].title
                 break
-            case valueType.uid:
+            case updateViewType.uid:
                 buttonText = info.value
                 break
-            case valueType.staticVal:
+            case updateViewType.staticVal:
                 buttonText = updateType[info.value].title
                 break
-            case valueType.dynamicVal:
+            case updateViewType.dynamicVal:
                 buttonText = `${updateType[info.value].title} ${info.dynamic}`
                 break
-            case valueType.health:
+            case updateViewType.health:
                 buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
+                break
+            case updateViewType.trigger:
+                buttonText = <i className="mdi mdi-flag"/>
                 break
             default:
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>

@@ -89,12 +89,18 @@ export const updateFamilyType = {
     health: 'family/health',
 }
 
-export const valueType = {
-    staticVal: 'valueType/staticVal',
-    dynamicVal: 'valueType/dynamicVal',
-    page: 'valueType/page',
-    uid: 'valueType/uid',
-    health: 'valueType/health',
+/*used to get value for UpdateButton
+    this is separate from variableType because in an UpdateButton view
+    there are multiple possible strings to be shown, such as the difference
+    between "increment" and "increment by 2"
+*/
+export const updateViewType = {
+    staticVal: 'updateViewType/staticVal',
+    dynamicVal: 'updateViewType/dynamicVal',
+    page: 'updateViewType/page',
+    uid: 'updateViewType/uid',
+    health: 'updateViewType/health',
+    trigger: 'updateViewType/trigger',
 }
 
 //possible static and dynamic update types
@@ -106,7 +112,7 @@ export const updateType = {
         title: 'null',
         label: 'null',
         icon: 'mdi mdi-swap-horizontal-bold',
-        valueType: valueType.staticVal,
+        updateViewType: updateViewType.staticVal,
         code: () => 'null',
     },
     setTo: {
@@ -116,7 +122,7 @@ export const updateType = {
         title: 'set to value',
         label: 'set to value',
         icon: 'mdi mdi-numeric',
-        valueType: valueType.dynamicVal,
+        updateViewType: updateViewType.dynamicVal,
         code: (data, field) => `${data[field].dynamic}`,
     },
     incr: {
@@ -125,7 +131,7 @@ export const updateType = {
         family: updateFamilyType.number,
         title: 'increment',
         icon: 'mdi mdi-numeric-1-box',
-        valueType: valueType.staticVal,
+        updateViewType: updateViewType.staticVal,
         code: (data, field) => `${field} + 1`,
     },
     incrBy: {
@@ -134,7 +140,7 @@ export const updateType = {
         family: updateFamilyType.number,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
-        valueType: valueType.dynamicVal,
+        updateViewType: updateViewType.dynamicVal,
         code: (data, field) => `${field} + ${data[field].dynamic}`,
     },
     decr: {
@@ -143,7 +149,7 @@ export const updateType = {
         family: updateFamilyType.number,
         title: 'decrement',
         icon: 'ion-md-arrow-round-down',
-        valueType: valueType.staticVal,
+        updateViewType: updateViewType.staticVal,
         code: (data, field) => `${field} - 1`,
     },
     decrBy: {
@@ -152,7 +158,7 @@ export const updateType = {
         family: updateFamilyType.number,
         title: 'decrement by',
         icon: 'ion-md-download',
-        valueType: valueType.dynamicVal,
+        updateViewType: updateViewType.dynamicVal,
         code: (data, field) => `${field} - ${data[field].dynamic}`,
     },
     true: {
@@ -161,7 +167,7 @@ export const updateType = {
         family: updateFamilyType.boolean,
         title: 'true',
         icon: 'mdi mdi-code-tags-check',
-        valueType: valueType.staticVal,
+        updateViewType: updateViewType.staticVal,
         code: () => 'true',
     },
     false: {
@@ -170,7 +176,7 @@ export const updateType = {
         family: updateFamilyType.boolean,
         title: 'false',
         icon: 'mdi mdi-close-box-outline',
-        valueType: valueType.staticVal,
+        updateViewType: updateViewType.staticVal,
         code: () => 'false',
     },
     attack1: {
@@ -180,7 +186,7 @@ export const updateType = {
         title: 'Basic Attack',
         label: ['mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '-1',
     },
     attack2: {
@@ -190,7 +196,7 @@ export const updateType = {
         title: 'Strong Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '-2',
     },
     attack3: {
@@ -200,7 +206,7 @@ export const updateType = {
         title: 'Superior Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '-100',
     },
     defend1: {
@@ -210,7 +216,7 @@ export const updateType = {
         title: 'Basic Defense',
         label: ['mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-half-full',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '1',
     },
     defend2: {
@@ -220,7 +226,7 @@ export const updateType = {
         title: 'Strong Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '2',
     },
     defend3: {
@@ -230,7 +236,7 @@ export const updateType = {
         title: 'Superior Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-plus',
-        valueType: valueType.health,
+        updateViewType: updateViewType.health,
         code: () => '100',
     },
 }

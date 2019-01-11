@@ -10,12 +10,9 @@ import UpdateType from './UpdateType'
 
 class PickHealth extends React.Component{
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, update, mutate } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-            update, mutate,
+        this.props.updatePage({
             value: item.key,
-            valueType: item.valueType
+            updateViewType: item.updateViewType,
         })
         this.props.showDropdown()
     }

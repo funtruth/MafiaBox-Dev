@@ -21,7 +21,7 @@ class EditTrigger extends React.Component {
         const { value } = this.state
 
         if (value && value.trim()) {
-            //TODO add new story
+            //TODO needs to apply updateViewType
             this.props.showModal()
         } else {
             //highlight red.
@@ -35,11 +35,14 @@ class EditTrigger extends React.Component {
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar } = this.props
+        const { pageRepo, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = this.props
+        //TODO it's either this or update attach
         const iprops = {
             indexKey,
             logicInfo: {
-                data: attach && attach[subfieldKey] && attach[subfieldKey].value,
+                data: pageRepo[pageKey] && pageRepo[pageKey][fieldKey] && pageRepo[pageKey][fieldKey][indexKey]
+                    && pageRepo[pageKey][fieldKey][indexKey].data && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey]
+                    && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey].value,
             },
             pageKey,
             fieldKey,
@@ -53,7 +56,7 @@ class EditTrigger extends React.Component {
             >
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        {`New Field`}
+                        Edit Trigger
                     </div>
                     <div className="modal-subtitle">
                         {`Choose a label for your new field.`}
@@ -74,7 +77,9 @@ class EditTrigger extends React.Component {
 }
 
 export default connect(
-    null,
+    state => ({
+        pageRepo: state.page.pageRepo,
+    }),
     {
         showModal,
     }

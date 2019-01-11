@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
-import { variableType, valueType } from '../../logic/types'
+import { variableType, updateViewType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
@@ -46,11 +46,9 @@ class PickUid extends React.Component{
     }
 
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}`, {
-            value: `$${item.key}`,
-            valueType: valueType.uid,
+        this.props.updatePage({
+            value: item.key,
+            updateViewType: updateViewType.uid,
         })
         this.props.showDropdown()
     }
