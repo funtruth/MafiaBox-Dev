@@ -11,7 +11,7 @@ import DropParent from '../components/DropParent'
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
-        const { currentValue, updateRef, subfieldKey, attach } = this.props
+        const { currentValue, updateRef, subfieldKey } = this.props
         const newKey = `${subfieldKey}.$${item.key}`
         
         const config = proptool.getUpdateConfig(newKey, updateRef)
@@ -38,7 +38,6 @@ class PickUid extends React.Component{
                 dropdownType={config.dropdown}
                 params={{
                     subfieldKey: newKey,
-                    currentValue: attach[newKey] && attach[newKey].value,
                 }}
                 text={item.key}
             />

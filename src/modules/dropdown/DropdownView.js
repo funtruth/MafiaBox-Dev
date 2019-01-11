@@ -90,6 +90,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickComparison:
                 return <PickComparison {...props}/>
 
+            //these write directly
             case dropdownType.pickPhase:
                 return <SearchBoard {...props} boardType={boardType.phases}/>
             case dropdownType.pickRole:
@@ -102,12 +103,13 @@ class DropdownView extends React.Component{
                 return <PickUpdate {...props}/>
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...props}/>
+            case dropdownType.pickHealth:
+                return <PickHealth {...props}/>
+
             case dropdownType.addUpdateField:
                 return <AddUpdateField {...props}/>
             case dropdownType.writeNews:
                 return <PickNews {...props}/>
-            case dropdownType.pickHealth:
-                return <PickHealth {...props}/>
             case dropdownType.pickTrigger:
                 return <PickTrigger {...props}/>
             default:

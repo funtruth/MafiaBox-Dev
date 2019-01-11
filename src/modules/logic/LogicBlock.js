@@ -64,7 +64,6 @@ class LogicBlock extends React.Component{
                                 fieldKey,
                                 vars,
                             }
-                            console.log('we want these props', iprops, {realProps: this.props})
                             
                             const newVars = logicInfo.logicType === logicType.function.key &&
                                 logicInfo.data && pageRepo[logicInfo.data].vars

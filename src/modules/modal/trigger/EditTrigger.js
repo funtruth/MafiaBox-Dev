@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as proptool from '../../logic/proptool'
 
 import { showModal } from '../ModalReducer'
 
@@ -36,14 +35,15 @@ class EditTrigger extends React.Component {
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, attach, attachVar } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar } = this.props
         const iprops = {
             indexKey,
             logicInfo: {
-                data: attach,
+                data: attach && attach[subfieldKey] && attach[subfieldKey].value,
             },
             pageKey,
             fieldKey,
+            subfieldKey,
             vars: attachVar,
         }
         
@@ -74,9 +74,7 @@ class EditTrigger extends React.Component {
 }
 
 export default connect(
-    state => ({ 
-        updateRef: proptool.addPlayerRef(state.template),
-    }),
+    null,
     {
         showModal,
     }

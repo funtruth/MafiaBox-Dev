@@ -4,16 +4,16 @@ import { logicType } from '../types'
 
 class LogicType extends React.Component{
     render() {
-        const { item, logicInfo, fieldKey, pageKey } = this.props
+        const { indexKey, logicInfo, fieldKey, pageKey } = this.props
         const type = logicInfo.logicType
-
+        
         return (
             <i 
                 className={`${(type && logicType[type].icon) ||
                     'ion-md-create'} logic-label app-onclick`}
                 menu-type={dropdownType.showLogic}
                 field-key={fieldKey}
-                index-key={item}
+                index-key={indexKey}
                 page-key={pageKey}
                 current-value={type}
                 style={{

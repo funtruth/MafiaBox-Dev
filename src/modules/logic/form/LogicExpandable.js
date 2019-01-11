@@ -20,7 +20,6 @@ class LogicExpandable extends React.Component{
         const { logicInfo, nested, property, updateRef, prefix } = this.props
     
         const hidden = logicInfo.data && logicInfo.data[prefix] && logicInfo.data[prefix].hide
-            
         const attributes = proptool.getSubfields(prefix, logicInfo.data)
         const hasAttr = attributes.length > 0
         const isVarField = property.charAt(0) === '$'

@@ -26,7 +26,7 @@ class UpdateType extends React.Component{
 
     _handleClick = type => {
         const { pageKey, fieldKey, indexKey, subfieldKey, attach } = this.props
-
+        
         if (attach[subfieldKey] && attach[subfieldKey].value) {
             this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, type, !this.state[type])
         }

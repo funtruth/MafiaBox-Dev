@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import * as proptool from '../proptool'
 
 import LogicExpandable from './LogicExpandable';
@@ -10,15 +9,14 @@ class LogicObject extends React.Component{
         const { updateRef } = this.props
         
         return (
-            _.filter(Object.keys(updateRef), i => i.indexOf('.') === -1)
-                .map((property, index) => (
-                    <LogicExpandable
-                        {...this.props}
-                        key={index}
-                        property={property}
-                        prefix={property}
-                    />
-                ))
+            proptool.getSubfields('', updateRef).map((item, index) => (
+                <LogicExpandable
+                    {...this.props}
+                    key={index}
+                    property={item.subfield}
+                    prefix={item.subfield}
+                />
+            ))
         )
     }
 }

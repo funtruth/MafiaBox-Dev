@@ -2,9 +2,8 @@ import _ from 'lodash'
 
 //returns properties of prefix existing in updateRef
 export function getSubfields(prefix, updateRef) {
-    const parts = prefix.split('.')
+    const parts = prefix.split('.').filter(i => i !== "")
     let fields = []
-    
     for (var key in updateRef) {
         const newParts = key.split('.')
         let match = true
@@ -75,4 +74,9 @@ export function addPlayerRef({updateRef, playerRef}) {
     }
 
     return updateRefClone
+}
+
+export function isTrigger(prefix) {
+    const parts = prefix.split('.')
+    return parts[parts.length - 1] === 'trigger'
 }

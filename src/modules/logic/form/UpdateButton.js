@@ -5,8 +5,9 @@ import { updateType, valueType } from '../types';
 
 class UpdateButton extends React.Component{
     render() {
-        const { config, pageKey, fieldKey, indexKey, logicInfo, prefix, vars, pageRepo } = this.props
-        const info = logicInfo.data[prefix] || {}
+        const { pageKey, fieldKey, indexKey, subfieldKey, config,
+            logicInfo, prefix, vars, pageRepo } = this.props
+        const info = (logicInfo.data && logicInfo.data[prefix]) || {}
         
         let buttonText = ""
         switch(info.valueType) {
@@ -29,6 +30,17 @@ class UpdateButton extends React.Component{
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
+        let attach = "", attachVar = "", currentValue = ""
+        if (subfieldKey) {
+            attach = (logicInfo.data && logicInfo.data[subfieldKey] && logicInfo.data[subfieldKey].value) || {}
+            attachVar = vars
+            currentValue = subfieldKey
+        } else {
+            attach = logicInfo.data
+            attachVar = vars
+            currentValue = info.value
+        }
+        
         return (
             <div
                 className="logic-pick-update app-onclick"
@@ -38,9 +50,9 @@ class UpdateButton extends React.Component{
                 index-key={indexKey}
                 field-key={fieldKey}
                 subfield-key={prefix}
-                current-value={info.value}
-                attach={JSON.stringify(logicInfo.data)}
-                attach-var={JSON.stringify(vars)}
+                current-value={currentValue}
+                attach={JSON.stringify(attach)}
+                attach-var={JSON.stringify(attachVar)}
             >
                 <div style={{ pointerEvents: 'none' }}>
                     {buttonText}

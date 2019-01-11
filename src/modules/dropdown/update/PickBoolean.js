@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+import * as proptool from '../../logic/proptool'
 
 import { updateType, updateFamilyType } from '../../logic/types'
 
@@ -9,13 +10,22 @@ import UpdateType from './UpdateType';
 
 class PickBoolean extends React.Component{
     _select = (item) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, update, mutate } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, currentValue, update, mutate } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-            update, mutate,
-            value: item.key,
-            valueType: item.valueType,
-        })
+        if (proptool.isTrigger(currentValue)) {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', currentValue, 'value', subfieldKey, {
+                update, mutate,
+                value: item.key,
+                valueType: item.valueType,
+            })
+        } else {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
+                update, mutate,
+                value: item.key,
+                valueType: item.valueType,
+            })
+        }
+        
         this.props.showDropdown()
     }
 
@@ -23,7 +33,7 @@ class PickBoolean extends React.Component{
         const { attach, subfieldKey } = this.props
         const value = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof value === 'string' && value === item.key
-
+        
         return (
             <div
                 key={item.key}
