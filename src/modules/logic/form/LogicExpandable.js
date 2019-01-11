@@ -7,13 +7,21 @@ import UpdateButton from './UpdateButton'
 
 class LogicExpandable extends React.Component{
     _toggle = () => {
-        const { pageKey, fieldKey, indexKey, logicInfo, prefix } = this.props
-
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', prefix, {
-            hide: !logicInfo.data ||
-                !logicInfo.data[prefix] ||
-                !logicInfo.data[prefix].hide
-        })
+        const { pageKey, fieldKey, indexKey, subfieldKey, logicInfo, prefix } = this.props
+        
+        if (subfieldKey) {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, 'value', prefix, {
+                hide: !logicInfo.data ||
+                    !logicInfo.data[prefix] ||
+                    !logicInfo.data[prefix].hide
+            })
+        } else {
+            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', prefix, {
+                hide: !logicInfo.data ||
+                    !logicInfo.data[prefix] ||
+                    !logicInfo.data[prefix].hide
+            })
+        }
     }
 
     render() {
@@ -41,7 +49,13 @@ class LogicExpandable extends React.Component{
                             style={{ opacity: 0 }}
                         />
                     }
-                    <div className={`common-bubble ${isVarField?'--var':'--grey27'}`} onClick={this._toggle}>
+                    <div
+                        className={`common-bubble ${isVarField?'--var':'--grey27'}`}
+                        onClick={this._toggle}
+                        style={{
+                            cursor: 'pointer',
+                        }}
+                    >
                         {property}
                     </div>
                     {!config.hideButton && <UpdateButton {...this.props} config={config}/>}

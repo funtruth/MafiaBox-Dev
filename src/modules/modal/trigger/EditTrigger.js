@@ -2,8 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { showModal } from '../ModalReducer'
+import { getUpdateCode } from '../../logic/LogicReducer'
 
+import { triggerNewVars } from '../../logic/types'
+
+import LogicArgs from '../../logic/components/LogicArgs'
 import LogicObject from '../../logic/form/LogicObject';
+import CodeField from '../../fields/components/CodeField';
+
+var beautify_js = require('js-beautify');
 
 class EditTrigger extends React.Component {
     constructor(props) {
@@ -37,31 +44,38 @@ class EditTrigger extends React.Component {
     render() {
         const { pageRepo, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = this.props
         //TODO it's either this or update attach
+        const data = pageRepo[pageKey] && pageRepo[pageKey][fieldKey] && pageRepo[pageKey][fieldKey][indexKey]
+            && pageRepo[pageKey][fieldKey][indexKey].data && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey]
+            && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey].value
         const iprops = {
             indexKey,
             logicInfo: {
-                data: pageRepo[pageKey] && pageRepo[pageKey][fieldKey] && pageRepo[pageKey][fieldKey][indexKey]
-                    && pageRepo[pageKey][fieldKey][indexKey].data && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey]
-                    && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey].value,
+                data,
             },
             pageKey,
             fieldKey,
             subfieldKey,
-            vars: attachVar,
+            vars: {
+                ...attachVar,
+                ...triggerNewVars,
+            },
         }
         
+        const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})
+        
         return (
-            <div
-                cancel-appclick="true"
-            >
+            <div cancel-appclick="true">
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
                         Edit Trigger
                     </div>
-                    <div className="modal-subtitle">
-                        {`Choose a label for your new field.`}
+                    <div className="row">
+                        <div style={{ marginRight: 16 }}>
+                            <LogicArgs vars={triggerNewVars}/>
+                            <LogicObject {...iprops}/>
+                        </div>
+                        <CodeField code={code}/>
                     </div>
-                    <LogicObject {...iprops}/>
                 </div>
                 <div className="row dark-grey modal-options">
                     <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={this._onCancel}>

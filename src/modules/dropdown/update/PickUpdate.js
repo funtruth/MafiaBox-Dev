@@ -29,10 +29,10 @@ class PickUpdate extends React.Component{
     }
     
     _renderItem = (item) => {
-        const { currentValue, attach } = this.props
-        
+        const { attach, subfieldKey } = this.props
+        const currentValue = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof currentValue === 'string' && currentValue === item.key
-
+        
         if (item.updateViewType === updateViewType.dynamicVal) {
             return (
                 <DropParent

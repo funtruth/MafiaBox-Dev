@@ -31,22 +31,7 @@ function recursive(key, library) {
             codeCurrent = returnType[data] ? returnType[data].code : ''
             break
         case logicType.update.key:
-            for (var field in data) {
-                if (!data[field].value) continue
-
-                if (data[field].update) {
-                    codeCurrent = codeCurrent.concat(
-                        `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                        .join('/')}\`]=${convertValue(data, field)};`
-                    )
-                }
-                
-                if (data[field].mutate) {
-                    codeCurrent = codeCurrent.concat(
-                        `${convertPropertyFields(field)}=${convertValue(data, field)};`
-                    )
-                }
-            }
+            codeCurrent = codeCurrent.concat(getUpdateCode(data))
             break
         case logicType.else.key:
         case logicType.function.key:
@@ -109,6 +94,28 @@ function convertValue(data, field) {
             updateType[data[field].value].code(data, convertPropertyFields(field))
             :`'${data[field].value}'`
         :`${data[field].value}`
+}
+
+//uses data and returns the combined string
+export function getUpdateCode(data) {
+    let string = ''
+    for (var field in data) {
+        if (!data[field].value) continue
+
+        if (data[field].update) {
+            string = string.concat(
+                `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                .join('/')}\`]=${convertValue(data, field)};`
+            )
+        }
+        
+        if (data[field].mutate) {
+            string = string.concat(
+                `${convertPropertyFields(field)}=${convertValue(data, field)};`
+            )
+        }
+    }
+    return string
 }
 
 export default (state = initialState, action) => {

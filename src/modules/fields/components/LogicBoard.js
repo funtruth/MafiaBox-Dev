@@ -8,9 +8,7 @@ import { getCode } from '../../logic/LogicReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
 import LogicArgs from '../../logic/components/LogicArgs';
-
-import {Controlled as CodeMirror} from 'react-codemirror2'
-require('codemirror/mode/javascript/javascript')
+import CodeField from './CodeField'
 
 class LogicBoard extends React.Component{
     render() {
@@ -33,7 +31,7 @@ class LogicBoard extends React.Component{
         
         return (
             <div className="logic-board">
-                <LogicArgs {...this.props}/>
+                <LogicArgs vars={fieldInfo.vars}/>
                 {Object.keys(parents).map((item, index) => (
                     <LogicBlock
                         {...this.props}
@@ -43,14 +41,7 @@ class LogicBoard extends React.Component{
                         vars={fieldInfo.vars}
                     />
                 ))}
-                <CodeMirror
-                    value={code}
-                    options={{
-                        mode: 'javascript',
-                        theme: 'monokai',
-                        lineNumbers: true
-                    }}
-                />
+                <CodeField code={code}/>
             </div>
         )
     }

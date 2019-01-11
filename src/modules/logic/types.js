@@ -308,3 +308,10 @@ export const returnType = {
         code: 'database.update(updates)',
     }
 }
+
+export const triggerNewVars = {
+    visitor: {
+        key: 'visitor',
+        variableType: variableType.uid.key,
+    },
+}

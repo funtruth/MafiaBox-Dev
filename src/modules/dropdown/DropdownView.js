@@ -55,6 +55,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
                 props.updatePage = (value) => {
+                    console.log({value, currentValue: props.currentValue})
                     if (proptool.isTrigger(props.currentValue || '')) {
                         this.props.updatePageByPath(
                             props.pageKey,

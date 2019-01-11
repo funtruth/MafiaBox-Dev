@@ -34,8 +34,9 @@ class UpdateButton extends React.Component{
         }
 
         let attach = "", attachVar = "", currentValue = ""
+        //a normal logicBlock will not have a subfieldKey
         if (subfieldKey) {
-            attach = (logicInfo.data && logicInfo.data[subfieldKey] && logicInfo.data[subfieldKey].value) || {}
+            attach = logicInfo.data || {}
             attachVar = vars
             currentValue = subfieldKey
         } else {

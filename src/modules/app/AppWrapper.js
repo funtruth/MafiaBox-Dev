@@ -11,6 +11,11 @@ import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
 
 class AppWrapper extends React.Component{
+    constructor(props) {
+        super(props)
+        this.prevClick = ''
+    }
+
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
         window.addEventListener('contextmenu', this._handleClick)
@@ -52,7 +57,7 @@ class AppWrapper extends React.Component{
         if (helpers.isAppClickCancelled(e.target)) {
             //return
         }
-
+        
         //check if clicking on a modal background
         if (e.target.classList.contains('modal')) {
             this.props.showModal()
@@ -68,6 +73,14 @@ class AppWrapper extends React.Component{
         if (e.target.matches('.app-onclick')) {
             const menuClick = e.target.getAttribute('menu-type')
             
+            if (this.prevClick === e.target.outerHTML) {
+                this.prevClick = ''
+                this.props.showDropdown()
+                return
+            } else {
+                this.prevClick = e.target.outerHTML
+            }
+
             if (menuClick) {
                 this.props.showDropdown(menuClick, e, {
                     indexKey: e.target.getAttribute('index-key'),

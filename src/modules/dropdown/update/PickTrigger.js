@@ -38,7 +38,7 @@ class PickTrigger extends React.Component{
 
     render() {
         const { subfieldKey, attach } = this.props
-        const value = attach[subfieldKey].value
+        const value = (attach[subfieldKey] && attach[subfieldKey].value) || {}
         
         return (
             Object.keys(value).length ?

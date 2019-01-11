@@ -81,7 +81,7 @@ class LogicBlock extends React.Component{
                                             ...provided.draggableProps.style,
                                             marginTop: index ? 10 : 0,
                                             marginBottom: 'auto',
-                                            cursor: 'pointer',
+                                            cursor: 'default',
                                             userSelect: 'none',
                                         }}
                                     >

@@ -106,10 +106,3 @@
 .see-code-button:hover {
     color: #fff;
 }
-
-.code-block {
-    border-radius: 4px;
-    overflow: hidden;
-
-    padding: 6px 0px;
-}
