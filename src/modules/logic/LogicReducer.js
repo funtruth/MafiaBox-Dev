@@ -1,4 +1,4 @@
-import { logicType, comparisonType, returnType, updateType } from './types'
+import { logicType, comparisonType, returnType, updateType, updateViewType } from './types'
 var beautify_js = require('js-beautify');
 
 const initialState = {}
@@ -121,6 +121,13 @@ export function getUpdateCode(data) {
             string = string.concat(
                 `${convertPropertyFields(field)}=${convertValue(data, field)};`
             )
+        }
+
+        switch(data[field].updateViewType) {
+            case updateViewType.trigger:
+                string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(data[field].value)}}`)
+                break
+            default:
         }
     }
     return string

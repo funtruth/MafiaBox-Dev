@@ -8,6 +8,7 @@ import { variableType, updateViewType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
+import UpdateType from './UpdateType';
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
@@ -47,6 +48,8 @@ class PickUid extends React.Component{
 
     _select = (item) => {
         this.props.updatePage({
+            update: this.props.update,
+            mutate: this.props.mutate,
             value: item.key,
             updateViewType: updateViewType.uid,
         })
@@ -58,13 +61,16 @@ class PickUid extends React.Component{
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
         
         return (
-            uids.length ?
-                <div>
-                    {uids.map(this._renderItem)}
-                </div>
-                :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                    There are no Unique IDs
-                </div>
+            <div>
+                {uids.length ?
+                    <div>
+                        {uids.map(this._renderItem)}
+                    </div>
+                    :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
+                        There are no Unique IDs
+                    </div>}
+                <UpdateType {...this.props}/>
+            </div>
         )
     }
 }
@@ -72,6 +78,8 @@ class PickUid extends React.Component{
 export default connect(
     state => ({
         updateRef: proptool.addPlayerRef(state.template),
+        update: state.template.update,
+        mutate: state.template.mutate,
     }),
     {
         updatePageByPath,

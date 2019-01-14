@@ -6,6 +6,7 @@ import { showModal, popModalTo } from './ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
 
 import { modalType } from './types'
+import { updateViewType } from '../logic/types'
 
 import Modal from './components/Modal';
 
@@ -64,7 +65,10 @@ class ModalView extends React.Component {
                             item.indexKey,
                             'data',
                             item.subfieldKey,
-                            item.attach,
+                            {
+                                ...item.attach,
+                                updateViewType: updateViewType.trigger,
+                            },
                         )
                         item.onClose = () => this.props.showModal(modalType.saveChanges, {
                             onSave: item.onSave,

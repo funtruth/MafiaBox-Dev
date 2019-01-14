@@ -11,6 +11,8 @@ import UpdateType from './UpdateType'
 class PickHealth extends React.Component{
     _select = (item) => {
         this.props.updatePage({
+            update: this.props.update,
+            mutate: this.props.mutate,
             value: item.key,
             updateViewType: item.updateViewType,
         })

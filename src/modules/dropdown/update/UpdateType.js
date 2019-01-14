@@ -31,9 +31,7 @@ class UpdateType extends React.Component{
 
         if (proptool.isTrigger(currentValue || '')) {
             this.props.updateTopModal('attach', 'value', subfieldKey, type, !this.state[type])
-        }
-
-        if (attach[subfieldKey] && attach[subfieldKey].value) {
+        } else if (attach[subfieldKey] && attach[subfieldKey].value) {
             this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, type, !this.state[type])
         }
 
