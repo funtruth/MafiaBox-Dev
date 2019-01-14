@@ -34,6 +34,8 @@ const initialState = {
         },
         'gameState.nominate.$': {
             hideButton: true,
+            update: true,
+            mutate: false,
             variableType: variableType.uid.key,
         },
         'lobby': {
@@ -79,6 +81,13 @@ const initialState = {
             update: true,
             mutate: true,
             variableType: variableType.string.key,
+        },
+        'role.charges': {
+            dropdown: dropdownType.pickUpdate,
+            action: 'Select',
+            update: true,
+            mutate: false,
+            variableType: variableType.number.key,
         },
         'role.suspicious': {
             dropdown: dropdownType.pickBoolean,

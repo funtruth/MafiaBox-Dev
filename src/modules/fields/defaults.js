@@ -146,15 +146,49 @@ export const initFieldRepo = {
         fieldTitle: 'Role Charges',
         boardType: boardType.roles,
     },
+    roleTargetMode: {
+        key: 'roleTargetMode',
+        fieldKey: 'roleTargetMode',
+        index: 3,
+        fieldType: fieldType.logic.key,
+        fieldTitle: 'Role Target Mode',
+        vars: {
+            lobby: {
+                key: 'lobby',
+                rss: true,
+                variableType: variableType.object.key,
+            },
+            gameState: {
+                key: 'gameState',
+                rss: true,
+                variableType: variableType.object.key,
+            },
+            user: {
+                key: 'user',
+                variableType: variableType.uid.key,
+            },
+            target: {
+                key: 'target',
+                variableType: variableType.uid.key,
+            },
+        },
+        boardType: boardType.roles,
+    },
     roleActionMode: {
         key: 'roleActionMode',
         fieldKey: 'roleActionMode',
-        index: 3,
+        index: 4,
         fieldType: fieldType.logic.key,
         fieldTitle: 'Role Action Mode',
         vars: {
             lobby: {
                 key: 'lobby',
+                rss: true,
+                variableType: variableType.object.key,
+            },
+            updates: {
+                key: 'updates',
+                rss: true,
                 variableType: variableType.object.key,
             },
             user: {
@@ -207,14 +241,22 @@ export const initFieldRepo = {
         vars: {
             lobby: {
                 key: 'lobby',
+                rss: true,
+                variableType: variableType.object.key,
+            },
+            updates: {
+                key: 'updates',
+                rss: true,
                 variableType: variableType.object.key,
             },
             choices: {
                 key: 'choices',
+                rss: true,
                 variableType: variableType.object.key,
             },
             gameState: {
                 key: 'gameState',
+                rss: true,
                 variableType: variableType.object.key,
             },
         },

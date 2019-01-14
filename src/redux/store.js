@@ -10,7 +10,7 @@ const persistConfig = {
     key: 'root',
     storage,
     //blacklist: ['story', 'flow']
-    //whitelist: ['user']
+    whitelist: ['page']
 }
   
 const persistedReducer = persistReducer(persistConfig, reducers)

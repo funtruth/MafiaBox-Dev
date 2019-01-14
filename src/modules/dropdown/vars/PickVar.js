@@ -8,6 +8,7 @@ import { variableType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
+import BoardLib from '../library/BoardLib';
 
 class PickVar extends React.Component{
     _onSelect = (item) => {
@@ -84,6 +85,8 @@ class PickVar extends React.Component{
         if (!attachVar) return null
         return (
             <div>
+                <BoardLib {...this.props}/>
+                <div className="drop-down-menu-separator"/>
                 <div style={menuStyle}>
                     {vars.map(this._renderItem)}
                 </div>
