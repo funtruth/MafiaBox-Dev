@@ -19,7 +19,10 @@ class PickTrigger extends React.Component{
     }
 
     _addTrigger = () => {
-        this.props.showModal(modalType.editTrigger)
+        const { attach, subfieldKey } = this.props
+        this.props.showModal(modalType.editTrigger, {
+            attach: attach[subfieldKey]
+        })
         this.props.showDropdown()
     }
 

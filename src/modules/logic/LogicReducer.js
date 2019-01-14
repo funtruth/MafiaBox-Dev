@@ -89,11 +89,19 @@ function convertPropertyFields(string) {
 
 //handles data value formatting on the right side of the =
 function convertValue(data, field) {
-    return typeof data[field].value === 'string' ?
-        updateType[data[field].value] ?
-            updateType[data[field].value].code(data, convertPropertyFields(field))
-            :`'${data[field].value}'`
-        :`${data[field].value}`
+    switch(typeof data[field].value) {
+        case 'string':
+            return updateType[data[field].value] ?
+                updateType[data[field].value].code(data, convertPropertyFields(field))
+                :`'${data[field].value}'`
+        case 'object':
+        default:
+            console.log('logic reducer warning for future Michael', {
+                value: data[field].value,
+                type: typeof data[field].value,
+            })
+            return `${data[field].value}`
+    }
 }
 
 //uses data and returns the combined string

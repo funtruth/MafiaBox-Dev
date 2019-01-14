@@ -42,11 +42,10 @@ class EditTrigger extends React.Component {
     }
 
     render() {
-        const { pageRepo, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar } = this.props
         //TODO it's either this or update attach
-        const data = pageRepo[pageKey] && pageRepo[pageKey][fieldKey] && pageRepo[pageKey][fieldKey][indexKey]
-            && pageRepo[pageKey][fieldKey][indexKey].data && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey]
-            && pageRepo[pageKey][fieldKey][indexKey].data[subfieldKey].value
+        
+        const data = attach && attach.value
         const iprops = {
             indexKey,
             logicInfo: {
@@ -91,9 +90,7 @@ class EditTrigger extends React.Component {
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
+    null,
     {
         showModal,
     }

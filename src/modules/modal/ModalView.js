@@ -18,7 +18,7 @@ import TemplateModal from './keys/TemplateModal'
 import EditTrigger from './trigger/EditTrigger'
 
 class ModalView extends React.Component {
-    _renderItem(item) {
+    _renderItem(item, index) {
         switch(item.key) {
             case modalType.deleteRole:
                 return <DeleteRole {...item}/>
@@ -49,7 +49,7 @@ class ModalView extends React.Component {
             modalKeys.map((item, index) => {
                 return (
                     <Modal {...item} key={index}>
-                        {this._renderItem(item)}
+                        {this._renderItem(item, index)}
                     </Modal>
                 )
             })

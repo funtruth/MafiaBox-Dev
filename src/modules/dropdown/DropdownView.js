@@ -6,6 +6,7 @@ import * as proptool from '../logic/proptool'
 import { dropdownType } from './types'
 import { boardType } from '../board/types'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
+import { updateModal } from '../modal/ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
 
 import Dropdown from './components/Dropdown';
@@ -54,33 +55,22 @@ class DropdownView extends React.Component{
             case dropdownType.pickUpdate:
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
-                props.updatePage = (value) => {
-                    console.log({value, currentValue: props.currentValue})
-                    if (proptool.isTrigger(props.currentValue || '')) {
-                        this.props.updatePageByPath(
-                            props.pageKey,
-                            props.fieldKey,
-                            props.indexKey,
-                            'data',
-                            props.currentValue,
-                            'value',
-                            props.subfieldKey,
-                            {
-                                update: props.update,
-                                mutate: props.mutate,
-                                ...value,
-                            },
-                        )
-                    } else {
-                        this.props.updatePageByPath(
-                            props.pageKey,
-                            props.fieldKey,
-                            props.indexKey,
-                            'data',
-                            props.subfieldKey,
-                            value,
-                        )
-                    }
+                if (proptool.isTrigger(props.currentValue || '')) {
+                    props.updatePage = (value) => this.props.updateModal(
+                        'attach',
+                        'value',
+                        props.subfieldKey,
+                        value,
+                    )
+                } else {
+                    props.updatePage = (value) => this.props.updatePageByPath(
+                        props.pageKey,
+                        props.fieldKey,
+                        props.indexKey,
+                        'data',
+                        props.subfieldKey,
+                        value,
+                    )
                 }
                 break
             default:
@@ -180,5 +170,6 @@ export default connect(
         showDropdown,
         popDropdownTo,
         updatePageByPath,
+        updateModal,
     }
 )(DropdownView)

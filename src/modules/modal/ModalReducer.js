@@ -41,6 +41,21 @@ export function showModal(key, params={}) {
     }
 }
 
+export function updateModal() {
+    return (dispatch, getState) => {
+        if (!arguments[0]) return
+        const { modalKeys } = getState().modal
+
+        let keysClone = Array.from(modalKeys)
+        keysClone[keysClone.length - 1][arguments[0]] = helpers.pathUpdate(arguments, 0, keysClone[keysClone.length - 1])
+        
+        dispatch({
+            type: UPDATE_MODAL_KEYS,
+            payload: keysClone
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_MODAL_KEYS:

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
 import { updatePageByPath } from '../../page/PageReducer'
+import { updateModal } from '../../modal/ModalReducer'
 import { initUpdateType, toggleUpdateType } from '../../template/TemplateReducer'
 
 class UpdateType extends React.Component{
@@ -29,7 +30,7 @@ class UpdateType extends React.Component{
         
 
         if (proptool.isTrigger(currentValue || '')) {
-            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', currentValue, 'value', subfieldKey, type, !this.state[type])
+            this.props.updateModal('attach', 'value', subfieldKey, type, !this.state[type])
         }
 
         if (attach[subfieldKey] && attach[subfieldKey].value) {
@@ -75,6 +76,7 @@ export default connect(
     }),
     {
         updatePageByPath,
+        updateModal,
         initUpdateType,
         toggleUpdateType,
     }

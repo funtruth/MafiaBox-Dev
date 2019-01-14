@@ -123,6 +123,7 @@ const initialState = {
         'trigger': {
             dropdown: dropdownType.pickTrigger,
             action: 'Edit',
+            mutate: true,
             variableType: variableType.uid.key,
         },
     },
