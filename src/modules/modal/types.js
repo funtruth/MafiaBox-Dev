@@ -8,5 +8,7 @@ export const modalType = {
     showPage: 'modalType/show-page',
     showTemplate: 'modalType/show-template',
 
+    //v2 aka not garbage
+    saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
 }

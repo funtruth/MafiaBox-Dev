@@ -2,7 +2,8 @@ import React from 'react'
 import './modals.css'
 import { connect } from 'react-redux'
 
-import { showModal } from './ModalReducer'
+import { showModal, popModalTo } from './ModalReducer'
+import { updatePageByPath } from '../page/PageReducer'
 
 import { modalType } from './types'
 
@@ -16,26 +17,31 @@ import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
 import EditTrigger from './trigger/EditTrigger'
+import SaveChanges from './components/SaveChanges';
 
 class ModalView extends React.Component {
-    _renderItem(item, index) {
-        switch(item.key) {
+    _renderItem(props) {
+        props.showModal = this.props.showModal
+
+        switch(props.key) {
             case modalType.deleteRole:
-                return <DeleteRole {...item}/>
+                return <DeleteRole {...props}/>
             case modalType.addNewStory:
-                return <AddNewStory {...item}/>
+                return <AddNewStory {...props}/>
             case modalType.addNewField:
-                return <AddNewField {...item}/>
+                return <AddNewField {...props}/>
             case modalType.deleteStory:
-                return <DeleteStory {...item}/>
+                return <DeleteStory {...props}/>
 
             case modalType.showPage:
-                return <PageModal {...item}/>
+                return <PageModal {...props}/>
             case modalType.showTemplate:
-                return <TemplateModal {...item}/>
+                return <TemplateModal {...props}/>
             
             case modalType.editTrigger:
-                return <EditTrigger {...item}/>
+                return <EditTrigger {...props}/>
+            case modalType.saveChanges:
+                return <SaveChanges {...props}/>
             default:
                 return null
         }
@@ -47,9 +53,30 @@ class ModalView extends React.Component {
         
         return (
             modalKeys.map((item, index) => {
+                item.popModalBy = (pops) => this.props.popModalTo(index - pops) 
+
+                switch(item.key) {
+                    case modalType.editTrigger:
+                        item.requireSave = true
+                        item.onSave = () => this.props.updatePageByPath(
+                            item.pageKey,
+                            item.fieldKey,
+                            item.indexKey,
+                            'data',
+                            item.subfieldKey,
+                            item.attach,
+                        )
+                        item.onClose = () => this.props.showModal(modalType.saveChanges, {
+                            onSave: item.onSave,
+                            onClose: this.props.showModal,
+                        })
+                        break
+                    default:
+                }
+
                 return (
                     <Modal {...item} key={index}>
-                        {this._renderItem(item, index)}
+                        {this._renderItem(item)}
                     </Modal>
                 )
             })
@@ -63,5 +90,7 @@ export default connect(
     }),
     {
         showModal,
+        updatePageByPath,
+        popModalTo,
     }
 )(ModalView)

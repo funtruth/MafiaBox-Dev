@@ -5,6 +5,7 @@
     min-width: 160px;
     padding: 8px 0px;
     user-select: none;
+    z-index: 3;
 
     animation: fadein 0.2s, scalein 0.2s;
     -webkit-animation: fadein 0.2s, scalein 0.2s;

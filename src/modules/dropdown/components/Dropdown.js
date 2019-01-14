@@ -2,7 +2,7 @@ import React from 'react'
 
 class Dropdown extends React.Component{
     render() {
-        const { children, pageX, pageY, zIndex } = this.props
+        const { children, pageX, pageY } = this.props
         
         return (
             <div
@@ -11,7 +11,6 @@ class Dropdown extends React.Component{
                     position: 'fixed',
                     top: pageY,
                     left: pageX,
-                    zIndex,
                 }}>
                 {children}
             </div>

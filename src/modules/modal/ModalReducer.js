@@ -16,22 +16,12 @@ export function showModal(key, params={}) {
         if (!key) {
             keysClone.pop()
         } else {
-            if (keysClone.length) {
-                keysClone.push({
-                    ...keysClone[keysClone.length - 1],
-                    ...dropdownKeys[dropdownKeys.length - 1],
-                    key,
-                    ...params,
-                    zIndex: helpers.getZIndex(keysClone, dropdownKeys),
-                })
-            } else {
-                keysClone.push({
-                    ...dropdownKeys[dropdownKeys.length - 1],
-                    key,
-                    ...params,
-                    zIndex: helpers.getZIndex(keysClone, dropdownKeys),
-                })
-            }
+            keysClone.push({
+                ...keysClone[keysClone.length - 1],
+                ...dropdownKeys[dropdownKeys.length - 1],
+                ...params,
+                key,
+            })
         }
         
         dispatch({
@@ -41,7 +31,20 @@ export function showModal(key, params={}) {
     }
 }
 
-export function updateModal() {
+export function popModalTo(index) {
+    return (dispatch, getState) => {
+        const { modalKeys } = getState().modal
+
+        const keysClone = Array.from(modalKeys).slice(0, index + 1)
+
+        dispatch({
+            type: UPDATE_MODAL_KEYS,
+            payload: keysClone,
+        })
+    }
+}
+
+export function updateTopModal() {
     return (dispatch, getState) => {
         if (!arguments[0]) return
         const { modalKeys } = getState().modal

@@ -59,7 +59,7 @@ class AppWrapper extends React.Component{
         }
         
         //check if clicking on a modal background
-        if (e.target.classList.contains('modal')) {
+        if (e.target.classList.contains('modal-appclick')) {
             this.props.showModal()
             this.props.showDropdown()
             return

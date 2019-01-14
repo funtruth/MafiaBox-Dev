@@ -6,7 +6,7 @@ import * as proptool from '../logic/proptool'
 import { dropdownType } from './types'
 import { boardType } from '../board/types'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
-import { updateModal } from '../modal/ModalReducer'
+import { updateTopModal } from '../modal/ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
 
 import Dropdown from './components/Dropdown';
@@ -56,7 +56,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
                 if (proptool.isTrigger(props.currentValue || '')) {
-                    props.updatePage = (value) => this.props.updateModal(
+                    props.updatePage = (value) => this.props.updateTopModal(
                         'attach',
                         'value',
                         props.subfieldKey,
@@ -170,6 +170,6 @@ export default connect(
         showDropdown,
         popDropdownTo,
         updatePageByPath,
-        updateModal,
+        updateTopModal,
     }
 )(DropdownView)

@@ -1,5 +1,3 @@
-import * as helpers from '../common/helpers'
-
 const initialState = {
     dropdownKeys: [],
 }
@@ -19,23 +17,24 @@ export function showDropdown(key, e, params={}, index=0) {
         } else {
             let keysClone = Array.from(dropdownKeys).slice(0, index + 1)
 
+            const prev = keysClone[keysClone.length - 1]
             if (keysClone.length) {
-                const prev = keysClone[keysClone.length - 1]
                 keysClone.push({
+                    ...modalKeys[modalKeys.length - 1],
                     ...prev,
-                    key,
                     ...params,
                     pageX: prev.pageX + e.target.offsetWidth,
                     pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
-                    zIndex: helpers.getZIndex(keysClone, modalKeys),
+                    key,
                 })
             } else {
                 keysClone.push({
-                    key,
+                    ...modalKeys[modalKeys.length - 1],
+                    ...prev,
                     ...params,
                     pageX: e.pageX - e.offsetX - 8,
                     pageY: e.pageY - e.offsetY + e.target.offsetHeight,
-                    zIndex: helpers.getZIndex(keysClone, modalKeys),
+                    key,
                 })
             }
 

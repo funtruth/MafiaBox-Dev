@@ -13,37 +13,13 @@ import CodeField from '../../fields/components/CodeField';
 var beautify_js = require('js-beautify');
 
 class EditTrigger extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            value: ''
-        }
+    _onSave = () => {
+        this.props.onSave()
+        this.props.popModalBy(1)
     }
     
-    _onCancel = () => {
-        this.props.showModal()
-    }
-
-    _onSave = () => {
-        const { value } = this.state
-
-        if (value && value.trim()) {
-            //TODO needs to apply updateViewType
-            this.props.showModal()
-        } else {
-            //highlight red.
-        }
-    }
-
-    _onChange = e => {
-        this.setState({
-            value: e.target.value
-        })
-    }
-
     render() {
         const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar } = this.props
-        //TODO it's either this or update attach
         
         const data = attach && attach.value
         const iprops = {
@@ -77,7 +53,7 @@ class EditTrigger extends React.Component {
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
-                    <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={this._onCancel}>
+                    <div className="underline-button" onClick={this.props.onClose}>
                         {`Cancel`}
                     </div>
                     <div className="modal-button" onClick={this._onSave}>
