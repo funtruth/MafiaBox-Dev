@@ -44,7 +44,7 @@ class AddVar extends React.Component{
         return (
             <div>
                 <input
-                    className="tag-input menu-voidclick"
+                    className="tag-input"
                     value={this.state.value}
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}

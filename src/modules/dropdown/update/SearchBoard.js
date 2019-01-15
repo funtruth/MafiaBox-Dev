@@ -49,7 +49,7 @@ class SearchBoard extends React.Component{
         return (
             <div>
                 <input
-                    className="tag-input menu-voidclick"
+                    className="tag-input"
                     value={this.state.searchText}
                     onChange={this._onType}
                     placeholder="Search for page"

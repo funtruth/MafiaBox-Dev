@@ -41,7 +41,7 @@ class EditTag extends React.Component{
         return (
             <div>
                 <input
-                    className="tag-input menu-voidclick"
+                    className="tag-input"
                     value={fieldInfo.title || ''}
                     onChange={this._onChange}
                     onKeyDown={this._onKeyDown}
