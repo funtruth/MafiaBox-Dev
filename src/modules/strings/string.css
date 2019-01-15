@@ -3,3 +3,19 @@
     color: #a6a6a6;
     margin: 4px 12px;
 }
+
+.underline-input {
+    border: none;
+    padding: 8px 0px;
+    font: 450 14px Arial;
+    color: #d6d6d6;
+    background-color: rgba(54, 57, 64);
+    cursor: text;
+    border: 0;
+    border-bottom: 1px solid #666;
+}
+
+.underline-input:focus {
+    outline: none;
+    border-bottom: 1px solid #a6a6a6;
+}

@@ -3,8 +3,8 @@ import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
-import { boardType } from '../board/types'
-import { fuseType } from '../dropdown/types'
+import { screenType } from '../types'
+import { fuseType } from '../../dropdown/types'
 
 class StringDashboard extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class StringDashboard extends React.Component {
             searchText: '',
             results: [],
         }
-        this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === boardType.strings), fuseType.stringDashboard)
+        this.fuse = new Fuse(_.toArray(props.stringRepo), fuseType.stringDashboard)
     }
     
     _onType = (e) => {
@@ -24,7 +24,7 @@ class StringDashboard extends React.Component {
     }
 
     _onCreate = () => {
-        this.props.navigate('screen/create')
+        this.props.navigate(screenType.edit)
     }
 
     _renderItem = (item) => {
@@ -85,6 +85,6 @@ class StringDashboard extends React.Component {
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        stringRepo: state.string.stringRepo,
     })
 )(StringDashboard)
