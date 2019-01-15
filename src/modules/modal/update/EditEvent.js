@@ -18,16 +18,16 @@ class EditEvent extends React.Component {
                     minWidth: 600,
                     width: '75vw',
                     minHeight: 400,
-                    height: '60vh',
+                    maxHeight: '60vh',
                 }}
             >
                 <StringView/>
                 <div className="row dark-grey modal-options">
+                    <div className="modal-button" onClick={this._onSave}>
+                        Save
+                    </div>
                     <div className="underline-button" onClick={this.props.onClose}>
                         Cancel
-                    </div>
-                    <div className="modal-button" onClick={this._onSave}>
-                        Done
                     </div>
                 </div>
             </div>

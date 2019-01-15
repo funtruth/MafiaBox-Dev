@@ -1,4 +1,5 @@
 import React from 'react'
+import './string.css'
 
 import StringDashboard from './StringDashboard'
 import StringCreate from './StringCreate'
@@ -16,14 +17,20 @@ class StringView extends React.Component {
         }
     }
 
+    navigate = (screen) => {
+        this.setState({
+            nav: screen,
+        })
+    }
+
     render() {
         switch(this.state.nav) {
             case SCREEN_DASHBOARD:
-                return <StringDashboard/>
+                return <StringDashboard navigate={this.navigate}/>
             case SCREEN_CREATE:
-                return <StringCreate/>
+                return <StringCreate navigate={this.navigate}/>
             case SCREEN_EDIT:
-                return <StringEdit/>
+                return <StringEdit navigate={this.navigate}/>
             default:
                 return null
         }
