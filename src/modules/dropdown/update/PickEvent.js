@@ -5,10 +5,10 @@ import * as proptool from '../../logic/proptool'
 import { showModal } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/types';
 
-class PickTrigger extends React.Component{
+class PickEvent extends React.Component{
     _addTrigger = () => {
         const { attach, subfieldKey } = this.props
-        this.props.showModal(modalType.editTrigger, {
+        this.props.showModal(modalType.editEvent, {
             attach: attach[subfieldKey]
         })
         this.props.showDropdown()
@@ -25,14 +25,14 @@ class PickTrigger extends React.Component{
                     onClick={this._addTrigger}
                 >
                     <i className="drop-down-menu-icon mdi mdi-flag"/>
-                    edit trigger
+                    edit events
                 </div>
                 :<div
                     className="drop-down-menu-option"
                     onClick={this._addTrigger}
                 >
                     <i className="drop-down-menu-icon mdi mdi-flag-plus"/>
-                    create trigger
+                    create event
                 </div>
         )
     }
@@ -45,4 +45,4 @@ export default connect(
     {
         showModal,
     }
-)(PickTrigger)
+)(PickEvent)

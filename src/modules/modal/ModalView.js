@@ -18,6 +18,7 @@ import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
 import EditTrigger from './update/EditTrigger'
+import EditEvent from './update/EditEvent'
 import SaveChanges from './components/SaveChanges';
 
 class ModalView extends React.Component {
@@ -41,6 +42,8 @@ class ModalView extends React.Component {
             
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>
+            case modalType.editEvent:
+                return <EditEvent {...props}/>
             case modalType.saveChanges:
                 return <SaveChanges {...props}/>
             default:

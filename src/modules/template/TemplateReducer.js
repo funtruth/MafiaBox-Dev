@@ -58,7 +58,7 @@ const initialState = {
             variableType: variableType.uid.key,
         },
         'events': {
-            dropdown: dropdownType.writeNews,
+            dropdown: dropdownType.pickEvent,
             action: 'Add',
             variableType: variableType.object.key,
         },

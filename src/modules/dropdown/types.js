@@ -30,10 +30,10 @@ export const dropdownType = {
     pickUid: 'dropdownType/pick-uid',
     pickHealth: 'dropdownType/pick-health',
     pickTrigger: 'dropdownType/pick-trigger',
-    writeNews: 'dropdownType/write-news',
     pickBoolean: 'dropdownType/pick-boolean',
     pickRole: 'dropdownType/pick-role',
     pickLibrary: 'dropdownType/pick-library',
+    pickEvent: 'dropdownType/pick-event',
 }
 
 export const fuseType = {

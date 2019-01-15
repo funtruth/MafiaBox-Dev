@@ -11,4 +11,5 @@ export const modalType = {
     //v2 aka not garbage
     saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
+    editEvent: 'modalType/edit-event',
 }

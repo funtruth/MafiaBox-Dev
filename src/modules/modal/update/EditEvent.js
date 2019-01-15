@@ -1,16 +1,11 @@
 import React from 'react'
 
 import { triggerNewVars } from '../../logic/types'
+import { boardType } from '../../board/types'
 
-import { getUpdateCode } from '../../logic/LogicReducer'
+import SearchBoard from '../../dropdown/update/SearchBoard';
 
-import LogicArgs from '../../logic/components/LogicArgs'
-import LogicObject from '../../logic/form/LogicObject';
-import CodeField from '../../fields/components/CodeField';
-
-var beautify_js = require('js-beautify');
-
-class EditTrigger extends React.Component {
+class EditEvent extends React.Component {
     _onSave = () => {
         this.props.onSave()
         this.props.popModalBy(1)
@@ -34,20 +29,17 @@ class EditTrigger extends React.Component {
             },
         }
         
-        const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})
-        
         return (
             <div cancel-appclick="true">
                 <div style={{ padding: 16 }}>
                     <div className="modal-title">
-                        Edit Trigger
+                        Edit Events
                     </div>
                     <div className="row">
                         <div style={{ marginRight: 16 }}>
-                            <LogicArgs vars={triggerNewVars}/>
-                            <LogicObject {...iprops}/>
+                            <SearchBoard {...this.props} boardType={boardType.strings}/>
                         </div>
-                        <CodeField code={code}/>
+                        <input/>
                     </div>
                 </div>
                 <div className="row dark-grey modal-options">
@@ -63,4 +55,4 @@ class EditTrigger extends React.Component {
     }
 }
 
-export default EditTrigger
+export default EditEvent

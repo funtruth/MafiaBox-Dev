@@ -40,9 +40,9 @@ import PickBoolean from './update/PickBoolean'
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
-import PickNews from './update/PickNews'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
+import PickEvent from './update/PickEvent';
 
 class DropdownView extends React.Component{
     _renderItem = (props, index) => {
@@ -137,10 +137,10 @@ class DropdownView extends React.Component{
 
             case dropdownType.addUpdateField:
                 return <AddUpdateField {...props}/>
-            case dropdownType.writeNews:
-                return <PickNews {...props}/>
             case dropdownType.pickTrigger:
                 return <PickTrigger {...props}/>
+            case dropdownType.pickEvent:
+                return <PickEvent {...props}/>
             default:
                 return null
         }
