@@ -32,12 +32,6 @@ const initialState = {
             action: 'Add',
             variableType: variableType.object.key,
         },
-        'gameState.nominate.$': {
-            hideButton: true,
-            update: true,
-            mutate: false,
-            variableType: variableType.uid.key,
-        },
         'lobby': {
             dropdown: dropdownType.pickUid,
             action: 'Add',

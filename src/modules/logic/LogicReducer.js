@@ -4,10 +4,9 @@ var beautify_js = require('js-beautify');
 const initialState = {}
 
 export function getCode(fieldInfo, key, library) {
-    const { fieldKey, vars } = fieldInfo
+    const { vars } = fieldInfo
     return (dispatch, getState) => {
-        return beautify_js(`const ${fieldKey}=(${Object.keys(vars).join(',')})=>{${recursive(key, library)}}`,
-            {brace_style: 'end-expand'})
+        return `(${groupRSSVars(vars)})=>${beautify_js(`{${recursive(key, library)}}`, {brace_style: 'end-expand'})})`
     }
 }
 
@@ -131,6 +130,12 @@ export function getUpdateCode(data) {
         }
     }
     return string
+}
+
+function groupRSSVars(vars) {
+    let yes = [], no = []
+    Object.keys(vars).map(key => vars[key].rss ? yes.push(key) : no.push(key))
+    return `{${yes.join(', ')}}, ${no.join(', ')}`
 }
 
 export default (state = initialState, action) => {

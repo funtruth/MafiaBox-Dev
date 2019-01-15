@@ -57,8 +57,9 @@ class PickUid extends React.Component{
     }
 
     render() {
-        const { attachVar } = this.props
+        const { attachVar, subfieldKey } = this.props
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
+        const fields = proptool.getSubfields(subfieldKey, this.props.updateRef)
         
         return (
             <div>
@@ -69,7 +70,7 @@ class PickUid extends React.Component{
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                         There are no Unique IDs
                     </div>}
-                <UpdateType {...this.props}/>
+                {!fields.length && <UpdateType {...this.props}/>}
             </div>
         )
     }

@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { showModal } from '../ModalReducer'
-import { getUpdateCode } from '../../logic/LogicReducer'
 
 import { triggerNewVars } from '../../logic/types'
+
+import { getUpdateCode } from '../../logic/LogicReducer'
 
 import LogicArgs from '../../logic/components/LogicArgs'
 import LogicObject from '../../logic/form/LogicObject';
@@ -65,9 +63,4 @@ class EditTrigger extends React.Component {
     }
 }
 
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(EditTrigger)
+export default EditTrigger

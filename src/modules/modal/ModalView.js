@@ -17,7 +17,7 @@ import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
-import EditTrigger from './trigger/EditTrigger'
+import EditTrigger from './update/EditTrigger'
 import SaveChanges from './components/SaveChanges';
 
 class ModalView extends React.Component {

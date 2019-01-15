@@ -163,6 +163,11 @@ export const initFieldRepo = {
                 rss: true,
                 variableType: variableType.object.key,
             },
+            updates: {
+                key: 'updates',
+                rss: true,
+                variableType: variableType.object.key,
+            },
             user: {
                 key: 'user',
                 variableType: variableType.uid.key,
