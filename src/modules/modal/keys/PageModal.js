@@ -6,7 +6,15 @@ class PageModal extends React.Component {
         const { pageKey } = this.props
 
         return (
-            <div className="modal-page">
+            <div
+                style={{
+                    minHeight: 400,
+                    minWidth: 600,
+                    height: '80vh',
+                    width: '65vw',
+                    overflow: 'scroll',
+                }}
+            >
                 <PageView pageKey={pageKey}/>
             </div>
         )

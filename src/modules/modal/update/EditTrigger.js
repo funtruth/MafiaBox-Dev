@@ -38,17 +38,15 @@ class EditTrigger extends React.Component {
         
         return (
             <div cancel-appclick="true">
-                <div style={{ padding: 16 }}>
-                    <div className="modal-title">
-                        Edit Trigger
-                    </div>
-                    <div className="row">
-                        <div style={{ marginRight: 16 }}>
-                            <LogicArgs vars={triggerNewVars}/>
-                            <LogicObject {...iprops}/>
+                <div className="row">
+                    <div style={{ marginRight: 16 }}>
+                        <div className="modal-title">
+                            Edit Trigger
                         </div>
-                        <CodeField code={code}/>
+                        <LogicArgs vars={triggerNewVars}/>
+                        <LogicObject {...iprops}/>
                     </div>
+                    <CodeField code={code}/>
                 </div>
                 <div className="row dark-grey modal-options">
                     <div className="underline-button" onClick={this.props.onClose}>

@@ -6,7 +6,7 @@ const initialState = {}
 export function getCode(fieldInfo, key, library) {
     const { vars } = fieldInfo
     return (dispatch, getState) => {
-        return `(${groupRSSVars(vars)})=>${beautify_js(`{${recursive(key, library)}}`, {brace_style: 'end-expand'})})`
+        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})})`
     }
 }
 

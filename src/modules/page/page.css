@@ -75,34 +75,3 @@
     margin-top: 4px;
     margin-bottom: auto;
 }
-
-.add-field {
-    padding: 8px 6px;
-    font: 600 158 Arial;
-    letter-spacing: .2px;
-    color: #a6a6a6;
-    cursor: pointer;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-}
-
-.add-field:hover {
-    color: #fff;
-}
-
-.see-code-button {
-    padding: 2px 12px;
-    border-radius: 4px;
-    font: 500 14px Arial;
-    color: #969696;
-    cursor: pointer;
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.see-code-button:hover {
-    color: #fff;
-}

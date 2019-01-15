@@ -6,7 +6,15 @@ class TemplateModal extends React.Component {
         const { boardType } = this.props
 
         return (
-            <div className="modal-page">
+            <div
+                style={{
+                    minHeight: 400,
+                    minWidth: 600,
+                    height: '80vh',
+                    width: '65vw',
+                    overflow: 'scroll',
+                }}
+            >
                 <TemplateView boardType={boardType}/>
             </div>
         )

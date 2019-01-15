@@ -24,14 +24,14 @@ class PickEvent extends React.Component{
                     className="drop-down-menu-option"
                     onClick={this._addTrigger}
                 >
-                    <i className="drop-down-menu-icon mdi mdi-flag"/>
+                    <i className="drop-down-menu-icon mdi mdi-calendar"/>
                     edit events
                 </div>
                 :<div
                     className="drop-down-menu-option"
                     onClick={this._addTrigger}
                 >
-                    <i className="drop-down-menu-icon mdi mdi-flag-plus"/>
+                    <i className="drop-down-menu-icon mdi mdi-calendar-plus"/>
                     create event
                 </div>
         )
