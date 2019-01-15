@@ -25,7 +25,7 @@ class SaveChanges extends React.Component {
                         your changes will be lost if you do not save.
                     </div>
                 </div>
-                <div className="row dark-grey modal-options">
+                <div className="row modal-options">
                     <div className="underline-button" onClick={this._onSave}>
                         Save
                     </div>

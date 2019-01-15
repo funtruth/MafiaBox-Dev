@@ -22,7 +22,7 @@ class EditEvent extends React.Component {
                 }}
             >
                 <StringView/>
-                <div className="row dark-grey modal-options">
+                <div className="row modal-options">
                     <div className="modal-button" onClick={this._onSave}>
                         Save
                     </div>

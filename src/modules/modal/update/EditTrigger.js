@@ -48,7 +48,7 @@ class EditTrigger extends React.Component {
                     </div>
                     <CodeField code={code}/>
                 </div>
-                <div className="row dark-grey modal-options">
+                <div className="row modal-options">
                     <div className="underline-button" onClick={this.props.onClose}>
                         Cancel
                     </div>

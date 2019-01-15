@@ -1,7 +1,15 @@
 .dashboard-section-title {
-    font: 600 15px Arial;
+    font: 500 14px Arial;
     color: #a6a6a6;
     margin: 4px 12px;
+}
+
+.dashboard-item {
+    border-radius: 4px;
+    background-color: rgba(47, 49, 54, 1);
+    color: #a6a6a6;
+    font: 400 13px Arial;
+    padding: 4px 8px;
 }
 
 .underline-input {

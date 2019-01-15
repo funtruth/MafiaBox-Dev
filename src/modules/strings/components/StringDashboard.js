@@ -28,7 +28,14 @@ class StringDashboard extends React.Component {
     }
 
     _renderItem = (item) => {
-        return null
+        return (
+            <div
+                key={item.key}
+                className="dashboard-item"
+            >
+                {item.string}
+            </div>
+        )
     }
 
     render() {
@@ -58,7 +65,7 @@ class StringDashboard extends React.Component {
                 />
                 <div className="drop-down-menu-separator"/>
                 <div className="dashboard-section-title">Search Results</div>
-                <div className="row">
+                <div className="row" style={{ padding: '0px 8px' }}>
                     {results.map(this._renderItem)}
                 </div>
                 <div className="drop-down-menu-separator"/>

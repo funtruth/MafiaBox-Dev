@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { screenType } from '../types'
 
+import { addString } from '../StringReducer'
+
 class StringEdit extends React.Component {
     constructor(props) {
         super(props)
@@ -14,11 +16,22 @@ class StringEdit extends React.Component {
 
     _onType = e => {
         this.setState({
-            title: e.target.value
+            title: e.target.value,
+        })
+    }
+
+    _onInput = e => {
+        this.setState({
+            string: e.target.textContent,
         })
     }
 
     _onCreate = () => {
+        const { title, string } = this.state
+        this.props.addString({
+            title,
+            string,
+        })
         this.props.navigate(screenType.dashboard)
     }
 
@@ -61,6 +74,7 @@ class StringEdit extends React.Component {
                     <div className="drop-down-menu-separator"/>
                     <div
                         contentEditable="true"
+                        onInput={this._onInput}
                         style={{
                             maxHeight: '20vh',
                             overflow: 'auto',
@@ -73,6 +87,7 @@ class StringEdit extends React.Component {
                             marginTop: 4,
                             marginLeft: 'auto',
                             color: '#d6d6d6',
+                            paddingRight: 2,
                         }}
                         onClick={this._onCreate}
                     >
@@ -87,5 +102,8 @@ class StringEdit extends React.Component {
 export default connect(
     state => ({
         stringRepo: state.string.stringRepo,
-    })
+    }),
+    {
+        addString,
+    }
 )(StringEdit)

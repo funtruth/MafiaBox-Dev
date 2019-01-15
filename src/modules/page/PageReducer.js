@@ -25,11 +25,7 @@ const UPDATE_PAGE = 'page/update-page'
 export function addStory(title, boardType) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
-
-        let storyKey = helpers.genUID('story')
-        while(storyMap[storyKey]) {
-            storyKey = helpers.genUID('story')
-        }
+        const storyKey = helpers.genUID('story', storyMap)
 
         let storyMapClone = Object.assign({}, storyMap)
         storyMapClone[storyKey] = {
@@ -64,11 +60,7 @@ export function moveStory(startIndex, endIndex) {
 export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-
-        let pageKey = helpers.genUID('phase')
-        while(pageRepo[pageKey]) {
-            pageKey = helpers.genUID('phase')
-        }
+        const pageKey = helpers.genUID('phase', pageRepo)
 
         let pageInfo = {
             pageKey,

@@ -27,11 +27,7 @@ export function addField(boardType, text) {
         const index = _.filter(fieldRepo, i => i.boardType === boardType).length
         
         let fieldRepoClone = Object.assign({}, fieldRepo)
-
-        let newItemKey = helpers.genUID('field')
-        while(fieldRepo[newItemKey]) {
-            newItemKey = helpers.genUID('field')
-        }
+        const newItemKey = helpers.genUID('field', fieldRepo)
 
         fieldRepoClone[newItemKey] = {
             key: newItemKey,
@@ -139,11 +135,7 @@ export function addTag(fieldKey, text) {
 
         //calculate new item index
         const index = Object.keys(dataClone).length
-        
-        let newItemKey = helpers.genUID('tag')
-        while(dataClone[newItemKey]) {
-            newItemKey = helpers.genUID('tag')
-        }
+        const newItemKey = helpers.genUID('tag', dataClone)
 
         dataClone[newItemKey] = {
             key: newItemKey,
@@ -248,11 +240,7 @@ export function addItemToRightOf(itemKey, pageKey, fieldKey) {
         
         let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
-
-        let newItemKey = helpers.genUID('item')
-        while(logicMap[newItemKey]) {
-            newItemKey = helpers.genUID('item')
-        }
+        const newItemKey = helpers.genUID('item', logicMap)
 
         logicMap[newItemKey] = {}
         logicMap[itemKey].right && (logicMap[newItemKey].right = logicMap[itemKey].right)
@@ -268,11 +256,7 @@ export function addItemBelowOf(itemKey, pageKey, fieldKey) {
 
         let logicMap = { ...defaultLogic }
         Object.assign(logicMap, pageRepo[pageKey][fieldKey])
-
-        let newItemKey = helpers.genUID('item')
-        while(logicMap[newItemKey]) {
-            newItemKey = helpers.genUID('item')
-        }
+        const newItemKey = helpers.genUID('item', logicMap)
         
         logicMap[newItemKey] = {}
         logicMap[itemKey].down && (logicMap[newItemKey].down = logicMap[itemKey].down)

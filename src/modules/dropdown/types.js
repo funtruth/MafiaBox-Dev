@@ -56,7 +56,14 @@ export const fuseType = {
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: [
-            "title"
+            {
+                name: 'title',
+                weight: 0.7,
+            },
+            {
+                name: 'string',
+                weight: 0.3,
+            },
         ],
     }
 }

@@ -6,6 +6,23 @@ const initialState = {
 
 const UPDATE_REPO = 'string/update-repo'
 
+export function addString(params={}) {
+    return (dispatch, getState) => {
+        const { stringRepo } = getState().string
+        let repoClone = Object.assign({}, stringRepo)
+        const newKey = helpers.genUID('string', stringRepo)
+
+        repoClone[newKey] = {
+            ...params,
+            key: newKey,
+        }
+
+        dispatch({
+            type: UPDATE_REPO,
+            payload: repoClone,
+        })
+    }
+}
 export function updateStringByPath() {
     return (dispatch, getState) => {
         const { stringRepo } = getState().string
