@@ -86,11 +86,11 @@ class PickVar extends React.Component{
         return (
             <div>
                 <BoardLib {...this.props}/>
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div style={menuStyle}>
                     {vars.map(this._renderItem)}
                 </div>
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <DropParent
                     {...this.props}
                     dropdownType={dropdownType.inputValue}

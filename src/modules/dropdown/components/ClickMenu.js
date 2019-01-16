@@ -23,7 +23,7 @@ class ClickMenu extends React.Component{
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete
                 </div>
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div className="drop-down-menu-option">
                     <i className={`drop-down-menu-icon ion-ios-flag`}></i>
                     Flag

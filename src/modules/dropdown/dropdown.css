@@ -63,7 +63,7 @@
     background-color: hsla(0,0%,100%,.1);
 }
 
-.drop-down-menu-separator {
+.-separator {
     height: 1px;
     margin: 8px 0px;
     background-color: #464646;

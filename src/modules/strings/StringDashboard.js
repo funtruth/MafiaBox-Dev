@@ -1,14 +1,12 @@
 import React from 'react'
+import './string.css'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
-import { screenType } from '../types'
-import { fuseType } from '../../dropdown/types'
+import { fuseType } from '../dropdown/types'
 
-import { stringNavigate } from '../StringReducer'
-
-import DashboardSection from './DashboardSection';
+import DashboardSection from './components/DashboardSection';
 
 class StringDashboard extends React.Component {
     constructor(props) {
@@ -28,7 +26,7 @@ class StringDashboard extends React.Component {
     }
 
     _onCreate = () => {
-        this.props.stringNavigate(screenType.edit)
+        
     }
 
     _renderItem = (item) => {
@@ -92,7 +90,4 @@ export default connect(
     state => ({
         stringRepo: state.string.stringRepo,
     }),
-    {
-        stringNavigate,
-    }
 )(StringDashboard)

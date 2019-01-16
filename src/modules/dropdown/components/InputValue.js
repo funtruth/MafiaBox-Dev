@@ -49,7 +49,7 @@ class InputValue extends React.Component{
                     type={type || "number"}
                     autoFocus
                 />
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div className="drop-down-menu-option" onClick={this._onSubmit}>
                     <i className={`drop-down-menu-icon mdi mdi-content-save-settings`}></i>
                     Save

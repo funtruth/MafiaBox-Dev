@@ -69,7 +69,7 @@ class PickOperator extends React.Component{
         return (
             <div>
                 {data.map(this._renderItem)}
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div className="drop-down-menu-option" onClick={this._addItemBelow}>
                     <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
                     Add Logic Below

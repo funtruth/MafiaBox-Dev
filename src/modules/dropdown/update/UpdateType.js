@@ -44,7 +44,7 @@ class UpdateType extends React.Component{
         
         return (
             <div>
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div
                     className="drop-down-menu-option"
                     chosen={update.toString()}

@@ -1,11 +1,17 @@
 import React from 'react'
 
-import StringView from '../../strings/StringView'
+import StringDashboard from '../../strings/StringDashboard';
 
 class EditEvent extends React.Component {
     _onSave = () => {
-        this.props.onSave()
-        this.props.popModalBy(1)
+        const { isTrigger } = this.props
+
+        if (isTrigger) {
+
+        } else {
+            this.props.onSave()
+            this.props.popModalBy(1)
+        }
     }
     
     render() {
@@ -21,7 +27,7 @@ class EditEvent extends React.Component {
                     maxHeight: '60vh',
                 }}
             >
-                <StringView {...this.props}/>
+                <StringDashboard {...this.props}/>
                 <div className="row modal-options">
                     <div className="modal-button" onClick={this._onSave}>
                         Save

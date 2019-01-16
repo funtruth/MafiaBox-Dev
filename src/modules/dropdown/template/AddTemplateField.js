@@ -47,7 +47,7 @@ class AddTemplateField extends React.Component{
                     type='text'
                     autoFocus
                 />
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div className="drop-down-menu-option" onClick={this._confirm}>
                     <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
                     Create

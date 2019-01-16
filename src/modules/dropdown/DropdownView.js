@@ -1,7 +1,6 @@
 import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
-import * as proptool from '../logic/proptool'
 
 import { dropdownType } from './types'
 import { boardType } from '../board/types'
@@ -78,7 +77,8 @@ class DropdownView extends React.Component{
                 break
             default:
         }
-
+        console.log({item})
+        console.log({propsy: props})
         switch(props.key) {
             case dropdownType.storyShowMore:
                 return <ClickMenu {...props}/>

@@ -20,6 +20,8 @@ import TemplateModal from './keys/TemplateModal'
 import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
 import SaveChanges from './components/SaveChanges';
+import StringEdit from './update/StringEdit';
+import StringUpdate from './update/StringUpdate';
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -46,6 +48,10 @@ class ModalView extends React.Component {
                 return <EditEvent {...props}/>
             case modalType.saveChanges:
                 return <SaveChanges {...props}/>
+            case modalType.stringEdit:
+                return <StringEdit {...props}/>
+            case modalType.stringUpdate:
+                return <StringUpdate {...props}/>
             default:
                 return null
         }

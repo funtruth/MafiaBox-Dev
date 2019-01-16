@@ -49,7 +49,7 @@ class BoardLib extends React.Component{
                     type='text'
                     autoFocus
                 />
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 {searchText ?
                     this.state.results.length ?
                         this.state.results.map((item, index) => {

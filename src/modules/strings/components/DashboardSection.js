@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { screenType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 
-import { stringNavigate } from '../StringReducer'
-import { showDropdown } from '../../dropdown/DropdownReducer'
+import { showModal } from '../../modal/ModalReducer'
+import { modalType } from '../../modal/types';
 
 class DashboardSection extends React.Component {
     _onUpdate = (item) => {
-        this.props.stringNavigate(screenType.update, item.key)
+        this.props.showModal(modalType.updateEvent, {
+            stringKey: item.key
+        })
     }
 
     render() {
@@ -19,17 +20,17 @@ class DashboardSection extends React.Component {
 
         return (
             <div>
-                <div className="drop-down-menu-separator"/>
+                <div className="-separator"/>
                 <div className="dashboard-section-title">{title}</div>
                 <div className="row dashboard-results">
-                    {data.map(item => {
+                    {data.map((item, index) => {
                         if(editOnly) {
                             return (
                                 <div
-                                    key={`${item.key}-EDITONLY`}
+                                    key={index}
                                     highlight="true"
                                     className="dashboard-item"
-                                    onClick={this._onUpdate}
+                                    onClick={this._onUpdate.bind(this, item)}
                                 >
                                     <div className="dashboard-item-title">
                                         {item.title}
@@ -70,7 +71,6 @@ class DashboardSection extends React.Component {
 export default connect(
     null,
     {
-        stringNavigate,
-        showDropdown,
+        showModal,
     }
 )(DashboardSection)

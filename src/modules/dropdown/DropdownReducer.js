@@ -10,6 +10,8 @@ export function showDropdown(key, e, params={}, index=0) {
         const { modalKeys } = getState().modal
 
         if (!key) {
+            if (!dropdownKeys.length) return
+
             dispatch({
                 type: UPDATE_KEYS,
                 payload: [],
@@ -28,14 +30,19 @@ export function showDropdown(key, e, params={}, index=0) {
                     key,
                 })
             } else {
-                keysClone.push({
-                    ...modalKeys[modalKeys.length - 1],
-                    ...prev,
-                    ...params,
-                    pageX: e.pageX - (e.offsetX || e.nativeEvent.offsetX) - 8,
-                    pageY: e.pageY - (e.offsetY || e.nativeEvent.offsetY) + e.target.offsetHeight,
-                    key,
-                })
+                //TODO wrap dropdown in a view with width = parentWidth and then alignItems:'center'
+                if (params.centerViewOnParent) {
+
+                } else {
+                    keysClone.push({
+                        ...modalKeys[modalKeys.length - 1],
+                        ...prev,
+                        ...params,
+                        pageX: e.pageX - (e.offsetX || e.nativeEvent.offsetX) - 8,
+                        pageY: e.pageY - (e.offsetY || e.nativeEvent.offsetY) + e.target.offsetHeight,
+                        key,
+                    })
+                }
             }
 
             dispatch({
