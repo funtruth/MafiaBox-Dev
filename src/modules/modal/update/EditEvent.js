@@ -11,13 +11,13 @@ class EditEvent extends React.Component {
     render() {
         return (
             <div
+                className="height-transition"
                 cancel-appclick="true"
                 style={{
                     display: 'flex',
                     flexDirection: 'column',
                     minWidth: 600,
                     width: '75vw',
-                    minHeight: 400,
                     maxHeight: '60vh',
                 }}
             >

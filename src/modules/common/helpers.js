@@ -10,6 +10,9 @@ export function genUID(key, repo) {
 //updates a property deep inside an object and returns the entire object
 //WARNING: cannot delete properties (THIS IS A FEATURE)
 export function pathUpdate(args, index, repo) {
+    if (args.length < 3) {
+        console.warning('helpers.pathUpdate cannot have less than 3 arguments.')
+    }
     return {
         ...repo[args[index]]||{},
         [args[index + 1]]: index === args.length - 3 ?

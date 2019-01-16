@@ -1,35 +1,30 @@
 import React from 'react'
 import './string.css'
+import { connect } from 'react-redux'
 
 import { screenType } from './types'
 
 import StringDashboard from './components/StringDashboard'
 import StringEdit from './components/StringEdit'
+import StringUpdate from './components/StringUpdate'
 
 class StringView extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            nav: screenType.dashboard,
-        }
-    }
-
-    navigate = (screen) => {
-        this.setState({
-            nav: screen,
-        })
-    }
-
     render() {
-        switch(this.state.nav) {
+        switch(this.props.stringView) {
             case screenType.dashboard:
-                return <StringDashboard navigate={this.navigate}/>
+                return <StringDashboard/>
             case screenType.edit:
-                return <StringEdit navigate={this.navigate}/>
+                return <StringEdit/>
+            case screenType.update:
+                return <StringUpdate/>
             default:
                 return null
         }
     }
 }
 
-export default StringView
+export default connect(
+    state => ({
+        stringView: state.string.stringView,
+    })
+)(StringView)

@@ -7,3 +7,8 @@
     from { transform: scale(0.8); }
     to   { transform: scale(1); }
 }
+
+@keyframes heightin {
+    from { max-height: 10px; }
+    to   { max-height: 1000px; }
+}

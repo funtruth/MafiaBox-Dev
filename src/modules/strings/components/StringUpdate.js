@@ -5,7 +5,7 @@ import { screenType } from '../types'
 
 import { addString, updateStringByPath, stringNavigate } from '../StringReducer'
 
-class StringEdit extends React.Component {
+class StringUpdate extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -136,4 +136,4 @@ export default connect(
         updateStringByPath,
         stringNavigate,
     }
-)(StringEdit)
+)(StringUpdate)

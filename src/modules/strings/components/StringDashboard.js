@@ -6,6 +6,10 @@ import { connect } from 'react-redux'
 import { screenType } from '../types'
 import { fuseType } from '../../dropdown/types'
 
+import { stringNavigate } from '../StringReducer'
+
+import DashboardSection from './DashboardSection';
+
 class StringDashboard extends React.Component {
     constructor(props) {
         super(props)
@@ -24,32 +28,32 @@ class StringDashboard extends React.Component {
     }
 
     _onCreate = () => {
-        this.props.navigate(screenType.edit)
+        this.props.stringNavigate(screenType.edit)
     }
 
     _renderItem = (item) => {
         return (
             <div
                 key={item.key}
+                highlight="true"
                 className="dashboard-item"
             >
+                <div className="dashboard-item-title">
+                    {item.title}
+                </div>
                 {item.string}
             </div>
         )
     }
 
     render() {
+        const { stringRepo } = this.props
+
+        const recent = _.sortBy(stringRepo, i => -i.lastEdit).slice(0, 5)
         const { results } = this.state
 
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    position: 'relative',
-                    height: '100%',
-                }}
-            >
+            <div className="dashboard">
                 <input
                     className="tag-input"
                     value={this.state.searchText}
@@ -63,16 +67,8 @@ class StringDashboard extends React.Component {
                         alignSelf: 'center',
                     }}
                 />
-                <div className="drop-down-menu-separator"/>
-                <div className="dashboard-section-title">Search Results</div>
-                <div className="row" style={{ padding: '0px 8px' }}>
-                    {results.map(this._renderItem)}
-                </div>
-                <div className="drop-down-menu-separator"/>
-                <div className="dashboard-section-title">Current Events</div>
-                <div className="row">
-                    {results.map(this._renderItem)}
-                </div>
+                <DashboardSection data={results} title="Search Results"/>
+                <DashboardSection data={recent} title="Recent Edits"/>
                 <div
                     className="cute-button"
                     style={{
@@ -93,5 +89,8 @@ class StringDashboard extends React.Component {
 export default connect(
     state => ({
         stringRepo: state.string.stringRepo,
-    })
+    }),
+    {
+        stringNavigate,
+    }
 )(StringDashboard)
