@@ -57,24 +57,50 @@ class ModalView extends React.Component {
         
         return (
             modalKeys.map((item, index) => {
-                item.popModalBy = (pops) => this.props.popModalTo(index - pops) 
+                let props = Object.assign({}, item)
 
-                switch(item.key) {
+                props.popModalBy = (pops) => this.props.popModalTo(index - pops) 
+
+                switch(props.key) {
                     case modalType.editTrigger:
-                        item.requireSave = true
-                        item.onSave = () => this.props.updatePageByPath(
-                            item.pageKey,
-                            item.fieldKey,
-                            item.indexKey,
+                    case modalType.editEvent:
+                        props.requireSave = true
+                        break
+                    default:
+                }
+
+                switch(props.key) {
+                    case modalType.editTrigger:
+                        props.onSave = () => this.props.updatePageByPath(
+                            props.pageKey,
+                            props.fieldKey,
+                            props.indexKey,
                             'data',
-                            item.subfieldKey,
+                            props.subfieldKey,
                             {
-                                ...item.attach,
+                                ...props.attach,
                                 updateViewType: updateViewType.trigger,
                             },
                         )
-                        item.onClose = () => this.props.showModal(modalType.saveChanges, {
-                            onSave: item.onSave,
+                        props.onClose = () => this.props.showModal(modalType.saveChanges, {
+                            onSave: props.onSave,
+                            onClose: this.props.showModal,
+                        })
+                        break
+                    case modalType.editEvent:
+                        props.onSave = () => this.props.updatePageByPath(
+                            props.pageKey,
+                            props.fieldKey,
+                            props.indexKey,
+                            'data',
+                            props.subfieldKey,
+                            {
+                                ...props.attach,
+                                updateViewType: updateViewType.events,
+                            }
+                        )
+                        props.onClose = () => this.props.showModal(modalType.saveChanges, {
+                            onSave: props.onSave,
                             onClose: this.props.showModal,
                         })
                         break
@@ -82,8 +108,8 @@ class ModalView extends React.Component {
                 }
 
                 return (
-                    <Modal {...item} key={index}>
-                        {this._renderItem(item)}
+                    <Modal {...props} key={index}>
+                        {this._renderItem(props)}
                     </Modal>
                 )
             })

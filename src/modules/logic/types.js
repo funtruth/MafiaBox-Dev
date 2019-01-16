@@ -101,6 +101,7 @@ export const updateViewType = {
     uid: 'updateViewType/uid',
     health: 'updateViewType/health',
     trigger: 'updateViewType/trigger',
+    events: 'updateViewType/events',
 }
 
 //possible static and dynamic update types

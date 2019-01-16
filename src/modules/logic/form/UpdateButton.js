@@ -6,7 +6,7 @@ import { updateType, updateViewType } from '../types';
 class UpdateButton extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, subfieldKey, config,
-            logicInfo, prefix, vars, pageRepo } = this.props
+            logicInfo, prefix, vars, pageRepo, isTrigger } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
         
         let buttonText = ""
@@ -29,13 +29,15 @@ class UpdateButton extends React.Component{
             case updateViewType.trigger:
                 buttonText = <i className="mdi mdi-flag"/>
                 break
+            case updateViewType.events:
+                buttonText = <i className="mdi mdi-calendar"/>
+                break
             default:
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
         let attach = "", attachVar = "", currentValue = ""
-        //a normal logicBlock will not have a subfieldKey
-        if (subfieldKey) {
+        if (isTrigger) {
             attach = logicInfo.data || {}
             attachVar = vars
             currentValue = subfieldKey

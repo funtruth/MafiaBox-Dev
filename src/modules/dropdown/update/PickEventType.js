@@ -2,17 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
-import { modalType } from '../../modal/types';
 import { screenType } from '../../strings/types'
 
-import { showModal } from '../../modal/ModalReducer'
+import { showModal, updateTopModal } from '../../modal/ModalReducer'
 import { stringNavigate } from '../../strings/StringReducer'
 
 class PickEventType extends React.Component{
     _onAdd = () => {
         const { tagKey } = this.props
-        this.props.stringNavigate(screenType.update, tagKey)
-        this.props.updatePage()
+        this.props.updateTopModal(
+            'attach',
+            'value',
+            Date.now(),
+            {
+                key: tagKey,
+            }
+        )
         this.props.showDropdown()
     }
 
@@ -51,5 +56,6 @@ export default connect(
     {
         showModal,
         stringNavigate,
+        updateTopModal,
     }
 )(PickEventType)

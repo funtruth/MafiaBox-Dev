@@ -26,10 +26,10 @@ class UpdateType extends React.Component{
     }
 
     _handleClick = type => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, currentValue } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, attach, isTrigger } = this.props
         
 
-        if (proptool.isTrigger(currentValue || '')) {
+        if (isTrigger) {
             this.props.updateTopModal('attach', 'value', subfieldKey, type, !this.state[type])
         } else if (attach[subfieldKey] && attach[subfieldKey].value) {
             this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, type, !this.state[type])

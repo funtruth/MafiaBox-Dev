@@ -26,7 +26,7 @@ class DashboardSection extends React.Component {
                         if(editOnly) {
                             return (
                                 <div
-                                    key={item.key}
+                                    key={`${item.key}-EDITONLY`}
                                     highlight="true"
                                     className="dashboard-item"
                                     onClick={this._onUpdate}

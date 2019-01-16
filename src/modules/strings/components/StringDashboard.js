@@ -50,7 +50,7 @@ class StringDashboard extends React.Component {
         const { stringRepo, attach } = this.props
 
         const { results } = this.state
-        const current = _.toArray(attach.value)
+        const current = _.toArray(attach.value).map(item => ({...stringRepo[item.key], ...item}))
         const recent = _.sortBy(stringRepo, i => -i.lastEdit).slice(0, 5)
 
         return (
@@ -69,7 +69,7 @@ class StringDashboard extends React.Component {
                     }}
                 />
                 <DashboardSection data={results} title="Search Results"/>
-                <DashboardSection data={current} title="Current Events"/>
+                <DashboardSection data={current} editOnly title="Active Events"/>
                 <DashboardSection data={recent} title="Recent Edits"/>
                 <div
                     className="cute-button"

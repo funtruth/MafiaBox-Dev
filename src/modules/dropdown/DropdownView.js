@@ -46,7 +46,9 @@ import PickEvent from './update/PickEvent';
 import PickEventType from './update/PickEventType';
 
 class DropdownView extends React.Component{
-    _renderItem = (props, index) => {
+    _renderItem = (item, index) => {
+        let props = Object.assign({}, item)
+        
         props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
         props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
 
@@ -56,7 +58,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickUpdate:
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
-                if (proptool.isTrigger(props.currentValue || '')) {
+                if (props.isTrigger) {
                     props.updatePage = (value) => this.props.updateTopModal(
                         'attach',
                         'value',

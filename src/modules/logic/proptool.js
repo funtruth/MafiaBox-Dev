@@ -75,8 +75,3 @@ export function addPlayerRef({updateRef, playerRef}) {
 
     return updateRefClone
 }
-
-export function isTrigger(prefix) {
-    const parts = prefix.split('.')
-    return parts[parts.length - 1] === 'trigger'
-}

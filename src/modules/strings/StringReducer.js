@@ -25,7 +25,7 @@ export function stringNavigate(view, key) {
                 })
                 break
             default:
-                console.warning('Screen type does not exist', view)
+                console.warn('Screen type does not exist', view)
         }
     }
 }
