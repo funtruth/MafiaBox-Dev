@@ -77,8 +77,7 @@ class DropdownView extends React.Component{
                 break
             default:
         }
-        console.log({item})
-        console.log({propsy: props})
+        
         switch(props.key) {
             case dropdownType.storyShowMore:
                 return <ClickMenu {...props}/>

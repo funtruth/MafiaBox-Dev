@@ -8,7 +8,7 @@ import { modalType } from '../../modal/types';
 
 class DashboardSection extends React.Component {
     _onUpdate = (item) => {
-        this.props.showModal(modalType.updateEvent, {
+        this.props.showModal(modalType.stringEdit, {
             stringKey: item.key
         })
     }
