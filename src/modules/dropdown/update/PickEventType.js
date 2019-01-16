@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
 import { showModal, updateTopModal } from '../../modal/ModalReducer'
+import { modalType } from '../../modal/types';
 
 class PickEventType extends React.Component{
     _onAdd = () => {
@@ -19,6 +20,10 @@ class PickEventType extends React.Component{
     }
 
     _onEdit = () => {
+        const { tagKey } = this.props
+        this.props.showModal(modalType.stringUpdate, {
+            stringKey: tagKey,
+        })
         this.props.showDropdown()
     }
 

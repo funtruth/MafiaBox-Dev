@@ -70,6 +70,7 @@ class StringUpdate extends React.Component {
                     maxWidth: '30vw',
                 }}
             >
+                <div className="drop-down-section-title">EVENT TEMPLATE</div>
                 <input
                     className="tag-input"
                     value={this.state.title}

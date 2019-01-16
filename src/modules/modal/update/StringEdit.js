@@ -61,6 +61,9 @@ class StringEdit extends React.Component {
     }
 
     render() {
+        const { stringRepo, stringKey } = this.props
+        const { title, string } = stringRepo[stringKey]
+
         return (
             <div
                 style={{
@@ -70,20 +73,19 @@ class StringEdit extends React.Component {
                     maxWidth: '30vw',
                 }}
             >
-                <input
+                <div className="drop-down-section-title">EVENT NAME</div>
+                <div
                     className="tag-input"
-                    value={this.state.title}
-                    onChange={this._onType}
-                    placeholder="Name the event"
-                    type='text'
-                    autoFocus
-                />
+                    style={{
+                        cursor: 'default',
+                    }}
+                >
+                    {title}
+                </div>
                 <div className="-separator"/>
                 <div
                     id="input"
-                    contentEditable="true"
-                    suppressContentEditableWarning="true"
-                    onInput={this._onInput}
+                    className="text-box"
                     style={{
                         maxHeight: '10vh',
                         overflowY: 'scroll',
@@ -92,6 +94,9 @@ class StringEdit extends React.Component {
                 >{this.string}
                 </div>
                 <div className="-separator"/>
+                <div className="drop-down-section-title">VARIABLES</div>
+                <div className="-separator"/>
+                <div className="drop-down-section-title">RECIPIENTS</div>
                 <div className="row modal-options">
                     <div className="modal-button" onClick={this._onCreate}>
                         Save
