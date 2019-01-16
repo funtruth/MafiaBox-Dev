@@ -5,6 +5,7 @@ import { screenType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 
 import { stringNavigate } from '../StringReducer'
+import { showDropdown } from '../../dropdown/DropdownReducer'
 
 class DashboardSection extends React.Component {
     _onUpdate = (item) => {
@@ -44,7 +45,9 @@ class DashboardSection extends React.Component {
                                 highlight="true"
                                 className="dashboard-item app-onclick"
                                 menu-type={dropdownType.pickEventType}
-                                page-key={item.key}
+                                app-onclick-props={JSON.stringify({
+                                    tagKey: item.key
+                                })}
                             >
                                 <div
                                     className="dashboard-item-title"
@@ -68,5 +71,6 @@ export default connect(
     null,
     {
         stringNavigate,
+        showDropdown,
     }
 )(DashboardSection)

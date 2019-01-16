@@ -22,9 +22,11 @@ class LogicOptions extends React.Component{
                 <i 
                     className="ion-md-close logic-option app-onclick"
                     menu-type={dropdownType.deleteLogic}
-                    field-key={fieldKey}
-                    index-key={item}
-                    page-key={pageInfo.pageKey}
+                    app-onclick-props={JSON.stringify({
+                        pageKey: pageInfo.pageKey,
+                        fieldKey,
+                        indexKey: item,
+                    })}
                 />
                 <i 
                     className={`${collapsed ? "ion-md-expand" : "ion-md-contract"} logic-option`}

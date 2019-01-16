@@ -83,14 +83,7 @@ class AppWrapper extends React.Component{
 
             if (menuClick) {
                 this.props.showDropdown(menuClick, e, {
-                    indexKey: e.target.getAttribute('index-key'),
-                    tagKey: e.target.getAttribute('tag-key'),
-                    fieldKey: e.target.getAttribute('field-key'),
-                    subfieldKey: e.target.getAttribute('subfield-key'),
-                    pageKey: e.target.getAttribute('page-key'),
-                    currentValue: e.target.getAttribute('current-value'),
-                    attach: JSON.parse(e.target.getAttribute('attach')),
-                    attachVar: JSON.parse(e.target.getAttribute('attach-var')),
+                    ...JSON.parse(e.target.getAttribute('app-onclick-props')),
                 })
             }
         }

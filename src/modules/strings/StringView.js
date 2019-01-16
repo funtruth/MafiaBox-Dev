@@ -12,11 +12,11 @@ class StringView extends React.Component {
     render() {
         switch(this.props.stringView) {
             case screenType.dashboard:
-                return <StringDashboard/>
+                return <StringDashboard {...this.props}/>
             case screenType.edit:
-                return <StringEdit/>
+                return <StringEdit {...this.props}/>
             case screenType.update:
-                return <StringUpdate/>
+                return <StringUpdate {...this.props}/>
             default:
                 return null
         }

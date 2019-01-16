@@ -10,14 +10,15 @@ import { stringNavigate } from '../../strings/StringReducer'
 
 class PickEventType extends React.Component{
     _onAdd = () => {
-        const { pageKey } = this.props
-        this.props.stringNavigate(screenType.update, pageKey)
+        const { tagKey } = this.props
+        this.props.stringNavigate(screenType.update, tagKey)
+        this.props.updatePage()
         this.props.showDropdown()
     }
 
     _onEdit = () => {
-        const { pageKey } = this.props
-        this.props.stringNavigate(screenType.edit, pageKey)
+        const { tagKey } = this.props
+        this.props.stringNavigate(screenType.edit, tagKey)
         this.props.showDropdown()
     }
 
@@ -29,7 +30,7 @@ class PickEventType extends React.Component{
                     onClick={this._onAdd}
                 >
                     <i className="drop-down-menu-icon mdi mdi-calendar-plus"/>
-                    add event
+                    add event to update
                 </div>
                 <div
                     className="drop-down-menu-option"

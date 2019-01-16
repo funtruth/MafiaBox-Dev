@@ -21,10 +21,12 @@ class VariableField extends React.Component{
                 <i 
                     className={`${variableType[varType].icon || 'ion-md-create'} logic-label app-onclick`}
                     menu-type={dropdownType.pickVarType}
-                    page-key={pageInfo.pageKey}
-                    field-key={fieldKey}
-                    index-key={item}
-                    current-value={varType}
+                    app-onclick-props={JSON.stringify({
+                        pageKey,
+                        fieldKey,
+                        indexKey: item,
+                        currentValue: varType,
+                    })}
                     style={{
                         color: '#fff',
                     }}
@@ -32,9 +34,11 @@ class VariableField extends React.Component{
                 <div
                     className="property-button app-onclick"
                     menu-type={dropdownType.editVar}
-                    page-key={pageKey}
-                    field-key={fieldKey}
-                    tag-key={item}
+                    app-onclick-props={JSON.stringify({
+                        pageKey,
+                        fieldKey,
+                        tagKey: item,
+                    })}
                     style={style}
                 >
                     {item || 'Untitled'}
@@ -61,8 +65,10 @@ class VariableField extends React.Component{
             <div
                 className="property-button app-onclick"
                 menu-type={dropdownType.addVar}
-                page-key={pageKey}
-                field-key={fieldKey}
+                app-onclick-props={JSON.stringify({
+                    pageKey,
+                    fieldKey,
+                })}
                 style={style}
             >
                 <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>

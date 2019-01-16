@@ -32,8 +32,8 @@ export function showDropdown(key, e, params={}, index=0) {
                     ...modalKeys[modalKeys.length - 1],
                     ...prev,
                     ...params,
-                    pageX: e.pageX - e.offsetX - 8,
-                    pageY: e.pageY - e.offsetY + e.target.offsetHeight,
+                    pageX: e.pageX - (e.offsetX || e.nativeEvent.offsetX) - 8,
+                    pageY: e.pageY - (e.offsetY || e.nativeEvent.offsetY) + e.target.offsetHeight,
                     key,
                 })
             }

@@ -28,9 +28,11 @@ class TagsView extends React.Component{
 
                         className="property-button app-onclick"
                         menu-type={dropdownType.editTag}
-                        index-key={index}
-                        tag-key={item.key}
-                        field-key={fieldInfo.fieldKey}
+                        app-onclick-props={JSON.stringify({
+                            fieldKey: fieldInfo.fieldKey,
+                            indexKey: index,
+                            tagKey: item.key,
+                        })}
                     >
                         {item.title || 'Untitled'}
                     </div>
@@ -57,7 +59,9 @@ class TagsView extends React.Component{
             <div
                 className="property-button app-onclick"
                 menu-type={dropdownType.addTag}
-                field-key={fieldInfo.fieldKey}
+                app-onclick-props={JSON.stringify({
+                    fieldKey: fieldInfo.fieldKey,
+                })}
                 style={style}
             >
                 <i className={`drop-down-menu-icon ion-ios-git-merge`}></i>

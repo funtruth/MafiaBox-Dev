@@ -9,13 +9,14 @@ class LogicType extends React.Component{
         
         return (
             <i 
-                className={`${(type && logicType[type].icon) ||
-                    'ion-md-create'} logic-label app-onclick`}
+                className={`${(type && logicType[type].icon) || 'ion-md-create'} logic-label app-onclick`}
                 menu-type={dropdownType.showLogic}
-                field-key={fieldKey}
-                index-key={indexKey}
-                page-key={pageKey}
-                current-value={type}
+                app-onclick-props={JSON.stringify({
+                    pageKey,
+                    fieldKey,
+                    indexKey,
+                    currentValue: type,
+                })}
                 style={{
                     backgroundColor: (type && logicType[type].color) ||
                         '#767676',

@@ -22,16 +22,18 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
-                            field-key={fieldKey}
-                            subfield-key="var1"
-                            index-key={indexKey}
-                            page-key={pageKey}
-                            current-value={data.var1}
+                            app-onclick-props={JSON.stringify({
+                                pageKey,
+                                fieldKey,
+                                indexKey,
+                                subfieldKey: 'var1',
+                                currentValue: data.var1,
+                                attachVar: attachments,
+                            })}
                             style={{
                                 color: (data.var1 || data[`var1.adjust`]) ? '#fff' : '#868686',
                                 borderRadius: '0px 4px 0px 0px',
                             }}
-                            attach-var={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var1 && data['var1.adjust'] && `${data.var1} + ${data['var1.adjust']}`) ||
@@ -41,11 +43,13 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickComparison}
-                            field-key={fieldKey}
-                            subfield-key="comparison"
-                            index-key={indexKey}
-                            page-key={pageKey}
-                            current-value={data.comparison}
+                            app-onclick-props={JSON.stringify({
+                                pageKey,
+                                fieldKey,
+                                indexKey,
+                                subfieldKey: 'comparison',
+                                currentValue: data.comparison,
+                            })}
                             style={{
                                 color: data.comparison ? '#d6d6d6' : '#868686',
                             }}
@@ -57,16 +61,18 @@ class LogicPanels extends React.Component{
                         <div
                             className="logic-button app-onclick"
                             menu-type={dropdownType.pickVar}
-                            field-key={fieldKey}
-                            subfield-key="var2"
-                            index-key={indexKey}
-                            page-key={pageKey}
-                            current-value={data.var2}
+                            app-onclick-props={JSON.stringify({
+                                pageKey,
+                                fieldKey,
+                                indexKey,
+                                subfieldKey: 'var2',
+                                currentValue: data.var2,
+                                attachVar: attachments,
+                            })}
                             style={{
                                 color: (data.var2 || data['var2.adjust']) ? '#fff' : '#868686',
                                 borderRadius: '0px 0px 4px 0px',
                             }}
-                            attach-var={attachments}
                         >
                             <div className="text-ellipsis">
                                 {(data.var2 && data['var2.adjust'] && `${data.var2} + ${data['var2.adjust']}`) ||
@@ -95,10 +101,12 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.pickLibrary}
-                        field-key={fieldKey}
-                        index-key={indexKey}
-                        page-key={pageKey}
-                        current-value={data}
+                        app-onclick-props={JSON.stringify({
+                            pageKey,
+                            fieldKey,
+                            indexKey,
+                            currentValue: data,
+                        })}
                         style={{
                             color: hasPage ? '#fff' : '#868686',
                             borderRadius: '0px 4px 4px 0px',
@@ -117,10 +125,12 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.returnTypes}
-                        field-key={fieldKey}
-                        index-key={indexKey}
-                        page-key={pageKey}
-                        current-value={data}
+                        app-onclick-props={JSON.stringify({
+                            pageKey,
+                            fieldKey,
+                            indexKey,
+                            currentValue: data,
+                        })}
                         style={{
                             color: '#fff',
                             borderRadius: '0px 4px 4px 0px',
@@ -134,10 +144,12 @@ class LogicPanels extends React.Component{
                     <div
                         className="logic-button app-onclick"
                         menu-type={dropdownType.showLibrary}
-                        field-key={fieldKey}
-                        index-key={indexKey}
-                        page-key={pageKey}
-                        current-value={data}
+                        app-onclick-props={JSON.stringify({
+                            pageKey,
+                            fieldKey,
+                            indexKey,
+                            currentValue: data,
+                        })}
                         style={{
                             color: hasPage ? '#fff' : '#868686',
                             borderRadius: '0px 4px 4px 0px',

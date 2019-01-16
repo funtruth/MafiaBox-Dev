@@ -48,15 +48,17 @@ class UpdateButton extends React.Component{
         return (
             <div
                 className="logic-pick-update app-onclick"
-                highlight="true"
                 menu-type={config.dropdown}
-                page-key={pageKey}
-                index-key={indexKey}
-                field-key={fieldKey}
-                subfield-key={prefix}
-                current-value={currentValue}
-                attach={JSON.stringify(attach)}
-                attach-var={JSON.stringify(attachVar)}
+                highlight="true"
+                app-onclick-props={JSON.stringify({
+                    pageKey,
+                    indexKey,
+                    fieldKey,
+                    subfieldKey: prefix,
+                    currentValue,
+                    attach,
+                    attachVar,
+                })}
             >
                 <div style={{ pointerEvents: 'none' }}>
                     {buttonText}

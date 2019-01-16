@@ -17,8 +17,12 @@ class TemplateTitle extends React.Component{
                 <div
                     className="tag-button app-onclick"
                     menu-type={dropdownType.pickFieldType}
-                    field-key={fieldKey}
-                >{types[fieldType].title}</div>
+                    app-onclick-props={JSON.stringify({
+                        fieldKey,
+                    })}
+                >
+                    {types[fieldType].title}
+                </div>
                 <input
                     className="field-title-input"
                     value={fieldTitle || ''}
@@ -29,8 +33,10 @@ class TemplateTitle extends React.Component{
                 </input>
                 <i className="story-option ion-ios-more app-onclick"
                     menu-type={dropdownType.templateTitleOptions}
-                    field-key={fieldKey}
-                    page-key={boardType}
+                    app-onclick-props={JSON.stringify({
+                        pageKey: boardType,
+                        fieldKey,
+                    })}
                     style={{
                         fontSize: 16,
                         marginLeft: 'auto',

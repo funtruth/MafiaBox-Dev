@@ -71,6 +71,9 @@ class FieldTemplateView extends React.Component {
                 <div
                     className="add-button app-onclick"
                     menu-type={dropdownType.addTemplateField}
+                    app-onclick-props={JSON.stringify({
+                        fieldKey: boardType,
+                    })}
                     field-key={boardType}
                 >
                     Add Field

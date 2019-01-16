@@ -51,7 +51,9 @@ class StoryList extends React.Component{
                     <div
                         className="story-option app-onclick"
                         menu-type={dropdownType.storyShowMore}
-                        field-key={index}
+                        app-onclick-props={JSON.stringify({
+                            fieldKey: index,
+                        })}
                     >
                         <i
                             className="ion-ios-more"

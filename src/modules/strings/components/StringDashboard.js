@@ -47,13 +47,14 @@ class StringDashboard extends React.Component {
     }
 
     render() {
-        const { stringRepo } = this.props
+        const { stringRepo, attach } = this.props
 
-        const recent = _.sortBy(stringRepo, i => -i.lastEdit).slice(0, 5)
         const { results } = this.state
+        const current = _.toArray(attach.value)
+        const recent = _.sortBy(stringRepo, i => -i.lastEdit).slice(0, 5)
 
         return (
-            <div className="dashboard">
+            <div className="dashboard" cancel-appclick="true">
                 <input
                     className="tag-input"
                     value={this.state.searchText}
@@ -68,6 +69,7 @@ class StringDashboard extends React.Component {
                     }}
                 />
                 <DashboardSection data={results} title="Search Results"/>
+                <DashboardSection data={current} title="Current Events"/>
                 <DashboardSection data={recent} title="Recent Edits"/>
                 <div
                     className="cute-button"

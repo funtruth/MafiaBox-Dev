@@ -21,7 +21,7 @@ class EditEvent extends React.Component {
                     maxHeight: '60vh',
                 }}
             >
-                <StringView/>
+                <StringView {...this.props}/>
                 <div className="row modal-options">
                     <div className="modal-button" onClick={this._onSave}>
                         Save

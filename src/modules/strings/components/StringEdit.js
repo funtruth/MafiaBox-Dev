@@ -118,7 +118,7 @@ class StringEdit extends React.Component {
                         }}
                         onClick={this._onCreate}
                     >
-                        Create
+                        Save
                     </div>
                 </div>
             </div>
