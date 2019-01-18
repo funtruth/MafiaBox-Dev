@@ -1,86 +1,73 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
-import * as proptool from '../../logic/proptool'
 
 import { variableType, updateViewType } from '../../logic/types'
 
-import { updatePageByPath } from '../../page/PageReducer'
-
-import DropParent from '../components/DropParent'
-
 class PickRecipient extends React.Component{
-    _renderItem = (item) => {
-        const { currentValue, updateRef, subfieldKey } = this.props
-        const newKey = `${subfieldKey}.$${item.key}`
-        
-        const config = proptool.getUpdateConfig(newKey, updateRef)
-        const chosen = typeof currentValue === 'string' && currentValue === item
+    _pickUid = (item, info) => {
+        const { selectionType } = this.props
+        const otherType = selectionType === 'showTo' ? 'hideFrom' : 'showTo'
 
-        if (!config || config.hideButton) {
-            return (
-                <div
-                    key={item.key}
-                    className="drop-down-menu-option"
-                    chosen={chosen.toString()}
-                    onClick={this._pickUid.bind(this, item)}
-                >
-                    {item.key}
-                    {chosen && <i className="ion-md-checkmark"/>}
-                </div>
-            )
-        }
-    
-        return (
-            <DropParent
-                {...this.props}
-                key={item.key}
-                dropdownType={config.dropdown}
-                params={{
-                    subfieldKey: newKey,
-                }}
-                text={item.key}
-            />
-        )
-        
-    }
-
-    _pickUid = (item) => {
         this.props.updatePage({
-            showTo: null,
+            [selectionType]: {
+                ...info,
+                [item.key]: !info[item.key],
+            },
+            [otherType]: {},
         })
-        this.props.showDropdown()
     }
 
     _pickEveryone = () => {
         this.props.updatePage({
-            showTo: null,
-            hideFrom: null,
+            showTo: {},
+            hideFrom: {},
         })
         this.props.showDropdown()
     }
 
     render() {
-        const { attachVar, hideToEveryone } = this.props
+        const { attach, attachVar, selectionType, selectedKey } = this.props
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
+
+        const inclusive = selectionType === 'showTo'
+        
+        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+        const info = selectedItem[selectionType] || {}
+        const everyone = Object.keys(selectedItem.showTo).length === 0
         
         return (
             <div>
                 {uids.length ?
                     <div>
-                        {uids.map(this._renderItem)}
+                        {uids.map(item => {
+                            const chosen = info[item.key] || false
+
+                            return(
+                                <div
+                                    key={item.key}
+                                    className="drop-down-menu-option"
+                                    chosen={chosen.toString()}
+                                    onClick={this._pickUid.bind(this, item, info)}
+                                >
+                                    {item.key}
+                                    {chosen && <i className="ion-md-checkmark"/>}
+                                </div>
+                            )
+                        })}
                     </div>
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                         There are no Unique IDs
                     </div>}
-                {!hideToEveryone && <div>
+                {inclusive && <div>
                     <div className="-separator"/>
                     <div
                         className="drop-down-menu-option"
+                        chosen={everyone.toString()}
                         onClick={this._pickEveryone}
                     >
                         <i className="mdi mdi-earth drop-down-menu-icon"/>
                         everyone
+                        {everyone && <i className="ion-md-checkmark"/>}
                     </div>
                 </div>}
             </div>
@@ -88,13 +75,4 @@ class PickRecipient extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        updateRef: proptool.addPlayerRef(state.template),
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-    {
-        updatePageByPath,
-    }
-)(PickRecipient)
+export default PickRecipient

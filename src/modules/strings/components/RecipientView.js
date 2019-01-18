@@ -9,7 +9,9 @@ class RecipientView extends React.Component {
         const selectedItem = (attach.value && attach.value[selectedKey]) || {}
         const { showTo, hideFrom } = selectedItem
 
-        //looking at showTo and hideFrom
+        //showing only to selected uid's
+        const exclusive = Object.keys(showTo || {}).length > 0
+        const inclusive = Object.keys(hideFrom || {}).length > 0
 
         return (
             <div
@@ -19,18 +21,12 @@ class RecipientView extends React.Component {
                     alignItems: 'center',
                 }}
             >
-                <div
-                    style={{
-                        padding: '6px 8px 6px 20px',
-                        font: '500 13px Arial',
-                        color: '#969696',
-                    }}
-                >
-                    Show event to ...
-                </div>
-                {!showTo && <div
+                {!exclusive && <div
                     className="cute-button app-onclick"
                     menu-type={dropdownType.pickRecipient}
+                    app-onclick-props={JSON.stringify({
+                        selectionType: 'showTo'
+                    })}
                     style={{
                         color: '#a6a6a6',
                         fontSize: 13,
@@ -38,18 +34,58 @@ class RecipientView extends React.Component {
                 >
                     everyone
                 </div>}
-                {!showTo && <div
+                {exclusive && <div
+                    className="cute-button app-onclick"
+                    menu-type={dropdownType.pickRecipient}
+                    app-onclick-props={JSON.stringify({
+                        selectionType: 'showTo'
+                    })}
+                    style={{
+                        color: '#a6a6a6',
+                        fontSize: 13,
+                    }}
+                >
+                    {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
+                </div>}
+                {!exclusive && <div
                     className="cute-button app-onclick"
                     empty="true"
                     menu-type={dropdownType.pickRecipient}
                     app-onclick-props={JSON.stringify({
-                        hideToEveryone: true,
+                        selectionType: 'hideFrom'
                     })}
                     style={{
                         marginLeft: 6,
                     }}
                 >
                     except
+                </div>}
+                {exclusive && <div
+                    className="cute-button app-onclick"
+                    empty="true"
+                    menu-type={dropdownType.pickRecipient}
+                    app-onclick-props={JSON.stringify({
+                        selectionType: 'showTo'
+                    })}
+                    style={{
+                        marginLeft: 6,
+                    }}
+                >
+                    and
+                </div>}
+                {inclusive && <div
+                    className="cute-button app-onclick"
+                    menu-type={dropdownType.pickRecipient}
+                    app-onclick-props={JSON.stringify({
+                        selectionType: 'hideFrom'
+                    })}
+                    style={{
+                        color: '#a6a6a6',
+                        fontSize: 13,
+                        marginLeft: 6,
+                    }}
+                >
+                    {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
                 </div>}
             </div>
         )

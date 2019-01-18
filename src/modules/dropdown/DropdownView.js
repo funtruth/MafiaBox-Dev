@@ -77,10 +77,10 @@ class DropdownView extends React.Component{
                 }
                 break
             case dropdownType.pickRecipient:
-                props.updatePage = (stringKey, value) => this.props.updateTopModal(
+                props.updatePage = (value) => this.props.updateTopModal(
                     'attach',
                     'value',
-                    stringKey,
+                    props.selectedKey,
                     value,
                 )
             default:

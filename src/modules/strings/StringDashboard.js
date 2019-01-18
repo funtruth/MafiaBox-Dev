@@ -16,7 +16,6 @@ class StringDashboard extends React.Component {
         this.state = {
             searchText: '',
             results: [],
-            selectedKey: '',
         }
         this.fuse = new Fuse(_.toArray(props.attach), fuseType.stringDashboard)
     }
@@ -29,9 +28,7 @@ class StringDashboard extends React.Component {
     }
 
     _onEdit = (item) => {
-        this.setState({
-            selectedKey: item.key,
-        })
+        this.props.updateTopModal('selectedKey', item.key)
     }
 
     _onCreate = () => {
@@ -43,15 +40,12 @@ class StringDashboard extends React.Component {
         }
 
         this.props.onEdit(newKey, newItem)
-        this.setState({
-            selectedKey: newKey,
-        })
+        this.props.updateTopModal('selectedKey', newKey)
     }
 
     render() {
         const { attach } = this.props
-        console.log({attach})
-        const { searchText, results, selectedKey } = this.state
+        const { searchText, results } = this.state
         const current = searchText ? results : _.toArray(attach.value)
 
         return (
@@ -100,7 +94,7 @@ class StringDashboard extends React.Component {
                         Make a new event from scratch
                     </div>
                 </div>
-                <TextEditor {...this.props} selectedKey={selectedKey}/>
+                <TextEditor {...this.props}/>
             </div>
         )
     }
