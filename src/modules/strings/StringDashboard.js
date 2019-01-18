@@ -8,7 +8,7 @@ import * as helpers from '../common/helpers'
 import { fuseType } from '../dropdown/types'
 
 import { showModal, updateTopModal } from '../modal/ModalReducer'
-import StringEdit from './components/StringEdit';
+import TextEditor from './components/TextEditor';
 
 class StringDashboard extends React.Component {
     constructor(props) {
@@ -100,7 +100,7 @@ class StringDashboard extends React.Component {
                         Make a new event from scratch
                     </div>
                 </div>
-                <StringEdit {...this.props} selectedKey={selectedKey}/>
+                <TextEditor {...this.props} selectedKey={selectedKey}/>
             </div>
         )
     }

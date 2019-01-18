@@ -21,7 +21,7 @@ class PickEventType extends React.Component{
 
     _onEdit = () => {
         const { tagKey } = this.props
-        this.props.showModal(modalType.stringEdit, {
+        this.props.showModal(modalType.TextEditor, {
             stringKey: tagKey,
         })
         this.props.showDropdown()

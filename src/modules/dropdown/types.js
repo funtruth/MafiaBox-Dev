@@ -35,6 +35,7 @@ export const dropdownType = {
     pickLibrary: 'dropdownType/pick-library',
     pickEvent: 'dropdownType/pick-event',
     pickEventType: 'dropdownType/pick-event-type',
+    pickRecipient: 'dropdownType/pick-recipient',
 }
 
 export const fuseType = {

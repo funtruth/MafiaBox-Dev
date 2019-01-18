@@ -3,7 +3,7 @@ import * as stringTool from '../stringTool'
 
 import RecipientView from './RecipientView'
 
-class StringEdit extends React.Component {
+class TextEditor extends React.Component {
     componentDidMount() {
         document.getElementById("input").addEventListener("input", this._onTypeString, false);
         document.getElementById('input').addEventListener('keypress', function(evt) {
@@ -102,4 +102,4 @@ class StringEdit extends React.Component {
     }
 }
 
-export default StringEdit
+export default TextEditor

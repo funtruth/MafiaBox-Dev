@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { dropdownType } from '../dropdown/types'
+
 export function braceToHtml(string) {
     let parts = []
     let startIndex = 0
@@ -17,6 +19,8 @@ export function braceToHtml(string) {
                     <div
                         key={i}
                         className="app-onclick common-bubble"
+                        menu-type={dropdownType}
+                        
                     >
                         {string.slice(startIndex + 1, i)}
                     </div>

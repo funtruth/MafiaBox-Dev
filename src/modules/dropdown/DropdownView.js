@@ -43,6 +43,7 @@ import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
 import PickEvent from './update/PickEvent';
 import PickEventType from './update/PickEventType';
+import PickRecipient from './update/PickRecipient'
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
@@ -75,6 +76,13 @@ class DropdownView extends React.Component{
                     )
                 }
                 break
+            case dropdownType.pickRecipient:
+                props.updatePage = (stringKey, value) => this.props.updateTopModal(
+                    'attach',
+                    'value',
+                    stringKey,
+                    value,
+                )
             default:
         }
         
@@ -145,6 +153,8 @@ class DropdownView extends React.Component{
                 return <PickEvent {...props}/>
             case dropdownType.pickEventType:
                 return <PickEventType {...props}/>
+            case dropdownType.pickRecipient:
+                return <PickRecipient {...props}/>
             default:
                 return null
         }

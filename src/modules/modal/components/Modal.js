@@ -3,6 +3,7 @@ import React from 'react'
 class Modal extends React.Component {
     _onClick = e => {
         if (e.target.id === 'parent-only') {
+            //TODO this is broken for un-original clicks. See AppWrapper 64
             this.props.onClose()
         }
     }
