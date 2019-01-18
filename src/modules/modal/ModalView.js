@@ -2,7 +2,7 @@ import React from 'react'
 import './modals.css'
 import { connect } from 'react-redux'
 
-import { showModal, popModalTo } from './ModalReducer'
+import { showModal, popModalTo, updateTopModal } from './ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
 
 import { modalType } from './types'
@@ -99,6 +99,12 @@ class ModalView extends React.Component {
                                 updateViewType: updateViewType.events,
                             }
                         )
+                        props.onEdit = (stringKey, value) => this.props.updateTopModal(
+                            'attach',
+                            'value',
+                            stringKey,
+                            value,
+                        )
                         props.onClose = () => this.props.showModal(modalType.saveChanges, {
                             onSave: props.onSave,
                             onClose: this.props.showModal,
@@ -125,5 +131,6 @@ export default connect(
         showModal,
         updatePageByPath,
         popModalTo,
+        updateTopModal,
     }
 )(ModalView)

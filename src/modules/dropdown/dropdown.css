@@ -63,13 +63,6 @@
     background-color: hsla(0,0%,100%,.1);
 }
 
-.drop-down-section-title {
-    font: 600 11px Arial;
-    color: #969696;
-    letter-spacing: 0.6px;
-    padding: 0px 10px 4px 10px;
-}
-
 .-separator {
     height: 1px;
     margin: 8px 0px;

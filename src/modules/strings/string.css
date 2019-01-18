@@ -6,12 +6,6 @@
     overflow: auto;
 }
 
-.dashboard-section-title {
-    font: 500 14px Arial;
-    color: #a6a6a6;
-    margin: 4px 12px;
-}
-
 .dashboard-results {
     display: flex;
     flex-direction: column;
@@ -37,6 +31,7 @@
     flex-direction: column;
     justify-content: center;
     animation: fadein 0.25s, heightin 2s;
+    cursor: pointer;
 }
 
 .dashboard-new-item:hover {
@@ -67,18 +62,33 @@
 
 .text-box {
   border-radius: 2px;
-  background-color: rgba(47, 49, 54, 1);
   padding: 10px 10px;
   font: 450 14px Arial;
   color: #c6c6c6;
-  box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
 }
 
 .string-edit-box {
+    min-height: 6vh;
     max-height: 10vh;
     overflow-y: scroll;
     margin: 0px 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.dashboard-section-title {
+    font: 600 11px Arial;
+    color: #969696;
+    letter-spacing: 0.6px;
+    padding: 0px 14px 6px 14px;
+}
+
+.empty-text {
+    padding: 4px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #666666;
+    font: 500 13px Arial;
 }

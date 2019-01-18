@@ -1,22 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import * as stringTool from '../stringTool'
-
-import { updateStringByPath } from '../StringReducer'
 
 import RecipientView from './RecipientView'
 
 class StringEdit extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            title: props.stringKey ? props.stringRepo[props.stringKey].title : '',
-            string: props.stringKey ? props.stringRepo[props.stringKey].string : '',
-        }
-    }
-
     componentDidMount() {
-        document.getElementById("input").addEventListener("input", this._onChange, false);
+        document.getElementById("input").addEventListener("input", this._onTypeString, false);
         document.getElementById('input').addEventListener('keypress', function(evt) {
             if (evt.which === 13) {
                 evt.preventDefault();
@@ -24,7 +13,24 @@ class StringEdit extends React.Component {
         });
     }
 
-    _onChange = e => {
+    _onTypeTitle = e => {
+        const { selectedKey } = this.props
+        this.props.onEdit(selectedKey, {
+            title: e.target.value,
+        })
+    }
+
+    _onTypeString = e => {
+        const { selectedKey } = this.props
+        
+        //Edgecase: empty text handler
+        if (!e.target.textContent) {
+            this.props.onEdit(selectedKey, {
+                string: "",
+            })
+            return
+        }
+
         var range = window.getSelection().getRangeAt(0),
             preCaretRange = range.cloneRange(),
             tmp = document.createElement("div"),
@@ -34,7 +40,7 @@ class StringEdit extends React.Component {
         preCaretRange.setEnd(range.endContainer, range.endOffset);
         tmp.appendChild(preCaretRange.cloneContents());
 
-        this.setState({
+        this.props.onEdit(selectedKey, {
             string: e.target.innerText,
         })
 
@@ -42,18 +48,13 @@ class StringEdit extends React.Component {
         range.setEnd(myDiv, tmp.innerText.length);
     }
 
-    _onType = e => {
-        this.setState({
-            title: e.target.value,
-        })
-    }
-
     _onSave = () => {
-        const { title, string } = this.state
-        const { stringKey } = this.props
+        const { selectedKey, attach } = this.props
+        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+        const { title, string } = selectedItem
 
         this.props.updateStringByPath(
-            stringKey,
+            'stringKey',
             {
                 title,
                 string,
@@ -63,43 +64,42 @@ class StringEdit extends React.Component {
     }
 
     render() {
-        const { title, string } = this.state
+        const { selectedKey, attach } = this.props
+        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+        const { title, string } = selectedItem
 
         return (
             <div className="dashboard-edit">
-                <div className="drop-down-section-title">EVENT NAME</div>
+                <div className="dashboard-section-title">EVENT NAME</div>
                 <input
                     className="tag-input"
                     value={title || ''}
-                    onChange={this._onType}
+                    onChange={this._onTypeTitle}
                     placeholder="Name the event"
                     type='text'
                     autoFocus
                 />
                 <div className="-separator"/>
+                <div className="dashboard-section-title">RAW TEXT</div>
                 <div
                     id="input"
                     className="string-edit-box"
                     contentEditable="true"
                     suppressContentEditableWarning="true"
-                >{string}
+                >
+                    {string || ''}
                 </div>
                 <div className="-separator"/>
-                <div className="drop-down-section-title">MARKDOWN AND VARIABLES</div>
-                <div className="text-box string-edit-box">{stringTool.braceToHtml(string)}</div>
+                <div className="dashboard-section-title">MARKDOWN AND VARIABLES</div>
+                <div className="text-box string-edit-box">
+                    {stringTool.braceToHtml(string || '')}
+                </div>
                 <div className="-separator"/>
-                <div className="drop-down-section-title">RECIPIENTS</div>
+                <div className="dashboard-section-title">RECIPIENTS</div>
                 <RecipientView {...this.props}/>
             </div>
         )
     }
 }
 
-export default connect(
-    state => ({
-        stringRepo: state.string.stringRepo,
-    }),
-    {
-        updateStringByPath,
-    }
-)(StringEdit)
+export default StringEdit

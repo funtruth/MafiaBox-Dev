@@ -3,12 +3,11 @@ import './string.css'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
+import * as helpers from '../common/helpers'
 
-import { modalType } from '../modal/types';
 import { fuseType } from '../dropdown/types'
 
-import { showModal } from '../modal/ModalReducer'
-import { addString } from './StringReducer'
+import { showModal, updateTopModal } from '../modal/ModalReducer'
 import StringEdit from './components/StringEdit';
 
 class StringDashboard extends React.Component {
@@ -17,6 +16,7 @@ class StringDashboard extends React.Component {
         this.state = {
             searchText: '',
             results: [],
+            selectedKey: '',
         }
         this.fuse = new Fuse(_.toArray(props.attach), fuseType.stringDashboard)
     }
@@ -28,20 +28,30 @@ class StringDashboard extends React.Component {
         })
     }
 
-    _onUpdate = (item) => {
-        this.props.showModal(modalType.stringEdit, {
-            stringKey: item.key
+    _onEdit = (item) => {
+        this.setState({
+            selectedKey: item.key,
         })
     }
 
     _onCreate = () => {
-        this.props.addString()
-        this.props.showModal()
+        const { attach } = this.props
+        const newKey = helpers.genUID('string', attach.value)
+        const newItem = {
+            key: newKey,
+            lastEdit: Date.now()
+        }
+
+        this.props.onEdit(newKey, newItem)
+        this.setState({
+            selectedKey: newKey,
+        })
     }
 
     render() {
         const { attach } = this.props
-        const { searchText, results } = this.state
+        console.log({attach})
+        const { searchText, results, selectedKey } = this.state
         const current = searchText ? results : _.toArray(attach.value)
 
         return (
@@ -51,7 +61,7 @@ class StringDashboard extends React.Component {
                         className="tag-input"
                         value={this.state.searchText}
                         onChange={this._onType}
-                        placeholder="Search for string"
+                        placeholder="Search for event"
                         type='text'
                         autoFocus
                         style={{
@@ -59,21 +69,26 @@ class StringDashboard extends React.Component {
                         }}
                     />
                     <div className="-separator"/>
-                    {current.map((item, index) => {
-                        return (
-                            <div
-                                key={index}
-                                highlight="true"
-                                className="dashboard-item"
-                                onClick={this._onUpdate.bind(this, item)}
-                            >
-                                <div className="dashboard-item-title">
-                                    {item.title}
+                    {current.length ?
+                        current.map((item, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    highlight="true"
+                                    className="dashboard-item"
+                                    onClick={this._onEdit.bind(this, item)}
+                                >
+                                    <div className="dashboard-item-title">
+                                        {item.title}
+                                    </div>
+                                    {item.string}
                                 </div>
-                                {item.string}
-                            </div>
-                        )
-                    })}
+                            )
+                        })
+                        :<div className="empty-text">
+                            No events found
+                        </div>
+                    }
                     <div className="-separator"/>
                     <div
                         className="dashboard-item dashboard-new-item"
@@ -85,7 +100,7 @@ class StringDashboard extends React.Component {
                         Make a new event from scratch
                     </div>
                 </div>
-                <StringEdit {...this.props}/>
+                <StringEdit {...this.props} selectedKey={selectedKey}/>
             </div>
         )
     }
@@ -94,7 +109,7 @@ class StringDashboard extends React.Component {
 export default connect(
     null,
     {
-        addString,
         showModal,
+        updateTopModal,
     }
 )(StringDashboard)
