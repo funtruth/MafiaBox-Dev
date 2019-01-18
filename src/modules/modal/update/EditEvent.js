@@ -24,7 +24,6 @@ class EditEvent extends React.Component {
                     flexDirection: 'column',
                     minWidth: 600,
                     width: '75vw',
-                    maxHeight: '60vh',
                 }}
             >
                 <StringDashboard {...this.props}/>

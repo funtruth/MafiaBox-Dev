@@ -1,4 +1,6 @@
 import * as helpers from '../common/helpers'
+import { showModal } from '../modal/ModalReducer';
+import { modalType } from '../modal/types';
 
 const initialState = {
     stringRepo: {},
@@ -23,6 +25,10 @@ export function addString(params={}) {
             type: UPDATE_REPO,
             payload: repoClone,
         })
+
+        dispatch(showModal(modalType.stringEdit, {
+            stringKey: newKey,
+        }))
     }
 }
 

@@ -4,9 +4,12 @@ import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
+import { modalType } from '../modal/types';
 import { fuseType } from '../dropdown/types'
 
-import DashboardSection from './components/DashboardSection';
+import { showModal } from '../modal/ModalReducer'
+import { addString } from './StringReducer'
+import StringEdit from './components/StringEdit';
 
 class StringDashboard extends React.Component {
     constructor(props) {
@@ -15,7 +18,7 @@ class StringDashboard extends React.Component {
             searchText: '',
             results: [],
         }
-        this.fuse = new Fuse(_.toArray(props.stringRepo), fuseType.stringDashboard)
+        this.fuse = new Fuse(_.toArray(props.attach), fuseType.stringDashboard)
     }
     
     _onType = (e) => {
@@ -25,67 +28,73 @@ class StringDashboard extends React.Component {
         })
     }
 
-    _onCreate = () => {
-        
+    _onUpdate = (item) => {
+        this.props.showModal(modalType.stringEdit, {
+            stringKey: item.key
+        })
     }
 
-    _renderItem = (item) => {
-        return (
-            <div
-                key={item.key}
-                highlight="true"
-                className="dashboard-item"
-            >
-                <div className="dashboard-item-title">
-                    {item.title}
-                </div>
-                {item.string}
-            </div>
-        )
+    _onCreate = () => {
+        this.props.addString()
+        this.props.showModal()
     }
 
     render() {
-        const { stringRepo, attach } = this.props
-
-        const { results } = this.state
-        const current = _.toArray(attach.value).map(item => ({...stringRepo[item.key], ...item}))
+        const { attach } = this.props
+        const { searchText, results } = this.state
+        const current = searchText ? results : _.toArray(attach.value)
 
         return (
             <div className="dashboard" cancel-appclick="true">
-                <input
-                    className="tag-input"
-                    value={this.state.searchText}
-                    onChange={this._onType}
-                    placeholder="Search for string"
-                    type='text'
-                    autoFocus
-                    style={{
-                        marginTop: 12,
-                        width: '30%',
-                        alignSelf: 'center',
-                    }}
-                />
-                <DashboardSection data={results} title="Search Results"/>
-                <DashboardSection data={current} editOnly title="Active Events"/>
-                <div
-                    className="cute-button"
-                    style={{
-                        position: 'absolute',
-                        bottom: 8,
-                        right: 16,
-                    }}
-                    onClick={this._onCreate}
-                >
-                    <i className="ion-ios-add-circle" style={{ marginRight: 6 }}/>
-                    Create
+                <div className="dashboard-results">
+                    <input
+                        className="tag-input"
+                        value={this.state.searchText}
+                        onChange={this._onType}
+                        placeholder="Search for string"
+                        type='text'
+                        autoFocus
+                        style={{
+                            margin: '12px 10px 0px 10px',
+                        }}
+                    />
+                    <div className="-separator"/>
+                    {current.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                highlight="true"
+                                className="dashboard-item"
+                                onClick={this._onUpdate.bind(this, item)}
+                            >
+                                <div className="dashboard-item-title">
+                                    {item.title}
+                                </div>
+                                {item.string}
+                            </div>
+                        )
+                    })}
+                    <div className="-separator"/>
+                    <div
+                        className="dashboard-item dashboard-new-item"
+                        onClick={this._onCreate}
+                    >
+                        <div className="dashboard-item-title">
+                            Create Event
+                        </div>
+                        Make a new event from scratch
+                    </div>
                 </div>
+                <StringEdit {...this.props}/>
             </div>
         )
     }
 }
 
 export default connect(
-    state => ({
-        stringRepo: state.string.stringRepo,
-    }),
+    null,
+    {
+        addString,
+        showModal,
+    }
 )(StringDashboard)

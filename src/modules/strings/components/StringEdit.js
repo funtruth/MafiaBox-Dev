@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as stringTool from '../../strings/stringTool'
+import * as stringTool from '../stringTool'
 
-import { addString, updateStringByPath } from '../../strings/StringReducer'
+import { updateStringByPath } from '../StringReducer'
 
-import RecipientView from '../../strings/components/RecipientView'
+import RecipientView from './RecipientView'
 
 class StringEdit extends React.Component {
     constructor(props) {
@@ -48,43 +48,25 @@ class StringEdit extends React.Component {
         })
     }
 
-    _onCreate = () => {
+    _onSave = () => {
         const { title, string } = this.state
         const { stringKey } = this.props
 
-        if (!title) {
-            return
-        }
-
-        if (stringKey) {
-            this.props.updateStringByPath(
-                stringKey,
-                {
-                    title,
-                    string,
-                    lastEdit: Date.now(),
-                }
-            )
-        } else {
-            this.props.addString({
+        this.props.updateStringByPath(
+            stringKey,
+            {
                 title,
                 string,
-            })
-        }
+                lastEdit: Date.now(),
+            }
+        )
     }
 
     render() {
         const { title, string } = this.state
 
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '8px 0px 0px 0px',
-                    maxWidth: '50vw',
-                }}
-            >
+            <div className="dashboard-edit">
                 <div className="drop-down-section-title">EVENT NAME</div>
                 <input
                     className="tag-input"
@@ -108,14 +90,6 @@ class StringEdit extends React.Component {
                 <div className="-separator"/>
                 <div className="drop-down-section-title">RECIPIENTS</div>
                 <RecipientView {...this.props}/>
-                <div className="row modal-options">
-                    <div className="modal-button" onClick={this._onCreate}>
-                        Save
-                    </div>
-                    <div className="underline-button" onClick={this.props.onClose}>
-                        Cancel
-                    </div>
-                </div>
             </div>
         )
     }
@@ -126,7 +100,6 @@ export default connect(
         stringRepo: state.string.stringRepo,
     }),
     {
-        addString,
         updateStringByPath,
     }
 )(StringEdit)
