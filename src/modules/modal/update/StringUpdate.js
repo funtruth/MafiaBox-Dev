@@ -27,6 +27,8 @@ class StringUpdate extends React.Component {
     }
 
     _onInput = e => {
+        const range = window.getSelection()
+        console.log({range})
         this.string = e.target.textContent
     }
 
@@ -86,7 +88,7 @@ class StringUpdate extends React.Component {
                     suppressContentEditableWarning="true"
                     onInput={this._onInput}
                     style={{
-                        maxHeight: '10vh',
+                        maxHeight: '20vh',
                         overflowY: 'scroll',
                         margin: '0px 10px'
                     }}

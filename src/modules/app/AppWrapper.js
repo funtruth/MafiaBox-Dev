@@ -14,10 +14,12 @@ class AppWrapper extends React.Component{
     constructor(props) {
         super(props)
         this.prevClick = ''
+        this.originalTarget = {}
     }
 
     componentDidMount() {
         window.addEventListener('click', this._handleClick)
+        window.addEventListener('mousedown', this._handleMouseDown)
         window.addEventListener('contextmenu', this._handleClick)
         window.addEventListener('scroll', this._handleScroll, true)
         window.addEventListener('keyup', this._onKeyPress)
@@ -25,6 +27,7 @@ class AppWrapper extends React.Component{
 
     componentWillUnmount() {
         window.removeEventListener('click', this._handleClick)
+        window.removeEventListener('mousedown', this._handleMouseDown)
         window.removeEventListener('contextmenu', this._handleClick)
         window.removeEventListener('scroll', this._handleScroll, false)
         window.removeEventListener('keyup', this._onKeyPress)
@@ -52,7 +55,16 @@ class AppWrapper extends React.Component{
         }
     }
 
+    _handleMouseDown = e => {
+        this.originalTarget = e.target || e.srcElement
+    }
+
     _handleClick = (e) => {
+        //Handles clicks that originated from different place
+        if (e.target !== this.originalTarget) {
+            return
+        }
+
         //TODO handling still needs a bit of work
         if (helpers.isAppClickCancelled(e.target)) {
             //return
