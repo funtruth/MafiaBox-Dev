@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { variableType, updateViewType } from '../../logic/types'
+import { variableType } from '../../logic/types'
 
 class PickRecipient extends React.Component{
     _pickUid = (item, info) => {
@@ -15,6 +15,7 @@ class PickRecipient extends React.Component{
             },
             [otherType]: {},
         })
+        this.props.showDropdown()
     }
 
     _pickEveryone = () => {
@@ -33,7 +34,7 @@ class PickRecipient extends React.Component{
         
         const selectedItem = (attach.value && attach.value[selectedKey]) || {}
         const info = selectedItem[selectionType] || {}
-        const everyone = Object.keys(selectedItem.showTo).length === 0
+        const everyone = Object.keys(selectedItem.showTo || {}).length === 0
         
         return (
             <div>

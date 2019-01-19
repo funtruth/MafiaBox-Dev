@@ -83,6 +83,7 @@ class DropdownView extends React.Component{
                     props.selectedKey,
                     value,
                 )
+                break
             default:
         }
         

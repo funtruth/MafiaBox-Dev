@@ -19,6 +19,7 @@ class RecipientView extends React.Component {
                 style={{
                     padding: '0px 10px',
                     alignItems: 'center',
+                    color: '#a6a6a6',
                 }}
             >
                 {!exclusive && <div
@@ -27,10 +28,6 @@ class RecipientView extends React.Component {
                     app-onclick-props={JSON.stringify({
                         selectionType: 'showTo'
                     })}
-                    style={{
-                        color: '#a6a6a6',
-                        fontSize: 13,
-                    }}
                 >
                     everyone
                 </div>}
@@ -40,15 +37,11 @@ class RecipientView extends React.Component {
                     app-onclick-props={JSON.stringify({
                         selectionType: 'showTo'
                     })}
-                    style={{
-                        color: '#a6a6a6',
-                        fontSize: 13,
-                    }}
                 >
                     {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
                 </div>}
                 {!exclusive && <div
-                    className="cute-button app-onclick"
+                    className="row cute-button app-onclick"
                     empty="true"
                     menu-type={dropdownType.pickRecipient}
                     app-onclick-props={JSON.stringify({
@@ -59,33 +52,9 @@ class RecipientView extends React.Component {
                     }}
                 >
                     except
-                </div>}
-                {exclusive && <div
-                    className="cute-button app-onclick"
-                    empty="true"
-                    menu-type={dropdownType.pickRecipient}
-                    app-onclick-props={JSON.stringify({
-                        selectionType: 'showTo'
-                    })}
-                    style={{
-                        marginLeft: 6,
-                    }}
-                >
-                    and
-                </div>}
-                {inclusive && <div
-                    className="cute-button app-onclick"
-                    menu-type={dropdownType.pickRecipient}
-                    app-onclick-props={JSON.stringify({
-                        selectionType: 'hideFrom'
-                    })}
-                    style={{
-                        color: '#a6a6a6',
-                        fontSize: 13,
-                        marginLeft: 6,
-                    }}
-                >
-                    {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
+                    {inclusive && <div style={{ marginLeft: 6, color: '#a6a6a6',  }}>
+                        {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
+                    </div>}
                 </div>}
             </div>
         )

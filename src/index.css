@@ -40,10 +40,6 @@ a {
   text-decoration: none;
 }
 
-i {
-  pointer-events: none;
-}
-
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-apperance: none;
@@ -74,4 +70,7 @@ textarea {
 
 .app-onclick {
   cursor: pointer;
+}
+.app-onclick * {
+  pointer-events: none;
 }
