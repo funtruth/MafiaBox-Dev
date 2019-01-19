@@ -29,6 +29,7 @@ class DropParent extends React.Component{
                     className="ion-ios-play"
                     style={{
                         marginLeft: 'auto',
+                        pointerEvents: 'none',
                     }}
                 />
             </div>

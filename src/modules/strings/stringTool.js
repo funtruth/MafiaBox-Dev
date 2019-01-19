@@ -18,9 +18,8 @@ export function braceToHtml(string) {
                 parts.push(
                     <div
                         key={i}
-                        className="app-onclick common-bubble"
-                        menu-type={dropdownType}
-                        
+                        className="app-onclick string-var"
+                        menu-type={dropdownType.pickVar}
                     >
                         {string.slice(startIndex + 1, i)}
                     </div>
@@ -39,5 +38,12 @@ export function braceToHtml(string) {
 
     parts.push(string.slice(startIndex))
     
-    return parts
+    return parts.map((i, j) => {
+        return typeof i === 'string' ?
+            i.replace(/\s/g, ' /123/')
+            .split('/123/')
+            .map((k, l) => {
+                return <pre key={`${j}-${l}`}>{k}</pre>
+            }):i
+    })
 }

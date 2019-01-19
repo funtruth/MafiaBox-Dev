@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { updateType, updateViewType } from '../types';
+import { modalType } from '../../modal/types'
+
+import { showModal } from '../../modal/ModalReducer'
 
 class UpdateButton extends React.Component{
     render() {
@@ -9,7 +12,7 @@ class UpdateButton extends React.Component{
             logicInfo, prefix, vars, pageRepo, isTrigger } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
         
-        let buttonText = ""
+        let buttonText = "", onClick
         switch(info.updateViewType) {
             case updateViewType.page:
                 buttonText = pageRepo[info.value].title
@@ -27,9 +30,28 @@ class UpdateButton extends React.Component{
                 buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
                 break
             case updateViewType.trigger:
+                onClick = () => this.props.showModal(modalType.editTrigger, {
+                    pageKey,
+                    indexKey,
+                    fieldKey,
+                    subfieldKey: prefix,
+                    currentValue,
+                    attach: (logicInfo.data && logicInfo.data[prefix]) || {},
+                    attachVar,
+                    isTrigger: true,
+                })
                 buttonText = <i className="mdi mdi-flag"/>
                 break
             case updateViewType.events:
+                onClick = () => this.props.showModal(modalType.editEvent, {
+                    pageKey,
+                    indexKey,
+                    fieldKey,
+                    subfieldKey: prefix,
+                    currentValue,
+                    attach: (logicInfo.data && logicInfo.data[prefix]) || {},
+                    attachVar,
+                })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
             default:
@@ -45,6 +67,18 @@ class UpdateButton extends React.Component{
             attach = logicInfo.data
             attachVar = vars
             currentValue = info.value
+        }
+
+        if (onClick) {
+            return (
+                <div
+                    className="logic-pick-update"
+                    highlight="true"
+                    onClick={onClick}
+                >
+                    {buttonText}
+                </div>
+            )
         }
         
         return (
@@ -62,9 +96,7 @@ class UpdateButton extends React.Component{
                     attachVar,
                 })}
             >
-                <div style={{ pointerEvents: 'none' }}>
-                    {buttonText}
-                </div>
+                {buttonText}
             </div>
         )
     }
@@ -74,4 +106,7 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
     }),
+    {
+        showModal,
+    }
 )(UpdateButton)

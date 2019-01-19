@@ -65,6 +65,13 @@
   padding: 10px 10px;
   font: 450 14px Arial;
   color: #c6c6c6;
+  align-content: flex-start;
+}
+
+.text-box > pre {
+    font: 450 14px Arial;
+    color: #c6c6c6;
+    margin: 0px;
 }
 
 .string-edit-box {
@@ -86,9 +93,15 @@
 
 .empty-text {
     padding: 4px 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     color: #666666;
     font: 500 13px Arial;
+}
+
+.string-var {
+    color: #eee;
+    border-radius: 4px;
+    padding: 0px 6px;
+    font: 300 13px Arial;
+    align-self: flex-start;
+    background-color: rgba(40, 43, 48,1);
 }

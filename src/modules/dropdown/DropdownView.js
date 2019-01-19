@@ -41,9 +41,9 @@ import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
-import PickEvent from './update/PickEvent';
-import PickEventType from './update/PickEventType';
-import PickRecipient from './update/PickRecipient'
+
+import PickEvent from './strings/PickEvent';
+import PickRecipient from './strings/PickRecipient'
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
@@ -152,8 +152,6 @@ class DropdownView extends React.Component{
                 return <PickTrigger {...props}/>
             case dropdownType.pickEvent:
                 return <PickEvent {...props}/>
-            case dropdownType.pickEventType:
-                return <PickEventType {...props}/>
             case dropdownType.pickRecipient:
                 return <PickRecipient {...props}/>
             default:

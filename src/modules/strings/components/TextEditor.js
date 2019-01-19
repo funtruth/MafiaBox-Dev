@@ -48,21 +48,6 @@ class TextEditor extends React.Component {
         range.setEnd(myDiv, tmp.innerText.length);
     }
 
-    _onSave = () => {
-        const { selectedKey, attach } = this.props
-        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
-        const { title, string } = selectedItem
-
-        this.props.updateStringByPath(
-            'stringKey',
-            {
-                title,
-                string,
-                lastEdit: Date.now(),
-            }
-        )
-    }
-
     render() {
         const { selectedKey, attach } = this.props
         const selectedItem = (attach.value && attach.value[selectedKey]) || {}
