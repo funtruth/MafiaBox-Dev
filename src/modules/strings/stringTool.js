@@ -19,7 +19,7 @@ export function braceToHtml(string) {
                     <div
                         key={i}
                         className="app-onclick string-var"
-                        menu-type={dropdownType.pickVar}
+                        menu-type={dropdownType.pickEventVar}
                     >
                         {string.slice(startIndex + 1, i)}
                     </div>

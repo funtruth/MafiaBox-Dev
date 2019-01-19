@@ -33,7 +33,9 @@ export const dropdownType = {
     pickBoolean: 'dropdownType/pick-boolean',
     pickRole: 'dropdownType/pick-role',
     pickLibrary: 'dropdownType/pick-library',
+
     pickEvent: 'dropdownType/pick-event',
+    pickEventVar: 'dropdownType/pick-event-var',
     pickRecipient: 'dropdownType/pick-recipient',
 }
 

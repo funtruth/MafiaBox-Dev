@@ -43,6 +43,7 @@ import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
 
 import PickEvent from './strings/PickEvent';
+import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 
 class DropdownView extends React.Component{
@@ -150,8 +151,11 @@ class DropdownView extends React.Component{
                 return <AddUpdateField {...props}/>
             case dropdownType.pickTrigger:
                 return <PickTrigger {...props}/>
+
             case dropdownType.pickEvent:
                 return <PickEvent {...props}/>
+            case dropdownType.pickEventVar:
+                return <PickEventVar {...props}/>
             case dropdownType.pickRecipient:
                 return <PickRecipient {...props}/>
             default:

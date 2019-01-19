@@ -15,8 +15,6 @@ class LogicPanels extends React.Component{
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
-                const attachments = JSON.stringify(vars)
-                
                 return (
                     <div>
                         <div
@@ -28,7 +26,7 @@ class LogicPanels extends React.Component{
                                 indexKey,
                                 subfieldKey: 'var1',
                                 currentValue: data.var1,
-                                attachVar: attachments,
+                                attachVar: vars,
                             })}
                             style={{
                                 color: (data.var1 || data[`var1.adjust`]) ? '#fff' : '#868686',
@@ -67,7 +65,7 @@ class LogicPanels extends React.Component{
                                 indexKey,
                                 subfieldKey: 'var2',
                                 currentValue: data.var2,
-                                attachVar: attachments,
+                                attachVar: vars,
                             })}
                             style={{
                                 color: (data.var2 || data['var2.adjust']) ? '#fff' : '#868686',
