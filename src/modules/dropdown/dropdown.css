@@ -98,3 +98,15 @@
 .tag-input:focus {
     outline: none;
 }
+
+.drop-down-scrollable {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.drop-down-title {
+    font: 600 11px Arial;
+    color: #666;
+    letter-spacing: 0.6px;
+    padding: 4px 16px;
+}

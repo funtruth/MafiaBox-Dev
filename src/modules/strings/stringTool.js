@@ -20,6 +20,12 @@ export function braceToHtml(string) {
                         key={i}
                         className="app-onclick string-var"
                         menu-type={dropdownType.pickEventVar}
+                        app-onclick-props={JSON.stringify({
+                            range: {
+                                startIndex: startIndex + 1,
+                                endIndex: i,
+                            }
+                        })}
                     >
                         {string.slice(startIndex + 1, i)}
                     </div>

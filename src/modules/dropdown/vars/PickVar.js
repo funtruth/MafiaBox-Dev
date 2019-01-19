@@ -72,25 +72,42 @@ class PickVar extends React.Component{
 
     render() {
         const { attachVar, currentValue } = this.props
+        if (!attachVar) return null
+
         const vars = _.toArray(attachVar)
+        const uids = vars.filter(i => i.variableType === variableType.uid.key)
+        const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
+        const rssVars = vars.filter(i => i.rss)
 
         const isNumber = attachVar[currentValue] &&
             attachVar[currentValue].variableType === variableType.number.key
 
-        let menuStyle = {
-            maxHeight: 200,
-            overflow: 'auto',
-        }
-
-        if (!attachVar) return null
         return (
             <div>
                 <BoardLib {...this.props}/>
+                {uids.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">UIDS</div>
+                    <div className="drop-down-scrollable">
+                        {uids.map(this._renderItem)}
+                    </div>
+                </div>}
+                {otherVars.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">VARIABLES</div>
+                    <div className="drop-down-scrollable">
+                        {otherVars.map(this._renderItem)}
+                    </div>
+                </div>}
+                {rssVars.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">GAME VARIABLES</div>
+                    <div className="drop-down-scrollable">
+                        {rssVars.map(this._renderItem)}
+                    </div>
+                </div>}
                 <div className="-separator"/>
-                <div style={menuStyle}>
-                    {vars.map(this._renderItem)}
-                </div>
-                <div className="-separator"/>
+                <div className="drop-down-title">OTHER OPTIONS</div>
                 <DropParent
                     {...this.props}
                     dropdownType={dropdownType.inputValue}
@@ -103,7 +120,7 @@ class PickVar extends React.Component{
                     icon="mdi mdi-alpha-c-box"
                     text="Constant"
                 />
-                <DropParent
+                {isNumber && <DropParent
                     {...this.props}
                     dropdownType={isNumber && dropdownType.inputValue}
                     params={{
@@ -114,7 +131,7 @@ class PickVar extends React.Component{
                     }}
                     icon="mdi mdi-numeric"
                     text="Adjust by"
-                />
+                />}
             </div>
         )
     }

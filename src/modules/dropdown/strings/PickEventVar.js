@@ -9,13 +9,16 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
 
-class PickEventVar extends React.Component{
+class PickVar extends React.Component{
     _onSelect = (item) => {
-        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
+        const { attach, selectedKey, range } = this.props
+        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+        const string = selectedItem.string || ''
+
+        const { startIndex, endIndex } = range
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey]: item.key,
-            [`${subfieldKey}.adjust`]: null
+        this.props.updatePage({
+            string: string.slice(0, startIndex) + item.key + string.slice(endIndex)
         })
         this.props.showDropdown()
     }
@@ -54,19 +57,36 @@ class PickEventVar extends React.Component{
 
     render() {
         const { attachVar } = this.props
-        const vars = _.toArray(attachVar)
-
-        let menuStyle = {
-            maxHeight: 200,
-            overflow: 'auto',
-        }
-
         if (!attachVar) return null
+
+        const vars = _.toArray(attachVar)
+        const uids = vars.filter(i => i.variableType === variableType.uid.key)
+        const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
+        const rssVars = vars.filter(i => i.rss)
+
         return (
             <div>
-                <div style={menuStyle}>
-                    {vars.map(this._renderItem)}
-                </div>
+                {uids.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">UIDS</div>
+                    <div className="drop-down-scrollable">
+                        {uids.map(this._renderItem)}
+                    </div>
+                </div>}
+                {otherVars.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">VARIABLES</div>
+                    <div className="drop-down-scrollable">
+                        {otherVars.map(this._renderItem)}
+                    </div>
+                </div>}
+                {rssVars.length > 0 && <div>
+                    <div className="-separator"/>
+                    <div className="drop-down-title">GAME VARIABLES</div>
+                    <div className="drop-down-scrollable">
+                        {rssVars.map(this._renderItem)}
+                    </div>
+                </div>}
             </div>
         )
     }
@@ -77,4 +97,4 @@ export default connect(
     {
         updatePageByPath,
     }
-)(PickEventVar)
+)(PickVar)
