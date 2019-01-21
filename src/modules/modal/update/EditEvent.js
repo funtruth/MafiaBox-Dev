@@ -7,7 +7,8 @@ class EditEvent extends React.Component {
         const { isTrigger } = this.props
 
         if (isTrigger) {
-
+            this.props.popModalBy(1)
+            this.props.onAttach()
         } else {
             this.props.onSave()
             this.props.popModalBy(1)

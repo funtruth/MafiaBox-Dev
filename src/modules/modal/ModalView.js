@@ -99,6 +99,15 @@ class ModalView extends React.Component {
                                 updateViewType: updateViewType.events,
                             }
                         )
+                        props.onAttach = () => this.props.updateTopModal(
+                            'attach',
+                            'value',
+                            props.subfieldKey,
+                            {
+                                ...props.attach,
+                                updateViewType: updateViewType.events,
+                            }
+                        )
                         props.onEdit = (stringKey, value) => this.props.updateTopModal(
                             'attach',
                             'value',
