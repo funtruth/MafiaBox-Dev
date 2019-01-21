@@ -1,4 +1,5 @@
 import * as helpers from '../common/helpers'
+import { modalType } from './types';
 
 const initialState = {
     modalKeys: [],
@@ -16,10 +17,20 @@ export function showModal(key, params={}) {
         if (!key) {
             keysClone.pop()
         } else {
+            const _params = {}
+            switch(key) {
+                case modalType.editEvent:
+                case modalType.editTrigger:
+                    _params._attach = params.attach
+                    break
+                default:
+            }
+            
             keysClone.push({
                 ...keysClone[keysClone.length - 1],
                 ...dropdownKeys[dropdownKeys.length - 1],
                 ...params,
+                ..._params,
                 key,
             })
         }

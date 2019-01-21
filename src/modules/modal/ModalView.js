@@ -1,5 +1,6 @@
 import React from 'react'
 import './modals.css'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
@@ -63,14 +64,6 @@ class ModalView extends React.Component {
 
                 switch(props.key) {
                     case modalType.editTrigger:
-                    case modalType.editEvent:
-                        props.requireSave = true
-                        break
-                    default:
-                }
-
-                switch(props.key) {
-                    case modalType.editTrigger:
                         props.onSave = () => this.props.updatePageByPath(
                             props.pageKey,
                             props.fieldKey,
@@ -82,10 +75,6 @@ class ModalView extends React.Component {
                                 updateViewType: updateViewType.trigger,
                             },
                         )
-                        props.onClose = () => this.props.showModal(modalType.saveChanges, {
-                            onSave: props.onSave,
-                            onClose: this.props.showModal,
-                        })
                         break
                     case modalType.editEvent:
                         props.onSave = () => this.props.updatePageByPath(
@@ -114,12 +103,21 @@ class ModalView extends React.Component {
                             stringKey,
                             value,
                         )
-                        props.onClose = () => this.props.showModal(modalType.saveChanges, {
-                            onSave: props.onSave,
-                            onClose: this.props.showModal,
-                        })
                         break
                     default:
+                }
+
+                if (props.onSave) {
+                    props.onClose = () => {
+                        if (_.isEqual(props.attach, props._attach)) {
+                            this.props.popModalTo(index - 1) 
+                        } else {
+                            this.props.showModal(modalType.saveChanges, {
+                                onSave: props.onSave,
+                                onClose: this.props.showModal,
+                            })
+                        }
+                    }
                 }
 
                 return (

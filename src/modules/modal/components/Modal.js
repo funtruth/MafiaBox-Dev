@@ -4,14 +4,15 @@ class Modal extends React.Component {
     _onClick = e => {
         if (e.target.id === 'parent-only') {
             //TODO this is broken for un-original clicks. See AppWrapper 64
+            //onClick triggers when click starts in modal but ends outside the modal
             this.props.onClose()
         }
     }
 
     render() {
-        const { children, requireSave } = this.props
+        const { children, onSave } = this.props
 
-        if (requireSave) {
+        if (onSave) {
             return (
                 <div id="parent-only" className="modal" onClick={this._onClick}>
                     <div style={{ pointerEvents: 'none' }}>

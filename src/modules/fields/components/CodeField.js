@@ -9,6 +9,7 @@ class CodeField extends React.Component{
             <CodeMirror
                 value={this.props.code}
                 options={{
+                    ...this.props.options,
                     mode: 'javascript',
                     theme: 'monokai',
                     lineNumbers: true
