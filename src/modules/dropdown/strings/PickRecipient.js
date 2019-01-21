@@ -60,7 +60,7 @@ class PickRecipient extends React.Component{
                         There are no Unique IDs
                     </div>}
                 {inclusive && <div>
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     <div
                         className="drop-down-menu-option"
                         chosen={everyone.toString()}

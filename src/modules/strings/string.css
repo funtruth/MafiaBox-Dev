@@ -10,13 +10,11 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    border-right: 1px solid #464646;
 }
 
 .dashboard-edit {
     display: flex;
     flex-direction: column;
-    padding: 8px 0px 0px 0px;
     width: 70%;
 }
 
@@ -26,7 +24,7 @@
     color: #a6a6a6;
     font: 400 12px Arial;
     padding: 12px 12px;
-    margin: 4px 10px;
+    margin: 0px 10px 8px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;

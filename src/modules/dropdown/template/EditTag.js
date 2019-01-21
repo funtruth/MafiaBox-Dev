@@ -49,7 +49,7 @@ class EditTag extends React.Component{
                     type='text'
                     autoFocus
                 />
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="drop-down-menu-option" onClick={this._onDelete}>
                     <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                     Delete

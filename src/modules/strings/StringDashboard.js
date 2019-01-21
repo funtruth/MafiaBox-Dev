@@ -50,7 +50,7 @@ class StringDashboard extends React.Component {
 
         return (
             <div className="dashboard" cancel-appclick="true">
-                <div className="dashboard-results">
+                <div className="dashboard-results border-right">
                     <input
                         className="tag-input"
                         value={this.state.searchText}
@@ -62,7 +62,7 @@ class StringDashboard extends React.Component {
                             margin: '12px 10px 0px 10px',
                         }}
                     />
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     {current.length ?
                         current.map((item, index) => {
                             return (
@@ -83,7 +83,7 @@ class StringDashboard extends React.Component {
                             No events found
                         </div>
                     }
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     <div
                         className="dashboard-item dashboard-new-item"
                         onClick={this._onCreate}

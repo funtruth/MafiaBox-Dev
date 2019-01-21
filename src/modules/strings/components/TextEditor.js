@@ -54,7 +54,7 @@ class TextEditor extends React.Component {
         const { title, string } = selectedItem
 
         return (
-            <div className="dashboard-edit">
+            <div className="dashboard-edit -top-m">
                 <div className="dashboard-section-title">EVENT NAME</div>
                 <input
                     className="tag-input"
@@ -64,7 +64,7 @@ class TextEditor extends React.Component {
                     type='text'
                     autoFocus
                 />
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="dashboard-section-title">RAW TEXT</div>
                 <div
                     id="input"
@@ -74,12 +74,12 @@ class TextEditor extends React.Component {
                 >
                     {string || ''}
                 </div>
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="dashboard-section-title">MARKDOWN AND VARIABLES</div>
                 <div className="text-box string-edit-box">
                     {stringTool.braceToHtml(string || '')}
                 </div>
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="dashboard-section-title">RECIPIENTS</div>
                 <RecipientView {...this.props}/>
             </div>

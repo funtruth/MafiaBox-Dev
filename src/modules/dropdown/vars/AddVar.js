@@ -52,7 +52,7 @@ class AddVar extends React.Component{
                     type='text'
                     autoFocus
                 />
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="drop-down-menu-option" onClick={this._confirm}>
                     <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
                     Create

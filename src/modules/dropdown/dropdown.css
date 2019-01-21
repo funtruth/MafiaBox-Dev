@@ -63,12 +63,6 @@
     background-color: hsla(0,0%,100%,.1);
 }
 
-.-separator {
-    height: 1px;
-    margin: 8px 0px;
-    background-color: #464646;
-}
-
 .page-separator {
     height: 2px;
     background-color: #666;

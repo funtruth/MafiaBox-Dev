@@ -60,3 +60,23 @@
     width: 20px;
     text-align: center;
 }
+
+.border-right {
+    border-right: 1px solid #464646;
+}
+
+.-sep {
+    height: 1px;
+    margin: 8px 0px;
+    background-color: #464646;
+}
+.-top-m {
+    padding-top: 8px;
+}
+.-bot-m {
+    padding-bottom: 8px;
+}
+.-side-m {
+    padding-left: 10px;
+    padding-right: 10px;
+}

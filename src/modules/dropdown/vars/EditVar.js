@@ -65,7 +65,7 @@ class EditVar extends React.Component{
                     type='text'
                     autoFocus
                 />
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="drop-down-menu-option" onClick={this._onSave}>
                     <i className={`drop-down-menu-icon ion-ios-save`}></i>
                     Save

@@ -86,27 +86,27 @@ class PickVar extends React.Component{
             <div>
                 <BoardLib {...this.props}/>
                 {uids.length > 0 && <div>
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     <div className="drop-down-title">UIDS</div>
                     <div className="drop-down-scrollable">
                         {uids.map(this._renderItem)}
                     </div>
                 </div>}
                 {otherVars.length > 0 && <div>
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     <div className="drop-down-title">VARIABLES</div>
                     <div className="drop-down-scrollable">
                         {otherVars.map(this._renderItem)}
                     </div>
                 </div>}
                 {rssVars.length > 0 && <div>
-                    <div className="-separator"/>
+                    <div className="-sep"/>
                     <div className="drop-down-title">GAME VARIABLES</div>
                     <div className="drop-down-scrollable">
                         {rssVars.map(this._renderItem)}
                     </div>
                 </div>}
-                <div className="-separator"/>
+                <div className="-sep"/>
                 <div className="drop-down-title">OTHER OPTIONS</div>
                 <DropParent
                     {...this.props}

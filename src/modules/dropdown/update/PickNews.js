@@ -48,7 +48,7 @@ class PickNews extends React.Component{
         return (
             <div>
                 {stringArr.map(this._renderItem)}
-                <div className="-separator"/>
+                <div className="-sep"/>
             </div>
         )
     }

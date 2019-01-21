@@ -1,6 +1,7 @@
 import React from 'react'
 
 import StringDashboard from '../../strings/StringDashboard';
+import ModalOptions from '../components/ModalOptions'
 
 class EditEvent extends React.Component {
     _onSave = () => {
@@ -28,14 +29,10 @@ class EditEvent extends React.Component {
                 }}
             >
                 <StringDashboard {...this.props}/>
-                <div className="row modal-options">
-                    <div className="modal-button" onClick={this._onSave}>
-                        Save
-                    </div>
-                    <div className="underline-button" onClick={this.props.onClose}>
-                        Cancel
-                    </div>
-                </div>
+                <ModalOptions
+                    onSave={this._onSave}
+                    onClose={this.props.onClose}
+                />
             </div>
         )
     }
