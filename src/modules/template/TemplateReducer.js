@@ -119,6 +119,11 @@ const initialState = {
             variableType: variableType.boolean,
         },
         'trigger': {
+            dropdown: dropdownType.pickUid,
+            action: 'Add',
+            variableType: variableType.object.key,
+        },
+        'trigger.$': {
             dropdown: dropdownType.pickTrigger,
             action: 'Edit',
             mutate: true,
