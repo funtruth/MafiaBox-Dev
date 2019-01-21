@@ -1,4 +1,5 @@
 import { logicType, comparisonType, returnType, updateType, updateViewType } from './types'
+import { stringToCode } from '../strings/stringTool';
 var beautify_js = require('js-beautify');
 
 const initialState = {}
@@ -72,7 +73,7 @@ function recursive(key, library) {
 }
 
 //replace variable properties from foo.$bar to foo[bar]
-function convertPropertyFields(string) {
+export function convertPropertyFields(string) {
     let parts = string.split('.')
 
     for (var i=0; i<parts.length; i++) {
@@ -81,9 +82,17 @@ function convertPropertyFields(string) {
         }
     }
 
-    parts = parts.join('.').replace(/\.\$/g, '[')
+    parts = parts.join('.').replace(/\$/g, '[').replace(/\.\[/g, '[')
 
     return parts
+}
+
+//converts the variables in event text properly
+function eventText(object) {
+    const eventKeys = ['string', 'showTo', 'hideFrom']
+    return eventKeys.map(k => k in object ?
+        `${k}:\`${stringToCode(object[k])}\`,`:'')
+        .join('')
 }
 
 //handles data value formatting on the right side of the =
@@ -126,15 +135,27 @@ export function getUpdateCode(data) {
             case updateViewType.trigger:
                 string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(data[field].value)}}`)
                 break
+            case updateViewType.events:
+                Object.keys(data[field].value).forEach(stringKey => {
+                    string = string.concat(`updates[\`events/\${timestamp++}\`]={${eventText(data[field].value[stringKey])}};`)
+                })
+                break
             default:
         }
     }
     return string
 }
 
+//group variables for the function arguments
 function groupRSSVars(vars) {
     let yes = [], no = []
-    Object.keys(vars).map(key => vars[key].rss ? yes.push(key) : no.push(key))
+    Object.keys(vars).forEach(key => {
+        if (key.charAt(0) === '$') {
+            vars[key].rss ? yes.push(key.substr(1)) : no.push(key.substr(1))
+        } else {
+            vars[key].rss ? yes.push(key) : no.push(key)
+        }
+    })
     return `{${yes.join(', ')}}, ${no.join(', ')}`
 }
 

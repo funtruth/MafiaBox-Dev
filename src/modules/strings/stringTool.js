@@ -2,6 +2,8 @@ import React from 'react'
 
 import { dropdownType } from '../dropdown/types'
 
+import { convertPropertyFields } from '../logic/LogicReducer'
+
 export function braceToHtml(string) {
     let parts = []
     let startIndex = 0
@@ -15,6 +17,8 @@ export function braceToHtml(string) {
                 parts.push(string.slice(startIndex, i))
                 startIndex = i
             } else if (char === '}') {
+                const segment = string.slice(startIndex + 1, i)
+                
                 parts.push(
                     <div
                         key={i}
@@ -24,10 +28,11 @@ export function braceToHtml(string) {
                             range: {
                                 startIndex: startIndex + 1,
                                 endIndex: i,
-                            }
+                            },
+                            currentValue: segment,
                         })}
                     >
-                        {string.slice(startIndex + 1, i)}
+                        {segment}
                     </div>
                 )
                 startIndex = i + 1
@@ -52,4 +57,35 @@ export function braceToHtml(string) {
                 return <pre key={`${j}-${l}`}>{k}</pre>
             }):i
     })
+}
+
+export function stringToCode(string) {
+    let startIndex = 0
+    let leftBraceSaved = false
+    let stringCopy = ''
+    
+    for (var i=0; i<string.length; i++) {
+        const char = string.charAt(i)
+
+        if (leftBraceSaved) {
+            if (char === '{') {
+                stringCopy = stringCopy.concat(string.slice(startIndex, i))
+                startIndex = i
+            } else if (char === '}') {
+                stringCopy = stringCopy.concat(`\${${convertPropertyFields(string.slice(startIndex + 1, i))}}`)
+                startIndex = i + 1
+                leftBraceSaved = false
+            }
+        } else {
+            if (char === '{') {
+                stringCopy = stringCopy.concat(string.slice(startIndex, i))
+                startIndex = i
+                leftBraceSaved = true
+            }
+        }
+    }
+
+    stringCopy = stringCopy.concat(string.slice(startIndex))
+    
+    return stringCopy
 }

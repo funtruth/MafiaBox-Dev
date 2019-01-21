@@ -59,10 +59,3 @@ export function isAppClickCancelled(target) {
 
     return isCancel
 }
-
-export function getZIndex(a, b) {
-    return Math.max(
-        a[a.length - 1] ? a[a.length - 1].zIndex : 1,
-        b[b.length - 1] ? b[b.length - 1].zIndex : 1,
-        1, ) + 1
-}

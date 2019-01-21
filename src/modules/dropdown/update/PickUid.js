@@ -13,7 +13,7 @@ import UpdateType from './UpdateType';
 class PickUid extends React.Component{
     _renderItem = (item) => {
         const { currentValue, updateRef, subfieldKey } = this.props
-        const newKey = `${subfieldKey}.$${item.key}`
+        const newKey = `${subfieldKey}.${item.key}`
         
         const config = proptool.getUpdateConfig(newKey, updateRef)
         const chosen = typeof currentValue === 'string' && currentValue === item

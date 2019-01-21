@@ -36,6 +36,7 @@ export const dropdownType = {
 
     pickEvent: 'dropdownType/pick-event',
     pickEventVar: 'dropdownType/pick-event-var',
+    pickEventVarProp: 'dropdownType/pick-event-var-prop',
     pickRecipient: 'dropdownType/pick-recipient',
 }
 

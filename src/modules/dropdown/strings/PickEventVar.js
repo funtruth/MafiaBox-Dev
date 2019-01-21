@@ -18,7 +18,7 @@ class PickVar extends React.Component{
         const { startIndex, endIndex } = range
         
         this.props.updatePage({
-            string: string.slice(0, startIndex) + item.key + string.slice(endIndex)
+            string: `${string.slice(0, startIndex)}${item.key}${string.slice(endIndex)}`
         })
         this.props.showDropdown()
     }
@@ -26,6 +26,7 @@ class PickVar extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
         const chosen = typeof currentValue === 'string' && currentValue === item.key
+        
         const isObject = item.variableType === variableType.object.key
 
         if (isObject) {
@@ -33,7 +34,7 @@ class PickVar extends React.Component{
                 <DropParent
                     {...this.props}
                     key={item.key}
-                    dropdownType={dropdownType.pickVarProp}
+                    dropdownType={dropdownType.pickEventVarProp}
                     params={{
                         prefix: item.key,
                     }}

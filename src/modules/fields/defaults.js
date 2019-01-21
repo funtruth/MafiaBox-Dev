@@ -168,12 +168,12 @@ export const initFieldRepo = {
                 rss: true,
                 variableType: variableType.object.key,
             },
-            user: {
-                key: 'user',
+            "$user": {
+                key: '$user',
                 variableType: variableType.uid.key,
             },
-            target: {
-                key: 'target',
+            "$target": {
+                key: '$target',
                 variableType: variableType.uid.key,
             },
         },

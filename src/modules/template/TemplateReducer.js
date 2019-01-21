@@ -105,16 +105,11 @@ const initialState = {
             variableType: variableType.boolean.key,
         },
         'health': {
-            dropdown: dropdownType.pickUid,
-            action: 'Add',
-            variableType: variableType.object.key,
-        },
-        'health.$': {
             dropdown: dropdownType.pickHealth,
-            action: 'Select',
+            action: 'Add',
             update: true,
             mutate: false,
-            variableType: variableType.uid.key,
+            variableType: variableType.object.key,
         },
         'dead': {
             dropdown: dropdownType.pickBoolean,
