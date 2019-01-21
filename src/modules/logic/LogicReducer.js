@@ -91,8 +91,10 @@ export function convertPropertyFields(string) {
 function eventText(object) {
     const eventKeys = ['string', 'showTo', 'hideFrom']
     return eventKeys.map(k => k in object ?
-        `${k}:\`${stringToCode(object[k])}\`,`:'')
-        .join('')
+        `${k}:${typeof object[k] === 'string' ?
+            `\`${stringToCode(object[k])}\``
+            :`{${Object.keys(object[k]).map(u => `${convertPropertyFields(u)}:true,`)}}`
+        },`:'').join('')
 }
 
 //handles data value formatting on the right side of the =

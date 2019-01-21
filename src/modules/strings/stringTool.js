@@ -59,6 +59,7 @@ export function braceToHtml(string) {
     })
 }
 
+//{$user} to ${user}
 export function stringToCode(string) {
     let startIndex = 0
     let leftBraceSaved = false
