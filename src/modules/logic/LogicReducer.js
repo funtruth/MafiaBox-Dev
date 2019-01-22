@@ -1,13 +1,29 @@
+import _ from 'lodash'
 import { logicType, comparisonType, returnType, updateType, updateViewType } from './types'
 import { stringToCode } from '../strings/stringTool';
+
 var beautify_js = require('js-beautify');
 
 const initialState = {}
 
+export function getParents(value) {
+    let children = {}
+
+    //gather all keys that are children
+    for (var logicKey in value) {
+        if (value[logicKey].right) children[value[logicKey].right] = true
+        if (value[logicKey].down) children[value[logicKey].down] = true
+    }
+    
+    //gather all keys that are parents, set index to the first parent
+    //TODO show variables in chronological order for dropdown PickVar
+    return _.pickBy(value, (i, key) => !children[key])
+}
+
 export function getCode(fieldInfo, key, library) {
     const { vars } = fieldInfo
     return (dispatch, getState) => {
-        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})})`
+        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
     }
 }
 

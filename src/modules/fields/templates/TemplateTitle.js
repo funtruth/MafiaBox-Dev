@@ -5,12 +5,12 @@ import { dropdownType } from '../../dropdown/types';
 class TemplateTitle extends React.Component{
     _onChange = e => {
         const { fieldKey } = this.props.fieldInfo
-        this.props.updateField(fieldKey, 'fieldTitle', e.target.value)
+        this.props.updateField(fieldKey, 'title', e.target.value)
     }
 
     render() {
         const { fieldInfo, boardType } = this.props
-        const { fieldKey, fieldTitle, fieldType } = fieldInfo
+        const { fieldKey, title, fieldType } = fieldInfo
 
         return (
             <div className="row" style={{ alignItems: 'center' }}>
@@ -25,7 +25,7 @@ class TemplateTitle extends React.Component{
                 </div>
                 <input
                     className="field-title-input"
-                    value={fieldTitle || ''}
+                    value={title || ''}
                     onChange={this._onChange}
                     placeholder="Untitled"
                     type="text"

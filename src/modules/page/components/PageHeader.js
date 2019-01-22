@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { navigate } from '../../navigation/NavReducer'
 import { showModal } from '../../modal/ModalReducer'
-import { publishPage } from '../../firebase/DBReducer'
+import { savePageToDB, publishPage } from '../../firebase/DBReducer'
 
 const leftBtns = [
     { key: 'resize', title: 'Open as Page', icon: 'ion-ios-resize' }
@@ -24,6 +24,9 @@ class PageHeader extends React.Component{
                 this.props.showModal()
                 break
             case 'updates':
+                this.props.savePageToDB(pageKey)
+                break
+            case 'share':
                 this.props.publishPage(pageKey)
                 break
             default:
@@ -59,6 +62,7 @@ export default connect(
     {
         navigate,
         showModal,
+        savePageToDB,
         publishPage,
     }
 )(PageHeader)

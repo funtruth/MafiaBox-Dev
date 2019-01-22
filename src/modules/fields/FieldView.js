@@ -11,6 +11,7 @@ import { updatePageByPath } from '../page/PageReducer'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import TagField from './components/TagField';
+import PlayerTagField from './components/PlayerTagField'
 import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
@@ -49,6 +50,8 @@ class FieldView extends React.Component {
                 return <LogicBoard {...props}/>
             case fieldType.tag.key:
                 return <TagField {...props}/>
+            case fieldType.playerTag.key:
+                return <PlayerTagField {...props}/>
             case fieldType.property.key:
                 return <PropertyField {...props}/>
             case fieldType.vars.key:
@@ -75,7 +78,7 @@ class FieldView extends React.Component {
                         <div className="-sep"/>
                         <div className="field-label">
                             <i className={`field-icon ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
-                            {item.fieldTitle}
+                            {item.title}
                         </div>
                         {this._renderItem(item)}
                     </div>

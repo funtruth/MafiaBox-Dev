@@ -68,17 +68,18 @@ export const fieldType = {
         icon: 'ion-ios-pricetags',
         title: 'Expert Tag',
     },
-    strings: {
-        key: 'strings',
-        index: 8,
-        icon: 'mdi mdi-code-string',
-        title: 'String Maker',
-    },
     choices: {
         key: 'choices',
         index: 9,
         icon: 'mdi mdi-source-branch',
         title: 'Choices',
+    },
+    playerTag: {
+        key: 'playerTag',
+        index: 10,
+        icon: 'ion-ios-pricetag',
+        title: 'Player Tags',
+        readOnly: true,
     },
 }
 
@@ -88,7 +89,7 @@ export const initFieldRepo = {
         fieldKey: 'description0',
         index: 0,
         fieldType: fieldType.text.key,
-        fieldTitle: 'Description',
+        title: 'Description',
         boardType: boardType.library.key,
     },
     description1: {
@@ -96,7 +97,7 @@ export const initFieldRepo = {
         fieldKey: 'description1',
         index: 0,
         fieldType: fieldType.text.key,
-        fieldTitle: 'Description',
+        title: 'Description',
         boardType: boardType.roles.key,
     },
     description2: {
@@ -104,7 +105,7 @@ export const initFieldRepo = {
         fieldKey: 'description2',
         index: 0,
         fieldType: fieldType.text.key,
-        fieldTitle: 'Description',
+        title: 'Description',
         boardType: boardType.phases.key,
     },
     code: {
@@ -112,7 +113,7 @@ export const initFieldRepo = {
         fieldKey: 'code',
         index: 0,
         fieldType: fieldType.code.key,
-        fieldTitle: 'Code Interpretation',
+        title: 'Code Interpretation',
         boardType: boardType.library.key,
     },
     args: {
@@ -120,7 +121,7 @@ export const initFieldRepo = {
         fieldKey: 'args',
         index: 0,
         fieldType: fieldType.vars.key,
-        fieldTitle: 'Required Variables',
+        title: 'Required Variables',
         boardType: boardType.library.key,
     },
     vars: {
@@ -128,7 +129,7 @@ export const initFieldRepo = {
         fieldKey: 'vars',
         index: 0,
         fieldType: fieldType.vars.key,
-        fieldTitle: 'Declared Variables',
+        title: 'Declared Variables',
         boardType: boardType.library.key,
     },
     roleTeam: {
@@ -136,7 +137,7 @@ export const initFieldRepo = {
         fieldKey: 'roleTeam',
         index: 1,
         fieldType: fieldType.tag.key,
-        fieldTitle: 'Role Team',
+        title: 'Role Team',
         data: {
             town: {
                 key: 'town',
@@ -161,15 +162,23 @@ export const initFieldRepo = {
         fieldKey: 'roleCharges',
         index: 2,
         fieldType: fieldType.number.key,
-        fieldTitle: 'Role Charges',
+        title: 'Role Charges',
+        boardType: boardType.roles.key,
+    },
+    playerTags: {
+        key: 'playerTags',
+        fieldKey: 'playerTags',
+        index: 3,
+        fieldType: fieldType.playerTag.key,
+        title: 'Player Tags',
         boardType: boardType.roles.key,
     },
     roleTargetMode: {
         key: 'roleTargetMode',
         fieldKey: 'roleTargetMode',
-        index: 3,
+        index: 4,
         fieldType: fieldType.logic.key,
-        fieldTitle: 'Role Target Mode',
+        title: 'Role Target Mode',
         vars: {
             lobby: {
                 key: 'lobby',
@@ -200,9 +209,9 @@ export const initFieldRepo = {
     roleActionMode: {
         key: 'roleActionMode',
         fieldKey: 'roleActionMode',
-        index: 4,
+        index: 5,
         fieldType: fieldType.logic.key,
-        fieldTitle: 'Role Action Mode',
+        title: 'Role Action Mode',
         vars: {
             lobby: {
                 key: 'lobby',
@@ -230,7 +239,7 @@ export const initFieldRepo = {
         fieldKey: 'phaseActionMode',
         index: 1,
         fieldType: fieldType.tag.key,
-        fieldTitle: 'Action Mode',
+        title: 'Action Mode',
         data: {
             all: {
                 key: 'all',
@@ -260,7 +269,7 @@ export const initFieldRepo = {
         fieldKey: 'phaseTriggerMode',
         index: 4,
         fieldType: fieldType.logic.key,
-        fieldTitle: 'Phase Trigger',
+        title: 'Phase Trigger',
         vars: {
             lobby: {
                 key: 'lobby',
@@ -290,7 +299,7 @@ export const initFieldRepo = {
         fieldKey: 'phaseChoices',
         index: 2,
         fieldType: fieldType.choices.key,
-        fieldTitle: 'Phase Choices',
+        title: 'Phase Choices',
         boardType: boardType.phases.key,
-    }
+    },
 }

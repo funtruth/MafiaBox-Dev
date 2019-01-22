@@ -32,7 +32,7 @@ export function addField(boardType, text) {
         fieldRepoClone[newItemKey] = {
             key: newItemKey,
             fieldKey: newItemKey,
-            fieldTitle: text,
+            title: text,
             fieldType: fieldType.text.key,
             boardType,
             index,
