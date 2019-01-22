@@ -10,9 +10,13 @@ export function publishPage(pageKey) {
         const { gameKey } = getState().db
         
         if (!pageKey || !gameKey) return
-        const pageInfo = pageRepo[pageKey] || {}
 
-        firebaseService.update(`dev/${gameKey}/roles/${pageKey}`,
+        const pageInfo = pageRepo[pageKey] || {}
+        const { boardType } = pageInfo
+
+        if (!boardType) return
+
+        firebaseService.update(`dev/${gameKey}/${boardType}/${pageKey}`,
             JSON.parse(JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾')))
     }
 }

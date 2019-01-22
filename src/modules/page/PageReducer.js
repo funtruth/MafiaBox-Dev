@@ -62,7 +62,7 @@ export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
-        const pageKey = helpers.genUID(boardType.split('/')[1], pageRepo)
+        const pageKey = helpers.genUID(boardType, pageRepo)
 
         let pageInfo = {
             pageKey,
