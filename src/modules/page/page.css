@@ -63,16 +63,3 @@
     z-index: 1;
     cursor: text;
 }
-
-.page-field-label {
-    font: 600 15px Arial;
-    letter-spacing: .2px;
-    color: #a6a6a6;
-    cursor: pointer;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    transition: 0.2s;
-    margin-top: 4px;
-    margin-bottom: auto;
-}

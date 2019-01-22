@@ -14,7 +14,6 @@ import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
-import StringMaker from './components/StringMaker'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
@@ -53,8 +52,6 @@ class FieldView extends React.Component {
                 return <PropertyField {...props}/>
             case fieldType.vars.key:
                 return <VariableField {...props}/>
-            case fieldType.strings.key:
-                return <StringMaker {...props}/>
             default:
                 return null
         }
@@ -73,12 +70,13 @@ class FieldView extends React.Component {
         return (
             fields.map((item, index) => {
                 return (
-                    <div key={index} className="field-item" style={{ marginBottom: 4 }}>
-                        <div className="page-field-label">
-                            <i className={`story-option ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
+                    <div key={index}>
+                        <div className="field-label">
+                            <i className={`field-icon ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
                             {item.fieldTitle}
                         </div>
                         {this._renderItem(item)}
+                        <div className="-sep"/>
                     </div>
                 )
             })

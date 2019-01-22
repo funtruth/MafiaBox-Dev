@@ -3,8 +3,6 @@ import PageView from '../../page/PageView'
 
 class PageModal extends React.Component {
     render() {
-        const { pageKey, location } = this.props
-
         return (
             <div
                 style={{
@@ -15,10 +13,7 @@ class PageModal extends React.Component {
                     overflow: 'scroll',
                 }}
             >
-                <PageView
-                    pageKey={pageKey}
-                    location={location}
-                />
+                <PageView {...this.props}/>
             </div>
         )
     }

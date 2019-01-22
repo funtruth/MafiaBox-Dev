@@ -13,7 +13,7 @@ class TagField extends React.Component{
                 className="property-button"
                 style={{
                     backgroundColor: active ?
-                        (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
+                        (item.color || '#6279CA') : 'rgba(40, 43, 48,1)',
                 }}
                 onClick={this._onClick.bind(this, item.key)}
             >

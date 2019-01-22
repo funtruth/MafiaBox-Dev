@@ -99,7 +99,7 @@ function eventText(object) {
 
 //get return text
 function returnText(data) {
-    const { key, string } = data
+    const { key } = data
     switch(key) {
         case 'toast':
             return `{${eventText(data)}}`
