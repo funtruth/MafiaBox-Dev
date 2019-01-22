@@ -114,15 +114,6 @@
     text-overflow: ellipsis;
 }
 
-.logic-variable-label {
-    font: 600 13px Arial;
-    color: #a6a6a6;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin: 6px;
-}
-
 .logic-pick-update {
     color: #d6d6d6;
     background-color: rgba(60, 63, 68,1);

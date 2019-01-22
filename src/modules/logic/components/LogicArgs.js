@@ -6,8 +6,12 @@ class LogicArgs extends React.Component{
         if (!vars) return null
 
         return (
-            <div className="row logic-variable-label">
-                Variables:
+            <div
+                className="row"
+                style={{
+                    margin: '0px 6px'
+                }}
+            >
                 {Object.keys(vars).map((item, index) => (
                     <div
                         key={index}

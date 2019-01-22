@@ -32,15 +32,21 @@ class LogicBoard extends React.Component{
         return (
             <div className="logic-board">
                 <LogicArgs vars={fieldInfo.vars}/>
-                {Object.keys(parents).map((item, index) => (
-                    <LogicBlock
-                        {...this.props}
-                        key={index}
-                        value={value || defaultLogic}
-                        index={item}
-                        vars={fieldInfo.vars}
-                    />
-                ))}
+                <div
+                    style={{
+                        margin: '8px 6px',
+                    }}
+                >
+                    {Object.keys(parents).map((item, index) => (
+                        <LogicBlock
+                            {...this.props}
+                            key={index}
+                            value={value || defaultLogic}
+                            index={item}
+                            vars={fieldInfo.vars}
+                        />
+                    ))}
+                </div>
                 <CodeField
                     code={code}
                     options={{

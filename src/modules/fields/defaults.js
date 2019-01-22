@@ -29,19 +29,19 @@ export const fieldType = {
     number: {
         key: 'number',
         index: 1,
-        icon: 'ion-md-attach',
+        icon: 'mdi mdi-numeric',
         title: 'Number',
     },
     code: {
         key: 'code',
         index: 2,
-        icon: 'ion-md-code',
+        icon: 'mdi mdi-codepen',
         title: 'Code',
     },
     logic: {
         key: 'logic',
         index: 3,
-        icon: 'ion-md-options',
+        icon: 'mdi mdi-codepen',
         title: 'Logic',
     },
     tag: {

@@ -8,10 +8,8 @@ import { addItemBelowOf } from '../../fields/FieldReducer'
 class LogicDownArrow extends React.Component{
     _onClick = (hide) => {
         if (hide) return
-        const { item, fieldKey, pageInfo } = this.props
-        const { pageKey } = pageInfo
-        
-        this.props.addItemBelowOf(item, pageKey, fieldKey)
+        const { pageKey, fieldKey, indexKey } = this.props
+        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
     }
 
     render() {

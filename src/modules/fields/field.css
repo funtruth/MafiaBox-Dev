@@ -18,8 +18,8 @@
 }
 
 .field-label {
-    font: 600 14px Arial;
-    letter-spacing: .4px;
+    font: 600 15px Arial;
+    letter-spacing: .1px;
     color: #a6a6a6;
     display: flex;
     align-items: center;
