@@ -115,7 +115,7 @@ class ModalView extends React.Component {
                             'data',
                             {
                                 ...props.attach,
-                                return: 'toast',
+                                key: 'toast',
                             },
                         )
                         props.onEdit = (value) => this.props.updateTopModal(

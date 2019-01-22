@@ -128,7 +128,7 @@ class LogicPanels extends React.Component{
                             fieldKey,
                             indexKey,
                             subfieldKey: 'return',
-                            currentValue: data.return,
+                            currentValue: data.key,
                             attach: data,
                             attachVar: vars,
                         })}
@@ -137,7 +137,7 @@ class LogicPanels extends React.Component{
                             borderRadius: '0px 4px 4px 0px',
                         }}
                     >
-                        {data.return}
+                        {data.key}
                     </div>
                 )
             default:

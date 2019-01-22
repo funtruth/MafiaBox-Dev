@@ -20,7 +20,7 @@ class ReturnTypes extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={this._select.bind(this, item.key)}
+                onClick={this._select.bind(this, item)}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
@@ -29,9 +29,9 @@ class ReturnTypes extends React.Component{
         )
     }
 
-    _select = (newValue) => {
+    _select = (item) => {
         this.props.updatePage({
-            return: newValue,
+            key: item.key,
             string: '',
         })
         this.props.showDropdown()

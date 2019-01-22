@@ -28,7 +28,7 @@ function recursive(key, library) {
             codeCurrent = convertPropertyFields(`${data.var1||''}${data['var1.adjust']||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data['var2.adjust']||''}`)
             break
         case logicType.return.key:
-            codeCurrent = returnType[data] ? returnType[data].code : ''
+            codeCurrent = returnText(data)
             break
         case logicType.update.key:
             codeCurrent = codeCurrent.concat(getUpdateCode(data))
@@ -95,6 +95,17 @@ function eventText(object) {
             `\`${stringToCode(object[k])}\``
             :`{${Object.keys(object[k]).map(u => `${convertPropertyFields(u)}:true,`)}}`
         },`:'').join('')
+}
+
+//get return text
+function returnText(data) {
+    const { key, string } = data
+    switch(key) {
+        case 'toast':
+            return `{${eventText(data)}}`
+        default:
+            return returnType[key] ? returnType[key].code : ''
+    }
 }
 
 //handles data value formatting on the right side of the =
