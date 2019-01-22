@@ -26,8 +26,12 @@ class HeaderView extends React.Component{
     }
 
     _getPathTitle(key) {
-        if (pathType[key]) return pathType[key].label
-        else return (this.props.roles[key] && this.props.roles[key].roleName) || 'Untitled'
+        if (pathType[key]) {
+            return pathType[key] && pathType[key].label
+        }
+        else {
+            return (this.props.pageRepo[key] && this.props.pageRepo[key].title) || 'Untitled'
+        }
     }
 
     _onPathClick = (paths, index) => {
@@ -163,6 +167,7 @@ class HeaderView extends React.Component{
 export default connect(
     state => ({
         storyMap: state.page.storyMap,
+        pageRepo: state.page.pageRepo,
     }),
     {
         addPageToMap,

@@ -38,7 +38,7 @@ class ModalView extends React.Component {
                 return <DeleteStory {...props}/>
 
             case modalType.showPage:
-                return <PageModal {...props}/>
+                return <PageModal {...props} location={this.props.location}/>
             case modalType.showTemplate:
                 return <TemplateModal {...props}/>
             

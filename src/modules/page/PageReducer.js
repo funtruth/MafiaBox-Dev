@@ -60,7 +60,8 @@ export function moveStory(startIndex, endIndex) {
 export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        const pageKey = helpers.genUID('phase', pageRepo)
+        
+        const pageKey = helpers.genUID(boardType.split('/')[1], pageRepo)
 
         let pageInfo = {
             pageKey,

@@ -19,14 +19,14 @@ class PageView extends React.Component {
         }
     }
     render() {
-        const { pageKey, pageRepo } = this.props
+        const { pageKey, pageRepo, location, match } = this.props
         const pageInfo = pageRepo[pageKey]
         
         if (!pageInfo) return null
 
         return (
             <div className="page">
-                <PageHeader/>
+                <PageHeader pageKey={pageKey} location={location} match={match}/>
                 <div className="page-content">
                     <PageAbstract
                         pageInfo={pageInfo}

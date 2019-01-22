@@ -8,7 +8,7 @@ class WindowPageView extends React.Component {
 
         return (
             <div className="story-view">
-                <PageView pageKey={pageKey}/>
+                <PageView pageKey={pageKey} match={match}/>
             </div>
         )
     }
