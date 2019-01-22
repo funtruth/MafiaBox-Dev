@@ -21,9 +21,6 @@ class ReturnTypes extends React.Component{
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
                 onClick={this._select.bind(this, item.key)}
-                style={{
-                    backgroundColor: chosen && item.color,
-                }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
@@ -33,9 +30,10 @@ class ReturnTypes extends React.Component{
     }
 
     _select = (newValue) => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', 'value', newValue)
+        this.props.updatePage({
+            return: newValue,
+            string: '',
+        })
         this.props.showDropdown()
     }
 
@@ -48,7 +46,10 @@ class ReturnTypes extends React.Component{
     }
 
     render() {
+        const { currentValue } = this.props
         const data = _.orderBy(returnType, i => i.index)
+
+        const toastChosen = currentValue === 'toast'
 
         return (
             <div>
@@ -56,10 +57,12 @@ class ReturnTypes extends React.Component{
                 <div className="-sep"/>
                 <div
                     className="drop-down-menu-option"
+                    chosen={toastChosen.toString()}
                     onClick={this._onToast}
                 >
                     <i className="drop-down-menu-icon mdi mdi-bread-slice"></i>
                     toaster
+                    {toastChosen && <i className="ion-md-checkmark"/>}
                 </div>
             </div>
         )

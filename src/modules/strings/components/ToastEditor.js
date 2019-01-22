@@ -39,11 +39,11 @@ class ToastEditor extends React.Component {
 
     render() {
         const { attach } = this.props
-        const selectedItem = attach.value || {}
+        const selectedItem = attach || {}
         const { string } = selectedItem
 
         return (
-            <div className="dashboard-edit -top-m" style={{ width: '100%' }}>
+            <div className="dashboard-edit -y-m" style={{ width: '100%' }}>
                 <div className="dashboard-section-title">RAW TEXT</div>
                 <div
                     id="input"

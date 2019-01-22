@@ -12,7 +12,7 @@ import DropParent from '../components/DropParent'
 class PickVar extends React.Component{
     _onSelect = (item) => {
         const { attach, selectedKey, range } = this.props
-        const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+        const selectedItem = selectedKey ? (attach.value && attach.value[selectedKey]) || {} : attach
         const string = selectedItem.string || ''
 
         const { startIndex, endIndex } = range

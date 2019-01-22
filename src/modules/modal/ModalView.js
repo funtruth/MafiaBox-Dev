@@ -108,15 +108,25 @@ class ModalView extends React.Component {
                         )
                         break
                     case modalType.editToast:
+                        props.onSave = () => this.props.updatePageByPath(
+                            props.pageKey,
+                            props.fieldKey,
+                            props.indexKey,
+                            'data',
+                            {
+                                ...props.attach,
+                                return: 'toast',
+                            },
+                        )
                         props.onEdit = (value) => this.props.updateTopModal(
                             'attach',
-                            'value',
                             value,
                         )
+                        break
                     default:
                 }
 
-                if (props.onSave) {
+                if (props._attach) {
                     props.onClose = () => {
                         if (_.isEqual(props.attach, props._attach)) {
                             this.props.popModalTo(index - 1) 

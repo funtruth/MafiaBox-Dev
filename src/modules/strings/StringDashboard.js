@@ -28,6 +28,7 @@ class StringDashboard extends React.Component {
     }
 
     _onEdit = (item) => {
+        document.getElementById('title-input').focus()
         this.props.updateTopModal('selectedKey', item.key)
     }
 
@@ -39,6 +40,7 @@ class StringDashboard extends React.Component {
             lastEdit: Date.now()
         }
 
+        document.getElementById('title-input').focus()
         this.props.onEdit(newKey, newItem)
         this.props.updateTopModal('selectedKey', newKey)
     }

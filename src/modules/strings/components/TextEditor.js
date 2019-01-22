@@ -2,6 +2,7 @@ import React from 'react'
 import * as stringTool from '../stringTool'
 
 import RecipientView from './RecipientView'
+import TextBlur from './TextBlur';
 
 class TextEditor extends React.Component {
     componentDidMount() {
@@ -54,15 +55,15 @@ class TextEditor extends React.Component {
         const { title, string } = selectedItem
 
         return (
-            <div className="dashboard-edit -top-m">
+            <div className="dashboard-edit -y-m">
                 <div className="dashboard-section-title">EVENT NAME</div>
                 <input
+                    id="title-input"
                     className="tag-input"
                     value={title || ''}
                     onChange={this._onTypeTitle}
                     placeholder="Name the event"
                     type='text'
-                    autoFocus
                 />
                 <div className="-sep"/>
                 <div className="dashboard-section-title">RAW TEXT</div>
@@ -82,6 +83,7 @@ class TextEditor extends React.Component {
                 <div className="-sep"/>
                 <div className="dashboard-section-title">RECIPIENTS</div>
                 <RecipientView {...this.props}/>
+                {!selectedKey && <TextBlur/>}
             </div>
         )
     }

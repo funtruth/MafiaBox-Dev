@@ -81,10 +81,26 @@ class DropdownView extends React.Component{
             case dropdownType.pickRecipient:
             case dropdownType.pickEventVar:
             case dropdownType.pickEventVarProp:
-                props.updatePage = (value) => this.props.updateTopModal(
-                    'attach',
-                    'value',
-                    props.selectedKey,
+                if (props.selectedKey) {
+                    props.updatePage = (value) => this.props.updateTopModal(
+                        'attach',
+                        'value',
+                        props.selectedKey,
+                        value,
+                    )
+                } else {
+                    props.updatePage = (value) => this.props.updateTopModal(
+                        'attach',
+                        value,
+                    )
+                }
+                break
+            case dropdownType.returnTypes:
+                props.updatePage = (value) => this.props.updatePageByPath(
+                    props.pageKey,
+                    props.fieldKey,
+                    props.indexKey,
+                    'data',
                     value,
                 )
                 break

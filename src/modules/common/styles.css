@@ -70,13 +70,11 @@
     margin: 8px 0px;
     background-color: #464646;
 }
-.-top-m {
-    padding-top: 8px;
-}
-.-bot-m {
-    padding-bottom: 8px;
-}
-.-side-m {
+.-x-m {
     padding-left: 10px;
     padding-right: 10px;
+}
+.-y-m {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

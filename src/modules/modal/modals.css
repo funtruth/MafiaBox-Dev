@@ -34,7 +34,7 @@
 
 .modal-options {
     padding: 8px 4px;
-    justify-content: flex-end;
+    align-items: center;
     margin-top: auto;
     background-color: rgba(47, 49, 54, 1);
 }
@@ -49,4 +49,9 @@
     background-color: rgba(54, 57, 64);
     overflow: auto;
 	box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
+}
+
+.error-text {
+    color: #db4757;
+    font: 500 14px Arial;
 }

@@ -42,17 +42,17 @@ class EditTrigger extends React.Component {
                 <div className="row">
                     <div className="border-right -top-m">
                         <div className="dashboard-section-title">VARIABLES</div>
-                        <div className="-side-m">
+                        <div className="-x-m">
                             <LogicNewVars newVars={attachVar}/>
                         </div>
                         <div className="-sep"/>
                         <div className="dashboard-section-title">NEW VARIABLES</div>
-                        <div className="-side-m">
+                        <div className="-x-m">
                             <LogicNewVars newVars={triggerNewVars}/>
                         </div>
                         <div className="-sep"/>
                         <div className="dashboard-section-title">UPDATES ON TRIGGER</div>
-                        <div className="-side-m -bot-m">
+                        <div className="-x-m -y-m">
                             <LogicObject {...iprops}/>
                         </div>
                     </div>

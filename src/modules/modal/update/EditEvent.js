@@ -19,7 +19,6 @@ class EditEvent extends React.Component {
     render() {
         return (
             <div
-                className="height-transition"
                 cancel-appclick="true"
                 style={{
                     display: 'flex',

@@ -21,6 +21,7 @@ export function showModal(key, params={}) {
             switch(key) {
                 case modalType.editEvent:
                 case modalType.editTrigger:
+                case modalType.editToast:
                     _params._attach = params.attach
                     break
                 default:

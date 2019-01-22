@@ -4,8 +4,23 @@ import ModalOptions from '../components/ModalOptions'
 import ToastEditor from '../../strings/components/ToastEditor';
 
 class EditToast extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            errorMessage: '',
+        }
+    }
+
     _onSave = () => {
-        const { isTrigger } = this.props
+        const { isTrigger, attach } = this.props
+        const { string } = attach
+
+        if (string.length === 0) {
+            this.setState({
+                errorMessage: 'Toast message cannot be empty.'
+            })
+            return
+        }
 
         if (isTrigger) {
             this.props.popModalBy(1)
@@ -19,7 +34,6 @@ class EditToast extends React.Component {
     render() {
         return (
             <div
-                className="height-transition"
                 cancel-appclick="true"
                 style={{
                     display: 'flex',
@@ -30,6 +44,7 @@ class EditToast extends React.Component {
             >
                 <ToastEditor {...this.props}/>
                 <ModalOptions
+                    errorMessage={this.state.errorMessage}
                     onSave={this._onSave}
                     onClose={this.props.onClose}
                 />
