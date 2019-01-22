@@ -1,10 +1,10 @@
 import React from 'react'
 
-class InputField extends React.Component{
+class TextField extends React.Component{
     _onChange = e => {
         const { pageInfo, fieldKey } = this.props
         const { pageKey } = pageInfo
-
+        
         this.props.updatePageByPath(pageKey, fieldKey, e.target.value)
     }
 
@@ -12,15 +12,15 @@ class InputField extends React.Component{
         const { value, inputType } = this.props
 
         return (
-            <input
-                className="page-input"
+            <textarea
+                className="field-text-input"
                 value={value || ''}
                 onChange={this._onChange}
-                placeholder="Empty"
+                placeholder="Start typing ..."
                 type={inputType}
             />
         )
     }
 }
 
-export default InputField
+export default TextField

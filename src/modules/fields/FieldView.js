@@ -8,7 +8,8 @@ import { defaultLogic } from '../logic/types';
 
 import { updatePageByPath } from '../page/PageReducer'
 
-import InputField from './components/InputField'
+import TextField from './components/TextField';
+import NumberField from './components/NumberField';
 import TagField from './components/TagField';
 import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
@@ -39,9 +40,9 @@ class FieldView extends React.Component {
         
         switch(fieldInfo.fieldType) {
             case fieldType.text.key:
-                return <InputField {...props} inputType="text"/>
+                return <TextField {...props}/>
             case fieldType.number.key:
-                return <InputField {...props} inputType="number"/>
+                return <NumberField {...props}/>
             case fieldType.code.key:
                 return <CodeField {...props}/>
             case fieldType.logic.key:
@@ -71,12 +72,12 @@ class FieldView extends React.Component {
             fields.map((item, index) => {
                 return (
                     <div key={index}>
+                        <div className="-sep"/>
                         <div className="field-label">
                             <i className={`field-icon ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
                             {item.fieldTitle}
                         </div>
                         {this._renderItem(item)}
-                        <div className="-sep"/>
                     </div>
                 )
             })

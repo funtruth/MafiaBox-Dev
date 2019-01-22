@@ -8,16 +8,14 @@ class PageAbstract extends React.Component{
 
     render() {
         return (
-            <div>
-                <input
-                    className="page-title-input"
-                    value={this.props.pageInfo.title || ''}
-                    onChange={this._onChange}
-                    placeholder="Untitled"
-                    type="text"
-                    autoFocus={true}
-                />
-            </div>
+            <input
+                className="page-title-input"
+                value={this.props.pageInfo.title || ''}
+                onChange={this._onChange}
+                placeholder="Untitled"
+                type="text"
+                autoFocus={true}
+            />
         )
     }
 }

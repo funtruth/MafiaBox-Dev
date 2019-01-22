@@ -3,14 +3,14 @@ import _ from 'lodash'
 
 class TagField extends React.Component{
     _renderItem = (item) => {
-        const { value, fieldKey } = this.props
-        
+        const { value, fieldKey } = this.props  
         const active = fieldKey && item.key === value
 
         return (
             <div
                 key={item.key}
-                className="property-button"
+                className="field-tag"
+
                 style={{
                     backgroundColor: active ?
                         (item.color || '#6279CA') : 'rgba(40, 43, 48,1)',
@@ -23,8 +23,8 @@ class TagField extends React.Component{
     }
 
     _onClick = key => {
-        const { fieldKey, pageInfo } = this.props
-        this.props.updatePageByPath(pageInfo.pageKey, fieldKey, key)
+        const { fieldKey, pageKey } = this.props
+        this.props.updatePageByPath(pageKey, fieldKey, key)
     }
 
     render() {
@@ -34,7 +34,7 @@ class TagField extends React.Component{
         const tags = _.sortBy(data, i => i.index)
         
         return (
-            <div className="row">
+            <div className="row -x-m">
                 {tags.map(this._renderItem)}
             </div>
         )
