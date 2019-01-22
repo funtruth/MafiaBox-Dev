@@ -1,5 +1,23 @@
-import { boardType } from '../board/types'
 import { variableType } from '../logic/types'
+
+export const boardType = {
+    library: {
+        key: 'library',
+        title: 'Library',
+    },
+    phases: {
+        key: 'phases',
+        title: 'Phases',
+    },
+    roles: {
+        key: 'roles',
+        title: 'Roles',
+    },
+    events: {
+        key: 'events',
+        title: 'Events',
+    },
+}
 
 export const fieldType = {
     text: {
@@ -71,7 +89,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
     },
     description1: {
         key: 'description1',
@@ -79,7 +97,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
     },
     description2: {
         key: 'description2',
@@ -87,7 +105,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.text.key,
         fieldTitle: 'Description',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
     },
     code: {
         key: 'code',
@@ -95,7 +113,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.code.key,
         fieldTitle: 'Code Interpretation',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
     },
     args: {
         key: 'args',
@@ -103,7 +121,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.vars.key,
         fieldTitle: 'Required Variables',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
     },
     vars: {
         key: 'vars',
@@ -111,7 +129,7 @@ export const initFieldRepo = {
         index: 0,
         fieldType: fieldType.vars.key,
         fieldTitle: 'Declared Variables',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
     },
     roleTeam: {
         key: 'roleTeam',
@@ -136,7 +154,7 @@ export const initFieldRepo = {
                 title: 'Neutral',
             },
         },
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
     },
     roleCharges: {
         key: 'roleCharges',
@@ -144,7 +162,7 @@ export const initFieldRepo = {
         index: 2,
         fieldType: fieldType.number.key,
         fieldTitle: 'Role Charges',
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
     },
     roleTargetMode: {
         key: 'roleTargetMode',
@@ -177,7 +195,7 @@ export const initFieldRepo = {
                 variableType: variableType.uid.key,
             },
         },
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
     },
     roleActionMode: {
         key: 'roleActionMode',
@@ -205,7 +223,7 @@ export const initFieldRepo = {
                 variableType: variableType.uid.key,
             },
         },
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
     },
     phaseActionMode: {
         key: 'phaseActionMode',
@@ -235,7 +253,7 @@ export const initFieldRepo = {
                 title: 'None',
             },
         },
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
     },
     phaseTriggerMode: {
         key: 'phaseTriggerMode',
@@ -265,7 +283,7 @@ export const initFieldRepo = {
                 variableType: variableType.object.key,
             },
         },
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
     },
     phaseStrings: {
         key: 'phaseStrings',
@@ -273,7 +291,7 @@ export const initFieldRepo = {
         index: 2,
         fieldType: fieldType.strings.key,
         fieldTitle: 'Strings',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
     },
     phaseChoices: {
         key: 'phaseChoices',
@@ -281,6 +299,6 @@ export const initFieldRepo = {
         index: 3,
         fieldType: fieldType.choices.key,
         fieldTitle: 'Phase Choices',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
     }
 }

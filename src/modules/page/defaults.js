@@ -1,11 +1,11 @@
-import { boardType } from '../board/types'
+import { boardType } from '../fields/defaults'
 
 export const initStoryMap = {
     boolean: {
         key: 'boolean',
         index: 0,
         title: 'Boolean',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
         palette: 'palette-yellow',
         default: true,
     },
@@ -13,7 +13,7 @@ export const initStoryMap = {
         key: 'functions',
         index: 1,
         title: 'Functions',
-        boardType: boardType.library,
+        boardType: boardType.library.key,
         palette: 'palette-blue',
         default: true,
     },
@@ -21,7 +21,7 @@ export const initStoryMap = {
         key: 'inProgress',
         index: 0,
         title: 'In Progress',
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
         palette: 'palette-yellow',
         default: true,
     },
@@ -29,7 +29,7 @@ export const initStoryMap = {
         key: 'complete',
         index: 1,
         title: 'Complete',
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
         palette: 'palette-blue',
         default: true,
     },
@@ -37,7 +37,7 @@ export const initStoryMap = {
         key: 'live',
         index: 2,
         title: 'Live',
-        boardType: boardType.roles,
+        boardType: boardType.roles.key,
         palette: 'palette-green',
         default: true,
     },
@@ -45,7 +45,7 @@ export const initStoryMap = {
         key: 'main',
         index: 0,
         title: 'Main',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
         palette: 'palette-yellow',
         default: true,
     },
@@ -53,7 +53,7 @@ export const initStoryMap = {
         key: 'unique',
         index: 1,
         title: 'Unique',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
         palette: 'palette-blue',
         default: true,
     },
@@ -61,23 +61,8 @@ export const initStoryMap = {
         key: 'endState',
         index: 2,
         title: 'End State',
-        boardType: boardType.phases,
+        boardType: boardType.phases.key,
         palette: 'palette-blue',
         default: true,
-    },
-}
-
-export const initBoardRepo = {
-    [boardType.library]: {
-        title: 'Library',
-    },
-    [boardType.roles]: {
-        title: 'Roles',
-    },
-    [boardType.phases]: {
-        title: 'Phases',
-    },
-    [boardType.events]: {
-        title: 'Events',
     },
 }

@@ -12,7 +12,8 @@ export function publishPage(pageKey) {
         if (!pageKey || !gameKey) return
         const pageInfo = pageRepo[pageKey] || {}
 
-        firebaseService.update(`library/${gameKey}/roles/${pageKey}`, pageInfo)
+        firebaseService.update(`dev/${gameKey}/roles/${pageKey}`,
+            JSON.parse(JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾')))
     }
 }
 

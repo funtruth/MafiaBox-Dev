@@ -3,11 +3,12 @@ import * as helpers from '../common/helpers'
 import { modalType } from '../modal/types'
 import { showModal } from '../modal/ModalReducer';
 
-import { initStoryMap, initBoardRepo } from './defaults'
+import { initStoryMap } from './defaults'
+import { boardType } from '../fields/defaults'
 
 const initialState = {
     storyMap: initStoryMap,
-    boardRepo: initBoardRepo,
+    boardRepo: boardType,
     pageRepo: {},
 }
 

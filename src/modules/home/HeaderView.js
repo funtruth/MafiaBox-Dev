@@ -6,7 +6,7 @@ import { navigate, goBack } from '../navigation/NavReducer'
 import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/types'
-import { boardType } from '../board/types'
+import { boardType } from '../fields/defaults'
 import { pathType } from '../navigation/paths'
 
 class HeaderView extends React.Component{
@@ -52,28 +52,28 @@ class HeaderView extends React.Component{
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', boardType: boardType.library, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.library.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathType.roles.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', boardType: boardType.roles, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.roles.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathType.phases.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', boardType: boardType.phases, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.phases.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             case pathType.events.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
-                    { key: 'editTemplate', boardType: boardType.events, title: 'Edit Defaults', icon: 'ion-md-browsers' },
+                    { key: 'editTemplate', boardType: boardType.events.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
             default:
@@ -94,7 +94,7 @@ class HeaderView extends React.Component{
         //adds item to first story of board
         let mapKey
         for (var i=0; i<storyMap.length; i++) {
-            if (storyMap[i].boardType === boardType[this.state.mainPath]) {
+            if (storyMap[i].boardType === this.state.mainPath) {
                 mapKey = storyMap[i].key
                 break
             }
@@ -105,10 +105,10 @@ class HeaderView extends React.Component{
             case 'done':
                 return this.props.goBack()
             case 'addPage':
-                return this.props.addPageToMap(mapKey, boardType[this.state.mainPath])
+                return this.props.addPageToMap(mapKey, this.state.mainPath)
             case 'addStory':
                 return this.props.showModal(modalType.addNewStory, {
-                    boardType: boardType[this.state.mainPath]
+                    boardType: this.state.mainPath
                 })
             case 'createField':
                 return this.props.showModal(modalType.addNewField)

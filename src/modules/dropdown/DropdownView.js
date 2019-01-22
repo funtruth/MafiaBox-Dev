@@ -3,7 +3,7 @@ import './dropdown.css'
 import { connect } from 'react-redux'
 
 import { dropdownType } from './types'
-import { boardType } from '../board/types'
+import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal } from '../modal/ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
@@ -152,11 +152,11 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
 
             case dropdownType.pickPhase:
-                return <SearchBoard {...props} boardType={boardType.phases}/>
+                return <SearchBoard {...props} boardType={boardType.phases.key}/>
             case dropdownType.pickRole:
-                return <SearchBoard {...props} boardType={boardType.roles}/>
+                return <SearchBoard {...props} boardType={boardType.roles.key}/>
             case dropdownType.pickLibrary:
-                return <SearchBoard {...props} boardType={boardType.library}/>
+                return <SearchBoard {...props} boardType={boardType.library.key}/>
             case dropdownType.pickUid:
                 return <PickUid {...props}/>
             case dropdownType.pickUpdate:
