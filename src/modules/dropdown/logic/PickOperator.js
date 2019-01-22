@@ -39,6 +39,7 @@ class PickOperator extends React.Component{
         switch(newValue) {
             case logicType.operator.key:
             case logicType.update.key:
+            case logicType.return.key:
                 valueClone[indexKey].data = {}
                 break
             default:

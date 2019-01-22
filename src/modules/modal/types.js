@@ -12,5 +12,5 @@ export const modalType = {
     saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
     editEvent: 'modalType/edit-event',
-    TextEditor: 'modalType/string-edit',
+    editToast: 'modalType/edit-toast',
 }

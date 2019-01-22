@@ -20,6 +20,7 @@ import TemplateModal from './keys/TemplateModal'
 
 import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
+import EditToast from './return/EditToast'
 import SaveChanges from './components/SaveChanges';
 
 class ModalView extends React.Component {
@@ -45,6 +46,8 @@ class ModalView extends React.Component {
                 return <EditTrigger {...props}/>
             case modalType.editEvent:
                 return <EditEvent {...props}/>
+            case modalType.editToast:
+                return <EditToast {...props}/>
             case modalType.saveChanges:
                 return <SaveChanges {...props}/>
             default:
@@ -104,6 +107,12 @@ class ModalView extends React.Component {
                             value,
                         )
                         break
+                    case modalType.editToast:
+                        props.onEdit = (value) => this.props.updateTopModal(
+                            'attach',
+                            'value',
+                            value,
+                        )
                     default:
                 }
 

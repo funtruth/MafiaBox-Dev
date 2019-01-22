@@ -2,9 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import { returnType } from '../../logic/types'
+import { modalType } from '../../modal/types';
+
+import { showModal } from '../../modal/ModalReducer'
 import { updatePageByPath } from '../../page/PageReducer'
 
-import { returnType } from '../../logic/types'
 
 class ReturnTypes extends React.Component{
     _renderItem = (item) => {
@@ -32,7 +35,15 @@ class ReturnTypes extends React.Component{
     _select = (newValue) => {
         const { pageKey, fieldKey, indexKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', newValue)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', 'value', newValue)
+        this.props.showDropdown()
+    }
+
+    _onToast = () => {
+        const { attach } = this.props
+        this.props.showModal(modalType.editToast, {
+            attach: attach || {},
+        })
         this.props.showDropdown()
     }
 
@@ -40,7 +51,17 @@ class ReturnTypes extends React.Component{
         const data = _.orderBy(returnType, i => i.index)
 
         return (
-            data.map(this._renderItem)
+            <div>
+                {data.map(this._renderItem)}
+                <div className="-sep"/>
+                <div
+                    className="drop-down-menu-option"
+                    onClick={this._onToast}
+                >
+                    <i className="drop-down-menu-icon mdi mdi-bread-slice"></i>
+                    toaster
+                </div>
+            </div>
         )
     }
 }
@@ -49,5 +70,6 @@ export default connect(
     null,
     {
         updatePageByPath,
+        showModal,
     }
 )(ReturnTypes)

@@ -41,7 +41,12 @@ class LogicBoard extends React.Component{
                         vars={fieldInfo.vars}
                     />
                 ))}
-                <CodeField code={code}/>
+                <CodeField
+                    code={code}
+                    options={{
+                        readOnly: 'nocursor',
+                    }}
+                />
             </div>
         )
     }

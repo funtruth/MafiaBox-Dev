@@ -127,14 +127,16 @@ class LogicPanels extends React.Component{
                             pageKey,
                             fieldKey,
                             indexKey,
-                            currentValue: data,
+                            currentValue: data.value,
+                            attach: data,
+                            attachVar: vars,
                         })}
                         style={{
                             color: '#fff',
                             borderRadius: '0px 4px 4px 0px',
                         }}
                     >
-                        {data}
+                        {data.value}
                     </div>
                 )
             default:
