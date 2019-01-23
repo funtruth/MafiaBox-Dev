@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 import * as helpers from '../common/helpers'
 
-import { dropdownType } from '../dropdown/types';
-
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
 import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
 import { showModal } from '../modal/ModalReducer'
@@ -17,11 +15,10 @@ class AppWrapper extends React.Component{
         this.originalTarget = {}
     }
 
-    componentWillMount() {
+    componentDidMount() {
         window.addEventListener('click', this._handleClick)
         window.addEventListener('mousedown', this._handleMouseDown)
         window.addEventListener('contextmenu', this._handleClick)
-        window.addEventListener('scroll', this._handleScroll, true)
         window.addEventListener('keyup', this._onKeyPress)
     }
 
@@ -29,17 +26,7 @@ class AppWrapper extends React.Component{
         window.removeEventListener('click', this._handleClick)
         window.removeEventListener('mousedown', this._handleMouseDown)
         window.removeEventListener('contextmenu', this._handleClick)
-        window.removeEventListener('scroll', this._handleScroll, false)
         window.removeEventListener('keyup', this._onKeyPress)
-    }
-
-    _handleScroll = () => {
-        //TODO not being handled properly, should chek the scroll container
-        const { dropdownKeys } = this.props
-        if (dropdownKeys.length) {
-            if (dropdownKeys[0].key === dropdownType.pickVar) return
-            this.props.showDropdown()
-        }
     }
 
     _onKeyPress = e => {

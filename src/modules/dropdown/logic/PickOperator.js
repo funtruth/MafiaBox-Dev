@@ -14,7 +14,7 @@ class PickOperator extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={this._select.bind(this, item.key)}
+                onClick={this._select.bind(this, item)}
                 style={{
                     backgroundColor: chosen && item.color,
                 }}

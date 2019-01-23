@@ -129,17 +129,23 @@ class ModalView extends React.Component {
                     default:
                 }
 
-                if (props._attach) {
-                    props.onClose = () => {
-                        if (_.isEqual(props.attach, props._attach)) {
-                            this.props.popModalTo(index - 1) 
-                        } else {
-                            this.props.showModal(modalType.saveChanges, {
-                                onSave: props.onSave,
-                                onClose: this.props.showModal,
-                            })
+                switch(props.key) {
+                    case modalType.editTrigger:
+                    case modalType.editEvent:
+                    case modalType.editToast:
+                        props.showSaveDialogue = true
+                        props.onClose = () => {
+                            if (_.isEqual(props.attach, props._attach)) {
+                                this.props.popModalTo(index - 1) 
+                            } else {
+                                this.props.showModal(modalType.saveChanges, {
+                                    onSave: props.onSave,
+                                    onClose: this.props.showModal,
+                                })
+                            }
                         }
-                    }
+                        break
+                    default:
                 }
 
                 return (

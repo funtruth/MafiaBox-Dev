@@ -99,6 +99,7 @@ class DropdownView extends React.Component{
                 }
                 break
             case dropdownType.returnTypes:
+            case dropdownType.pageLib:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,

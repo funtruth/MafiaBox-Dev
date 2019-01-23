@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { dropdownType } from '../types'
-import { variableType } from '../../logic/types'
+import { variableType, panelType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 
@@ -16,7 +16,8 @@ class PickVar extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
             [subfieldKey]: item.key,
-            [`${subfieldKey}.adjust`]: null
+            [`${subfieldKey}Adjust`]: null,
+            [`${subfieldKey}Type`]: panelType.var.key,
         })
         this.props.showDropdown()
     }
@@ -58,7 +59,7 @@ class PickVar extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
             [subfieldKey]: null,
-            [`${subfieldKey}.adjust`]: value,
+            [`${subfieldKey}Adjust`]: value,
         })
         this.props.showDropdown()
     }
@@ -66,7 +67,7 @@ class PickVar extends React.Component{
     _setAdjustment = (value) => {
         const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}.adjust`, value)
+        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', `${subfieldKey}Adjust`, value)
         this.props.showDropdown()
     }
 

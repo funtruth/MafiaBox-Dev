@@ -77,3 +77,6 @@ textarea {
 .app-onclick * {
   pointer-events: none;
 }
+.drop-down-menu-icon {
+  pointer-events: none;
+}

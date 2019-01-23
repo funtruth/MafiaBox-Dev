@@ -34,12 +34,25 @@ export function showDropdown(key, e, params={}, index=0) {
                 if (params.centerViewOnParent) {
 
                 } else {
+                    let offsetX = 0, offsetY = 0
+                    switch(e.type) {
+                        case 'click':
+                            offsetX = e.offsetX
+                            offsetY = e.offsetY
+                            break
+                        case 'mouseover':
+                            offsetX = e.nativeEvent.offsetX
+                            offsetY = e.nativeEvent.offsetY
+                            break
+                        default:
+                    }
+
                     keysClone.push({
                         ...modalKeys[modalKeys.length - 1],
                         ...prev,
                         ...params,
-                        pageX: e.pageX - (e.offsetX || e.nativeEvent.offsetX) - 8,
-                        pageY: e.pageY - (e.offsetY || e.nativeEvent.offsetY) + e.target.offsetHeight,
+                        pageX: e.pageX - offsetX - 8,
+                        pageY: e.pageY - offsetY + e.target.offsetHeight,
                         key,
                     })
                 }

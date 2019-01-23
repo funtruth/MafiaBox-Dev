@@ -2,15 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { updatePageByPath } from '../../page/PageReducer'
+import { panelType } from '../../logic/types'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
-        const { pageKey, fieldKey, indexKey, onSelect } = this.props
+        const { subfieldKey, onSelect } = this.props
         
         if (onSelect) return onSelect(item.pageKey)
 
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', item.pageKey)
+        this.props.updatePage({
+            [subfieldKey]: item.pageKey,
+            [`${subfieldKey}Type`]: panelType.page.key,
+        })
         this.props.showDropdown()
     }
 
@@ -39,7 +42,4 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
     }),
-    {
-        updatePageByPath,
-    }
 )(PageLib)

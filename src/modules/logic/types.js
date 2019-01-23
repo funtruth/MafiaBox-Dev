@@ -32,13 +32,33 @@ export const logicType = {
     },
 }
 
+//helps us process the LogicPanel string
+export const panelType = {
+    page: {
+        key: 'page',
+    },
+    var: {
+        key: 'var',
+    },
+    value: {
+        key: 'value',
+    },
+}
+
 export const operatorType = {
     if: {
         key: 'if',
-        index: 1,
+        index: 0,
         title: 'if',
         icon: 'ion-md-help',
         color: '#af8c40',
+    },
+    else: {
+        key: 'else',
+        index: 1,
+        title: 'else',
+        icon: 'ion-ios-more',
+        color: '#db4757',
     },
     elseif: {
         key: 'elseif',
@@ -46,13 +66,6 @@ export const operatorType = {
         title: 'else if',
         icon: 'ion-ios-more',
         color: '#0e7db4',
-    },
-    else: {
-        key: 'else',
-        index: 3,
-        title: 'else',
-        icon: 'ion-ios-more',
-        color: '#db4757',
     },
 }
 

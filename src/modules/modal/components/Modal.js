@@ -10,9 +10,9 @@ class Modal extends React.Component {
     }
 
     render() {
-        const { children, _attach } = this.props
+        const { children, showSaveDialogue } = this.props
 
-        if (_attach) {
+        if (showSaveDialogue) {
             return (
                 <div id="parent-only" className="modal" onClick={this._onClick}>
                     <div style={{ pointerEvents: 'none' }}>

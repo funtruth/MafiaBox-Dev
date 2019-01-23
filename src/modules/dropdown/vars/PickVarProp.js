@@ -16,7 +16,8 @@ class PickVarProp extends React.Component{
         
         this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
             [subfieldKey]: `${prefix}.${item}`,
-            [`${subfieldKey}.adjust`]: null
+            [`${subfieldKey}Adjust`]: null,
+            [`${subfieldKey}Type`]: null,
         })
         this.props.showDropdown()
     }

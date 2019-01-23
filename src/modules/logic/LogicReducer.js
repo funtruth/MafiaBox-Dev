@@ -6,6 +6,23 @@ var beautify_js = require('js-beautify');
 
 const initialState = {}
 
+//THUNK FUNCTIONS
+export function getCode(fieldInfo, key, library) {
+    const { vars } = fieldInfo
+    return (dispatch, getState) => {
+        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
+    }
+}
+
+export function pageKeyToTitle(pageKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        return pageRepo[pageKey] && pageRepo[pageKey].title
+    }
+}
+
+//HELPERS
 export function getParents(value) {
     let children = {}
 
@@ -20,23 +37,18 @@ export function getParents(value) {
     return _.pickBy(value, (i, key) => !children[key])
 }
 
-export function getCode(fieldInfo, key, library) {
-    const { vars } = fieldInfo
-    return (dispatch, getState) => {
-        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
-    }
-}
-
 function recursive(key, library) {
     if (!key || !library[key] || !library[key].logicType) return
+
     const type = library[key].logicType
-    const opType = library[key].opType
+    const opType = library[key].operatorType
     const data = library[key].data
 
     let codeCurrent = ''
     switch(type) {
         case logicType.operator.key:
-            codeCurrent = convertPropertyFields(`${data.var1||''}${data['var1.adjust']||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data['var2.adjust']||''}`)
+            codeCurrent = convertPropertyFields(`${data.var1||''}${data.var1Adjust||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data.var2Adjust||''}`)
+            console.log({data})
             break
         case logicType.return.key:
             codeCurrent = returnText(data)
