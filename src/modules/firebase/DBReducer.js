@@ -59,7 +59,10 @@ function publishRole(pageInfo) {
                         const parents = getParents(pageInfo[i])
                         batchUpdate[i] = dispatch(getCode(fieldRepo[i], Object.keys(parents)[0], pageInfo[i]))
                             .replace(/(\r\n|\n|\r|\s\s\s\s)/gm,"")
-                        testFunction(batchUpdate[i])
+                        break
+                    case fieldType.playerTag.key:
+                        Object.keys(pageInfo[i]).forEach(j => pageInfo[i][j] && (batchUpdate[j] = true))
+                        batchUpdate[i] = null
                         break
                     default:
                 }
@@ -70,14 +73,13 @@ function publishRole(pageInfo) {
     }
 }
 
-export function testFunction(string) {
+/*function testFunction(string) {
     console.time('hello!')
     for (var i=0; i<100; i++) {
         Function(`return ${string}`)()({lobby: {michael: {}, immy: {},}, gameState: {}, updates: {}}, 'michael', 'immy')
     }
     console.timeEnd('hello!')
-    
-}
+}*/
 
 export default (state = initialState, action) => {
     switch(action.type){

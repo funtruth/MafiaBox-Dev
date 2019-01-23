@@ -102,6 +102,7 @@ export const updateViewType = {
     health: 'updateViewType/health',
     trigger: 'updateViewType/trigger',
     events: 'updateViewType/events',
+    timer: 'updateViewType/timer',
 }
 
 //possible static and dynamic update types

@@ -27,6 +27,7 @@ export const dropdownType = {
     addUpdateField: 'dropdownType/add-update-field',
     pickUpdateValue: 'dropdownType/pick-update-value',
     pickPhase: 'dropdownType/pick-phase',
+    pickTimer: 'dropdownType/pick-timer',
     pickUid: 'dropdownType/pick-uid',
     pickHealth: 'dropdownType/pick-health',
     pickTrigger: 'dropdownType/pick-trigger',

@@ -54,6 +54,9 @@ class UpdateButton extends React.Component{
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
+            case updateViewType.timer:
+                buttonText = `${Math.floor(info.value / 60 / 1000)}m${info.value % 60000 / 1000}s`
+                break
             default:
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }

@@ -17,7 +17,7 @@ class AppWrapper extends React.Component{
         this.originalTarget = {}
     }
 
-    componentDidMount() {
+    componentWillMount() {
         window.addEventListener('click', this._handleClick)
         window.addEventListener('mousedown', this._handleMouseDown)
         window.addEventListener('contextmenu', this._handleClick)

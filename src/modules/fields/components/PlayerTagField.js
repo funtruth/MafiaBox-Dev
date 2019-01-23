@@ -4,10 +4,8 @@ import _ from 'lodash'
 
 class PlayerTagField extends React.Component{
     _renderItem = (item) => {
-        const { value, fieldKey } = this.props
-        
-        //todo i think this is wrong
-        const active = fieldKey && value && value[item.key]
+        const { value } = this.props
+        const active = value && value[item.subfield]
         
         return (
             <div
@@ -17,21 +15,17 @@ class PlayerTagField extends React.Component{
                     backgroundColor: active ?
                         (item.color || '#6279CA') : 'rgba(40, 43, 48,1)',
                 }}
-                onClick={this._onClick.bind(this, item.key)}
+                onClick={this._onClick.bind(this, item)}
             >
                 {item.subfield}
             </div>
         )
     }
 
-    _onClick = tagKey => {
-        const { fieldKey, value, pageInfo } = this.props
-        const { pageKey } = pageInfo
-
-        let dataClone = Object.assign({}, value)
-        dataClone[tagKey] = !dataClone[tagKey]
-
-        this.props.updatePageByPath(pageKey, fieldKey, dataClone)
+    _onClick = (item) => {
+        const { pageKey, fieldKey, value } = this.props
+        const active = value && value[item.subfield]
+        this.props.updatePageByPath(pageKey, fieldKey, item.subfield, !active)
     }
 
     render() {

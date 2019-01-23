@@ -41,6 +41,7 @@ import PickUpdate from './update/PickUpdate'
 import AddUpdateField from './update/AddUpdateField'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
+import PickTimer from './update/PickTimer'
 
 import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
@@ -60,6 +61,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickUpdate:
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
+            case dropdownType.pickTimer:
                 if (props.isTrigger) {
                     props.updatePage = (value) => this.props.updateTopModal(
                         'attach',
@@ -165,6 +167,8 @@ class DropdownView extends React.Component{
                 return <PickBoolean {...props}/>
             case dropdownType.pickHealth:
                 return <PickHealth {...props}/>
+            case dropdownType.pickTimer:
+                return <PickTimer {...props}/>
 
             case dropdownType.addUpdateField:
                 return <AddUpdateField {...props}/>

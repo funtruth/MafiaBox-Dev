@@ -42,6 +42,15 @@ const initialState = {
             action: 'Add',
             variableType: variableType.object.key,
         },
+        'gameState.timer': {
+            key: 'gameState.timer',
+            subfield: 'timer',
+            dropdown: dropdownType.pickTimer,
+            action: 'Select',
+            update: true,
+            mutate: false,
+            variableType: variableType.number.key,
+        },
         'lobby': {
             key: 'lobby',
             subfield: 'lobby',

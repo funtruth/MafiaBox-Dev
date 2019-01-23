@@ -169,6 +169,12 @@ export function getUpdateCode(data) {
                     string = string.concat(`updates[\`events/\${timestamp++}\`]={${eventText(data[field].value[stringKey])}};`)
                 })
                 break
+            case updateViewType.timer:
+                string = string.concat(
+                    `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                    .join('/')}\`]=Date.now() + ${data[field].value};`
+                )
+                break
             default:
         }
     }
