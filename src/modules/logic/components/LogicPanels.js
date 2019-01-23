@@ -79,7 +79,6 @@ class LogicPanels extends React.Component{
                         </div>
                     </div>
                 )
-            case logicType.else.key:
             case logicType.update.key:
                 return (
                     <div

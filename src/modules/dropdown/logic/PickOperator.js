@@ -1,11 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { updatePage } from '../../page/PageReducer'
-import { addItemBelowOf, deleteItem } from '../../fields/FieldReducer'
-
-import { logicType } from '../../logic/types'
+import { logicType, operatorType } from '../../logic/types'
 
 class PickOperator extends React.Component{
     _renderItem = (item) => {
@@ -30,67 +26,34 @@ class PickOperator extends React.Component{
         )
     }
 
-    _select = (newValue) => {
-        const { pageKey, fieldKey, indexKey, pageRepo } = this.props
-        
-        let valueClone = Object.assign({}, pageRepo[pageKey][fieldKey])
+    _select = (item) => {
+        let update = {}
+        update.logicType = this.props.logicType
+        update.operatorType = item.key
 
-        valueClone[indexKey].logicType = newValue
-        switch(newValue) {
+        switch(this.props.logicType) {
             case logicType.operator.key:
             case logicType.update.key:
             case logicType.return.key:
-                valueClone[indexKey].data = {}
+                update.data = {}
                 break
             default:
-                valueClone[indexKey].data = ''
+                update.data = ''
         }
         
-        this.props.updatePage(pageKey, fieldKey, valueClone)
-        this.props.showDropdown()
-    }
-
-    _addItemBelow = () => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
-        this.props.showDropdown()
-    }
-
-    _deleteItem = () => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.deleteItem(indexKey, pageKey, fieldKey)
+        this.props.updatePage(update)
         this.props.showDropdown()
     }
 
     render() {
-        const data = _.orderBy(logicType, i => i.index)
+        const data = _.orderBy(operatorType, i => i.index)
 
         return (
             <div>
                 {data.map(this._renderItem)}
-                <div className="-sep"/>
-                <div className="drop-down-menu-option" onClick={this._addItemBelow}>
-                    <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
-                    Add Logic Below
-                </div>
-                <div className="drop-down-menu-option" onClick={this._deleteItem}>
-                    <i className={`drop-down-menu-icon ion-md-close`}></i>
-                    Delete
-                </div>
             </div>
         )
     }
 }
 
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
-    {
-        updatePage,
-        addItemBelowOf,
-        deleteItem,
-    }
-)(PickOperator)
+export default PickOperator

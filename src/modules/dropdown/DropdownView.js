@@ -14,7 +14,7 @@ import SearchBoard from './update/SearchBoard';
 import ClickMenu from './components/ClickMenu'
 import InputValue from './components/InputValue'
 
-import PickOperator from './logic/PickOperator';
+import PickLogic from './logic/PickLogic';
 import LogicDelete from './logic/LogicDelete'
 import ReturnTypes from './logic/ReturnTypes';
 
@@ -47,6 +47,7 @@ import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
+import PickOperator from './logic/PickOperator';
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
@@ -106,6 +107,15 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
+            case dropdownType.pickLogic:
+            case dropdownType.pickOperator:
+                props.updatePage = (value) => this.props.updatePageByPath(
+                    props.pageKey,
+                    props.fieldKey,
+                    props.indexKey,
+                    value
+                )
+                break
             default:
         }
         
@@ -115,7 +125,9 @@ class DropdownView extends React.Component{
             case dropdownType.inputValue:
                 return <InputValue {...props}/>
                 
-            case dropdownType.showLogic:
+            case dropdownType.pickLogic:
+                return <PickLogic {...props}/>
+            case dropdownType.pickOperator:
                 return <PickOperator {...props}/>
             case dropdownType.deleteLogic:
                 return <LogicDelete {...props}/>

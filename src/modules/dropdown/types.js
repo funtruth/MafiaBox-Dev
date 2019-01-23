@@ -6,7 +6,8 @@ export const dropdownType = {
     pageLib: 'dropdownType/page-lib',
     storyMapLib: 'dropdownType/story-map-lib',
 
-    showLogic: 'dropdownType/show-logic',
+    pickLogic: 'dropdownType/show-logic',
+    pickOperator: 'dropdownType/pick-operator',
     deleteLogic: 'dropdownType/delete-logic',
     returnTypes: 'dropdownType/return-types',
 

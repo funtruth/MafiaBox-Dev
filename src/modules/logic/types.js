@@ -1,4 +1,38 @@
+import { dropdownType } from "../dropdown/types";
+
 export const logicType = {
+    operator: {
+        key: 'operator',
+        index: 0,
+        title: 'operator',
+        icon: 'ion-md-code-working',
+        color: 'Mediumslateblue',
+        dropdown: dropdownType.pickOperator,
+    },
+    function: {
+        key: 'function',
+        index: 1,
+        title: 'function',
+        icon: 'ion-md-pulse',
+        color: '#3864ab',
+    },
+    update: {
+        key: 'update',
+        index: 2,
+        title: 'update',
+        icon: 'mdi mdi-code-braces',
+        color: '#a566b0',
+    },
+    return: {
+        key: 'return',
+        index: 3,
+        title: 'return',
+        icon: 'ion-ios-send',
+        color: '#1e9939',
+    },
+}
+
+export const operatorType = {
     if: {
         key: 'if',
         index: 1,
@@ -19,34 +53,6 @@ export const logicType = {
         title: 'else',
         icon: 'ion-ios-more',
         color: '#db4757',
-    },
-    operator: {
-        key: 'operator',
-        index: 4,
-        title: 'operator',
-        icon: 'ion-md-code-working',
-        color: 'Mediumslateblue',
-    },
-    function: {
-        key: 'function',
-        index: 5,
-        title: 'function',
-        icon: 'ion-md-pulse',
-        color: '#3864ab',
-    },
-    update: {
-        key: 'update',
-        index: 6,
-        title: 'update',
-        icon: 'mdi mdi-code-braces',
-        color: '#a566b0',
-    },
-    return: {
-        key: 'return',
-        index: 7,
-        title: 'return',
-        icon: 'ion-ios-send',
-        color: '#1e9939',
     },
 }
 

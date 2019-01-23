@@ -1,5 +1,5 @@
 import firebaseService from './firebaseService'
-import { boardType as boardTypeObject, fieldType } from '../fields/defaults'
+import { fieldType } from '../fields/defaults'
 import { getParents, getCode } from '../logic/LogicReducer';
 
 const initialState = {
@@ -26,29 +26,14 @@ export function savePageToDB(pageKey) {
 export function publishPage(pageKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
+        const { fieldRepo } = getState().field
+        const { gameKey } = getState().db
         
-        if (!pageKey) return
+        if (!pageKey || !gameKey) return
 
         const pageInfo = pageRepo[pageKey] || {}
         const { boardType } = pageInfo
         
-        switch(boardType) {
-            case boardTypeObject.roles.key:
-                dispatch(publishRole(pageInfo))
-                break
-            default:
-        }
-    }
-}
-
-function publishRole(pageInfo) {
-    return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
-        const { gameKey } = getState().db
-        const { boardType, pageKey } = pageInfo
-
-        if (!gameKey) return
-
         let batchUpdate = Object.assign({}, pageInfo)
         const path = `library/${gameKey}/${boardType}/${pageKey}`
 

@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { logicType, comparisonType, returnType, updateType, updateViewType } from './types'
+import { logicType, comparisonType, returnType, updateType, updateViewType, operatorType } from './types'
 import { stringToCode } from '../strings/stringTool';
 
 var beautify_js = require('js-beautify');
@@ -30,16 +30,11 @@ export function getCode(fieldInfo, key, library) {
 function recursive(key, library) {
     if (!key || !library[key] || !library[key].logicType) return
     const type = library[key].logicType
+    const opType = library[key].opType
     const data = library[key].data
 
     let codeCurrent = ''
     switch(type) {
-        case logicType.if.key:
-            codeCurrent = data
-            break
-        case logicType.elseif.key:
-            codeCurrent = data
-            break
         case logicType.operator.key:
             codeCurrent = convertPropertyFields(`${data.var1||''}${data['var1.adjust']||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data['var2.adjust']||''}`)
             break
@@ -49,26 +44,28 @@ function recursive(key, library) {
         case logicType.update.key:
             codeCurrent = codeCurrent.concat(getUpdateCode(data))
             break
-        case logicType.else.key:
         case logicType.function.key:
         default:
     }
+
     if (!codeCurrent) codeCurrent = ''
 
     let codeBody = ''
     let codeRight = recursive(library[key].right, library) || '\n'
     switch(type) {
-        case logicType.if.key:
-            codeBody = `if(${codeCurrent}){${codeRight}}`
-            break
-        case logicType.else.key:
-            codeBody = `else{${codeRight}}`
-            break
-        case logicType.elseif.key:
-            codeBody = `else if(${codeCurrent}){${codeRight}}`
-            break
         case logicType.operator.key:
-            codeBody = `if(${codeCurrent}){${codeRight}}`
+            switch(opType) {
+                case operatorType.if.key:
+                    codeBody = `if(${codeCurrent}){${codeRight}}`
+                    break
+                case operatorType.else.key:
+                    codeBody = `else{${codeRight}}`
+                    break
+                case operatorType.elseif.key:
+                    codeBody = `else if(${codeCurrent}){${codeRight}}`
+                    break
+                default:
+            }
             break
         case logicType.function.key:
             codeBody = `${codeCurrent};${codeRight};`
