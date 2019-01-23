@@ -12,8 +12,7 @@ class PlayerTagField extends React.Component{
                 key={item.key}
                 className="field-tag"
                 style={{
-                    backgroundColor: active ?
-                        (item.color || '#6279CA') : 'rgba(40, 43, 48,1)',
+                    backgroundColor: active && (item.color || '#6279CA'),
                 }}
                 onClick={this._onClick.bind(this, item)}
             >

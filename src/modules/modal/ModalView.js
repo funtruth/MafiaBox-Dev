@@ -18,10 +18,11 @@ import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
+import SaveChanges from './components/SaveChanges';
 import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
 import EditToast from './return/EditToast'
-import SaveChanges from './components/SaveChanges';
+import EditPriority from './update/EditPriority'
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -42,14 +43,16 @@ class ModalView extends React.Component {
             case modalType.showTemplate:
                 return <TemplateModal {...props}/>
             
+            case modalType.saveChanges:
+                return <SaveChanges {...props}/>
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>
             case modalType.editEvent:
                 return <EditEvent {...props}/>
             case modalType.editToast:
                 return <EditToast {...props}/>
-            case modalType.saveChanges:
-                return <SaveChanges {...props}/>
+            case modalType.editPriority:    
+                return <EditPriority {...props}/>
             default:
                 return null
         }

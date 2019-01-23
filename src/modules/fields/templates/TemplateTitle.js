@@ -4,13 +4,13 @@ import { dropdownType } from '../../dropdown/types';
 
 class TemplateTitle extends React.Component{
     _onChange = e => {
-        const { fieldKey } = this.props.fieldInfo
-        this.props.updateField(fieldKey, 'title', e.target.value)
+        const { key } = this.props.fieldInfo
+        this.props.updateField(key, 'title', e.target.value)
     }
 
     render() {
         const { fieldInfo, boardType } = this.props
-        const { fieldKey, title, fieldType } = fieldInfo
+        const { key, title, fieldType } = fieldInfo
 
         return (
             <div className="row" style={{ alignItems: 'center' }}>
@@ -18,7 +18,7 @@ class TemplateTitle extends React.Component{
                     className="tag-button app-onclick"
                     menu-type={dropdownType.pickFieldType}
                     app-onclick-props={JSON.stringify({
-                        fieldKey,
+                        fieldKey: key,
                     })}
                 >
                     {types[fieldType].title}
@@ -35,7 +35,7 @@ class TemplateTitle extends React.Component{
                     menu-type={dropdownType.templateTitleOptions}
                     app-onclick-props={JSON.stringify({
                         pageKey: boardType,
-                        fieldKey,
+                        fieldKey: key,
                     })}
                     style={{
                         fontSize: 16,

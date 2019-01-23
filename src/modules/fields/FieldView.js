@@ -12,6 +12,7 @@ import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import TagField from './components/TagField';
 import PlayerTagField from './components/PlayerTagField'
+import PriorityField from './components/PriorityField'
 import PropertyField from './components/PropertyField'
 import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
@@ -21,22 +22,22 @@ class FieldView extends React.Component {
     _renderItem = (item) => {
         const { pageKey, pageInfo, fieldRepo, updatePageByPath } = this.props
         const fieldInfo = fieldRepo[item.key]
-        const { fieldKey, data } = fieldInfo
+        const { key, data } = fieldInfo
         
         const props = {
-            key: fieldKey,
+            key,
             pageKey,
-            fieldKey,
-            value: pageInfo[fieldKey],
+            fieldKey: key,
+            value: pageInfo[key],
             data,
             pageInfo,
             fieldInfo,
             updatePageByPath,
         }
-
+        
         //if the field has a default that hasn't been set, update
-        if (!pageInfo[fieldKey] && fieldInfo.fieldType === fieldType.logic.key) {
-            this.props.updatePageByPath(pageInfo.pageKey, fieldKey, defaultLogic)
+        if (!pageInfo[key] && fieldInfo.fieldType === fieldType.logic.key) {
+            this.props.updatePageByPath(pageKey, key, defaultLogic)
         }
         
         switch(fieldInfo.fieldType) {
@@ -52,6 +53,8 @@ class FieldView extends React.Component {
                 return <TagField {...props}/>
             case fieldType.playerTag.key:
                 return <PlayerTagField {...props}/>
+            case fieldType.priority.key:
+                return <PriorityField {...props}/>
             case fieldType.property.key:
                 return <PropertyField {...props}/>
             case fieldType.vars.key:

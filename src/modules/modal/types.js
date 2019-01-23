@@ -13,4 +13,5 @@ export const modalType = {
     editTrigger: 'modalType/edit-trigger',
     editEvent: 'modalType/edit-event',
     editToast: 'modalType/edit-toast',
+    editPriority: 'modalType/edit-priority',
 }

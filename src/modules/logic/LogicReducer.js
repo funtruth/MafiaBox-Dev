@@ -191,7 +191,10 @@ function groupRSSVars(vars) {
             vars[key].rss ? yes.push(key) : no.push(key)
         }
     })
-    return `{${yes.join(', ')}}, ${no.join(', ')}`
+
+    const rssVars = `{${yes.join(', ')}}`
+    const otherVars = (no.length ? `, {${no.join(', ')}}` : '')
+    return `${rssVars}${otherVars}`
 }
 
 export default (state = initialState, action) => {

@@ -45,14 +45,15 @@
     border: none;
     border-radius: 2px;
     padding: 10px 10px;
-    margin: 0px 4px;
+    margin: 2px 8px;
     font: 450 14px Arial;
     color: #c6c6c6;
-    width: 20%;
+    width: 50px;
     outline: none;
     background-color: rgba(47, 49, 54, 1);
     box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px, rgba(15, 15, 15, 0.1) 0px 3px 6px, rgba(15, 15, 15, 0.2) 0px 9px 24px;
     cursor: text;
+    text-align: center;
 }
 
 .field-time-input {
@@ -73,8 +74,13 @@
     border-radius: 4px;
     font: 500 13px Arial;
     color: #fff;
+    background-color: #282b30;
     cursor: pointer;
     margin-right: 6px;
+}
+
+.field-tag:hover {
+    opacity: 0.7;
 }
 
 .field-number-inc {

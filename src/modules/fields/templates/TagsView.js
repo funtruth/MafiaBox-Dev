@@ -6,7 +6,7 @@ import { dropdownType } from '../../dropdown/types';
 
 class TagsView extends React.Component{
     _renderItem = (item, index) => {
-        const { fieldInfo } = this.props
+        const { fieldKey } = this.props
 
         const style = {
             backgroundColor: 'rgba(40, 43, 48,1)',
@@ -14,6 +14,8 @@ class TagsView extends React.Component{
             marginBottom: 6,
         }
         
+        if (!fieldKey) console.warn('There is no fieldKey. TagsView 17.')
+
         return (
             <Draggable key={item.key} draggableId={item.key} index={index}>
                 {(provided, snapshot) => (
@@ -29,7 +31,7 @@ class TagsView extends React.Component{
                         className="property-button app-onclick"
                         menu-type={dropdownType.editTag}
                         app-onclick-props={JSON.stringify({
-                            fieldKey: fieldInfo.fieldKey,
+                            fieldKey: fieldKey,
                             indexKey: index,
                             tagKey: item.key,
                         })}
@@ -43,7 +45,7 @@ class TagsView extends React.Component{
     }
 
     _renderFooter() {
-        const { fieldInfo, add } = this.props
+        const { fieldKey, add } = this.props
 
         const style = {
             backgroundColor: 'hsla(0,0%,100%,.1)',
@@ -60,7 +62,7 @@ class TagsView extends React.Component{
                 className="property-button app-onclick"
                 menu-type={dropdownType.addTag}
                 app-onclick-props={JSON.stringify({
-                    fieldKey: fieldInfo.fieldKey,
+                    fieldKey: fieldKey,
                 })}
                 style={style}
             >
@@ -72,13 +74,13 @@ class TagsView extends React.Component{
 
     render() {
         const { fieldInfo } = this.props
-        const { fieldKey, data } = fieldInfo
+        const { key, data } = fieldInfo
 
         const tags = _.sortBy(data, i => i.index)
         
         return (
             <div>
-                <Droppable droppableId={`TAG/${fieldKey}`} type={`TEMPLATE-TAG/${fieldKey}`} direction="horizontal">
+                <Droppable droppableId={`TAG/${key}`} type={`TEMPLATE-TAG/${key}`} direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}

@@ -81,12 +81,18 @@ export const fieldType = {
         title: 'Player Tags',
         readOnly: true,
     },
+    priority: {
+        key: 'priority',
+        index: 11,
+        icon: 'mdi mdi-priority-high',
+        title: 'Priority',
+        readOnly: true,
+    },
 }
 
 export const initFieldRepo = {
     description0: {
         key: 'description0',
-        fieldKey: 'description0',
         index: 0,
         fieldType: fieldType.text.key,
         title: 'Description',
@@ -94,7 +100,6 @@ export const initFieldRepo = {
     },
     description1: {
         key: 'description1',
-        fieldKey: 'description1',
         index: 0,
         fieldType: fieldType.text.key,
         title: 'Description',
@@ -102,7 +107,6 @@ export const initFieldRepo = {
     },
     description2: {
         key: 'description2',
-        fieldKey: 'description2',
         index: 0,
         fieldType: fieldType.text.key,
         title: 'Description',
@@ -110,7 +114,6 @@ export const initFieldRepo = {
     },
     code: {
         key: 'code',
-        fieldKey: 'code',
         index: 0,
         fieldType: fieldType.code.key,
         title: 'Code Interpretation',
@@ -118,7 +121,6 @@ export const initFieldRepo = {
     },
     args: {
         key: 'args',
-        fieldKey: 'args',
         index: 0,
         fieldType: fieldType.vars.key,
         title: 'Required Variables',
@@ -126,7 +128,6 @@ export const initFieldRepo = {
     },
     vars: {
         key: 'vars',
-        fieldKey: 'vars',
         index: 0,
         fieldType: fieldType.vars.key,
         title: 'Declared Variables',
@@ -134,10 +135,9 @@ export const initFieldRepo = {
     },
     roleTeam: {
         key: 'roleTeam',
-        fieldKey: 'roleTeam',
         index: 1,
         fieldType: fieldType.tag.key,
-        title: 'Role Team',
+        title: 'Team',
         data: {
             town: {
                 key: 'town',
@@ -159,7 +159,6 @@ export const initFieldRepo = {
     },
     playerTags: {
         key: 'playerTags',
-        fieldKey: 'playerTags',
         index: 2,
         fieldType: fieldType.playerTag.key,
         title: 'Player Tags',
@@ -167,18 +166,23 @@ export const initFieldRepo = {
     },
     roleCharges: {
         key: 'roleCharges',
-        fieldKey: 'roleCharges',
         index: 3,
         fieldType: fieldType.number.key,
-        title: 'Role Charges',
+        title: 'Charges',
+        boardType: boardType.roles.key,
+    },
+    priority: {
+        key: 'priority',
+        index: 4,
+        fieldType: fieldType.number.key,
+        title: 'Priority',
         boardType: boardType.roles.key,
     },
     roleTargetMode: {
         key: 'roleTargetMode',
-        fieldKey: 'roleTargetMode',
-        index: 4,
+        index: 5,
         fieldType: fieldType.logic.key,
-        title: 'Role Target Mode',
+        title: 'Target Mode',
         vars: {
             lobby: {
                 key: 'lobby',
@@ -208,10 +212,9 @@ export const initFieldRepo = {
     },
     roleActionMode: {
         key: 'roleActionMode',
-        fieldKey: 'roleActionMode',
-        index: 5,
+        index: 6,
         fieldType: fieldType.logic.key,
-        title: 'Role Action Mode',
+        title: 'Action Mode',
         vars: {
             lobby: {
                 key: 'lobby',
@@ -236,7 +239,6 @@ export const initFieldRepo = {
     },
     phaseActionMode: {
         key: 'phaseActionMode',
-        fieldKey: 'phaseActionMode',
         index: 1,
         fieldType: fieldType.tag.key,
         title: 'Action Mode',
@@ -266,7 +268,6 @@ export const initFieldRepo = {
     },
     phaseTriggerMode: {
         key: 'phaseTriggerMode',
-        fieldKey: 'phaseTriggerMode',
         index: 4,
         fieldType: fieldType.logic.key,
         title: 'Phase Trigger',
@@ -296,7 +297,6 @@ export const initFieldRepo = {
     },
     phaseChoices: {
         key: 'phaseChoices',
-        fieldKey: 'phaseChoices',
         index: 2,
         fieldType: fieldType.choices.key,
         title: 'Phase Choices',

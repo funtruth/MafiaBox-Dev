@@ -26,7 +26,7 @@ class NumberField extends React.Component{
                     className="field-number-input"
                     value={value || ''}
                     onChange={this._onChange}
-                    placeholder="No charges"
+                    placeholder="0"
                     type="number"
                 />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
