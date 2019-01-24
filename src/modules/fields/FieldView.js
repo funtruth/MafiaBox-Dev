@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import _ from 'lodash'
 
 import { fieldType } from './defaults'
-import { defaultLogic } from '../logic/types';
 
 import { updatePageByPath } from '../page/PageReducer'
 
@@ -35,11 +34,6 @@ class FieldView extends React.Component {
             updatePageByPath,
         }
         
-        //if the field has a default that hasn't been set, update
-        if (!pageInfo[key] && fieldInfo.fieldType === fieldType.logic.key) {
-            this.props.updatePageByPath(pageKey, key, defaultLogic)
-        }
-        
         switch(fieldInfo.fieldType) {
             case fieldType.text.key:
                 return <TextField {...props}/>
@@ -62,7 +56,6 @@ class FieldView extends React.Component {
             default:
                 return null
         }
-
     }
 
     render() {

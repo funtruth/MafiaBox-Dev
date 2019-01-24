@@ -1,22 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { logicType } from '../types'
-
-import { addItemToRightOf } from '../../fields/FieldReducer'
+import { addItem } from '../../fields/FieldReducer'
 
 class LogicRightArrow extends React.Component{
     _onClick = () => {
-        const { indexKey, pageKey, fieldKey } = this.props
-        this.props.addItemToRightOf(indexKey, pageKey, fieldKey)
+        const { pageKey, fieldKey, indexKey } = this.props
+        this.props.addItem(pageKey, fieldKey, indexKey, 'right')
     }
 
     render() {
-        const { logicInfo } = this.props
-
-        const hide = logicInfo.logicType === logicType.return.key
-        if (hide) return null
-
         return (
             <div
                 className="logic-button-right"
@@ -32,6 +25,6 @@ class LogicRightArrow extends React.Component{
 export default connect(
     null,
     {
-        addItemToRightOf,
+        addItem,
     }
 )(LogicRightArrow)

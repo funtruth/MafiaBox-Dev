@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { defaultLogic } from '../../logic/types';
-
 import { getCode, getParents } from '../../logic/LogicReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
@@ -30,7 +28,7 @@ class LogicBoard extends React.Component{
                         <LogicBlock
                             {...this.props}
                             key={index}
-                            value={value || defaultLogic}
+                            value={value || {}}
                             index={item}
                             vars={fieldInfo.vars}
                         />

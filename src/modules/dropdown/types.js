@@ -9,6 +9,7 @@ export const dropdownType = {
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
     deleteLogic: 'dropdownType/delete-logic',
+    pickDeleteMode: 'dropdownType/pick-delete-mode',
     returnTypes: 'dropdownType/return-types',
 
     editTag: 'dropdownType/edit-tag',
@@ -74,3 +75,5 @@ export const fuseType = {
         ],
     }
 }
+
+export const DROP_TITLE_HEIGHT = 21

@@ -1,7 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import { logicType } from '../../logic/types'
+import { dropdownType } from '../types'
+
+import { addItem, deleteItem } from '../../fields/FieldReducer'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle';
@@ -64,7 +68,20 @@ class PickLogic extends React.Component{
         this.props.showDropdown()
     }
 
+    _addItem = (dir) => {
+        const { pageKey, fieldKey, indexKey } = this.props
+        this.props.addItem(pageKey, fieldKey, indexKey, dir)
+        this.props.showDropdown()
+    }
+
+    _deleteItem = () => {
+        const { pageKey, fieldKey, indexKey } = this.props
+        this.props.deleteItem(pageKey, fieldKey, indexKey)
+        this.props.showDropdown()
+    }
+
     render() {
+        const { attach } = this.props
         const data = _.orderBy(logicType, i => i.index)
 
         return (
@@ -72,17 +89,33 @@ class PickLogic extends React.Component{
                 <DropTitle>logic types</DropTitle>
                 {data.map(this._renderItem)}
                 <DropTitle>other options</DropTitle>
-                <div className="drop-down-menu-option" onClick={this._addItemBelow}>
-                    <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
-                    Add Logic Below
+                <div className="drop-down-menu-option" onClick={this._addItem.bind(this, 'right')}>
+                    <i className="drop-down-menu-icon mdi mdi-chevron-double-right"></i>
+                    add right
                 </div>
-                <div className="drop-down-menu-option" onClick={this._deleteItem}>
-                    <i className={`drop-down-menu-icon ion-md-close`}></i>
-                    Delete
+                <div className="drop-down-menu-option" onClick={this._addItem.bind(this, 'down')}>
+                    <i className="drop-down-menu-icon mdi mdi-chevron-double-down"></i>
+                    add below
                 </div>
+                {attach.source && <div className="drop-down-menu-option" onClick={this._deleteItem}>
+                    <i className="drop-down-menu-icon mdi mdi-close"></i>
+                    delete
+                </div>}
+                {attach.source && <DropParent
+                    {...this.props}
+                    dropdownType={dropdownType.pickDeleteMode}
+                    icon="mdi mdi-close-network"
+                    text="delete ..."
+                />}
             </div>
         )
     }
 }
 
-export default PickLogic
+export default connect(
+    null,
+    {
+        addItem,
+        deleteItem,
+    }
+)(PickLogic)

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
-import { defaultLogic, logicType } from './types'
+import { logicType } from './types'
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
@@ -26,14 +26,10 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, pageInfo, index, vars,
-            pageRepo, updateRef, } = this.props
+        const { pageKey, fieldKey, pageInfo, index, vars, pageRepo, updateRef, } = this.props
         let { value } = this.props
 
         if (!pageInfo) return null
-        if (!value) {
-            value = defaultLogic
-        }
         
         const rows = [index]
         let pointer = value[index] && value[index].down

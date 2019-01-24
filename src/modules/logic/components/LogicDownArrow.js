@@ -1,29 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { logicType } from '../types'
-
-import { addItemBelowOf } from '../../fields/FieldReducer'
+import { addItem } from '../../fields/FieldReducer'
 
 class LogicDownArrow extends React.Component{
-    _onClick = (hide) => {
-        if (hide) return
+    _onClick = () => {
         const { pageKey, fieldKey, indexKey } = this.props
-        this.props.addItemBelowOf(indexKey, pageKey, fieldKey)
+        this.props.addItem(pageKey, fieldKey, indexKey, 'down')
     }
 
     render() {
-        const { logicInfo } = this.props
-
-        const hide = logicInfo.logicType === logicType.return.key ||
-            logicInfo.logicType === logicType.update.key
-
         return (
             <i 
                 className="ion-md-arrow-dropdown logic-button-down"
-                data-tip={hide ? null : "Add another operator"}
-                onClick={this._onClick.bind(this, hide)}
-                style={{ opacity: hide ? 0.4 : 1 }}
+                data-tip="Add another operator"
+                onClick={this._onClick}
             />
         )
     }
@@ -32,6 +23,6 @@ class LogicDownArrow extends React.Component{
 export default connect(
     null,
     {
-        addItemBelowOf,
+        addItem,
     }
 )(LogicDownArrow)

@@ -51,7 +51,7 @@ class PickVar extends React.Component{
     }
 
     _setConstant = (value) => {
-        this.props.updatePageByPath({
+        this.props.updatePage({
             value: null,
             type: panelType.var.key,
             adjust: value,
@@ -60,7 +60,7 @@ class PickVar extends React.Component{
     }
 
     _setAdjustment = (value) => {
-        this.props.updatePageByPath({
+        this.props.updatePage({
             adjust: value,
         })
         this.props.showDropdown()

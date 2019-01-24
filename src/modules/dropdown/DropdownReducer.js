@@ -1,4 +1,4 @@
-import { dropdownType } from './types'
+import { dropdownType, DROP_TITLE_HEIGHT } from './types'
 
 const initialState = {
     dropdownKeys: [],
@@ -37,7 +37,8 @@ export function showDropdown(key, e, params={}, index=0) {
                         case dropdownType.pickEventVarProp:
                         case dropdownType.returnTypes:
                         case dropdownType.pickOperator:
-                            offsetY = 20.67 //height of a DropTitle
+                        case dropdownType.pickDeleteMode:
+                            offsetY = DROP_TITLE_HEIGHT
                             break
                     default:
                 }

@@ -19,7 +19,7 @@ const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
 //[repo]sitory: holds all the pages keyed by pageKey
-const ADD_PAGE_TO_REPO = 'page/add-page'
+const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'
 
@@ -61,18 +61,25 @@ export function moveStory(startIndex, endIndex) {
 export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        
+        const { fieldRepo } = getState().field
+
         const pageKey = helpers.genUID(boardType, pageRepo)
+
+        //set-up defaults
+        const fieldsWithDefaults = _.filter(fieldRepo, i => i.boardType === boardType && i.default)
+        let defaultInfo = {}
+        fieldsWithDefaults.forEach(i => defaultInfo[i.key] = i.default)
 
         let pageInfo = {
             pageKey,
             boardType,
             storyType: mapKey,
             index: itemCount,
+            ...defaultInfo,
         }
 
         dispatch({
-            type: ADD_PAGE_TO_REPO,
+            type: ADD_PAGE,
             payload: pageInfo
         })
         dispatch(showModal(modalType.showPage, { pageKey }))
@@ -127,15 +134,6 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
         dispatch({
             type: MOVE_PAGE_TO_OTHER_MAP,
             payload: pageRepoClone
-        })
-    }
-}
-
-export function addPageToRepo(obj) {
-    return (dispatch) => {
-        dispatch({
-            type: ADD_PAGE_TO_REPO,
-            payload: obj
         })
     }
 }
@@ -203,7 +201,7 @@ export default (state = initialState, action) => {
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
             
-        case ADD_PAGE_TO_REPO:
+        case ADD_PAGE:
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
         default:

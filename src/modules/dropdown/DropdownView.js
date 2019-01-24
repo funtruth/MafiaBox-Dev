@@ -15,7 +15,7 @@ import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
 
 import PickLogic from './logic/PickLogic';
-import LogicDelete from './logic/LogicDelete'
+import PickDeleteMode from './logic/PickDeleteMode'
 import ReturnTypes from './logic/ReturnTypes';
 
 import EditTag from './template/EditTag'
@@ -134,8 +134,8 @@ class DropdownView extends React.Component{
                 return <PickLogic {...props}/>
             case dropdownType.pickOperator:
                 return <PickOperator {...props}/>
-            case dropdownType.deleteLogic:
-                return <LogicDelete {...props}/>
+            case dropdownType.pickDeleteMode:
+                return <PickDeleteMode {...props}/>
             case dropdownType.returnTypes:
                 return <ReturnTypes {...props}/>
 

@@ -9,7 +9,6 @@ import { initFieldRepo } from './defaults'
 
 const initialState = {
     fieldRepo: initFieldRepo,
-    defaultLogic,
 }
 
 const ADD_FIELD = 'field/add-field'
@@ -233,57 +232,91 @@ export function toggleCollapse(itemKey, pageKey, fieldKey) {
     }
 }
 
-//LogicBoard functions
-export function addItemToRightOf(itemKey, pageKey, fieldKey) {
+/* Deliverables:
+    1. sourceItem
+        a. assign dir to newItem
+    2. newItem
+        a. assign a source (sourceItem)
+        b. assign a sourceDir (sourceItem)
+        c. assign a dir towards affectedItem
+    3. affectedItem
+        a. assign a source (newItem)
+*/
+export function addItem(pageKey, fieldKey, itemKey, dir = 'down') {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
-        let logicMap = { ...defaultLogic }
-        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+        let logicMap = Object.assign({}, pageRepo[pageKey][fieldKey])
         const newItemKey = helpers.genUID('item', logicMap)
 
-        logicMap[newItemKey] = {}
-        logicMap[itemKey].right && (logicMap[newItemKey].right = logicMap[itemKey].right)
-        logicMap[itemKey].right = newItemKey
-
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
-    }
-}
-
-export function addItemBelowOf(itemKey, pageKey, fieldKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        let logicMap = { ...defaultLogic }
-        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
-        const newItemKey = helpers.genUID('item', logicMap)
-        
-        logicMap[newItemKey] = {}
-        logicMap[itemKey].down && (logicMap[newItemKey].down = logicMap[itemKey].down)
-        logicMap[itemKey].down = newItemKey
-        
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
-    }
-}
-
-export function deleteItem(itemKey, pageKey, fieldKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        let logicMap = {}
-        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
-
-        //re-assign parent logic path
-        const { key, type } = maptool.getParent(itemKey, logicMap)
-        key && (logicMap[key][type] = logicMap[itemKey].right || logicMap[itemKey].down || null)
-        
-        //re-assign furthest child in next .right IF removed child has a .down
-        if (logicMap[itemKey].right) {
-            let keyToChange = getLastYChild(logicMap[itemKey].right, logicMap)
-            logicMap[itemKey].down && (logicMap[keyToChange].down = logicMap[itemKey].down)
+        if (!logicMap[itemKey]) {
+            return console.warn('Item does not exist. FieldReducer js.244')
         }
         
-        delete logicMap[itemKey]
+        logicMap[newItemKey] = {
+            source: itemKey, //2a
+            sourceDir: dir, //2b
+        }
+
+       if (logicMap[itemKey][dir]) {
+            logicMap[newItemKey][dir] = logicMap[itemKey][dir] //2c
+            logicMap[logicMap[itemKey][dir]].source = newItemKey //3a
+        }
+
+        logicMap[itemKey][dir] = newItemKey //1a
+
+        dispatch(updatePage(pageKey, fieldKey, logicMap))
+    }
+}
+
+/* Deliverables:
+    1. sourceItem
+        a. assign a dir (deletedItem.sourceDir) towards (rightOfDeletedItem || downOfDeletedItem)
+    2. deletedItem
+        a. delete the item (deletedItem)
+    3. rightOfDeletedItem
+        a. assign a source (sourceItem)
+        b. assign a sourceDir (deletedItem.sourceDir)
+    4. downOfDeletedItem
+        a. assign a source
+            1. if (rightOfDeletedItem) bottomOfRightOfDeletedItem
+            2. else sourceItem
+        b. assign a sourceDir
+            1. if (rightOfDeletedItem) [does not change]
+            2. else deletedItem.sourceDir
+    5. bottomOfRightOfDeletedItem (can be rightOfDeletedItem)
+        a. assign a down dir towards downOfDeletedItem (if downOfDeletedItem exists)
+*/
+export function deleteItem(pageKey, fieldKey, itemKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let logicMap = Object.assign({}, pageRepo[pageKey][fieldKey])
+
+        const { source, sourceDir } = logicMap[itemKey]
+        if (!source || !sourceDir) {
+            return console.warn('There is something wrong. deleteItem, FieldReducer 276.js')
+        }
+
+        logicMap[source][sourceDir] = logicMap[itemKey].right || logicMap[itemKey].down || null //1a
+
+        if (logicMap[itemKey].right) {
+            logicMap[logicMap[itemKey].right].source = source //3a
+            logicMap[logicMap[itemKey].right].sourceDir = sourceDir //3b
+
+            const bottomOfRightOfDeletedItem = getLastYChild(logicMap[itemKey].right, logicMap)
+            if (logicMap[itemKey].down) {
+                logicMap[logicMap[itemKey].down].source = bottomOfRightOfDeletedItem //4a1, 4b1
+                logicMap[bottomOfRightOfDeletedItem].down = logicMap[itemKey].down //5a
+            }
+        } else {
+            if (logicMap[itemKey].down) {
+                logicMap[logicMap[itemKey].down].source = source //4a2
+                logicMap[logicMap[itemKey].down].sourceDir = logicMap[itemKey].sourceDir //4b2
+            }
+        }
+
+        delete logicMap[itemKey] //2a
 
         dispatch(updatePage(pageKey, fieldKey, logicMap))
     }

@@ -1,4 +1,4 @@
-import { variableType } from '../logic/types'
+import { variableType, defaultLogic } from '../logic/types'
 
 export const boardType = {
     library: {
@@ -209,6 +209,7 @@ export const initFieldRepo = {
             },
         },
         boardType: boardType.roles.key,
+        default: defaultLogic,
     },
     roleActionMode: {
         key: 'roleActionMode',
@@ -236,6 +237,7 @@ export const initFieldRepo = {
             },
         },
         boardType: boardType.roles.key,
+        default: defaultLogic,
     },
     phaseActionMode: {
         key: 'phaseActionMode',
@@ -294,6 +296,7 @@ export const initFieldRepo = {
             },
         },
         boardType: boardType.phases.key,
+        default: defaultLogic,
     },
     phaseChoices: {
         key: 'phaseChoices',
