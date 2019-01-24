@@ -58,6 +58,9 @@
 .drop-down-menu-option[chosen=true] {
     color: #fff;
 }
+.drop-down-menu-option[origin=true] {
+    background-color: hsla(0,0%,100%,.1);
+}
 
 .drop-down-menu-option:hover {
     background-color: hsla(0,0%,100%,.1);

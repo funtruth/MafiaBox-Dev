@@ -59,3 +59,17 @@ export function isAppClickCancelled(target) {
 
     return isCancel
 }
+
+export function getDropdownParentTarget(ele) {
+    let nextTarget = ele.parentElement
+
+    while (nextTarget) {
+        if (nextTarget.className === 'drop-down-menu') {
+            return nextTarget
+        } else {
+            nextTarget = nextTarget.parentElement
+        }
+    }
+
+    return null
+}
