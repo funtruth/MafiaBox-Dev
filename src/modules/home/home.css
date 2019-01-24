@@ -75,9 +75,7 @@
 .property-button {
     padding: 6px 12px;
     border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 13px Arial;
     color: #fff;
     cursor: pointer;
     margin-right: 8px;

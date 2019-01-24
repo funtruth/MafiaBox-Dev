@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { logicType, comparisonType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
+import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
 import { stringToCode } from '../strings/stringTool';
 
 var beautify_js = require('js-beautify');

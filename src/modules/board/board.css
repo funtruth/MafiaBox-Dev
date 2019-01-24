@@ -29,9 +29,7 @@
 
     padding: 8px 8px;
     border-radius: 4px;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 15px Arial;
     color: #fff;
     cursor: pointer;
 

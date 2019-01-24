@@ -61,7 +61,7 @@ export const operatorType = {
         key: 'elseif',
         index: 2,
         title: 'else if',
-        icon: 'mdi mdi-arrow-decision-outline',
+        icon: 'mdi mdi-swap-horizontal-variant',
         color: '#0e7db4',
     },
 }

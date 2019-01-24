@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { logicType } from '../types'
+import { logicType, operatorType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 
 import LogicPanel from './LogicPanel'
@@ -12,42 +12,38 @@ class LogicPanels extends React.Component{
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
-                return (
-                    <div>
-                        <LogicPanel
-                            {...this.props}
-                            subfieldKey="var1"
-                            placeholder="variable"
-                            dropdown={dropdownType.pickVar}
-                        />
-                        <LogicPanel
-                            {...this.props}
-                            subfieldKey="comparison"
-                            placeholder="operator"
-                            dropdown={dropdownType.pickComparison}
-                        />
-                        <LogicPanel
-                            {...this.props}
-                            subfieldKey="var2"
-                            placeholder="variable"
-                            dropdown={dropdownType.pickVar}
-                        />
-                    </div>
-                )
+                switch(logicInfo.operatorType) {
+                    case operatorType.if.key:
+                    case operatorType.elseif.key:
+                        return (
+                            <div>
+                                <LogicPanel
+                                    {...this.props}
+                                    subfieldKey="var1"
+                                    placeholder="variable"
+                                    dropdown={dropdownType.pickVar}
+                                />
+                                <LogicPanel
+                                    {...this.props}
+                                    subfieldKey="comparison"
+                                    placeholder="operator"
+                                    dropdown={dropdownType.pickComparison}
+                                />
+                                <LogicPanel
+                                    {...this.props}
+                                    subfieldKey="var2"
+                                    placeholder="variable"
+                                    dropdown={dropdownType.pickVar}
+                                />
+                            </div>
+                        )
+                    case operatorType.else.key:
+                        return <div className="logic-panel-disabled">N/A</div>
+                    default:
+                        return null
+                }
             case logicType.update.key:
-                return (
-                    <div
-                        className="logic-button"
-                        style={{
-                            color: '#868686',
-                            borderRadius: '0px 4px 4px 0px',
-                        }}
-                    >
-                        <div className="text-ellipsis">
-                            N/A
-                        </div>
-                    </div>
-                )
+                return <div className="logic-panel-disabled">N/A</div>
             case logicType.function.key:
                 return (
                     <LogicPanel

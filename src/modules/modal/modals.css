@@ -23,11 +23,9 @@
 
 .modal-subtitle {
     padding: 4px 4px;
-    font-size: 14px;
     line-height: 1.4;
     letter-spacing: 0.2px;
-    font-weight: 400;
-    font-family: Arial;
+    font: 400 14px Arial;
     color: #d6d6d6;
     align-items: flex-end;
 }

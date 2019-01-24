@@ -13,11 +13,21 @@
     cursor: pointer;
 }
 
+.logic-panel-disabled {
+    padding: 4px 12px;
+    font: 500 13px Arial;
+    background-color: rgba(40, 43, 48,1);
+    height: 18px;
+    width: 80px;
+    display: flex;
+    align-items: center;
+    color: #868686;
+    border-radius: 0px 4px 4px 0px;
+}
+
 .logic-button {
     padding: 4px 12px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: Arial;
+    font: 500 13px Arial;
     cursor: pointer;
     background-color: rgba(40, 43, 48,1);
     height: 18px;
