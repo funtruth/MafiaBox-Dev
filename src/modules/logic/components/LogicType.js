@@ -15,11 +15,11 @@ class LogicType extends React.Component{
                     pageKey,
                     fieldKey,
                     indexKey,
+                    attach: logicInfo,
                     currentValue: type,
                 })}
                 style={{
-                    backgroundColor: (type && logicType[type].color) ||
-                        '#767676',
+                    backgroundColor: (type && logicType[type].color) || '#767676',
                     color: '#fff',
                 }}
             />

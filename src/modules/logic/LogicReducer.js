@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { logicType, comparisonType, returnType, updateType, updateViewType, operatorType } from './types'
+import { logicType, comparisonType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
 import { stringToCode } from '../strings/stringTool';
 
 var beautify_js = require('js-beautify');
@@ -14,11 +14,18 @@ export function getCode(fieldInfo, key, library) {
     }
 }
 
-export function pageKeyToTitle(pageKey) {
+//used for LogicPanel to get proper title
+export function dataPropToTitle(obj) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
 
-        return pageRepo[pageKey] && pageRepo[pageKey].title
+        switch(obj.type) {
+            case panelType.page.key:
+                return pageRepo[obj.value] && pageRepo[obj.value].title
+            case panelType.var.key:
+                return applyAdjust(obj)
+            default:
+        }
     }
 }
 
@@ -47,8 +54,7 @@ function recursive(key, library) {
     let codeCurrent = ''
     switch(type) {
         case logicType.operator.key:
-            codeCurrent = convertPropertyFields(`${data.var1||''}${data.var1Adjust||''}${(data.comparison && comparisonType[data.comparison].code)||''}${data.var2||''}${data.var2Adjust||''}`)
-            console.log({data})
+            codeCurrent = convertPropertyFields(`${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`)
             break
         case logicType.return.key:
             codeCurrent = returnText(data)
@@ -122,7 +128,7 @@ function eventText(object) {
         },`:'').join('')
 }
 
-//get return text
+//get return text for logicType.return
 function returnText(data) {
     const { key } = data
     switch(key) {
@@ -131,6 +137,22 @@ function returnText(data) {
         default:
             return returnType[key] ? returnType[key].code : ''
     }
+}
+
+function getCodeFromDataProp(obj = {}) {
+    switch(obj.type) {
+        case panelType.page.key:
+            return `'${obj.value}'`
+        case panelType.var.key:
+            return convertPropertyFields(applyAdjust(obj))
+        default:
+            return ''
+    }
+}
+
+//proper string formatting for .adjust
+function applyAdjust(obj = {}) {
+    return (obj.value && obj.adjust && `${obj.value} + ${obj.adjust}`) || obj.value || obj.adjust || ''
 }
 
 //handles data value formatting on the right side of the =

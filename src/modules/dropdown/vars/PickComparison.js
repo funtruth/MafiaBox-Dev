@@ -1,32 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import { comparisonType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
 
 class PickComparison extends React.Component{
     _renderItem = (item) => {
         const { currentValue } = this.props
 
-        const chosen = typeof currentValue === 'string' && currentValue === item
-
-        const itemStyle = {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-        }
+        const chosen = typeof currentValue === 'string' && currentValue === item.key
 
         return (
             <div
-                key={item}
+                key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
                 onClick={this._select.bind(this, item)}
-                style={itemStyle}
             >
-                {comparisonType[item].title}
+                <i className={`${item.icon} drop-down-menu-icon`}/>
+                {item.title}
                 {chosen ?
                     <i className="ion-md-checkmark"/>
                     :<div style={{ width: 20, marginLeft: 'auto' }}/>
@@ -35,23 +26,19 @@ class PickComparison extends React.Component{
         )
     }
 
-    _select = (value) => {
-        const { pageKey, fieldKey, subfieldKey, indexKey } = this.props
-
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, value)
+    _select = (item) => {
+        this.props.updatePage(item)
         this.props.showDropdown()
     }
 
     render() {
         return (
-            Object.keys(comparisonType).map(this._renderItem)
+            <div>
+                <div className="drop-down-title">PICK COMPARISON</div>
+                {_.toArray(comparisonType).map(this._renderItem)}
+            </div>
         )
     }
 }
 
-export default connect(
-    null,
-    {
-        updatePageByPath,
-    }
-)(PickComparison)
+export default PickComparison

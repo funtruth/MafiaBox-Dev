@@ -63,6 +63,10 @@ class DropdownView extends React.Component{
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
             case dropdownType.pickTimer:
+            case dropdownType.pageLib:
+            case dropdownType.pickVar:
+            case dropdownType.pickVarProp:
+            case dropdownType.pickComparison:
                 if (props.isTrigger) {
                     props.updatePage = (value) => this.props.updateTopModal(
                         'attach',
@@ -99,7 +103,6 @@ class DropdownView extends React.Component{
                 }
                 break
             case dropdownType.returnTypes:
-            case dropdownType.pageLib:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -114,7 +117,7 @@ class DropdownView extends React.Component{
                     props.pageKey,
                     props.fieldKey,
                     props.indexKey,
-                    value
+                    value,
                 )
                 break
             default:

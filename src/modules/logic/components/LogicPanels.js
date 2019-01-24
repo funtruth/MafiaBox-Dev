@@ -1,73 +1,41 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { logicType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 import { comparisonType } from '../types'
 
+import LogicPanel from './LogicPanel'
+
 class LogicPanels extends React.Component{
     //TODO needs major refactoring
     render() {
-        const { logicInfo, pageRepo, vars } = this.props
+        const { logicInfo, vars } = this.props
         const { data } = logicInfo
-        
-        const hasPage = pageRepo[data]
+
+        const hasPage = true
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
                 return (
                     <div>
-                        <div
-                            className="logic-button app-onclick"
-                            menu-type={dropdownType.pickVar}
-                            app-onclick-props={JSON.stringify({
-                                subfieldKey: 'var1',
-                                currentValue: data.var1,
-                                attachVar: vars,
-                            })}
-                            style={{
-                                color: (data.var1 || data.var1Adjust) ? '#fff' : '#868686',
-                                borderRadius: '0px 4px 0px 0px',
-                            }}
-                        >
-                            <div className="text-ellipsis">
-                                {(data.var1 && data.var1Adjust && `${data.var1} + ${data.var1Adjust}`) ||
-                                    data.var1 || data.var1Adjust || 'Variable'}
-                            </div> 
-                        </div>
-                        <div
-                            className="logic-button app-onclick"
-                            menu-type={dropdownType.pickComparison}
-                            app-onclick-props={JSON.stringify({
-                                subfieldKey: 'comparison',
-                                currentValue: data.comparison,
-                            })}
-                            style={{
-                                color: data.comparison ? '#d6d6d6' : '#868686',
-                            }}
-                        >
-                            <div className="text-ellipsis">
-                                {(data.comparison && comparisonType[data.comparison].title) || 'Operator'}
-                            </div>
-                        </div>
-                        <div
-                            className="logic-button app-onclick"
-                            menu-type={dropdownType.pickVar}
-                            app-onclick-props={JSON.stringify({
-                                subfieldKey: 'var2',
-                                currentValue: data.var2,
-                                attachVar: vars,
-                            })}
-                            style={{
-                                color: (data.var2 || data.var2Adjust) ? '#fff' : '#868686',
-                                borderRadius: '0px 0px 4px 0px',
-                            }}
-                        >
-                            <div className="text-ellipsis">
-                                {(data.var2 && data.var2Adjust && `${data.var2} + ${data.var2Adjust}`) ||
-                                    data.var2 || data.var2Adjust || 'Variable'}
-                            </div>
-                        </div>
+                        <LogicPanel
+                            {...this.props}
+                            subfieldKey="var1"
+                            placeholder="variable"
+                            dropdown={dropdownType.pickVar}
+                        />
+                        <LogicPanel
+                            {...this.props}
+                            subfieldKey="comparison"
+                            placeholder="operator"
+                            dropdown={dropdownType.pickComparison}
+                        />
+                        <LogicPanel
+                            {...this.props}
+                            subfieldKey="var2"
+                            placeholder="variable"
+                            dropdown={dropdownType.pickVar}
+                        />
                     </div>
                 )
             case logicType.update.key:
@@ -86,24 +54,12 @@ class LogicPanels extends React.Component{
                 )
             case logicType.function.key:
                 return (
-                    <div
-                        className="logic-button app-onclick"
-                        menu-type={dropdownType.pickLibrary}
-                        app-onclick-props={JSON.stringify({
-                            currentValue: data,
-                        })}
-                        style={{
-                            color: hasPage ? '#fff' : '#868686',
-                            borderRadius: '0px 4px 4px 0px',
-                        }}
-                    >
-                        <div className="text-ellipsis">
-                            {hasPage ? 
-                                pageRepo[data].title
-                                :'Empty'
-                            }
-                        </div>
-                    </div>
+                    <LogicPanel
+                        {...this.props}
+                        subfieldKey="var1"
+                        placeholder="variable"
+                        dropdown={dropdownType.pickLibrary}
+                    />
                 )
             case logicType.return.key:
                 return (
@@ -125,32 +81,9 @@ class LogicPanels extends React.Component{
                     </div>
                 )
             default:
-                return (
-                    <div
-                        className="logic-button app-onclick"
-                        menu-type={dropdownType.showLibrary}
-                        app-onclick-props={JSON.stringify({
-                            currentValue: data,
-                        })}
-                        style={{
-                            color: hasPage ? '#fff' : '#868686',
-                            borderRadius: '0px 4px 4px 0px',
-                        }}
-                    >
-                        <div className="text-ellipsis">
-                            {hasPage ? 
-                                pageRepo[data].title || 'Untitled'
-                                :'Empty'
-                            }
-                        </div>
-                    </div>
-                )
+                return null
         }
     }
 }
 
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
-)(LogicPanels)
+export default LogicPanels

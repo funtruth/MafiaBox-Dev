@@ -24,7 +24,6 @@ class EditPriority extends React.Component {
         const { pageRepo, fieldKey } = this.props
         let data = _.filter(pageRepo, i => i.boardType === boardType.roles.key && i[fieldKey])
         data = _.groupBy(data, i => i[fieldKey])
-        console.log({data})
 
         return (
             <div

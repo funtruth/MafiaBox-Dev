@@ -40,9 +40,6 @@ export const panelType = {
     var: {
         key: 'var',
     },
-    value: {
-        key: 'value',
-    },
 }
 
 export const operatorType = {
@@ -50,21 +47,21 @@ export const operatorType = {
         key: 'if',
         index: 0,
         title: 'if',
-        icon: 'ion-md-help',
+        icon: 'mdi mdi-ray-start-arrow',
         color: '#af8c40',
     },
     else: {
         key: 'else',
         index: 1,
         title: 'else',
-        icon: 'ion-ios-more',
+        icon: 'mdi mdi-redo-variant',
         color: '#db4757',
     },
     elseif: {
         key: 'elseif',
         index: 2,
         title: 'else if',
-        icon: 'ion-ios-more',
+        icon: 'mdi mdi-arrow-decision-outline',
         color: '#0e7db4',
     },
 }
@@ -73,32 +70,38 @@ export const comparisonType = {
     equal: {
         key: 'equal',
         code: '===',
-        title: '===',
+        title: 'equal',
+        icon: 'mdi mdi-equal',
     },
     notEqual: {
         key: 'notEqual',
         code: '!==',
-        title: '!==',
+        title: 'not equal',
+        icon: 'mdi mdi-not-equal',
     },
     greaterThan: {
         key: 'greaterThan',
         code: '>',
-        title: '>',
+        title: 'greater than',
+        icon: 'mdi mdi-greater-than',
     },
     greaterThanOrEqualTo: {
         key: 'greaterThanOrEqualTo',
         code: '>=',
-        title: '≥',
+        title: 'greater than / equal',
+        icon: 'mdi mdi-greater-than-or-equal',
     },
     lessThan: {
         key: 'lessThan',
         code: '<',
-        title: '>',
+        title: 'less than',
+        icon: 'mdi mdi-less-than',
     },
     lessThanOrEqualTo: {
         key: 'lessThanOrEqualTo',
         code: '<=',
-        title: '≤',
+        title: 'less than / equal',
+        icon: 'mdi mdi-less-than-or-equal',
     },
 }
 

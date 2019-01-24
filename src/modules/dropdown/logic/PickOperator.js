@@ -1,13 +1,12 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { logicType, operatorType } from '../../logic/types'
+import { operatorType } from '../../logic/types'
 
 class PickOperator extends React.Component{
     _renderItem = (item) => {
-        const { currentValue } = this.props
-        
-        const chosen = item.key === currentValue
+        const { attach } = this.props
+        const chosen = item.key === attach.operatorType
 
         return (
             <div
@@ -27,21 +26,12 @@ class PickOperator extends React.Component{
     }
 
     _select = (item) => {
-        let update = {}
-        update.logicType = this.props.logicType
-        update.operatorType = item.key
-
-        switch(this.props.logicType) {
-            case logicType.operator.key:
-            case logicType.update.key:
-            case logicType.return.key:
-                update.data = {}
-                break
-            default:
-                update.data = ''
-        }
-        
-        this.props.updatePage(update)
+        const { hoverKey } = this.props
+        this.props.updatePage({
+            data: {},
+            logicType: hoverKey,
+            operatorType: item.key,
+        })
         this.props.showDropdown()
     }
 

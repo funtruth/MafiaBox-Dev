@@ -7,9 +7,8 @@ import DropParent from '../components/DropParent'
 
 class PickLogic extends React.Component{
     _renderItem = (item) => {
-        const { currentValue } = this.props
-        
-        const chosen = item.key === currentValue
+        const { attach } = this.props
+        const chosen = item.key === attach.logicType
 
         if (item.dropdown) {
             return (
@@ -18,7 +17,7 @@ class PickLogic extends React.Component{
                     key={item.key}
                     dropdownType={item.dropdown}
                     params={{
-                        logicType: item.key,
+                        hoverKey: item.key,
                     }}
                     icon={item.icon}
                     text={item.key}
@@ -45,16 +44,19 @@ class PickLogic extends React.Component{
 
     _select = (item) => {
         let update = {}
+        
         update.logicType = item.key
+        update.operatorType = ''
 
         switch(item.key) {
-            case logicType.operator.key:
             case logicType.update.key:
             case logicType.return.key:
                 update.data = {}
                 break
-            default:
+            case logicType.function.key:
                 update.data = ''
+                break
+            default:
         }
         
         this.props.updatePage(update)

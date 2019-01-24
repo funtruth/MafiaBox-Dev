@@ -60,7 +60,7 @@ class ReturnTypes extends React.Component{
                     chosen={toastChosen.toString()}
                     onClick={this._onToast}
                 >
-                    <i className="drop-down-menu-icon mdi mdi-bread-slice"></i>
+                    <i className="drop-down-menu-icon mdi mdi-comment-processing"></i>
                     toaster
                     {toastChosen && <i className="ion-md-checkmark"/>}
                 </div>

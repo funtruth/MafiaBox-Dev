@@ -4,20 +4,18 @@ import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
-import { variableType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
+import { variableType, panelType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 
 class PickVarProp extends React.Component{
     _onSelect = (item) => {
-        const { pageKey, fieldKey, subfieldKey, indexKey, prefix } = this.props
+        const { prefix } = this.props
         
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', {
-            [subfieldKey]: `${prefix}.${item}`,
-            [`${subfieldKey}Adjust`]: null,
-            [`${subfieldKey}Type`]: null,
+        this.props.updatePage({
+            value: `${prefix}.${item}`,
+            adjust: null,
+            type: panelType.var.key,
         })
         this.props.showDropdown()
     }
@@ -70,7 +68,7 @@ class PickVarProp extends React.Component{
             <div style={menuStyle}>
                 {subfields.length ?
                     subfields[0].subfield === '$' ?
-                        uids.map(item => this._renderItem(`$${item.key}`))
+                        uids.map(item => this._renderItem(`${item.key}`))
                         :subfields.map(item => this._renderItem(item.subfield))
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
                         There are no props
@@ -85,7 +83,4 @@ export default connect(
     state => ({
         updateRef: proptool.addPlayerRef(state.template),
     }),
-    {
-        updatePageByPath,
-    }
 )(PickVarProp)

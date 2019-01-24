@@ -6,13 +6,14 @@ import { panelType } from '../../logic/types'
 
 class PageLib extends React.Component{
     _onClick = (item) => {
-        const { subfieldKey, onSelect } = this.props
+        const { onSelect } = this.props
         
         if (onSelect) return onSelect(item.pageKey)
 
         this.props.updatePage({
-            [subfieldKey]: item.pageKey,
-            [`${subfieldKey}Type`]: panelType.page.key,
+            value: item.pageKey,
+            type: panelType.page.key,
+            adjust: '',
         })
         this.props.showDropdown()
     }
