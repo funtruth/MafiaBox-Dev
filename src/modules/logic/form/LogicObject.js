@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import * as proptool from '../proptool'
 
 import LogicExpandable from './LogicExpandable';
@@ -21,8 +20,4 @@ class LogicObject extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        updateRef: proptool.addPlayerRef(state.template),
-    })
-)(LogicObject)
+export default LogicObject

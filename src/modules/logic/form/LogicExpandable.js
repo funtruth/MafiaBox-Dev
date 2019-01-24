@@ -78,9 +78,7 @@ class LogicExpandable extends React.Component{
 }
 
 export default connect(
-    state => ({
-        updateRef: proptool.addPlayerRef(state.template),
-    }),
+    null,
     {
         updatePageByPath,
         updateTopModal,

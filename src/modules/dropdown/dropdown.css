@@ -102,7 +102,8 @@
 
 .drop-down-title {
     font: 600 11px Arial;
-    color: #666;
+    color: #777;
     letter-spacing: 0.6px;
-    padding: 4px 16px;
+    padding: 4px 4px;
+    text-transform: uppercase;
 }

@@ -24,7 +24,7 @@ class DropParent extends React.Component{
         }
     }
 
-    _handleOrigin = e => {
+    _handleOrigin = () => {
         this.setState({
             origin: false,
         })

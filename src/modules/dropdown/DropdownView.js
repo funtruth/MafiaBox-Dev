@@ -11,7 +11,7 @@ import { updatePageByPath } from '../page/PageReducer'
 import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
 
-import ClickMenu from './components/ClickMenu'
+import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
 
 import PickLogic from './logic/PickLogic';
@@ -36,12 +36,13 @@ import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
 import PickBoolean from './update/PickBoolean'
+import PickChoice from './update/PickChoice'
+import PickHealth from './update/PickHealth'
+import PickTimer from './update/PickTimer'
+import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
-import AddUpdateField from './update/AddUpdateField'
-import PickHealth from './update/PickHealth'
-import PickTrigger from './update/PickTrigger';
-import PickTimer from './update/PickTimer'
+import ShowSubfields from './update/ShowSubfields';
 
 import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
@@ -125,7 +126,7 @@ class DropdownView extends React.Component{
         
         switch(props.key) {
             case dropdownType.storyShowMore:
-                return <ClickMenu {...props}/>
+                return <StoryShowMore {...props}/>
             case dropdownType.inputValue:
                 return <InputValue {...props}/>
                 
@@ -169,27 +170,29 @@ class DropdownView extends React.Component{
             case dropdownType.pickComparison:
                 return <PickComparison {...props}/>
 
+            case dropdownType.pickBoolean: 
+                return <PickBoolean {...props}/>
+            case dropdownType.pickChoice:
+                return <PickChoice {...props}/>
+            case dropdownType.pickHealth:
+                return <PickHealth {...props}/>
+            case dropdownType.pickTimer:
+                return <PickTimer {...props}/>
+            case dropdownType.pickTrigger:
+                return <PickTrigger {...props}/>
+            case dropdownType.pickUid:
+                return <PickUid {...props}/>
+            case dropdownType.pickUpdate:
+                return <PickUpdate {...props}/>
             case dropdownType.pickPhase:
                 return <SearchBoard {...props} boardType={boardType.phases.key}/>
             case dropdownType.pickRole:
                 return <SearchBoard {...props} boardType={boardType.roles.key}/>
             case dropdownType.pickLibrary:
                 return <SearchBoard {...props} boardType={boardType.library.key}/>
-            case dropdownType.pickUid:
-                return <PickUid {...props}/>
-            case dropdownType.pickUpdate:
-                return <PickUpdate {...props}/>
-            case dropdownType.pickBoolean: 
-                return <PickBoolean {...props}/>
-            case dropdownType.pickHealth:
-                return <PickHealth {...props}/>
-            case dropdownType.pickTimer:
-                return <PickTimer {...props}/>
+            case dropdownType.showSubfields:
+                return <ShowSubfields {...props}/>
 
-            case dropdownType.addUpdateField:
-                return <AddUpdateField {...props}/>
-            case dropdownType.pickTrigger:
-                return <PickTrigger {...props}/>
 
             case dropdownType.pickEvent:
                 return <PickEvent {...props}/>

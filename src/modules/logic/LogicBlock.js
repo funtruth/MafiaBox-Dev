@@ -8,6 +8,7 @@ import { defaultLogic, logicType } from './types'
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
+import * as proptool from './proptool'
 
 import LogicErrors from './components/LogicErrors'
 import LogicNewVars from './components/LogicNewVars'
@@ -25,7 +26,8 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, pageInfo, pageRepo, index, vars } = this.props
+        const { pageKey, fieldKey, pageInfo, index, vars,
+            pageRepo, updateRef, } = this.props
         let { value } = this.props
 
         if (!pageInfo) return null
@@ -91,7 +93,7 @@ class LogicBlock extends React.Component{
                                                 <LogicPanels {...iprops}/>
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
-                                            {showObject && <LogicObject {...iprops}/>}
+                                            {showObject && <LogicObject {...iprops} updateRef={updateRef}/>}
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>
@@ -124,5 +126,6 @@ class LogicBlock extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
+        updateRef: proptool.addPlayerRef(state.template),
     })
 )(LogicBlock)

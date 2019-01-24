@@ -5,7 +5,7 @@ import { showModal } from '../../modal/ModalReducer'
 
 import { modalType } from '../../modal/types'
 
-class ClickMenu extends React.Component{
+class StoryShowMore extends React.Component{
     _onDelete = () => {
         this.props.showModal(modalType.deleteStory, {
             fieldKey: this.props.fieldKey,
@@ -42,4 +42,4 @@ export default connect(
     {
         showModal,
     }
-)(ClickMenu)
+)(StoryShowMore)

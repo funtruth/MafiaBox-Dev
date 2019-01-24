@@ -9,9 +9,8 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType';
-import DropTitle from '../components/DropTitle';
 
-class PickUid extends React.Component{
+class PickChoice extends React.Component{
     _renderItem = (item) => {
         const { currentValue, updateRef, subfieldKey } = this.props
         const newKey = `${subfieldKey}.${item.key}`
@@ -66,7 +65,6 @@ class PickUid extends React.Component{
             <div>
                 {uids.length ?
                     <div>
-                        <DropTitle>UIDS</DropTitle>
                         {uids.map(this._renderItem)}
                     </div>
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
@@ -87,4 +85,4 @@ export default connect(
     {
         updatePageByPath,
     }
-)(PickUid)
+)(PickChoice)

@@ -6,7 +6,7 @@ const initialState = {
         'gameState': {
             key: 'gameState',
             subfield: 'gameState',
-            dropdown: dropdownType.addUpdateField,
+            dropdown: dropdownType.showSubfields,
             action: 'Add',
             variableType: variableType.object.key,
         },
@@ -61,14 +61,14 @@ const initialState = {
         'lobby.$': {
             key: 'lobby.$',
             subfield: '$',
-            dropdown: dropdownType.addUpdateField,
+            dropdown: dropdownType.showSubfields,
             action: 'Add',
             variableType: variableType.uid.key,
         },
         'lobby.$.$player': {
             key: 'lobby.$.$player',
             subfield: '$player',
-            dropdown: dropdownType.addUpdateField,
+            dropdown: dropdownType.showSubfields,
             action: 'Add',
             variableType: variableType.uid.key,
         },
@@ -98,7 +98,7 @@ const initialState = {
         'role': {
             key: 'role',
             subfield: 'role',
-            dropdown: dropdownType.addUpdateField,
+            dropdown: dropdownType.showSubfields,
             action: 'Add',
             variableType: variableType.object.key,
         },
