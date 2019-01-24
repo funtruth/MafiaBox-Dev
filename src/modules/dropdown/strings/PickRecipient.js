@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import { variableType } from '../../logic/types'
+import DropTitle from '../components/DropTitle';
 
 class PickRecipient extends React.Component{
     _pickUid = (item, info) => {
@@ -38,6 +39,7 @@ class PickRecipient extends React.Component{
         
         return (
             <div>
+                <DropTitle>uids</DropTitle>
                 {uids.length ?
                     <div>
                         {uids.map(item => {

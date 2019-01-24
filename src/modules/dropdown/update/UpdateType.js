@@ -6,6 +6,8 @@ import { updatePageByPath } from '../../page/PageReducer'
 import { updateTopModal } from '../../modal/ModalReducer'
 import { initUpdateType, toggleUpdateType } from '../../template/TemplateReducer'
 
+import DropTitle from '../components/DropTitle'
+
 class UpdateType extends React.Component{
     constructor(props) {
         super(props)
@@ -44,7 +46,7 @@ class UpdateType extends React.Component{
         
         return (
             <div>
-                <div className="-sep"/>
+                <DropTitle>update type</DropTitle>
                 <div
                     className="drop-down-menu-option"
                     chosen={update.toString()}

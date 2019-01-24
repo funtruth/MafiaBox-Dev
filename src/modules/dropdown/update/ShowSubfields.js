@@ -14,15 +14,13 @@ class ShowSubfields extends React.Component{
             <div>
                 <DropTitle>subfields</DropTitle>
                 {items.map(item => {
-                    const newKey = `${subfieldKey}.${item.subfield}`
-
                     return (
                         <DropParent
                             {...this.props}
                             key={item.subfield}
                             dropdownType={item.dropdown}
                             params={{
-                                subfieldKey: newKey,
+                                subfieldKey: `${subfieldKey}.${item.subfield}`,
                             }}
                             text={item.subfield}
                         />

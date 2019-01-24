@@ -6,6 +6,7 @@ import { returnType } from '../../logic/types'
 import { modalType } from '../../modal/types';
 
 import { showModal } from '../../modal/ModalReducer'
+import DropTitle from '../components/DropTitle';
 
 class ReturnTypes extends React.Component{
     _renderItem = (item) => {
@@ -50,8 +51,9 @@ class ReturnTypes extends React.Component{
 
         return (
             <div>
+                <DropTitle>return types</DropTitle>
                 {data.map(this._renderItem)}
-                <div className="-sep"/>
+                <DropTitle>other</DropTitle>
                 <div
                     className="drop-down-menu-option"
                     chosen={toastChosen.toString()}

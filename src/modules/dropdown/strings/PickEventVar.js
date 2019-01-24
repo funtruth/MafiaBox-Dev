@@ -8,6 +8,7 @@ import { variableType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
+import DropTitle from '../components/DropTitle'
 
 class PickVar extends React.Component{
     _onSelect = (item) => {
@@ -18,7 +19,7 @@ class PickVar extends React.Component{
         const { startIndex, endIndex } = range
         
         this.props.updatePage({
-            string: `${string.slice(0, startIndex)}${item.key}${string.slice(endIndex)}`
+            string: `${string.slice(0, startIndex)}${item.key}${string.slice(endIndex)}`,
         })
         this.props.showDropdown()
     }
@@ -68,22 +69,19 @@ class PickVar extends React.Component{
         return (
             <div>
                 {uids.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">UIDS</div>
+                    <DropTitle>uids</DropTitle>
                     <div className="drop-down-scrollable">
                         {uids.map(this._renderItem)}
                     </div>
                 </div>}
                 {otherVars.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">VARIABLES</div>
+                    <DropTitle>variables</DropTitle>
                     <div className="drop-down-scrollable">
                         {otherVars.map(this._renderItem)}
                     </div>
                 </div>}
                 {rssVars.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">GAME VARIABLES</div>
+                    <DropTitle>game variables</DropTitle>
                     <div className="drop-down-scrollable">
                         {rssVars.map(this._renderItem)}
                     </div>

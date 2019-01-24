@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { logicType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
+import DropTitle from '../components/DropTitle';
 
 class PickLogic extends React.Component{
     _renderItem = (item) => {
@@ -68,8 +69,9 @@ class PickLogic extends React.Component{
 
         return (
             <div>
+                <DropTitle>logic types</DropTitle>
                 {data.map(this._renderItem)}
-                <div className="-sep"/>
+                <DropTitle>other options</DropTitle>
                 <div className="drop-down-menu-option" onClick={this._addItemBelow}>
                     <i className={`drop-down-menu-icon ion-ios-bulb`}></i>
                     Add Logic Below

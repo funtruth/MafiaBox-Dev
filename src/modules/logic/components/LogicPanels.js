@@ -72,7 +72,7 @@ class LogicPanels extends React.Component{
                     </div>
                 )
             default:
-                return null
+                return <div className="logic-panel-disabled">select logic ...</div>
         }
     }
 }

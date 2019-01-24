@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { panelType } from '../../logic/types'
+import DropTitle from '../components/DropTitle';
 
 class PageLib extends React.Component{
     _onClick = (item) => {
@@ -24,17 +25,20 @@ class PageLib extends React.Component{
         const pages = _.filter(pageRepo, i => i.storyType === hoverKey)
 
         return (
-            pages.map((item, index) => {
-                return (
-                    <div
-                        key={item.pageKey}
-                        className="drop-down-menu-option"
-                        onClick={this._onClick.bind(this, item)}
-                    >
-                        {pageRepo[item.pageKey].title || 'Untitled'}
-                    </div>
-                )
-            })
+            <div>
+                <DropTitle>page</DropTitle>
+                {pages.map((item, index) => {
+                    return (
+                        <div
+                            key={item.pageKey}
+                            className="drop-down-menu-option"
+                            onClick={this._onClick.bind(this, item)}
+                        >
+                            {pageRepo[item.pageKey].title || 'Untitled'}
+                        </div>
+                    )
+                })}
+            </div>
         )
     }
 }

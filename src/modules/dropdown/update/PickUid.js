@@ -66,7 +66,7 @@ class PickUid extends React.Component{
             <div>
                 {uids.length ?
                     <div>
-                        <DropTitle>UIDS</DropTitle>
+                        <DropTitle>uids</DropTitle>
                         {uids.map(this._renderItem)}
                     </div>
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>

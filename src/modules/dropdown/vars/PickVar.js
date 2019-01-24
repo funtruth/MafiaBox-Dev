@@ -6,6 +6,7 @@ import { variableType, panelType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import BoardLib from '../library/BoardLib';
+import DropTitle from '../components/DropTitle';
 
 class PickVar extends React.Component{
     _onSelect = (item) => {
@@ -81,28 +82,24 @@ class PickVar extends React.Component{
             <div>
                 <BoardLib {...this.props}/>
                 {uids.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">UIDS</div>
+                    <DropTitle>uids</DropTitle>
                     <div className="drop-down-scrollable">
                         {uids.map(this._renderItem)}
                     </div>
                 </div>}
                 {otherVars.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">VARIABLES</div>
+                    <DropTitle>variables</DropTitle>
                     <div className="drop-down-scrollable">
                         {otherVars.map(this._renderItem)}
                     </div>
                 </div>}
                 {rssVars.length > 0 && <div>
-                    <div className="-sep"/>
-                    <div className="drop-down-title">GAME VARIABLES</div>
+                    <DropTitle>game variables</DropTitle>
                     <div className="drop-down-scrollable">
                         {rssVars.map(this._renderItem)}
                     </div>
                 </div>}
-                <div className="-sep"/>
-                <div className="drop-down-title">OTHER OPTIONS</div>
+                <DropTitle>other options</DropTitle>
                 <DropParent
                     {...this.props}
                     dropdownType={dropdownType.inputValue}

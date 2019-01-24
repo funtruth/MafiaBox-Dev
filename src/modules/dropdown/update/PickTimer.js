@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { updateViewType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
+import DropTitle from '../components/DropTitle';
 
 class PickTimer extends React.Component{
     constructor(props) {
@@ -53,7 +54,7 @@ class PickTimer extends React.Component{
         
         return (
             <div>
-                <div className="drop-down-title">SET A TIMER</div>
+                <DropTitle>set a timer</DropTitle>
                 <div className="row" style={{ justifyContent: 'center' }}>
                     <input
                         className="field-time-input border-right"

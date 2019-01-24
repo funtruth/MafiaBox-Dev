@@ -9,6 +9,7 @@ import { variableType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
+import DropTitle from '../components/DropTitle'
 
 class PickEventVarProp extends React.Component{
     _onSelect = (item) => {
@@ -63,19 +64,20 @@ class PickEventVarProp extends React.Component{
         const subfields = proptool.getSubfields(prefix, updateRef)
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
         
-        let menuStyle = {
-            maxHeight: 200,
-            overflow: 'auto',
-        }
-
         return (
-            <div style={menuStyle}>
+            <div className="drop-down-scrollable">
                 {subfields.length ?
                     subfields[0].subfield === '$' ?
-                        uids.map(item => this._renderItem(`${item.key}`))
-                        :subfields.map(item => this._renderItem(item.subfield))
+                        <div>
+                            <DropTitle>uids</DropTitle>
+                            {uids.map(item => this._renderItem(`${item.key}`))}
+                        </div>
+                        :<div>
+                            <DropTitle>subfields</DropTitle>
+                            {subfields.map(item => this._renderItem(item.subfield))}
+                        </div>
                     :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                        There are no props
+                        no subfields found
                     </div>
                 }
             </div>

@@ -6,6 +6,7 @@ import { updateType, updateFamilyType } from '../../logic/types'
 
 import { updatePageByPath } from '../../page/PageReducer'
 import UpdateType from './UpdateType';
+import DropTitle from '../components/DropTitle';
 
 class PickBoolean extends React.Component{
     _select = (item) => {
@@ -43,6 +44,7 @@ class PickBoolean extends React.Component{
         
         return (
             <div>
+                <DropTitle>boolean type</DropTitle>
                 {items.map(this._renderItem)}
                 <UpdateType {...this.props}/>
             </div>

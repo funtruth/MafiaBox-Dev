@@ -7,6 +7,7 @@ import { updateType, updateFamilyType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import UpdateType from './UpdateType'
+import DropTitle from '../components/DropTitle';
 
 class PickHealth extends React.Component{
     _select = (item) => {
@@ -43,6 +44,7 @@ class PickHealth extends React.Component{
 
         return (
             <div>
+                <DropTitle>health type</DropTitle>
                 {items.map(this._renderItem)}
                 <UpdateType {...this.props}/>
             </div>

@@ -1,3 +1,5 @@
+import { dropdownType } from './types'
+
 const initialState = {
     dropdownKeys: [],
 }
@@ -21,41 +23,55 @@ export function showDropdown(key, e, params={}, index=0) {
 
             const prev = keysClone[keysClone.length - 1]
             if (keysClone.length) {
+                let offsetY = 0
+                switch(key) {
+                        case dropdownType.pickUid:
+                        case dropdownType.pickUpdate:
+                        case dropdownType.pickBoolean:
+                        case dropdownType.pickHealth:
+                        case dropdownType.pickTimer:
+                        case dropdownType.pageLib:
+                        case dropdownType.pickVarProp:
+                        case dropdownType.pickComparison:
+                        case dropdownType.pickRecipient:
+                        case dropdownType.pickEventVarProp:
+                        case dropdownType.returnTypes:
+                        case dropdownType.pickOperator:
+                            offsetY = 20.67 //height of a DropTitle
+                            break
+                    default:
+                }
+
                 keysClone.push({
                     ...modalKeys[modalKeys.length - 1],
                     ...prev,
                     ...params,
                     pageX: prev.pageX + e.target.offsetWidth,
-                    pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8,
+                    pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8 - offsetY,
                     key,
                 })
             } else {
-                //TODO wrap dropdown in a view with width = parentWidth and then alignItems:'center'
-                if (params.centerViewOnParent) {
-
-                } else {
-                    let offsetX = 0, offsetY = 0
-                    switch(e.type) {
-                        case 'click':
-                            offsetX = e.offsetX
-                            offsetY = e.offsetY
-                            break
-                        case 'mouseover':
-                            offsetX = e.nativeEvent.offsetX
-                            offsetY = e.nativeEvent.offsetY
-                            break
-                        default:
-                    }
-
-                    keysClone.push({
-                        ...modalKeys[modalKeys.length - 1],
-                        ...prev,
-                        ...params,
-                        pageX: e.pageX - offsetX - 8,
-                        pageY: e.pageY - offsetY + e.target.offsetHeight,
-                        key,
-                    })
+                let offsetX = 0, offsetY = 0
+                switch(e.type) {
+                    case 'click':
+                        offsetX = e.offsetX
+                        offsetY = e.offsetY
+                        break
+                    case 'mouseover':
+                        offsetX = e.nativeEvent.offsetX
+                        offsetY = e.nativeEvent.offsetY
+                        break
+                    default:
                 }
+
+                keysClone.push({
+                    ...modalKeys[modalKeys.length - 1],
+                    ...prev,
+                    ...params,
+                    pageX: e.pageX - offsetX - 8,
+                    pageY: e.pageY - offsetY + e.target.offsetHeight,
+                    key,
+                })
             }
 
             dispatch({

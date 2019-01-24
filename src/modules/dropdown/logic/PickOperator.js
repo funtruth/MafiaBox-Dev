@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import { operatorType } from '../../logic/types'
+import DropTitle from '../components/DropTitle';
 
 class PickOperator extends React.Component{
     _renderItem = (item) => {
@@ -40,6 +41,7 @@ class PickOperator extends React.Component{
 
         return (
             <div>
+                <DropTitle>operator types</DropTitle>
                 {data.map(this._renderItem)}
             </div>
         )

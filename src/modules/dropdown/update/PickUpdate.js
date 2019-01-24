@@ -9,6 +9,7 @@ import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType'
+import DropTitle from '../components/DropTitle';
 
 class PickUpdate extends React.Component{
     _select = (item) => {
@@ -47,7 +48,7 @@ class PickUpdate extends React.Component{
                         type: 'number',
                         showValue: chosen,
                         attach,
-                        onSubmit: this._selectDynamic.bind(this, item)
+                        onSubmit: this._selectDynamic.bind(this, item),
                     }}
                     icon={item.icon}
                     text={item.title}
@@ -76,6 +77,7 @@ class PickUpdate extends React.Component{
 
         return (
             <div>
+                <DropTitle>update type</DropTitle>
                 {items.map(this._renderItem)}
                 <UpdateType {...this.props}/>
             </div>

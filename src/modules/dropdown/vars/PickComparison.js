@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import { comparisonType } from '../../logic/types'
+import DropTitle from '../components/DropTitle';
 
 class PickComparison extends React.Component{
     _renderItem = (item) => {
@@ -34,7 +35,7 @@ class PickComparison extends React.Component{
     render() {
         return (
             <div>
-                <div className="drop-down-title">PICK COMPARISON</div>
+                <DropTitle>pick comparison</DropTitle>
                 {_.toArray(comparisonType).map(this._renderItem)}
             </div>
         )
