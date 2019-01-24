@@ -2,17 +2,13 @@ import React from 'react'
 
 import { logicType } from '../types'
 import { dropdownType } from '../../dropdown/types'
-import { comparisonType } from '../types'
 
 import LogicPanel from './LogicPanel'
 
 class LogicPanels extends React.Component{
-    //TODO needs major refactoring
     render() {
-        const { logicInfo, vars } = this.props
+        const { pageKey, fieldKey, indexKey, logicInfo, vars } = this.props
         const { data } = logicInfo
-
-        const hasPage = true
 
         switch(logicInfo.logicType) {
             case logicType.operator.key:
@@ -67,8 +63,7 @@ class LogicPanels extends React.Component{
                         className="logic-button app-onclick"
                         menu-type={dropdownType.returnTypes}
                         app-onclick-props={JSON.stringify({
-                            subfieldKey: 'return',
-                            currentValue: data.key,
+                            pageKey, fieldKey, indexKey,
                             attach: data,
                             attachVar: vars,
                         })}

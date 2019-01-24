@@ -51,7 +51,7 @@ class PickVar extends React.Component{
                 onClick={this._onSelect.bind(this, item)}
             >
                 {item.key}
-                {chosen && <i className="ion-md-checkmark"/>}
+                <i className="mdi mdi-check"/>
             </div>
         )
     }

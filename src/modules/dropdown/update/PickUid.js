@@ -27,7 +27,7 @@ class PickUid extends React.Component{
                     onClick={this._select.bind(this, item)}
                 >
                     {item.key}
-                    {chosen && <i className="ion-md-checkmark"/>}
+                    <i className="mdi mdi-check"/>
                 </div>
             )
         }

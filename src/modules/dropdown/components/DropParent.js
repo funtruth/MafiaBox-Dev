@@ -25,13 +25,7 @@ class DropParent extends React.Component{
             >
                 {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
                 {text || 'Parent'}
-                <i
-                    className="ion-ios-play"
-                    style={{
-                        marginLeft: 'auto',
-                        pointerEvents: 'none',
-                    }}
-                />
+                <i className="mdi mdi-play"/>
             </div>
         )
     }

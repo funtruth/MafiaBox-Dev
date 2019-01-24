@@ -37,7 +37,7 @@ class PickLogic extends React.Component{
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {chosen && <i className="ion-md-checkmark"/>}
+                <i className="mdi mdi-check"/>
             </div>
         )
     }

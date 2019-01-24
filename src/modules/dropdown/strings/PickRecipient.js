@@ -51,7 +51,7 @@ class PickRecipient extends React.Component{
                                     onClick={this._pickUid.bind(this, item, info)}
                                 >
                                     {item.key}
-                                    {chosen && <i className="ion-md-checkmark"/>}
+                                    <i className="mdi mdi-check"/>
                                 </div>
                             )
                         })}
@@ -68,7 +68,7 @@ class PickRecipient extends React.Component{
                     >
                         <i className="mdi mdi-earth drop-down-menu-icon"/>
                         everyone
-                        {everyone && <i className="ion-md-checkmark"/>}
+                        <i className="mdi mdi-check"/>
                     </div>
                 </div>}
             </div>

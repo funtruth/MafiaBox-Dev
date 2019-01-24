@@ -54,10 +54,18 @@
     font-size: 13px;
     pointer-events: none;
 }
-
-.ion-md-checkmark {
+div[chosen=true] > .mdi-check {
+    opacity: 1;
+}
+.mdi-check {
+    opacity: 0;
     margin-left: auto;
-    width: 20px;
+    padding-left: 10px;
+    text-align: center;
+}
+.mdi-play {
+    margin-left: auto;
+    padding-left: 10px;
     text-align: center;
 }
 

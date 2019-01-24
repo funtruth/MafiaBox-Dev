@@ -2,6 +2,7 @@
     position: fixed;
     background-color: rgba(54, 57, 64, 1);
     border-radius: 4px;
+    min-width: 160px;
     padding: 8px 0px;
     user-select: none;
     z-index: 3;
@@ -35,7 +36,7 @@
 }
 
 .drop-down-menu-option {
-    padding: 6px 20px 6px 15px;
+    padding: 6px 15px 6px 15px;
     cursor: pointer;
     display: flex;
     flex-direction: row;

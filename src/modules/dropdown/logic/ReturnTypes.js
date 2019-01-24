@@ -6,14 +6,11 @@ import { returnType } from '../../logic/types'
 import { modalType } from '../../modal/types';
 
 import { showModal } from '../../modal/ModalReducer'
-import { updatePageByPath } from '../../page/PageReducer'
-
 
 class ReturnTypes extends React.Component{
     _renderItem = (item) => {
-        const { currentValue } = this.props
-        
-        const chosen = item.key === currentValue
+        const { attach } = this.props
+        const chosen = item.key === attach.key
 
         return (
             <div
@@ -24,7 +21,7 @@ class ReturnTypes extends React.Component{
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {chosen && <i className="ion-md-checkmark"/>}
+                <i className="mdi mdi-check"/>
             </div>
         )
     }
@@ -46,10 +43,10 @@ class ReturnTypes extends React.Component{
     }
 
     render() {
-        const { currentValue } = this.props
+        const { attach } = this.props
         const data = _.orderBy(returnType, i => i.index)
 
-        const toastChosen = currentValue === 'toast'
+        const toastChosen = attach.key === 'toast'
 
         return (
             <div>
@@ -62,7 +59,7 @@ class ReturnTypes extends React.Component{
                 >
                     <i className="drop-down-menu-icon mdi mdi-comment-processing"></i>
                     toaster
-                    {toastChosen && <i className="ion-md-checkmark"/>}
+                    <i className="mdi mdi-check"/>
                 </div>
             </div>
         )
@@ -72,7 +69,6 @@ class ReturnTypes extends React.Component{
 export default connect(
     null,
     {
-        updatePageByPath,
         showModal,
     }
 )(ReturnTypes)
