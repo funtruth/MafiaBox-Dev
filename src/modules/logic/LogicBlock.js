@@ -5,6 +5,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
 import { logicType } from './types'
+import { droppableType } from '../common/types';
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
@@ -39,7 +40,7 @@ class LogicBlock extends React.Component{
         
         return (
             <Droppable
-                droppableId={`CIRCUIT/${pageKey}/${fieldKey}/${indexKey}/${this.rng}`}
+                droppableId={`${droppableType.logic}.${pageKey}.${fieldKey}.${indexKey}.${this.rng}`}
                 type={`ROW/${indexKey}`}
             >
                 {(provided, snapshot) => (

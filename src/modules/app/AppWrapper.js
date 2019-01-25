@@ -7,6 +7,7 @@ import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageRe
 import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
 import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
+import { droppableType } from '../common/types';
 
 class AppWrapper extends React.Component{
     constructor(props) {
@@ -91,70 +92,69 @@ class AppWrapper extends React.Component{
     onDragEnd = result => {
         const { source, destination } = result;
         
-        // dropped outside the list
+        //dropped outside the list
         if (!destination) {
             return;
         }
 
+        //if nothing happened
         if (source.index === destination.index && source.droppableId === destination.droppableId) {
             return;
         }
 
-        if (source.droppableId === 'board') {
-            this.props.moveStory(
-                source.index,
-                destination.index,
-            )  
-        } else if (source.droppableId.indexOf('CIRCUIT') !== -1) {
-            if (source.droppableId === destination.droppableId) {
-                let sources = source.droppableId.split('/')
-                let pageKey = sources[1]
-                let fieldKey = sources[2]
-                let origin = sources[3]
+        const sources = source.droppableId.split('.')
+        const dests = destination.droppableId.split('.')
 
-                this.props.moveLogic(
-                    pageKey,
-                    fieldKey,
-                    origin,
+        switch(sources[0]) {
+            case droppableType.board:
+                this.props.moveStory(
                     source.index,
                     destination.index,
                 )
-            }
-        } else if (source.droppableId.indexOf('TEMPLATE') !== -1) {
-            if (source.droppableId === destination.droppableId) {
-                const sources = source.droppableId.split('-')
-                const boardType = sources[1]
-
-                this.props.moveField(
-                    boardType,
+                break
+            case droppableType.logic:
+                if (source.droppableId === destination.droppableId) {
+                    this.props.moveLogic(
+                        sources[1],
+                        sources[2],
+                        sources[3],
+                        source.index,
+                        destination.index,
+                    )
+                } 
+                break
+            case droppableType.template:
+                if (source.droppableId === destination.droppableId) {
+                    this.props.moveField(
+                        sources[1],
+                        source.index,
+                        destination.index,
+                    )
+                }
+                break
+            case droppableType.tag:
+                this.props.moveTagWithinField(
+                    sources[1],
                     source.index,
                     destination.index,
                 )
-            }
-        } else if (source.droppableId.indexOf('TAG') !== -1) {
-            let sources = source.droppableId.split('/')
-            let fieldKey = sources[1]
-
-            this.props.moveTagWithinField(
-                fieldKey,
-                source.index,
-                destination.index,
-            )
-        } else {
-            if (source.droppableId === destination.droppableId) {
-                this.props.movePageWithinMap(
-                    source.droppableId,
-                    source.index,
-                    destination.index,
-                )
-            } else {
-                this.props.movePageToOtherMap(
-                    source.droppableId,
-                    destination.droppableId,
-                    source.index,
-                    destination.index,
-                )
-            }
+                break
+            case droppableType.page:
+                if (source.droppableId === destination.droppableId) {
+                    this.props.movePageWithinMap(
+                        sources[1],
+                        source.index,
+                        destination.index,
+                    )
+                } else {
+                    this.props.movePageToOtherMap(
+                        sources[1],
+                        dests[1],
+                        source.index,
+                        destination.index,
+                    )
+                }
+            default:
         }
     }
 

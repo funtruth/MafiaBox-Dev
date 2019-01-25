@@ -10,6 +10,7 @@ import { updateField } from './FieldReducer'
 
 import TagsView from './templates/TagsView';
 import TemplateTitle from './templates/TemplateTitle';
+import { droppableType } from '../common/types';
 
 class FieldTemplateView extends React.Component {
     _renderItem = (item) => {
@@ -37,7 +38,7 @@ class FieldTemplateView extends React.Component {
             
         return (
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Droppable droppableId={`TEMPLATE-${boardType}`} type="TEMPLATE">
+                <Droppable droppableId={`${droppableType.template}.${boardType}`} type="TEMPLATE">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}

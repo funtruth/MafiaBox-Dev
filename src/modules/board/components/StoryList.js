@@ -8,6 +8,7 @@ import { dropdownType } from '../../dropdown/types'
 
 import { showModal } from '../../modal/ModalReducer'
 import { addPageToMap } from '../../page/PageReducer'
+import { droppableType } from '../../common/types';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -71,7 +72,7 @@ class StoryList extends React.Component{
                     </div>
                     
                 </div>
-                <Droppable droppableId={item.key} type="ITEM">
+                <Droppable droppableId={`${droppableType.page}.${item.key}`} type="ITEM">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}

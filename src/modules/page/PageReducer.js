@@ -43,6 +43,7 @@ export function addStory(title, boardType) {
     }
 }
 
+//TODO this looks like old code / broken
 export function moveStory(startIndex, endIndex) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page

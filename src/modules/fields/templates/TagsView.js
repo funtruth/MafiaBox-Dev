@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 
 import { dropdownType } from '../../dropdown/types';
+import { droppableType } from '../../common/types';
 
 class TagsView extends React.Component{
     _renderItem = (item, index) => {
@@ -80,7 +81,7 @@ class TagsView extends React.Component{
         
         return (
             <div>
-                <Droppable droppableId={`TAG/${key}`} type={`TEMPLATE-TAG/${key}`} direction="horizontal">
+                <Droppable droppableId={`${droppableType.tag}.${key}`} type={`TEMPLATE-TAG/${key}`} direction="horizontal">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}

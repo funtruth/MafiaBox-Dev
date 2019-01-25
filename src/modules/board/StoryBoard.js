@@ -7,6 +7,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { addPageToMap } from '../page/PageReducer'
 
 import StoryList from './components/StoryList'
+import { droppableType } from '../common/types';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -24,15 +25,16 @@ const getListStyle = isDraggingOver => ({
 class StoryBoard extends React.Component{
     render() {
         const { storyMap, pageRepo, boardType } = this.props
-        let filteredStoryMap = _.filter(storyMap, i => i.boardType === boardType)
-        let filteredPageRepo = _.filter(pageRepo, i => i.boardType === boardType)
-        
-        filteredStoryMap = _.sortBy(filteredStoryMap, i => i.index)
-        filteredPageRepo = _.sortBy(filteredPageRepo, i => i.index)
 
+        let filteredStoryMap = _.filter(storyMap, i => i.boardType === boardType)
+        filteredStoryMap = _.sortBy(filteredStoryMap, i => i.index)
+
+        let filteredPageRepo = _.filter(pageRepo, i => i.boardType === boardType)
+        filteredPageRepo = _.sortBy(filteredPageRepo, i => i.index)
+        
         return (
             <div className="story-view">
-                <Droppable droppableId="board" direction="horizontal" type="COLUMN">
+                <Droppable droppableId={droppableType.board} direction="horizontal" type="COLUMN">
                     {(provided, snapshot) => (
                         <div
                             className="scrollable-x"
