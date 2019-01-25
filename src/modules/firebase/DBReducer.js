@@ -1,6 +1,7 @@
+import _ from 'lodash'
 import firebaseService from './firebaseService'
 import { fieldType } from '../fields/defaults'
-import { getParents, getCode } from '../logic/LogicReducer';
+import { getCode } from '../logic/LogicReducer';
 
 const initialState = {
     gameKey: 'mafia',
@@ -41,8 +42,8 @@ export function publishPage(pageKey) {
             if (fieldRepo[i]) {
                 switch(fieldRepo[i].fieldType) {
                     case fieldType.logic.key:
-                        const parents = getParents(pageInfo[i])
-                        batchUpdate[i] = dispatch(getCode(fieldRepo[i], Object.keys(parents)[0], pageInfo[i]))
+                        const origin = _.findKey(pageInfo[i], i => !i.source)
+                        batchUpdate[i] = dispatch(getCode(fieldRepo[i], origin, pageInfo[i]))
                             .replace(/(\r\n|\n|\r|\s\s\s\s)/gm,"")
                         break
                     case fieldType.playerTag.key:

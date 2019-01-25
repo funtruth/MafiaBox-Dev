@@ -29,7 +29,6 @@ class FieldView extends React.Component {
             fieldKey: key,
             value: pageInfo[key],
             data,
-            pageInfo,
             fieldInfo,
             updatePageByPath,
         }

@@ -2,9 +2,7 @@ import React from 'react'
 
 class TextField extends React.Component{
     _onChange = e => {
-        const { pageInfo, fieldKey } = this.props
-        const { pageKey } = pageInfo
-        
+        const { pageKey, fieldKey } = this.props
         this.props.updatePageByPath(pageKey, fieldKey, e.target.value)
     }
 

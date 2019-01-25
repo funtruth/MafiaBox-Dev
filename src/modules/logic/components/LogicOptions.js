@@ -7,14 +7,12 @@ import { toggleCollapse } from '../../fields/FieldReducer'
 
 class LogicOptions extends React.Component{
     _toggleCollapse = () => {
-        const { item, fieldKey, pageInfo } = this.props
-        const { pageKey } = pageInfo
-
+        const { item, fieldKey, pageKey } = this.props
         this.props.toggleCollapse(item, pageKey, fieldKey)
     }
 
     render() {
-        const { item, logicInfo, fieldKey, pageInfo } = this.props
+        const { indexKey, logicInfo, fieldKey, pageKey } = this.props
         const collapsed = logicInfo.collapsed
 
         return (
@@ -23,9 +21,9 @@ class LogicOptions extends React.Component{
                     className="ion-md-close logic-option app-onclick"
                     menu-type={dropdownType.deleteLogic}
                     app-onclick-props={JSON.stringify({
-                        pageKey: pageInfo.pageKey,
+                        pageKey,
                         fieldKey,
-                        indexKey: item,
+                        indexKey,
                     })}
                 />
                 <i 

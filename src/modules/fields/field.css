@@ -79,10 +79,6 @@
     margin-right: 6px;
 }
 
-.field-tag:hover {
-    opacity: 0.7;
-}
-
 .field-number-inc {
     font-size: 16px;
     color: #fff;

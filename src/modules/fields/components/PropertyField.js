@@ -23,8 +23,7 @@ class PropertyField extends React.Component{
     }
 
     _onClick = tagKey => {
-        const { fieldKey, value, pageInfo } = this.props
-        const { pageKey } = pageInfo
+        const { pageKey, fieldKey, value } = this.props
 
         let dataClone = Object.assign({}, value)
         dataClone[tagKey] = !dataClone[tagKey]

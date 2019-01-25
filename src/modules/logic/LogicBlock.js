@@ -26,13 +26,10 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, pageInfo, index, vars, pageRepo, updateRef, } = this.props
-        let { value } = this.props
-
-        if (!pageInfo) return null
+        const { pageKey, fieldKey, indexKey, vars, pageRepo, updateRef, value } = this.props
         
-        const rows = [index]
-        let pointer = value[index] && value[index].down
+        const rows = [indexKey]
+        let pointer = value[indexKey] && value[indexKey].down
 
         while(pointer) {
             if (!value[pointer]) break
@@ -42,8 +39,8 @@ class LogicBlock extends React.Component{
         
         return (
             <Droppable
-                droppableId={`CIRCUIT/${pageKey}/${fieldKey}/${index}/${this.rng}`}
-                type={`ROW/${index}`}
+                droppableId={`CIRCUIT/${pageKey}/${fieldKey}/${indexKey}/${this.rng}`}
+                type={`ROW/${indexKey}`}
             >
                 {(provided, snapshot) => (
                     <div
@@ -100,7 +97,7 @@ class LogicBlock extends React.Component{
                                         {!collapsed && logicInfo.right && 
                                             <LogicBlock 
                                                 {...this.props}
-                                                index={logicInfo.right}
+                                                indexKey={logicInfo.right}
                                                 vars={{
                                                     ...vars,
                                                     ...newVars

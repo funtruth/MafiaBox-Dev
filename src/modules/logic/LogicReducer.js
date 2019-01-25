@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
 import { stringToCode } from '../strings/stringTool';
 
@@ -27,21 +26,6 @@ export function dataPropToTitle(obj) {
             default:
         }
     }
-}
-
-//HELPERS
-export function getParents(value) {
-    let children = {}
-
-    //gather all keys that are children
-    for (var logicKey in value) {
-        if (value[logicKey].right) children[value[logicKey].right] = true
-        if (value[logicKey].down) children[value[logicKey].down] = true
-    }
-    
-    //gather all keys that are parents, set index to the first parent
-    //TODO show variables in chronological order for dropdown PickVar
-    return _.pickBy(value, (i, key) => !children[key])
 }
 
 function recursive(key, library) {
