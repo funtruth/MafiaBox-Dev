@@ -77,7 +77,7 @@ class PickUpdate extends React.Component{
 
         return (
             <div>
-                <DropTitle>update type</DropTitle>
+                <DropTitle>update value</DropTitle>
                 {items.map(this._renderItem)}
                 <UpdateType {...this.props}/>
             </div>

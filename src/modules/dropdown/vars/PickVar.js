@@ -142,7 +142,6 @@ class PickVar extends React.Component{
                     chosen={currentValue.length}
                     onClick={this._setLength}
                     icon="mdi mdi-code-braces"
-                    backgroundColor="#2e6db4"
                 >length</DropOption>
             </div>
         )

@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default class DropTitle extends React.Component {
+export default class DropOption extends React.Component {
     render() {
-        const { show, onClick, icon, children, chosen, backgroundColor } = this.props
+        const { show, onClick, icon, children, chosen } = this.props
         if (!show) return null
 
         return (
@@ -10,9 +10,6 @@ export default class DropTitle extends React.Component {
                 className="drop-down-menu-option"
                 onClick={onClick}
                 chosen={chosen ? "true" : "false"}
-                style={{
-                    backgroundColor: chosen && backgroundColor,
-                }}
             >
                 <i className={`drop-down-menu-icon ${icon}`}></i>
                 {children}

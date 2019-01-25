@@ -9,6 +9,7 @@ import { updateViewType } from '../../logic/types'
 import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from '../library/StoryMapLib';
+import DropTitle from '../components/DropTitle';
 
 class SearchBoard extends React.Component{
     constructor(props) {
@@ -55,27 +56,31 @@ class SearchBoard extends React.Component{
                     placeholder="Search for page"
                     type='text'
                     autoFocus
+                    style={{ marginBottom: 8 }}
                 />
-                <div className="-sep"/>
                 {searchText ?
-                    this.state.results.length ?
-                        this.state.results.map((item, index) => {
-                            return (
-                                <div
-                                    key={item.pageKey}
-                                    className="drop-down-menu-option"
-                                    onClick={this._onSelect.bind(this, item)}
-                                >
-                                    <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
-                                    <div style={{ marginLeft: 'auto', color: '#666666' }}>
-                                        {`${boardRepo[item.boardType].title}`}
+                    <div>
+                        <DropTitle>results</DropTitle>
+                        {this.state.results.length ?
+                            this.state.results.map((item, index) => {
+                                return (
+                                    <div
+                                        key={item.pageKey}
+                                        className="drop-down-menu-option"
+                                        onClick={this._onSelect.bind(this, item)}
+                                    >
+                                        <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
+                                        <div style={{ marginLeft: 'auto', color: '#666666' }}>
+                                            {`${boardRepo[item.boardType].title}`}
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })
-                        :<div className="drop-down-menu-option" empty="true">
-                            No search results found
-                        </div>
+                                )
+                            })
+                            :<div className="drop-down-menu-option" empty="true">
+                                No search results found
+                            </div>
+                        }
+                    </div>
                     :<StoryMapLib
                         {...this.props}
                         hoverKey={boardType}
