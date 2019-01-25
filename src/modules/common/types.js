@@ -10,4 +10,6 @@ export const droppableType = {
     template: 'droppableType/template',
     tag: 'droppableType/tag',
     page: 'droppableType/page',
+    priority: 'droppableType/priority',
+    priorityNew: 'droppableType/priority-new',
 }

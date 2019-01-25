@@ -1,10 +1,35 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import _ from 'lodash'
-
-import { boardType } from '../../fields/defaults'
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import ModalOptions from '../components/ModalOptions'
+import { droppableType } from '../../common/types';
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+    // some basic styles to make the items look a bit nicer
+    userSelect: 'none',
+  
+    // styles we need to apply on draggables
+    ...draggableStyle,
+    cursor: 'pointer',
+    marginRight: 10,
+    whiteSpace: 'nowrap',
+});
+
+const getListStyle = isDraggingOver => ({
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '12px 12px',
+    minWidth: '90%',
+});
+
+const getEmptyListStyle = isDraggingOver => ({
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '12px 12px',
+    minWidth: '90%',
+    transition: 'height 0.15s ease-out',
+    backgroundColor: isDraggingOver && 'red',
+});
 
 class EditPriority extends React.Component {
     _onSave = () => {
@@ -19,22 +44,79 @@ class EditPriority extends React.Component {
         }
     }
     
-    //TODO i want a clean ui/ux for showing priority, currently going to leavei t at a NumberField
     render() {
-        const { pageRepo, fieldKey } = this.props
-        let data = _.filter(pageRepo, i => i.boardType === boardType.roles.key && i[fieldKey])
-        data = _.groupBy(data, i => i[fieldKey])
+        const { attach } = this.props
 
         return (
             <div
                 cancel-appclick="true"
                 style={{
-                    display: 'flex',
-                    flexDirection: 'column',
                     minWidth: 600,
                     width: '75vw',
                 }}
             >
+                <div style={{ overflowX: 'auto' }}>
+                    {attach.map((list, index) => {
+                        return (
+                            <div key={index}>
+                                <div className="row-nowrap -b-t">
+                                    <div className="priority-gutter">
+                                        {index}
+                                    </div>
+                                    <Droppable
+                                        droppableId={`${droppableType.priority}.${index}`}
+                                        direction="horizontal"
+                                    >
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                style={getListStyle(snapshot.isDraggingOver)}
+                                            >
+                                                {list.map((item, index) => (
+                                                    <Draggable
+                                                        key={item.pageKey}
+                                                        draggableId={item.pageKey}
+                                                        index={index}
+                                                    >
+                                                        {(provided, snapshot) => (
+                                                            <div
+                                                                className="story-tag"
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                                style={getItemStyle(
+                                                                    snapshot.isDragging,
+                                                                    provided.draggableProps.style
+                                                                )}
+                                                            >
+                                                                {item.title || 'Untitled'}
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                                {provided.placeholder}
+                                            </div>
+                                        )}
+                                    </Droppable>
+                                </div>
+                                <div className="row-nowrap -b-t">
+                                    <div className="priority-gutter"/>
+                                    <Droppable
+                                        droppableId={`${droppableType.priorityNew}.${index}`}
+                                        direction="horizontal"
+                                    >
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                style={getEmptyListStyle(snapshot.isDraggingOver)}
+                                            />
+                                        )}
+                                    </Droppable>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
                 <ModalOptions
                     onSave={this._onSave}
                     onClose={this.props.onClose}
@@ -44,8 +126,4 @@ class EditPriority extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    })
-)(EditPriority)
+export default EditPriority

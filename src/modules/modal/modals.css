@@ -1,7 +1,6 @@
 .modal {
     animation: fadein 0.25s;
     -webkit-animation: fadein 0.25s;
-
     position: absolute;
     top: 20px;
     bottom: 0;
@@ -9,7 +8,6 @@
     right: 0;
     background-color: rgba(10, 10, 10, 0.4);
     z-index: 2;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,9 +40,8 @@
     -webkit-animation: scalein 0.2s;
     user-select: none;
     z-index: 2;
-
     border-radius: 4px;
-    background-color: rgba(54, 57, 64);
+    background-color: #363940;
     overflow: auto;
 	box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
 }

@@ -32,7 +32,7 @@ class PlayerTagField extends React.Component{
         const tags = _.filter(playerRef, i => i.tag)
         
         return (
-            <div className="row -x-m">
+            <div className="row -x-p">
                 {tags.map(this._renderItem)}
             </div>
         )

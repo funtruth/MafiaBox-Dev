@@ -43,7 +43,7 @@ class ToastEditor extends React.Component {
         const { string } = selectedItem
 
         return (
-            <div className="dashboard-edit -y-m" style={{ width: '100%' }}>
+            <div className="dashboard-edit -y-p" style={{ width: '100%' }}>
                 <div className="dashboard-section-title">RAW TEXT</div>
                 <div
                     id="input"

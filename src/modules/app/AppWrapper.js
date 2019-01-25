@@ -3,11 +3,20 @@ import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 import * as helpers from '../common/helpers'
 
+import { droppableType } from '../common/types';
+
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
-import { moveLogic, moveField, moveTagToOtherField, moveTagWithinField } from '../fields/FieldReducer'
+import {
+    moveLogic,
+    moveField,
+    moveTagToOtherField,
+    moveTagWithinField,
+    moveRoleWithinPrio,
+    moveRoleToOtherPrio,
+    moveRoleToEmpty,
+} from '../fields/FieldReducer'
 import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
-import { droppableType } from '../common/types';
 
 class AppWrapper extends React.Component{
     constructor(props) {
@@ -154,6 +163,29 @@ class AppWrapper extends React.Component{
                         destination.index,
                     )
                 }
+                break
+            case droppableType.priority:
+                if (dests[0] === droppableType.priorityNew) {
+                    this.props.moveRoleToEmpty(
+                        parseInt(sources[1]),
+                        parseInt(dests[1]),
+                        source.index,
+                    )
+                } else if (sources[1] === dests[1]) {
+                    this.props.moveRoleWithinPrio(
+                        sources[1],
+                        source.index,
+                        destination.index,
+                    )
+                } else {
+                    this.props.moveRoleToOtherPrio(
+                        sources[1],
+                        dests[1],
+                        source.index,
+                        destination.index,
+                    )
+                }
+                break
             default:
         }
     }
@@ -182,5 +214,8 @@ export default connect(
         moveField,
         moveTagToOtherField,
         moveTagWithinField,
+        moveRoleWithinPrio,
+        moveRoleToOtherPrio,
+        moveRoleToEmpty,
     }
 )(AppWrapper)

@@ -1,11 +1,13 @@
 import * as helpers from '../common/helpers'
 import * as maptool from '../logic/maptool'
 import _ from 'lodash'
-import { updatePage } from '../page/PageReducer'
 
-import { fieldType } from './defaults'
+import { fieldType, boardType as _boardType } from './defaults'
 import { defaultLogic } from '../logic/types'
 import { initFieldRepo } from './defaults'
+
+import { updatePage } from '../page/PageReducer'
+import { updateTopModal } from '../modal/ModalReducer'
 
 const initialState = {
     fieldRepo: initFieldRepo,
@@ -75,8 +77,10 @@ export function moveField(boardType, startIndex, endIndex) {
         const { fieldRepo } = getState().field
         
         //get items in fieldRepo that may be affected
-        let relatedRepo = _.filter(fieldRepo, i => i.boardType === boardType)
-        relatedRepo = _.sortBy(relatedRepo, i => i.index)
+        let relatedRepo = _(fieldRepo)
+            .filter(i => i.boardType === boardType)
+            .sortBy(i => i.index)
+            .value()
 
         //move the item within the array
         const [removed] = relatedRepo.splice(startIndex, 1)
@@ -381,6 +385,60 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
         delete valueClone[rows[rows.length - 1]].down
         
         dispatch(updatePage(pageKey, fieldKey, valueClone))
+    }
+}
+
+//Role priority sort
+export function rolePrioritySort(pageRepo) {
+    return _(pageRepo)
+        .filter(i => i.boardType === _boardType.roles.key)
+        .groupBy(i => i.priority)
+        .sortBy((i, k) => k)
+        .value()
+}
+
+export function moveRoleWithinPrio(prio, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { modalKeys } = getState().modal
+        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+
+        const [removed] = attachClone[prio].splice(startIndex, 1)
+        attachClone[prio].splice(endIndex, 0, removed)
+        
+        dispatch(updateTopModal(
+            'attach',
+            attachClone,
+        ))
+    }
+}
+
+export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { modalKeys } = getState().modal
+        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+
+        let [removed] = attachClone[startPrio].splice(startIndex, 1)
+        attachClone[endPrio].splice(endIndex, 0, removed)
+
+        dispatch(updateTopModal(
+            'attach',
+            attachClone,
+        ))
+    }
+}
+
+export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
+    return (dispatch, getState) => {
+        const { modalKeys } = getState().modal
+        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+
+        let [removed] = attachClone[startPrio].splice(startIndex, 1)
+        attachClone.splice(endPrio + 1, 0, [removed])
+
+        dispatch(updateTopModal(
+            'attach',
+            attachClone,
+        ))
     }
 }
 

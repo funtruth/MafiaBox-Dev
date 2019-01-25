@@ -32,7 +32,7 @@ class TagField extends React.Component{
         const tags = _.sortBy(data, i => i.index)
         
         return (
-            <div className="row -x-m">
+            <div className="row -x-p">
                 {tags.map(this._renderItem)}
             </div>
         )

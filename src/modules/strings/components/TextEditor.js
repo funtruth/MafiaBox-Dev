@@ -55,7 +55,7 @@ class TextEditor extends React.Component {
         const { title, string } = selectedItem
 
         return (
-            <div className="dashboard-edit -y-m">
+            <div className="dashboard-edit -y-p">
                 <div className="dashboard-section-title">EVENT NAME</div>
                 <input
                     id="title-input"

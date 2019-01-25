@@ -174,7 +174,7 @@ export const initFieldRepo = {
     priority: {
         key: 'priority',
         index: 4,
-        fieldType: fieldType.number.key,
+        fieldType: fieldType.priority.key,
         title: 'Priority',
         boardType: boardType.roles.key,
     },

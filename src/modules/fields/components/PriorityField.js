@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 import { modalType } from '../../modal/types';
 
 import { showModal } from '../../modal/ModalReducer'
+import { rolePrioritySort } from '../FieldReducer'
 
 class PriorityField extends React.Component{
     _onClick = () => {
-        const { fieldKey } = this.props
+        const { fieldKey, pageRepo } = this.props
         this.props.showModal(modalType.editPriority, {
             fieldKey,
+            attach: rolePrioritySort(pageRepo),
         })
     }
 
@@ -17,7 +19,7 @@ class PriorityField extends React.Component{
         const { value } = this.props
 
         return (
-            <div className="row -x-m">
+            <div className="row -x-p">
                 <div
                     className="field-tag"
                     onClick={this._onClick}
@@ -30,7 +32,9 @@ class PriorityField extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        pageRepo: state.page.pageRepo,
+    }),
     {
         showModal,
     }
