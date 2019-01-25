@@ -58,8 +58,8 @@ class PickRecipient extends React.Component{
                             )
                         })}
                     </div>
-                    :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                        There are no Unique IDs
+                    :<div className="drop-down-empty">
+                        no UIDs found
                     </div>}
                 {inclusive && <div>
                     <div className="-sep"/>

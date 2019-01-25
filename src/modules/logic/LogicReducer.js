@@ -136,7 +136,11 @@ function getCodeFromDataProp(obj = {}) {
 
 //proper string formatting for .adjust
 function applyAdjust(obj = {}) {
-    return (obj.value && obj.adjust && `${obj.value} + ${obj.adjust}`) || obj.value || obj.adjust || ''
+    let value = obj.value
+    if (obj.length) {
+        value = `Object.keys(${value}).length`
+    }
+    return (value && obj.adjust && `${value} + ${obj.adjust}`) || value || obj.adjust || ''
 }
 
 //handles data value formatting on the right side of the =

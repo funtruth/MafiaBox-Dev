@@ -76,8 +76,9 @@ class PickEventVarProp extends React.Component{
                             <DropTitle>subfields</DropTitle>
                             {subfields.map(item => this._renderItem(item.subfield))}
                         </div>
-                    :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                        no subfields found
+                    :<div>
+                        <DropTitle>results</DropTitle>
+                        <div className="drop-down-empty">no results found</div>
                     </div>
                 }
             </div>

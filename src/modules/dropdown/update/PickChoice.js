@@ -67,8 +67,8 @@ class PickChoice extends React.Component{
                     <div>
                         {uids.map(this._renderItem)}
                     </div>
-                    :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                        There are no Unique IDs
+                    :<div className="drop-down-empty">
+                        no UIDs found
                     </div>}
                 {!fields.length && <UpdateType {...this.props}/>}
             </div>

@@ -62,7 +62,7 @@ export const operatorType = {
         index: 2,
         title: 'else if',
         icon: 'mdi mdi-swap-horizontal-variant',
-        color: '#0e7db4',
+        color: '#2e6db4',
     },
 }
 

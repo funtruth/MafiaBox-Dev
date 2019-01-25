@@ -10,46 +10,47 @@ import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle';
 
 class PickVarProp extends React.Component{
-    _onSelect = (item) => {
+    _onSelect = (item, key) => {
         const { prefix } = this.props
-        
         this.props.updatePage({
-            value: `${prefix}.${item}`,
+            value: `${prefix}.${key}`,
+            variableType: item.variableType,
             adjust: null,
             type: panelType.var.key,
+            length: false,
         })
         this.props.showDropdown()
     }
 
-    _renderItem = (item) => {
+    _renderItem = (item, key) => {
         const { currentValue, prefix, updateRef } = this.props
-        const chosen = typeof currentValue === 'string' && currentValue === `${prefix}.${item}`
         
-        const vars = proptool.getSubfields(`${prefix}.${item}`, updateRef)
+        const vars = proptool.getSubfields(`${prefix}.${key}`, updateRef)
+        const chosen = currentValue.value === `${prefix}.${key}`
         const isObject = vars.length > 0
         
         if (isObject) {
             return (
                 <DropParent
                     {...this.props}
-                    key={item}
+                    key={key}
                     dropdownType={dropdownType.pickVarProp}
                     params={{
-                        prefix: `${prefix}.${item}`,
+                        prefix: `${prefix}.${key}`,
                     }}
-                    text={item}
+                    text={key}
                 />
             )
         }
 
         return (
             <div
-                key={item}
+                key={key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={this._onSelect.bind(this, item)}
+                onClick={this._onSelect.bind(this, item, key)}
             >
-                {item}
+                {key}
                 <i className="mdi mdi-check"/>
             </div>
         )
@@ -57,23 +58,25 @@ class PickVarProp extends React.Component{
     
     render() {
         const { updateRef, prefix, attachVar } = this.props
+
         const subfields = proptool.getSubfields(prefix, updateRef)
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
-
+        
         return (
             <div className="drop-down-scrollable">
                 {subfields.length ?
                     subfields[0].subfield === '$' ?
                         <div>
                             <DropTitle>uids</DropTitle>
-                            {uids.map(item => this._renderItem(`${item.key}`))}
+                            {uids.map(item => this._renderItem(item, item.key))}
                         </div>
                         :<div>
                             <DropTitle>subfields</DropTitle>
-                            {subfields.map(item => this._renderItem(item.subfield))}
+                            {subfields.map(item => this._renderItem(item, item.subfield))}
                         </div>
-                    :<div className="drop-down-item-padding" style={{ color: '#969696' }}>
-                        no subfields found
+                    :<div>
+                        <DropTitle>results</DropTitle>
+                        <div className="drop-down-empty">no results found</div>
                     </div>
                 }
             </div>

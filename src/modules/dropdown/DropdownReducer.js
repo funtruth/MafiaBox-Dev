@@ -30,6 +30,7 @@ export function showDropdown(key, e, params={}, index=0) {
                         case dropdownType.pickBoolean:
                         case dropdownType.pickHealth:
                         case dropdownType.pickTimer:
+                        case dropdownType.storyMapLib:
                         case dropdownType.pageLib:
                         case dropdownType.pickVarProp:
                         case dropdownType.pickComparison:

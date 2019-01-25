@@ -51,8 +51,8 @@ class InputValue extends React.Component{
                 />
                 <div className="-sep"/>
                 <div className="drop-down-menu-option" onClick={this._onSubmit}>
-                    <i className={`drop-down-menu-icon mdi mdi-content-save-settings`}></i>
-                    Save
+                    <i className="drop-down-menu-icon mdi mdi-checkbox-marked"></i>
+                    save
                 </div>
             </div>
         )

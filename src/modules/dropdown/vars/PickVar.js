@@ -7,20 +7,24 @@ import { variableType, panelType } from '../../logic/types'
 import DropParent from '../components/DropParent'
 import BoardLib from '../library/BoardLib';
 import DropTitle from '../components/DropTitle';
+import DropOption from '../components/DropOption'
 
 class PickVar extends React.Component{
     _onSelect = (item) => {
         this.props.updatePage({
             value: item.key,
+            variableType: item.variableType,
             type: panelType.var.key,
             adjust: null,
+            length: false,
         })
         this.props.showDropdown()
     }
 
     _renderItem = (item) => {
         const { currentValue } = this.props
-        const chosen = typeof currentValue === 'string' && currentValue === item.key
+        
+        const chosen = currentValue.value === item.key
         const isObject = item.variableType === variableType.object.key
 
         if (isObject) {
@@ -55,6 +59,7 @@ class PickVar extends React.Component{
             value: null,
             type: panelType.var.key,
             adjust: value,
+            length: false,
         })
         this.props.showDropdown()
     }
@@ -62,21 +67,29 @@ class PickVar extends React.Component{
     _setAdjustment = (value) => {
         this.props.updatePage({
             adjust: value,
+            length: false,
+        })
+        this.props.showDropdown()
+    }
+
+    _setLength = () => {
+        const { currentValue } = this.props
+        this.props.updatePage({
+            length: !currentValue.length,
         })
         this.props.showDropdown()
     }
 
     render() {
         const { attachVar, currentValue } = this.props
-        if (!attachVar) return null
 
         const vars = _.toArray(attachVar)
         const uids = vars.filter(i => i.variableType === variableType.uid.key)
         const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
         const rssVars = vars.filter(i => i.rss)
 
-        const isNumber = attachVar[currentValue] &&
-            attachVar[currentValue].variableType === variableType.number.key
+        const isNumber = currentValue.variableType === variableType.number.key
+        const hasLength = currentValue.variableType === variableType.object.key
 
         return (
             <div>
@@ -100,6 +113,18 @@ class PickVar extends React.Component{
                     </div>
                 </div>}
                 <DropTitle>other options</DropTitle>
+                {isNumber && <DropParent
+                    {...this.props}
+                    dropdownType={dropdownType.inputValue}
+                    params={{
+                        inputText: 'Enter a number',
+                        type: 'number',
+                        showValue: true,
+                        onSubmit: this._setAdjustment,
+                    }}
+                    icon="mdi mdi-numeric"
+                    text="adjust by"
+                />}
                 <DropParent
                     {...this.props}
                     dropdownType={dropdownType.inputValue}
@@ -109,21 +134,16 @@ class PickVar extends React.Component{
                         showValue: true,
                         onSubmit: this._setConstant,
                     }}
-                    icon="mdi mdi-alpha-c-box"
-                    text="Constant"
-                />
-                {isNumber && <DropParent
-                    {...this.props}
-                    dropdownType={isNumber && dropdownType.inputValue}
-                    params={{
-                        inputText: 'Enter a number',
-                        type: 'number',
-                        showValue: true,
-                        onSubmit: this._setAdjustment,
-                    }}
                     icon="mdi mdi-numeric"
-                    text="Adjust by"
-                />}
+                    text="constant"
+                />
+                <DropOption
+                    show={hasLength}
+                    chosen={currentValue.length}
+                    onClick={this._setLength}
+                    icon="mdi mdi-code-braces"
+                    backgroundColor="#2e6db4"
+                >length</DropOption>
             </div>
         )
     }
