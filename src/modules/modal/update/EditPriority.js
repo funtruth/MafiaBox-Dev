@@ -27,7 +27,8 @@ const getEmptyListStyle = isDraggingOver => ({
     flexDirection: 'row',
     padding: '12px 12px',
     minWidth: '90%',
-    transition: 'height 0.15s ease-out',
+    maxHeight: isDraggingOver ? 60 : 24,
+    transition: 'max-height 1s ease',
     backgroundColor: isDraggingOver && 'red',
 });
 
@@ -59,7 +60,7 @@ class EditPriority extends React.Component {
                     {attach.map((list, index) => {
                         return (
                             <div key={index}>
-                                <div className="row-nowrap -b-t">
+                                <div className="priority-row">
                                     <div className="priority-gutter">
                                         {index}
                                     </div>
@@ -99,18 +100,22 @@ class EditPriority extends React.Component {
                                         )}
                                     </Droppable>
                                 </div>
-                                <div className="row-nowrap -b-t">
+                                <div className="priority-row-placeholder">
                                     <div className="priority-gutter"/>
                                     <Droppable
                                         droppableId={`${droppableType.priorityNew}.${index}`}
                                         direction="horizontal"
                                     >
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                style={getEmptyListStyle(snapshot.isDraggingOver)}
-                                            />
-                                        )}
+                                        {(provided, snapshot) => {
+                                            return (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    style={getEmptyListStyle(snapshot.isDraggingOver)}
+                                                >
+                                                    {provided.placeholder}
+                                                </div>
+                                            )
+                                        }}
                                     </Droppable>
                                 </div>
                             </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { modalType } from '../types';
 
 class Modal extends React.Component {
     _onClick = e => {
@@ -11,22 +12,34 @@ class Modal extends React.Component {
 
     render() {
         const { children, showSaveDialogue } = this.props
+        
+        let extraStyle = {}
+        switch(children.key) {
+            case modalType.editPriority:
+                extraStyle = {
+                    position: 'absolute',
+                    maxHeight: '80vh',
+                    top: '10vh',
+                }
+                break
+            default:
+        }
 
         if (showSaveDialogue) {
             return (
                 <div id="parent-only" className="modal" onClick={this._onClick}>
-                    <div style={{ pointerEvents: 'none' }}>
-                        <div className="modal-child"  style={{ pointerEvents: 'all' }}>
+                    <div style={{ pointerEvents: 'none', ...extraStyle }}>
+                        <div className="modal-child" style={{ pointerEvents: 'all' }}>
                             {children}
                         </div>
                     </div>
                 </div>
             )
         }
-
+        
         return (
             <div className="modal modal-appclick">
-                <div className="modal-child">
+                <div className="modal-child" style={extraStyle}>
                     {children}
                 </div>
             </div>

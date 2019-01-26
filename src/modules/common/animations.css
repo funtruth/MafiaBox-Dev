@@ -13,6 +13,11 @@
     to   { max-height: 1000px; }
 }
 
+@keyframes itemin {
+    from { max-height: 1px; }
+    to   { max-height: 150px; }
+}
+
 .-blur {
     animation: fadein 1s;
     -webkit-animation: fadein 1s;

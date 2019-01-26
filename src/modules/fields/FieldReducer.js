@@ -417,9 +417,9 @@ export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
         const { modalKeys } = getState().modal
         let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
 
-        let [removed] = attachClone[startPrio].splice(startIndex, 1)
+        const [removed] = attachClone[startPrio].splice(startIndex, 1)
         attachClone[endPrio].splice(endIndex, 0, removed)
-
+        
         dispatch(updateTopModal(
             'attach',
             attachClone,
@@ -432,7 +432,7 @@ export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
         const { modalKeys } = getState().modal
         let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
 
-        let [removed] = attachClone[startPrio].splice(startIndex, 1)
+        const [removed] = attachClone[startPrio].splice(startIndex, 1)
         attachClone.splice(endPrio + 1, 0, [removed])
 
         dispatch(updateTopModal(

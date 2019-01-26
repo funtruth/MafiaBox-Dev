@@ -17,11 +17,12 @@ export function showModal(key, params={}) {
         if (!key) {
             keysClone.pop()
         } else {
-            const _params = {}
+            let _params = {}
             switch(key) {
                 case modalType.editEvent:
                 case modalType.editTrigger:
                 case modalType.editToast:
+                case modalType.editPriority:
                     _params._attach = params.attach
                     break
                 default:

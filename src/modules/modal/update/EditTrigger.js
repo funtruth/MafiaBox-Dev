@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import * as proptool from '../../logic/proptool'
 
 import { triggerNewVars } from '../../logic/types'
 
@@ -18,7 +20,7 @@ class EditTrigger extends React.Component {
     }
     
     render() {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, updateRef } = this.props
         
         const data = attach && attach.value
         const iprops = {
@@ -53,7 +55,7 @@ class EditTrigger extends React.Component {
                         <div className="-sep"/>
                         <div className="dashboard-section-title">UPDATES ON TRIGGER</div>
                         <div className="-x-p -y-p">
-                            <LogicObject {...iprops}/>
+                            <LogicObject {...iprops} updateRef={updateRef}/>
                         </div>
                     </div>
                     <div style={{ backgroundColor: '#272822', padding: '10px 8px 10px 0px' }}>
@@ -74,4 +76,8 @@ class EditTrigger extends React.Component {
     }
 }
 
-export default EditTrigger
+export default connect(
+    state => ({
+        updateRef: proptool.addPlayerRef(state.template),
+    }),
+)(EditTrigger)

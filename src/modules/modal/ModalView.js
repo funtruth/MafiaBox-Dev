@@ -133,6 +133,7 @@ class ModalView extends React.Component {
                     case modalType.editTrigger:
                     case modalType.editEvent:
                     case modalType.editToast:
+                    case modalType.editPriority:
                         props.showSaveDialogue = true
                         props.onClose = () => {
                             if (_.isEqual(props.attach, props._attach)) {
@@ -147,7 +148,7 @@ class ModalView extends React.Component {
                         break
                     default:
                 }
-
+                
                 return (
                     <Modal {...props} key={index}>
                         {this._renderItem(props)}
