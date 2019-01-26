@@ -19,6 +19,7 @@ const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
 //[repo]sitory: holds all the pages keyed by pageKey
+const UPDATE_REPO = 'page/update-repo'
 const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 const UPDATE_PAGE = 'page/update-page'
@@ -191,12 +192,31 @@ export function updatePageByProps(props) {
     }
 }*/
 
+export function saveAllPriorities(attach) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        let repoClone = Object.assign({}, pageRepo)
+
+        for (var i=0; i<attach.length; i++) {
+            for (var j=0; j<attach[i].length; j++) {
+                repoClone[attach[i][j].pageKey].priority = i
+            }
+        }
+
+        dispatch({
+            type: UPDATE_REPO,
+            payload: repoClone,
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
         case MOVE_STORY:
             return { ...state, storyMap: action.payload }
             
+        case UPDATE_REPO:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
         case REMOVE_PAGE:

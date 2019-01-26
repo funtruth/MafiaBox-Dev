@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
-import { updatePageByPath } from '../page/PageReducer'
+import { updatePageByPath, saveAllPriorities } from '../page/PageReducer'
 
 import { modalType } from './types'
 import { updateViewType } from '../logic/types'
@@ -126,6 +126,9 @@ class ModalView extends React.Component {
                             value,
                         )
                         break
+                    case modalType.editPriority:
+                        props.onSave = () => this.props.saveAllPriorities(props.attach)
+                        break
                     default:
                 }
 
@@ -166,6 +169,7 @@ export default connect(
     {
         showModal,
         updatePageByPath,
+        saveAllPriorities,
         popModalTo,
         updateTopModal,
     }

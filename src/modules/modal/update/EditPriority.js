@@ -25,24 +25,16 @@ const getListStyle = isDraggingOver => ({
 const getEmptyListStyle = isDraggingOver => ({
     display: 'flex',
     flexDirection: 'row',
-    padding: '12px 12px',
+    padding: isDraggingOver ? '0px 12px' : '12px 12px',
     minWidth: '90%',
-    maxHeight: isDraggingOver ? 60 : 24,
-    transition: 'max-height 1s ease',
+    maxHeight: 24,
     backgroundColor: isDraggingOver && 'red',
 });
 
 class EditPriority extends React.Component {
     _onSave = () => {
-        const { isTrigger } = this.props
-
-        if (isTrigger) {
-            this.props.popModalBy(1)
-            this.props.onAttach()
-        } else {
-            this.props.onSave()
-            this.props.popModalBy(1)
-        }
+        this.props.onSave()
+        this.props.popModalBy(1)
     }
     
     render() {
