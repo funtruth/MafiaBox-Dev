@@ -68,6 +68,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickVar:
             case dropdownType.pickVarProp:
             case dropdownType.pickComparison:
+            case dropdownType.inputValue:
                 if (props.isTrigger) {
                     props.updatePage = (value) => this.props.updateTopModal(
                         'attach',

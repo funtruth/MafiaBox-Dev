@@ -20,6 +20,7 @@ class LogicPanel extends React.Component{
                     indexKey,
                     subfieldKey,
                     currentValue: dataProp,
+                    attach: data,
                     attachVar: vars,
                 })}
                 style={{

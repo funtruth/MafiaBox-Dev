@@ -8,8 +8,7 @@ import { showModal } from '../../modal/ModalReducer'
 
 class UpdateButton extends React.Component{
     render() {
-        const { pageKey, fieldKey, indexKey, subfieldKey, config,
-            logicInfo, prefix, vars, pageRepo, isTrigger } = this.props
+        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
         
         let buttonText = "", onClick
@@ -35,7 +34,6 @@ class UpdateButton extends React.Component{
                     indexKey,
                     fieldKey,
                     subfieldKey: prefix,
-                    currentValue,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar,
                     isTrigger: true,
@@ -48,7 +46,6 @@ class UpdateButton extends React.Component{
                     indexKey,
                     fieldKey,
                     subfieldKey: prefix,
-                    currentValue,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar,
                 })
@@ -61,16 +58,8 @@ class UpdateButton extends React.Component{
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
-        let attach = "", attachVar = "", currentValue = ""
-        if (isTrigger) {
-            attach = logicInfo.data || {}
-            attachVar = vars
-            currentValue = subfieldKey
-        } else {
-            attach = logicInfo.data
-            attachVar = vars
-            currentValue = info.value
-        }
+        const attach = logicInfo.data || {}
+        const attachVar = vars
 
         if (onClick) {
             return (
@@ -94,7 +83,6 @@ class UpdateButton extends React.Component{
                     indexKey,
                     fieldKey,
                     subfieldKey: prefix,
-                    currentValue,
                     attach,
                     attachVar,
                 })}

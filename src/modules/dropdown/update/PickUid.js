@@ -13,11 +13,12 @@ import DropTitle from '../components/DropTitle';
 
 class PickUid extends React.Component{
     _renderItem = (item) => {
-        const { currentValue, updateRef, subfieldKey } = this.props
+        const { attach, updateRef, subfieldKey } = this.props
         const newKey = `${subfieldKey}.${item.key}`
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
         
         const config = proptool.getUpdateConfig(newKey, updateRef)
-        const chosen = typeof currentValue === 'string' && currentValue === item
 
         if (!config || config.hideButton) {
             return (

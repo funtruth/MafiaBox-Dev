@@ -49,7 +49,7 @@ class LogicPanels extends React.Component{
                     <LogicPanel
                         {...this.props}
                         subfieldKey="var1"
-                        placeholder="variable"
+                        placeholder="function ..."
                         dropdown={dropdownType.pickLibrary}
                     />
                 )

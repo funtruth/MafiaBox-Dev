@@ -33,8 +33,8 @@ class PickUpdate extends React.Component{
     
     _renderItem = (item) => {
         const { attach, subfieldKey } = this.props
-        const currentValue = attach[subfieldKey] && attach[subfieldKey].value
-        const chosen = typeof currentValue === 'string' && currentValue === item.key
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
         
         if (item.updateViewType === updateViewType.dynamicVal) {
             return (
@@ -43,11 +43,9 @@ class PickUpdate extends React.Component{
                     key={item.key}
                     dropdownType={dropdownType.inputValue}
                     params={{
-                        hoverKey: item.key,
                         inputText: 'Enter a number',
                         type: 'number',
                         showValue: chosen,
-                        attach,
                         onSubmit: this._selectDynamic.bind(this, item),
                     }}
                     icon={item.icon}

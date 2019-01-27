@@ -3,16 +3,10 @@ import React from 'react'
 class InputValue extends React.Component{
     constructor(props) {
         super(props)
-        this.state = {
-            value: props.showValue && props.attach
-        }
-    }
 
-    componentWillReceiveProps(newProps) {
-        if (newProps.showValue !== this.props.showValue) {
-            this.setState({
-                value: newProps.showValue && newProps.attach
-            })
+        const data = props.attach && props.subfieldKey && props.attach[props.subfieldKey]
+        this.state = {
+            value: props.showValue ? data.dynamic : ''
         }
     }
 

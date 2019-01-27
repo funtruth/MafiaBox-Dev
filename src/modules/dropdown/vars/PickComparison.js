@@ -6,9 +6,9 @@ import DropTitle from '../components/DropTitle';
 
 class PickComparison extends React.Component{
     _renderItem = (item) => {
-        const { currentValue } = this.props
-
-        const chosen = typeof currentValue === 'string' && currentValue === item.key
+        const { attach, subfieldKey } = this.props
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
 
         return (
             <div
@@ -19,10 +19,7 @@ class PickComparison extends React.Component{
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                {chosen ?
-                    <i className="mdi mdi-check"/>
-                    :<div style={{ width: 20, marginLeft: 'auto' }}/>
-                }
+                <i className="mdi mdi-check"/>
             </div>
         )
     }

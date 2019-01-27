@@ -25,22 +25,23 @@ export function showDropdown(key, e, params={}, index=0) {
             if (keysClone.length) {
                 let offsetY = 0
                 switch(key) {
-                        case dropdownType.pickUid:
-                        case dropdownType.pickUpdate:
-                        case dropdownType.pickBoolean:
-                        case dropdownType.pickHealth:
-                        case dropdownType.pickTimer:
-                        case dropdownType.storyMapLib:
-                        case dropdownType.pageLib:
-                        case dropdownType.pickVarProp:
-                        case dropdownType.pickComparison:
-                        case dropdownType.pickRecipient:
-                        case dropdownType.pickEventVarProp:
-                        case dropdownType.returnTypes:
-                        case dropdownType.pickOperator:
-                        case dropdownType.pickDeleteMode:
-                            offsetY = DROP_TITLE_HEIGHT
-                            break
+                    case dropdownType.pageLib:
+                    case dropdownType.pickComparison:
+                    case dropdownType.pickBoolean:
+                    case dropdownType.pickDeleteMode:
+                    case dropdownType.pickEventVarProp:
+                    case dropdownType.pickHealth:
+                    case dropdownType.pickOperator:
+                    case dropdownType.pickTimer:
+                    case dropdownType.pickUid:
+                    case dropdownType.pickUpdate:
+                    case dropdownType.pickVarProp:
+                    case dropdownType.pickRecipient:
+                    case dropdownType.returnTypes:
+                    case dropdownType.showSubfields:
+                    case dropdownType.storyMapLib:
+                        offsetY = DROP_TITLE_HEIGHT
+                        break
                     default:
                 }
 

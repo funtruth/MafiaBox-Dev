@@ -127,6 +127,12 @@ class PickVar extends React.Component{
                 />}
                 <DropParent
                     {...this.props}
+                    dropdownType={dropdownType.pickBoolean}
+                    icon="mdi mdi-code-tags-check"
+                    text="boolean"
+                />
+                <DropParent
+                    {...this.props}
                     dropdownType={dropdownType.inputValue}
                     params={{
                         inputText: 'Enter a number',

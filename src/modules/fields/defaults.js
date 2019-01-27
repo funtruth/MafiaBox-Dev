@@ -239,38 +239,16 @@ export const initFieldRepo = {
         boardType: boardType.roles.key,
         default: defaultLogic,
     },
-    phaseActionMode: {
-        key: 'phaseActionMode',
+    phaseChoices: {
+        key: 'phaseChoices',
         index: 1,
-        fieldType: fieldType.tag.key,
-        title: 'Action Mode',
-        data: {
-            all: {
-                key: 'all',
-                index: 0,
-                title: 'All',
-            },
-            king: {
-                key: 'king',
-                index: 1,
-                title: 'King',
-            },
-            clown: {
-                key: 'clown',
-                index: 2,
-                title: 'Clown',
-            },
-            none: {
-                key: 'none',
-                index: 3,
-                title: 'None',
-            },
-        },
+        fieldType: fieldType.choices.key,
+        title: 'Phase Choices',
         boardType: boardType.phases.key,
     },
     phaseTriggerMode: {
         key: 'phaseTriggerMode',
-        index: 4,
+        index: 2,
         fieldType: fieldType.logic.key,
         title: 'Phase Trigger',
         vars: {
@@ -297,12 +275,5 @@ export const initFieldRepo = {
         },
         boardType: boardType.phases.key,
         default: defaultLogic,
-    },
-    phaseChoices: {
-        key: 'phaseChoices',
-        index: 2,
-        fieldType: fieldType.choices.key,
-        title: 'Phase Choices',
-        boardType: boardType.phases.key,
     },
 }

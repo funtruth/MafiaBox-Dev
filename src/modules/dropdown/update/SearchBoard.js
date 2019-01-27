@@ -71,7 +71,7 @@ class SearchBoard extends React.Component{
                                     >
                                         <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
                                         <div style={{ marginLeft: 'auto', color: '#666666' }}>
-                                            {`${boardRepo[item.boardType].title}`}
+                                            {boardRepo[item.boardType].title}
                                         </div>
                                     </div>
                                 )
