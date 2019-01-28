@@ -5,10 +5,16 @@ import { updateType, updateViewType } from '../types';
 import { modalType } from '../../modal/types'
 
 import { showModal } from '../../modal/ModalReducer'
+import { deleteProp } from '../../page/PageReducer'
 
 class UpdateButton extends React.Component{
+    _onDelete = () => {
+        const { pageKey, fieldKey, indexKey, prefix } = this.props
+        this.props.deleteProp(pageKey, fieldKey, indexKey, prefix)
+    }
+
     render() {
-        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo } = this.props
+        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
 
         let buttonText = "", onClick
@@ -53,40 +59,62 @@ class UpdateButton extends React.Component{
                 buttonText = `${Math.floor(info.value / 60 / 1000)}m${info.value % 60000 / 1000}s`
                 break
             default:
-                buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
         if (info.adjust) {
             buttonText = buttonText.concat(info.adjust)
         }
 
-        if (onClick) {
-            return (
-                <div
-                    className="logic-pick-update"
-                    highlight="true"
-                    onClick={onClick}
-                >
-                    {buttonText}
-                </div>
-            )
-        }
-        
+        //TODO DISGUSTING CODE FIX ASAP
         return (
-            <div
-                className="logic-pick-update app-onclick"
-                menu-type={config.dropdown}
-                highlight="true"
-                app-onclick-props={JSON.stringify({
-                    pageKey,
-                    indexKey,
-                    fieldKey,
-                    subfieldKey: prefix,
-                    attach: logicInfo.data || {},
-                    attachVar: vars,
-                })}
-            >
-                {buttonText}
+            <div className="row">
+                {buttonText &&
+                    (onClick ? <div
+                        className="logic-pick-update"
+                        highlight="true"
+                        onClick={onClick}
+                    >
+                        {buttonText}
+                    </div>
+                    :<div
+                        className="logic-pick-update app-onclick"
+                        menu-type={config.dropdown}
+                        highlight="true"
+                        app-onclick-props={JSON.stringify({
+                            pageKey,
+                            indexKey,
+                            fieldKey,
+                            subfieldKey: prefix,
+                            attach: logicInfo.data || {},
+                            attachVar: vars,
+                        })}
+                    >
+                        {buttonText}
+                    </div>)
+                }
+                {showOptions && <div className="common-bubble --grey27">
+                    {!buttonText && (onClick ? <i
+                        className="mdi mdi-plus icon-pop"
+                        onClick={onClick}
+                        style={{ marginRight: 4 }}
+                    />:<i
+                        className="mdi mdi-plus icon-pop app-onclick"
+                        menu-type={config.dropdown}
+                        app-onclick-props={JSON.stringify({
+                            pageKey,
+                            indexKey,
+                            fieldKey,
+                            subfieldKey: prefix,
+                            attach: logicInfo.data || {},
+                            attachVar: vars,
+                        })}
+                        style={{ marginRight: 4 }}
+                    />)}
+                    <i
+                        className="mdi mdi-close icon-pop"
+                        onClick={this._onDelete}
+                    />
+                </div>}
             </div>
         )
     }
@@ -98,5 +126,6 @@ export default connect(
     }),
     {
         showModal,
+        deleteProp,
     }
 )(UpdateButton)

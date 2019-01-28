@@ -7,6 +7,21 @@ import { updateTopModal } from '../../modal/ModalReducer'
 import UpdateButton from './UpdateButton'
 
 class LogicExpandable extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            showOptions: false,
+        }
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.dropdownKeys.length === 0) {
+            this.setState({
+                showOptions: false,
+            })
+        }
+    }
+
     _toggle = () => {
         const { pageKey, fieldKey, indexKey, subfieldKey, logicInfo, prefix } = this.props
         
@@ -25,8 +40,27 @@ class LogicExpandable extends React.Component{
         }
     }
 
+    _onMouseEnter = () => {
+        const { dropdownKeys } = this.props
+        if (dropdownKeys.length === 0) {
+            this.setState({
+                showOptions: true,
+            })
+        }
+    }
+
+    _onMouseLeave = () => {
+        const { dropdownKeys } = this.props
+        if (dropdownKeys.length === 0) {
+            this.setState({
+                showOptions: false,
+            })
+        }
+    }
+
     render() {
         const { logicInfo, nested, property, updateRef, prefix } = this.props
+        const { showOptions } = this.state
     
         const hidden = logicInfo.data && logicInfo.data[prefix] && logicInfo.data[prefix].hide
         const attributes = proptool.getSubfields(prefix, logicInfo.data)
@@ -37,7 +71,11 @@ class LogicExpandable extends React.Component{
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested ? 12 : 0 }}>
-                <div className="row-nowrap">
+                <div
+                    className="row-nowrap"
+                    onMouseEnter={this._onMouseEnter}
+                    onMouseLeave={this._onMouseLeave}
+                >
                     {hasAttr ? 
                         <div
                             className="common-bubble"
@@ -59,7 +97,7 @@ class LogicExpandable extends React.Component{
                     >
                         {property}
                     </div>
-                    {!config.hideButton && <UpdateButton {...this.props} config={config}/>}
+                    <UpdateButton {...this.props} config={config} showOptions={showOptions}/>
                 </div>
                 {!hidden &&
                     attributes.map((property, index) => (
@@ -78,7 +116,9 @@ class LogicExpandable extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        dropdownKeys: state.dropdown.dropdownKeys,
+    }),
     {
         updatePageByPath,
         updateTopModal,

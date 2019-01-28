@@ -133,6 +133,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickTimer:
                 props.update = update
                 props.mutate = mutate
+                break
             default:
         }
         

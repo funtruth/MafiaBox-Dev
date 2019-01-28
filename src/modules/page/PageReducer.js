@@ -216,6 +216,26 @@ export function saveAllPriorities(attach) {
     }
 }
 
+//LogicBoard
+export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        const repoClone = Object.assign({}, pageRepo)
+
+        if (!repoClone[pageKey]) return
+        if (!repoClone[pageKey][fieldKey]) return
+        if (!repoClone[pageKey][fieldKey][indexKey]) return
+        if (!repoClone[pageKey][fieldKey][indexKey].data) return
+        if (!repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]) return
+
+        delete repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]
+        dispatch({
+            type: UPDATE_REPO,
+            payload: repoClone,
+        })
+    }
+}
+
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 

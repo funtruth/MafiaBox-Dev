@@ -131,3 +131,12 @@
     padding: 3px 6px 3px 6px;
     font: 300 12px Arial;
 }
+
+.icon-pop {
+    color: #999;
+    cursor: pointer;
+    font-size: 12px;
+}
+.icon-pop:hover {
+    color: #d6d6d6;
+}
