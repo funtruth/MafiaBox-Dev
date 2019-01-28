@@ -11,8 +11,9 @@ class StoryMapLib extends React.Component{
     render() {
         const { storyMap, pageRepo, hoverKey } = this.props
         
-        let stories = _.filter(pageRepo, i => hoverKey === i.boardType)
-        stories = _.groupBy(stories, i => i.storyType)
+        const stories = _(pageRepo)
+            .filter(i => hoverKey === i.boardType)
+            .groupBy(i => i.storyType)
         
         return (
             <div>

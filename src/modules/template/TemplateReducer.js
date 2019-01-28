@@ -139,6 +139,15 @@ const initialState = {
             mutate: true,
             variableType: variableType.string.key,
         },
+        'role.action': {
+            key: 'role.action',
+            subfield: 'action',
+            dropdown: dropdownType.pickRole,
+            action: 'Select',
+            update: true,
+            mutate: true,
+            variableType: variableType.string.key,
+        },
         'role.charges': {
             key: 'role.charges',
             subfield: 'charges',

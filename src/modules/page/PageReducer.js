@@ -94,8 +94,9 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
         
         let pageRepoClone = Object.assign({}, pageRepo)
 
-        let relatedPages = _.filter(pageRepo, i => i.storyType === mapKey)
-        relatedPages = _.sortBy(relatedPages, i => i.index)
+        let relatedPages = _(pageRepo)
+            .filter(i => i.storyType === mapKey)
+            .sortBy(i => i.index)
         
         const [removed] = relatedPages.splice(startIndex, 1)
         relatedPages.splice(endIndex, 0, removed)
@@ -117,10 +118,12 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
 
         let pageRepoClone = Object.assign({}, pageRepo)
 
-        let startPages = _.filter(pageRepo, i => i.storyType === startMapKey)
-        startPages = _.sortBy(startPages, i => i.index)
-        let endPages = _.filter(pageRepo, i => i.storyType === endMapKey)
-        endPages = _.sortBy(endPages, i => i.index)
+        let startPages = _(pageRepo)
+            .filter(i => i.storyType === startMapKey)
+            .sortBy(i => i.index)
+        let endPages = _(pageRepo)
+            .filter(i => i.storyType === endMapKey)
+            .sortBy(i => i.index)
 
         startPages[startIndex].storyType = endMapKey
         const [removed] = startPages.splice(startIndex, 1)

@@ -9,8 +9,9 @@ class TemplateView extends React.Component {
     render() {
         const { boardType, fieldRepo } = this.props
         
-        let pageInfo = _.filter(fieldRepo, i => i.boardType === boardType)
-        pageInfo = _.sortBy(pageInfo, i => i.index)
+        const pageInfo = _(fieldRepo)
+            .filter(i => i.boardType === boardType)
+            .sortBy(i => i.index)
 
         if (!pageInfo.length) return null
 

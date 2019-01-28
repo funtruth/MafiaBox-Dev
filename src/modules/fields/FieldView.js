@@ -62,8 +62,9 @@ class FieldView extends React.Component {
         const { boardType } = pageInfo
         if (!boardType) return null
         
-        let fields = _.filter(fieldRepo, i => i.boardType === boardType)
-        fields = _.sortBy(fields, i => i.index)
+        const fields = _(fieldRepo)
+            .filter(i => i.boardType === boardType)
+            .sortBy(i => i.index)
         if (!fields.length) return null
 
         return (

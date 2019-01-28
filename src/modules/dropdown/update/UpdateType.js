@@ -2,8 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../../logic/proptool'
 
-import { updatePageByPath } from '../../page/PageReducer'
-import { updateTopModal } from '../../modal/ModalReducer'
 import { initUpdateType, toggleUpdateType } from '../../template/TemplateReducer'
 
 import DropTitle from '../components/DropTitle'
@@ -28,15 +26,9 @@ class UpdateType extends React.Component{
     }
 
     _handleClick = type => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, isTrigger } = this.props
-        
-
-        if (isTrigger) {
-            this.props.updateTopModal('attach', 'value', subfieldKey, type, !this.state[type])
-        } else if (attach[subfieldKey] && attach[subfieldKey].value) {
-            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, type, !this.state[type])
-        }
-
+        this.props.updatePage({
+            [type]: !this.state[type],
+        })
         this.setState({ [type]: !this.state[type] })
         this.props.toggleUpdateType(type)
     }
@@ -70,13 +62,9 @@ class UpdateType extends React.Component{
 
 export default connect(
     state => ({
-        update: state.template.update,
-        mutate: state.template.mutate,
         updateRef: proptool.addPlayerRef(state.template),
     }),
     {
-        updatePageByPath,
-        updateTopModal,
         initUpdateType,
         toggleUpdateType,
     }

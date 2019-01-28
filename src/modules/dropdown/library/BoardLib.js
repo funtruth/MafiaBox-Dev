@@ -37,8 +37,7 @@ class BoardLib extends React.Component{
         const { pageRepo, boardRepo } = this.props
         const { searchText } = this.state
 
-        let boards = _.filter(pageRepo, i => i.boardType)
-        boards = _.groupBy(boards, i => i.boardType)
+        const boards = _(pageRepo).filter(i => i.boardType).groupBy(i => i.boardType)
         
         return (
             <div>

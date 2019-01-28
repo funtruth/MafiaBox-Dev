@@ -211,11 +211,11 @@ export const initFieldRepo = {
         boardType: boardType.roles.key,
         default: defaultLogic,
     },
-    roleActionMode: {
-        key: 'roleActionMode',
+    roleAction: {
+        key: 'roleAction',
         index: 6,
         fieldType: fieldType.logic.key,
-        title: 'Action Mode',
+        title: 'Action',
         vars: {
             lobby: {
                 key: 'lobby',
