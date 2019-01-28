@@ -14,7 +14,7 @@ class UpdateButton extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions } = this.props
+        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions, nested } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
 
         let buttonText = "", onClick
@@ -108,12 +108,12 @@ class UpdateButton extends React.Component{
                             attach: logicInfo.data || {},
                             attachVar: vars,
                         })}
-                        style={{ marginRight: 4 }}
                     />)}
-                    <i
+                    {nested && <i
                         className="mdi mdi-close icon-pop"
                         onClick={this._onDelete}
-                    />
+                        style={{ marginLeft: 4 }}
+                    />}
                 </div>}
             </div>
         )
