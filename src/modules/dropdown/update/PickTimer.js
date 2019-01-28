@@ -1,9 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { updateViewType } from '../../logic/types'
+import { VAR_DEFAULTS } from '../types';
 
-import { updatePageByPath } from '../../page/PageReducer'
 import DropTitle from '../components/DropTitle';
 
 class PickTimer extends React.Component{
@@ -43,6 +42,7 @@ class PickTimer extends React.Component{
         const timer = (60 * parseInt(min) + parseInt(sec)) * 1000
         
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             value: timer,
             updateViewType: updateViewType.timer,
         })
@@ -86,12 +86,4 @@ class PickTimer extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-    {
-        updatePageByPath,
-    }
-)(PickTimer)
+export default PickTimer

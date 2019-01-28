@@ -4,6 +4,7 @@ import _ from 'lodash'
 
 import { panelType } from '../../logic/types'
 import DropTitle from '../components/DropTitle';
+import { VAR_DEFAULTS } from '../types';
 
 class PageLib extends React.Component{
     _onClick = (item) => {
@@ -12,9 +13,9 @@ class PageLib extends React.Component{
         if (onSelect) return onSelect(item.pageKey)
 
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             value: item.pageKey,
             type: panelType.page.key,
-            adjust: '',
         })
         this.props.showDropdown()
     }

@@ -117,6 +117,8 @@ export const updateFamilyType = {
     between "increment" and "increment by 2"
 */
 export const updateViewType = {
+    number: 'updateViewType/number',
+    variable: 'updateViewType/variable',
     staticVal: 'updateViewType/staticVal',
     dynamicVal: 'updateViewType/dynamicVal',
     page: 'updateViewType/page',

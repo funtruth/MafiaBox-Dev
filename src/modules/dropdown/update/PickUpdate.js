@@ -1,19 +1,29 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { updateType, updateViewType, updateFamilyType } from '../../logic/types'
-import { dropdownType } from '../types'
-
-import { updatePageByPath } from '../../page/PageReducer'
+import { dropdownType, VAR_DEFAULTS } from '../types'
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType'
 import DropTitle from '../components/DropTitle';
 
 class PickUpdate extends React.Component{
+    _selectDynamic = (item, number) => {
+        this.props.updatePage({
+            ...VAR_DEFAULTS,
+            update: this.props.update,
+            mutate: this.props.mutate,
+            value: item.key,
+            dynamic: number,
+            updateViewType: item.updateViewType,
+        })
+        this.props.showDropdown()
+    }
+    
     _select = (item) => {
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             update: this.props.update,
             mutate: this.props.mutate,
             value: item.key,
@@ -22,15 +32,6 @@ class PickUpdate extends React.Component{
         this.props.showDropdown()
     }
 
-    _selectDynamic = (item, number) => {
-        this.props.updatePage({
-            value: item.key,
-            dynamic: number,
-            updateViewType: item.updateViewType,
-        })
-        this.props.showDropdown()
-    }
-    
     _renderItem = (item) => {
         const { attach, subfieldKey } = this.props
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
@@ -70,8 +71,9 @@ class PickUpdate extends React.Component{
     }
 
     render() {
-        let items = _.filter(updateType, i => i.family === updateFamilyType.number)
-        items = _.sortBy(items, i => i.index)
+        const items = _(updateType)
+            .filter(i => i.family === updateFamilyType.number)
+            .sortBy(i => i.index)
 
         return (
             <div>
@@ -83,12 +85,4 @@ class PickUpdate extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-    {
-        updatePageByPath,
-    }
-)(PickUpdate)
+export default PickUpdate

@@ -18,7 +18,7 @@ export function dataPropToTitle(obj) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
 
-        switch(obj.type) {
+        switch(obj.panelType) {
             case panelType.page.key:
                 return pageRepo[obj.value] && pageRepo[obj.value].title
             case panelType.var.key:

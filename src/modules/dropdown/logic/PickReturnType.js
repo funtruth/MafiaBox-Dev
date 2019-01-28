@@ -8,7 +8,7 @@ import { modalType } from '../../modal/types';
 import { showModal } from '../../modal/ModalReducer'
 import DropTitle from '../components/DropTitle';
 
-class ReturnTypes extends React.Component{
+class PickReturnType extends React.Component{
     _renderItem = (item) => {
         const { attach } = this.props
         const chosen = item.key === attach.key
@@ -73,4 +73,4 @@ export default connect(
     {
         showModal,
     }
-)(ReturnTypes)
+)(PickReturnType)

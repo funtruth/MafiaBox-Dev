@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { updateType, updateFamilyType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
+import { VAR_DEFAULTS } from '../types';
 
 import UpdateType from './UpdateType'
 import DropTitle from '../components/DropTitle';
@@ -12,10 +10,11 @@ import DropTitle from '../components/DropTitle';
 class PickHealth extends React.Component{
     _select = (item) => {
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             update: this.props.update,
             mutate: this.props.mutate,
-            value: item.key,
             updateViewType: item.updateViewType,
+            value: item.key,
         })
         this.props.showDropdown()
     }
@@ -53,12 +52,4 @@ class PickHealth extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-    {
-        updatePageByPath,
-    }
-)(PickHealth)
+export default PickHealth

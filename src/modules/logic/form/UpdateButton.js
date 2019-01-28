@@ -10,20 +10,20 @@ class UpdateButton extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
-        
+
         let buttonText = "", onClick
         switch(info.updateViewType) {
             case updateViewType.page:
                 buttonText = pageRepo[info.value].title
                 break
+            case updateViewType.number:
             case updateViewType.uid:
+            case updateViewType.variable:
                 buttonText = info.value
                 break
+            case updateViewType.dynamicVal:
             case updateViewType.staticVal:
                 buttonText = updateType[info.value].title
-                break
-            case updateViewType.dynamicVal:
-                buttonText = `${updateType[info.value].title} ${info.dynamic}`
                 break
             case updateViewType.health:
                 buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
@@ -35,7 +35,6 @@ class UpdateButton extends React.Component{
                     fieldKey,
                     subfieldKey: prefix,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
-                    attachVar,
                     isTrigger: true,
                 })
                 buttonText = <i className="mdi mdi-flag"/>
@@ -47,7 +46,6 @@ class UpdateButton extends React.Component{
                     fieldKey,
                     subfieldKey: prefix,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
-                    attachVar,
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
@@ -58,8 +56,9 @@ class UpdateButton extends React.Component{
                 buttonText = <div style={{ color: '#767676' }}>{config.action}</div>
         }
 
-        const attach = logicInfo.data || {}
-        const attachVar = vars
+        if (info.adjust) {
+            buttonText = buttonText.concat(info.adjust)
+        }
 
         if (onClick) {
             return (
@@ -83,8 +82,8 @@ class UpdateButton extends React.Component{
                     indexKey,
                     fieldKey,
                     subfieldKey: prefix,
-                    attach,
-                    attachVar,
+                    attach: logicInfo.data || {},
+                    attachVar: vars,
                 })}
             >
                 {buttonText}

@@ -4,7 +4,7 @@ class InputValue extends React.Component{
     constructor(props) {
         super(props)
 
-        const data = props.attach && props.subfieldKey && props.attach[props.subfieldKey]
+        const data = (props.attach && props.subfieldKey && props.attach[props.subfieldKey]) || {}
         this.state = {
             value: props.showValue ? data.dynamic : ''
         }

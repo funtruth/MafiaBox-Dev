@@ -37,7 +37,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     case dropdownType.pickUpdate:
                     case dropdownType.pickVarProp:
                     case dropdownType.pickRecipient:
-                    case dropdownType.returnTypes:
+                    case dropdownType.pickReturnType:
                     case dropdownType.showSubfields:
                     case dropdownType.storyMapLib:
                         offsetY = DROP_TITLE_HEIGHT

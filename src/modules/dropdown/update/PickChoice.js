@@ -1,16 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+
 import * as proptool from '../../logic/proptool'
-
 import { variableType, updateViewType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType';
+import { VAR_DEFAULTS } from '../types';
 
+//TODO this is not real XD
 class PickChoice extends React.Component{
+    _select = (item) => {
+        this.props.updatePage({
+            ...VAR_DEFAULTS,
+            update: this.props.update,
+            mutate: this.props.mutate,
+            value: item.key,
+            updateViewType: updateViewType.uid,
+        })
+        this.props.showDropdown()
+    }
+
     _renderItem = (item) => {
         const { currentValue, updateRef, subfieldKey } = this.props
         const newKey = `${subfieldKey}.${item.key}`
@@ -46,16 +57,6 @@ class PickChoice extends React.Component{
         
     }
 
-    _select = (item) => {
-        this.props.updatePage({
-            update: this.props.update,
-            mutate: this.props.mutate,
-            value: item.key,
-            updateViewType: updateViewType.uid,
-        })
-        this.props.showDropdown()
-    }
-
     render() {
         const { attachVar, subfieldKey } = this.props
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
@@ -82,7 +83,4 @@ export default connect(
         update: state.template.update,
         mutate: state.template.mutate,
     }),
-    {
-        updatePageByPath,
-    }
 )(PickChoice)

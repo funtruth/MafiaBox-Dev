@@ -1,8 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { dropdownType } from '../types'
-import { variableType, panelType } from '../../logic/types'
+import { dropdownType, VAR_DEFAULTS } from '../types'
+import { variableType, panelType, updateViewType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import BoardLib from '../library/BoardLib';
@@ -12,19 +12,20 @@ import DropOption from '../components/DropOption'
 class PickVar extends React.Component{
     _onSelect = (item) => {
         this.props.updatePage({
+            ...VAR_DEFAULTS,
+            panelType: panelType.var.key,
+            updateViewType: updateViewType.uid,
             value: item.key,
             variableType: item.variableType,
-            type: panelType.var.key,
-            adjust: null,
-            length: false,
         })
         this.props.showDropdown()
     }
 
     _renderItem = (item) => {
-        const { currentValue } = this.props
+        const { attach, subfieldKey } = this.props
+        const selectedValue = attach[subfieldKey] || {}
         
-        const chosen = currentValue.value === item.key
+        const chosen = selectedValue.value === item.key
         const isObject = item.variableType === variableType.object.key
 
         if (isObject) {
@@ -56,40 +57,43 @@ class PickVar extends React.Component{
 
     _setConstant = (value) => {
         this.props.updatePage({
-            value: null,
-            type: panelType.var.key,
+            ...VAR_DEFAULTS,
             adjust: value,
-            length: false,
+            panelType: panelType.var.key,
+            updateViewType: updateViewType.number,
         })
         this.props.showDropdown()
     }
 
     _setAdjustment = (value) => {
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             adjust: value,
-            length: false,
         })
         this.props.showDropdown()
     }
 
     _setLength = () => {
-        const { currentValue } = this.props
+        const { attach, subfieldKey } = this.props
+        const selectedValue = attach[subfieldKey] || {}
+        
         this.props.updatePage({
-            length: !currentValue.length,
+            length: !selectedValue.length,
         })
         this.props.showDropdown()
     }
 
     render() {
-        const { attachVar, currentValue } = this.props
+        const { attachVar, attach, subfieldKey } = this.props
+        const selectedValue = attach[subfieldKey] || {}
 
         const vars = _.toArray(attachVar)
         const uids = vars.filter(i => i.variableType === variableType.uid.key)
         const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
         const rssVars = vars.filter(i => i.rss)
-
-        const isNumber = currentValue.variableType === variableType.number.key
-        const hasLength = currentValue.variableType === variableType.object.key
+        
+        const isNumber = selectedValue.variableType === variableType.number.key
+        const hasLength = selectedValue.variableType === variableType.object.key
 
         return (
             <div>
@@ -145,7 +149,7 @@ class PickVar extends React.Component{
                 />
                 <DropOption
                     show={hasLength}
-                    chosen={currentValue.length}
+                    chosen={selectedValue.length}
                     onClick={this._setLength}
                     icon="mdi mdi-code-braces"
                 >length</DropOption>

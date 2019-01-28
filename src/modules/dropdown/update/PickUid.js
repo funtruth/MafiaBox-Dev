@@ -1,17 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+
 import * as proptool from '../../logic/proptool'
-
 import { variableType, updateViewType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
+import { VAR_DEFAULTS } from '../types';
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType';
 import DropTitle from '../components/DropTitle';
 
 class PickUid extends React.Component{
+    _select = (item) => {
+        this.props.updatePage({
+            ...VAR_DEFAULTS,
+            update: this.props.update,
+            mutate: this.props.mutate,
+            value: item.key,
+            updateViewType: updateViewType.uid,
+        })
+        this.props.showDropdown()
+    }
+
     _renderItem = (item) => {
         const { attach, updateRef, subfieldKey } = this.props
         const newKey = `${subfieldKey}.${item.key}`
@@ -48,16 +58,6 @@ class PickUid extends React.Component{
         
     }
 
-    _select = (item) => {
-        this.props.updatePage({
-            update: this.props.update,
-            mutate: this.props.mutate,
-            value: item.key,
-            updateViewType: updateViewType.uid,
-        })
-        this.props.showDropdown()
-    }
-
     render() {
         const { attachVar, subfieldKey } = this.props
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
@@ -82,10 +82,5 @@ class PickUid extends React.Component{
 export default connect(
     state => ({
         updateRef: proptool.addPlayerRef(state.template),
-        update: state.template.update,
-        mutate: state.template.mutate,
     }),
-    {
-        updatePageByPath,
-    }
 )(PickUid)

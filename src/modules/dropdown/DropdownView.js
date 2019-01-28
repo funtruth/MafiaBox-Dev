@@ -16,7 +16,7 @@ import InputValue from './components/InputValue'
 
 import PickLogic from './logic/PickLogic';
 import PickDeleteMode from './logic/PickDeleteMode'
-import ReturnTypes from './logic/ReturnTypes';
+import PickReturnType from './logic/PickReturnType';
 
 import EditTag from './template/EditTag'
 import AddTag from './template/AddTag'
@@ -52,12 +52,12 @@ import PickOperator from './logic/PickOperator';
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
+        const { update, mutate } = this.props
         let props = Object.assign({}, item)
         
         props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
         props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
 
-        //Special deep updates
         switch(props.key) {
             case dropdownType.pickUid:
             case dropdownType.pickUpdate:
@@ -104,7 +104,7 @@ class DropdownView extends React.Component{
                     )
                 }
                 break
-            case dropdownType.returnTypes:
+            case dropdownType.pickReturnType:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -124,6 +124,17 @@ class DropdownView extends React.Component{
                 break
             default:
         }
+
+        switch(props.key) {
+            case dropdownType.pickBoolean:
+            case dropdownType.pickHealth:
+            case dropdownType.pickUid:
+            case dropdownType.pickUpdate:
+            case dropdownType.pickTimer:
+                props.update = update
+                props.mutate = mutate
+            default:
+        }
         
         switch(props.key) {
             case dropdownType.storyShowMore:
@@ -137,8 +148,8 @@ class DropdownView extends React.Component{
                 return <PickOperator {...props}/>
             case dropdownType.pickDeleteMode:
                 return <PickDeleteMode {...props}/>
-            case dropdownType.returnTypes:
-                return <ReturnTypes {...props}/>
+            case dropdownType.pickReturnType:
+                return <PickReturnType {...props}/>
 
             case dropdownType.showLibrary:
                 return <BoardLib {...props}/>
@@ -227,6 +238,8 @@ class DropdownView extends React.Component{
 export default connect(
     state => ({
         dropdownKeys: state.dropdown.dropdownKeys,
+        update: state.template.update,
+        mutate: state.template.mutate,
     }),
     {
         showDropdown,

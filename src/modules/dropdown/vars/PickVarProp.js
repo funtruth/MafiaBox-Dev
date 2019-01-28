@@ -4,7 +4,7 @@ import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
-import { variableType, panelType } from '../../logic/types'
+import { variableType, panelType, updateViewType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle';
@@ -15,6 +15,7 @@ class PickVarProp extends React.Component{
         this.props.updatePage({
             value: `${prefix}.${key}`,
             variableType: item.variableType,
+            updateViewType: updateViewType.variable,
             adjust: null,
             type: panelType.var.key,
             length: false,
@@ -23,10 +24,11 @@ class PickVarProp extends React.Component{
     }
 
     _renderItem = (item, key) => {
-        const { currentValue, prefix, updateRef } = this.props
+        const { attach, subfieldKey, prefix, updateRef } = this.props
+        const selectedValue = attach[subfieldKey] || {}
         
         const vars = proptool.getSubfields(`${prefix}.${key}`, updateRef)
-        const chosen = currentValue.value === `${prefix}.${key}`
+        const chosen = selectedValue.value === `${prefix}.${key}`
         const isObject = vars.length > 0
         
         if (isObject) {

@@ -1,20 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { updateType, updateFamilyType } from '../../logic/types'
+import { updateType, updateFamilyType, panelType, variableType } from '../../logic/types'
+import { VAR_DEFAULTS } from '../types';
 
-import { updatePageByPath } from '../../page/PageReducer'
 import UpdateType from './UpdateType';
 import DropTitle from '../components/DropTitle';
 
 class PickBoolean extends React.Component{
     _select = (item) => {
         this.props.updatePage({
+            ...VAR_DEFAULTS,
             update: this.props.update,
             mutate: this.props.mutate,
-            value: item.key,
+            panelType: panelType.var.key,
             updateViewType: item.updateViewType,
+            value: item.key,
+            variableType: variableType.boolean.key,
         })
         this.props.showDropdown()
     }
@@ -52,12 +54,4 @@ class PickBoolean extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-    {
-        updatePageByPath,
-    }
-)(PickBoolean)
+export default PickBoolean

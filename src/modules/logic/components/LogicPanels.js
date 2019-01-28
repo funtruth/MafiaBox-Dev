@@ -57,7 +57,7 @@ class LogicPanels extends React.Component{
                 return (
                     <div
                         className="logic-button app-onclick"
-                        menu-type={dropdownType.returnTypes}
+                        menu-type={dropdownType.pickReturnType}
                         app-onclick-props={JSON.stringify({
                             pageKey, fieldKey, indexKey,
                             attach: data,
