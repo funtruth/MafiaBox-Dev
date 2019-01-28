@@ -38,7 +38,7 @@ function recursive(key, library) {
     let codeCurrent = ''
     switch(type) {
         case logicType.operator.key:
-            codeCurrent = convertPropertyFields(`${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`)
+            codeCurrent = `${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`
             break
         case logicType.return.key:
             codeCurrent = returnText(data)
@@ -102,6 +102,11 @@ export function convertPropertyFields(string) {
     return parts
 }
 
+//$user to ${user} without []'s
+export function convertString(string) {
+    return string.split(' ').map(c => c.charAt(0) === '$' ? `$\{${c.substr(1)}}` : c).join(' ')
+}
+
 //converts the variables in event text properly
 function eventText(object) {
     const eventKeys = ['string', 'showTo', 'hideFrom']
@@ -124,11 +129,19 @@ function returnText(data) {
 }
 
 function getCodeFromDataProp(obj = {}) {
-    switch(obj.type) {
+    switch(obj.panelType) {
         case panelType.page.key:
             return `'${obj.value}'`
         case panelType.var.key:
-            return convertPropertyFields(applyAdjust(obj))
+            switch(obj.updateViewType) {
+                case updateViewType.number:
+                    return applyAdjust(obj)
+                case updateViewType.uid:
+                case updateViewType.variable:
+                    return convertPropertyFields(applyAdjust(obj))
+                default:
+                    return ''
+            }
         default:
             return ''
     }
@@ -136,20 +149,28 @@ function getCodeFromDataProp(obj = {}) {
 
 //proper string formatting for .adjust
 function applyAdjust(obj = {}) {
-    let value = obj.value
+    const { value, adjust } = obj
     if (obj.length) {
         value = `Object.keys(${value}).length`
     }
-    return (value && obj.adjust && `${value} + ${obj.adjust}`) || value || obj.adjust || ''
+    return (value && adjust && `${value} + ${adjust}`) || value || adjust || ''
 }
 
 //handles data value formatting on the right side of the =
 function convertValue(data, field) {
     switch(typeof data[field].value) {
         case 'string':
-            return updateType[data[field].value] ?
-                updateType[data[field].value].code(data, convertPropertyFields(field))
-                :`'${data[field].value}'`
+            switch(data[field].updateViewType) {
+                case updateViewType.staticVal:
+                case updateViewType.dynamicVal:
+                    return updateType[data[field].value].code(data, convertPropertyFields(field))
+                case updateViewType.uid:
+                case updateViewType.number:
+                case updateViewType.variable:
+                    return `\`${convertString(data[field].value)}\``
+                default:
+                    return data[field].value
+            }
         case 'object':
         default:
             console.log('logic reducer warning for future Michael', {
@@ -164,34 +185,35 @@ function convertValue(data, field) {
 export function getUpdateCode(data) {
     let string = ''
     for (var field in data) {
-        if (!data[field].value) continue
+        const info = data[field]
+        if (!info.value) continue
 
-        if (data[field].update) {
+        if (info.update) {
             string = string.concat(
                 `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                 .join('/')}\`]=${convertValue(data, field)};`
             )
         }
         
-        if (data[field].mutate) {
+        if (info.mutate) {
             string = string.concat(
                 `${convertPropertyFields(field)}=${convertValue(data, field)};`
             )
         }
 
-        switch(data[field].updateViewType) {
+        switch(info.updateViewType) {
             case updateViewType.trigger:
-                string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(data[field].value)}}`)
+                string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(info.value)}}`)
                 break
             case updateViewType.events:
-                Object.keys(data[field].value).forEach(stringKey => {
-                    string = string.concat(`updates[\`events/\${timestamp++}\`]={${eventText(data[field].value[stringKey])}};`)
+                Object.keys(info.value).forEach(stringKey => {
+                    string = string.concat(`updates[\`events/\${timestamp++}\`]={${eventText(info.value[stringKey])}};`)
                 })
                 break
             case updateViewType.timer:
                 string = string.concat(
                     `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                    .join('/')}\`]=Date.now() + ${data[field].value};`
+                    .join('/')}\`]=Date.now() + ${info.value};`
                 )
                 break
             default:

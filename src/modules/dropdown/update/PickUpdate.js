@@ -15,7 +15,7 @@ class PickUpdate extends React.Component{
             update: this.props.update,
             mutate: this.props.mutate,
             value: item.key,
-            dynamic: number,
+            adjust: number,
             updateViewType: item.updateViewType,
         })
         this.props.showDropdown()

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { dropdownType } from '../dropdown/types'
 
-import { convertPropertyFields } from '../logic/LogicReducer'
+import { convertString } from '../logic/LogicReducer'
 
 export function braceToHtml(string) {
     let parts = []
@@ -73,7 +73,7 @@ export function stringToCode(string) {
                 stringCopy = stringCopy.concat(string.slice(startIndex, i))
                 startIndex = i
             } else if (char === '}') {
-                stringCopy = stringCopy.concat(`\${${convertPropertyFields(string.slice(startIndex + 1, i))}}`)
+                stringCopy = stringCopy.concat(convertString(string.slice(startIndex + 1, i)))
                 startIndex = i + 1
                 leftBraceSaved = false
             }

@@ -15,7 +15,7 @@ class PageLib extends React.Component{
         this.props.updatePage({
             ...VAR_DEFAULTS,
             value: item.pageKey,
-            type: panelType.page.key,
+            panelType: panelType.page.key,
         })
         this.props.showDropdown()
     }

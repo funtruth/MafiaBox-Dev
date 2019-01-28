@@ -17,7 +17,7 @@ class PickVarProp extends React.Component{
             variableType: item.variableType,
             updateViewType: updateViewType.variable,
             adjust: null,
-            type: panelType.var.key,
+            panelType: panelType.var.key,
             length: false,
         })
         this.props.showDropdown()
