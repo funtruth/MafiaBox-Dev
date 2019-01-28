@@ -26,8 +26,14 @@ class StoryBoard extends React.Component{
     render() {
         const { storyMap, pageRepo, boardType } = this.props
 
-        const filteredStoryMap = _(storyMap).filter(i => i.boardType === boardType).sortBy(i => i.index).value()
-        const filteredPageRepo = _(pageRepo).filter(i => i.boardType === boardType).sortBy(i => i.index).value()
+        const filteredStoryMap = _(storyMap)
+            .filter(i => i.boardType === boardType)
+            .sortBy(i => i.index)
+            .value()
+        const filteredPageRepo = _(pageRepo)
+            .filter(i => i.boardType === boardType)
+            .sortBy(i => i.index)
+            .value()
         
         return (
             <div className="story-view">

@@ -42,6 +42,7 @@ class PickHealth extends React.Component{
         let items = _(updateType)
             .filter(i => i.family === updateFamilyType.health)
             .sortBy(i => i.index)
+            .value()
 
         return (
             <div>

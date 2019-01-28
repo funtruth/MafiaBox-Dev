@@ -57,6 +57,7 @@ export function deleteField(fieldKey) {
         let relatedRepo = _(fieldRepo)
             .filterBy(i => i.boardType === boardTarget)
             .sortBy(i => i.index)
+            .value()
         
         //remove the deleted field, re-index, and re-key (into object)
         _.remove(relatedRepo, i => i.key === fieldKey)

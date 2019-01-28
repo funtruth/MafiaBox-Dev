@@ -97,6 +97,7 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
         let relatedPages = _(pageRepo)
             .filter(i => i.storyType === mapKey)
             .sortBy(i => i.index)
+            .value()
         
         const [removed] = relatedPages.splice(startIndex, 1)
         relatedPages.splice(endIndex, 0, removed)
@@ -121,9 +122,11 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
         let startPages = _(pageRepo)
             .filter(i => i.storyType === startMapKey)
             .sortBy(i => i.index)
+            .value()
         let endPages = _(pageRepo)
             .filter(i => i.storyType === endMapKey)
             .sortBy(i => i.index)
+            .value()
 
         startPages[startIndex].storyType = endMapKey
         const [removed] = startPages.splice(startIndex, 1)

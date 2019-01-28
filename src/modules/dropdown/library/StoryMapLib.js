@@ -14,6 +14,7 @@ class StoryMapLib extends React.Component{
         const stories = _(pageRepo)
             .filter(i => hoverKey === i.boardType)
             .groupBy(i => i.storyType)
+            .value()
         
         return (
             <div>

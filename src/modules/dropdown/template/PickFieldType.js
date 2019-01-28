@@ -35,6 +35,7 @@ class PickFieldType extends React.Component{
         const data = _(fieldType)
             .orderBy(i => i.index)
             .filter(i => !i.readOnly)
+            .value()
         
         return (
             data.map(this._renderItem)

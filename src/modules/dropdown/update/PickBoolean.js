@@ -44,6 +44,7 @@ class PickBoolean extends React.Component{
         let items = _(updateType)
             .filter(i => i.family === updateFamilyType.boolean)
             .sortBy(i => i.index)
+            .value()
         
         return (
             <div>

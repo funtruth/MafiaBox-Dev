@@ -74,6 +74,7 @@ class PickUpdate extends React.Component{
         const items = _(updateType)
             .filter(i => i.family === updateFamilyType.number)
             .sortBy(i => i.index)
+            .value()
 
         return (
             <div>

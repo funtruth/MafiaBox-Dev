@@ -12,6 +12,7 @@ class TemplateView extends React.Component {
         const pageInfo = _(fieldRepo)
             .filter(i => i.boardType === boardType)
             .sortBy(i => i.index)
+            .value()
 
         if (!pageInfo.length) return null
 

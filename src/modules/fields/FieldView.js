@@ -65,6 +65,8 @@ class FieldView extends React.Component {
         const fields = _(fieldRepo)
             .filter(i => i.boardType === boardType)
             .sortBy(i => i.index)
+            .value()
+            
         if (!fields.length) return null
 
         return (
