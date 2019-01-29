@@ -64,6 +64,13 @@ export const operatorType = {
         icon: 'mdi mdi-swap-horizontal-variant',
         color: '#2e6db4',
     },
+    forin: {
+        key: 'forin',
+        index: 3,
+        title: 'for ... in',
+        icon: 'mdi mdi-sync',
+        color: '#2e6db4',
+    }
 }
 
 export const comparisonType = {
@@ -303,11 +310,6 @@ export const variableType = {
         key: 'object',
         title: 'Object',
         icon: 'mdi mdi-code-braces'
-    },
-    array: {
-        key: 'array',
-        title: 'Array',
-        icon: 'mdi mdi-code-brackets'
     },
 }
 

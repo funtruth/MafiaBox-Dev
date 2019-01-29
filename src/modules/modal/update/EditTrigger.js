@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as proptool from '../../logic/proptool'
 
 import { triggerNewVars } from '../../logic/types'
 
@@ -78,6 +77,6 @@ class EditTrigger extends React.Component {
 
 export default connect(
     state => ({
-        updateRef: proptool.addPlayerRef(state.template),
+        updateRef: state.template.updateRef,
     }),
 )(EditTrigger)

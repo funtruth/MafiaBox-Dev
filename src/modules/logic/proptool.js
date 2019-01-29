@@ -52,26 +52,3 @@ export function getUpdateConfig(prefix, updateRef) {
 
     return null
 }
-
-//replaces all $player properties with the appropriate properties
-//this allows the player properties in playerRef to exist in a single location
-export function addPlayerRef({updateRef, playerRef}) {
-    let updateRefClone = Object.assign({}, updateRef)
-
-    for (var ref in updateRefClone) {
-        let refParts = ref.split('.')
-
-        if (refParts[refParts.length - 1] === '$player') {
-            refParts.pop()
-            delete updateRefClone[ref]
-
-            const prefix = refParts.join('.')
-            for (var playerProp in playerRef) {
-                updateRefClone[`${prefix}.${playerProp}`] = playerRef[playerProp]
-            }
-
-        }
-    }
-
-    return updateRefClone
-}

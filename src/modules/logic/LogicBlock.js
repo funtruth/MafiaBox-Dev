@@ -9,13 +9,11 @@ import { droppableType } from '../common/types';
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
-import * as proptool from './proptool'
 
 import LogicErrors from './components/LogicErrors'
 import LogicNewVars from './components/LogicNewVars'
 import LogicType from './components/LogicType';
 import LogicDownArrow from './components/LogicDownArrow';
-//import LogicOptions from './components/LogicOptions'
 import LogicRightArrow from './components/LogicRightArrow';
 import LogicPanels from './components/LogicPanels';
 import LogicObject from './form/LogicObject';
@@ -63,7 +61,6 @@ class LogicBlock extends React.Component{
                             
                             const newVars = logicInfo.logicType === logicType.function.key &&
                                 logicInfo.data && pageRepo[logicInfo.data].vars
-                            const showObject = logicInfo.logicType === logicType.update.key
                                 
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -87,13 +84,12 @@ class LogicBlock extends React.Component{
                                                 <LogicPanels {...iprops}/>
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
-                                            {showObject && <LogicObject {...iprops} updateRef={updateRef}/>}
+                                            <LogicObject {...iprops} updateRef={updateRef}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>
                                             </div>
                                         </div>
-                                        {/*<LogicOptions {...iprops}/>*/}
                                         <LogicRightArrow {...iprops}/>
                                         {!collapsed && logicInfo.right && 
                                             <LogicBlock 
@@ -120,6 +116,5 @@ class LogicBlock extends React.Component{
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
-        updateRef: proptool.addPlayerRef(state.template),
     })
 )(LogicBlock)

@@ -62,7 +62,7 @@ class UpdateType extends React.Component{
 
 export default connect(
     state => ({
-        updateRef: proptool.addPlayerRef(state.template),
+        updateRef: state.template.updateRef,
     }),
     {
         initUpdateType,

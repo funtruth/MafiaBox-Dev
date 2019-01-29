@@ -39,6 +39,8 @@ class LogicPanels extends React.Component{
                         )
                     case operatorType.else.key:
                         return <div className="logic-panel-disabled">N/A</div>
+                    case operatorType.forin.key:
+                        return <div className="logic-panel-disabled">TODO</div>
                     default:
                         return null
                 }

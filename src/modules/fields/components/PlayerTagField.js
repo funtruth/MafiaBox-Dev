@@ -28,8 +28,10 @@ class PlayerTagField extends React.Component{
     }
 
     render() {
-        const { playerRef } = this.props
-        const tags = _.filter(playerRef, i => i.tag)
+        const { updateRef } = this.props
+        const tags = _(updateRef)
+            .filter(i => i.tag)
+            .value()
         
         return (
             <div className="row -x-p">
@@ -41,6 +43,6 @@ class PlayerTagField extends React.Component{
 
 export default connect(
     state => ({
-        playerRef: state.template.playerRef,
+        updateRef: state.template.updateRef,
     })
 )(PlayerTagField)

@@ -40,7 +40,9 @@ class LogicBoard extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        updateRef: state.template.updateRef,
+    }),
     {
         getCode,
     }

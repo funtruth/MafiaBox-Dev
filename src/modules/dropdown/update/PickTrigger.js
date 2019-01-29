@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as proptool from '../../logic/proptool'
 
 import { showModal } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/types';
@@ -41,7 +40,7 @@ class PickTrigger extends React.Component{
 
 export default connect(
     state => ({
-        updateRef: proptool.addPlayerRef(state.template),
+        updateRef: state.template.updateRef,
     }),
     {
         showModal,
