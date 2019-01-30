@@ -30,6 +30,7 @@ import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
+import PickObject from './vars/PickObject'
 import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
@@ -114,6 +115,7 @@ class DropdownView extends React.Component{
                 break
             case dropdownType.pickLogic:
             case dropdownType.pickOperator:
+            case dropdownType.pickVarType:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -155,7 +157,6 @@ class DropdownView extends React.Component{
             case dropdownType.pickReturnType:
                 return <PickReturnType {...props}/>
 
-
             case dropdownType.editTag:
                 return <EditTag {...props}/>
             case dropdownType.addTag:
@@ -175,6 +176,8 @@ class DropdownView extends React.Component{
                 return <PickVar {...props}/>
             case dropdownType.pickVarProp:
                 return <PickVarProp {...props}/>
+            case dropdownType.pickObject:
+                return <PickObject {...props}/>
             case dropdownType.pickVarType:
                 return <PickVarType {...props}/>
             case dropdownType.pickComparison:

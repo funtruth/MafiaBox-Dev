@@ -138,6 +138,9 @@ function getCodeFromDataProp(obj = {}) {
                 case updateViewType.uid:
                 case updateViewType.variable:
                     return convertPropertyFields(applyAdjust(obj))
+                case updateViewType.staticVal:
+                case updateViewType.dynamicVal:
+                    return updateType[obj.value].title
                 default:
                     return ''
             }

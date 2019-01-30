@@ -40,7 +40,14 @@ class LogicPanels extends React.Component{
                     case operatorType.else.key:
                         return <div className="logic-panel-disabled">N/A</div>
                     case operatorType.forin.key:
-                        return <div className="logic-panel-disabled">TODO</div>
+                        return (
+                            <LogicPanel
+                                {...this.props}
+                                subfieldKey="var1"
+                                placeholder="variable ..."
+                                dropdown={dropdownType.pickObject}
+                            />
+                        )
                     default:
                         return null
                 }

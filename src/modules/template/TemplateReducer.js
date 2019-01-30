@@ -8,7 +8,7 @@ const initialState = {
             subfield: 'gameState',
             dropdown: dropdownType.showSubfields,
             variableType: variableType.object.key,
-            rss: true,
+            pickVar: true,
         },
         'gameState.phase': {
             key: 'gameState.phase',
@@ -45,7 +45,7 @@ const initialState = {
             subfield: 'lobby',
             dropdown: dropdownType.pickUid,
             variableType: variableType.object.key,
-            rss: true,
+            pickVar: true,
         },
         'lobby.$': {
             key: 'lobby.$',
@@ -160,7 +160,7 @@ const initialState = {
             subfield: 'choices',
             dropdown: dropdownType.pickUid,
             variableType: variableType.object.key,
-            rss: true,
+            pickVar: true,
         },
         'choices.$': {
             key: 'choices.$',
@@ -203,7 +203,6 @@ const initialState = {
             subfield: 'events',
             dropdown: dropdownType.pickEvent,
             variableType: variableType.object.key,
-            rss: true,
         },
     },
     update: false,

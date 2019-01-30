@@ -1,11 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
+import { connect } from 'react-redux'
 
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
@@ -58,26 +56,24 @@ class PickVar extends React.Component{
     }
 
     render() {
-        const { attachVar } = this.props
+        const { attachVar, updateRef } = this.props
         if (!attachVar) return null
 
-        const vars = _.toArray(attachVar)
-        const uids = vars.filter(i => i.variableType === variableType.uid.key)
-        const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
-        const rssVars = vars.filter(i => i.rss)
+        const vars = _.groupBy(attachVar, i => i.variableType === variableType.uid.key)
+        const rssVars = _.filter(updateRef, i => i.pickVar)
 
         return (
             <div>
-                {uids.length > 0 && <div>
+                {vars.true && <div>
                     <DropTitle>uids</DropTitle>
                     <div className="drop-down-scrollable">
-                        {uids.map(this._renderItem)}
+                        {vars.true.map(this._renderItem)}
                     </div>
                 </div>}
-                {otherVars.length > 0 && <div>
+                {vars.false && <div>
                     <DropTitle>variables</DropTitle>
                     <div className="drop-down-scrollable">
-                        {otherVars.map(this._renderItem)}
+                        {vars.false.map(this._renderItem)}
                     </div>
                 </div>}
                 {rssVars.length > 0 && <div>
@@ -92,8 +88,7 @@ class PickVar extends React.Component{
 }
 
 export default connect(
-    null,
-    {
-        updatePageByPath,
-    }
+    state => ({
+        updateRef: state.template.updateRef,
+    })
 )(PickVar)

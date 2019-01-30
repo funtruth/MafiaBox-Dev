@@ -1,6 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import { dropdownType, VAR_DEFAULTS } from '../types'
 import { variableType, panelType, updateViewType } from '../../logic/types'
@@ -10,7 +9,7 @@ import BoardLib from '../library/BoardLib';
 import DropTitle from '../components/DropTitle';
 import DropOption from '../components/DropOption'
 
-class PickVar extends React.Component{
+class PickObject extends React.Component{
     _onSelect = (item) => {
         this.props.updatePage({
             ...VAR_DEFAULTS,
@@ -56,40 +55,14 @@ class PickVar extends React.Component{
         )
     }
 
-    _setConstant = (value) => {
-        this.props.updatePage({
-            ...VAR_DEFAULTS,
-            adjust: value,
-            panelType: panelType.var.key,
-            updateViewType: updateViewType.number,
-        })
-        this.props.showDropdown()
-    }
-
-    _setAdjustment = (value) => {
-        this.props.updatePage({
-            ...VAR_DEFAULTS,
-            adjust: value,
-        })
-        this.props.showDropdown()
-    }
-
-    _setLength = () => {
-        const { attach, subfieldKey } = this.props
-        const selectedValue = attach[subfieldKey] || {}
-        
-        this.props.updatePage({
-            length: !selectedValue.length,
-        })
-        this.props.showDropdown()
-    }
-
     render() {
-        const { attachVar, attach, subfieldKey, updateRef } = this.props
+        const { attachVar, attach, subfieldKey } = this.props
         const selectedValue = attach[subfieldKey] || {}
 
-        const vars = _.groupBy(attachVar, i => i.variableType === variableType.uid.key)
-        const rssVars = _.filter(updateRef, i => i.pickVar)
+        const vars = _.toArray(attachVar)
+        const uids = vars.filter(i => i.variableType === variableType.uid.key)
+        const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
+        const rssVars = vars.filter(i => i.rss)
         
         const isNumber = selectedValue.variableType === variableType.number.key
         const hasLength = selectedValue.variableType === variableType.object.key
@@ -97,22 +70,22 @@ class PickVar extends React.Component{
         return (
             <div>
                 <BoardLib {...this.props}/>
-                {rssVars.length > 0 && <div>
-                    <DropTitle>game values</DropTitle>
-                    <div className="drop-down-scrollable">
-                        {rssVars.map(this._renderItem)}
-                    </div>
-                </div>}
-                {vars.true && <div>
+                {uids.length > 0 && <div>
                     <DropTitle>uids</DropTitle>
                     <div className="drop-down-scrollable">
-                        {vars.true.map(this._renderItem)}
+                        {uids.map(this._renderItem)}
                     </div>
                 </div>}
-                {vars.false && <div>
+                {otherVars.length > 0 && <div>
                     <DropTitle>variables</DropTitle>
                     <div className="drop-down-scrollable">
-                        {vars.false.map(this._renderItem)}
+                        {otherVars.map(this._renderItem)}
+                    </div>
+                </div>}
+                {rssVars.length > 0 && <div>
+                    <DropTitle>game variables</DropTitle>
+                    <div className="drop-down-scrollable">
+                        {rssVars.map(this._renderItem)}
                     </div>
                 </div>}
                 <DropTitle>other options</DropTitle>
@@ -157,8 +130,4 @@ class PickVar extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    })
-)(PickVar)
+export default PickObject

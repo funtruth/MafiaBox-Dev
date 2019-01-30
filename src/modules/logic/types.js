@@ -134,6 +134,7 @@ export const updateViewType = {
     trigger: 'updateViewType/trigger',
     events: 'updateViewType/events',
     timer: 'updateViewType/timer',
+    boolean: 'updateViewType/boolean',
 }
 
 //possible static and dynamic update types

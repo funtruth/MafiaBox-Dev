@@ -1,4 +1,4 @@
-import { logicType } from './types'
+//import { logicType } from './types'
 
 /* function compile
     takes the item key and the overall value
@@ -6,7 +6,7 @@ import { logicType } from './types'
 */
 export function compile(key, map) {
     let errors = []
-    let parent = getParent(key, map)
+    //let parent = getParent(key, map)
 
     //cases = []
     //loop through yellow then red?
@@ -34,7 +34,7 @@ function addYellow(text, errors) {
 /*
     MUTATES
 */
-function addRed(text, errors) {
+export function addRed(text, errors) {
     errors.push({
         icon: 'ion-md-warning',
         color: '#db4757',
