@@ -73,3 +73,18 @@ export function getDropdownParentTarget(ele) {
 
     return null
 }
+
+export function swapVarFormat(string, ugly) {
+    const itemType = typeof string
+    switch(itemType) {
+        case 'string':
+            return ugly ?
+                string.replace(/\./g, '§')
+                :string.replace(/§/g, '.')
+        case 'object':
+            return JSON.parse(swapVarFormat(JSON.stringify(string), ugly))
+        default:
+            return console.warn('Unexpected input, helpers swapVarFormat', {string})
+    }
+    
+}

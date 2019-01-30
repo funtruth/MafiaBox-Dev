@@ -1,4 +1,5 @@
 import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
+import * as helpers from '../common/helpers'
 import { stringToCode } from '../strings/stringTool';
 
 var beautify_js = require('js-beautify');
@@ -6,11 +7,9 @@ var beautify_js = require('js-beautify');
 const initialState = {}
 
 //THUNK FUNCTIONS
-export function getCode(fieldInfo, key, library) {
-    const { vars } = fieldInfo
-    return (dispatch, getState) => {
-        const { rssRef } = getState().template
-        return `(${groupRSSVars(vars)}${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
+export function getCode(key, library) {
+    return (dispatch) => {
+        return `(rss, write, choice${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
     }
 }
 
@@ -99,6 +98,7 @@ export function convertPropertyFields(string) {
     }
 
     parts = parts.join('.').replace(/\$/g, '[').replace(/\.\[/g, '[')
+    parts = helpers.swapVarFormat(parts, false)
 
     return parts
 }
@@ -165,10 +165,13 @@ function convertValue(data, field) {
                 case updateViewType.staticVal:
                 case updateViewType.dynamicVal:
                     return updateType[data[field].value].code(data, convertPropertyFields(field))
-                case updateViewType.uid:
                 case updateViewType.number:
                 case updateViewType.variable:
                     return `\`${convertString(data[field].value)}\``
+                case updateViewType.health:
+                    return `'${data[field].value}'`
+                case updateViewType.uid:
+                    return helpers.swapVarFormat(data[field].value.substr(1))
                 default:
                     return data[field].value
             }
@@ -191,14 +194,13 @@ export function getUpdateCode(data) {
 
         if (info.update) {
             string = string.concat(
-                `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                .join('/')}\`]=${convertValue(data, field)};`
+                `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${helpers.swapVarFormat(i.substring(1), false)}}`:i).join('/')}\`]=${convertValue(data, field)};`
             )
         }
         
         if (info.mutate) {
             string = string.concat(
-                `${convertPropertyFields(field)}=${convertValue(data, field)};`
+                `rss.${convertPropertyFields(field)}=${convertValue(data, field)};`
             )
         }
 
@@ -208,12 +210,12 @@ export function getUpdateCode(data) {
                 break
             case updateViewType.events:
                 Object.keys(info.value).forEach(stringKey => {
-                    string = string.concat(`updates[\`events/\${timestamp++}\`]={${eventText(info.value[stringKey])}};`)
+                    string = string.concat(`write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
                 })
                 break
             case updateViewType.timer:
                 string = string.concat(
-                    `updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                    `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=Date.now() + ${info.value};`
                 )
                 break
@@ -221,22 +223,6 @@ export function getUpdateCode(data) {
         }
     }
     return string
-}
-
-//group variables for the function arguments
-function groupRSSVars(vars) {
-    let yes = [], no = []
-    Object.keys(vars).forEach(key => {
-        if (key.charAt(0) === '$') {
-            vars[key].rss ? yes.push(key.substr(1)) : no.push(key.substr(1))
-        } else {
-            vars[key].rss ? yes.push(key) : no.push(key)
-        }
-    })
-
-    const rssVars = `{${yes.join(', ')}}`
-    const otherVars = (no.length ? `, {${no.join(', ')}}` : '')
-    return `${rssVars}${otherVars}`
 }
 
 export default (state = initialState, action) => {

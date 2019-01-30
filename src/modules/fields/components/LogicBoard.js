@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
+import * as helpers from '../../common/helpers'
 import { getCode } from '../../logic/LogicReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
@@ -13,19 +14,20 @@ class LogicBoard extends React.Component{
         const { fieldInfo, value } = this.props
         
         const origin = _.findKey(value, i => !i.source)
-        const code = this.props.getCode(fieldInfo, origin, value)
-
+        const code = this.props.getCode(origin, value)
+        const vars = helpers.swapVarFormat(fieldInfo.vars, true)
+        
         if (!value) return null
         
         return (
             <div className="logic-board">
-                <LogicArgs vars={fieldInfo.vars}/>
+                <LogicArgs vars={vars}/>
                 <div style={{ margin: '8px 6px' }}>
                     <LogicBlock
                         {...this.props}
                         value={value}
                         indexKey={origin}
-                        vars={fieldInfo.vars}
+                        vars={vars}
                     />
                 </div>
                 <CodeField

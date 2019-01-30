@@ -43,7 +43,7 @@ export function publishPage(pageKey) {
                 switch(fieldRepo[i].fieldType) {
                     case fieldType.logic.key:
                         const origin = _.findKey(pageInfo[i], i => !i.source)
-                        batchUpdate[i] = dispatch(getCode(fieldRepo[i], origin, pageInfo[i]))
+                        batchUpdate[i] = dispatch(getCode(origin, pageInfo[i]))
                             .replace(/(\r\n|\n|\r|\s\s\s\s)/gm,"")
                         break
                     case fieldType.playerTag.key:

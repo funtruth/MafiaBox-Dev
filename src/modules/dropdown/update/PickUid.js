@@ -30,7 +30,7 @@ class PickUid extends React.Component{
         
         const config = proptool.getUpdateConfig(newKey, updateRef)
 
-        if (!config || config.hideButton) {
+        if (!config) {
             return (
                 <div
                     key={item.key}

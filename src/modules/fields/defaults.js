@@ -184,27 +184,12 @@ export const initFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Target Mode',
         vars: {
-            lobby: {
-                key: 'lobby',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            gameState: {
-                key: 'gameState',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            updates: {
-                key: 'updates',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            "$user": {
-                key: '$user',
+            "$choice.user": {
+                key: '$choice.user',
                 variableType: variableType.uid.key,
             },
-            "$target": {
-                key: '$target',
+            "$choice.target": {
+                key: '$choice.target',
                 variableType: variableType.uid.key,
             },
         },
@@ -217,23 +202,21 @@ export const initFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Action',
         vars: {
-            lobby: {
-                key: 'lobby',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            updates: {
-                key: 'updates',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            user: {
-                key: 'user',
+            "$choice.user": {
+                key: '$choice.user',
                 variableType: variableType.uid.key,
             },
-            target: {
-                key: 'target',
+            "$choice.target": {
+                key: '$choice.target',
                 variableType: variableType.uid.key,
+            },
+            "$choice.multitarget": {
+                key: '$choice.multitarget',
+                variableType: variableType.object.key,
+            },
+            "$choice.value": {
+                key: '$choice.value',
+                variableType: variableType.string.key,
             },
         },
         boardType: boardType.roles.key,
@@ -246,33 +229,11 @@ export const initFieldRepo = {
         title: 'Phase Choices',
         boardType: boardType.phases.key,
     },
-    phaseTriggerMode: {
-        key: 'phaseTriggerMode',
+    phaseListener: {
+        key: 'phaseListener',
         index: 2,
         fieldType: fieldType.logic.key,
-        title: 'Phase Trigger',
-        vars: {
-            lobby: {
-                key: 'lobby',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            updates: {
-                key: 'updates',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            choices: {
-                key: 'choices',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-            gameState: {
-                key: 'gameState',
-                rss: true,
-                variableType: variableType.object.key,
-            },
-        },
+        title: 'Phase Listener',
         boardType: boardType.phases.key,
         default: defaultLogic,
     },
