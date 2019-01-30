@@ -5,8 +5,7 @@ import { variableType } from '../../logic/types'
 
 class VariableField extends React.Component{
     _renderItem = (item, index) => {
-        const { pageInfo, fieldKey, value } = this.props
-        const { pageKey } = pageInfo
+        const { pageKey, fieldKey, value } = this.props
 
         const style = {
             backgroundColor: 'rgba(40, 43, 48,1)',
@@ -48,8 +47,7 @@ class VariableField extends React.Component{
     }
 
     _renderFooter() {
-        const { pageInfo, fieldKey } = this.props
-        const { pageKey } = pageInfo
+        const { pageKey, fieldKey } = this.props
 
         const style = {
             backgroundColor: 'hsla(0,0%,100%,.1)',

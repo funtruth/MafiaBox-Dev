@@ -2,20 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { panelType } from '../../logic/types'
+import { panelType, updateViewType } from '../../logic/types'
 import DropTitle from '../components/DropTitle';
 import { VAR_DEFAULTS } from '../types';
 
 class PageLib extends React.Component{
     _onClick = (item) => {
-        const { onSelect } = this.props
-        
-        if (onSelect) return onSelect(item.pageKey)
-
         this.props.updatePage({
             ...VAR_DEFAULTS,
             value: item.pageKey,
             panelType: panelType.page.key,
+            updateViewType: updateViewType.page,
         })
         this.props.showDropdown()
     }

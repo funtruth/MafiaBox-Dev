@@ -1,10 +1,8 @@
 export const dropdownType = {
     storyShowMore: 'dropdownType/story-show-more',
     inputValue: 'dropdownType/input-value',
-
-    showLibrary: 'dropdownType/show-library',
-    pageLib: 'dropdownType/page-lib',
     storyMapLib: 'dropdownType/story-map-lib',
+    pageLib: 'dropdownType/page-lib',
 
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',

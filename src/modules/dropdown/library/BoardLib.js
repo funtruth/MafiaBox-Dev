@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { updatePageByPath } from '../../page/PageReducer'
-
 import DropParent from '../components/DropParent'
 
 class BoardLib extends React.Component{
@@ -20,9 +18,7 @@ class BoardLib extends React.Component{
     }
 
     _onSelect = (key) => {
-        const { pageKey, fieldKey, indexKey } = this.props
-        
-        this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', key)
+        this.props.updatePage(key)
         this.props.showDropdown()
     }
 
@@ -34,7 +30,7 @@ class BoardLib extends React.Component{
     }
 
     render() {
-        const { pageRepo, boardRepo } = this.props
+        const { pageRepo } = this.props
         const { searchText } = this.state
 
         const boards = _(pageRepo)
@@ -62,9 +58,11 @@ class BoardLib extends React.Component{
                                     className="drop-down-menu-option"
                                     onClick={this._onSelect.bind(this, item)}
                                 >
-                                    <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
+                                    <div className="text-ellipsis" style={{ maxWidth: 100 }}>
+                                        {item.title}
+                                    </div>
                                     <div style={{ marginLeft: 'auto', color: '#666666' }}>
-                                        {`${boardRepo[item.boardType].title}`}
+                                        {item.boardType}
                                     </div>
                                 </div>
                             )
@@ -81,7 +79,7 @@ class BoardLib extends React.Component{
                                 params={{
                                     hoverKey: item,
                                 }}
-                                text={boardRepo[item].title}
+                                text={item}
                             />
                         )
                     })
@@ -93,10 +91,6 @@ class BoardLib extends React.Component{
 
 export default connect(
     state => ({
-        boardRepo: state.page.boardRepo,
         pageRepo: state.page.pageRepo,
     }),
-    {
-        updatePageByPath,
-    }
 )(BoardLib)

@@ -9,7 +9,7 @@ const initialState = {}
 //THUNK FUNCTIONS
 export function getCode(key, library) {
     return (dispatch) => {
-        return `(rss, write, choice${beautify_js(`)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})}`
+        return beautify_js(`(rss, write, choice)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})
     }
 }
 
@@ -41,8 +41,12 @@ function recursive(key, library) {
             codeCurrent = `${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`
             break
         case logicType.return.key:
-            codeCurrent = returnText(data)
-            break
+            switch(data.key) {
+                case 'toast':
+                    return codeCurrent = `{${eventText(data)}}`
+                default:
+                    return codeCurrent = returnType[data.key] ? returnType[data.key].code : ''
+            }
         case logicType.update.key:
             codeCurrent = codeCurrent.concat(getUpdateCode(data))
             break
@@ -53,7 +57,7 @@ function recursive(key, library) {
     if (!codeCurrent) codeCurrent = ''
 
     let codeBody = ''
-    let codeRight = recursive(library[key].right, library) || '\n'
+    let codeRight = recursive(library[key].right, library) || ''
     switch(type) {
         case logicType.operator.key:
             switch(opType) {
@@ -66,14 +70,17 @@ function recursive(key, library) {
                 case operatorType.elseif.key:
                     codeBody = `else if(${codeCurrent}){${codeRight}}`
                     break
+                case operatorType.forin.key:
+                    codeBody = `for( in )${codeCurrent}${codeRight}`
+                    break
                 default:
             }
             break
         case logicType.function.key:
-            codeBody = `${codeCurrent};${codeRight};`
+            codeBody = `${codeCurrent}${codeRight}`
             break
         case logicType.return.key:
-            codeBody = `return ${codeCurrent};`
+            codeBody = `return ${codeCurrent}`
             break
         case logicType.update.key:
             codeBody = `${codeCurrent}${codeRight}`
@@ -84,7 +91,7 @@ function recursive(key, library) {
     
     let codeDown = library[key].down ? recursive(library[key].down, library) : ''
 
-    return `${codeBody}${codeDown}`
+    return helpers.swapVarFormat(`${codeBody}${codeDown}`, false)
 }
 
 //replace variable properties from foo.$bar to foo[bar]
@@ -98,7 +105,6 @@ export function convertPropertyFields(string) {
     }
 
     parts = parts.join('.').replace(/\$/g, '[').replace(/\.\[/g, '[')
-    parts = helpers.swapVarFormat(parts, false)
 
     return parts
 }
@@ -111,22 +117,14 @@ export function convertString(string) {
 //converts the variables in event text properly
 function eventText(object) {
     const eventKeys = ['string', 'showTo', 'hideFrom']
-    return eventKeys.map(k => k in object ?
-        `${k}:${typeof object[k] === 'string' ?
-            `\`${stringToCode(object[k])}\``
-            :`{${Object.keys(object[k]).map(u => `${convertPropertyFields(u)}:true,`)}}`
-        },`:'').join('')
-}
-
-//get return text for logicType.return
-function returnText(data) {
-    const { key } = data
-    switch(key) {
-        case 'toast':
-            return `{${eventText(data)}}`
-        default:
-            return returnType[key] ? returnType[key].code : ''
-    }
+    return eventKeys.map(k => {
+        return k in object ?
+            `${k}:${typeof object[k] === 'string' ?
+                `\`${stringToCode(object[k])}\``
+                :`{${Object.keys(object[k]).map(u => `${convertPropertyFields(u)}:true,`)}}`
+            },`
+            :''
+    }).join('')
 }
 
 function getCodeFromDataProp(obj = {}) {
@@ -171,7 +169,7 @@ function convertValue(data, field) {
                 case updateViewType.health:
                     return `'${data[field].value}'`
                 case updateViewType.uid:
-                    return helpers.swapVarFormat(data[field].value.substr(1))
+                    return data[field].value.substr(1)
                 default:
                     return data[field].value
             }
@@ -194,7 +192,7 @@ export function getUpdateCode(data) {
 
         if (info.update) {
             string = string.concat(
-                `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${helpers.swapVarFormat(i.substring(1), false)}}`:i).join('/')}\`]=${convertValue(data, field)};`
+                `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}`:i).join('/')}\`]=${convertValue(data, field)};`
             )
         }
         
@@ -209,15 +207,15 @@ export function getUpdateCode(data) {
                 string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(info.value)}}`)
                 break
             case updateViewType.events:
-                Object.keys(info.value).forEach(stringKey => {
-                    string = string.concat(`write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
-                })
+                string = string.concat(
+                    Object.keys(info.value)
+                    .map(stringKey => `write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
+                    .join(''))
                 break
             case updateViewType.timer:
                 string = string.concat(
                     `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
-                    .join('/')}\`]=Date.now() + ${info.value};`
-                )
+                    .join('/')}\`]=Date.now() + ${info.value};`)
                 break
             default:
         }

@@ -39,9 +39,7 @@ class PickTrigger extends React.Component{
 }
 
 export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
+    null,
     {
         showModal,
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { triggerNewVars } from '../../logic/types'
+import { logicType } from '../../logic/types'
 
 import { getUpdateCode } from '../../logic/LogicReducer'
 
@@ -26,6 +27,7 @@ class EditTrigger extends React.Component {
             indexKey,
             logicInfo: {
                 data,
+                logicType: logicType.update.key,
             },
             pageKey,
             fieldKey,

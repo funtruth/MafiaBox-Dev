@@ -13,6 +13,8 @@ import SearchBoard from './update/SearchBoard';
 
 import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
+import StoryMapLib from './library/StoryMapLib';
+import PageLib from './library/PageLib';
 
 import PickLogic from './logic/PickLogic';
 import PickDeleteMode from './logic/PickDeleteMode'
@@ -23,10 +25,6 @@ import AddTag from './template/AddTag'
 import PickFieldType from './template/PickFieldType'
 import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
-
-import BoardLib from './library/BoardLib';
-import PageLib from './library/PageLib';
-import StoryMapLib from './library/StoryMapLib';
 
 import AddVar from './vars/AddVar'
 import EditVar from './vars/EditVar'
@@ -105,6 +103,7 @@ class DropdownView extends React.Component{
                 }
                 break
             case dropdownType.pickReturnType:
+            case dropdownType.boardLib:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -142,7 +141,11 @@ class DropdownView extends React.Component{
                 return <StoryShowMore {...props}/>
             case dropdownType.inputValue:
                 return <InputValue {...props}/>
-                
+            case dropdownType.storyMapLib:
+                return <StoryMapLib {...props}/>
+            case dropdownType.pageLib:
+                return <PageLib {...props}/>
+
             case dropdownType.pickLogic:
                 return <PickLogic {...props}/>
             case dropdownType.pickOperator:
@@ -152,12 +155,6 @@ class DropdownView extends React.Component{
             case dropdownType.pickReturnType:
                 return <PickReturnType {...props}/>
 
-            case dropdownType.showLibrary:
-                return <BoardLib {...props}/>
-            case dropdownType.pageLib:
-                return <PageLib {...props}/>
-            case dropdownType.storyMapLib:
-                return <StoryMapLib {...props}/>
 
             case dropdownType.editTag:
                 return <EditTag {...props}/>

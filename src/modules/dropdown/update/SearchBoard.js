@@ -4,9 +4,6 @@ import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
-import { updateViewType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
 
 import StoryMapLib from '../library/StoryMapLib';
 import DropTitle from '../components/DropTitle';
@@ -21,21 +18,6 @@ class SearchBoard extends React.Component{
         this.fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === props.boardType), fuseType.searchBoard)
     }
 
-    _onSelect = (value) => {
-        const { pageKey, fieldKey, indexKey, subfieldKey } = this.props
-        
-        if (subfieldKey) {
-            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', subfieldKey, {
-                value,
-                updateViewType: updateViewType.page,
-            })
-        } else {
-            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', value)
-        }
-            
-        this.props.showDropdown()
-    }
-
     _onType = (e) => {
         this.setState({
             searchText: e.target.value,
@@ -44,7 +26,7 @@ class SearchBoard extends React.Component{
     }
 
     render() {
-        const { pageRepo, boardRepo, boardType } = this.props
+        const { pageRepo, boardType } = this.props
         const { searchText } = this.state
         
         return (
@@ -71,7 +53,7 @@ class SearchBoard extends React.Component{
                                     >
                                         <div className="text-ellipsis" style={{ maxWidth: 100 }}>{pageRepo[item.pageKey].title}</div>
                                         <div style={{ marginLeft: 'auto', color: '#666666' }}>
-                                            {boardRepo[item.boardType].title}
+                                            {item.boardType}
                                         </div>
                                     </div>
                                 )
@@ -84,7 +66,6 @@ class SearchBoard extends React.Component{
                     :<StoryMapLib
                         {...this.props}
                         hoverKey={boardType}
-                        onSelect={this._onSelect}
                     />
                 }
             </div>
@@ -94,11 +75,6 @@ class SearchBoard extends React.Component{
 
 export default connect(
     state => ({
-        boardRepo: state.page.boardRepo,
         pageRepo: state.page.pageRepo,
-        storyMap: state.page.storyMap,
     }),
-    {
-        updatePageByPath,
-    }
 )(SearchBoard)
