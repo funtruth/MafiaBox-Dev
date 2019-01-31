@@ -67,6 +67,14 @@ const initialState = {
             mutate: true,
             variableType: variableType.string.key,
         },
+        'lobby.$.role.team': {
+            key: 'lobby.$.role.team',
+            subfield: 'team',
+            dropdown: dropdownType.pickTeam, //TODO
+            update: true,
+            mutate: true,
+            variableType: variableType.string.key,
+        },
         'lobby.$.role.action': {
             key: 'lobby.$.role.action',
             subfield: 'action',
@@ -177,7 +185,7 @@ const initialState = {
         'choices.$.target': {
             key: 'choices.$.target',
             subfield: 'target',
-            dropdown: dropdownType.pickUid,
+            dropdown: dropdownType.pickChoice,
             variableType: variableType.uid.key,
         },
         'choices.$.multitarget': {

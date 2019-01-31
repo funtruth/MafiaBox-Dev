@@ -7,8 +7,7 @@
     align-items: center;
     width: 18px;
     background-color: hsla(0,0%,100%,.1);
-    font-size: 13px;
-    font-weight: 300;
+    font: 300 13px Arial;
     letter-spacing: 0.6px;
     cursor: pointer;
 }

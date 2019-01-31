@@ -43,10 +43,13 @@ function recursive(key, library) {
         case logicType.return.key:
             switch(data.key) {
                 case 'toast':
-                    return codeCurrent = `{${eventText(data)}}`
+                    codeCurrent = `{${eventText(data)}}`
+                    break
                 default:
-                    return codeCurrent = returnType[data.key] ? returnType[data.key].code : ''
+                    codeCurrent = returnType[data.key] ? returnType[data.key].code : ''
+                    break
             }
+            break
         case logicType.update.key:
             codeCurrent = codeCurrent.concat(getUpdateCode(data))
             break
@@ -136,8 +139,9 @@ function getCodeFromDataProp(obj = {}) {
                 case updateViewType.number:
                     return applyAdjust(obj)
                 case updateViewType.uid:
+                    return obj.value.substr(1)
                 case updateViewType.variable:
-                    return convertPropertyFields(applyAdjust(obj))
+                    return `rss.${convertPropertyFields(applyAdjust(obj))}`
                 case updateViewType.staticVal:
                 case updateViewType.dynamicVal:
                     return updateType[obj.value].title
@@ -207,7 +211,7 @@ export function getUpdateCode(data) {
 
         switch(info.updateViewType) {
             case updateViewType.trigger:
-                string = string.concat(`${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(info.value)}}`)
+                string = string.concat(`rss.${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(info.value)}}`)
                 break
             case updateViewType.events:
                 string = string.concat(

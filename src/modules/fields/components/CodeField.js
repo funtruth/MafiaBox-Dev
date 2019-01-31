@@ -12,7 +12,8 @@ class CodeField extends React.Component{
                     ...this.props.options,
                     mode: 'javascript',
                     theme: 'monokai',
-                    lineNumbers: true
+                    lineNumbers: true,
+                    lineWrapping: true,
                 }}
             />
         )

@@ -1,86 +1,71 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import * as proptool from '../../logic/proptool'
 import { variableType, updateViewType } from '../../logic/types'
-
-import DropParent from '../components/DropParent'
-import UpdateType from './UpdateType';
 import { VAR_DEFAULTS } from '../types';
 
-//TODO this is not real XD
+import UpdateType from './UpdateType';
+import DropTitle from '../components/DropTitle';
+
 class PickChoice extends React.Component{
     _select = (item) => {
         this.props.updatePage({
             ...VAR_DEFAULTS,
             update: this.props.update,
             mutate: this.props.mutate,
-            value: item.key,
+            value: item.key || "$\"\"", //HACK
             updateViewType: updateViewType.uid,
         })
         this.props.showDropdown()
     }
 
     _renderItem = (item) => {
-        const { currentValue, updateRef, subfieldKey } = this.props
-        const newKey = `${subfieldKey}.${item.key}`
-        
-        const config = proptool.getUpdateConfig(newKey, updateRef)
-        const chosen = typeof currentValue === 'string' && currentValue === item
+        const { attach, subfieldKey } = this.props
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
 
-        if (!config || config.hideButton) {
-            return (
-                <div
-                    key={item.key}
-                    className="drop-down-menu-option"
-                    chosen={chosen.toString()}
-                    onClick={this._select.bind(this, item)}
-                >
-                    {item.key}
-                    <i className="mdi mdi-check"/>
-                </div>
-            )
-        }
-    
         return (
-            <DropParent
-                {...this.props}
+            <div
                 key={item.key}
-                dropdownType={config.dropdown}
-                params={{
-                    subfieldKey: newKey,
-                }}
-                text={item.key}
-            />
+                className="drop-down-menu-option"
+                chosen={chosen.toString()}
+                onClick={this._select.bind(this, item)}
+            >
+                {item.key}
+                <i className="mdi mdi-check"/>
+            </div>
         )
-        
     }
 
     render() {
-        const { attachVar, subfieldKey } = this.props
+        const { attachVar, attach, subfieldKey } = this.props
+
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+        const chosen = typeof selectedKey === 'string' && selectedKey === "$\"\""
+
         const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
-        const fields = proptool.getSubfields(subfieldKey, this.props.updateRef)
         
         return (
             <div>
+                <DropTitle>uids</DropTitle>
                 {uids.length ?
-                    <div>
-                        {uids.map(this._renderItem)}
-                    </div>
-                    :<div className="drop-down-empty">
-                        no UIDs found
-                    </div>}
-                {!fields.length && <UpdateType {...this.props}/>}
+                    uids.map(this._renderItem)
+                    :<div className="drop-down-empty">no UIDs found</div>
+                }
+                <DropTitle>options</DropTitle>
+                <div
+                    className="drop-down-menu-option"
+                    chosen={chosen.toString()}
+                    onClick={this._select}
+                >
+                    <i className="drop-down-menu-icon mdi mdi-message-bulleted-off"/>
+                    no choice
+                    <i className="mdi mdi-check"/>
+                </div>
+                <UpdateType {...this.props}/>
             </div>
         )
     }
 }
 
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-        update: state.template.update,
-        mutate: state.template.mutate,
-    }),
-)(PickChoice)
+export default PickChoice

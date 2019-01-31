@@ -38,6 +38,7 @@ import PickBoolean from './update/PickBoolean'
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
 import PickTimer from './update/PickTimer'
+import PickTeam from './update/PickTeam'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
 import PickUpdate from './update/PickUpdate'
@@ -59,6 +60,7 @@ class DropdownView extends React.Component{
 
         switch(props.key) {
             case dropdownType.pickUid:
+            case dropdownType.pickChoice:
             case dropdownType.pickUpdate:
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
@@ -132,6 +134,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickUid:
             case dropdownType.pickUpdate:
             case dropdownType.pickTimer:
+            case dropdownType.pickChoice:
                 props.update = update
                 props.mutate = mutate
                 break
@@ -191,6 +194,8 @@ class DropdownView extends React.Component{
                 return <PickHealth {...props}/>
             case dropdownType.pickTimer:
                 return <PickTimer {...props}/>
+            case dropdownType.pickTeam:
+                return <PickTeam {...props}/>
             case dropdownType.pickTrigger:
                 return <PickTrigger {...props}/>
             case dropdownType.pickUid:

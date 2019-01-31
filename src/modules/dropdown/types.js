@@ -29,6 +29,7 @@ export const dropdownType = {
     pickChoice: 'dropdownType/pick-choice',
     pickPhase: 'dropdownType/pick-phase',
     pickTimer: 'dropdownType/pick-timer',
+    pickTeam: 'dropdownType/pick-team',
     pickTrigger: 'dropdownType/pick-trigger',
     pickUpdate: 'dropdownType/pick-update',
     pickUid: 'dropdownType/pick-uid',

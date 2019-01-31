@@ -25,7 +25,7 @@ class LogicPanel extends React.Component{
                 })}
                 style={{
                     color: (dataProp.key || dataProp.value || dataProp.adjust) ? '#fff' : '#868686',
-                    borderRadius: '0px 4px 0px 0px',
+                    borderRadius: '0px 4px 0px 0px', //TODO
                 }}
             >
                 <div className="text-ellipsis">

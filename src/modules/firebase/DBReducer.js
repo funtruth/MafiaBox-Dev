@@ -33,10 +33,9 @@ export function publishPage(pageKey) {
         if (!pageKey || !gameKey) return
 
         const pageInfo = pageRepo[pageKey] || {}
-        const { boardType } = pageInfo
         
         let batchUpdate = Object.assign({}, pageInfo)
-        const path = `library/${gameKey}/${boardType}/${pageKey}`
+        const path = `library/${gameKey}/${pageKey}`
 
         Object.keys(batchUpdate).forEach(i => {
             if (fieldRepo[i]) {
