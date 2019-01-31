@@ -6,6 +6,7 @@ export const authType = {
 
 export const droppableType = {
     board: 'droppableType/board',
+    functionBoard: 'droppableType/function-board',
     logic: 'droppableType/logic',
     template: 'droppableType/template',
     tag: 'droppableType/tag',

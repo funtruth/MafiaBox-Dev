@@ -1,13 +1,14 @@
 import React from 'react'
-import './board.css'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { addPageToMap } from '../page/PageReducer'
+import { droppableType } from '../../common/types';
+import { boardType } from '../../fields/defaults'
 
-import StoryList from './components/StoryList'
-import { droppableType } from '../common/types';
+import { addPageToMap } from '../../page/PageReducer'
+
+import StoryList from '../components/StoryList'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -22,29 +23,23 @@ const getListStyle = isDraggingOver => ({
     ...styles.listStyle,
 });
 
-class StoryBoard extends React.Component{
+class FunctionView extends React.Component{
     render() {
-        const { storyMap, pageRepo, boardType } = this.props
+        const { functionMap, functionRepo } = this.props
 
-        const filteredStoryMap = _(storyMap)
-            .filter(i => i.boardType === boardType)
-            .sortBy(i => i.index)
-            .value()
-        const filteredPageRepo = _(pageRepo)
-            .filter(i => i.boardType === boardType)
-            .sortBy(i => i.index)
-            .value()
+        const filteredMap = _.sortBy(functionMap, i => i.index)
+        const filteredRepo = _.sortBy(functionRepo, i => i.index)
         
         return (
             <div className="story-view">
-                <Droppable droppableId={`${droppableType.board}.${boardType}`} direction="horizontal" type="COLUMN">
+                <Droppable droppableId={droppableType.functionBoard} direction="horizontal" type="COLUMN">
                     {(provided, snapshot) => (
                         <div
                             className="scrollable-x"
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {filteredStoryMap.map((item, index) => (
+                            {filteredMap.map((item, index) => (
                                 <Draggable key={item.key} draggableId={item.key} index={index}>
                                     {(provided, snapshot) => (
                                         <div
@@ -61,7 +56,7 @@ class StoryBoard extends React.Component{
                                                 storyIndex={index}
                                                 boardType={boardType}
                                                 dragging={snapshot.isDragging}
-                                                repo={filteredPageRepo}
+                                                repo={filteredRepo}
                                             />
                                         </div>
                                     )}
@@ -95,10 +90,10 @@ const styles = {
 
 export default connect(
     state => ({
-        storyMap: state.page.storyMap,
-        pageRepo: state.page.pageRepo,
+        functionRepo: state.functions.functionRepo,
+        functionMap: state.functions.functionMap,
     }),
     {
         addPageToMap,
     }
-)(StoryBoard)
+)(FunctionView)

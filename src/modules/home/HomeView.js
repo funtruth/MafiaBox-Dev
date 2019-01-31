@@ -6,7 +6,7 @@ import SideBarView from './SideBarView';
 import HeaderView from './HeaderView';
 
 import LandingView from './LandingView'
-import LibraryView from '../board/views/LibraryView'
+import FunctionView from '../board/views/FunctionView'
 import StoryView from '../board/views/StoryView';
 import FlowView from '../board/views/FlowView'
 import WindowTemplateView from '../template/WindowTemplateVIew'
@@ -23,7 +23,8 @@ class HomeView extends React.Component{
                     <HeaderView location={this.props.location}/>
                     <div>
                         <Route exact path="/" component={LandingView}/>
-                        <Route exact path="/library" component={LibraryView}/>
+                        <Route exact path="/library" component={FunctionView}/>
+                        <Route exact path="/library/:pageKey" component={FunctionView}/>
                         <Route exact path="/roles" component={StoryView}/>
                         <Route exact path="/roles/:pageKey" component={WindowPageView}/>
                         <Route exact path="/defaults/:boardType" component={WindowTemplateView}/>

@@ -66,3 +66,22 @@ export const initStoryMap = {
         default: true,
     },
 }
+
+export const initFunctionMap = {
+    boolean: {
+        key: 'boolean',
+        index: 0,
+        title: 'Boolean',
+        boardType: boardType.library.key,
+        palette: 'palette-yellow',
+        default: true,
+    },
+    functions: {
+        key: 'functions',
+        index: 1,
+        title: 'Functions',
+        boardType: boardType.library.key,
+        palette: 'palette-blue',
+        default: true,
+    },
+}

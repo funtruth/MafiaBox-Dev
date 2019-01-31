@@ -5,6 +5,10 @@ export const boardType = {
         key: 'library',
         title: 'Library',
     },
+    functions: {
+        key: 'functions',
+        title: 'Functions',
+    },
     phases: {
         key: 'phases',
         title: 'Phases',

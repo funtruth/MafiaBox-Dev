@@ -19,8 +19,10 @@ export function savePageToDB(pageKey) {
 
         if (!boardType) return
 
-        firebaseService.update(`dev/${gameKey}/${boardType}/${pageKey}`,
-            JSON.parse(JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾')))
+        firebaseService.update(
+            `dev/${gameKey}/${boardType}/${pageKey}`,
+            JSON.parse(JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾'))
+        )
     }
 }
 

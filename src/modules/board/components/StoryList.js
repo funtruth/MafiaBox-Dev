@@ -79,29 +79,27 @@ class StoryList extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {isEmpty?
-                            <div className="story-empty">
-                                {`There is nothing here yet.`}
-                            </div>:
-                            filteredPageRepo.map((item, index) => (
-                                <Draggable key={item.pageKey} draggableId={item.pageKey} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            className="story-tag"
-                                            onClick={this._onClick.bind(this, item.pageKey, snapshot)}
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            {item.title || 'Untitled'}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
+                            {isEmpty?<div className="story-empty">There is nothing here yet</div>
+                                :filteredPageRepo.map((item, index) => (
+                                    <Draggable key={item.pageKey} draggableId={item.pageKey} index={index}>
+                                        {(provided, snapshot) => (
+                                            <div
+                                                className="story-tag"
+                                                onClick={this._onClick.bind(this, item.pageKey, snapshot)}
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}
+                                            >
+                                                {item.title || 'Untitled'}
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                ))
+                            }
                             {provided.placeholder}
                         </div>
                     )}

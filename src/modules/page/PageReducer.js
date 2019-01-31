@@ -44,14 +44,21 @@ export function addStory(title, boardType) {
     }
 }
 
-//TODO this looks like old code / broken
-export function moveStory(startIndex, endIndex) {
+export function moveStory(boardKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
-        let storyMapClone = Array.from(storyMap)
+        let storyMapClone = Object.assign({}, storyMap)
 
-        const [removed] = storyMapClone.splice(startIndex, 1)
-        storyMapClone.splice(endIndex, 0, removed)
+        let relatedStories = _(storyMapClone)
+            .filter(i => i.boardType === boardKey)
+            .sortBy(i => i.index)
+            .value()
+
+        const [removed] = relatedStories.splice(startIndex, 1)
+        relatedStories.splice(endIndex, 0, removed)
+
+        //re-index
+        relatedStories.forEach((i, x) => storyMapClone[i.key].index = x)
         
         dispatch({
             type: MOVE_STORY,
@@ -102,9 +109,8 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
         const [removed] = relatedPages.splice(startIndex, 1)
         relatedPages.splice(endIndex, 0, removed)
         
-        for(var i=0; i<relatedPages.length; i++) {
-            pageRepoClone[relatedPages[i].pageKey].index = i
-        }
+        //re-index
+        relatedPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
 
         dispatch({
             type: MOVE_PAGE_WITHIN_MAP,
@@ -132,12 +138,9 @@ export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex)
         const [removed] = startPages.splice(startIndex, 1)
         endPages.splice(endIndex, 0, removed)
 
-        for(var i=0; i<startPages.length; i++) {
-            pageRepoClone[startPages[i].pageKey].index = i
-        }
-        for(var j=0; j<endPages.length; j++) {
-            pageRepoClone[endPages[j].pageKey].index = j
-        }
+        //re-index
+        startPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
+        endPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
     
         dispatch({
             type: MOVE_PAGE_TO_OTHER_MAP,

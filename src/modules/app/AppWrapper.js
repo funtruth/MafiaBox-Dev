@@ -6,6 +6,7 @@ import * as helpers from '../common/helpers'
 import { droppableType } from '../common/types';
 
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
+import { moveFunctionStory } from '../functions/FunctionReducer'
 import {
     moveLogic,
     moveField,
@@ -116,10 +117,10 @@ class AppWrapper extends React.Component{
 
         switch(sources[0]) {
             case droppableType.board:
-                this.props.moveStory(
-                    source.index,
-                    destination.index,
-                )
+                this.props.moveStory(sources[1], source.index, destination.index)
+                break
+            case droppableType.functionBoard:
+                this.props.moveFunctionStory(source.index, destination.index)
                 break
             case droppableType.logic:
                 if (source.droppableId === destination.droppableId) {
@@ -206,6 +207,7 @@ export default connect(
     }),
     {
         moveStory,
+        moveFunctionStory,
         movePageWithinMap,
         movePageToOtherMap,
         showDropdown,
