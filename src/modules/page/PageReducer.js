@@ -67,19 +67,21 @@ export function moveStory(boardKey, startIndex, endIndex) {
     }
 }
 
+//TODO itemCount should be replaced because it places the item on BOTTOM, should be on TOP UX
 export function addPageToMap(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         const { fieldRepo } = getState().field
 
+        let repoClone = Object.assign({}, pageRepo)
         const pageKey = helpers.genUID(boardType, pageRepo)
 
         //set-up defaults
-        const fieldsWithDefaults = _.filter(fieldRepo, i => i.boardType === boardType && i.default)
         let defaultInfo = {}
-        fieldsWithDefaults.forEach(i => defaultInfo[i.key] = i.default)
+        _.filter(fieldRepo, i => i.boardType === boardType && i.default)
+            .forEach(i => defaultInfo[i.key] = i.default)
 
-        let pageInfo = {
+        repoClone[pageKey] = {
             pageKey,
             boardType,
             storyType: mapKey,
@@ -89,7 +91,7 @@ export function addPageToMap(mapKey, itemCount, boardType) {
 
         dispatch({
             type: ADD_PAGE,
-            payload: pageInfo
+            payload: repoClone,
         })
         dispatch(showModal(modalType.showPage, { pageKey }))
     }
@@ -248,10 +250,10 @@ export default (state = initialState, action) => {
         case UPDATE_REPO:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
+        case ADD_PAGE:
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
             
-        case ADD_PAGE:
         case UPDATE_PAGE:
             return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
         default:

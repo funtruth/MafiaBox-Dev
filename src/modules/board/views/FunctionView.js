@@ -8,7 +8,7 @@ import { boardType } from '../../fields/defaults'
 
 import { addPageToMap } from '../../page/PageReducer'
 
-import StoryList from '../components/StoryList'
+import FunctionList from '../components/FunctionList'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -51,7 +51,7 @@ class FunctionView extends React.Component{
                                                 provided.draggableProps.style
                                             )}
                                         >
-                                            <StoryList
+                                            <FunctionList
                                                 item={item}
                                                 storyIndex={index}
                                                 boardType={boardType}

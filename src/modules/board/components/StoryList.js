@@ -21,7 +21,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getListStyle = isDraggingOver => ({
-    ...styles.listStyle,
+    
 });
 
 
@@ -48,8 +48,9 @@ class StoryList extends React.Component{
         return (
             <div>
                 <div className="story-title">
-                    <div className={item.palette || "black-grey"} style={styles.title}>{item.title}</div>
-                    
+                    <div className={`${item.palette || "black-grey"} story-label`}>
+                        {item.title}
+                    </div>
                     <div
                         className="story-option app-onclick"
                         menu-type={dropdownType.storyShowMore}
@@ -59,7 +60,9 @@ class StoryList extends React.Component{
                     >
                         <i
                             className="ion-ios-more"
-                            style={styles.moreIcon}
+                            style={{
+                                fontSize: 16,
+                            }}
                         ></i>
                     </div>
                     <div
@@ -68,7 +71,9 @@ class StoryList extends React.Component{
                     >
                         <i
                             className="ion-ios-add"
-                            style={styles.addIcon}
+                            style={{
+                                fontSize: 19,
+                            }}
                         ></i>
                     </div>
                     
@@ -76,6 +81,7 @@ class StoryList extends React.Component{
                 <Droppable droppableId={`${droppableType.page}.${item.key}`} type="ITEM">
                     {(provided, snapshot) => (
                         <div
+                            className="story-list"
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
@@ -107,29 +113,6 @@ class StoryList extends React.Component{
             </div>
                 
         )
-    }
-}
-
-const styles = {
-    container: {
-        flex: 1,
-    },
-    listStyle: {
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'auto',
-        minHeight: 250,
-    },
-    title: {
-        borderRadius: 2,
-        padding: '2px 10px',
-        marginRight: 'auto',
-    },
-    moreIcon: {
-        fontSize: 16,
-    },
-    addIcon: {
-        fontSize: 19,
     }
 }
 

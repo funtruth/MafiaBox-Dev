@@ -115,6 +115,7 @@ class AppWrapper extends React.Component{
         const sources = source.droppableId.split('.')
         const dests = destination.droppableId.split('.')
 
+        //TODO probably move this into a reducer of some sort
         switch(sources[0]) {
             case droppableType.board:
                 this.props.moveStory(sources[1], source.index, destination.index)
