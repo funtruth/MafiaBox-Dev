@@ -5,7 +5,9 @@ import { variableType } from '../../logic/types'
 
 class PickVarType extends React.Component{
     _select = (item) => {
-        this.props.updatePage({variableType: item.key})
+        this.props.updatePage({
+            variableType: item.key,
+        })
         this.props.showDropdown()
     }
 

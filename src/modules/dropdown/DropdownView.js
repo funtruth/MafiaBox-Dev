@@ -119,7 +119,6 @@ class DropdownView extends React.Component{
                 break
             case dropdownType.pickLogic:
             case dropdownType.pickOperator:
-            case dropdownType.pickVarType:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -128,9 +127,19 @@ class DropdownView extends React.Component{
                 )
                 break
             case dropdownType.editVar:
+            case dropdownType.pickVarType:
                 props.updatePage = (value) => this.props.updateFunction(
                     props.pageKey,
                     props.fieldKey,
+                    props.tagKey,
+                    value,
+                )
+                break
+            case dropdownType.addVar:
+                props.updatePage = (tagKey, value) => this.props.updateFunction(
+                    props.pageKey,
+                    props.fieldKey,
+                    tagKey,
                     value,
                 )
                 break
@@ -219,7 +228,6 @@ class DropdownView extends React.Component{
                 return <SearchBoard {...props} boardType={boardType.library.key}/>
             case dropdownType.showSubfields:
                 return <ShowSubfields {...props}/>
-
 
             case dropdownType.pickEvent:
                 return <PickEvent {...props}/>

@@ -37,7 +37,6 @@ class PickTeam extends React.Component{
     }
 
     render() {
-        console.log({props: this.props})
         return (
             <div>
                 <DropTitle>team</DropTitle>

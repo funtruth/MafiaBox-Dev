@@ -3,19 +3,7 @@ import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
 import * as helpers from '../common/helpers'
 
-import { droppableType } from '../common/types';
-
-import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
-import { moveFunctionStory } from '../functions/FunctionReducer'
-import {
-    moveLogic,
-    moveField,
-    moveTagToOtherField,
-    moveTagWithinField,
-    moveRoleWithinPrio,
-    moveRoleToOtherPrio,
-    moveRoleToEmpty,
-} from '../fields/FieldReducer'
+import { handleDragEnd } from './AppReducer'
 import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
 
@@ -112,84 +100,7 @@ class AppWrapper extends React.Component{
             return;
         }
 
-        const sources = source.droppableId.split('.')
-        const dests = destination.droppableId.split('.')
-
-        //TODO probably move this into a reducer of some sort
-        switch(sources[0]) {
-            case droppableType.board:
-                this.props.moveStory(sources[1], source.index, destination.index)
-                break
-            case droppableType.functionBoard:
-                this.props.moveFunctionStory(source.index, destination.index)
-                break
-            case droppableType.logic:
-                if (source.droppableId === destination.droppableId) {
-                    this.props.moveLogic(
-                        sources[1],
-                        sources[2],
-                        sources[3],
-                        source.index,
-                        destination.index,
-                    )
-                } 
-                break
-            case droppableType.template:
-                if (source.droppableId === destination.droppableId) {
-                    this.props.moveField(
-                        sources[1],
-                        source.index,
-                        destination.index,
-                    )
-                }
-                break
-            case droppableType.tag:
-                this.props.moveTagWithinField(
-                    sources[1],
-                    source.index,
-                    destination.index,
-                )
-                break
-            case droppableType.page:
-                if (source.droppableId === destination.droppableId) {
-                    this.props.movePageWithinMap(
-                        sources[1],
-                        source.index,
-                        destination.index,
-                    )
-                } else {
-                    this.props.movePageToOtherMap(
-                        sources[1],
-                        dests[1],
-                        source.index,
-                        destination.index,
-                    )
-                }
-                break
-            case droppableType.priority:
-                if (dests[0] === droppableType.priorityNew) {
-                    this.props.moveRoleToEmpty(
-                        parseInt(sources[1]),
-                        parseInt(dests[1]),
-                        source.index,
-                    )
-                } else if (sources[1] === dests[1]) {
-                    this.props.moveRoleWithinPrio(
-                        sources[1],
-                        source.index,
-                        destination.index,
-                    )
-                } else {
-                    this.props.moveRoleToOtherPrio(
-                        sources[1],
-                        dests[1],
-                        source.index,
-                        destination.index,
-                    )
-                }
-                break
-            default:
-        }
+        this.props.handleDragEnd(source, destination)
     }
 
     render() {
@@ -207,18 +118,8 @@ export default connect(
         dropdownKeys: state.dropdown.dropdownKeys,
     }),
     {
-        moveStory,
-        moveFunctionStory,
-        movePageWithinMap,
-        movePageToOtherMap,
         showDropdown,
         showModal,
-        moveLogic,
-        moveField,
-        moveTagToOtherField,
-        moveTagWithinField,
-        moveRoleWithinPrio,
-        moveRoleToOtherPrio,
-        moveRoleToEmpty,
+        handleDragEnd,
     }
 )(AppWrapper)

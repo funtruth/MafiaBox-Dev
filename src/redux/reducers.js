@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 
+import AppReducer from '../modules/app/AppReducer'
 import UserReducer from '../modules/user/UserReducer'
 import ModalReducer from '../modules/modal/ModalReducer'
 import NavReducer from '../modules/navigation/NavReducer'
@@ -11,6 +12,7 @@ import DBReducer from '../modules/firebase/DBReducer'
 import FunctionReducer from '../modules/functions/FunctionReducer'
 
 const reducers = {
+    app: AppReducer,
     user: UserReducer,
     modal: ModalReducer,
     nav: NavReducer,

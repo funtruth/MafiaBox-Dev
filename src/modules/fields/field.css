@@ -30,8 +30,8 @@
     border: none;
     background-color: rgba(54, 57, 64);
     padding: 4px 7px;
-    font: 600 17px Arial;
-    color: #f6f6f7;
+    font: 600 15px Arial;
+    color: #aaa;
 }
 
 .field-call-input:focus {

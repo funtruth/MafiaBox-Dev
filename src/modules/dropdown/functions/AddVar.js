@@ -1,9 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import * as helpers from '../../common/helpers'
 
 import { variableType } from '../../logic/types'
-
-import { updatePageByPath } from '../../page/PageReducer'
 
 class AddVar extends React.Component{
     constructor(props){
@@ -29,15 +27,17 @@ class AddVar extends React.Component{
     }
 
     _confirm = () => {
-        const { pageKey, fieldKey } = this.props
+        const { attachVar } = this.props
         const { value } = this.state
-        
-        if (true) {
-            this.props.updatePageByPath(pageKey, fieldKey, value, { key: value, variableType: variableType.any.key })
-            this.props.showDropdown()
-        } else {
 
-        }
+        const tagKey = helpers.genUID('var', attachVar)
+        
+        this.props.updatePage(tagKey, {
+            key: tagKey,
+            name: value,
+            variableType: variableType.any.key,
+        })
+        this.props.showDropdown()
     }
 
     render() {
@@ -62,9 +62,4 @@ class AddVar extends React.Component{
     }
 }
 
-export default connect(
-    null,
-    {
-        updatePageByPath,
-    }
-)(AddVar)
+export default AddVar

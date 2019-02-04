@@ -14,7 +14,7 @@ class CallField extends React.Component{
                 className="field-call-input"
                 value={value || ''}
                 onChange={this._onChange}
-                placeholder="Untitled"
+                placeholder="untitled"
                 type="text"
             />
         )

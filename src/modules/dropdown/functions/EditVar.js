@@ -1,38 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class EditVar extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
-            value: props.tagKey
+            value: props.currentValue,
         }
     }
 
     _onSave = () => {
-        const { pageRepo, pageKey, fieldKey, tagKey } = this.props
+        const { currentValue } = this.props
 
-        if (tagKey === this.state.value) return this.props.showDropdown()
-
-        let varsClone = Object.assign({}, pageRepo[pageKey].vars)
-
-        varsClone[this.state.value] = {
-            ...varsClone[tagKey],
-            key: this.state.value    
+        if (currentValue === this.state.value) {
+            return this.props.showDropdown()
         }
-        delete varsClone[tagKey]
 
-        this.props.updatePage(fieldKey, varsClone)
+        this.props.updatePage({
+            name: this.state.value, 
+        })
         this.props.showDropdown()
     }
 
     _onDelete = () => {
-        const { pageRepo, pageKey, fieldKey } = this.props
-
-        let varsClone = Object.assign({}, pageRepo[pageKey].vars)
-        delete varsClone[this.state.value]
-
-        this.props.updatePage(pageKey, fieldKey, varsClone)
+        this.props.updatePage({
+            name: '',
+        })
         this.props.showDropdown()
     }
 
@@ -77,8 +69,4 @@ class EditVar extends React.Component{
     }
 }
 
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo
-    }),
-)(EditVar)
+export default EditVar
