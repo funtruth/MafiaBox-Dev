@@ -16,9 +16,11 @@ class FunctionList extends React.Component{
     }
 
     _onClick = (item) => {
-        this.props.showModal(modalType.showFunctionPage, {
-            pageKey: item.pageKey,
-        })
+        if (!this.props.dragging) {
+            this.props.showModal(modalType.showFunctionPage, {
+                pageKey: item.pageKey,
+            })
+        }
     }
 
     render() {  

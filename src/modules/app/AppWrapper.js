@@ -87,7 +87,7 @@ class AppWrapper extends React.Component{
         }
     }
 
-    onDragEnd = result => {
+    _onDragEnd = result => {
         const { source, destination } = result;
         
         //dropped outside the list
@@ -105,7 +105,9 @@ class AppWrapper extends React.Component{
 
     render() {
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
+            <DragDropContext
+                onDragEnd={this._onDragEnd}
+            >
                 {this.props.children}
             </DragDropContext>
         )

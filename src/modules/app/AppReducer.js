@@ -14,7 +14,7 @@ import {
 const initialState = {}
 
 export function handleDragEnd(source, destination) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         const sources = source.droppableId.split('.')
         const dests = destination.droppableId.split('.')
 
