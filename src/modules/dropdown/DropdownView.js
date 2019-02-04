@@ -7,6 +7,7 @@ import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal } from '../modal/ModalReducer'
 import { updatePageByPath } from '../page/PageReducer'
+import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
@@ -26,12 +27,13 @@ import PickFieldType from './template/PickFieldType'
 import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
-import AddVar from './vars/AddVar'
-import EditVar from './vars/EditVar'
+import AddVar from './functions/AddVar'
+import EditVar from './functions/EditVar'
+import PickVarType from './functions/PickVarType';
+
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
 import PickObject from './vars/PickObject'
-import PickVarType from './vars/PickVarType';
 import PickComparison from './vars/PickComparison'
 
 import PickBoolean from './update/PickBoolean'
@@ -125,6 +127,13 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
+            case dropdownType.editVar:
+                props.updatePage = (value) => this.props.updateFunction(
+                    props.pageKey,
+                    props.fieldKey,
+                    value,
+                )
+                break
             default:
         }
 
@@ -140,7 +149,7 @@ class DropdownView extends React.Component{
                 break
             default:
         }
-        
+        //TODO proper obj
         switch(props.key) {
             case dropdownType.storyShowMore:
                 return <StoryShowMore {...props}/>
@@ -252,5 +261,6 @@ export default connect(
         popDropdownTo,
         updatePageByPath,
         updateTopModal,
+        updateFunction,
     }
 )(DropdownView)

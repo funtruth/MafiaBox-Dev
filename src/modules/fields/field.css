@@ -26,6 +26,18 @@
     padding-bottom: 4px;
 }
 
+.field-call-input {
+    border: none;
+    background-color: rgba(54, 57, 64);
+    padding: 4px 7px;
+    font: 600 17px Arial;
+    color: #f6f6f7;
+}
+
+.field-call-input:focus {
+    outline: none;
+}
+
 .field-text-input {
     border: none;
     border-radius: 2px;

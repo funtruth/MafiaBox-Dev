@@ -24,6 +24,12 @@ export const boardType = {
 }
 
 export const fieldType = {
+    call: {
+        key: 'call',
+        index: -1,
+        icon: 'mdi mdi-console',
+        title: 'Call',
+    },
     text: {
         key: 'text',
         index: 0,
@@ -35,12 +41,6 @@ export const fieldType = {
         index: 1,
         icon: 'mdi mdi-numeric',
         title: 'Number',
-    },
-    code: {
-        key: 'code',
-        index: 2,
-        icon: 'mdi mdi-codepen',
-        title: 'Code',
     },
     logic: {
         key: 'logic',
@@ -95,12 +95,19 @@ export const fieldType = {
 }
 
 export const initFieldRepo = {
+    functionCall: {
+        key: 'functionCall',
+        index: 0,
+        fieldType: fieldType.call.key,
+        title: 'Function name',
+        boardType: boardType.functions.key,
+    },
     description0: {
         key: 'description0',
         index: 0,
         fieldType: fieldType.text.key,
         title: 'Description',
-        boardType: boardType.library.key,
+        boardType: boardType.functions.key,
     },
     description1: {
         key: 'description1',
@@ -121,21 +128,22 @@ export const initFieldRepo = {
         index: 1,
         fieldType: fieldType.vars.key,
         title: 'Required Variables',
-        boardType: boardType.library.key,
+        boardType: boardType.functions.key,
     },
     vars: {
         key: 'vars',
         index: 2,
         fieldType: fieldType.vars.key,
         title: 'Declared Variables',
-        boardType: boardType.library.key,
+        boardType: boardType.functions.key,
     },
     code: {
         key: 'code',
         index: 3,
-        fieldType: fieldType.code.key,
+        fieldType: fieldType.logic.key,
         title: 'Code Interpretation',
-        boardType: boardType.library.key,
+        boardType: boardType.functions.key,
+        default: defaultLogic,
     },
     roleTeam: {
         key: 'roleTeam',

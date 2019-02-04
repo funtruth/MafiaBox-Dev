@@ -16,16 +16,18 @@ class FunctionList extends React.Component{
     }
 
     _onClick = (item) => {
-        this.props.showModal(modalType.showPage, { pageKey: item })
+        this.props.showModal(modalType.showFunctionPage, {
+            pageKey: item.pageKey,
+        })
     }
 
     render() {  
         const { item, index, repo } = this.props
 
-        const filteredPageRepo = _.filter(repo, i => i.storyType === item.key)
+        const filteredRepo = _.filter(repo, i => i.storyType === item.key)
         
-        const itemCount = filteredPageRepo.length
-        const isEmpty = filteredPageRepo.length === 0
+        const itemCount = filteredRepo.length
+        const isEmpty = filteredRepo.length === 0
 
         return (
             <div>
@@ -63,11 +65,11 @@ class FunctionList extends React.Component{
                 <div className="story=list">
                     {isEmpty?
                         <div className="story-empty">There is nothing here yet</div>
-                        :filteredPageRepo.map((item, index) => (
+                        :filteredRepo.map((item, index) => (
                             <div
                                 key={item.pageKey}
                                 className="story-tag"
-                                onClick={this._onClick.bind(this, item.pageKey)}
+                                onClick={this._onClick.bind(this, item)}
                                 style={{
                                     cursor: 'pointer',
                                     marginBottom: 8,

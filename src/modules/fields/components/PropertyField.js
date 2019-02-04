@@ -23,12 +23,12 @@ class PropertyField extends React.Component{
     }
 
     _onClick = tagKey => {
-        const { pageKey, fieldKey, value } = this.props
+        const { fieldKey, value } = this.props
 
         let dataClone = Object.assign({}, value)
         dataClone[tagKey] = !dataClone[tagKey]
 
-        this.props.updatePageByPath(pageKey, fieldKey, dataClone)
+        this.props.updatePage(fieldKey, dataClone)
     }
 
     render() {

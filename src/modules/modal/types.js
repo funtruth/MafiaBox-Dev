@@ -5,10 +5,11 @@ export const modalType = {
     deleteStory: 'modalType/delete-story',
     editPhase: 'modalType/edit-phase',
 
+    //v2 aka not garbage
     showPage: 'modalType/show-page',
     showTemplate: 'modalType/show-template',
+    showFunctionPage: 'modalType/show-function-page',
 
-    //v2 aka not garbage
     saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
     editEvent: 'modalType/edit-event',

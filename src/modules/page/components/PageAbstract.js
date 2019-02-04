@@ -2,8 +2,7 @@ import React from 'react'
 
 class PageAbstract extends React.Component{
     _onChange = e => {
-        const { pageKey } = this.props.pageInfo
-        this.props.updatePage(pageKey, 'title', e.target.value)
+        this.props.updatePage('title', e.target.value)
     }
 
     render() {

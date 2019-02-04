@@ -33,7 +33,7 @@ class StoryList extends React.Component{
 
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.showModal(modalType.showPage, { pageKey: item })
+            this.props.showModal(modalType.showPage, { pageKey: item.pageKey })
         }
     }
 
@@ -91,7 +91,7 @@ class StoryList extends React.Component{
                                         {(provided, snapshot) => (
                                             <div
                                                 className="story-tag"
-                                                onClick={this._onClick.bind(this, item.pageKey, snapshot)}
+                                                onClick={this._onClick.bind(this, item, snapshot)}
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}

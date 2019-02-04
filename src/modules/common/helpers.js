@@ -9,6 +9,7 @@ export function genUID(key, repo) {
 
 //updates a property deep inside an object and returns the entire object
 //WARNING: cannot delete properties (THIS IS A FEATURE)
+//TODO this needs to be moved up one level so it can be used easier
 export function pathUpdate(args, index, repo) {
     if (args.length === 2) {
         return typeof args[args[index + 1]] === 'object' ? 
@@ -83,6 +84,8 @@ export function swapVarFormat(string, ugly) {
                 :string.replace(/§/g, '.')
         case 'object':
             return JSON.parse(swapVarFormat(JSON.stringify(string), ugly))
+        case 'undefined':
+            return string
         default:
             return console.warn('Unexpected input, helpers swapVarFormat', {string})
     }

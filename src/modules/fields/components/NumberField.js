@@ -2,19 +2,19 @@ import React from 'react'
 
 class NumberField extends React.Component{
     _incre = () => {
-        const { value, pageKey, fieldKey } = this.props
+        const { value, fieldKey } = this.props
         //TODO 1111
-        this.props.updatePageByPath(pageKey, fieldKey, value + 1)
+        this.props.updatePage(fieldKey, value + 1)
     }
     
     _decre = () => {
-        const { value, pageKey, fieldKey } = this.props
-        this.props.updatePageByPath(pageKey, fieldKey, value - 1)
+        const { value, fieldKey } = this.props
+        this.props.updatePage(fieldKey, value - 1)
     }
 
     _onChange = e => {
-        const { pageKey, fieldKey } = this.props
-        this.props.updatePageByPath(pageKey, fieldKey, e.target.value)
+        const { fieldKey } = this.props
+        this.props.updatePage(fieldKey, e.target.value)
     }
 
     render() {

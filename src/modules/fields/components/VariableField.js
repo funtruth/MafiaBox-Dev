@@ -7,7 +7,7 @@ import { dropdownType } from '../../dropdown/types';
 class VariableField extends React.Component{
     render() {
         const { value, fieldKey } = this.props
-        console.log(value)
+        
         return (
             <div className="row -x-p">
                 {_.toArray(value).map((item, index) => (

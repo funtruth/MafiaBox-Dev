@@ -21,8 +21,8 @@ class TagField extends React.Component{
     }
 
     _onClick = key => {
-        const { fieldKey, pageKey } = this.props
-        this.props.updatePageByPath(pageKey, fieldKey, key)
+        const { fieldKey } = this.props
+        this.props.updatePage(fieldKey, key)
     }
 
     render() {

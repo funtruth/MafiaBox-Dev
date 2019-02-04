@@ -16,7 +16,9 @@ export const dropdownType = {
     addTemplateField: 'dropdownType/add-template-field',
     templateTitleOptions: 'dropdownType/template-title-options',
 
+    //functions
     editVar: 'dropdownType/edit-var',
+
     addVar: 'dropdownType/add-var',
     pickVar: 'dropdownType/pick-var',
     pickVarProp: 'dropdownType/pick-var-prop',

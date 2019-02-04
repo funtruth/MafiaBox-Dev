@@ -5,21 +5,19 @@ import _ from 'lodash'
 
 import { fieldType } from './defaults'
 
-import { updatePageByPath } from '../page/PageReducer'
-
+import CallField from './components/CallField'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import TagField from './components/TagField';
 import PlayerTagField from './components/PlayerTagField'
 import PriorityField from './components/PriorityField'
 import PropertyField from './components/PropertyField'
-import CodeField from './components/CodeField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
-        const { pageKey, pageInfo, fieldRepo, updatePageByPath } = this.props
+        const { pageKey, pageInfo, fieldRepo, updatePage } = this.props
         const fieldInfo = fieldRepo[item.key]
         const { key, data } = fieldInfo
         
@@ -30,16 +28,16 @@ class FieldView extends React.Component {
             value: pageInfo[key],
             data,
             fieldInfo,
-            updatePageByPath,
+            updatePage,
         }
         
         switch(fieldInfo.fieldType) {
+            case fieldType.call.key:
+                return <CallField {...props}/>
             case fieldType.text.key:
                 return <TextField {...props}/>
             case fieldType.number.key:
                 return <NumberField {...props}/>
-            case fieldType.code.key:
-                return <CodeField {...props}/>
             case fieldType.logic.key:
                 return <LogicBoard {...props}/>
             case fieldType.tag.key:
@@ -90,7 +88,4 @@ export default connect(
     state => ({
         fieldRepo: state.field.fieldRepo,
     }),
-    {
-        updatePageByPath,
-    }
 )(FieldView)

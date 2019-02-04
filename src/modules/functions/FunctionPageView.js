@@ -1,15 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import './page.css'
 
-import PageHeader from './components/PageHeader';
-import PageAbstract from './components/PageAbstract'
+import PageHeader from '../page/components/PageHeader';
+import PageAbstract from '../page/components/PageAbstract'
 import FieldView from '../fields/FieldView';
 
-class PageView extends React.Component {
+class PageFunctionView extends React.Component {
     render() {
-        const { pageRepo, pageKey } = this.props
-        const pageInfo = pageRepo[pageKey] || {}
+        const { pageKey, functionRepo } = this.props
+        const pageInfo = functionRepo[pageKey] || {}
 
         return (
             <div className="page">
@@ -31,6 +30,6 @@ class PageView extends React.Component {
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
-    })
-)(PageView)
+        functionRepo: state.functions.functionRepo,
+    }),
+)(PageFunctionView)

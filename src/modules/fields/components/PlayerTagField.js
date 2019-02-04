@@ -22,9 +22,11 @@ class PlayerTagField extends React.Component{
     }
 
     _onClick = (item) => {
-        const { pageKey, fieldKey, value } = this.props
+        const { fieldKey, value } = this.props
         const active = value && value[item.subfield]
-        this.props.updatePageByPath(pageKey, fieldKey, item.subfield, !active)
+        this.props.updatePage(fieldKey, {
+            [item.subfield]: !active,
+        })
     }
 
     render() {

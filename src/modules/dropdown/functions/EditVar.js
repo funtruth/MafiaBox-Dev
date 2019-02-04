@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updatePage } from '../../page/PageReducer'
-
 class EditVar extends React.Component{
     constructor(props) {
         super(props)
@@ -24,7 +22,7 @@ class EditVar extends React.Component{
         }
         delete varsClone[tagKey]
 
-        this.props.updatePage(pageKey, fieldKey, varsClone)
+        this.props.updatePage(fieldKey, varsClone)
         this.props.showDropdown()
     }
 
@@ -83,7 +81,4 @@ export default connect(
     state => ({
         pageRepo: state.page.pageRepo
     }),
-    {
-        updatePage,
-    }
 )(EditVar)

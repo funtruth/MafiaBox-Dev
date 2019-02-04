@@ -13,12 +13,14 @@ const initialState = {
 
 const MOVE_STORY = 'functions/move-story'
 const ADD_FUNCTION = 'functions/add-function'
+const UPDATE_FUNCTION = 'functions/update-function'
 
 export function moveFunctionStory(startIndex, endIndex) {
     return (dispatch, getState) => {
         const { functionMap } = getState().functions
         let functionMapClone = Object.assign({}, functionMap)
 
+        //TODO probably can reduce
         let relatedStories = _.sortBy(functionMapClone, i => i.index)
 
         const [removed] = relatedStories.splice(startIndex, 1)
@@ -48,18 +50,32 @@ export function addFunction(mapKey, itemCount, boardType) {
             .forEach(i => defaultInfo[i.key] = i.default)
 
         repoClone[pageKey] = {
+            ...defaultInfo,
             pageKey,
             boardType,
             storyType: mapKey,
             index: itemCount,
-            ...defaultInfo,
         }
 
         dispatch({
             type: ADD_FUNCTION,
             payload: repoClone,
         })
-        dispatch(showModal(modalType.showPage, { pageKey }))
+        dispatch(showModal(modalType.showFunctionPage, { pageKey }))
+    }
+}
+
+export function updateFunction() {
+    return (dispatch, getState) => {
+        const { functionRepo } = getState().functions
+        
+        const pageInfo = helpers.pathUpdate(arguments, 0, functionRepo)
+        if (!pageInfo) return
+
+        dispatch({
+            type: UPDATE_FUNCTION,
+            payload: pageInfo
+        })
     }
 }
 
@@ -69,6 +85,8 @@ export default (state = initialState, action) => {
             return { ...state, functionMap: action.payload }
         case ADD_FUNCTION:
             return { ...state, functionRepo: action.payload }
+        case UPDATE_FUNCTION:
+            return { ...state, functionRepo: { ...state.functionRepo, [action.payload.pageKey]: action.payload }}
         default:
             return state;
     }

@@ -1,24 +1,24 @@
 import React from 'react'
 
-class TextField extends React.Component{
+class CallField extends React.Component{
     _onChange = e => {
         const { fieldKey } = this.props
         this.props.updatePage(fieldKey, e.target.value)
     }
 
     render() {
-        const { value, inputType } = this.props
+        const { value } = this.props
 
         return (
-            <textarea
-                className="field-text-input"
+            <input
+                className="field-call-input"
                 value={value || ''}
                 onChange={this._onChange}
-                placeholder="Start typing ..."
-                type={inputType}
+                placeholder="Untitled"
+                type="text"
             />
         )
     }
 }
 
-export default TextField
+export default CallField

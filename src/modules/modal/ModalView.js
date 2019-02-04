@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
 import { updatePageByPath, saveAllPriorities } from '../page/PageReducer'
+import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
 import { updateViewType } from '../logic/types'
@@ -23,6 +24,7 @@ import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
 import EditToast from './return/EditToast'
 import EditPriority from './update/EditPriority'
+import FunctionPageView from '../functions/FunctionPageView';
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -42,6 +44,8 @@ class ModalView extends React.Component {
                 return <PageModal {...props} location={this.props.location}/>
             case modalType.showTemplate:
                 return <TemplateModal {...props}/>
+            case modalType.showFunctionPage:
+                return <FunctionPageView {...props} location={this.props.location}/>
             
             case modalType.saveChanges:
                 return <SaveChanges {...props}/>
@@ -67,6 +71,24 @@ class ModalView extends React.Component {
                 let props = Object.assign({}, item)
 
                 props.popModalBy = (pops) => this.props.popModalTo(index - pops) 
+
+                switch(props.key) {
+                    case modalType.showPage:
+                        props.updatePage = (fieldKey, value) => this.props.updatePageByPath(
+                            props.pageKey,
+                            fieldKey,
+                            value,
+                        )
+                        break
+                    case modalType.showFunctionPage:
+                        props.updatePage = (fieldKey, value) => this.props.updateFunction(
+                            props.pageKey,
+                            fieldKey,
+                            value,
+                        )
+                        break
+                    default:
+                }
 
                 switch(props.key) {
                     case modalType.editTrigger:
@@ -169,6 +191,7 @@ export default connect(
     {
         showModal,
         updatePageByPath,
+        updateFunction,
         saveAllPriorities,
         popModalTo,
         updateTopModal,
