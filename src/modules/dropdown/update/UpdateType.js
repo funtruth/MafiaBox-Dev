@@ -37,7 +37,7 @@ class UpdateType extends React.Component{
         const { update, mutate } = this.state
         
         return (
-            <div>
+            <>
                 <DropTitle>update type</DropTitle>
                 <div
                     className="drop-down-menu-option"
@@ -55,7 +55,7 @@ class UpdateType extends React.Component{
                     <input type="checkbox" checked={mutate} readOnly/>
                     mutate
                 </div>
-            </div>
+            </>
         )
     }
 }

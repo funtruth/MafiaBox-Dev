@@ -11,6 +11,7 @@ import { modalType } from './types'
 import { updateViewType } from '../logic/types'
 
 import Modal from './components/Modal';
+import FunctionPageModal from './components/FunctionPageModal';
 
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
@@ -24,7 +25,6 @@ import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
 import EditToast from './return/EditToast'
 import EditPriority from './update/EditPriority'
-import FunctionPageView from '../functions/FunctionPageView';
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -45,7 +45,7 @@ class ModalView extends React.Component {
             case modalType.showTemplate:
                 return <TemplateModal {...props}/>
             case modalType.showFunctionPage:
-                return <FunctionPageView {...props} location={this.props.location}/>
+                return <FunctionPageModal {...props} location={this.props.location}/>
             
             case modalType.saveChanges:
                 return <SaveChanges {...props}/>
