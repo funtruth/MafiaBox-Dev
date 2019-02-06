@@ -9,7 +9,7 @@ class LogicArgs extends React.Component{
             <div
                 className="row"
                 style={{
-                    margin: '0px 6px'
+                    margin: '0px 6px 6px 6px'
                 }}
             >
                 {Object.keys(vars).map((item, index) => (

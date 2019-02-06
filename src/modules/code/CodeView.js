@@ -1,42 +1,29 @@
 import React from 'react'
 import './code.css'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 
-import { showModal, popModalTo, updateTopModal } from './ModalReducer'
-import { updatePageByPath, saveAllPriorities } from '../page/PageReducer'
-import { updateFunction } from '../functions/FunctionReducer'
+import { removeCodeAtIndex } from './CodeReducer'
 
-import { codeType } from './types'
-
-import CodeChild from './components/CodeChild'
-
-import LogicMirror from './logic/LogicMirror'
+import CodeCollapsed from './components/CodeCollapsed'
+import CodeExpanded from './components/CodeExpanded'
 
 class CodeView extends React.Component {
-    _renderItem(props) {
-        props.showModal = this.props.showModal
-
-        switch(props.key) {
-            case codeType.logicMirror:
-                return <LogicMirror {...props}/>
-            default:
-                return null
-        }
-    }
-
     render() {
-        const { modalKeys } = this.props
-        if (!modalKeys.length) return null
-        
+        const { codeKeys } = this.props
+        if (codeKeys.length < 1) {
+            return null
+        }
+
         return (
-            modalKeys.map((item, index) => {
-                let props = Object.assign({}, item)
+            codeKeys.map((item, index) => {
+                let newProps = item
+
+                newProps.removeCode = () => this.props.removeCodeAtIndex(index)
 
                 return (
-                    <CodeChild {...props} key={index}>
-                        {this._renderItem(props)}
-                    </CodeChild>
+                    <div className="code-view" key={index}>
+                        {item.expanded ? <CodeExpanded {...newProps}/> : <CodeCollapsed {...newProps}/>}
+                    </div>
                 )
             })
         )
@@ -48,11 +35,6 @@ export default connect(
         codeKeys: state.code.codeKeys,
     }),
     {
-        showModal,
-        updatePageByPath,
-        updateFunction,
-        saveAllPriorities,
-        popModalTo,
-        updateTopModal,
+        removeCodeAtIndex,
     }
 )(CodeView)

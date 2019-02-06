@@ -8,7 +8,7 @@ import { getUpdateCode } from '../../logic/LogicReducer'
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
 import LogicObject from '../../logic/form/LogicObject';
-import CodeField from '../../fields/components/CodeField';
+import CodeField from '../../code/components/CodeField';
 import ModalOptions from '../components/ModalOptions';
 
 var beautify_js = require('js-beautify');

@@ -58,23 +58,26 @@ class FieldView extends React.Component {
     render() {
         const { pageInfo, fieldRepo } = this.props
         const { boardType } = pageInfo
-        if (!boardType) return null
         
         const fields = _(fieldRepo)
             .filter(i => i.boardType === boardType)
             .sortBy(i => i.index)
             .value()
-            
-        if (!fields.length) return null
 
         return (
             fields.map((item, index) => {
+                const { icon, showRawCode } = fieldType[item.fieldType]
+
                 return (
                     <div key={index}>
                         <div className="-sep"/>
                         <div className="field-label">
-                            <i className={`field-icon ${fieldType[item.fieldType].icon}`} style={{ width: 16 }}></i>
+                            <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
                             {item.title}
+                            {showRawCode && <div className="field-view-code">
+                                <i className="mdi mdi-code-tags" style={{ marginRight: 4 }}></i>
+                                view raw code
+                            </div>}
                         </div>
                         {this._renderItem(item)}
                     </div>

@@ -26,6 +26,15 @@
     padding-bottom: 4px;
 }
 
+.field-view-code {
+    margin-left: auto;
+    font: 500 13px Arial;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .field-call-input {
     border: none;
     background-color: rgba(54, 57, 64);

@@ -7,7 +7,6 @@ import { getCode } from '../../logic/LogicReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
 import LogicArgs from '../../logic/components/LogicArgs';
-import CodeField from './CodeField'
 
 class LogicBoard extends React.Component{
     render() {
@@ -22,7 +21,7 @@ class LogicBoard extends React.Component{
         return (
             <div className="logic-board">
                 <LogicArgs vars={vars}/>
-                <div style={{ margin: '8px 6px' }}>
+                <div style={{ margin: '0px 6px' }}>
                     <LogicBlock
                         {...this.props}
                         value={value}
@@ -30,21 +29,13 @@ class LogicBoard extends React.Component{
                         vars={vars}
                     />
                 </div>
-                <CodeField
-                    code={code}
-                    options={{
-                        readOnly: 'nocursor',
-                    }}
-                />
             </div>
         )
     }
 }
 
 export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
+    null,
     {
         getCode,
     }
