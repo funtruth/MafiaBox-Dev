@@ -39,7 +39,7 @@ class FieldView extends React.Component {
             case fieldType.number.key:
                 return <NumberField {...props}/>
             case fieldType.logic.key:
-                return <LogicBoard {...props}/>
+                return <LogicBoard {...props} pageInfo={pageInfo}/>
             case fieldType.tag.key:
                 return <TagField {...props}/>
             case fieldType.playerTag.key:
@@ -66,21 +66,17 @@ class FieldView extends React.Component {
 
         return (
             fields.map((item, index) => {
-                const { icon, showRawCode } = fieldType[item.fieldType]
+                const { icon } = fieldType[item.fieldType]
 
                 return (
-                    <div key={index}>
+                    <React.Fragment key={index}>
                         <div className="-sep"/>
                         <div className="field-label">
                             <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
                             {item.title}
-                            {showRawCode && <div className="field-view-code">
-                                <i className="mdi mdi-code-tags" style={{ marginRight: 4 }}></i>
-                                view raw code
-                            </div>}
                         </div>
                         {this._renderItem(item)}
-                    </div>
+                    </React.Fragment>
                 )
             })
         )

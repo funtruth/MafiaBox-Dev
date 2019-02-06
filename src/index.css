@@ -67,10 +67,6 @@ textarea {
   cursor: text;
 }
 
-.CodeMirror {
-  min-width: 400px;
-}
-
 .app-onclick {
   cursor: pointer;
 }

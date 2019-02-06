@@ -1,21 +1,21 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import CodeField from './CodeField'
 
 class CodeExpanded extends React.Component {
     _onCollapse = () => {
-        this.props.expandCode(false)
+        this.props.toggleCode()
     }
 
     render() {
-        const { code } = this.props
+        const { source, subsource, code } = this.props
         
         return (
-            <div
-                className="code-expanded"
-                onClick={this._onCollapse}
-            >
+            <div className="code-expanded">
+                <div className="code-title" onClick={this._onCollapse}>
+                    <div className="code-source">{source}</div>
+                    <div className="code-subsource">{subsource}</div>
+                </div>
                 <CodeField
                     code={code}
                     options={{
@@ -27,9 +27,4 @@ class CodeExpanded extends React.Component {
     }
 }
 
-export default connect(
-    null,
-    {
-        
-    }
-)(CodeExpanded)
+export default CodeExpanded

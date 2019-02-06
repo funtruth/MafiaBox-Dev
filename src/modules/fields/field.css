@@ -27,12 +27,10 @@
 }
 
 .field-view-code {
-    margin-left: auto;
     font: 500 13px Arial;
+    color: #a6a6a6;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    margin-left: auto;
 }
 
 .field-call-input {

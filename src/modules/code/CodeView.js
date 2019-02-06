@@ -2,7 +2,7 @@ import React from 'react'
 import './code.css'
 import { connect } from 'react-redux'
 
-import { removeCodeAtIndex } from './CodeReducer'
+import { toggleCodeAtIndex, removeCodeAtIndex } from './CodeReducer'
 
 import CodeCollapsed from './components/CodeCollapsed'
 import CodeExpanded from './components/CodeExpanded'
@@ -15,17 +15,20 @@ class CodeView extends React.Component {
         }
 
         return (
-            codeKeys.map((item, index) => {
-                let newProps = item
+            <div className="code-view">
+                {codeKeys.map((item, index) => {
+                    let newProps = item
 
-                newProps.removeCode = () => this.props.removeCodeAtIndex(index)
+                    newProps.toggleCode = () => this.props.toggleCodeAtIndex(index)
+                    newProps.removeCode = () => this.props.removeCodeAtIndex(index)
 
-                return (
-                    <div className="code-view" key={index}>
-                        {item.expanded ? <CodeExpanded {...newProps}/> : <CodeCollapsed {...newProps}/>}
-                    </div>
-                )
-            })
+                    return (
+                        <React.Fragment key={index}>
+                            {item.expanded ? <CodeExpanded {...newProps}/> : <CodeCollapsed {...newProps}/>}
+                        </React.Fragment>
+                    )
+                })}
+            </div>
         )
     }
 }
@@ -35,6 +38,7 @@ export default connect(
         codeKeys: state.code.codeKeys,
     }),
     {
+        toggleCodeAtIndex,
         removeCodeAtIndex,
     }
 )(CodeView)
