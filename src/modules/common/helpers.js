@@ -32,6 +32,11 @@ export function pathUpdate(args, index, repo) {
     }
 }
 
+//TODO WIP
+export function assignUpdate(path, update, repo) {
+}
+
+
 //returns boolean if element is a dropdown
 export function isElementDropdown(target) {
     let isDropdown = target.className === 'drop-down-menu'

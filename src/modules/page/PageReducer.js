@@ -194,15 +194,6 @@ export function updatePageByPath() {
     }
 }
 
-/*TODO?????
-export function updatePageByProps(props) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        const pageInfo = helpers.pathUpdate()
-    }
-}*/
-
 export function saveAllPriorities(attach) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page

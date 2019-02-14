@@ -33,7 +33,7 @@ import PickVarType from './functions/PickVarType';
 
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
-import PickObject from './vars/PickObject'
+import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 
 import PickBoolean from './update/PickBoolean'
@@ -109,6 +109,7 @@ class DropdownView extends React.Component{
                 break
             case dropdownType.pickReturnType:
             case dropdownType.boardLib:
+            case dropdownType.pickUidObject:
                 props.updatePage = (value) => this.props.updatePageByPath(
                     props.pageKey,
                     props.fieldKey,
@@ -158,6 +159,7 @@ class DropdownView extends React.Component{
                 break
             default:
         }
+        
         //TODO proper obj
         switch(props.key) {
             case dropdownType.storyShowMore:
@@ -197,8 +199,8 @@ class DropdownView extends React.Component{
                 return <PickVar {...props}/>
             case dropdownType.pickVarProp:
                 return <PickVarProp {...props}/>
-            case dropdownType.pickObject:
-                return <PickObject {...props}/>
+            case dropdownType.pickUidObject:
+                return <PickUidObject {...props}/>
             case dropdownType.pickVarType:
                 return <PickVarType {...props}/>
             case dropdownType.pickComparison:

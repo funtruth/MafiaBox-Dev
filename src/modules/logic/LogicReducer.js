@@ -74,7 +74,7 @@ function recursive(key, library) {
                     codeBody = `else if(${codeCurrent}){${codeRight}}`
                     break
                 case operatorType.forin.key:
-                    codeBody = `for( in )${codeCurrent}${codeRight}`
+                    codeBody = `for(var hi in ${data.value.substr(1)}){${codeCurrent}${codeRight}}`
                     break
                 default:
             }

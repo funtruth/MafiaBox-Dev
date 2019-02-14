@@ -43,9 +43,8 @@ class LogicPanels extends React.Component{
                         return (
                             <LogicPanel
                                 {...this.props}
-                                subfieldKey="var1"
-                                placeholder="object ..."
-                                dropdown={dropdownType.pickObject}
+                                placeholder="UID object ..."
+                                dropdown={dropdownType.pickUidObject}
                             />
                         )
                     default:

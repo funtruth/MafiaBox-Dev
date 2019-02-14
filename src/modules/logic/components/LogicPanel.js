@@ -8,7 +8,7 @@ class LogicPanel extends React.Component{
         const { pageKey, fieldKey, indexKey, subfieldKey,
             logicInfo, vars, placeholder, dropdown } = this.props
         const { data } = logicInfo
-        const dataProp = data[subfieldKey] || {}
+        const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 
         return (
             <div
