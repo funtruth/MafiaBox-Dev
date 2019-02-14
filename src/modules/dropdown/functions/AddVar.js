@@ -1,65 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as helpers from '../../common/helpers'
 
 import { variableType } from '../../logic/types'
 
-class AddVar extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            value: ''
-        }
-    }
-
-    _onChange = e => {
-        this.setState({
-            value: e.target.value
+export default function AddVar(props) {
+    let [value, setValue] = useState('')
+    
+    let handleChange = e => setValue(e.target.value)
+    
+    let handleConfirm = () => {
+        const { attachVar } = props
+        
+        const tagKey = helpers.genUID('var', attachVar)
+        
+        props.updatePage(tagKey, {
+            key: tagKey,
+            name: value,
+            variableType: [variableType.any.key],
         })
+        props.showDropdown()
     }
 
-    _onKeyDown = e => {
+    let handleKeyPress = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                this._confirm()
+                handleConfirm()
                 break
             default:
         }
     }
 
-    _confirm = () => {
-        const { attachVar } = this.props
-        const { value } = this.state
-
-        const tagKey = helpers.genUID('var', attachVar)
-        
-        this.props.updatePage(tagKey, {
-            key: tagKey,
-            name: value,
-            variableType: [variableType.any.key],
-        })
-        this.props.showDropdown()
-    }
-
-    render() {
-        return (
-            <div>
-                <input
-                    className="tag-input"
-                    value={this.state.value}
-                    onChange={this._onChange}
-                    onKeyDown={this._onKeyDown}
-                    placeholder="Untitled"
-                    type='text'
-                    autoFocus
-                />
-                <div className="-sep"/>
-                <div className="drop-down-menu-option" onClick={this._confirm}>
-                    <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
-                    Create
-                </div>
+    return (
+        <div>
+            <input
+                className="tag-input"
+                value={value}
+                onChange={handleChange}
+                onKeyDown={handleKeyPress}
+                placeholder="Untitled"
+                type='text'
+                autoFocus
+            />
+            <div className="-sep"/>
+            <div className="drop-down-menu-option" onClick={handleConfirm}>
+                <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
+                Create
             </div>
-        )
-    }
+        </div>
+    )
 }
-
-export default AddVar

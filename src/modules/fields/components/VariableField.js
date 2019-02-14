@@ -22,7 +22,7 @@ class VariableField extends React.Component{
                                 app-onclick-props={JSON.stringify({
                                     fieldKey,
                                     tagKey: item.key,
-                                    currentValue: item.variableType,
+                                    currentValue: item.variableTypes, //TODO this needs ot be mapped now
                                 })}
                                 style={{
                                     color: '#fff',
