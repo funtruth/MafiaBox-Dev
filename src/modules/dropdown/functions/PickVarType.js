@@ -1,38 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import _ from 'lodash'
 
 import { variableType } from '../../logic/types'
 
-class PickVarType extends React.Component{
-    render() {
-        const { currentValue } = this.props
-        const currentValueIsArray = Array.isArray(currentValue)
+export default function PickVarType(props) {
+    const [selectedTypes, setSelectedTypes] = useState(props.currentValue)
+    const currentValueIsArray = Array.isArray(selectedTypes)
 
-        const handleSelect = item => {
-            this.props.updatePage({
-                variableTypes: currentValueIsArray ? _.uniq([...currentValue, item.key]) : [item.key]
-            })
-        }//TODO DROPDOWNS NEED TO LIVE UPDATE
-
-        return (
-            _.toArray(variableType).map(item => {
-                const chosen = currentValueIsArray && currentValue.includes(item.key)
-
-                return (
-                    <div
-                        key={item.key}
-                        className="drop-down-menu-option"
-                        chosen={chosen.toString()}
-                        onClick={handleSelect.bind(this, item)}
-                    >
-                        <i className={`${item.icon} drop-down-menu-icon`}/>
-                        {item.title}
-                        <i className="mdi mdi-check"/>
-                    </div>
-                )
-            })
-        )
+    const handleSelect = item => {
+        const updatedTypes = currentValueIsArray ? _.uniq([...selectedTypes, item.key]) : [item.key]
+        props.updatePage({
+            variableTypes: updatedTypes
+        })
+        setSelectedTypes(updatedTypes)
     }
-}
+    
+    return (
+        _.toArray(variableType).map(item => {
+            const chosen = currentValueIsArray && selectedTypes.includes(item.key)
 
-export default PickVarType
+            return (
+                <div
+                    key={item.key}
+                    className="drop-down-menu-option"
+                    chosen={(chosen.toString())}
+                    onClick={() => handleSelect(item)}
+                >
+                    <i className={`${item.icon} drop-down-menu-icon`}/>
+                    {item.title}
+                    <i className="mdi mdi-check"/>
+                </div>
+            )
+        })
+    )
+}

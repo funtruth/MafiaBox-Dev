@@ -7,7 +7,6 @@ import { variableType, panelType, updateViewType } from '../../logic/types'
 import DropParent from '../components/DropParent'
 import BoardLib from '../library/BoardLib';
 import DropTitle from '../components/DropTitle';
-import DropOption from '../components/DropOption'
 
 class PickObject extends React.Component{
     _onSelect = (item) => {
