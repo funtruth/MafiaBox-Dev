@@ -199,11 +199,15 @@ export const initFieldRepo = {
         vars: {
             "$choice.user": {
                 key: '$choice.user',
-                variableType: variableType.uid.key,
+                variableTypes: [
+                    variableType.uid.key,
+                ],
             },
             "$choice.target": {
                 key: '$choice.target',
-                variableType: variableType.uid.key,
+                variableTypes: [
+                    variableType.uid.key,
+                ],
             },
         },
         boardType: boardType.roles.key,
@@ -217,19 +221,28 @@ export const initFieldRepo = {
         vars: {
             "$choice.user": {
                 key: '$choice.user',
-                variableType: variableType.uid.key,
+                variableTypes: [
+                    variableType.uid.key,
+                ],
             },
             "$choice.target": {
                 key: '$choice.target',
-                variableType: variableType.uid.key,
+                variableTypes: [
+                    variableType.uid.key,
+                ],
             },
             "$choice.multitarget": {
                 key: '$choice.multitarget',
-                variableType: variableType.object.key,
+                variableTypes: [
+                    variableType.object.key,
+                    variableType.uidObject.key,
+                ],
             },
             "$choice.value": {
                 key: '$choice.value',
-                variableType: variableType.string.key,
+                variableTypes: [
+                    variableType.string.key,
+                ],
             },
         },
         boardType: boardType.roles.key,

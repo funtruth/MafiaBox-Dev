@@ -216,8 +216,9 @@ export function getUpdateCode(data) {
             case updateViewType.events:
                 string = string.concat(
                     Object.keys(info.value)
-                    .map(stringKey => `write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
-                    .join(''))
+                        .map(stringKey => `write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
+                        .join('')
+                )
                 break
             case updateViewType.timer:
                 string = string.concat(

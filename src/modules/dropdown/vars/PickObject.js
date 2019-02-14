@@ -26,7 +26,7 @@ class PickObject extends React.Component{
         const selectedValue = attach[subfieldKey] || {}
         
         const chosen = selectedValue.value === item.key
-        const isObject = item.variableType === variableType.object.key
+        const isObject = item.variableTypes.includes(variableType.object.key)
 
         if (isObject) {
             return (
@@ -56,17 +56,13 @@ class PickObject extends React.Component{
     }
 
     render() {
-        const { attachVar, attach, subfieldKey } = this.props
-        const selectedValue = attach[subfieldKey] || {}
+        const { attachVar } = this.props
 
         const vars = _.toArray(attachVar)
-        const uids = vars.filter(i => i.variableType === variableType.uid.key)
-        const otherVars = vars.filter(i => i.variableType !== variableType.uid.key && !i.rss)
+        const uids = vars.filter(i => i.variableTypes.includes(variableType.uid.key))
+        const otherVars = vars.filter(i => i.variableTypes.includes(variableType.uid.key) && !i.rss)
         const rssVars = vars.filter(i => i.rss)
         
-        const isNumber = selectedValue.variableType === variableType.number.key
-        const hasLength = selectedValue.variableType === variableType.object.key
-
         return (
             <div>
                 <BoardLib {...this.props}/>
@@ -88,43 +84,6 @@ class PickObject extends React.Component{
                         {rssVars.map(this._renderItem)}
                     </div>
                 </div>}
-                <DropTitle>other options</DropTitle>
-                {isNumber && <DropParent
-                    {...this.props}
-                    dropdownType={dropdownType.inputValue}
-                    params={{
-                        inputText: 'Enter a number',
-                        type: 'number',
-                        showValue: true,
-                        onSubmit: this._setAdjustment,
-                    }}
-                    icon="mdi mdi-numeric"
-                    text="adjust by"
-                />}
-                <DropParent
-                    {...this.props}
-                    dropdownType={dropdownType.pickBoolean}
-                    icon="mdi mdi-code-tags-check"
-                    text="boolean"
-                />
-                <DropParent
-                    {...this.props}
-                    dropdownType={dropdownType.inputValue}
-                    params={{
-                        inputText: 'Enter a number',
-                        type: 'number',
-                        showValue: true,
-                        onSubmit: this._setConstant,
-                    }}
-                    icon="mdi mdi-numeric"
-                    text="constant"
-                />
-                <DropOption
-                    show={hasLength}
-                    chosen={selectedValue.length}
-                    onClick={this._setLength}
-                    icon="mdi mdi-code-braces"
-                >length</DropOption>
             </div>
         )
     }

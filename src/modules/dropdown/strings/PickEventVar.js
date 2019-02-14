@@ -26,7 +26,7 @@ class PickVar extends React.Component{
         const { currentValue } = this.props
         const chosen = typeof currentValue === 'string' && currentValue === item.key
         
-        const isObject = item.variableType === variableType.object.key
+        const isObject = item.variableTypes.includes(variableType.object.key)
 
         if (isObject) {
             return (
@@ -59,7 +59,7 @@ class PickVar extends React.Component{
         const { attachVar, updateRef } = this.props
         if (!attachVar) return null
 
-        const vars = _.groupBy(attachVar, i => i.variableType === variableType.uid.key)
+        const vars = _.groupBy(attachVar, i => i.variableTypes.includes(variableType.uid.key))
         const rssVars = _.filter(updateRef, i => i.pickVar)
 
         return (

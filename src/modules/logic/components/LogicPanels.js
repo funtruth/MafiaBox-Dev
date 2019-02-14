@@ -44,7 +44,7 @@ class LogicPanels extends React.Component{
                             <LogicPanel
                                 {...this.props}
                                 subfieldKey="var1"
-                                placeholder="variable ..."
+                                placeholder="object ..."
                                 dropdown={dropdownType.pickObject}
                             />
                         )

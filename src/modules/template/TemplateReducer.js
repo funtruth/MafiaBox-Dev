@@ -7,14 +7,18 @@ const initialState = {
             key: 'gameState',
             subfield: 'gameState',
             dropdown: dropdownType.showSubfields,
-            variableType: variableType.object.key,
-            pickVar: true,
+            variableTypes: [
+                variableType.object.key,
+                variableType.rss.key,
+            ],
         },
         'gameState.phase': {
             key: 'gameState.phase',
             subfield: 'phase',
             dropdown: dropdownType.pickPhase,
-            variableType: variableType.string.key,
+            variableTypes: [
+                variableType.string.key,
+            ],
         },
         'gameState.counter': {
             key: 'gameState.counter',
@@ -22,7 +26,9 @@ const initialState = {
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
-            variableType: variableType.number.key,
+            variableTypes: [
+                variableType.number.key,
+            ],
         },
         'gameState.veto': {
             key: 'gameState.veto',
@@ -30,7 +36,9 @@ const initialState = {
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
-            variableType: variableType.number.key,
+            variableTypes: [
+                variableType.number.key,
+            ],
         },
         'gameState.timer': {
             key: 'gameState.timer',
@@ -38,26 +46,35 @@ const initialState = {
             dropdown: dropdownType.pickTimer,
             update: true,
             mutate: false,
-            variableType: variableType.number.key,
+            variableTypes: [
+                variableType.number.key,
+            ],
         },
         'lobby': {
             key: 'lobby',
             subfield: 'lobby',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.object.key,
-            pickVar: true,
+            variableTypes: [
+                variableType.object.key,
+                variableType.rss.key,
+                variableType.uidObject.key,
+            ],
         },
         'lobby.$': {
             key: 'lobby.$',
             subfield: '$',
             dropdown: dropdownType.showSubfields,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.uid.key,
+            ],
         },
         'lobby.$.role': {
             key: 'lobby.$.role',
             subfield: 'role',
             dropdown: dropdownType.showSubfields,
-            variableType: variableType.object.key,
+            variableTypes: [
+                variableType.object.key,
+            ],
         },
         'lobby.$.role.roleId': {
             key: 'lobby.$.role.roleId',
@@ -65,7 +82,9 @@ const initialState = {
             dropdown: dropdownType.pickRole,
             update: true,
             mutate: true,
-            variableType: variableType.string.key,
+            variableTypes: [
+                variableType.string.key,
+            ],
         },
         'lobby.$.role.team': {
             key: 'lobby.$.role.team',
@@ -73,7 +92,9 @@ const initialState = {
             dropdown: dropdownType.pickTeam, //TODO
             update: true,
             mutate: true,
-            variableType: variableType.string.key,
+            variableTypes: [
+                variableType.string.key,
+            ],
         },
         'lobby.$.role.action': {
             key: 'lobby.$.role.action',
@@ -81,7 +102,9 @@ const initialState = {
             dropdown: dropdownType.pickRole,
             update: true,
             mutate: true,
-            variableType: variableType.string.key,
+            variableTypes: [
+                variableType.string.key,
+            ],
         },
         'lobby.$.role.charges': {
             key: 'lobby.$.role.charges',
@@ -89,7 +112,9 @@ const initialState = {
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
-            variableType: variableType.number.key,
+            variableTypes: [
+                variableType.number.key,
+            ],
         },
         'lobby.$.role.suspicious': {
             key: 'lobby.$.role.suspicious',
@@ -97,7 +122,9 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
             tag: true,
         },
         'lobby.$.role.focus': {
@@ -106,7 +133,9 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
             tag: true,
         },
         'lobby.$.role.sneak': {
@@ -115,7 +144,9 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
             tag: true,
         },
         'lobby.$.health': {
@@ -124,7 +155,9 @@ const initialState = {
             dropdown: dropdownType.pickHealth,
             update: true,
             mutate: false,
-            variableType: variableType.object.key,
+            variableTypes: [
+                variableType.object.key,
+            ],
         },
         'lobby.$.dead': {
             key: 'lobby.$.dead',
@@ -132,7 +165,9 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: true,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
         },
         'lobby.$.king': {
             key: 'lobby.$.king',
@@ -140,7 +175,9 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: false,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
         },
         'lobby.$.clown': {
             key: 'lobby.$.clown',
@@ -148,69 +185,93 @@ const initialState = {
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: false,
-            variableType: variableType.boolean.key,
+            variableTypes: [
+                variableType.boolean.key,
+            ],
         },
         'lobby.$.trigger': {
             key: 'lobby.$.trigger',
             subfield: 'trigger',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.object.key,
+            variableTypes: [
+                variableType.object.key,
+            ],
         },
         'lobby.$.trigger.$': {
             key: 'lobby.$.trigger.$',
             subfield: '$',
             dropdown: dropdownType.pickTrigger,
             mutate: true,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.uid.key,
+            ],
         },
         'choices': {
             key: 'choices',
             subfield: 'choices',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.object.key,
-            pickVar: true,
+            variableTypes: [
+                variableType.object.key,
+                variableType.rss.key,
+            ],
         },
         'choices.$': {
             key: 'choices.$',
             subfield: '$',
             dropdown: dropdownType.showSubfields,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.uid.key,
+            ],
         },
         'choices.$.user': {
             key: 'choices.$.user',
             subfield: 'user',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.uid.key,
+            ],
         },
         'choices.$.target': {
             key: 'choices.$.target',
             subfield: 'target',
             dropdown: dropdownType.pickChoice,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.uid.key,
+            ],
         },
         'choices.$.multitarget': {
             key: 'choices.$.multitarget',
             subfield: 'multitarget',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.uid.key,
+            variableTypes: [
+                variableType.object.key,
+                variableType.uidObject.key,
+            ],
         },
         'choices.$.multitarget.$': {
             key: 'choices.$.multitarget.$',
             subfield: '$',
             dropdown: dropdownType.pickUid,
-            variableType: variableType.number.key,
+            variableTypes: [
+                variableType.number.key,
+            ],
         },
         'choices.$.value': {
             key: 'choices.$.value',
             subfield: 'value',
             dropdown: dropdownType.pickVar,
-            variableType: variableType.any.key,
+            variableTypes: [
+                variableType.any.key,
+            ],
         },
         'events': {
             key: 'events',
             subfield: 'events',
             dropdown: dropdownType.pickEvent,
-            variableType: variableType.object.key,
+            variableTypes: [
+                variableType.object.key,
+                variableType.rss.key,
+            ],
         },
     },
     update: false,

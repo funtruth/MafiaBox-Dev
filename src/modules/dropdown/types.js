@@ -89,5 +89,5 @@ export const VAR_DEFAULTS = {
     update: false,
     updateViewType: "",
     value: "",
-    variableType: "",
+    variableTypes: [],
 }

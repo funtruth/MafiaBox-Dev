@@ -35,7 +35,7 @@ class AddVar extends React.Component{
         this.props.updatePage(tagKey, {
             key: tagKey,
             name: value,
-            variableType: variableType.any.key,
+            variableType: [variableType.any.key],
         })
         this.props.showDropdown()
     }

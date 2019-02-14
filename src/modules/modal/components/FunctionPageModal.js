@@ -8,7 +8,7 @@ class FunctionPageModal extends React.Component {
                 style={{
                     minHeight: 400,
                     minWidth: 600,
-                    height: '50vh',
+                    height: '60vh',
                     width: '65vw',
                     overflow: 'scroll',
                 }}

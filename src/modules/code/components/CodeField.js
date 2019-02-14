@@ -2,7 +2,6 @@ import React from 'react'
 
 import '../monokai.css'
 import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material.css'
 
 import {Controlled as CodeMirror} from 'react-codemirror2'
 require('codemirror/mode/javascript/javascript')

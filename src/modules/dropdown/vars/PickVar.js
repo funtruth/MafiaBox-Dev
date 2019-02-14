@@ -17,7 +17,7 @@ class PickVar extends React.Component{
             panelType: panelType.var.key,
             updateViewType: updateViewType.uid,
             value: item.key,
-            variableType: item.variableType,
+            variableTypes: item.variableTypes,
         })
         this.props.showDropdown()
     }
@@ -27,7 +27,7 @@ class PickVar extends React.Component{
         const selectedValue = attach[subfieldKey] || {}
         
         const chosen = selectedValue.value === item.key
-        const isObject = item.variableType === variableType.object.key
+        const isObject = item.variableTypes.includes(variableType.object.key)
 
         if (isObject) {
             return (
@@ -87,12 +87,13 @@ class PickVar extends React.Component{
     render() {
         const { attachVar, attach, subfieldKey, updateRef } = this.props
         const selectedValue = attach[subfieldKey] || {}
+        const { variableTypes } = selectedValue || []
 
-        const vars = _.groupBy(attachVar, i => i.variableType === variableType.uid.key)
-        const rssVars = _.filter(updateRef, i => i.pickVar)
+        const vars = _.groupBy(attachVar, i => i.variableTypes.includes(variableType.uid.key))
+        const rssVars = _.filter(updateRef, i => i.variableTypes.includes(variableType.rss.key))
         
-        const isNumber = selectedValue.variableType === variableType.number.key
-        const hasLength = selectedValue.variableType === variableType.object.key
+        const isNumber = variableTypes.includes(variableType.number.key)
+        const hasLength = variableTypes.includes(variableType.object.key)
 
         return (
             <div>

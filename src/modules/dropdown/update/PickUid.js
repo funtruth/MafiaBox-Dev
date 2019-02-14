@@ -60,7 +60,7 @@ class PickUid extends React.Component{
 
     render() {
         const { attachVar, subfieldKey } = this.props
-        const uids = _.filter(attachVar, i => i.variableType === variableType.uid.key)
+        const uids = _.filter(attachVar, i => i.variableTypes.includes(variableType.uid.key))
         const fields = proptool.getSubfields(subfieldKey, this.props.updateRef)
         
         return (
