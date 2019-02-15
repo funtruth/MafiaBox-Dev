@@ -16,7 +16,7 @@ class PickBoolean extends React.Component{
             panelType: panelType.var.key,
             updateViewType: item.updateViewType,
             value: item.key,
-            variableType: variableType.boolean.key,
+            variableTypes: [variableType.boolean.key],
         })
         this.props.showDropdown()
     }

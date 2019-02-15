@@ -1,25 +1,29 @@
 import React from 'react'
 import { dropdownType } from '../../dropdown/types'
-import { logicType } from '../types'
+import { logicType, operatorType } from '../types'
 
 class LogicType extends React.Component{
     render() {
         const { indexKey, logicInfo, fieldKey, pageKey } = this.props
-        const type = logicInfo.logicType
+        const {
+            operatorType: selectedOperator,
+            logicType: selectedLogic,
+        } = logicInfo
         
+        const item = selectedOperator ? operatorType[selectedOperator] : selectedLogic ? logicType[selectedLogic] : {}
+
         return (
             <i 
-                className={`${(type && logicType[type].icon) || 'ion-md-create'} logic-label app-onclick`}
+                className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
                 menu-type={dropdownType.pickLogic}
                 app-onclick-props={JSON.stringify({
                     pageKey,
                     fieldKey,
                     indexKey,
                     attach: logicInfo,
-                    currentValue: type,
                 })}
                 style={{
-                    backgroundColor: (type && logicType[type].color) || '#767676',
+                    backgroundColor: item.color || '#767676',
                     color: '#fff',
                 }}
             />

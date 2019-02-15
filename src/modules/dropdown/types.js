@@ -82,6 +82,7 @@ export const DROP_TITLE_HEIGHT = 21
 
 export const VAR_DEFAULTS = {
     adjust: "",
+    declare: {},
     hide: false,
     length: false,
     mutate: false,

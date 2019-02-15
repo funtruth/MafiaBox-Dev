@@ -14,7 +14,7 @@ class PickVarProp extends React.Component{
         const { prefix } = this.props
         this.props.updatePage({
             value: `${prefix}.${key}`,
-            variableType: item.variableType,
+            variableTypes: [item.variableType],
             updateViewType: updateViewType.variable,
             adjust: null,
             panelType: panelType.var.key,

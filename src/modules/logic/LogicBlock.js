@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
-import { logicType } from './types'
+import { logicType, operatorType } from './types'
 import { droppableType } from '../common/types';
 
 import * as helpers from '../common/helpers'
@@ -62,6 +62,8 @@ class LogicBlock extends React.Component{
                             const newVars = logicInfo.logicType === logicType.function.key &&
                                 logicInfo.data && logicInfo.data.var1 && logicInfo.data.var1.value &&
                                 pageRepo[logicInfo.data.var1.value] && pageRepo[logicInfo.data.var1.value].vars
+
+                            const forInVar = (logicInfo.operatorType === operatorType.forin.key) && logicInfo.data.declare
                                 
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -98,7 +100,8 @@ class LogicBlock extends React.Component{
                                                 indexKey={logicInfo.right}
                                                 vars={{
                                                     ...vars,
-                                                    ...newVars
+                                                    ...newVars,
+                                                    [forInVar.key]: forInVar,
                                                 }}
                                             />
                                         }

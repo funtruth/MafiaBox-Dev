@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import * as helpers from '../../common/helpers'
 import _ from 'lodash'
 
 import { VAR_DEFAULTS } from '../types'
@@ -21,6 +22,13 @@ export default function PickUidObject(props) {
             ...VAR_DEFAULTS,
             panelType: panelType.var.key,
             value: item.key,
+            declare: {
+                key: helpers.genUID('$uid', attachVar, '_x'),
+                variableTypes: [
+                    variableType.uid.key,
+                    variableType.string.key,
+                ],
+            },
         })
         props.showDropdown()
     }

@@ -351,6 +351,9 @@ export const returnType = {
 export const triggerNewVars = {
     "$visitor": {
         key: '$visitor',
-        variableType: variableType.uid.key,
+        variableTypes: [
+            variableType.uid.key,
+            variableType.string.key,
+        ],
     },
 }

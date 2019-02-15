@@ -16,7 +16,7 @@ export default function AddVar(props) {
         props.updatePage(tagKey, {
             key: tagKey,
             name: value,
-            variableType: [variableType.any.key],
+            variableTypes: [variableType.any.key],
         })
         props.showDropdown()
     }
