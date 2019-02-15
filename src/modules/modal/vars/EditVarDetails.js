@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import ModalOptions from '../components/ModalOptions'
 import ToastEditor from '../../strings/components/ToastEditor';
 
-export default function EditToast(props) {
+export default function EditVarDetails(props) {
     let [error, setError] = useState('')
 
     let handleSave = () => {

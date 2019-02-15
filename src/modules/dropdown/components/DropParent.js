@@ -50,7 +50,7 @@ class DropParent extends React.Component{
     }
 
     render() {
-        const { icon, text, chosen } = this.props
+        const { icon, text, chosen, style } = this.props
         const { origin } = this.state
         
         return (
@@ -61,6 +61,7 @@ class DropParent extends React.Component{
                 origin={origin.toString()}
                 onMouseOver={this._onMouseOver}
                 onMouseOut={this._onMouseOut}
+                style={style}
             >
                 {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
                 {text || 'Parent'}

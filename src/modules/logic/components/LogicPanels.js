@@ -52,6 +52,15 @@ class LogicPanels extends React.Component{
                 }
             case logicType.update.key:
                 return <div className="logic-panel-disabled">N/A</div>
+            case logicType.declaration.key:
+                return (
+                    <LogicPanel
+                        {...this.props}
+                        subfieldKey="var2"
+                        placeholder="variable ..."
+                        dropdown={dropdownType.editVar}
+                    />
+                )
             case logicType.function.key:
                 return (
                     <LogicPanel

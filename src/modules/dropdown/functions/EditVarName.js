@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
 
-import { dropdownType } from '../types'
-
-import DropTitle from '../components/DropTitle'
-import DropParent from '../components/DropParent'
-
-export default function EditVar(props) {
+export default function EditVarName(props) {
     let [value, setValue] = useState(props.currentValue)
 
     let handleSave = () => {
@@ -41,7 +36,6 @@ export default function EditVar(props) {
 
     return (
         <div>
-            <DropTitle>variable declaration</DropTitle>
             <input
                 className="tag-input"
                 value={value}
@@ -52,28 +46,12 @@ export default function EditVar(props) {
                 autoFocus
             />
             <div className="-sep"/>
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.pickVarType}
-                icon="mdi mdi-language-typescript"
-                text="variable type"
-            />
             <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon mdi mdi-ray-start-arrow"></i>
-                initialize
-            </div>
-            <DropTitle>variable assignment</DropTitle>
-            <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon mdi mdi-dots-horizontal"></i>
-                advanced ...
-            </div>
-            <DropTitle>options</DropTitle>
-            <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon ion-ios-save"></i>
+                <i className={`drop-down-menu-icon ion-ios-save`}></i>
                 Save
             </div>
             <div className="drop-down-menu-option" onClick={handleDelete}>
-                <i className="drop-down-menu-icon ion-ios-trash"></i>
+                <i className={`drop-down-menu-icon ion-ios-trash`}></i>
                 Delete
             </div>
         </div>

@@ -29,6 +29,7 @@ import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
 import EditVar from './functions/EditVar'
+import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 
 import PickVar from './vars/PickVar'
@@ -195,6 +196,8 @@ class DropdownView extends React.Component{
                 return <AddVar {...props}/>
             case dropdownType.editVar:
                 return <EditVar {...props}/>
+            case dropdownType.editVarName:
+                return <EditVarName {...props}/>
             case dropdownType.pickVar:
                 return <PickVar {...props}/>
             case dropdownType.pickVarProp:

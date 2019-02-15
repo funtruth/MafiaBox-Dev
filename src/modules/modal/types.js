@@ -5,7 +5,6 @@ export const modalType = {
     deleteStory: 'modalType/delete-story',
     editPhase: 'modalType/edit-phase',
 
-    //v2 aka not garbage
     showPage: 'modalType/show-page',
     showTemplate: 'modalType/show-template',
     showFunctionPage: 'modalType/show-function-page',
@@ -15,4 +14,5 @@ export const modalType = {
     editEvent: 'modalType/edit-event',
     editToast: 'modalType/edit-toast',
     editPriority: 'modalType/edit-priority',
+    editVarDetails: 'modalType/edit-var-details',
 }

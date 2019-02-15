@@ -30,7 +30,7 @@ class VariableField extends React.Component{
                             />
                             <div
                                 className="property-button app-onclick"
-                                menu-type={dropdownType.editVar}
+                                menu-type={dropdownType.editVarName}
                                 app-onclick-props={JSON.stringify({
                                     fieldKey,
                                     tagKey: item.key,

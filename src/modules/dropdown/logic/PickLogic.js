@@ -20,12 +20,16 @@ class PickLogic extends React.Component{
                 <DropParent
                     {...this.props}
                     key={item.key}
+                    chosen={chosen.toString()}
                     dropdownType={item.dropdown}
                     params={{
                         hoverKey: item.key,
                     }}
                     icon={item.icon}
                     text={item.key}
+                    style={{
+                        backgroundColor: chosen && item.color,
+                    }}
                 />
             )
         }

@@ -25,6 +25,7 @@ import EditTrigger from './update/EditTrigger'
 import EditEvent from './update/EditEvent'
 import EditToast from './return/EditToast'
 import EditPriority from './update/EditPriority'
+import EditVarDetails from './vars/EditVarDetails'
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -57,6 +58,8 @@ class ModalView extends React.Component {
                 return <EditToast {...props}/>
             case modalType.editPriority:    
                 return <EditPriority {...props}/>
+            case modalType.editVar:
+                return <EditVarDetails {...props}/>
             default:
                 return null
         }

@@ -63,14 +63,20 @@ class AppWrapper extends React.Component{
             return
         }
 
-        //if click is not inside a dropdown element, close any dropdowns
+        const targetIsAppClick = e.target.matches('.app-onclick')
+
+        //if click is not inside a dropdown element, close dropdowns
         if (!helpers.isElementDropdown(e.target)) {
+            if (!targetIsAppClick) {
+                this.prevClick = ''
+            }
             this.props.showDropdown()
         }
 
-        if (e.target.matches('.app-onclick')) {
+        if (targetIsAppClick) {
             const menuClick = e.target.getAttribute('menu-type')
             
+            //re-clicking target hides dropdown
             if (this.prevClick === e.target.outerHTML) {
                 this.prevClick = ''
                 this.props.showDropdown()
