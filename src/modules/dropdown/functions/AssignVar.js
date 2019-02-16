@@ -5,7 +5,7 @@ import { dropdownType } from '../types'
 import DropTitle from '../components/DropTitle'
 import DropParent from '../components/DropParent'
 
-export default function EditVar(props) {
+export default function AssignVar(props) {
     let [value, setValue] = useState(props.currentValue)
 
     let handleSave = () => {
@@ -40,32 +40,16 @@ export default function EditVar(props) {
     }
 
     return (
-        <div>
-            <DropTitle>variable declaration</DropTitle>
-            <input
-                className="tag-input"
-                value={value}
-                onChange={handleChange}
-                onKeyDown={handleKeyPress}
-                placeholder="Untitled"
-                type='text'
-                autoFocus
-            />
-            <div className="-sep"/>
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.pickVarType}
-                icon="mdi mdi-language-typescript"
-                text="variable type"
-            />
-            <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon mdi mdi-ray-start-arrow"></i>
-                initialize
-            </div>
+        <>
             <DropTitle>variable assignment</DropTitle>
             <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon mdi mdi-dots-horizontal"></i>
-                advanced ...
+                <i className="drop-down-menu-icon mdi mdi-variable"></i>
+                variable
+            </div>
+            <div className="drop-down-menu-option" onClick={handleSave}>
+                <i className="drop-down-menu-icon mdi mdi-ray-start-arrow"></i>
+                assign as
+                <i className="mdi mdi-dots-horizontal adjust-right"/>
             </div>
             <DropTitle>options</DropTitle>
             <div className="drop-down-menu-option" onClick={handleSave}>
@@ -76,6 +60,6 @@ export default function EditVar(props) {
                 <i className="drop-down-menu-icon ion-ios-trash"></i>
                 Delete
             </div>
-        </div>
+        </>
     )
 }

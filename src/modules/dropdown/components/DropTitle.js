@@ -15,6 +15,7 @@ export default class DropTitle extends React.Component {
                     height: 2,
                     flexGrow: 1,
                     backgroundColor: '#464646',
+                    minWidth: 10,
                 }}/>
             </div>
         )

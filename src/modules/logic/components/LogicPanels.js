@@ -9,10 +9,14 @@ class LogicPanels extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, logicInfo, vars } = this.props
         const { data } = logicInfo
+        const {
+            logicType: selectedLogic,
+            operatorType: selectedOperator,
+        } = logicInfo
 
-        switch(logicInfo.logicType) {
+        switch(selectedLogic) {
             case logicType.operator.key:
-                switch(logicInfo.operatorType) {
+                switch(selectedOperator) {
                     case operatorType.if.key:
                     case operatorType.elseif.key:
                         return (
@@ -52,15 +56,29 @@ class LogicPanels extends React.Component{
                 }
             case logicType.update.key:
                 return <div className="logic-panel-disabled">N/A</div>
-            case logicType.declaration.key:
-                return (
-                    <LogicPanel
-                        {...this.props}
-                        subfieldKey="var2"
-                        placeholder="variable ..."
-                        dropdown={dropdownType.editVar}
-                    />
-                )
+            case logicType.variable.key:
+                switch(selectedOperator) {
+                    case operatorType.assignment.key:
+                        return (
+                            <LogicPanel
+                                {...this.props}
+                                subfieldKey="var1"
+                                placeholder="assign ..."
+                                dropdown={dropdownType.assignVar}
+                            />
+                        )
+                    case operatorType.declaration.key:
+                        return (
+                            <LogicPanel
+                                {...this.props}
+                                subfieldKey="var1"
+                                placeholder="declare ..."
+                                dropdown={dropdownType.declareVar}
+                            />
+                        )
+                    default:
+                        return null
+                }
             case logicType.function.key:
                 return (
                     <LogicPanel

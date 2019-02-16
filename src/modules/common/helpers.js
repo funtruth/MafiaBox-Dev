@@ -32,10 +32,22 @@ export function pathUpdate(args, index, repo) {
     }
 }
 
-//TODO WIP
-export function assignUpdate(path, update, repo) {
+export function updateByPath(path, update, repo, pathIndex=0) {
+    return {
+        ...repo||{},
+        ...((path.length > pathIndex) ?
+            {
+                [path[pathIndex]]: updateByPath(
+                    path,
+                    update,
+                    repo[path[pathIndex]]||{},
+                    pathIndex + 1
+                ),
+            }
+            :update
+        ),
+    }
 }
-
 
 //returns boolean if element is a dropdown
 export function isElementDropdown(target) {

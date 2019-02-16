@@ -194,6 +194,18 @@ export function updatePageByPath() {
     }
 }
 
+export function updateRepoByPath(path, update) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        const repoClone = helpers.updateByPath(path, update, pageRepo)
+
+        dispatch({
+            type: UPDATE_REPO,
+            payload: repoClone,
+        })
+    }
+}
+
 export function saveAllPriorities(attach) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page

@@ -6,7 +6,7 @@ import { dropdownType } from './types'
 import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal } from '../modal/ModalReducer'
-import { updatePageByPath } from '../page/PageReducer'
+import { updatePageByPath, updateRepoByPath } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
@@ -28,7 +28,8 @@ import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
-import EditVar from './functions/EditVar'
+import AssignVar from './functions/AssignVar'
+import DeclareVar from './functions/DeclareVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 
@@ -128,7 +129,8 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
-            case dropdownType.editVar:
+            case dropdownType.assignVar:
+            case dropdownType.declareVar:
             case dropdownType.pickVarType:
                 props.updatePage = (value) => this.props.updateFunction(
                     props.pageKey,
@@ -194,8 +196,10 @@ class DropdownView extends React.Component{
                 
             case dropdownType.addVar:
                 return <AddVar {...props}/>
-            case dropdownType.editVar:
-                return <EditVar {...props}/>
+            case dropdownType.assignVar:
+                return <AssignVar {...props}/>
+            case dropdownType.declareVar:
+                return <DeclareVar {...props}/>
             case dropdownType.editVarName:
                 return <EditVarName {...props}/>
             case dropdownType.pickVar:
@@ -273,6 +277,7 @@ export default connect(
         showDropdown,
         popDropdownTo,
         updatePageByPath,
+        updateRepoByPath,
         updateTopModal,
         updateFunction,
     }

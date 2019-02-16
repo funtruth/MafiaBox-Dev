@@ -37,7 +37,12 @@ class PickOperator extends React.Component{
     }
 
     render() {
-        const data = _.orderBy(operatorType, i => i.index)
+        const { hoverKey } = this.props
+        
+        const data = _(operatorType)
+            .filter(i => i.logicType === hoverKey)
+            .orderBy(i => i.index)
+            .value()
 
         return (
             <div>

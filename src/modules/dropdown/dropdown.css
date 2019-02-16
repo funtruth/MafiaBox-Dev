@@ -76,6 +76,7 @@
     width: 20px;
     text-align: center;
     margin-right: 5px;
+    pointer-events: none;
 }
 
 .tag-input {

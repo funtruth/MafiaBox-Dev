@@ -9,12 +9,13 @@ export const logicType = {
         color: 'Mediumslateblue',
         dropdown: dropdownType.pickOperator,
     },
-    declaration: {
-        key: 'declaration',
+    variable: {
+        key: 'variable',
         index: 1,
-        title: 'declaration',
+        title: 'variable',
         icon: 'mdi mdi-pen',
         color: '#bc6283',
+        dropdown: dropdownType.pickOperator,
     },
     function: {
         key: 'function',
@@ -56,6 +57,7 @@ export const operatorType = {
         title: 'if',
         icon: 'mdi mdi-ray-start-arrow',
         color: '#af8c40',
+        logicType: logicType.operator.key,
     },
     else: {
         key: 'else',
@@ -63,6 +65,7 @@ export const operatorType = {
         title: 'else',
         icon: 'mdi mdi-redo-variant',
         color: '#db4757',
+        logicType: logicType.operator.key,
     },
     elseif: {
         key: 'elseif',
@@ -70,6 +73,7 @@ export const operatorType = {
         title: 'else if',
         icon: 'mdi mdi-swap-horizontal-variant',
         color: '#2e6db4',
+        logicType: logicType.operator.key,
     },
     forin: {
         key: 'forin',
@@ -77,7 +81,24 @@ export const operatorType = {
         title: 'for ... in',
         icon: 'mdi mdi-sync',
         color: '#2e6db4',
-    }
+        logicType: logicType.operator.key,
+    },
+    declaration: {
+        key: 'declaration',
+        index: 4,
+        title: 'declaration',
+        icon: 'mdi mdi-account-card-details',
+        color: '#2e6db4',
+        logicType: logicType.variable.key,
+    },
+    assignment: {
+        key: 'assignment',
+        index: 5,
+        title: 'assignment',
+        icon: 'mdi mdi-pen',
+        color: '#2e6db4',
+        logicType: logicType.variable.key,
+    },
 }
 
 export const comparisonType = {
@@ -125,7 +146,7 @@ export const updateFamilyType = {
     health: 'family/health',
 }
 
-/*used to get value for UpdateButton
+/*used to get value for UpdateButton TODO remove
     this is separate from variableType because in an UpdateButton view
     there are multiple possible strings to be shown, such as the difference
     between "increment" and "increment by 2"
@@ -326,7 +347,7 @@ export const variableType = {
     },
     rss: {
         key: 'rss',
-        title: 'Room Snapshot',
+        title: 'Room Info',
         icon: 'mdi mdi-film',
     },
 }

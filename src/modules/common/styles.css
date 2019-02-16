@@ -68,6 +68,9 @@ div[chosen=true] > .mdi-check {
     padding-left: 10px;
     text-align: center;
 }
+.adjust-right {
+    margin-left: auto;
+}
 
 .border-right {
     border-right: 1px solid #464646;

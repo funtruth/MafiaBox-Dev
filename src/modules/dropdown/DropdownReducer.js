@@ -25,6 +25,8 @@ export function showDropdown(key, e, params={}, index=0) {
             if (keysClone.length) {
                 let offsetY = 0
                 switch(key) {
+                    case dropdownType.assignVar:
+                    case dropdownType.declareVar:
                     case dropdownType.pageLib:
                     case dropdownType.pickComparison:
                     case dropdownType.pickBoolean:

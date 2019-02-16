@@ -17,7 +17,8 @@ export const dropdownType = {
     templateTitleOptions: 'dropdownType/template-title-options',
 
     //functions
-    editVar: 'dropdownType/edit-var',
+    assignVar: 'dropdownType/assign-var',
+    declareVar: 'dropdownType/declare-var',
     editVarName: 'dropdownType/edit-var-name',
 
     addVar: 'dropdownType/add-var',
