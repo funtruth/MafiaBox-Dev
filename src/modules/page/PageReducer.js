@@ -165,36 +165,7 @@ export function removePage(pageKey) {
     }
 }
 
-export function updatePage(pageKey, field, newValue) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        let pageInfo = {
-            ...pageRepo[pageKey],
-            [field]: newValue,
-        }
-
-        dispatch({
-            type: UPDATE_PAGE,
-            payload: pageInfo
-        })
-    }
-}
-
-export function updatePageByPath() {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        
-        const pageInfo = helpers.pathUpdate(arguments, 0, pageRepo)
-        if (!pageInfo) return
-
-        dispatch({
-            type: UPDATE_PAGE,
-            payload: pageInfo
-        })
-    }
-}
-
-export function updateRepoByPath(path, update) {
+export function updateRepo(path, update) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         const repoClone = helpers.updateByPath(path, update, pageRepo)

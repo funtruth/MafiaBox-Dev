@@ -6,7 +6,7 @@ import { fieldType, boardType as _boardType } from './defaults'
 import { defaultLogic } from '../logic/types'
 import { initFieldRepo } from './defaults'
 
-import { updatePage } from '../page/PageReducer'
+import { updateRepo } from '../page/PageReducer'
 import { updateTopModal } from '../modal/ModalReducer'
 
 const initialState = {
@@ -102,31 +102,15 @@ export function moveField(boardType, startIndex, endIndex) {
     }
 }
 
-export function updateField(fieldKey, field, newValue) {
-    return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
-        let fieldInfo = {
-            ...fieldRepo[fieldKey],
-            [field]: newValue,
-        }
-
-        dispatch({
-            type: UPDATE_FIELD,
-            payload: fieldInfo
-        })
-    }
-}
-
-export function updateFieldByPath() {
+export function updateField(path, update) {
     return (dispatch, getState) => {
         const { fieldRepo } = getState().field
         
-        const fieldInfo = helpers.pathUpdate(arguments, 0, fieldRepo)
-        if (!fieldInfo) return
+        const repoClone = helpers.updateByPath(path, update, fieldRepo)
 
         dispatch({
             type: UPDATE_FIELD,
-            payload: fieldInfo
+            payload: repoClone,
         })
     }
 }
@@ -148,7 +132,7 @@ export function addTag(fieldKey, text) {
             index,
         }
         
-        dispatch(updateField(fieldKey, 'data', dataClone))
+        dispatch(updateField([fieldKey, 'data'], dataClone))
     }
 }
 
@@ -164,7 +148,7 @@ export function deleteTag(fieldKey, tagKey) {
         _.sortBy(dataClone, i => i.index)
             .map((item, index) => dataClone[item.key].index = index)
 
-        dispatch(updateField(fieldKey, 'data', dataClone))
+        dispatch(updateField([fieldKey, 'data'], dataClone))
     }
 }
 
@@ -183,7 +167,7 @@ export function moveTagWithinField(fieldKey, startIndex, endIndex) {
         dataSorted.map((item, index) => item.index = index)
         dataClone = _.keyBy(dataSorted, i => i.key)
         
-        dispatch(updateFieldByPath(fieldKey, 'data', dataClone))
+        dispatch(updateField([fieldKey, 'data'], dataClone))
     }
 }
 
@@ -229,12 +213,10 @@ export function toggleCollapse(itemKey, pageKey, fieldKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
 
-        let logicMap = { ...defaultLogic }
-        Object.assign(logicMap, pageRepo[pageKey][fieldKey])
+        const logicMap = Object.assign({}, pageRepo[pageKey][fieldKey])
+        const collapsed = !logicMap[itemKey].collapsed
 
-        logicMap[itemKey].collapsed = !logicMap[itemKey].collapsed
-
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
+        dispatch(updateRepo([pageKey, fieldKey, itemKey], {collapsed}))
     }
 }
 
@@ -248,7 +230,7 @@ export function toggleCollapse(itemKey, pageKey, fieldKey) {
     3. affectedItem
         a. assign a source (newItem)
 */
-export function addItem(pageKey, fieldKey, itemKey, dir = 'down') {
+export function addItem(pageKey, fieldKey, itemKey, dir='down') {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
@@ -266,12 +248,12 @@ export function addItem(pageKey, fieldKey, itemKey, dir = 'down') {
 
        if (logicMap[itemKey][dir]) {
             logicMap[newItemKey][dir] = logicMap[itemKey][dir] //2c
-            logicMap[logicMap[itemKey][dir]].source = newItemKey //3a
+            logicMap[logicMap[itemKey][dir]].source = newItemKey //3a TEST
         }
 
         logicMap[itemKey][dir] = newItemKey //1a
 
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
+        dispatch(updateRepo([pageKey, fieldKey], logicMap))
     }
 }
 
@@ -324,7 +306,7 @@ export function deleteItem(pageKey, fieldKey, itemKey) {
 
         delete logicMap[itemKey] //2a
 
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
+        dispatch(updateRepo([pageKey, fieldKey], logicMap))
     }
 }
 
@@ -340,7 +322,7 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
 
         //if item is main parent
         if (!type && !key) {
-            return dispatch(updatePage(pageKey, fieldKey, defaultLogic))
+            return dispatch(updateRepo([pageKey, fieldKey], defaultLogic))
         }
 
         if (logicMap[itemKey].down) {
@@ -353,7 +335,7 @@ export function deleteLogicTree(itemKey, pageKey, fieldKey) {
         recursiveDelete(logicMap[itemKey].right, logicMap)
         delete logicMap[itemKey]
 
-        dispatch(updatePage(pageKey, fieldKey, logicMap))
+        dispatch(updateRepo([pageKey, fieldKey], logicMap))
     }
 }
 
@@ -386,7 +368,7 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
         //delete down prop from last item
         delete valueClone[rows[rows.length - 1]].down
         
-        dispatch(updatePage(pageKey, fieldKey, valueClone))
+        dispatch(updateRepo([pageKey, fieldKey], valueClone))
     }
 }
 
@@ -408,7 +390,7 @@ export function moveRoleWithinPrio(prio, startIndex, endIndex) {
         attachClone[prio].splice(endIndex, 0, removed)
         
         dispatch(updateTopModal(
-            'attach',
+            ['attach'],
             attachClone,
         ))
     }
@@ -423,7 +405,7 @@ export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
         attachClone[endPrio].splice(endIndex, 0, removed)
         
         dispatch(updateTopModal(
-            'attach',
+            ['attach'],
             attachClone,
         ))
     }
@@ -438,7 +420,7 @@ export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
         attachClone.splice(endPrio + 1, 0, [removed])
 
         dispatch(updateTopModal(
-            'attach',
+            ['attach'],
             attachClone,
         ))
     }
@@ -447,9 +429,8 @@ export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_FIELD:
-            return { ...state, fieldRepo: action.payload }
         case UPDATE_FIELD:
-            return { ...state, fieldRepo: { ...state.fieldRepo, [action.payload.key]: action.payload } }
+            return { ...state, fieldRepo: action.payload }
         case MOVE_FIELD:
             return { ...state, fieldRepo: action.payload }
         case DELETE_FIELD:

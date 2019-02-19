@@ -15,6 +15,8 @@ import PropertyField from './components/PropertyField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
+import FooterSpacer from './components/FooterSpacer'
+
 class FieldView extends React.Component {
     _renderItem = (item) => {
         const { pageKey, pageInfo, fieldRepo, updatePage } = this.props
@@ -65,20 +67,23 @@ class FieldView extends React.Component {
             .value()
 
         return (
-            fields.map((item, index) => {
-                const { icon } = fieldType[item.fieldType]
+            <>
+                {fields.map((item, index) => {
+                    const { icon } = fieldType[item.fieldType]
 
-                return (
-                    <React.Fragment key={index}>
-                        <div className="-sep"/>
-                        <div className="field-label">
-                            <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
-                            {item.title}
-                        </div>
-                        {this._renderItem(item)}
-                    </React.Fragment>
-                )
-            })
+                    return (
+                        <React.Fragment key={index}>
+                            <div className="-sep"/>
+                            <div className="field-label">
+                                <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
+                                {item.title}
+                            </div>
+                            {this._renderItem(item)}
+                        </React.Fragment>
+                    )
+                })}
+                <FooterSpacer/>
+            </>
         )
     }
 }

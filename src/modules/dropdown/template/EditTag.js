@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateFieldByPath, deleteTag } from '../../fields/FieldReducer'
+import { updateField, deleteTag } from '../../fields/FieldReducer'
 
 class EditTag extends React.Component{
     constructor(props) {
@@ -19,7 +19,10 @@ class EditTag extends React.Component{
 
     _onChange = e => {
         const { tagKey, fieldKey } = this.props
-        this.props.updateFieldByPath(fieldKey, 'data', tagKey, 'title', e.target.value)
+        this.props.updateField(
+            [fieldKey, 'data', tagKey],
+            {title: e.target.value}
+        )
     }
 
     _onKeyDown = e => {
@@ -64,7 +67,7 @@ export default connect(
         fieldRepo: state.field.fieldRepo,
     }),
     {
-        updateFieldByPath,
+        updateField,
         deleteTag,
     }
 )(EditTag)

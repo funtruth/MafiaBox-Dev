@@ -13,7 +13,7 @@ const initialState = {
 
 const MOVE_STORY = 'functions/move-story'
 const ADD_FUNCTION = 'functions/add-function'
-const UPDATE_FUNCTION = 'functions/update-function'
+const UPDATE_REPO = 'functions/update-repo'
 
 export function moveFunctionStory(startIndex, endIndex) {
     return (dispatch, getState) => {
@@ -65,16 +65,15 @@ export function addFunction(mapKey, itemCount, boardType) {
     }
 }
 
-export function updateFunction() {
+export function updateFunction(path, update) {
     return (dispatch, getState) => {
         const { functionRepo } = getState().functions
         
-        const pageInfo = helpers.pathUpdate(arguments, 0, functionRepo)
-        if (!pageInfo) return
+        const repoClone = helpers.updateByPath(path, update, functionRepo)
 
         dispatch({
-            type: UPDATE_FUNCTION,
-            payload: pageInfo
+            type: UPDATE_REPO,
+            payload: repoClone,
         })
     }
 }
@@ -84,9 +83,8 @@ export default (state = initialState, action) => {
         case MOVE_STORY:
             return { ...state, functionMap: action.payload }
         case ADD_FUNCTION:
+        case UPDATE_REPO:
             return { ...state, functionRepo: action.payload }
-        case UPDATE_FUNCTION:
-            return { ...state, functionRepo: { ...state.functionRepo, [action.payload.pageKey]: action.payload }}
         default:
             return state;
     }

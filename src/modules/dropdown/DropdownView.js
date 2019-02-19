@@ -6,7 +6,7 @@ import { dropdownType } from './types'
 import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal } from '../modal/ModalReducer'
-import { updatePageByPath, updateRepoByPath } from '../page/PageReducer'
+import { updateRepo } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
@@ -76,18 +76,12 @@ class DropdownView extends React.Component{
             case dropdownType.inputValue:
                 if (props.isTrigger) {
                     props.updatePage = (value) => this.props.updateTopModal(
-                        'attach',
-                        'value',
-                        props.subfieldKey,
+                        ['attach', 'value', props.subfieldKey],
                         value,
                     )
                 } else {
-                    props.updatePage = (value) => this.props.updatePageByPath(
-                        props.pageKey,
-                        props.fieldKey,
-                        props.indexKey,
-                        'data',
-                        props.subfieldKey,
+                    props.updatePage = (value) => this.props.updateRepo(
+                        [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
                         value,
                     )
                 }
@@ -97,14 +91,12 @@ class DropdownView extends React.Component{
             case dropdownType.pickEventVarProp:
                 if (props.selectedKey) {
                     props.updatePage = (value) => this.props.updateTopModal(
-                        'attach',
-                        'value',
-                        props.selectedKey,
+                        ['attach', 'value', props.selectedKey],
                         value,
                     )
                 } else {
                     props.updatePage = (value) => this.props.updateTopModal(
-                        'attach',
+                        ['attach'],
                         value,
                     )
                 }
@@ -112,20 +104,15 @@ class DropdownView extends React.Component{
             case dropdownType.pickReturnType:
             case dropdownType.boardLib:
             case dropdownType.pickUidObject:
-                props.updatePage = (value) => this.props.updatePageByPath(
-                    props.pageKey,
-                    props.fieldKey,
-                    props.indexKey,
-                    'data',
+                props.updatePage = (value) => this.props.updateRepo(
+                    [props.pageKey, props.fieldKey, props.indexKey, 'data'],
                     value,
                 )
                 break
             case dropdownType.pickLogic:
             case dropdownType.pickOperator:
-                props.updatePage = (value) => this.props.updatePageByPath(
-                    props.pageKey,
-                    props.fieldKey,
-                    props.indexKey,
+                props.updatePage = (value) => this.props.updateRepo(
+                    [props.pageKey, props.fieldKey, props.indexKey],
                     value,
                 )
                 break
@@ -133,17 +120,13 @@ class DropdownView extends React.Component{
             case dropdownType.declareVar:
             case dropdownType.pickVarType:
                 props.updatePage = (value) => this.props.updateFunction(
-                    props.pageKey,
-                    props.fieldKey,
-                    props.tagKey,
+                    [props.pageKey, props.fieldKey, props.tagKey],
                     value,
                 )
                 break
             case dropdownType.addVar:
                 props.updatePage = (tagKey, value) => this.props.updateFunction(
-                    props.pageKey,
-                    props.fieldKey,
-                    tagKey,
+                    [props.pageKey, props.fieldKey, tagKey],
                     value,
                 )
                 break
@@ -276,8 +259,7 @@ export default connect(
     {
         showDropdown,
         popDropdownTo,
-        updatePageByPath,
-        updateRepoByPath,
+        updateRepo,
         updateTopModal,
         updateFunction,
     }

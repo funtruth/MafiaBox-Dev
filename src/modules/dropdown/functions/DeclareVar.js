@@ -4,6 +4,7 @@ import { dropdownType } from '../types'
 
 import DropTitle from '../components/DropTitle'
 import DropParent from '../components/DropParent'
+import DropItem from '../components/DropItem'
 
 export default function DeclareVar(props) {
     let [value, setValue] = useState('')
@@ -57,20 +58,20 @@ export default function DeclareVar(props) {
                 icon="mdi mdi-language-typescript"
                 text="variable type"
             />
-            <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon mdi mdi-ray-start-arrow"></i>
+            <DropItem
+                leftIcon="mdi mdi-ray-start-arrow"
+                rightIcon="mdi mdi-dots-horizontal adjust-right"
+                onClick={handleSave}
+            >
                 initialize as
-                <i className="mdi mdi-dots-horizontal adjust-right"/>
-            </div>
+            </DropItem>
             <DropTitle>options</DropTitle>
-            <div className="drop-down-menu-option" onClick={handleSave}>
-                <i className="drop-down-menu-icon ion-ios-save"></i>
-                Save
-            </div>
-            <div className="drop-down-menu-option" onClick={handleDelete}>
-                <i className="drop-down-menu-icon ion-ios-trash"></i>
-                Delete
-            </div>
+            <DropItem
+                leftIcon="mdi mdi-checkbox-marked-outline"
+                onClick={handleSave}
+            >
+                add variable
+            </DropItem>
         </div>
     )
 }

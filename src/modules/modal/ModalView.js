@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
-import { updatePageByPath, saveAllPriorities } from '../page/PageReducer'
+import { updateRepo, saveAllPriorities } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
@@ -77,16 +77,14 @@ class ModalView extends React.Component {
 
                 switch(props.key) {
                     case modalType.showPage:
-                        props.updatePage = (fieldKey, value) => this.props.updatePageByPath(
-                            props.pageKey,
-                            fieldKey,
+                        props.updatePage = (fieldKey, value) => this.props.updateRepo(
+                            [props.pageKey, fieldKey],
                             value,
                         )
                         break
                     case modalType.showFunctionPage:
                         props.updatePage = (fieldKey, value) => this.props.updateFunction(
-                            props.pageKey,
-                            fieldKey,
+                            [props.pageKey, fieldKey],
                             value,
                         )
                         break
@@ -95,12 +93,8 @@ class ModalView extends React.Component {
 
                 switch(props.key) {
                     case modalType.editTrigger:
-                        props.onSave = () => this.props.updatePageByPath(
-                            props.pageKey,
-                            props.fieldKey,
-                            props.indexKey,
-                            'data',
-                            props.subfieldKey,
+                        props.onSave = () => this.props.updateRepo(
+                            [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
                             {
                                 ...props.attach,
                                 updateViewType: updateViewType.trigger,
@@ -108,46 +102,35 @@ class ModalView extends React.Component {
                         )
                         break
                     case modalType.editEvent:
-                        props.onSave = () => this.props.updatePageByPath(
-                            props.pageKey,
-                            props.fieldKey,
-                            props.indexKey,
-                            'data',
-                            props.subfieldKey,
+                        props.onSave = () => this.props.updateRepo(
+                            [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
                             {
                                 ...props.attach,
                                 updateViewType: updateViewType.events,
                             }
                         )
                         props.onAttach = () => this.props.updateTopModal(
-                            'attach',
-                            'value',
-                            props.subfieldKey,
+                            ['attach', 'value', props.subfieldKey],
                             {
                                 ...props.attach,
                                 updateViewType: updateViewType.events,
                             }
                         )
                         props.onEdit = (stringKey, value) => this.props.updateTopModal(
-                            'attach',
-                            'value',
-                            stringKey,
+                            ['attach', 'value', stringKey],
                             value,
                         )
                         break
                     case modalType.editToast:
-                        props.onSave = () => this.props.updatePageByPath(
-                            props.pageKey,
-                            props.fieldKey,
-                            props.indexKey,
-                            'data',
+                        props.onSave = () => this.props.updateRepo(
+                            [props.pageKey, props.fieldKey, props.indexKey, 'data'],
                             {
                                 ...props.attach,
                                 key: 'toast',
                             },
                         )
                         props.onEdit = (value) => this.props.updateTopModal(
-                            'attach',
+                            ['attach'],
                             value,
                         )
                         break
@@ -193,7 +176,7 @@ export default connect(
     }),
     {
         showModal,
-        updatePageByPath,
+        updateRepo,
         updateFunction,
         saveAllPriorities,
         popModalTo,

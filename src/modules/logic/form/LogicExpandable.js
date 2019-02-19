@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as proptool from '../proptool'
 
-import { updatePageByPath } from '../../page/PageReducer'
+import { updateRepo } from '../../page/PageReducer'
 import { updateTopModal } from '../../modal/ModalReducer'
 import UpdateButton from './UpdateButton'
 
@@ -26,17 +26,19 @@ class LogicExpandable extends React.Component{
         const { pageKey, fieldKey, indexKey, subfieldKey, logicInfo, prefix } = this.props
         
         if (subfieldKey) {
-            this.props.updateTopModal('attach', 'value', prefix, {
-                hide: !logicInfo.data ||
-                    !logicInfo.data[prefix] ||
-                    !logicInfo.data[prefix].hide
-            })
+            this.props.updateTopModal(
+                ['attach', 'value', prefix],
+                {
+                    hide: !logicInfo.data || !logicInfo.data[prefix] || !logicInfo.data[prefix].hide,
+                }
+            )
         } else {
-            this.props.updatePageByPath(pageKey, fieldKey, indexKey, 'data', prefix, {
-                hide: !logicInfo.data ||
-                    !logicInfo.data[prefix] ||
-                    !logicInfo.data[prefix].hide
-            })
+            this.props.updateRepo(
+                [pageKey, fieldKey, indexKey, 'data', prefix],
+                {
+                    hide: !logicInfo.data || !logicInfo.data[prefix] || !logicInfo.data[prefix].hide
+                }
+            )
         }
     }
 
@@ -120,7 +122,7 @@ export default connect(
         dropdownKeys: state.dropdown.dropdownKeys,
     }),
     {
-        updatePageByPath,
+        updateRepo,
         updateTopModal,
     }
 )(LogicExpandable)

@@ -6,8 +6,6 @@ import * as proptool from '../../logic/proptool'
 import { dropdownType } from '../types'
 import { variableType } from '../../logic/types'
 
-import { updatePageByPath } from '../../page/PageReducer'
-
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
 
@@ -90,7 +88,4 @@ export default connect(
     state => ({
         updateRef: state.template.updateRef,
     }),
-    {
-        updatePageByPath,
-    }
 )(PickEventVarProp)

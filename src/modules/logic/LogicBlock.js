@@ -64,6 +64,7 @@ class LogicBlock extends React.Component{
                                 pageRepo[logicInfo.data.var1.value] && pageRepo[logicInfo.data.var1.value].vars
 
                             const forInVar = (logicInfo.operatorType === operatorType.forin.key) && logicInfo.data.declare
+                            const removeThisTODO = forInVar ? {[forInVar.key]: forInVar} : {}
                                 
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -101,7 +102,7 @@ class LogicBlock extends React.Component{
                                                 vars={{
                                                     ...vars,
                                                     ...newVars,
-                                                    [forInVar.key]: forInVar,
+                                                    ...removeThisTODO,
                                                 }}
                                             />
                                         }

@@ -27,7 +27,10 @@ class PickFieldType extends React.Component{
 
     _select = (newValue) => {
         const { fieldKey } = this.props
-        this.props.updateField(fieldKey, 'fieldType', newValue)
+        this.props.updateField(
+            [fieldKey],
+            {fieldType: newValue},
+        )
         this.props.showDropdown()
     }
 

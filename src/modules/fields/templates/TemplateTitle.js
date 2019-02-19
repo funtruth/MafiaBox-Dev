@@ -5,7 +5,10 @@ import { dropdownType } from '../../dropdown/types';
 class TemplateTitle extends React.Component{
     _onChange = e => {
         const { key } = this.props.fieldInfo
-        this.props.updateField(key, 'title', e.target.value)
+        this.props.updateField(
+            [key],
+            {title: e.target.value},
+        )
     }
 
     render() {

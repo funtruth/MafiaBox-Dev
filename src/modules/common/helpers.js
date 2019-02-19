@@ -33,6 +33,7 @@ export function pathUpdate(args, index, repo) {
 }
 
 export function updateByPath(path, update, repo, pathIndex=0) {
+    if (typeof update !== 'object') console.warn('somethign is wrong. Update is not an Object.')
     return {
         ...repo||{},
         ...((path.length > pathIndex) ?
