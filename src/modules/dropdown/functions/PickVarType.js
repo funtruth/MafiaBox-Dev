@@ -9,7 +9,14 @@ export default function PickVarType(props) {
     const currentValueIsArray = Array.isArray(selectedTypes)
 
     const handleSelect = item => {
-        const updatedTypes = currentValueIsArray ? _.uniq([...selectedTypes, item.key]) : [item.key]
+        let updatedTypes;
+
+        if (currentValueIsArray && selectedTypes.includes(item.key)) {
+            updatedTypes = _.remove(selectedTypes, i => i !== item.key)
+        } else {
+            updatedTypes = currentValueIsArray ? _.uniq([...selectedTypes, item.key]) : [item.key]
+        }
+
         props.updatePage({
             variableTypes: updatedTypes,
         })

@@ -73,6 +73,7 @@ class DropdownView extends React.Component{
             case dropdownType.pickTimer:
             case dropdownType.pageLib:
             case dropdownType.pickVar:
+            case dropdownType.pickVarType:
             case dropdownType.pickVarProp:
             case dropdownType.pickComparison:
             case dropdownType.inputValue:

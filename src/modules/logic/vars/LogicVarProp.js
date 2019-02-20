@@ -1,21 +1,55 @@
 import React from 'react'
 
-import UpdateButton from '../form/UpdateButton'
+import { dropdownType } from '../../dropdown/types'
+import { modalType } from '../../modal/types';
 
 export default function LogicVarProp(props) {
-    const { nested, property, config } = props
-    
-    return (
-        <div className="row-nowrap" style={{ marginTop: 2, marginLeft: nested ? 12 : 0 }}>
-            <div
-                className="common-bubble --grey27"
-                style={{
-                    cursor: 'pointer',
-                }}
-            >
-                {property}
-            </div>
-            <UpdateButton {...props} config={config}/>
-        </div>
-    )
+    const { property, fieldKey, indexKey, item } = props
+
+    let handleModal = () => {
+        props.showModal(modalType.assignVar, {
+
+        })
+    }
+
+    switch(property) {
+        case 'types':
+            return (
+                <div className="row-nowrap" style={{ marginTop: 2, marginLeft: 12 }}>
+                    <div className="common-bubble --grey27">{property}</div>
+                    <div
+                        className="logic-pick-update app-onclick"
+                        menu-type={dropdownType.pickVarType}
+                        app-onclick-props={JSON.stringify({
+                            fieldKey,
+                            indexKey,
+                            subfieldKey: item.key,
+                            currentValue: item.variableTypes,
+                        })}
+                        highlight="true"
+                    >
+                        todo
+                    </div>
+                </div>
+            )
+        case 'assign':
+            return (
+                <div className="row-nowrap" style={{ marginTop: 2, marginLeft: 12 }}>
+                    <div className="common-bubble --grey27">{property}</div>
+                    <div
+                        className="logic-pick-update"
+                        highlight="true"
+                        onClick={handleModal}
+                    >
+                        todo
+                    </div>
+                </div>
+            )
+        default:
+            return (
+                <div className="row-nowrap" style={{ marginTop: 2 }}>
+                    <div className="common-bubble --grey27">{property}</div>
+                </div>
+            )
+    }
 }
