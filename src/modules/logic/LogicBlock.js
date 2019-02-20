@@ -17,6 +17,7 @@ import LogicDownArrow from './components/LogicDownArrow';
 import LogicRightArrow from './components/LogicRightArrow';
 import LogicPanels from './components/LogicPanels';
 import LogicObject from './form/LogicObject';
+import LogicVariable from './vars/LogicVariable';
 
 class LogicBlock extends React.Component{
     constructor(props) {
@@ -89,6 +90,7 @@ class LogicBlock extends React.Component{
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
                                             <LogicObject {...iprops} updateRef={updateRef}/>
+                                            <LogicVariable {...iprops}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>
                                                 <LogicErrors errors={errors}/>

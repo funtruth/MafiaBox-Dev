@@ -38,6 +38,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     case dropdownType.pickUid:
                     case dropdownType.pickUpdate:
                     case dropdownType.pickVarProp:
+                    case dropdownType.pickVarType:
                     case dropdownType.pickRecipient:
                     case dropdownType.pickReturnType:
                     case dropdownType.showSubfields:

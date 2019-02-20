@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { dropdownType } from '../types'
 
 import DropTitle from '../components/DropTitle'
-import DropParent from '../components/DropParent'
 
 export default function AssignVar(props) {
     let [value, setValue] = useState(props.currentValue)

@@ -1,29 +1,24 @@
 import React, { useState } from 'react'
 
-import * as helpers from '../../common/helpers'
+import { dropdownType } from '../types'
 
 import DropTitle from '../components/DropTitle'
+import DropParent from '../components/DropParent'
 import DropItem from '../components/DropItem'
 
-export default function DeclareVar(props) {
+export default function EditVar(props) {
     let [value, setValue] = useState('')
     let handleChange = e => setValue(e.target.value)
 
     let handleSave = () => {
         const { currentValue } = props
 
-        const isAlpha = helpers.checkAlpha(value)
-        
-        if (!isAlpha) {
-            return
+        if (currentValue === value) {
+            return props.showDropdown()
         }
 
-        const newKey = helpers.genUID('var', currentValue, '-xx')
         props.updatePage({
-            [newKey]: {
-                key: newKey,
-                value,
-            }
+            name: value, 
         })
         props.showDropdown()
     }
@@ -48,10 +43,21 @@ export default function DeclareVar(props) {
                 placeholder="Variable name ..."
                 type='text'
                 autoFocus
-                style={{
-                    marginBottom: 6,
-                }}
             />
+            <div className="-sep"/>
+            <DropParent
+                {...props}
+                dropdownType={dropdownType.pickVarType}
+                icon="mdi mdi-language-typescript"
+                text="variable type"
+            />
+            <DropItem
+                leftIcon="mdi mdi-ray-start-arrow"
+                rightIcon="mdi mdi-dots-horizontal adjust-right"
+                onClick={handleSave}
+            >
+                initialize as
+            </DropItem>
             <DropTitle>options</DropTitle>
             <DropItem
                 leftIcon="mdi mdi-checkbox-marked-outline"

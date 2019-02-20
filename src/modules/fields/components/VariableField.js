@@ -18,7 +18,7 @@ class VariableField extends React.Component{
                         <div key={index} className="row">
                             <i 
                                 className={`${variableType[item.variableType || variableType.any.key].icon} logic-label app-onclick`}
-                                menu-type={dropdownType.pickVarType}
+                                menu-type={dropdownType.writeVarType}
                                 app-onclick-props={JSON.stringify({
                                     fieldKey,
                                     tagKey: item.key,

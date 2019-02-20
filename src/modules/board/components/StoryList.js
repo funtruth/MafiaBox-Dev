@@ -33,7 +33,13 @@ class StoryList extends React.Component{
 
     _onClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.showModal(modalType.showPage, { pageKey: item.pageKey })
+            this.props.showModal(
+                modalType.showPage,
+                {
+                    pageKey: item.pageKey,
+                    boardType: item.boardType,
+                },
+            )
         }
     }
 

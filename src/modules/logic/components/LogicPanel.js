@@ -37,7 +37,9 @@ class LogicPanel extends React.Component{
 }
 
 export default connect(
-    null,
+    state => ({
+        pageRepo: state.page.pageRepo,
+    }),
     {
         dataPropToTitle,
     }

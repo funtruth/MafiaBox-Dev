@@ -30,8 +30,10 @@ import TemplateTitleOptions from './template/TemplateTitleOptions'
 import AddVar from './functions/AddVar'
 import AssignVar from './functions/AssignVar'
 import DeclareVar from './functions/DeclareVar'
+import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
+import WriteVarType from './functions/WriteVarType'
 
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
@@ -104,6 +106,8 @@ class DropdownView extends React.Component{
             case dropdownType.pickReturnType:
             case dropdownType.boardLib:
             case dropdownType.pickUidObject:
+            case dropdownType.assignVar:
+            case dropdownType.declareVar:
                 props.updatePage = (value) => this.props.updateRepo(
                     [props.pageKey, props.fieldKey, props.indexKey, 'data'],
                     value,
@@ -116,9 +120,7 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
-            case dropdownType.assignVar:
-            case dropdownType.declareVar:
-            case dropdownType.pickVarType:
+            case dropdownType.writeVarType:
                 props.updatePage = (value) => this.props.updateFunction(
                     [props.pageKey, props.fieldKey, props.tagKey],
                     value,
@@ -183,6 +185,8 @@ class DropdownView extends React.Component{
                 return <AssignVar {...props}/>
             case dropdownType.declareVar:
                 return <DeclareVar {...props}/>
+            case dropdownType.editVar:
+                return <EditVar {...props}/>
             case dropdownType.editVarName:
                 return <EditVarName {...props}/>
             case dropdownType.pickVar:
@@ -195,6 +199,8 @@ class DropdownView extends React.Component{
                 return <PickVarType {...props}/>
             case dropdownType.pickComparison:
                 return <PickComparison {...props}/>
+            case dropdownType.writeVarType:
+                return <WriteVarType {...props}/>
 
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...props}/>

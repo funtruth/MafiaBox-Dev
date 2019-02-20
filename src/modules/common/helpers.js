@@ -1,3 +1,6 @@
+const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const alphaWithSpace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '
+
 export function genUID(key, repo, suffix='-xxxx') {
     return `${key}${suffix}`.replace(/[xy]/g, function(c) {
         // eslint-disable-next-line
@@ -9,29 +12,6 @@ export function genUID(key, repo, suffix='-xxxx') {
 
 //updates a property deep inside an object and returns the entire object
 //WARNING: cannot delete properties (THIS IS A FEATURE)
-//TODO this needs to be moved up one level so it can be used easier
-export function pathUpdate(args, index, repo) {
-    if (args.length === 2) {
-        return typeof args[args[index + 1]] === 'object' ? 
-            {
-                ...repo[args[index]]||{},
-                ...args[index + 1],
-            }
-            :args[index + 1]
-    }
-    return {
-        ...repo[args[index]]||{},
-        [args[index + 1]]: index === args.length - 3 ?
-            typeof args[args.length - 1] === 'object' ?
-                {
-                    ...(repo[args[index]]||{})[args[index + 1]]||{},
-                    ...args[args.length - 1]
-                }
-                :args[args.length - 1]
-            :pathUpdate(args, index + 1, repo[args[index]]||{})
-    }
-}
-
 export function updateByPath(path, update, repo, pathIndex=0) {
     if (typeof update !== 'object') console.warn('somethign is wrong. Update is not an Object.')
     return {
@@ -107,4 +87,13 @@ export function swapVarFormat(string, ugly) {
         default:
             return console.warn('Unexpected input, helpers swapVarFormat', {string})
     }   
+}
+
+export function checkAlpha(string) {
+    for (var i=0; i<string.length; i++) {
+        if (alpha.indexOf(string.charAt(i)) === -1) {
+            return false
+        }
+    }
+    return true
 }

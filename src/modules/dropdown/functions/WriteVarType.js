@@ -4,7 +4,8 @@ import _ from 'lodash'
 import { variableType } from '../../logic/types'
 import DropTitle from '../components/DropTitle';
 
-export default function PickVarType(props) {
+//used to write library functions
+export default function WriteVarType(props) {
     const [selectedTypes, setSelectedTypes] = useState(props.currentValue)
     const currentValueIsArray = Array.isArray(selectedTypes)
 
