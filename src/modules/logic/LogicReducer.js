@@ -28,6 +28,35 @@ export function dataPropToTitle(obj) {
     }
 }
 
+export function updateVariables(logicInfo) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+
+        let newVars = {}
+
+        switch(logicInfo.logicType) {
+            case logicType.function.key:
+                newVars = logicInfo.data && logicInfo.data.var1 && logicInfo.data.var1.value &&
+                    pageRepo[logicInfo.data.var1.value] && pageRepo[logicInfo.data.var1.value].vars
+                break
+            case logicType.operator.key:
+                switch(logicInfo.operatorType) {
+                    case operatorType.forin.key:
+                        newVars = logicInfo.data.declare
+                        break
+                    default:
+                }
+                break
+            case logicType.variable.key:
+                newVars = logicInfo.data
+                break
+            default:
+        }
+
+        return newVars
+    }
+}
+
 function recursive(key, library) {
     if (!key || !library[key] || !library[key].logicType) return
 

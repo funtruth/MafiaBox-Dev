@@ -28,7 +28,6 @@ import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
-import AssignVar from './functions/AssignVar'
 import DeclareVar from './functions/DeclareVar'
 import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
@@ -182,8 +181,6 @@ class DropdownView extends React.Component{
                 
             case dropdownType.addVar:
                 return <AddVar {...props}/>
-            case dropdownType.assignVar:
-                return <AssignVar {...props}/>
             case dropdownType.declareVar:
                 return <DeclareVar {...props}/>
             case dropdownType.editVar:

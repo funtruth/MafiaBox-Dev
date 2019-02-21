@@ -1,8 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
+import { updateRepo } from '../PageReducer'
+
+//TODO this is hacky
 class PageAbstract extends React.Component{
     _onChange = e => {
-        this.props.updatePage('title', e.target.value)
+        const { pageInfo } = this.props
+        this.props.updateRepo(
+            [pageInfo.pageKey],
+            {
+                title: e.target.value,
+            }
+        )
     }
 
     render() {
@@ -19,4 +29,9 @@ class PageAbstract extends React.Component{
     }
 }
 
-export default PageAbstract
+export default connect(
+    null,
+    {
+        updateRepo,
+    }
+)(PageAbstract)

@@ -14,8 +14,7 @@ export const logicType = {
         index: 1,
         title: 'variable',
         icon: 'mdi mdi-pen',
-        color: '#bc6283',
-        dropdown: dropdownType.pickOperator,
+        color: '#2e6db4',
     },
     function: {
         key: 'function',
@@ -82,22 +81,6 @@ export const operatorType = {
         icon: 'mdi mdi-sync',
         color: '#2e6db4',
         logicType: logicType.operator.key,
-    },
-    declaration: {
-        key: 'declaration',
-        index: 4,
-        title: 'declaration',
-        icon: 'mdi mdi-account-card-details',
-        color: '#2e6db4',
-        logicType: logicType.variable.key,
-    },
-    assignment: {
-        key: 'assignment',
-        index: 5,
-        title: 'assignment',
-        icon: 'mdi mdi-pen',
-        color: '#2e6db4',
-        logicType: logicType.variable.key,
     },
 }
 

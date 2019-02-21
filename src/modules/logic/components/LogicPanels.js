@@ -57,28 +57,13 @@ class LogicPanels extends React.Component{
             case logicType.update.key:
                 return <div className="logic-panel-disabled">N/A</div>
             case logicType.variable.key:
-                switch(selectedOperator) {
-                    case operatorType.assignment.key:
-                        return (
-                            <LogicPanel
-                                {...this.props}
-                                subfieldKey="var1"
-                                placeholder="assign ..."
-                                dropdown={dropdownType.assignVar}
-                            />
-                        )
-                    case operatorType.declaration.key:
-                        return (
-                            <LogicPanel
-                                {...this.props}
-                                subfieldKey="var1"
-                                placeholder="declare ..."
-                                dropdown={dropdownType.declareVar}
-                            />
-                        )
-                    default:
-                        return null
-                }
+                return (
+                    <LogicPanel
+                        {...this.props}
+                        placeholder="variable ..."
+                        dropdown={dropdownType.declareVar}
+                    />
+                )
             case logicType.function.key:
                 return (
                     <LogicPanel

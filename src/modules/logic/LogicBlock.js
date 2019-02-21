@@ -4,11 +4,11 @@ import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import ReactTooltip from 'react-tooltip'
 
-import { logicType, operatorType } from './types'
 import { droppableType } from '../common/types';
 
 import * as helpers from '../common/helpers'
 import * as maptool from './maptool'
+import { updateVariables } from './LogicReducer'
 
 import LogicErrors from './components/LogicErrors'
 import LogicNewVars from './components/LogicNewVars'
@@ -26,7 +26,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, vars, pageRepo, updateRef, value } = this.props
+        const { pageKey, fieldKey, indexKey, vars, updateRef, value } = this.props
         
         const rows = [indexKey]
         let pointer = value[indexKey] && value[indexKey].down
@@ -60,12 +60,7 @@ class LogicBlock extends React.Component{
                                 vars,
                             }
                             
-                            const newVars = logicInfo.logicType === logicType.function.key &&
-                                logicInfo.data && logicInfo.data.var1 && logicInfo.data.var1.value &&
-                                pageRepo[logicInfo.data.var1.value] && pageRepo[logicInfo.data.var1.value].vars
-
-                            const forInVar = (logicInfo.operatorType === operatorType.forin.key) && logicInfo.data.declare
-                            const removeThisTODO = forInVar ? {[forInVar.key]: forInVar} : {}
+                            const newVars = this.props.updateVariables(logicInfo)
                                 
                             return <Draggable key={item} draggableId={item} index={index}>
                                 {(provided, snapshot) => (
@@ -104,7 +99,6 @@ class LogicBlock extends React.Component{
                                                 vars={{
                                                     ...vars,
                                                     ...newVars,
-                                                    ...removeThisTODO,
                                                 }}
                                             />
                                         }
@@ -121,7 +115,8 @@ class LogicBlock extends React.Component{
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    })
+    null,
+    {
+        updateVariables,
+    }
 )(LogicBlock)

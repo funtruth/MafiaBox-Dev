@@ -18,11 +18,14 @@ export default function DeclareVar(props) {
             return
         }
 
-        const newKey = helpers.genUID('var', currentValue, '-xx')
+        if (currentValue[value]) {
+            return
+        }
+
         props.updatePage({
-            [newKey]: {
-                key: newKey,
-                value,
+            [value]: {
+                key: value,
+                variableTypes: [],
             }
         })
         props.showDropdown()
@@ -39,7 +42,7 @@ export default function DeclareVar(props) {
 
     return (
         <div>
-            <DropTitle>variable declaration</DropTitle>
+            <DropTitle>declare</DropTitle>
             <input
                 className="tag-input"
                 value={value}
@@ -52,13 +55,14 @@ export default function DeclareVar(props) {
                     marginBottom: 6,
                 }}
             />
-            <DropTitle>options</DropTitle>
             <DropItem
                 leftIcon="mdi mdi-checkbox-marked-outline"
                 onClick={handleSave}
             >
                 save variable
             </DropItem>
+            <DropTitle>assign</DropTitle>
+            
         </div>
     )
 }

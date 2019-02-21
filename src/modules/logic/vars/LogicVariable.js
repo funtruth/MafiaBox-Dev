@@ -22,7 +22,9 @@ function LogicVarName(props) {
             return (
                 <React.Fragment key={item.key}>
                     <LogicVarProp
-                        property={item.value}
+                        {...props}
+                        property={item.key}
+                        item={item}
                     />
                     <LogicVarProp
                         {...props}

@@ -106,7 +106,7 @@ class StoryList extends React.Component{
                                                     provided.draggableProps.style
                                                 )}
                                             >
-                                                {item.title || 'Untitled'}
+                                                {(typeof item.title === 'string' && item.title) || 'Untitled'}
                                             </div>
                                         )}
                                     </Draggable>
