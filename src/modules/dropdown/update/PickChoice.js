@@ -6,6 +6,7 @@ import { VAR_DEFAULTS } from '../types';
 
 import UpdateType from './UpdateType';
 import DropTitle from '../components/DropTitle';
+import DropEmpty from '../components/DropEmpty'
 
 class PickChoice extends React.Component{
     _select = (item) => {
@@ -48,10 +49,10 @@ class PickChoice extends React.Component{
         return (
             <div>
                 <DropTitle>uids</DropTitle>
-                {uids.length ?
-                    uids.map(this._renderItem)
-                    :<div className="drop-down-empty">no UIDs found</div>
-                }
+                <div>
+                    {uids.map(this._renderItem)}
+                    <DropEmpty>no UIDS found</DropEmpty>
+                </div>
                 <DropTitle>options</DropTitle>
                 <div
                     className="drop-down-menu-option"

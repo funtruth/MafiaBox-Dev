@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import { variableType } from '../../logic/types'
 import DropTitle from '../components/DropTitle';
+import DropEmpty from '../components/DropEmpty';
 
 class PickRecipient extends React.Component{
     _pickUid = (item, info) => {
@@ -40,27 +41,24 @@ class PickRecipient extends React.Component{
         return (
             <div>
                 <DropTitle>uids</DropTitle>
-                {uids.length ?
-                    <div>
-                        {uids.map(item => {
-                            const chosen = info[item.key] || false
+                {<div>
+                    {uids.map(item => {
+                        const chosen = info[item.key] || false
 
-                            return(
-                                <div
-                                    key={item.key}
-                                    className="drop-down-menu-option"
-                                    chosen={chosen.toString()}
-                                    onClick={this._pickUid.bind(this, item, info)}
-                                >
-                                    {item.key}
-                                    <i className="mdi mdi-check"/>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    :<div className="drop-down-empty">
-                        no UIDs found
-                    </div>}
+                        return(
+                            <div
+                                key={item.key}
+                                className="drop-down-menu-option"
+                                chosen={chosen.toString()}
+                                onClick={this._pickUid.bind(this, item, info)}
+                            >
+                                {item.key}
+                                <i className="mdi mdi-check"/>
+                            </div>
+                        )
+                    })}
+                    <DropEmpty>no UIDS found</DropEmpty>
+                </div>}
                 {inclusive && <div>
                     <div className="-sep"/>
                     <div

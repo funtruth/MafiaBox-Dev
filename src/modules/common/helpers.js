@@ -1,6 +1,7 @@
-const alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const alphaWithSpace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ '
-
+const CIPHER = {
+    A26: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    A26wSPACE: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ',
+}
 export function genUID(key, repo, suffix='-xxxx') {
     return `${key}${suffix}`.replace(/[xy]/g, function(c) {
         // eslint-disable-next-line
@@ -89,9 +90,9 @@ export function swapVarFormat(string, ugly) {
     }   
 }
 
-export function checkAlpha(string) {
+export function checkAlpha(string, cipher='A26') {
     for (var i=0; i<string.length; i++) {
-        if (alpha.indexOf(string.charAt(i)) === -1) {
+        if (CIPHER[cipher].indexOf(string.charAt(i)) === -1) {
             return false
         }
     }

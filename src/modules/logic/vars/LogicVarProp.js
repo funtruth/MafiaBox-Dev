@@ -46,10 +46,6 @@ export default function LogicVarProp(props) {
                 </div>
             )
         default:
-            return (
-                <div className="row-nowrap" style={{ marginTop: 2 }}>
-                    <div className="common-bubble --grey27">{property}</div>
-                </div>
-            )
+            return null
     }
 }

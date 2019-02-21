@@ -8,6 +8,7 @@ import { variableType } from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
+import DropEmpty from '../components/DropEmpty'
 
 class PickEventVarProp extends React.Component{
     _onSelect = (item) => {
@@ -76,7 +77,7 @@ class PickEventVarProp extends React.Component{
                         </div>
                     :<div>
                         <DropTitle>results</DropTitle>
-                        <div className="drop-down-empty">no results found</div>
+                        <DropEmpty>no results found</DropEmpty>
                     </div>
                 }
             </div>

@@ -261,7 +261,7 @@ const initialState = {
             subfield: 'value',
             dropdown: dropdownType.pickVar,
             variableTypes: [
-                variableType.any.key,
+                variableType.number.key,
             ],
         },
         'events': {

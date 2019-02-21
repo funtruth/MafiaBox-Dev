@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import _ from 'lodash'
 
 import * as helpers from '../../common/helpers'
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
+import DropScrollable from '../components/DropScrollable'
+import DropEmpty from '../components/DropEmpty';
 
 export default function DeclareVar(props) {
     let [value, setValue] = useState('')
@@ -26,6 +29,7 @@ export default function DeclareVar(props) {
             [value]: {
                 key: value,
                 variableTypes: [],
+                isNotDefault: true,
             }
         })
         props.showDropdown()
@@ -38,6 +42,20 @@ export default function DeclareVar(props) {
                 break
             default:
         }
+    }
+
+    const assignable = _(props.attachVar)
+        .filter(i => i.isNotDefault)
+        .value()
+    
+    let handleSelect = (item) => {
+        props.updatePage({
+            [item.key]: {
+                ...item,
+                isBeingAssigned: true,
+            }
+        })
+        props.showDropdown()
     }
 
     return (
@@ -62,7 +80,17 @@ export default function DeclareVar(props) {
                 save variable
             </DropItem>
             <DropTitle>assign</DropTitle>
-            
+            <DropScrollable>
+                {assignable.map(item => (
+                    <DropItem
+                        key={item.key}
+                        onClick={() => handleSelect(item)}
+                    >
+                        {item.key}
+                    </DropItem>
+                ))}
+                <DropEmpty>no assignable vars ...</DropEmpty>
+            </DropScrollable>
         </div>
     )
 }

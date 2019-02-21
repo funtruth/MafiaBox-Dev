@@ -7,6 +7,7 @@ import { logicType } from '../types'
 import { showModal } from '../../modal/ModalReducer'
 
 import LogicVarProp from './LogicVarProp'
+import LogicVarHeader from './LogicVarHeader';
 
 function LogicVarName(props) {
     const { logicInfo } = props
@@ -21,16 +22,14 @@ function LogicVarName(props) {
         _.toArray(data).map(item => {
             return (
                 <React.Fragment key={item.key}>
-                    <LogicVarProp
-                        {...props}
-                        property={item.key}
-                        item={item}
-                    />
-                    <LogicVarProp
-                        {...props}
-                        property="types"
-                        item={item}
-                    />
+                    <LogicVarHeader>{item.key}</LogicVarHeader>
+                    {!item.isBeingAssigned &&
+                        <LogicVarProp
+                            {...props}
+                            property="types"
+                            item={item}
+                        />
+                    }
                     <LogicVarProp
                         {...props}
                         property="assign"
