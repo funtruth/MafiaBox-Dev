@@ -34,6 +34,7 @@ export function showDropdown(key, e, params={}, index=0) {
                     case dropdownType.pickEventVarProp:
                     case dropdownType.pickHealth:
                     case dropdownType.pickOperator:
+                    case dropdownType.pickOpType:
                     case dropdownType.pickTimer:
                     case dropdownType.pickUid:
                     case dropdownType.pickUpdate:

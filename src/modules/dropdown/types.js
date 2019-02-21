@@ -20,7 +20,9 @@ export const dropdownType = {
     declareVar: 'dropdownType/declare-var',
     editVarName: 'dropdownType/edit-var-name',
     writeVarType: 'dropdownType/write-var-type',
+
     pickBasicOp: 'dropdownType/pick-basic-op',
+    pickOpType: 'dropdownType/pick-op-type',
 
     addVar: 'dropdownType/add-var',
     editVar: 'dropdownType/edit-var',

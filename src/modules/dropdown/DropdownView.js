@@ -33,7 +33,9 @@ import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
-import PickBasicOp from './functions/PickBasicOp'
+
+import PickBasicOp from './calc/PickBasicOp'
+import PickOpType from './calc/PickOpType'
 
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
@@ -133,7 +135,14 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
+            case dropdownType.pickOpType:
+                props.updatePage = (value) => this.props.updateTopModal(
+                    ['attach', 'assign'],
+                    value,
+                )
+                break
             default:
+                props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
         }
 
         switch(props.key) {
@@ -200,8 +209,11 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
             case dropdownType.writeVarType:
                 return <WriteVarType {...props}/>
+
             case dropdownType.pickBasicOp:
                 return <PickBasicOp {...props}/>
+            case dropdownType.pickOpType:
+                return <PickOpType {...props}/>
 
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...props}/>

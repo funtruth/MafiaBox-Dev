@@ -165,10 +165,10 @@ export function removePage(pageKey) {
     }
 }
 
-export function updateRepo(path, update) {
+export function updateRepo(path, update, extraPath=[]) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        const repoClone = helpers.updateByPath(path, update, pageRepo)
+        const repoClone = helpers.updateByPath(path.concat(extraPath), update, pageRepo)
 
         dispatch({
             type: UPDATE_REPO,

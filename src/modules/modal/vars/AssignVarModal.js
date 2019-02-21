@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import './AssignVarModal.css'
 import _ from 'lodash'
 
-import { basicOpType } from './calc/ops'
+import { basicOpType, defaultAssign } from './calc/ops'
 
 import ModalOptions from '../components/ModalOptions'
 import ActiveOp from './calc/ActiveOp'
 import InactiveOp from './calc/InactiveOp';
 
 export default function AssignVarModal(props) {
-    const { subfieldKey, attachVar } = props
+    const { subfieldKey, attachVar, attach } = props
 
-    const variableInfo = attachVar[subfieldKey]
+    const variableInfo = attach || { variableTypes: [], assign: defaultAssign }
     const { variableTypes, assign } = variableInfo
 
     const assignable = _(attachVar)

@@ -12,6 +12,7 @@ export default function LogicVarProp(props) {
             indexKey,
             subfieldKey: item.key,
             attachVar: vars,
+            attach: item,
         })
     }
 

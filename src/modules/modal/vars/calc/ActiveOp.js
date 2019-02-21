@@ -5,8 +5,16 @@ import { dropdownType } from '../../../dropdown/types'
 
 export default function ActiveOp(props) {
     let { assign } = props
-    let { type } = assign
 
+    if (!assign) return (
+        <div
+            className="basic-op-bubble app-onclick"
+            menu-type={dropdownType.pickBasicOp}
+        >
+            ...
+        </div>
+    )
+    let { type } = assign
     switch(type) {
         case opBubbleType.basicOp.key:
             return (
