@@ -69,18 +69,20 @@ class PickVarProp extends React.Component{
             <div className="drop-down-scrollable">
                 {subfields.length ?
                     subfields[0].subfield === '$' ?
-                        <div>
+                        <>
                             <DropTitle>uids</DropTitle>
                             {uids.map(item => this._renderItem(item, item.key))}
-                        </div>
-                        :<div>
+                            <DropEmpty>no results found</DropEmpty>
+                        </>
+                        :<>
                             <DropTitle>subfields</DropTitle>
                             {subfields.map(item => this._renderItem(item, item.subfield))}
-                        </div>
-                    :<div>
+                            <DropEmpty>no results found</DropEmpty>
+                        </>
+                    :<>
                         <DropTitle>results</DropTitle>
                         <DropEmpty>no results found</DropEmpty>
-                    </div>
+                    </>
                 }
             </div>
         )

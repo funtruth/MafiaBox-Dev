@@ -4,11 +4,14 @@ import { dropdownType } from '../../dropdown/types'
 import { modalType } from '../../modal/types';
 
 export default function LogicVarProp(props) {
-    const { property, fieldKey, indexKey, item } = props
+    const { property, fieldKey, indexKey, item, vars } = props
 
     let handleModal = () => {
         props.showModal(modalType.assignVar, {
-
+            fieldKey,
+            indexKey,
+            subfieldKey: item.key,
+            attachVar: vars,
         })
     }
 

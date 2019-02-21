@@ -48,7 +48,11 @@ export function updateVariables(logicInfo) {
                 }
                 break
             case logicType.variable.key:
-                newVars = logicInfo.data
+                if (logicInfo.data && logicInfo.data.isBeingAssigned) {
+                    newVars = {}
+                } else {
+                    newVars = logicInfo.data
+                }
                 break
             default:
         }

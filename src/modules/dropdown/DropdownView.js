@@ -33,6 +33,7 @@ import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
+import PickBasicOp from './functions/PickBasicOp'
 
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
@@ -199,6 +200,8 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
             case dropdownType.writeVarType:
                 return <WriteVarType {...props}/>
+            case dropdownType.pickBasicOp:
+                return <PickBasicOp {...props}/>
 
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...props}/>

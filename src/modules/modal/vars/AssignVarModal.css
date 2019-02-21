@@ -1,0 +1,33 @@
+.assign-var-tag {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font: 500 13px Arial;
+    color: #fff;
+    background-color: #272727;
+    margin-right: 6px;
+}
+
+.basic-op {
+    padding: 6px 8px;
+    border-radius: 4px;
+    font: 500 13px Arial;
+    color: #d6d6d6;
+    background-color: #272727;
+    margin-right: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.basic-op-op {
+    border-radius: 4px;
+    padding: 0px 6px;
+    font: 300 16px Arial;
+}
+
+.basic-op-bubble {
+    background-color: rgba(60, 63, 68,1);
+    border-radius: 4px;
+    padding: 3px 6px 3px 6px;
+    font: 300 12px Arial;
+}
