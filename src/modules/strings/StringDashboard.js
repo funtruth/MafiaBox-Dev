@@ -29,7 +29,10 @@ class StringDashboard extends React.Component {
 
     _onEdit = (item) => {
         document.getElementById('title-input').focus()
-        this.props.updateTopModal(['selectedKey'], item.key)
+        this.props.updateTopModal([], {
+            selectedKey: item.key,
+            subpath: ['value', item.key],
+        })
     }
 
     _onCreate = () => {
@@ -42,7 +45,10 @@ class StringDashboard extends React.Component {
 
         document.getElementById('title-input').focus()
         this.props.onEdit(newKey, newItem)
-        this.props.updateTopModal(['selectedKey'], newKey)
+        this.props.updateTopModal([], {
+            selectedKey: newKey,
+            subpath: ['value', newKey],
+        })
     }
 
     render() {

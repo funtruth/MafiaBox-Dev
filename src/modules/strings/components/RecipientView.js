@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { dropdownType } from '../../dropdown/types'
 
@@ -61,9 +60,4 @@ class RecipientView extends React.Component {
     }
 }
 
-export default connect(
-    null,
-    {
-        
-    }
-)(RecipientView)
+export default RecipientView

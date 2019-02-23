@@ -70,57 +70,18 @@ class DropdownView extends React.Component{
         props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
         props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
 
-        switch(props.key) {
-            case dropdownType.pickRecipient:
-            case dropdownType.pickEventVar:
-            case dropdownType.pickEventVarProp:
-                if (props.selectedKey) {
-                    props.updatePage = (value) => this.props.updateTopModal(
-                        ['attach', 'value', props.selectedKey],
-                        value,
-                    )
-                } else {
-                    props.updatePage = (value) => this.props.updateTopModal(
-                        ['attach'],
-                        value,
-                    )
-                }
+        switch(props.updateSource) {
+            case updateSourceType.repo:
+                props.updatePage = (value) => this.props.updateRepo(props.path, value, props.subpath)
                 break
-            case dropdownType.pickReturnType:
-            case dropdownType.boardLib:
-            case dropdownType.pickUidObject:
-            case dropdownType.declareVar:
-                props.updatePage = (value) => this.props.updateRepo(
-                    [props.pageKey, props.fieldKey, props.indexKey, 'data'],
-                    value,
-                )
+            case updateSourceType.function:
+                props.updatePage = (value) => this.props.updateFunction(props.path, value, props.subpath)
                 break
-            case dropdownType.writeVarType:
-                props.updatePage = (value) => this.props.updateFunction(
-                    [props.pageKey, props.fieldKey, props.tagKey],
-                    value,
-                )
-                break
-            case dropdownType.addVar:
-                props.updatePage = (tagKey, value) => this.props.updateFunction(
-                    [props.pageKey, props.fieldKey, tagKey],
-                    value,
-                )
+            case updateSourceType.topModal:
+                props.updatePage = (value) => this.props.updateTopModal(props.path, value, props.subpath)
                 break
             default:
-                switch(props.updateSource) {
-                    case updateSourceType.repo:
-                        props.updatePage = (value) => this.props.updateRepo(props.path, value, props.subpath)
-                        break
-                    case updateSourceType.function:
-                        props.updatePage = (value) => this.props.updateFunction(props.path, value, props.subpath)
-                        break
-                    case updateSourceType.topModal:
-                        props.updatePage = (value) => this.props.updateTopModal(props.path, value, props.subpath)
-                        break
-                    default:
-                        props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
-                }
+                props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
         }
 
         switch(props.key) {

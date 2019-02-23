@@ -7,8 +7,7 @@ import LogicPanel from './LogicPanel'
 
 class LogicPanels extends React.Component{
     render() {
-        const { pageKey, fieldKey, indexKey, logicInfo, vars } = this.props
-        const { data } = logicInfo
+        const { logicInfo } = this.props
         const {
             logicType: selectedLogic,
             operatorType: selectedOperator,
@@ -76,21 +75,11 @@ class LogicPanels extends React.Component{
                 )
             case logicType.return.key:
                 return (
-                    <div
-                        className="logic-button app-onclick"
-                        menu-type={dropdownType.pickReturnType}
-                        app-onclick-props={JSON.stringify({
-                            pageKey, fieldKey, indexKey,
-                            attach: data,
-                            attachVar: vars,
-                        })}
-                        style={{
-                            color: '#fff',
-                            borderRadius: '0px 4px 4px 0px',
-                        }}
-                    >
-                        {data.key}
-                    </div>
+                    <LogicPanel
+                        {...this.props}
+                        placeholder="return ..."
+                        dropdown={dropdownType.pickReturnType}
+                    />
                 )
             default:
                 return <div className="logic-panel-disabled">select logic ...</div>

@@ -44,6 +44,7 @@ class UpdateButton extends React.Component{
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar: vars,
                     isTrigger: true,
+                    path: ['attach', 'value'],
                     updateSource: updateSourceType.topModal,
                 })
                 buttonText = <i className="mdi mdi-flag"/>
@@ -56,6 +57,7 @@ class UpdateButton extends React.Component{
                     subfieldKey: prefix,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar: vars,
+                    path: ['attach'],
                     updateSource: updateSourceType.topModal,
                 })
                 buttonText = <i className="mdi mdi-calendar"/>

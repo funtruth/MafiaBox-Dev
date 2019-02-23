@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { updateSourceType } from '../../common/types';
 import { showModal } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/types';
 
@@ -9,6 +10,8 @@ class PickEvent extends React.Component{
         const { attach, subfieldKey } = this.props
         this.props.showModal(modalType.editEvent, {
             attach: attach[subfieldKey] || {},
+            path: ['attach'],
+            updateSource: updateSourceType.topModal,
         })
         this.props.showDropdown()
     }

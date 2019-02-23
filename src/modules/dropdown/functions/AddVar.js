@@ -13,10 +13,12 @@ export default function AddVar(props) {
         
         const tagKey = helpers.genUID('var', attachVar)
         
-        props.updatePage(tagKey, {
-            key: tagKey,
-            name: value,
-            variableTypes: [variableType.any.key],
+        props.updatePage({
+            [tagKey]: {
+                key: tagKey,
+                name: value,
+                variableTypes: [variableType.any.key],
+            },
         })
         props.showDropdown()
     }
