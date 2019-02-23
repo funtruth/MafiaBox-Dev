@@ -26,7 +26,6 @@ class PageLib extends React.Component{
             <div>
                 <DropTitle>page</DropTitle>
                 {pages.map((item, index) => {
-                    console.log({item})
                     return (
                         <div
                             key={item.pageKey}

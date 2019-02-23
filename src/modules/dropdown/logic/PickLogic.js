@@ -60,6 +60,8 @@ class PickLogic extends React.Component{
         switch(item.key) {
             case logicType.update.key:
             case logicType.return.key:
+            case logicType.variable.key:
+            case logicType.operator.key:
                 update.data = {}
                 break
             case logicType.function.key:

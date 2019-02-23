@@ -1,5 +1,6 @@
 import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
 import * as helpers from '../common/helpers'
+import { orderOfOp } from '../modal/vars/calc/ops'
 import { stringToCode } from '../strings/stringTool';
 
 var beautify_js = require('js-beautify');
@@ -42,7 +43,7 @@ export function updateVariables(logicInfo) {
             case logicType.operator.key:
                 switch(logicInfo.operatorType) {
                     case operatorType.forin.key:
-                        newVars = logicInfo.data.declare
+                        newVars = logicInfo.data.declare ? {[logicInfo.data.declare.key]: logicInfo.data.declare} : {}
                         break
                     default:
                 }
@@ -72,6 +73,9 @@ function recursive(key, library) {
     switch(type) {
         case logicType.operator.key:
             codeCurrent = `${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`
+            break
+        case logicType.variable.key:
+            codeCurrent = declareOrAssign(data)
             break
         case logicType.return.key:
             switch(data.key) {
@@ -107,10 +111,13 @@ function recursive(key, library) {
                     codeBody = `else if(${codeCurrent}){${codeRight}}`
                     break
                 case operatorType.forin.key:
-                    codeBody = `for(var ${(data.declare && data.declare.key && data.declare.key.substr(1)) || ''} in ${data.value.substr(1)}){${codeCurrent}${codeRight}}`
+                    codeBody = `for(var ${(data.declare && data.declare.key && helpers.remove$(data.declare.key))||''} in ${helpers.remove$(data.value)}){${codeCurrent}${codeRight}}`
                     break
                 default:
             }
+            break
+        case logicType.variable.key:
+            codeBody = `${codeCurrent}`
             break
         case logicType.function.key:
             codeBody = `${codeCurrent}${codeRight}`
@@ -128,6 +135,21 @@ function recursive(key, library) {
     let codeDown = library[key].down ? recursive(library[key].down, library) : ''
 
     return helpers.swapVarFormat(`${codeBody}${codeDown}`, false)
+}
+
+function declareOrAssign(data) {
+    let scope = 'let', string = '', assignTo = ''
+    for (var key in data) {
+        const varInfo = data[key]
+        if (varInfo.isBeingAssigned) {
+            scope = ''
+        }
+        if (varInfo.assign) {
+            assignTo = orderOfOp(varInfo.assign)
+        }
+        string = string.concat(`${scope} ${helpers.remove$(key)} = ${assignTo};`)
+    }
+    return string
 }
 
 //replace variable properties from foo.$bar to foo[bar]

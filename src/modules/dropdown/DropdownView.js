@@ -72,13 +72,27 @@ class DropdownView extends React.Component{
 
         switch(props.updateSource) {
             case updateSourceType.repo:
-                props.updatePage = (value) => this.props.updateRepo(props.path, value, props.subpath)
+                props.updatePage = (value) => {
+                    if (props.ignoreSubpath) {
+                        this.props.updateRepo(props.path, value)
+                    } else {
+                        this.props.updateRepo(props.path, value, props.subpath)
+                    }
+                }
                 break
             case updateSourceType.function:
-                props.updatePage = (value) => this.props.updateFunction(props.path, value, props.subpath)
+                props.updatePage = (value) => {
+                    if (props.ignoreSubpath) {
+                        this.props.updateFunction(props.path, value)
+                    } else {
+                        this.props.updateFunction(props.path, value, props.subpath)
+                    }
+                }
                 break
             case updateSourceType.topModal:
-                props.updatePage = (value) => this.props.updateTopModal(props.path, value, props.subpath)
+                props.updatePage = (value) => {
+                    this.props.updateTopModal(props.path, value, props.subpath)
+                }
                 break
             default:
                 props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')

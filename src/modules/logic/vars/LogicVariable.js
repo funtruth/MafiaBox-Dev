@@ -23,7 +23,7 @@ function LogicVariable(props) {
             return (
                 <React.Fragment key={item.key}>
                     <LogicVarHeader>{item.key}</LogicVarHeader>
-                    {!item.isBeingAssigned &&
+                    {item && !item.isBeingAssigned &&
                         <LogicVarProp
                             {...props}
                             property="types"

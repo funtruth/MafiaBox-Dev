@@ -56,8 +56,8 @@ const initialState = {
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
-                variableType.rss.key,
                 variableType.uidObject.key,
+                variableType.rss.key,
             ],
         },
         'lobby.$': {
@@ -212,6 +212,7 @@ const initialState = {
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
+                variableType.uidObject.key,
                 variableType.rss.key,
             ],
         },

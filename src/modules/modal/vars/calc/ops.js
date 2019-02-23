@@ -1,3 +1,5 @@
+import * as helpers from '../../../common/helpers'
+
 export const basicOpType = {
     add: {
         key: 'add',
@@ -54,13 +56,13 @@ export const DEFAULT_ASSIGN = {
 export function orderOfOp(assign) {
     switch(assign.opType) {
         case opType.basicOp.key:
-            return `${orderOfOp(assign.left||{})} ${assign.basicOpType.char} ${orderOfOp(assign.right||{})}`
+            return `(${orderOfOp(assign.left||{})} ${assign.basicOpType.char} ${orderOfOp(assign.right||{})})`
         case opType.value.key:
             switch(assign.opValueType) {
                 case opValueType.constant.key:
                     return `${assign.value}`
                 case opValueType.variable.key:
-                    return `${assign.value.key}`
+                    return `${helpers.remove$(assign.value.key)}`
                 default:
                     return ''
             }

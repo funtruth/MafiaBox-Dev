@@ -90,6 +90,8 @@ export function swapVarFormat(string, ugly) {
     }   
 }
 
+export const remove$ = (string) => string.charAt(0) === '$' ? string.substr(1) : string
+
 export function checkAlpha(string, cipher='A26') {
     for (var i=0; i<string.length; i++) {
         if (CIPHER[cipher].indexOf(string.charAt(i)) === -1) {

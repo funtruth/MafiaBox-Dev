@@ -38,7 +38,6 @@
 
 .drop-down-empty {
     padding: 6px 15px 6px 15px;
-    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;

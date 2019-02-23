@@ -19,7 +19,7 @@ import LogicPanels from './components/LogicPanels';
 import LogicObject from './form/LogicObject';
 import LogicVariable from './vars/LogicVariable';
 
-class LogicBlock extends React.Component{
+class LogicBlock extends React.PureComponent{
     constructor(props) {
         super(props)
         this.rng = helpers.genUID('rng')
@@ -28,53 +28,42 @@ class LogicBlock extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, vars, path, updateSource, updateRef, value } = this.props
         
-        const rows = [indexKey]
-        let pointer = value[indexKey] && value[indexKey].down
-
-        while(pointer) {
-            if (!value[pointer]) break
-            rows.push(pointer)
-            pointer = value[pointer].down
-        }
-        
         return (
             <Droppable
                 droppableId={`${droppableType.logic}.${pageKey}.${fieldKey}.${indexKey}.${this.rng}`}
                 type={`ROW/${indexKey}`}
             >
-                {(provided, snapshot) => (
-                    <div
-                        ref={provided.innerRef}
-                    >
-                        {rows.map((item, index) => {
-                            const logicInfo = value[item]
-                            if (!logicInfo) return null
-
-                            const errors = maptool.compile(item, value)
-                            const collapsed = logicInfo.collapsed
-                            const iprops = {
-                                indexKey: item,
-                                logicInfo,
-                                pageKey,
-                                fieldKey,
-                                vars,
-                                path: [...path, item],
-                                updateSource,
-                            }
-                            
-                            const newVars = this.props.updateVariables(logicInfo)
-                                
-                            return <Draggable key={item} draggableId={item} index={index}>
+                {(provided, snapshot) => {
+                    const logicInfo = value[indexKey]
+                    if (!logicInfo) return null
+                    
+                    const errors = maptool.compile(indexKey, value)
+                    const collapsed = logicInfo.collapsed
+                    const iprops = {
+                        indexKey,
+                        logicInfo,
+                        pageKey,
+                        fieldKey,
+                        vars,
+                        path: [...path, indexKey],
+                        updateSource,
+                    }
+                    
+                    const newVars = this.props.updateVariables(logicInfo)
+                    const isVerticalParent = !logicInfo.source || logicInfo.sourceDir === 'right'
+                    
+                    return (
+                        <div ref={provided.innerRef}>
+                        <Draggable key={indexKey} draggableId={indexKey}>
                                 {(provided, snapshot) => (
                                     <div
                                         className="row-nowrap"
-                                        key={index}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
                                         style={{
                                             ...provided.draggableProps.style,
-                                            marginTop: index ? 10 : 0,
+                                            marginTop: isVerticalParent ? 0 : 10,
                                             marginBottom: 'auto',
                                             cursor: 'default',
                                             userSelect: 'none',
@@ -85,14 +74,14 @@ class LogicBlock extends React.Component{
                                                 <LogicType {...iprops}/>
                                                 <LogicPanels
                                                     {...iprops}
-                                                    path={[...path, item, 'data']}
+                                                    path={[...path, indexKey, 'data']}
                                                 />
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
                                             <LogicObject
                                                 {...iprops}
                                                 updateRef={updateRef}
-                                                path={[...path, item, 'data']}
+                                                path={[...path, indexKey, 'data']}
                                             />
                                             <LogicVariable {...iprops}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
@@ -115,9 +104,19 @@ class LogicBlock extends React.Component{
                                     </div>
                                 )}
                             </Draggable>
-                        })}
-                    </div>
-                )}
+                            {logicInfo.down && 
+                                <LogicBlock
+                                    {...this.props}
+                                    indexKey={logicInfo.down}
+                                    vars={{
+                                        ...vars,
+                                        ...newVars,
+                                    }}
+                                />
+                            }
+                        </div>
+                    )
+                }}
             </Droppable>
         )
     }

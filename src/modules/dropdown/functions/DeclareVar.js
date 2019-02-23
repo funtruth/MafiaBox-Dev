@@ -28,8 +28,8 @@ export default function DeclareVar(props) {
         }
 
         props.updatePage({
-            [value]: {
-                key: value,
+            [`$${value}`]: {
+                key: `$${value}`,
                 variableTypes: [],
                 assign: DEFAULT_ASSIGN,
                 isNotDefault: true,
@@ -54,7 +54,9 @@ export default function DeclareVar(props) {
     let handleSelect = (item) => {
         props.updatePage({
             [item.key]: {
-                ...item,
+                key: item.key,
+                variableTypes: item.variableTypes,
+                assign: DEFAULT_ASSIGN,
                 isBeingAssigned: true,
             }
         })

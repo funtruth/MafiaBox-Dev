@@ -23,6 +23,7 @@ class LogicPanel extends React.Component{
                     attach: data,
                     attachVar: vars,
                     path: subfieldKey ? [...path, subfieldKey] : path,
+                    ignoreSubpath: true,
                 })}
                 style={{
                     color: (dataProp.key || dataProp.value || dataProp.adjust) ? '#fff' : '#868686',

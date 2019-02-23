@@ -46,7 +46,7 @@ export default function LogicVarProp(props) {
                         highlight="true"
                         onClick={handleModal}
                     >
-                        {orderOfOp(item.assign)}
+                        {orderOfOp(item.assign) || '...'}
                     </div>
                 </div>
             )

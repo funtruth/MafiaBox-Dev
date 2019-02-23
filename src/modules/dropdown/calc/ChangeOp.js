@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { basicOpType, DEFAULT_ASSIGN } from '../../modal/vars/calc/ops'
+import { opType, basicOpType, DEFAULT_ASSIGN } from '../../modal/vars/calc/ops'
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
@@ -12,6 +12,7 @@ export default function ChangeOp(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
+            opType: opType.basicOp.key,
             basicOpType: item,
         })
         props.showDropdown()
