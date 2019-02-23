@@ -23,10 +23,10 @@ export const basicOpType = {
         key: 'mod',
         char: '%',
         icon: 'mdi mdi-percent',
-    }
+    },
 }
 
-export const opBubbleType = {
+export const opType = {
     basicOp: {
         key: 'basicOp',
     },
@@ -35,6 +35,18 @@ export const opBubbleType = {
     },
 }
 
-export const defaultAssign = {
-    type: opBubbleType.value.key,
+export const opValueType = {
+    constant: {
+        key: 'constant',
+    },
+    variable: {
+        key: 'variable',
+    }
+}
+
+export const DEFAULT_ASSIGN = {
+    opType: opType.value.key,
+    opValueType: '',
+    basicOpType: '',
+    value: '',
 }

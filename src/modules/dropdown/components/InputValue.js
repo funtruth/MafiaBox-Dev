@@ -33,7 +33,7 @@ class InputValue extends React.Component{
         const { type, inputText } = this.props
 
         return (
-            <div>
+            <>
                 <input
                     className="tag-input"
                     value={this.state.value || ''}
@@ -48,7 +48,7 @@ class InputValue extends React.Component{
                     <i className="drop-down-menu-icon mdi mdi-checkbox-marked"></i>
                     save
                 </div>
-            </div>
+            </>
         )
     }
 }

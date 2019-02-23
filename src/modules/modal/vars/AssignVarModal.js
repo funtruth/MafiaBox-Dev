@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './AssignVarModal.css'
 import _ from 'lodash'
 
-import { basicOpType, defaultAssign } from './calc/ops'
+import { basicOpType, DEFAULT_ASSIGN } from './calc/ops'
 
 import ModalOptions from '../components/ModalOptions'
 import ActiveOp from './calc/ActiveOp'
@@ -11,7 +11,7 @@ import InactiveOp from './calc/InactiveOp';
 export default function AssignVarModal(props) {
     const { subfieldKey, attachVar, attach } = props
 
-    const variableInfo = attach || { variableTypes: [], assign: defaultAssign }
+    const variableInfo = attach || { variableTypes: [], assign: DEFAULT_ASSIGN }
     const { variableTypes, assign } = variableInfo
 
     const assignable = _(attachVar)
@@ -66,7 +66,7 @@ export default function AssignVarModal(props) {
             <div className="-sep"></div>
             <div className="row">
                 <div className="dashboard-section-title">SET VARIABLE TO</div>
-                <ActiveOp assign={assign}/>
+                <ActiveOp opInfo={assign} subpath={[]}/>
             </div>
             <div className="-sep"></div>
             <div className="row">

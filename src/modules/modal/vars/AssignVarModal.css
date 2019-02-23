@@ -10,10 +10,10 @@
 .basic-op {
     padding: 6px 8px;
     border-radius: 4px;
+    border: 1px solid #888;
     font: 500 13px Arial;
     color: #d6d6d6;
     background-color: #272727;
-    margin-right: 6px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,7 +21,7 @@
 
 .basic-op-op {
     border-radius: 4px;
-    padding: 0px 6px;
+    padding: 0px 8px;
     font: 300 16px Arial;
 }
 
@@ -30,4 +30,5 @@
     border-radius: 4px;
     padding: 3px 6px 3px 6px;
     font: 300 12px Arial;
+    color: #d6d6d6;
 }

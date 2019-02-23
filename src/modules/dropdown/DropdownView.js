@@ -34,8 +34,11 @@ import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
 
-import PickBasicOp from './calc/PickBasicOp'
+import PickOp from './calc/PickOp'
 import PickOpType from './calc/PickOpType'
+import ChangeOp from './calc/ChangeOp'
+import PickAssignableVar from './calc/PickAssignableVar'
+import SetOpValueTo from './calc/SetOpValueTo'
 
 import PickVar from './vars/PickVar'
 import PickVarProp from './vars/PickVarProp'
@@ -136,9 +139,13 @@ class DropdownView extends React.Component{
                 )
                 break
             case dropdownType.pickOpType:
+            case dropdownType.changeOp:
+            case dropdownType.setOpValueTo:
+            case dropdownType.pickAssignableVar:
                 props.updatePage = (value) => this.props.updateTopModal(
                     ['attach', 'assign'],
                     value,
+                    props.subpath,
                 )
                 break
             default:
@@ -210,10 +217,16 @@ class DropdownView extends React.Component{
             case dropdownType.writeVarType:
                 return <WriteVarType {...props}/>
 
-            case dropdownType.pickBasicOp:
-                return <PickBasicOp {...props}/>
+            case dropdownType.pickOp:
+                return <PickOp {...props}/>
             case dropdownType.pickOpType:
                 return <PickOpType {...props}/>
+            case dropdownType.changeOp:
+                return <ChangeOp {...props}/>
+            case dropdownType.pickAssignableVar:
+                return <PickAssignableVar {...props}/>
+            case dropdownType.setOpValueTo:
+                return <SetOpValueTo {...props}/>
 
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...props}/>
@@ -255,7 +268,6 @@ class DropdownView extends React.Component{
 
     render() {
         const { dropdownKeys } = this.props
-        if (!dropdownKeys.length) return null
         
         return (
             dropdownKeys.map((item, index) => {

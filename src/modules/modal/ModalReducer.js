@@ -57,12 +57,12 @@ export function popModalTo(index) {
     }
 }
 
-export function updateTopModal(path, update) {
+export function updateTopModal(path, update, extraPath=[]) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
 
         let keysClone = Array.from(modalKeys)
-        keysClone[keysClone.length - 1] = helpers.updateByPath(path, update, keysClone[keysClone.length - 1])
+        keysClone[keysClone.length - 1] = helpers.updateByPath(path.concat(extraPath), update, keysClone[keysClone.length - 1])
         
         dispatch({
             type: UPDATE_MODAL_KEYS,

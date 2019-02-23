@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import * as helpers from '../../common/helpers'
 
-import { defaultAssign } from '../../modal/vars/calc/ops';
+import { DEFAULT_ASSIGN } from '../../modal/vars/calc/ops';
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
@@ -31,7 +31,7 @@ export default function DeclareVar(props) {
             [value]: {
                 key: value,
                 variableTypes: [],
-                assign: defaultAssign,
+                assign: DEFAULT_ASSIGN,
                 isNotDefault: true,
             }
         })
