@@ -7,7 +7,6 @@ import { getCode } from '../../logic/LogicReducer'
 import { pushCode, updateIfActive } from '../../code/CodeReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
-import LogicArgs from '../../logic/components/LogicArgs';
 
 class LogicBoard extends React.Component{
     _showCode(origin, value) {
@@ -37,7 +36,6 @@ class LogicBoard extends React.Component{
         return (
             <div className="logic-board">
                 <div className="row">
-                    <LogicArgs vars={vars}/>
                     <div className="field-view-code" onClick={() => this._showCode(origin, value)}>
                         <i className="mdi mdi-code-tags" style={{ marginRight: 4 }}></i>
                         view code
