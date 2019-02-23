@@ -301,12 +301,12 @@ export const variableType = {
     number: {
         key: 'number',
         title: 'Number',
-        icon: 'mdi mdi-numeric-1-box',
+        icon: 'mdi mdi-numeric',
     },
     string: {
         key: 'string',
         title: 'String',
-        icon: 'mdi mdi-code-string',
+        icon: 'mdi mdi-alpha-s-circle-outline',
     },
     boolean: {
         key: 'boolean',

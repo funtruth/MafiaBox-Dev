@@ -11,13 +11,11 @@ import * as maptool from './maptool'
 import { updateVariables } from './LogicReducer'
 
 import LogicErrors from './components/LogicErrors'
-import LogicNewVars from './components/LogicNewVars'
 import LogicType from './components/LogicType';
 import LogicDownArrow from './components/LogicDownArrow';
 import LogicRightArrow from './components/LogicRightArrow';
 import LogicPanels from './components/LogicPanels';
-import LogicObject from './form/LogicObject';
-import LogicVariable from './vars/LogicVariable';
+import LogicDetails from './components/LogicDetails';
 
 function LogicBlock(props) {
     const rng = helpers.genUID('rng')
@@ -28,7 +26,7 @@ function LogicBlock(props) {
     if (!logicInfo) return null
     
     const errors = maptool.compile(indexKey, value)
-    const collapsed = logicInfo.collapsed
+    //const collapsed = logicInfo.collapsed
     const iprops = {
         indexKey,
         logicInfo,
@@ -81,13 +79,11 @@ function LogicBlock(props) {
                                             path={[...path, indexKey, 'data']}
                                         />
                                     </div>
-                                    <LogicNewVars {...iprops} newVars={newVars}/>
-                                    <LogicObject
+                                    <LogicDetails
                                         {...iprops}
                                         updateRef={updateRef}
                                         path={[...path, indexKey, 'data']}
                                     />
-                                    <LogicVariable {...iprops}/>
                                     <div className="row" style={{ textAlign: 'center' }}>
                                         <LogicDownArrow {...iprops}/>
                                         <LogicErrors errors={errors}/>

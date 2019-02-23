@@ -5,23 +5,19 @@ import { logicType } from '../types'
 
 import LogicExpandable from './LogicExpandable';
 
-class LogicObject extends React.Component{
-    render() {
-        const { updateRef, logicInfo } = this.props
+export default function LogicObject(props) {
+    const { updateRef, logicInfo } = props
 
-        if (logicInfo.logicType !== logicType.update.key) return null
-        
-        return (
-            proptool.getSubfields('', updateRef).map((item, index) => (
-                <LogicExpandable
-                    {...this.props}
-                    key={index}
-                    property={item.subfield}
-                    prefix={item.subfield}
-                />
-            ))
-        )
-    }
+    if (logicInfo.logicType !== logicType.update.key) return null
+    
+    return (
+        proptool.getSubfields('', updateRef).map((item, index) => (
+            <LogicExpandable
+                {...props}
+                key={index}
+                property={item.subfield}
+                prefix={item.subfield}
+            />
+        ))
+    )
 }
-
-export default LogicObject

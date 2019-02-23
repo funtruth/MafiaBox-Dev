@@ -126,7 +126,6 @@
 .logic-pick-update {
     color: #d6d6d6;
     background-color: rgba(60, 63, 68,1);
-    border-radius: 4px;
     padding: 3px 6px 3px 6px;
     font: 300 12px Arial;
 }
@@ -138,4 +137,7 @@
 }
 .icon-pop:hover {
     color: #d6d6d6;
+}
+.letter-s {
+    font: 300 15px Arial;
 }
