@@ -2,21 +2,22 @@ import React from 'react'
 
 import { dropdownType } from '../../dropdown/types'
 import { modalType } from '../../modal/types';
+import { variableType } from '../types';
+import { orderOfOp } from '../../modal/vars/calc/ops'
 
 export default function LogicVarProp(props) {
-    const { property, fieldKey, indexKey, item, vars, path } = props
+    const { property, item, vars, path } = props
+
+    let newPath = [...path, 'data', item.key]
 
     let handleModal = () => {
         props.showModal(modalType.assignVar, {
-            fieldKey,
-            indexKey,
-            subfieldKey: item.key,
             attachVar: vars,
             attach: item,
-            path: [...path, 'data', item.key],
+            path: newPath,
         })
     }
-
+    
     switch(property) {
         case 'types':
             return (
@@ -26,14 +27,13 @@ export default function LogicVarProp(props) {
                         className="logic-pick-update app-onclick"
                         menu-type={dropdownType.pickVarType}
                         app-onclick-props={JSON.stringify({
-                            fieldKey,
-                            indexKey,
-                            subfieldKey: item.key,
                             currentValue: item.variableTypes,
+                            path: newPath,
                         })}
                         highlight="true"
                     >
-                        todo
+                        {item.variableTypes.map(type => <i key={type} className={`${variableType[type].icon}`}/>)}
+                        {item.variableTypes.length === 0 && '...'}
                     </div>
                 </div>
             )
@@ -46,7 +46,7 @@ export default function LogicVarProp(props) {
                         highlight="true"
                         onClick={handleModal}
                     >
-                        todo
+                        {orderOfOp(item.assign)}
                     </div>
                 </div>
             )

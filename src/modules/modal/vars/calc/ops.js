@@ -50,3 +50,21 @@ export const DEFAULT_ASSIGN = {
     basicOpType: '',
     value: '',
 }
+
+export function orderOfOp(assign) {
+    switch(assign.opType) {
+        case opType.basicOp.key:
+            return `${orderOfOp(assign.left||{})} ${assign.basicOpType.char} ${orderOfOp(assign.right||{})}`
+        case opType.value.key:
+            switch(assign.opValueType) {
+                case opValueType.constant.key:
+                    return `${assign.value}`
+                case opValueType.variable.key:
+                    return `${assign.value.key}`
+                default:
+                    return ''
+            }
+        default:
+            return ''
+    }
+}

@@ -9,7 +9,7 @@ import ActiveOp from './calc/ActiveOp'
 import InactiveOp from './calc/InactiveOp';
 
 export default function AssignVarModal(props) {
-    const { subfieldKey, attachVar, attach } = props
+    const { attachVar, attach } = props
 
     const variableInfo = attach || { variableTypes: [], assign: DEFAULT_ASSIGN }
     const { variableTypes, assign } = variableInfo
@@ -37,7 +37,7 @@ export default function AssignVarModal(props) {
         >
             <div className="row">
                 <div className="dashboard-section-title">VARIABLE</div>
-                <div className="assign-var-tag">{subfieldKey}</div>
+                <div className="assign-var-tag">{attach.key}</div>
             </div>
             <div className="-sep"></div>
             <div className="row">
