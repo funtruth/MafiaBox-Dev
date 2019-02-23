@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { updateSourceType } from '../../common/types';
 import { updateType, updateViewType } from '../types';
 import { modalType } from '../../modal/types'
 
@@ -14,7 +15,7 @@ class UpdateButton extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions, nested } = this.props
+        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions, path, nested } = this.props
         const info = (logicInfo.data && logicInfo.data[prefix]) || {}
 
         let buttonText = "", onClick
@@ -43,6 +44,7 @@ class UpdateButton extends React.Component{
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar: vars,
                     isTrigger: true,
+                    updateSource: updateSourceType.topModal,
                 })
                 buttonText = <i className="mdi mdi-flag"/>
                 break
@@ -54,6 +56,7 @@ class UpdateButton extends React.Component{
                     subfieldKey: prefix,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar: vars,
+                    updateSource: updateSourceType.topModal,
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
@@ -89,6 +92,8 @@ class UpdateButton extends React.Component{
                             subfieldKey: prefix,
                             attach: logicInfo.data || {},
                             attachVar: vars,
+                            path,
+                            subpath: [prefix],
                         })}
                     >
                         {buttonText}
@@ -109,6 +114,8 @@ class UpdateButton extends React.Component{
                             subfieldKey: prefix,
                             attach: logicInfo.data || {},
                             attachVar: vars,
+                            path,
+                            subpath: [prefix],
                         })}
                     />)}
                     {nested && <i

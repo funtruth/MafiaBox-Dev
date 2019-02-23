@@ -70,7 +70,6 @@ class ModalView extends React.Component {
 
     render() {
         const { modalKeys } = this.props
-        if (!modalKeys.length) return null
         
         return (
             modalKeys.map((item, index) => {
@@ -140,6 +139,9 @@ class ModalView extends React.Component {
                     case modalType.editPriority:
                         props.onSave = () => this.props.saveAllPriorities(props.attach)
                         break
+                    case modalType.assignVar: //TODO WIP
+                        props.onSave = (value) => this.props.updateRepo(props.path, value, props.subpath)
+                        break
                     default:
                 }
 
@@ -148,6 +150,7 @@ class ModalView extends React.Component {
                     case modalType.editEvent:
                     case modalType.editToast:
                     case modalType.editPriority:
+                    case modalType.assignVar:
                         props.showSaveDialogue = true
                         props.onClose = () => {
                             if (_.isEqual(props.attach, props._attach)) {

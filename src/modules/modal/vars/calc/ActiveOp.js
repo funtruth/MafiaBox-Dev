@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { updateSourceType } from '../../../common/types'
 import { opType, opValueType } from './ops';
 import { dropdownType } from '../../../dropdown/types'
 
@@ -14,7 +15,9 @@ export default function ActiveOp(props) {
                 className="basic-op-bubble app-onclick"
                 menu-type={dropdownType.pickOp}
                 app-onclick-props={JSON.stringify({
+                    path: ['attach', 'assign'],
                     subpath,
+                    updateSource: updateSourceType.topModal,
                 })}
             >
                 {buttonText}
@@ -41,7 +44,9 @@ export default function ActiveOp(props) {
                 className="basic-op-bubble app-onclick"
                 menu-type={dropdownType.pickOp}
                 app-onclick-props={JSON.stringify({
+                    path: ['attach', 'assign'],
                     subpath,
+                    updateSource: updateSourceType.topModal,
                 })}
             >
                 {buttonText}
@@ -56,8 +61,10 @@ export default function ActiveOp(props) {
                 className="basic-op-op app-onclick"
                 menu-type={dropdownType.changeOp}
                 app-onclick-props={JSON.stringify({
+                    path: ['attach', 'assign'],
                     subpath,
                     currentValue: opInfo,
+                    updateSource: updateSourceType.topModal,
                 })}
             >
                 {opInfo.basicOpType.char}

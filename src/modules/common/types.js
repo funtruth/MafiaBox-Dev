@@ -14,3 +14,9 @@ export const droppableType = {
     priority: 'droppableType/priority',
     priorityNew: 'droppableType/priority-new',
 }
+
+export const updateSourceType = {
+    repo: 'updateSourceType/repo',
+    function: 'updateSourceType/function',
+    topModal: 'updateSourceType/top-modal',
+}

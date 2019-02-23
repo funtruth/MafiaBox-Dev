@@ -20,7 +20,7 @@ class EditTrigger extends React.Component {
     }
     
     render() {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, updateRef } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, path, updateRef } = this.props
         
         const data = attach && attach.value
         const iprops = {
@@ -36,6 +36,7 @@ class EditTrigger extends React.Component {
                 ...attachVar,
                 ...triggerNewVars,
             },
+            path,
         }
         
         const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})

@@ -13,7 +13,7 @@ class LogicPanels extends React.Component{
             logicType: selectedLogic,
             operatorType: selectedOperator,
         } = logicInfo
-
+        
         switch(selectedLogic) {
             case logicType.operator.key:
                 switch(selectedOperator) {
@@ -62,6 +62,7 @@ class LogicPanels extends React.Component{
                         {...this.props}
                         placeholder="variable ..."
                         dropdown={dropdownType.declareVar}
+                        
                     />
                 )
             case logicType.function.key:

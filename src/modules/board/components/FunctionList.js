@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types'
+import { updateSourceType } from '../../common/types';
 import { dropdownType } from '../../dropdown/types'
 import { boardType } from '../../fields/defaults';
 
@@ -19,6 +20,8 @@ class FunctionList extends React.Component{
         if (!this.props.dragging) {
             this.props.showModal(modalType.showFunctionPage, {
                 pageKey: item.pageKey,
+                path: [item.pageKey],
+                updateSource: updateSourceType.function,
             })
         }
     }

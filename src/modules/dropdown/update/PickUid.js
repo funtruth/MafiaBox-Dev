@@ -52,6 +52,7 @@ class PickUid extends React.Component{
                 dropdownType={config.dropdown}
                 params={{
                     subfieldKey: newKey,
+                    subpath: newKey,
                 }}
                 text={item.key}
             />

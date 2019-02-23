@@ -19,7 +19,7 @@ import FooterSpacer from './components/FooterSpacer'
 
 class FieldView extends React.Component {
     _renderItem = (item) => {
-        const { pageKey, pageInfo, fieldRepo, updatePage } = this.props
+        const { pageKey, pageInfo, fieldRepo, path, updateSource, updatePage } = this.props
         const fieldInfo = fieldRepo[item.key]
         const { key, data } = fieldInfo
         
@@ -30,6 +30,8 @@ class FieldView extends React.Component {
             value: pageInfo[key],
             data,
             fieldInfo,
+            path: [...path, key],
+            updateSource,
             updatePage,
         }
         

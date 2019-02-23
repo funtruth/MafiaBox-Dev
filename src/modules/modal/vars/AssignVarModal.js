@@ -21,20 +21,8 @@ export default function AssignVarModal(props) {
     let [error, setError] = useState('')
 
     let handleSave = () => {
-        const { isTrigger, attach } = props
-        const { string } = attach
-
-        if (string.length === 0) {
-            return setError('Toast message cannot be empty.')
-        }
-
-        if (isTrigger) {
-            props.popModalBy(1)
-            props.onAttach()
-        } else {
-            props.onSave()
-            props.popModalBy(1)
-        }
+        props.onSave(props.attach)
+        props.popModalBy(1)
     }
     
     return (
@@ -66,7 +54,7 @@ export default function AssignVarModal(props) {
             <div className="-sep"></div>
             <div className="row">
                 <div className="dashboard-section-title">SET VARIABLE TO</div>
-                <ActiveOp opInfo={assign} subpath={[]}/>
+                <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
             </div>
             <div className="-sep"></div>
             <div className="row">

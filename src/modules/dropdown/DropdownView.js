@@ -2,6 +2,7 @@ import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
 
+import { updateSourceType } from '../common/types';
 import { dropdownType } from './types'
 import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
@@ -70,30 +71,6 @@ class DropdownView extends React.Component{
         props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
 
         switch(props.key) {
-            case dropdownType.pickUid:
-            case dropdownType.pickChoice:
-            case dropdownType.pickUpdate:
-            case dropdownType.pickBoolean:
-            case dropdownType.pickHealth:
-            case dropdownType.pickTimer:
-            case dropdownType.pageLib:
-            case dropdownType.pickVar:
-            case dropdownType.pickVarType:
-            case dropdownType.pickVarProp:
-            case dropdownType.pickComparison:
-            case dropdownType.inputValue:
-                if (props.isTrigger) {
-                    props.updatePage = (value) => this.props.updateTopModal(
-                        ['attach', 'value', props.subfieldKey],
-                        value,
-                    )
-                } else {
-                    props.updatePage = (value) => this.props.updateRepo(
-                        [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
-                        value,
-                    )
-                }
-                break
             case dropdownType.pickRecipient:
             case dropdownType.pickEventVar:
             case dropdownType.pickEventVarProp:
@@ -112,17 +89,9 @@ class DropdownView extends React.Component{
             case dropdownType.pickReturnType:
             case dropdownType.boardLib:
             case dropdownType.pickUidObject:
-            case dropdownType.assignVar:
             case dropdownType.declareVar:
                 props.updatePage = (value) => this.props.updateRepo(
                     [props.pageKey, props.fieldKey, props.indexKey, 'data'],
-                    value,
-                )
-                break
-            case dropdownType.pickLogic:
-            case dropdownType.pickOperator:
-                props.updatePage = (value) => this.props.updateRepo(
-                    [props.pageKey, props.fieldKey, props.indexKey],
                     value,
                 )
                 break
@@ -138,18 +107,20 @@ class DropdownView extends React.Component{
                     value,
                 )
                 break
-            case dropdownType.pickOpType:
-            case dropdownType.changeOp:
-            case dropdownType.setOpValueTo:
-            case dropdownType.pickAssignableVar:
-                props.updatePage = (value) => this.props.updateTopModal(
-                    ['attach', 'assign'],
-                    value,
-                    props.subpath,
-                )
-                break
             default:
-                props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+                switch(props.updateSource) {
+                    case updateSourceType.repo:
+                        props.updatePage = (value) => this.props.updateRepo(props.path, value, props.subpath)
+                        break
+                    case updateSourceType.function:
+                        props.updatePage = (value) => this.props.updateFunction(props.path, value, props.subpath)
+                        break
+                    case updateSourceType.topModal:
+                        props.updatePage = (value) => this.props.updateTopModal(props.path, value, props.subpath)
+                        break
+                    default:
+                        props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+                }
         }
 
         switch(props.key) {

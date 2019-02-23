@@ -40,6 +40,7 @@ class PickVarProp extends React.Component{
                     dropdownType={dropdownType.pickVarProp}
                     params={{
                         prefix: `${prefix}.${key}`,
+                        subpath: [`${prefix}.${key}`],
                     }}
                     text={key}
                 />

@@ -9,7 +9,7 @@ import { showModal } from '../../modal/ModalReducer'
 import LogicVarProp from './LogicVarProp'
 import LogicVarHeader from './LogicVarHeader';
 
-function LogicVarName(props) {
+function LogicVariable(props) {
     const { logicInfo } = props
     const {
         data,
@@ -46,4 +46,4 @@ export default connect(
     {
         showModal,
     }
-)(LogicVarName)
+)(LogicVariable)

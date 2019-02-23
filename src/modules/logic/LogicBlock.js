@@ -26,7 +26,7 @@ class LogicBlock extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, vars, updateRef, value } = this.props
+        const { pageKey, fieldKey, indexKey, vars, path, updateSource, updateRef, value } = this.props
         
         const rows = [indexKey]
         let pointer = value[indexKey] && value[indexKey].down
@@ -58,6 +58,8 @@ class LogicBlock extends React.Component{
                                 pageKey,
                                 fieldKey,
                                 vars,
+                                path: [...path, item],
+                                updateSource,
                             }
                             
                             const newVars = this.props.updateVariables(logicInfo)
@@ -81,10 +83,17 @@ class LogicBlock extends React.Component{
                                         <div>
                                             <div className="row-nowrap">
                                                 <LogicType {...iprops}/>
-                                                <LogicPanels {...iprops}/>
+                                                <LogicPanels
+                                                    {...iprops}
+                                                    path={[...path, item, 'data']}
+                                                />
                                             </div>
                                             <LogicNewVars {...iprops} newVars={newVars}/>
-                                            <LogicObject {...iprops} updateRef={updateRef}/>
+                                            <LogicObject
+                                                {...iprops}
+                                                updateRef={updateRef}
+                                                path={[...path, item, 'data']}
+                                            />
                                             <LogicVariable {...iprops}/>
                                             <div className="row" style={{ textAlign: 'center' }}>
                                                 <LogicDownArrow {...iprops}/>

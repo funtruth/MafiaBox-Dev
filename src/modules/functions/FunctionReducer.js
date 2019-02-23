@@ -3,6 +3,7 @@ import * as helpers from '../common/helpers'
 import { initFunctionMap } from "../page/defaults";
 
 import { modalType } from '../modal/types'
+import { updateSourceType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer'
 
@@ -61,7 +62,11 @@ export function addFunction(mapKey, itemCount, boardType) {
             type: ADD_FUNCTION,
             payload: repoClone,
         })
-        dispatch(showModal(modalType.showFunctionPage, { pageKey }))
+        dispatch(showModal(modalType.showFunctionPage, {
+            pageKey,
+            path: [pageKey],
+            updateSource: updateSourceType.function,
+        }))
     }
 }
 

@@ -6,10 +6,10 @@ import { dataPropToTitle } from '../LogicReducer'
 class LogicPanel extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, subfieldKey,
-            logicInfo, vars, placeholder, dropdown } = this.props
+            logicInfo, vars, placeholder, dropdown, path } = this.props
         const { data } = logicInfo
         const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
-
+        
         return (
             <div
                 className="logic-button app-onclick"
@@ -22,6 +22,7 @@ class LogicPanel extends React.Component{
                     currentValue: dataProp,
                     attach: data,
                     attachVar: vars,
+                    path: subfieldKey ? [...path, subfieldKey] : path,
                 })}
                 style={{
                     color: (dataProp.key || dataProp.value || dataProp.adjust) ? '#fff' : '#868686',

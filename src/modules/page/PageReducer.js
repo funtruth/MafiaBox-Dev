@@ -5,6 +5,7 @@ import { showModal } from '../modal/ModalReducer';
 
 import { initStoryMap } from './defaults'
 import { boardType } from '../fields/defaults'
+import { updateSourceType } from '../common/types';
 
 const initialState = {
     storyMap: initStoryMap,
@@ -93,7 +94,11 @@ export function addPageToMap(mapKey, itemCount, boardType) {
             type: ADD_PAGE,
             payload: repoClone,
         })
-        dispatch(showModal(modalType.showPage, { pageKey }))
+        dispatch(showModal(modalType.showPage, {
+            pageKey,
+            path: [pageKey],
+            updateSource: updateSourceType.repo,
+        }))
     }
 }
 

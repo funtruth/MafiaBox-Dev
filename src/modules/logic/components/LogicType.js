@@ -4,14 +4,14 @@ import { logicType, operatorType } from '../types'
 
 class LogicType extends React.Component{
     render() {
-        const { indexKey, logicInfo, fieldKey, pageKey } = this.props
+        const { indexKey, logicInfo, fieldKey, pageKey, path, updateSource } = this.props
         const {
             operatorType: selectedOperator,
             logicType: selectedLogic,
         } = logicInfo
         
         const item = selectedOperator ? operatorType[selectedOperator] : selectedLogic ? logicType[selectedLogic] : {}
-
+        
         return (
             <i 
                 className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
@@ -21,6 +21,8 @@ class LogicType extends React.Component{
                     fieldKey,
                     indexKey,
                     attach: logicInfo,
+                    updateSource,
+                    path,
                 })}
                 style={{
                     backgroundColor: item.color || '#767676',

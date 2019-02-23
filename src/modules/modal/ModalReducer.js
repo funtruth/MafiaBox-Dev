@@ -23,6 +23,7 @@ export function showModal(key, params={}) {
                 case modalType.editTrigger:
                 case modalType.editToast:
                 case modalType.editPriority:
+                case modalType.assignVar:
                     _params._attach = params.attach
                     break
                 default:

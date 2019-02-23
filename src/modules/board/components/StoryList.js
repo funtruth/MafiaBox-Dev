@@ -5,10 +5,10 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { modalType } from '../../modal/types'
 import { dropdownType } from '../../dropdown/types'
+import { droppableType, updateSourceType } from '../../common/types';
 
 import { showModal } from '../../modal/ModalReducer'
 import { addPageToMap } from '../../page/PageReducer'
-import { droppableType } from '../../common/types';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -37,6 +37,8 @@ class StoryList extends React.Component{
                 modalType.showPage,
                 {
                     pageKey: item.pageKey,
+                    path: [item.pageKey],
+                    updateSource: updateSourceType.repo,
                     boardType: item.boardType,
                 },
             )

@@ -21,6 +21,7 @@ class ShowSubfields extends React.Component{
                             dropdownType={item.dropdown}
                             params={{
                                 subfieldKey: `${subfieldKey}.${item.subfield}`,
+                                subpath: [`${subfieldKey}.${item.subfield}`],
                             }}
                             text={item.subfield}
                         />
