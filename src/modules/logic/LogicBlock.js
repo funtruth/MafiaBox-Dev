@@ -51,7 +51,7 @@ function LogicBlock(props) {
                     ref={provided.innerRef}
                     style={{
                         marginTop: isVerticalParent ? 0 : 4,
-                        marginLeft: isHorizontalChild ? 50 : 0,
+                        marginLeft: isHorizontalChild ? 40 : 0,
                         borderLeft: isVerticalParent ? '1px dashed #666' : null,
                         borderRadius: 2,
                     }}

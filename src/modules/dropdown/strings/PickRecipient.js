@@ -30,7 +30,7 @@ class PickRecipient extends React.Component{
 
     render() {
         const { attach, attachVar, selectionType, selectedKey } = this.props
-        const uids = _.filter(attachVar, i => i.variableTypes.includes(variableType.uid.key))
+        const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
 
         const inclusive = selectionType === 'showTo'
         

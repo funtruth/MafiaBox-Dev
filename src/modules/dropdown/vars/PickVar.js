@@ -88,9 +88,9 @@ class PickVar extends React.Component{
         const { attachVar, attach, subfieldKey, updateRef } = this.props
         const selectedValue = attach[subfieldKey] || {}
         const variableTypes = selectedValue.variableTypes || []
-
-        const vars = _.groupBy(attachVar, i => i.variableTypes.includes(variableType.uid.key))
-        const rssVars = _.filter(updateRef, i => i.variableTypes.includes(variableType.rss.key))
+        
+        const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
+        const rssVars = _.filter(updateRef, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
         
         const isNumber = variableTypes.includes(variableType.number.key)
         const hasLength = variableTypes.includes(variableType.object.key)

@@ -14,14 +14,13 @@ function PickUidObject(props) {
     let selectedValue = attach[subfieldKey] || {}
 
     let uidObjects = _(attachVar)
-        .toArray()
-        .filter(i => i.variableTypes.includes(variableType.uidObject.key))
+        .filter(i => i.variableTypes && i.variableTypes.includes(variableType.uidObject.key))
         .value()
 
-    const rssUidObjects = _.filter(updateRef,
-        i => i.variableTypes.includes(variableType.rss.key) &&
-            i.variableTypes.includes(variableType.uidObject.key)
-    )
+    const rssUidObjects = _(updateRef)
+        .filter(i => i.variableTypes && i.variableTypes.includes(variableType.rss.key) &&
+            i.variableTypes.includes(variableType.uidObject.key))
+        .value()
 
     let handleSelect = (item) => {
         const rssVar = item.variableTypes.includes(variableType.rss.key)//TODO hacky

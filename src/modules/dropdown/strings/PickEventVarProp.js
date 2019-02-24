@@ -61,7 +61,7 @@ class PickEventVarProp extends React.Component{
     render() {
         const { updateRef, prefix, attachVar } = this.props
         const subfields = proptool.getSubfields(prefix, updateRef)
-        const uids = _.filter(attachVar, i => i.variableTypes.includes(variableType.uid.key))
+        const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
         
         return (
             <div className="drop-down-scrollable">

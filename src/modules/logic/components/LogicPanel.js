@@ -9,7 +9,7 @@ class LogicPanel extends React.Component{
             logicInfo, vars, placeholder, dropdown, path } = this.props
         const { data } = logicInfo
         const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
-        
+
         return (
             <div
                 className="logic-button app-onclick"
@@ -39,9 +39,7 @@ class LogicPanel extends React.Component{
 }
 
 export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
+    null,
     {
         dataPropToTitle,
     }

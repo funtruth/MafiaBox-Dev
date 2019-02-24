@@ -44,7 +44,7 @@ class PickChoice extends React.Component{
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof selectedKey === 'string' && selectedKey === "$\"\""
 
-        const uids = _.filter(attachVar, i => i.variableTypes.includes(variableType.uid.key))
+        const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
         
         return (
             <div>

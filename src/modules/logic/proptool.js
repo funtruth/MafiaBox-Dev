@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { variableType } from './types'
 
 //returns properties of prefix existing in updateRef
 export function getSubfields(prefix, updateRef) {
