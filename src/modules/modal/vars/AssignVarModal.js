@@ -6,11 +6,11 @@ import { basicOpType, DEFAULT_ASSIGN } from './components/ops'
 
 import ModalOptions from '../components/ModalOptions'
 import ActiveOp from './components/ActiveOp'
-import InactiveOp from './components/InactiveOp';
-import Playground from './components/Playground'
+import BasicOpDraggable from './components/BasicOpDraggable';
+import PlaygroundDroppable from './components/PlaygroundDroppable';
 
 export default function AssignVarModal(props) {
-    //let [playground, setPlayground] = useState([])
+    let [playground, setPlayground] = useState([])
     const { attachVar, attach } = props
 
     const variableInfo = attach || { variableTypes: [], assign: DEFAULT_ASSIGN }
@@ -59,15 +59,17 @@ export default function AssignVarModal(props) {
                 <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
             </div>
             <div className="-sep"></div>
+            <div className="dashboard-section-title">playground</div>
             <div className="row">
-                <div className="dashboard-section-title">playground</div>
-                <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
-                <Playground/>
+                {playground.map((item, index) => (
+                    <div key={index}>{item.opType}</div>
+                ))}
+                <PlaygroundDroppable playground={playground} setPlayground={setPlayground}/>
             </div>
             <div className="-sep"></div>
+            <div className="dashboard-section-title">BASIC OPERATIONS</div>
             <div className="row">
-                <div className="dashboard-section-title">BASIC OPERATIONS</div>
-                {_.toArray(basicOpType).map(item => <InactiveOp key={item.key} {...item}/>)}
+                {_.toArray(basicOpType).map(item => <BasicOpDraggable key={item.key} item={item}/>)}
             </div>
             <div className="-sep"></div>
             <div className="row">

@@ -33,3 +33,11 @@
     font: 300 12px Arial;
     color: #d6d6d6;
 }
+
+.playground {
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px dashed #888;
+    font: 500 13px Arial;
+    color: #d6d6d6;
+}
