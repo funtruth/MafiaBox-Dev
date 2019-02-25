@@ -5,6 +5,7 @@
     color: #fff;
     background-color: #272727;
     margin-right: 6px;
+    cursor: pointer;
 }
 
 .basic-op {
@@ -17,7 +18,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    cursor: grab;
+    cursor: pointer;
 }
 
 .basic-op-op {
@@ -35,9 +36,11 @@
 }
 
 .playground {
-    padding: 6px 12px;
-    border-radius: 2px;
-    border: 1px dashed #888;
-    font: 500 13px Arial;
-    color: #d6d6d6;
+    min-height: 60px;
+    padding: 8px 0px;
+}
+
+.-sep-no-m {
+    height: 1px;
+    background-color: #464646;
 }

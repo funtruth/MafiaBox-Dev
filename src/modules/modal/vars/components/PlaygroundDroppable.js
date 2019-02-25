@@ -11,8 +11,7 @@ const itemTarget = {
             ...props.playground,
             {
                 ...DEFAULT_ASSIGN,
-                opType: item.opType,
-                basicOpType: item.basicOpType,
+                ...item.opInfo,
             }
         ])
     }
@@ -21,17 +20,20 @@ const itemTarget = {
 function collect(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver(),
+        isOver: monitor.isOver({ shallow: true }),
     }
 }
   
 function PlaygroundDroppable(props) {
-    const { connectDropTarget } = props
+    const { connectDropTarget, isOver, children } = props
     return connectDropTarget(
         <div
             className="playground"
+            style={{
+                backgroundColor: isOver && 'rgba(70, 73, 78, 1)',
+            }}
         >
-            drag item here
+            {children}
         </div>
     );
 }

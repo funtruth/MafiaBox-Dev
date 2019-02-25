@@ -7,7 +7,11 @@ import { opType } from './ops'
 const itemSource = {
     beginDrag(props) {
         return {
-            basicOpType: props.item.key,
+            opInfo: {
+                basicOpType: props.item,
+                opType: opType.basicOp.key,
+            },
+            basicOpType: props.item,
             opType: opType.basicOp.key,
         }
     }
