@@ -27,6 +27,8 @@ class LogicType extends React.Component{
                 style={{
                     backgroundColor: item.color || '#767676',
                     color: '#fff',
+                    width: 18,
+                    borderRadius: '4px 0px 0px 4px',
                 }}
             />
         )

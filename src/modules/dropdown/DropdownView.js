@@ -61,6 +61,7 @@ import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
 import PickOperator from './logic/PickOperator';
+import ShowLogicOptions from './logic/ShowLogicOptions';
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
@@ -130,6 +131,8 @@ class DropdownView extends React.Component{
                 return <PickDeleteMode {...props}/>
             case dropdownType.pickReturnType:
                 return <PickReturnType {...props}/>
+            case dropdownType.showLogicOptions:
+                return <ShowLogicOptions {...props}/>
 
             case dropdownType.editTag:
                 return <EditTag {...props}/>

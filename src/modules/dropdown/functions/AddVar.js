@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import * as helpers from '../../common/helpers'
 
-import { variableType } from '../../logic/types'
-
 export default function AddVar(props) {
     let [value, setValue] = useState('')
     
@@ -17,7 +15,7 @@ export default function AddVar(props) {
             [tagKey]: {
                 key: tagKey,
                 name: value,
-                variableTypes: [variableType.any.key],
+                variableTypes: [],
             },
         })
         props.showDropdown()
@@ -45,7 +43,7 @@ export default function AddVar(props) {
             />
             <div className="-sep"/>
             <div className="drop-down-menu-option" onClick={handleConfirm}>
-                <i className={`drop-down-menu-icon ion-md-checkbox`}></i>
+                <i className="drop-down-menu-icon ion-md-checkbox"></i>
                 Create
             </div>
         </div>

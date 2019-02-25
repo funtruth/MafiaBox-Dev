@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactTooltip from 'react-tooltip'
 
-class LogicErrors extends React.Component{
-    componentDidUpdate() {
-        ReactTooltip.rebuild()
-    }
+export default function LogicErrors(props) {
+    useEffect(() => ReactTooltip.rebuild())
 
-    render() {
-        return (
-            this.props.errors.map((item, index) => (
+    return (
+        <div className="row">
+            {props.errors.map((item, index) => (
                 <i
                     key={index}
                     className={`${item.icon} logic-alert`}
@@ -18,9 +16,7 @@ class LogicErrors extends React.Component{
                     }}
                     data-tip={item.text}
                 />
-            ))
-        )
-    }
+            ))}
+        </div>
+    )
 }
-
-export default LogicErrors

@@ -5,6 +5,7 @@ export const dropdownType = {
     pageLib: 'dropdownType/page-lib',
 
     pickLogic: 'dropdownType/show-logic',
+    showLogicOptions: 'dropdownType/show-logic-options',
     pickOperator: 'dropdownType/pick-operator',
     deleteLogic: 'dropdownType/delete-logic',
     pickDeleteMode: 'dropdownType/pick-delete-mode',

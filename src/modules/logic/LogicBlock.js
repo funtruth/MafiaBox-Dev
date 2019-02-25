@@ -12,8 +12,7 @@ import { updateVariables } from './LogicReducer'
 
 import LogicErrors from './components/LogicErrors'
 import LogicType from './components/LogicType';
-import LogicDownArrow from './components/LogicDownArrow';
-import LogicRightArrow from './components/LogicRightArrow';
+import LogicOptions from './components/LogicOptions'
 import LogicPanels from './components/LogicPanels';
 import LogicDetails from './components/LogicDetails';
 
@@ -38,6 +37,8 @@ function LogicBlock(props) {
     }
     
     const newVars = props.updateVariables(logicInfo)
+    const compiledVars = Object.assign({}, vars, newVars)
+
     const isVerticalParent = !logicInfo.source || logicInfo.sourceDir === 'right'
     const isHorizontalChild = logicInfo.sourceDir === 'right'
 
@@ -50,7 +51,7 @@ function LogicBlock(props) {
                 <div
                     ref={provided.innerRef}
                     style={{
-                        marginTop: isVerticalParent ? 0 : 4,
+                        marginTop: 8,
                         marginLeft: isHorizontalChild ? 40 : 0,
                         borderLeft: isVerticalParent ? '1px dashed #666' : null,
                         borderRadius: 2,
@@ -74,46 +75,18 @@ function LogicBlock(props) {
                                 <div>
                                     <div className="row-nowrap">
                                         <LogicType {...iprops}/>
-                                        <LogicPanels
-                                            {...iprops}
-                                            path={[...path, indexKey, 'data']}
-                                        />
+                                        <LogicPanels {...iprops} path={[...path, indexKey, 'data']}/>
+                                        <LogicOptions {...iprops}/>
                                     </div>
-                                    <LogicDetails
-                                        {...iprops}
-                                        updateRef={updateRef}
-                                        path={[...path, indexKey, 'data']}
-                                    />
-                                    <div className="row" style={{ textAlign: 'center' }}>
-                                        <LogicDownArrow {...iprops}/>
-                                        <LogicErrors errors={errors}/>
-                                    </div>
+                                    <LogicDetails {...iprops} updateRef={updateRef} path={[...path, indexKey, 'data']}/>
+                                    <LogicErrors errors={errors}/>
                                 </div>
-                                <LogicRightArrow {...iprops}/>
                                 <ReactTooltip place="right"/>
                             </div>
                         )}
                     </Draggable>
-                    {logicInfo.right && 
-                        <LogicBlock 
-                            {...props}
-                            indexKey={logicInfo.right}
-                            vars={{
-                                ...vars,
-                                ...newVars,
-                            }}
-                        />
-                    }
-                    {logicInfo.down && 
-                        <LogicBlock
-                            {...props}
-                            indexKey={logicInfo.down}
-                            vars={{
-                                ...vars,
-                                ...newVars,
-                            }}
-                        />
-                    }
+                    {logicInfo.right && <LogicBlock {...props} indexKey={logicInfo.right} vars={compiledVars}/>}
+                    {logicInfo.down && <LogicBlock {...props} indexKey={logicInfo.down} vars={compiledVars}/>}
                 </div>
             )}
         </Droppable>

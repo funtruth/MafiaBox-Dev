@@ -293,11 +293,6 @@ export const defaultLogic = {
 }
 
 export const variableType = {
-    any: {
-        key: 'any',
-        title: 'Any',
-        icon: 'mdi mdi-variable',
-    },
     number: {
         key: 'number',
         title: 'Number',

@@ -1,12 +1,9 @@
 .logic-label {
     padding: 4px 4px;
     pointer-events: auto;
-    border-radius: 4px 0px 0px 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 18px;
-    background-color: hsla(0,0%,100%,.1);
     font: 300 13px Arial;
     letter-spacing: 0.6px;
     cursor: pointer;

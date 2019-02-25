@@ -17,8 +17,8 @@ class VariableField extends React.Component{
                     .value()
                     .map((item, index) => (
                         <div key={index} className="row">
-                            <i 
-                                className={`${variableType[item.variableType || variableType.any.key].icon} logic-label app-onclick`}
+                            <div
+                                className="logic-label app-onclick"
                                 menu-type={dropdownType.writeVarType}
                                 app-onclick-props={JSON.stringify({
                                     fieldKey,
@@ -29,8 +29,14 @@ class VariableField extends React.Component{
                                 })}
                                 style={{
                                     color: '#fff',
+                                    borderRadius: '4px 0px 0px 4px',
+                                    backgroundColor: 'hsla(0,0%,100%,.1)',
                                 }}
-                            />
+                            >
+                                {item.variableTypes && item.variableTypes.map(type => (
+                                    <i key={type} className={`${variableType[type].icon}`}/>
+                                ))}
+                            </div>
                             <div
                                 className="property-button app-onclick"
                                 menu-type={dropdownType.editVarName}
