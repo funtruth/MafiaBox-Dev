@@ -2,13 +2,22 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
+import { LOGIC_TESTS } from '../../testhub/tests';
+
 import * as helpers from '../../common/helpers'
 import { getCode } from '../../logic/LogicReducer'
 import { pushCode, updateIfActive } from '../../code/CodeReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
 
-class LogicBoard extends React.Component{
+class LogicBoard extends React.Component {
+    _runCode(origin, value) {
+        const code = this.props.getCode(origin, value)
+        let { rss, write } = LOGIC_TESTS[0]
+        new Function(`return ${code}`)()(rss, write)
+        console.log('_runCode results', {rss, write})
+    }
+
     _showCode(origin, value) {
         const { pageKey, fieldKey, pageInfo, fieldInfo } = this.props
         const code = this.props.getCode(origin, value)
@@ -35,8 +44,12 @@ class LogicBoard extends React.Component{
         
         return (
             <div className="logic-board">
-                <div className="row">
-                    <div className="field-view-code" onClick={() => this._showCode(origin, value)}>
+                <div className="row field-view-code">
+                    <div onClick={() => this._runCode(origin, value)} style={{ marginLeft: 'auto', marginRight: 16 }}>
+                        <i className="mdi mdi-console-line" style={{ marginRight: 4 }}></i>
+                        run code in console
+                    </div>
+                    <div onClick={() => this._showCode(origin, value)}>
                         <i className="mdi mdi-code-tags" style={{ marginRight: 4 }}></i>
                         view code
                     </div>
