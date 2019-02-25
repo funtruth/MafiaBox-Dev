@@ -29,6 +29,9 @@ export const basicOpType = {
 }
 
 export const opType = {
+    NaN: {
+        key: 'NaN',
+    },
     basicOp: {
         key: 'basicOp',
     },
@@ -47,7 +50,7 @@ export const opValueType = {
 }
 
 export const DEFAULT_ASSIGN = {
-    opType: opType.value.key,
+    opType: opType.NaN.key,
     opValueType: '',
     basicOpType: '',
     value: '',

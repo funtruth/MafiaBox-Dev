@@ -5,10 +5,9 @@ import _ from 'lodash'
 import { basicOpType, DEFAULT_ASSIGN } from './components/ops'
 
 import ModalOptions from '../components/ModalOptions'
-import ActiveOp from './components/ActiveOp'
-import PlaygroundDroppable from './components/PlaygroundDroppable';
-import BasicOpDraggable from './components/BasicOpDraggable';
-import VarValueDraggable from './components/VarValueDraggable'
+import PlaygroundDrop from './components/PlaygroundDrop';
+import BasicOpDrag from './components/BasicOpDrag';
+import VarValueDrag from './components/VarValueDrag'
 
 export default function AssignVarModal(props) {
     let [workspace, setWorkspace] = useState(props.attach)
@@ -55,24 +54,19 @@ export default function AssignVarModal(props) {
                 </div>
             </div>
             <div className="-sep-no-m"></div>
-            <PlaygroundDroppable
+            <PlaygroundDrop
+                opInfo={assign}
+                setError={setError}
+                subpath={['assign']}
                 workspace={workspace}
                 setWorkspace={setWorkspace}
-            >
-                <ActiveOp
-                    opInfo={assign}
-                    subpath={['assign']}
-                    setError={setError}
-                    workspace={workspace}
-                    setWorkspace={setWorkspace}
-                />
-            </PlaygroundDroppable>
+            />
             <div className="-sep-no-m"></div>
             <div className="-y-p">
                 <div className="dashboard-section-title">BASIC OPERATIONS</div>
                 <div className="row -x-p">
                     {_.toArray(basicOpType).map(item => (
-                        <BasicOpDraggable key={item.key} item={item}/>
+                        <BasicOpDrag key={item.key} item={item}/>
                     ))}
                 </div>
             </div>
@@ -80,7 +74,7 @@ export default function AssignVarModal(props) {
             <div className="-y-p">
                 <div className="dashboard-section-title">VARIABLES</div>
                 <div className="row -x-p">
-                    {assignable.map(item => <VarValueDraggable key={item.key} item={item}/>)}
+                    {assignable.map(item => <VarValueDrag key={item.key} item={item}/>)}
                 </div>
             </div>
             <ModalOptions

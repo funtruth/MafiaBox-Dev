@@ -2,17 +2,18 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './Constants'
-import { opType } from './ops' 
+import { opType, opValueType } from './ops' 
 
 const itemSource = {
     beginDrag(props) {
         return {
             opInfo: {
-                basicOpType: props.item,
-                opType: opType.basicOp.key,
+                value: props.item,
+                opType: opType.value.key,
+                opValueType: opValueType.variable.key,
             },
-            basicOpType: props.item,
-            opType: opType.basicOp.key,
+            value: props.item.key,
+            opType: opType.value.key,
         }
     }
 }
@@ -24,19 +25,17 @@ function collect(connect, monitor) {
     }
 }
   
-function BasicOpDraggable(props) {
+function VarValueDrag(props) {
     const { item, connectDragSource } = props
     return connectDragSource(
-        <div className="basic-op" style={{ marginRight: 8 }}>
-            <div className="basic-op-bubble">x</div>
-            <div className="basic-op-op">{item.char}</div>
-            <div className="basic-op-bubble">y</div>
+        <div className="assign-var-tag">
+            {item.key}
         </div>
     );
 }
 
 export default DragSource(
-    ItemTypes.BASIC_OP,
+    ItemTypes.VALUE,
     itemSource,
     collect
-)(BasicOpDraggable);
+)(VarValueDrag);

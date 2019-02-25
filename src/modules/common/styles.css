@@ -87,6 +87,10 @@ div[chosen=true] > .mdi-check {
     margin: 8px 0px;
     background-color: #464646;
 }
+.-sep-no-m {
+    height: 1px;
+    background-color: #464646;
+}
 .-x-p {
     padding-left: 10px;
     padding-right: 10px;
