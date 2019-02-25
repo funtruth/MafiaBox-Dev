@@ -2,13 +2,15 @@ import React, { useState } from 'react'
 import './AssignVarModal.css'
 import _ from 'lodash'
 
-import { basicOpType, DEFAULT_ASSIGN } from './calc/ops'
+import { basicOpType, DEFAULT_ASSIGN } from './components/ops'
 
 import ModalOptions from '../components/ModalOptions'
-import ActiveOp from './calc/ActiveOp'
-import InactiveOp from './calc/InactiveOp';
+import ActiveOp from './components/ActiveOp'
+import InactiveOp from './components/InactiveOp';
+import Playground from './components/Playground'
 
 export default function AssignVarModal(props) {
+    //let [playground, setPlayground] = useState([])
     const { attachVar, attach } = props
 
     const variableInfo = attach || { variableTypes: [], assign: DEFAULT_ASSIGN }
@@ -55,6 +57,12 @@ export default function AssignVarModal(props) {
             <div className="row">
                 <div className="dashboard-section-title">SET VARIABLE TO</div>
                 <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
+            </div>
+            <div className="-sep"></div>
+            <div className="row">
+                <div className="dashboard-section-title">playground</div>
+                <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
+                <Playground/>
             </div>
             <div className="-sep"></div>
             <div className="row">

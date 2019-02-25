@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { dropdownType } from '../../dropdown/types'
 import { modalType } from '../../modal/types';
 import { variableType } from '../types';
-import { orderOfOp } from '../../modal/vars/calc/ops'
+import { orderOfOp } from '../../modal/vars/components/ops'
 
 import { showModal } from '../../modal/ModalReducer'
 

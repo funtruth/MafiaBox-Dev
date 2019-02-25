@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { opType, basicOpType, DEFAULT_ASSIGN } from '../../modal/vars/calc/ops'
+import { opType, basicOpType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops'
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'

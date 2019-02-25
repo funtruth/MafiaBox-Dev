@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/calc/ops';
+import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 import DropItem from '../components/DropItem';
 

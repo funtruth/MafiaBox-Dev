@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContextProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import * as helpers from '../common/helpers'
 
 import { handleDragEnd } from './AppReducer'
@@ -111,10 +114,10 @@ class AppWrapper extends React.Component{
 
     render() {
         return (
-            <DragDropContext
-                onDragEnd={this._onDragEnd}
-            >
-                {this.props.children}
+            <DragDropContext onDragEnd={this._onDragEnd}>
+                <DragDropContextProvider backend={HTML5Backend}>
+                    {this.props.children}
+                </DragDropContextProvider>
             </DragDropContext>
         )
     }

@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import DropTitle from '../components/DropTitle';
 import DropItem from '../components/DropItem';
-import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/calc/ops';
+import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 export default function PickAssignableVar(props) {
     let handleSelect = (item) => {

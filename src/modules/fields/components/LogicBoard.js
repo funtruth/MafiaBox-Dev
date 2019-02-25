@@ -14,7 +14,8 @@ class LogicBoard extends React.Component {
     _runCode(origin, value) {
         const code = this.props.getCode(origin, value)
         let { rss, write } = LOGIC_TESTS[0]
-        new Function(`return ${code}`)()(rss, write)
+        // eslint-disable-next-line
+        Function(`return ${code}`)()(rss, write)
         console.log('_runCode results', {rss, write})
     }
 

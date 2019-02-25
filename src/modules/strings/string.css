@@ -86,6 +86,7 @@
     color: #aaa;
     letter-spacing: 0.6px;
     padding: 0px 14px 6px 14px;
+    text-transform: uppercase;
 }
 
 .empty-text {

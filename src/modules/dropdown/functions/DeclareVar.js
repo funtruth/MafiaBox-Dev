@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import * as helpers from '../../common/helpers'
 
-import { DEFAULT_ASSIGN } from '../../modal/vars/calc/ops';
+import { DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
