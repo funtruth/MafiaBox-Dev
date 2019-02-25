@@ -99,6 +99,10 @@ div[chosen=true] > .mdi-check {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.-y-m {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .-t-m {
     margin-top: 10px;
 }

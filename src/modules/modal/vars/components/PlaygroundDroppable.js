@@ -7,13 +7,17 @@ import { DEFAULT_ASSIGN } from './ops'
 const itemTarget = {
     drop(props, monitor) {
         const item = monitor.getItem()
-        props.setPlayground([
+        const didDrop = monitor.didDrop()
+        const index = Object.keys(props.playground).length
+
+        if (didDrop) return;
+        props.setPlayground({
             ...props.playground,
-            {
+            [index]: {
                 ...DEFAULT_ASSIGN,
                 ...item.opInfo,
             }
-        ])
+        })
     }
 }
 
@@ -27,13 +31,9 @@ function collect(connect, monitor) {
 function PlaygroundDroppable(props) {
     const { connectDropTarget, isOver, children } = props
     return connectDropTarget(
-        <div
-            className="playground"
-            style={{
-                backgroundColor: isOver && 'rgba(70, 73, 78, 1)',
-            }}
-        >
-            {children}
+        <div className="playground" style={{ backgroundColor: isOver && 'rgba(70, 73, 78, 1)' }}>
+            <div className="dashboard-section-title" style={{ color: isOver && '#fff' }}>playground</div>
+            <div className="row -x-p">{children}</div>
         </div>
     );
 }

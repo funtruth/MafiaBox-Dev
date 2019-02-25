@@ -11,8 +11,10 @@ import BasicOpDraggable from './components/BasicOpDraggable';
 import VarValueDraggable from './components/VarValueDraggable'
 
 export default function AssignVarModal(props) {
-    let [playground, setPlayground] = useState([])
-    const { attachVar, attach } = props
+    let [attach, setAttach] = useState(props.attach)
+
+    let [playground, setPlayground] = useState({})
+    const { attachVar } = props
 
     const variableInfo = attach || { variableTypes: [], assign: DEFAULT_ASSIGN }
     const { variableTypes, assign } = variableInfo
@@ -39,40 +41,54 @@ export default function AssignVarModal(props) {
             }}
         >
             <div className="row">
-                <div className="dashboard-section-title">VARIABLE</div>
-                <div className="assign-var-tag">{attach.key}</div>
-            </div>
-            <div className="-sep"></div>
-            <div className="row">
-                <div className="dashboard-section-title">TYPES</div>
-                {variableTypes.map(item => (
-                    <div
-                        key={item}
-                        className="assign-var-tag"
-                    >
-                        {item}
+                <div className="-y-p border-right">
+                    <div className="dashboard-section-title">variable</div>
+                    <div className="-x-p">
+                        <div className="assign-var-tag">{attach.key}</div>
                     </div>
-                ))}
+                </div>
+                <div className="-y-p">
+                    <div className="dashboard-section-title">types</div>
+                    <div className="-x-p">
+                        {variableTypes.map(item => <div key={item} className="assign-var-tag">{item}</div>)}
+                    </div>
+                </div>
             </div>
-            <div className="-sep"></div>
-            <div className="row">
-                <div className="dashboard-section-title">SET VARIABLE TO</div>
-                <ActiveOp opInfo={assign} subpath={[]} setError={setError}/>
+            <div className="-sep-no-m"></div>
+            <div className="-y-p">
+                <div className="dashboard-section-title">set variable to</div>
+                <div className="row -x-p">
+                    <ActiveOp
+                        opInfo={assign}
+                        subpath={[]}
+                        setError={setError}
+                        openDropZones={true}
+                    />
+                </div>
             </div>
             <div className="-sep-no-m"></div>
             <PlaygroundDroppable playground={playground} setPlayground={setPlayground}>
-                <div className="dashboard-section-title">playground</div>
-                <div className="row">
-                    {playground.map((item, index) => <ActiveOp key={index} opInfo={item} subpath={[]} setError={setError}/>)}
-                </div>
+                {_.toArray(playground).map((item, index) => (
+                    <ActiveOp
+                        key={index}
+                        opInfo={item}
+                        subpath={[index]}
+                        setError={setError}
+                        playground={playground}
+                        setPlayground={setPlayground}
+                        openDropZones={true}
+                    />
+                ))}
             </PlaygroundDroppable>
             <div className="-sep-no-m"></div>
-            <div className="dashboard-section-title">BASIC OPERATIONS</div>
-            <div className="row">
-                {_.toArray(basicOpType).map(item => <BasicOpDraggable key={item.key} item={item}/>)}
+            <div className="-y-p">
+                <div className="dashboard-section-title">BASIC OPERATIONS</div>
+                <div className="row -x-p">
+                    {_.toArray(basicOpType).map(item => <BasicOpDraggable key={item.key} item={item}/>)}
+                </div>
             </div>
             <div className="-sep-no-m"></div>
-            <div className="row">
+            <div className="row -y-p">
                 <div className="dashboard-section-title">VARIABLES</div>
                 {assignable.map(item => <VarValueDraggable key={item.key} item={item}/>)}
             </div>

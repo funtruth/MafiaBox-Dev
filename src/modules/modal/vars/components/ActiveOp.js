@@ -4,24 +4,23 @@ import { updateSourceType } from '../../../common/types'
 import { opType, opValueType } from './ops';
 import { dropdownType } from '../../../dropdown/types'
 
+import ValueDroppable from './ValueDroppable'
+import BasicOpDroppable from './BasicOpDroppable';
+
 export default function ActiveOp(props) {
-    let { opInfo, subpath } = props
+    let { opInfo, subpath, playground, setPlayground } = props
     let buttonText = '...'
     
     //if field has not been touched -> empty
     if (!opInfo) {
         return (
-            <div
-                className="basic-op-bubble app-onclick"
-                menu-type={dropdownType.pickOp}
-                app-onclick-props={JSON.stringify({
-                    path: ['attach', 'assign'],
-                    subpath,
-                    updateSource: updateSourceType.topModal,
-                })}
+            <ValueDroppable
+                subpath={subpath} 
+                playground={playground}
+                setPlayground={setPlayground}
             >
                 {buttonText}
-            </div>
+            </ValueDroppable>
         )
     }
 
@@ -40,23 +39,28 @@ export default function ActiveOp(props) {
         }
 
         return (
-            <div
-                className="basic-op-bubble app-onclick"
-                menu-type={dropdownType.pickOp}
-                app-onclick-props={JSON.stringify({
-                    path: ['attach', 'assign'],
-                    subpath,
-                    updateSource: updateSourceType.topModal,
-                })}
+            <ValueDroppable
+                subpath={subpath} 
+                playground={playground}
+                setPlayground={setPlayground}
             >
                 {buttonText}
-            </div>
+            </ValueDroppable>
         )
     }
 
     return (
-        <div className="basic-op">
-            <ActiveOp opInfo={opInfo.left} subpath={[...subpath, 'left']}/>
+        <BasicOpDroppable
+            subpath={subpath}
+            playground={playground}
+            setPlayground={setPlayground}
+        >
+            <ActiveOp
+                opInfo={opInfo.left}
+                subpath={[...subpath, 'left']}
+                playground={playground}
+                setPlayground={setPlayground}
+            />
             <div
                 className="basic-op-op app-onclick"
                 menu-type={dropdownType.changeOp}
@@ -69,7 +73,12 @@ export default function ActiveOp(props) {
             >
                 {opInfo.basicOpType.char}
             </div>
-            <ActiveOp opInfo={opInfo.right} subpath={[...subpath, 'right']}/>
-        </div>
+            <ActiveOp
+                opInfo={opInfo.right}
+                subpath={[...subpath, 'right']}
+                playground={playground}
+                setPlayground={setPlayground}
+            />
+        </BasicOpDroppable>
     )
 }
