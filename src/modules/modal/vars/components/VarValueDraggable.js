@@ -34,4 +34,8 @@ function VarValueDraggable(props) {
     );
 }
 
-export default DragSource(ItemTypes.VALUE, itemSource, collect)(VarValueDraggable);
+export default DragSource(
+    ItemTypes.VALUE,
+    itemSource,
+    collect
+)(VarValueDraggable);

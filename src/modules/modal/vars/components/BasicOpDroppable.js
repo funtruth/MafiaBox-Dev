@@ -10,7 +10,7 @@ const itemTarget = {
         const didDrop = monitor.didDrop()
 
         if (didDrop) return;
-        props.setPlayground(helpers.updateByPath(props.subpath, item, props.playground))
+        props.setWorkspace(helpers.updateByPath(props.subpath, item, props.workspace))
     }
 }
 
@@ -26,4 +26,8 @@ function BasicOpDroppable(props) {
     return connectDropTarget(<div className="basic-op" style={{ backgroundColor: isOver && '#6279CA' }}>{children}</div>);
 }
 
-export default DropTarget(ItemTypes.BASIC_OP, itemTarget, collect)(BasicOpDroppable);
+export default DropTarget(
+    ItemTypes.BASIC_OP,
+    itemTarget,
+    collect
+)(BasicOpDroppable);

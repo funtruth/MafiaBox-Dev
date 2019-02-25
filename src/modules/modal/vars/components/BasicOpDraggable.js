@@ -27,7 +27,7 @@ function collect(connect, monitor) {
 function BasicOpDraggable(props) {
     const { item, connectDragSource } = props
     return connectDragSource(
-        <div className="basic-op">
+        <div className="basic-op" style={{ marginRight: 8 }}>
             <div className="basic-op-bubble">x</div>
             <div className="basic-op-op">{item.char}</div>
             <div className="basic-op-bubble">y</div>
@@ -35,4 +35,8 @@ function BasicOpDraggable(props) {
     );
 }
 
-export default DragSource(ItemTypes.BASIC_OP, itemSource, collect)(BasicOpDraggable);
+export default DragSource(
+    ItemTypes.BASIC_OP,
+    itemSource,
+    collect
+)(BasicOpDraggable);
