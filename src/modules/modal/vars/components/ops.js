@@ -50,10 +50,10 @@ export const opValueType = {
 }
 
 export const DEFAULT_ASSIGN = {
-    opType: opType.NaN.key,
-    opValueType: '',
+    opType: opType.value.key,
+    opValueType: opValueType.constant.key,
     basicOpType: '',
-    value: '',
+    value: '0',
 }
 
 export function orderOfOp(assign) {
@@ -72,4 +72,17 @@ export function orderOfOp(assign) {
         default:
             return ''
     }
+}
+
+//return true if there is error
+export function compileMath(assign) {
+    if (!assign) return true
+
+    if (assign.opType === opType.basicOp.key) {
+        if (compileMath(assign.right) || compileMath(assign.left)) return true
+    } else if (assign.opType === opType.value.key) {
+        if (assign.value === '') return true
+    } else return true
+    
+    return false
 }

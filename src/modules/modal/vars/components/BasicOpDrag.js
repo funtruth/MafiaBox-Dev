@@ -27,7 +27,7 @@ function collect(connect, monitor) {
 function BasicOpDrag(props) {
     const { item, connectDragSource } = props
     return connectDragSource(
-        <div className="basic-op" style={{ marginRight: 8 }}>
+        <div className="basic-op" style={{ marginRight: 8, cursor: 'pointer' }}>
             <div className="basic-op-bubble">x</div>
             <div className="basic-op-op">{item.char}</div>
             <div className="basic-op-bubble">y</div>

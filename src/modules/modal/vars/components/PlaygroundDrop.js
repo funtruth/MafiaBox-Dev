@@ -3,7 +3,7 @@ import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './Constants'
-import { opType } from './ops'
+import { opType, DEFAULT_ASSIGN } from './ops'
 
 import ActiveOp from './ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
@@ -14,7 +14,16 @@ const itemTarget = {
         const didDrop = monitor.didDrop()
 
         if (didDrop) return;
-        props.setWorkspace(helpers.updateByPath(props.subpath, item.opInfo, props.workspace))
+        switch(item.opType) {
+            case opType.basicOp.key:
+                props.setWorkspace(helpers.updateByPath(props.subpath,
+                    {...item.opInfo, left: DEFAULT_ASSIGN, right: DEFAULT_ASSIGN}, props.workspace))
+                break
+            case opType.value.key:
+                props.setWorkspace(helpers.updateByPath(props.subpath, item.opInfo, props.workspace))
+                break
+            default:
+        }
     },
 
     canDrop(props) {

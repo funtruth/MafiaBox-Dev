@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './AssignVarModal.css'
 import _ from 'lodash'
 
-import { basicOpType, DEFAULT_ASSIGN } from './components/ops'
+import { basicOpType, DEFAULT_ASSIGN, compileMath } from './components/ops'
 
 import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
@@ -23,6 +23,13 @@ export default function AssignVarModal(props) {
     let [error, setError] = useState('')
 
     let handleSave = () => {
+        let badMath = compileMath(assign)
+
+        if (badMath) {
+            setError('You cannot have empty values.')
+            return
+        }
+
         props.onSave(workspace)
         props.popModalBy(1)
     }

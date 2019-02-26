@@ -4,6 +4,8 @@ export const dropdownType = {
     storyMapLib: 'dropdownType/story-map-lib',
     pageLib: 'dropdownType/page-lib',
 
+    dropInput: 'dropdownType/drop-input',
+
     pickLogic: 'dropdownType/show-logic',
     showLogicOptions: 'dropdownType/show-logic-options',
     pickOperator: 'dropdownType/pick-operator',

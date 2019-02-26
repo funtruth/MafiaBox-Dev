@@ -30,7 +30,7 @@ export default function ActiveOp(props) {
         case opType.value.key:
             switch(opInfo.opValueType) {
                 case opValueType.constant.key:
-                    buttonText = opInfo.value
+                    buttonText = opInfo.value || buttonText
                     break
                 case opValueType.variable.key:
                     buttonText = opInfo.value.key
@@ -40,6 +40,7 @@ export default function ActiveOp(props) {
 
             return (
                 <ValueDrop
+                    opInfo={opInfo}
                     subpath={subpath}
                     workspace={workspace}
                     setWorkspace={setWorkspace}

@@ -18,6 +18,7 @@ const itemTarget = {
                 opType: opType.basicOp.key,
                 basicOpType: item.basicOpType,
                 [dropSide]: props.workspace.assign,
+                [props.side]: DEFAULT_ASSIGN,
             }
         }
         props.setWorkspace(newWorkspace)

@@ -12,6 +12,7 @@ import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
+import DropInput from './components/DropInput'
 
 import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
@@ -122,6 +123,9 @@ class DropdownView extends React.Component{
                 return <StoryMapLib {...props}/>
             case dropdownType.pageLib:
                 return <PageLib {...props}/>
+
+            case dropdownType.dropInput:
+                return <DropInput {...props}/>
 
             case dropdownType.pickLogic:
                 return <PickLogic {...props}/>
