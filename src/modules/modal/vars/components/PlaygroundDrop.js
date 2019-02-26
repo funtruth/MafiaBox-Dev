@@ -1,8 +1,9 @@
 import React from 'react'
 import * as helpers from '../../../common/helpers'
+import { DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './Constants'
-import { DropTarget } from 'react-dnd'
+import { opType } from './ops'
 
 import ActiveOp from './ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
@@ -14,6 +15,12 @@ const itemTarget = {
 
         if (didDrop) return;
         props.setWorkspace(helpers.updateByPath(props.subpath, item.opInfo, props.workspace))
+    },
+
+    canDrop(props) {
+        const { opInfo } = props
+        const droppable = opInfo.opType === opType.NaN.key
+        return droppable
     }
 }
 
@@ -26,33 +33,14 @@ function collect(connect, monitor) {
   
 function PlaygroundDrop(props) {
     const { connectDropTarget, isOver, opInfo } = props
-    
+    const highlight = isOver && opInfo.opType === opType.NaN.key
+
     return connectDropTarget(
-        <div className="playground" style={{ backgroundColor: isOver && 'rgba(70, 73, 78, 1)' }}>
-            <PlaygroundSideDrop side="left" opInfo={opInfo}/>
-            <PlaygroundSideDrop side="right" opInfo={opInfo}/>
-            <div className="playground-children">
-                <div
-                    className="row -x-p"
-                    style={{
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <ActiveOp {...props}/>
-                </div>
-            </div>
-            <div
-                className="dashboard-section-title"
-                style={{
-                    color: isOver && '#fff',
-                    position: 'relative',
-                    top: 8,
-                }}
-            >
-                set variable to
-            </div>
+        <div className="playground" style={{ backgroundColor: highlight && 'rgba(70, 73, 78, 1)' }}>
+            <PlaygroundSideDrop side="left" {...props}/>
+            <PlaygroundSideDrop side="right" {...props}/>
+            <div className="playground-title" style={{ color: highlight && '#fff' }}>set variable to</div>
+            <div style={{ margin: '26px 16px' }}><ActiveOp {...props}/></div>
         </div>
     );
 }

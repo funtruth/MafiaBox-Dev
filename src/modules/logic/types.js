@@ -306,7 +306,7 @@ export const variableType = {
     boolean: {
         key: 'boolean',
         title: 'Boolean',
-        icon: 'mdi mdi-nintendo-switch',
+        icon: 'mdi mdi-toggle-switch',
     },
     uid: {
         key: 'uid',

@@ -19,6 +19,7 @@
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+    position: relative;
 }
 
 .basic-op-op {
@@ -33,13 +34,27 @@
     padding: 3px 6px 3px 6px;
     font: 300 12px Arial;
     color: #d6d6d6;
+    position: relative;
 }
 
 .playground {
+    display: flex;
     position: relative;
     height: 100%;
     width: 100%;
     min-height: 80px;
+    justify-content: center;
+    align-items: center;
+}
+.playground-title {
+    font: 600 11px Arial;
+    color: #aaa;
+    letter-spacing: 0.6px;
+    padding: 0px 14px 6px 14px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 8px;
+    left: 0px;
 }
 .playground-children {
     position: absolute;
@@ -51,12 +66,10 @@
     left: 0;
     width: 50%;
     height: 100%;
-    background-color: #b43e6b75
 }
 .playground-right {
     position: absolute;
     right: 0;
     width: 50%;
     height: 100%;
-    background-color: #3eb46575
 }

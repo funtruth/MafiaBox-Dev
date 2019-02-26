@@ -34,7 +34,7 @@ export default function AssignVarModal(props) {
                 display: 'flex',
                 flexDirection: 'column',
                 minWidth: 600,
-                width: '45vw',
+                maxWidth: '90vw',
             }}
         >
             <div className="row">

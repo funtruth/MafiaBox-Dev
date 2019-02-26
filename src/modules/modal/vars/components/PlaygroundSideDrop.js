@@ -1,17 +1,26 @@
 import React from 'react'
-import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './Constants'
-import { opType } from './ops'
+import { opType, DEFAULT_ASSIGN } from './ops'
 import { DropTarget } from 'react-dnd'
 
 const itemTarget = {
     drop(props, monitor) {
         const item = monitor.getItem()
         const didDrop = monitor.didDrop()
-
+        
         if (didDrop) return;
-        props.setWorkspace(helpers.updateByPath(props.subpath, item.opInfo, props.workspace))
+        const dropSide = props.side === 'right' ? 'left' : 'right'
+        const newWorkspace = {
+            ...props.workspace,
+            assign: {
+                ...DEFAULT_ASSIGN,
+                opType: opType.basicOp.key,
+                basicOpType: item.basicOpType,
+                [dropSide]: props.workspace.assign,
+            }
+        }
+        props.setWorkspace(newWorkspace)
     }
 }
 
@@ -24,15 +33,14 @@ function collect(connect, monitor) {
   
 function PlaygroundSideDrop(props) {
     const { connectDropTarget, isOver, side, opInfo } = props
-
+    
     if (opInfo.opType === opType.NaN.key) return null
 
     return connectDropTarget(
         <div
             className={`playground-${side}`}
-        >
-
-        </div>
+            style={{ backgroundColor: isOver && 'rgba(70, 73, 78, 1)' }}
+        />
     );
 }
 

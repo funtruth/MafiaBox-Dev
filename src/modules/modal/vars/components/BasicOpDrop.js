@@ -23,7 +23,16 @@ function collect(connect, monitor) {
   
 function BasicOpDrop(props) {
     const { connectDropTarget, isOver, children } = props
-    return connectDropTarget(<div className="basic-op" style={{ backgroundColor: isOver && '#6279CA' }}>{children}</div>);
+    return connectDropTarget(
+        <div
+            className="basic-op"
+            style={{
+                backgroundColor: isOver && '#6279CA',
+            }}
+        >
+            {children}
+        </div>
+    );
 }
 
 export default DropTarget(
