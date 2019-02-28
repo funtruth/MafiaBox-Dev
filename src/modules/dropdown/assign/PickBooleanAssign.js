@@ -2,15 +2,18 @@ import React from 'react'
 import _ from 'lodash'
 
 import { updateType, updateFamilyType, variableType } from '../../logic/types'
+import { DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 import DropTitle from '../components/DropTitle';
+import DropItem from '../components/DropItem';
 
 export default function PickBooleanAssign(props) {
-    const { attach, subfieldKey } = props
-    const selectedValue = attach[subfieldKey] && attach[subfieldKey].value
+    const { item } = props
+    const selectedValue = item.assign && item.assign.value
 
     let handleSelect = (item) => {
         props.updatePage({
+            assign: DEFAULT_ASSIGN,
             value: item.key,
             variableTypes: [variableType.boolean.key],
         })
@@ -27,18 +30,17 @@ export default function PickBooleanAssign(props) {
             <DropTitle>boolean type</DropTitle>
             {items.map(item => {
                 const chosen = typeof selectedValue === 'string' && selectedValue === item.key
-                
+                    
                 return (
-                    <div
+                    <DropItem
                         key={item.key}
-                        className="drop-down-menu-option"
-                        chosen={chosen.toString()}
+                        chosen={chosen}
                         onClick={() => handleSelect(item)}
+                        leftIcon={item.icon}
+                        rightIcon="mdi mdi-check"
                     >
-                        <i className={`${item.icon} drop-down-menu-icon`}/>
                         {item.title}
-                        <i className="mdi mdi-check"/>
-                    </div>
+                    </DropItem>
                 )
             })}
         </div>

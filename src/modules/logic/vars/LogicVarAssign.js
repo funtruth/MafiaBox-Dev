@@ -12,9 +12,13 @@ function LogicVarAssign(props) {
     const { item, vars, path, updateSource } = props
 
     let newPath = [...path, item.key]
+
     const noTypeSelected = !item.variableTypes || !item.variableTypes.length
-    const isNumber = item.variableTypes && item.variableTypes.includes(variableType.number.key)
-    const isUid = item.variableTypes && item.variableTypes.includes(variableType.uid.key)
+    if (noTypeSelected) return null
+
+    const isNumber = item.variableTypes.includes(variableType.number.key)
+    const isUid = item.variableTypes.includes(variableType.uid.key)
+    const isBoolean = item.variableTypes.includes(variableType.boolean.key)
 
     let handleModal = () => {
         props.showModal(modalType.assignVar, {
@@ -23,7 +27,7 @@ function LogicVarAssign(props) {
             path: newPath,
         })
     }
-
+    
     function innerContent() {
         if (isNumber) {
             return (
@@ -51,11 +55,25 @@ function LogicVarAssign(props) {
                     {item.assign.value.key || '...'}
                 </div>
             )
+        } else if (isBoolean) {
+            return (
+                <div
+                    className="logic-pick-update app-onclick"
+                    menu-type={dropdownType.pickBooleanAssign}
+                    app-onclick-props={JSON.stringify({
+                        attachVar: vars,
+                        item,
+                        path,
+                        subpath: [item.key, 'assign'],
+                        updateSource,
+                    })}
+                >
+                    {item.assign.value || '...'}
+                </div>
+            )
         }
         return null
     }
-
-    if (noTypeSelected) return null
 
     return (
         <div className="row-nowrap" style={{ marginLeft: 6, borderRadius: 6, overflow: 'hidden' }}>

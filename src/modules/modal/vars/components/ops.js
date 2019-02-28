@@ -53,7 +53,7 @@ export const DEFAULT_ASSIGN = {
     opType: opType.NaN.key,
     opValueType: opValueType.constant.key,
     basicOpType: '',
-    value: '0',
+    value: '',
 }
 
 export const DEFAULT_VALUE_ASSIGN = {
@@ -67,7 +67,7 @@ export const DEFAULT_BASIC_OP_ASSIGN = {
     opType: opType.basicOp.key,
     opValueType: opValueType.constant.key,
     basicOpType: '',
-    value: '0',
+    value: '',
     left: DEFAULT_VALUE_ASSIGN,
     right: DEFAULT_VALUE_ASSIGN,
 }

@@ -8,9 +8,14 @@ import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
 import BasicOpDrag from './components/BasicOpDrag';
 import VarValueDrag from './components/VarValueDrag'
+import ValueDrag from './components/ValueDrag';
 
 export default function AssignVarModal(props) {
     let [workspace, setWorkspace] = useState(props.attach)
+
+    const clearWorkspace = () => setWorkspace({...props.attach, assign: DEFAULT_ASSIGN})
+    const resetWorkspace = () => setWorkspace(props.attach)
+    
     const { attachVar } = props
 
     const variableInfo = workspace || { variableTypes: [], assign: DEFAULT_ASSIGN }
@@ -67,6 +72,8 @@ export default function AssignVarModal(props) {
                 subpath={['assign']}
                 workspace={workspace}
                 setWorkspace={setWorkspace}
+                clearWorkspace={clearWorkspace}
+                resetWorkspace={resetWorkspace}
             />
             <div className="-sep-no-m"></div>
             <div className="-y-p">
@@ -81,6 +88,7 @@ export default function AssignVarModal(props) {
             <div className="-y-p">
                 <div className="dashboard-section-title">VARIABLES</div>
                 <div className="row -x-p">
+                    <ValueDrag value={0}/>
                     {assignable.map(item => <VarValueDrag key={item.key} item={item}/>)}
                 </div>
             </div>

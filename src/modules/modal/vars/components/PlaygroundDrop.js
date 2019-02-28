@@ -1,4 +1,5 @@
 import React from 'react'
+import './Playground.css'
 import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
@@ -23,7 +24,7 @@ const itemTarget = {
                 ))
                 break
             case opType.value.key:
-                props.setWorkspace(helpers.updateByPath(props.subpath, item.opInfo, props.workspace))
+                props.setWorkspace(helpers.updateByPath(props.subpath, item, props.workspace))
                 break
             default:
         }
@@ -52,6 +53,16 @@ function PlaygroundDrop(props) {
             <PlaygroundSideDrop side="left" {...props}/>
             <PlaygroundSideDrop side="right" {...props}/>
             <div className="playground-title" style={{ color: highlight && '#fff' }}>set variable to</div>
+            <div className="playground-erase">
+                <div onClick={props.resetWorkspace} style={{ marginRight: 8, cursor: 'pointer' }}>
+                    <i className="mdi mdi-reload" style={{ marginRight: 2 }}></i>
+                    reset
+                </div>
+                <div onClick={props.clearWorkspace} style={{ cursor: 'pointer' }}>
+                    <i className="mdi mdi-eraser" style={{ marginRight: 2 }}></i>
+                    clear
+                </div>
+            </div>
             <div style={{ margin: '26px 16px' }}><ActiveOp {...props}/></div>
         </div>
     );

@@ -7,9 +7,9 @@ import { opType, opValueType } from './ops'
 const itemSource = {
     beginDrag(props) {
         return {
-            value: props.item,
+            value: props.value,
             opType: opType.value.key,
-            opValueType: opValueType.variable.key,
+            opValueType: opValueType.constant.key,
         }
     }
 }
@@ -21,11 +21,11 @@ function collect(connect, monitor) {
     }
 }
   
-function VarValueDrag(props) {
-    const { item, connectDragSource } = props
+function ValueDrag(props) {
+    const { value, connectDragSource } = props
     return connectDragSource(
         <div className="assign-var-tag">
-            {item.key}
+            {value}
         </div>
     );
 }
@@ -34,4 +34,4 @@ export default DragSource(
     ItemTypes.VALUE,
     itemSource,
     collect
-)(VarValueDrag);
+)(ValueDrag);

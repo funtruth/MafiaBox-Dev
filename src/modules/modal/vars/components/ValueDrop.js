@@ -3,14 +3,19 @@ import { DropTarget } from 'react-dnd'
 import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './Constants'
-import { opValueType, DEFAULT_BASIC_OP_ASSIGN } from './ops'
+import { opType, opValueType, DEFAULT_VALUE_ASSIGN, DEFAULT_BASIC_OP_ASSIGN } from './ops'
 
 const MAGIC_FACTOR = 6.5
 
 const itemTarget = {
     drop(props, monitor) {
         const item = monitor.getItem() //item.opInfo = {item.basicOpType, item.opType}
-        const newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
+        let newItem;
+        if (item.opType === opType.value.key) {
+            newItem = Object.assign({}, DEFAULT_VALUE_ASSIGN, item)
+        } else if (item.opType === opType.basicOp.key) {
+            newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
+        }
         props.setWorkspace(helpers.updateByPath(props.subpath, newItem, props.workspace))
     }
 }
@@ -22,11 +27,10 @@ function collect(connect, monitor) {
     }
 }
 
-
 function ValueDrop(props) {
     let [rng] = useState(helpers.genUID('txt'))
     const { connectDropTarget, isOver, children, opInfo } = props
-    const isConstant = opInfo && opInfo.opValueType === opValueType.constant.key
+    const isConstant = opInfo && (opInfo.opValueType === opValueType.constant.key)
     
     useEffect(() => {
         const el = document.getElementById(rng)
@@ -59,7 +63,7 @@ function ValueDrop(props) {
             <input
                 id={rng}
                 className="playground-constant"
-                value={opInfo.value || ''}
+                value={opInfo.value}
                 onChange={onChange}
                 onFocus={handleFocus}
                 type='number'
