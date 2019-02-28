@@ -5,6 +5,8 @@ import * as helpers from '../../../common/helpers'
 import { ItemTypes } from './Constants'
 import { opValueType, DEFAULT_ASSIGN } from './ops'
 
+const MAGIC_FACTOR = 6.5
+
 const itemTarget = {
     drop(props, monitor) {
         const item = monitor.getItem()
@@ -34,7 +36,7 @@ function ValueDrop(props) {
         const el = document.getElementById(rng)
         if (!el) return;
 
-        function resize() {el.style.width = ((el.value.length+1) * 7) + 'px'}
+        function resize() {el.style.width = ((el.value.length+1) * MAGIC_FACTOR) + 'px'}
         var e = 'keyup,keypress,focus,blur,change'.split(',');
         for (var i in e) el.addEventListener(e[i], resize, false);
         resize();

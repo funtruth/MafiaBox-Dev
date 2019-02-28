@@ -38,6 +38,9 @@ export const dropdownType = {
     pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',
 
+    pickBooleanAssign: 'dropdownType/pick-boolean-assign',
+    pickUidAssign: 'dropdownType/pick-uid-for-assign',
+
     pickUpdateValue: 'dropdownType/pick-update-value',
     pickBoolean: 'dropdownType/pick-boolean',
     pickChoice: 'dropdownType/pick-choice',

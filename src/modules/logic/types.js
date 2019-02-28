@@ -312,6 +312,7 @@ export const variableType = {
         key: 'uid',
         title: 'Unique ID',
         icon: 'mdi mdi-account',
+        subtype: 'string',
     },
     object: {
         key: 'object',
@@ -322,11 +323,13 @@ export const variableType = {
         key: 'uidObject',
         title: 'UID Object',
         icon: 'mdi mdi-code-braces',
+        subtype: 'object',
     },
     rss: {
         key: 'rss',
         title: 'Room Info',
         icon: 'mdi mdi-film',
+        subtype: 'object',
     },
 }
 

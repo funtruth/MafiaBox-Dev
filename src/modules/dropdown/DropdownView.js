@@ -47,6 +47,9 @@ import PickVarProp from './vars/PickVarProp'
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 
+import PickBooleanAssign from './assign/PickBooleanAssign'
+import PickUidAssign from './assign/PickUidAssign'
+
 import PickBoolean from './update/PickBoolean'
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
@@ -169,6 +172,11 @@ class DropdownView extends React.Component{
                 return <PickComparison {...props}/>
             case dropdownType.writeVarType:
                 return <WriteVarType {...props}/>
+                
+            case dropdownType.pickBooleanAssign:
+                return <PickBooleanAssign {...props}/>
+            case dropdownType.pickUidAssign:
+                return <PickUidAssign {...props}/>
 
             case dropdownType.pickOp:
                 return <PickOp {...props}/>

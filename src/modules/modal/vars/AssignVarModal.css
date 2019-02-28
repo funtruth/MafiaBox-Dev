@@ -82,6 +82,7 @@
     color: #d6d6d6;
     cursor: text;
     transition: .3s width ease-in-out;
+    text-align:right;
 }
 .playground-constant:focus {
     outline: none;
