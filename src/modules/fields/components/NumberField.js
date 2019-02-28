@@ -16,14 +16,8 @@ export default function NumberField(props) {
                 type="number"
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <i
-                    className="field-number-inc mdi mdi-plus-box"
-                    onClick={handleIncr}
-                />
-                <i
-                    className="field-number-inc mdi mdi-minus-box"
-                    onClick={handleDecr}
-                />
+                <i onClick={handleIncr} className="field-number-inc mdi mdi-plus-box"/>
+                <i onClick={handleDecr} className="field-number-inc mdi mdi-minus-box"/>
             </div>
         </div>
     )

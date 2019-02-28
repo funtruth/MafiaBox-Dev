@@ -9,11 +9,7 @@ function PlayerTagField(props) {
         .filter(i => i.tag)
         .value()
 
-    let handleClick = (item, active) => {
-        props.updatePage(path, {
-            [item.subfield]: !active,
-        })
-    }
+    let handleClick = (item, active) => props.updatePage(path, { [item.subfield]: !active })
     
     return (
         <div className="row -x-p">

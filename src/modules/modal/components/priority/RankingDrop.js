@@ -3,33 +3,20 @@ import { DropTarget } from 'react-dnd'
 import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './Constants'
-import { opValueType, DEFAULT_VALUE_ASSIGN, DEFAULT_BASIC_OP_ASSIGN, DEFAULT_ASSIGN } from './ops'
+import { opType, opValueType, DEFAULT_VALUE_ASSIGN, DEFAULT_BASIC_OP_ASSIGN } from './ops'
 
 const MAGIC_FACTOR = 6.5
 
 const itemTarget = {
     drop(props, monitor) {
         const item = monitor.getItem() //item.opInfo = {item.basicOpType, item.opType}
-        const itemType = monitor.getItemType()
-
         let newItem;
-        switch(itemType) {
-            case ItemTypes.BASIC_OP:
-                newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
-                break
-            case ItemTypes.VALUE:
-                newItem = Object.assign({}, DEFAULT_VALUE_ASSIGN, item)
-                break
-            default:
-                console.warn('Item does not have appropriate Type.')
-                newItem = DEFAULT_ASSIGN
+        if (item.opType === opType.value.key) {
+            newItem = Object.assign({}, DEFAULT_VALUE_ASSIGN, item)
+        } else if (item.opType === opType.basicOp.key) {
+            newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
         }
-        
-        props.setWorkspace(helpers.updateByPath(
-            props.subpath,
-            newItem,
-            props.workspace,
-        ))
+        props.setWorkspace(helpers.updateByPath(props.subpath, newItem, props.workspace))
     }
 }
 

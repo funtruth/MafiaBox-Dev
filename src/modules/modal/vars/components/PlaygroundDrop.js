@@ -11,20 +11,26 @@ import PlaygroundSideDrop from './PlaygroundSideDrop';
 
 const itemTarget = {
     drop(props, monitor) {
-        const item = monitor.getItem()
         const didDrop = monitor.didDrop()
-
         if (didDrop) return;
-        switch(item.opType) {
-            case opType.basicOp.key:
+
+        const item = monitor.getItem()
+        const itemType = monitor.getItemType()
+
+        switch(itemType) {
+            case ItemTypes.BASIC_OP:
                 props.setWorkspace(helpers.updateByPath(
                     props.subpath,
                     Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo),
                     props.workspace,
                 ))
                 break
-            case opType.value.key:
-                props.setWorkspace(helpers.updateByPath(props.subpath, item, props.workspace))
+            case ItemTypes.VALUE:
+                props.setWorkspace(helpers.updateByPath(
+                    props.subpath,
+                    item,
+                    props.workspace,
+                ))
                 break
             default:
         }

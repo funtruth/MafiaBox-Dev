@@ -6,11 +6,15 @@ import { DropTarget } from 'react-dnd'
 
 const itemTarget = {
     drop(props, monitor) {
-        const item = monitor.getItem()
         const didDrop = monitor.didDrop()
-
         if (didDrop) return;
-        props.setWorkspace(helpers.updateByPath(props.subpath, item, props.workspace))
+
+        const item = monitor.getItem()
+        props.setWorkspace(helpers.updateByPath(
+            props.subpath,
+            item,
+            props.workspace,
+        ))
     }
 }
 
@@ -24,12 +28,7 @@ function collect(connect, monitor) {
 function BasicOpDrop(props) {
     const { connectDropTarget, isOver, children } = props
     return connectDropTarget(
-        <div
-            className="basic-op"
-            style={{
-                backgroundColor: isOver && '#6279CA',
-            }}
-        >
+        <div className="basic-op" style={{ backgroundColor: isOver && '#6279CA' }}>
             {children}
         </div>
     );
