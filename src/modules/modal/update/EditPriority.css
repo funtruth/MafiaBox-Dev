@@ -1,0 +1,61 @@
+.priority-role-drag {
+    padding: 12px 10px;
+    border-radius: 4px;
+    color: #d6d6d6;
+    background-color: rgba(40, 43, 48,1);
+    font: 550 14px Arial;
+    pointer-events: auto;
+    line-height: 1.2;
+    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.priority-role-drop {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 12px 2px 12px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.priority-gutter {
+    position: sticky;
+    left: 0px;
+    background-color: #363940;
+    font: 600 18px Arial;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #464646;
+    padding: 6px 12px; 
+}
+.priority-gutter-add {
+    font: 600 18px Arial;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    padding-left: 6px;
+}
+.priority-icon {
+    cursor: pointer;
+}
+.priority-icon:hover {
+    color: #bbb;
+}
+
+.priority-row {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #464646;
+}
+
+.priority-row-placeholder {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #464646;
+    animation: itemin 2s;
+}

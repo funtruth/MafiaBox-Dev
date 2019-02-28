@@ -103,29 +103,3 @@
     color: #fff;
     cursor: pointer;
 }
-
-.priority-row {
-    display: flex;
-    flex-direction: row;
-    border-top: 1px solid #464646;
-}
-
-.priority-row-placeholder {
-    display: flex;
-    flex-direction: row;
-    border-top: 1px solid #464646;
-    animation: itemin 2s;
-}
-
-.priority-gutter {
-    position: sticky;
-    left: 0px;
-    background-color: #363940;
-    font: 600 18px Arial;
-    color: #999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 50px;
-    border-right: 1px solid #464646;
-}
