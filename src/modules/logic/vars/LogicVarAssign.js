@@ -71,8 +71,9 @@ function LogicVarAssign(props) {
                     {item.assign.value || '...'}
                 </div>
             )
+        } else {
+            return <div className="logic-pick-update">coming soon</div>
         }
-        return null
     }
 
     return (

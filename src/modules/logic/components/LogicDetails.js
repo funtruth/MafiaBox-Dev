@@ -5,8 +5,7 @@ import * as proptool from '../proptool'
 import { logicType, operatorType } from '../types'
 
 import LogicExpandable from '../form/LogicExpandable';
-import LogicVarType from '../vars/LogicVarType'
-import LogicVarAssign from '../vars/LogicVarAssign'
+import LogicVarWrapper from '../vars/LogicVarWrapper'
 
 export default function LogicDetails(props) {
     const { updateRef, logicInfo } = props
@@ -36,15 +35,7 @@ export default function LogicDetails(props) {
                         .toArray()
                         .filter(i => i.key)
                         .value()
-                        .map(item => (
-                            <div key={item.key} className="row-nowrap" style={{ marginTop: 2 }}>
-                                <div className="common-bubble --var">
-                                    <div style={{marginRight: 6}}>{item.key}</div>
-                                    {item && !item.isBeingAssigned && <LogicVarType {...props} item={item}/>}
-                                    <LogicVarAssign {...props} item={item}/>
-                                </div>
-                            </div>
-                        ))
+                        .map(item => <LogicVarWrapper key={item.key} {...props} item={item}/>)
                     }
                 </div>
             )

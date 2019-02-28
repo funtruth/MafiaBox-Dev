@@ -1,24 +1,19 @@
 import React from 'react'
 
-class TextField extends React.Component{
-    _onChange = e => {
-        const { fieldKey } = this.props
-        this.props.updatePage(fieldKey, e.target.value)
+export default function TextField(props) {
+    const { path, value, inputType } = props
+
+    let handleChange = e => {
+        props.updatePage(path, e.target.value)
     }
 
-    render() {
-        const { value, inputType } = this.props
-
-        return (
-            <textarea
-                className="field-text-input"
-                value={value || ''}
-                onChange={this._onChange}
-                placeholder="Start typing ..."
-                type={inputType}
-            />
-        )
-    }
+    return (
+        <textarea
+            className="field-text-input"
+            value={value || ''}
+            onChange={handleChange}
+            placeholder="Start typing ..."
+            type={inputType}
+        />
+    )
 }
-
-export default TextField

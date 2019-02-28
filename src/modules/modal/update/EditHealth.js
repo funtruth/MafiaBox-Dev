@@ -3,7 +3,7 @@ import React from 'react'
 import StringDashboard from '../../strings/StringDashboard';
 import ModalOptions from '../components/ModalOptions'
 
-export default function EditEvent(props) {
+export default function EditHealth(props) {
     let handleSave = () => {
         const { isTrigger } = props
 

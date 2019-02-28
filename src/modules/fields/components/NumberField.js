@@ -1,47 +1,30 @@
 import React from 'react'
 
-class NumberField extends React.Component{
-    _incre = () => {
-        const { value, fieldKey } = this.props
-        //TODO 1111
-        this.props.updatePage(fieldKey, value + 1)
-    }
-    
-    _decre = () => {
-        const { value, fieldKey } = this.props
-        this.props.updatePage(fieldKey, value - 1)
-    }
+export default function NumberField(props) {
+    const { value, path } = props
 
-    _onChange = e => {
-        const { fieldKey } = this.props
-        this.props.updatePage(fieldKey, e.target.value)
-    }
+    let handleIncr = () => props.updatePage(path, parseInt(value || 0) + 1)
+    let handleDecr = () => props.updatePage(path, parseInt(value || 0) - 1)
+    let handleChange = e => props.updatePage(path, e.target.value)
 
-    render() {
-        const { value } = this.props
-
-        return (
-            <div className="row" style={{ alignItems: 'center' }}>
-                <input
-                    className="field-number-input"
-                    value={value || ''}
-                    onChange={this._onChange}
-                    placeholder="0"
-                    type="number"
+    return (
+        <div className="row" style={{ alignItems: 'center' }}>
+            <input
+                className="field-number-input"
+                value={value || 0}
+                onChange={handleChange}
+                type="number"
+            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <i
+                    className="field-number-inc mdi mdi-plus-box"
+                    onClick={handleIncr}
                 />
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <i
-                        className="field-number-inc mdi mdi-plus-box"
-                        onClick={this._incre}
-                    />
-                    <i
-                        className="field-number-inc mdi mdi-minus-box"
-                        onClick={this._decre}
-                    />
-                </div>
+                <i
+                    className="field-number-inc mdi mdi-minus-box"
+                    onClick={handleDecr}
+                />
             </div>
-        )
-    }
+        </div>
+    )
 }
-
-export default NumberField

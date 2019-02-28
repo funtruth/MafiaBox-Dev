@@ -1,42 +1,34 @@
 import React from 'react'
 import _ from 'lodash'
 
-class TagField extends React.Component{
-    _renderItem = (item) => {
-        const { value, fieldKey } = this.props  
-        const active = fieldKey && item.key === value
+export default function TagField(props) {
+    const { path, value, data } = props
 
-        return (
-            <div
-                key={item.key}
-                className="field-tag"
-                style={{
-                    backgroundColor: active && (item.color || '#6279CA'),
-                }}
-                onClick={this._onClick.bind(this, item.key)}
-            >
-                {item.title || 'Untitled'}
-            </div>
-        )
+    if (!data) return null
+    const tags = _.sortBy(data, i => i.index)
+
+    let handleClick = (item) => {
+        props.updatePage(path, item.key)
     }
+    
+    return (
+        <div className="row -x-p">
+            {tags.map(item => {
+                const active = item.key === value
 
-    _onClick = key => {
-        const { fieldKey } = this.props
-        this.props.updatePage(fieldKey, key)
-    }
-
-    render() {
-        const { data } = this.props
-        if (!data) return null
-
-        const tags = _.sortBy(data, i => i.index)
-        
-        return (
-            <div className="row -x-p">
-                {tags.map(this._renderItem)}
-            </div>
-        )
-    }
+                return (
+                    <div
+                        key={item.key}
+                        className="field-tag"
+                        style={{
+                            backgroundColor: active && (item.color || '#6279CA'),
+                        }}
+                        onClick={() => handleClick(item)}
+                    >
+                        {item.title || 'Untitled'}
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
-
-export default TagField

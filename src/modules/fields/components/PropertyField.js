@@ -1,48 +1,37 @@
 import React from 'react'
 import _ from 'lodash'
 
-class PropertyField extends React.Component{
-    _renderItem = (item) => {
-        const { value, fieldKey } = this.props
-        
-        //todo i think this is wrong
-        const active = fieldKey && value && value[item.key]
-        
-        return (
-            <div
-                key={item.key}
-                className="property-button"
-                style={{
-                    backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
-                }}
-                onClick={this._onClick.bind(this, item.key)}
-            >
-                {item.title}
-            </div>
-        )
-    }
+export default function PropertyField(props) {
+    const { path, data, value } = props
 
-    _onClick = tagKey => {
-        const { fieldKey, value } = this.props
+    if (!data) return null
+    const tags = _.sortBy(data, i => i.index)
 
+    let handleClick = (item) => {
         let dataClone = Object.assign({}, value)
-        dataClone[tagKey] = !dataClone[tagKey]
+        dataClone[item.key] = !dataClone[item.key]
 
-        this.props.updatePage(fieldKey, dataClone)
+        props.updatePage(path, dataClone)
     }
 
-    render() {
-        const { data } = this.props
-        if (!data) return null
-
-        const tags = _.sortBy(data, i => i.index)
-        
-        return (
-            <div className="row">
-                {tags.map(this._renderItem)}
-            </div>
-        )
-    }
+    return (
+        <div className="row">
+            {tags.map(item => {
+                const active = value && value[item.key]
+                
+                return (
+                    <div
+                        key={item.key}
+                        className="property-button"
+                        style={{
+                            backgroundColor: active ? (item.color || 'hsla(0,0%,100%,.1)') : 'rgba(40, 43, 48,1)',
+                        }}
+                        onClick={() => handleClick(item)}
+                    >
+                        {item.title}
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
-
-export default PropertyField

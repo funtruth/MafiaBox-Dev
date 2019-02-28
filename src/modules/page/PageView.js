@@ -6,27 +6,19 @@ import PageHeader from './components/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
 
-class PageView extends React.Component {
-    render() {
-        const { pageRepo, pageKey } = this.props
-        const pageInfo = pageRepo[pageKey] || {}
+function PageView(props) {
+    const { pageRepo, pageKey } = props
+    const pageInfo = pageRepo[pageKey] || {}
 
-        return (
-            <div className="page">
-                <PageHeader {...this.props}/>
-                <div className="page-content">
-                    <PageAbstract
-                        {...this.props}
-                        pageInfo={pageInfo}
-                    />
-                    <FieldView
-                        {...this.props}
-                        pageInfo={pageInfo}
-                    />
-                </div>
+    return (
+        <div className="page">
+            <PageHeader {...props}/>
+            <div className="page-content">
+                <PageAbstract {...props} pageInfo={pageInfo}/>
+                <FieldView {...props} pageInfo={pageInfo}/>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default connect(

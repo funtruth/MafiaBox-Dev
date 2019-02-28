@@ -1,24 +1,17 @@
 import React from 'react'
 
-class CallField extends React.Component{
-    _onChange = e => {
-        const { fieldKey } = this.props
-        this.props.updatePage(fieldKey, e.target.value)
-    }
+export default function CallField(props) {
+    const { path, value } = props
 
-    render() {
-        const { value } = this.props
+    let handleChange = e => props.updatePage(path, e.target.value)
 
-        return (
-            <input
-                className="field-call-input"
-                value={value || ''}
-                onChange={this._onChange}
-                placeholder="untitled"
-                type="text"
-            />
-        )
-    }
+    return (
+        <input
+            className="field-call-input"
+            value={value || ''}
+            onChange={handleChange}
+            placeholder="untitled"
+            type="text"
+        />
+    )
 }
-
-export default CallField

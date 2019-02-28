@@ -8,6 +8,7 @@ import { updateRepo, saveAllPriorities } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
+import { updateSourceType } from '../common/types'
 import { updateViewType } from '../logic/types'
 
 import Modal from './components/Modal';
@@ -77,20 +78,32 @@ class ModalView extends React.Component {
 
                 props.popModalBy = (pops) => this.props.popModalTo(index - pops) 
 
-                switch(props.key) {
-                    case modalType.showPage:
-                        props.updatePage = (fieldKey, value) => this.props.updateRepo(
-                            [props.pageKey, fieldKey],
-                            value,
-                        )
+                switch(props.updateSource) {
+                    case updateSourceType.repo:
+                        props.updatePage = (path, value, subpath) => {
+                            if (props.ignoreSubpath) {
+                                this.props.updateRepo(path, value)
+                            } else {
+                                this.props.updateRepo(path, value, subpath)
+                            }
+                        }
                         break
-                    case modalType.showFunctionPage:
-                        props.updatePage = (fieldKey, value) => this.props.updateFunction(
-                            [props.pageKey, fieldKey],
-                            value,
-                        )
+                    case updateSourceType.function:
+                        props.updatePage = (path, value, subpath) => {
+                            if (props.ignoreSubpath) {
+                                this.props.updateFunction(path, value)
+                            } else {
+                                this.props.updateFunction(path, value, subpath)
+                            }
+                        }
+                        break
+                    case updateSourceType.topModal:
+                        props.updatePage = (path, value, subpath) => {
+                            this.props.updateTopModal(path, value, subpath)
+                        }
                         break
                     default:
+                        props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
                 }
 
                 switch(props.key) {
