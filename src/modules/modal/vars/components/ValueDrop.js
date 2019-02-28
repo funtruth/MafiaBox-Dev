@@ -3,18 +3,14 @@ import { DropTarget } from 'react-dnd'
 import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './Constants'
-import { opValueType, DEFAULT_ASSIGN } from './ops'
+import { opValueType, DEFAULT_BASIC_OP_ASSIGN } from './ops'
 
 const MAGIC_FACTOR = 6.5
 
 const itemTarget = {
     drop(props, monitor) {
-        const item = monitor.getItem()
-        const newItem = {
-            ...item.opInfo,
-            left: DEFAULT_ASSIGN,
-            right: DEFAULT_ASSIGN,
-        }
+        const item = monitor.getItem() //item.opInfo = {item.basicOpType, item.opType}
+        const newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
         props.setWorkspace(helpers.updateByPath(props.subpath, newItem, props.workspace))
     }
 }

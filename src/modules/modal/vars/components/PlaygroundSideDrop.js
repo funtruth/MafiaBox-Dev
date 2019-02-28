@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ItemTypes } from './Constants'
-import { opType, DEFAULT_ASSIGN } from './ops'
+import { opType, DEFAULT_BASIC_OP_ASSIGN } from './ops'
 import { DropTarget } from 'react-dnd'
 
 const itemTarget = {
@@ -14,11 +14,9 @@ const itemTarget = {
         const newWorkspace = {
             ...props.workspace,
             assign: {
-                ...DEFAULT_ASSIGN,
-                opType: opType.basicOp.key,
+                ...DEFAULT_BASIC_OP_ASSIGN,
                 basicOpType: item.basicOpType,
                 [dropSide]: props.workspace.assign,
-                [props.side]: DEFAULT_ASSIGN,
             }
         }
         props.setWorkspace(newWorkspace)

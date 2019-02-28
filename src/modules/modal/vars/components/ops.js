@@ -50,10 +50,26 @@ export const opValueType = {
 }
 
 export const DEFAULT_ASSIGN = {
+    opType: opType.NaN.key,
+    opValueType: opValueType.constant.key,
+    basicOpType: '',
+    value: '0',
+}
+
+export const DEFAULT_VALUE_ASSIGN = {
     opType: opType.value.key,
     opValueType: opValueType.constant.key,
     basicOpType: '',
     value: '0',
+}
+
+export const DEFAULT_BASIC_OP_ASSIGN = {
+    opType: opType.basicOp.key,
+    opValueType: opValueType.constant.key,
+    basicOpType: '',
+    value: '0',
+    left: DEFAULT_VALUE_ASSIGN,
+    right: DEFAULT_VALUE_ASSIGN,
 }
 
 export function orderOfOp(assign) {

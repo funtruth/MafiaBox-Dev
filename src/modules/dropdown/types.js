@@ -40,6 +40,7 @@ export const dropdownType = {
 
     pickBooleanAssign: 'dropdownType/pick-boolean-assign',
     pickUidAssign: 'dropdownType/pick-uid-for-assign',
+    declareVarType: 'dropdownType/declare-var-type',
 
     pickUpdateValue: 'dropdownType/pick-update-value',
     pickBoolean: 'dropdownType/pick-boolean',

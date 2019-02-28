@@ -20,7 +20,7 @@ export default function LogicVarType(props) {
             </div>
             <div
                 className="logic-pick-update app-onclick"
-                menu-type={dropdownType.pickVarType}
+                menu-type={dropdownType.declareVarType}
                 app-onclick-props={JSON.stringify({
                     currentValue: item.variableTypes,
                     path: newPath,
