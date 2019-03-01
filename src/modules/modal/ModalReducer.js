@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import * as helpers from '../common/helpers'
 import { modalType } from './types';
 
@@ -12,7 +13,7 @@ export function showModal(key, params={}) {
         const { modalKeys } = getState().modal
         const { dropdownKeys } = getState().dropdown
 
-        let keysClone = Array.from(modalKeys)
+        let keysClone = _.cloneDeep(modalKeys)
 
         if (!key) {
             keysClone.pop()
@@ -49,7 +50,7 @@ export function popModalTo(index) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
 
-        const keysClone = Array.from(modalKeys).slice(0, index + 1)
+        const keysClone = _.cloneDeep(modalKeys).slice(0, index + 1)
 
         dispatch({
             type: UPDATE_MODAL_KEYS,
@@ -62,7 +63,7 @@ export function updateTopModal(path, update, extraPath=[]) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
 
-        let keysClone = Array.from(modalKeys)
+        let keysClone = _.cloneDeep(modalKeys)
         keysClone[keysClone.length - 1] = helpers.updateByPath(path.concat(extraPath), update, keysClone[keysClone.length - 1])
         
         dispatch({

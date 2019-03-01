@@ -11,7 +11,6 @@ import { modalType } from './types'
 import { updateSourceType } from '../common/types'
 import { updateViewType } from '../logic/types'
 
-import Modal from './components/Modal';
 import FunctionPageModal from './components/FunctionPageModal';
 
 import DeleteRole from './keys/DeleteRole';
@@ -149,9 +148,6 @@ class ModalView extends React.Component {
                             value,
                         )
                         break
-                    case modalType.editPriority:
-                        props.onSave = () => this.props.saveAllPriorities(props.attach)
-                        break
                     case modalType.assignVar: //TODO WIP
                         props.onSave = (value) => this.props.updateRepo(props.path, value, props.subpath)
                         break
@@ -162,7 +158,6 @@ class ModalView extends React.Component {
                     case modalType.editTrigger:
                     case modalType.editEvent:
                     case modalType.editToast:
-                    case modalType.editPriority:
                     case modalType.assignVar:
                         props.showSaveDialogue = true
                         props.onClose = () => {
@@ -179,11 +174,7 @@ class ModalView extends React.Component {
                     default:
                 }
                 
-                return (
-                    <Modal {...props} key={index}>
-                        {this._renderItem(props)}
-                    </Modal>
-                )
+                return this._renderItem(props)
             })
         )
     }

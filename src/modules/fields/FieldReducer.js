@@ -177,8 +177,8 @@ export function moveTagToOtherField(startFieldKey, endFieldKey, startIndex, endI
 
         let fieldRepoClone = Object.assign({}, fieldRepo)
 
-        let startFieldData = Array.from(fieldRepoClone[startFieldKey].data)
-        let endFieldData = Array.from(fieldRepoClone[endFieldKey].data)
+        let startFieldData = _.cloneDeep(fieldRepoClone[startFieldKey].data)
+        let endFieldData = _.cloneDeep(fieldRepoClone[endFieldKey].data)
         
         let [removed] = startFieldData.splice(startIndex, 1)
         endFieldData.splice(endIndex, 0, removed)
@@ -384,7 +384,7 @@ export function rolePrioritySort(pageRepo) {
 export function moveRoleWithinPrio(prio, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
-        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
 
         const [removed] = attachClone[prio].splice(startIndex, 1)
         attachClone[prio].splice(endIndex, 0, removed)
@@ -399,7 +399,7 @@ export function moveRoleWithinPrio(prio, startIndex, endIndex) {
 export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
-        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
 
         const [removed] = attachClone[startPrio].splice(startIndex, 1)
         attachClone[endPrio].splice(endIndex, 0, removed)
@@ -414,7 +414,7 @@ export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
 export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
     return (dispatch, getState) => {
         const { modalKeys } = getState().modal
-        let attachClone = Array.from(modalKeys[modalKeys.length - 1].attach)
+        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
 
         const [removed] = attachClone[startPrio].splice(startIndex, 1)
         attachClone.splice(endPrio + 1, 0, [removed])

@@ -1,44 +1,40 @@
 import React from 'react'
+import Modal from './Modal';
 
-class SaveChanges extends React.Component {
-    _onSave = () => {
-        this.props.onSave()
-        this.props.popModalBy(2)
+export default function SaveChanges(props) {
+    let _onSave = () => {
+        props.onSave()
     }
 
-    _onClose = () => {
-        this.props.popModalBy(1)
+    let _onClose = () => {
+        props.popModalBy(1)
     }
 
-    _onQuit = () => {
-        this.props.popModalBy(2)
+    let _onQuit = () => {
+        props.popModalBy(2)
     }
 
-    render() {
-        return (
-            <div>
-                <div style={{ padding: 16 }}>
-                    <div className="modal-title">
-                        Save changes?
-                    </div>
-                    <div className="modal-subtitle">
-                        your changes will be lost if you do not save.
-                    </div>
+    return (
+        <Modal>
+            <div style={{ padding: 16 }}>
+                <div className="modal-title">
+                    Save changes?
                 </div>
-                <div className="row modal-options">
-                    <div className="underline-button" onClick={this._onSave}>
-                        Save
-                    </div>
-                    <div className="underline-button" onClick={this._onClose}>
-                        Cancel
-                    </div>
-                    <div className="delete-button" onClick={this._onQuit}>
-                        Don't Save
-                    </div>
+                <div className="modal-subtitle">
+                    your changes will be lost if you do not save.
                 </div>
             </div>
-        )
-    }
+            <div className="row modal-options">
+                <div className="underline-button" onClick={_onSave}>
+                    Save
+                </div>
+                <div className="underline-button" onClick={_onClose}>
+                    Cancel
+                </div>
+                <div className="delete-button" onClick={_onQuit}>
+                    Don't Save
+                </div>
+            </div>
+        </Modal>
+    )
 }
-
-export default SaveChanges

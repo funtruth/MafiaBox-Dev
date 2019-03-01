@@ -189,7 +189,7 @@ export function saveAllPriorities(attach) {
 
         for (var i=0; i<attach.length; i++) {
             for (var j=0; j<attach[i].length; j++) {
-                repoClone[attach[i][j].pageKey].priority = i
+                repoClone[attach[i][j].pageKey].priority = i + 1
             }
         }
 

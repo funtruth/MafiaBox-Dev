@@ -14,7 +14,7 @@ export function pushCode(obj) {
 
         const activeIndex = _.findIndex(codeKeys, i => i.pageKey === pageKey && i.fieldKey === fieldKey)
 
-        let keysClone = Array.from(codeKeys)
+        let keysClone = _.cloneDeep(codeKeys)
         if (activeIndex > -1) {
             keysClone.splice(activeIndex, 1)
         }
@@ -31,7 +31,7 @@ export function toggleCodeAtIndex(index) {
     return (dispatch, getState) => {
         const { codeKeys } = getState().code
 
-        let keysClone = Array.from(codeKeys)
+        let keysClone = _.cloneDeep(codeKeys)
         keysClone[index].expanded = !keysClone[index].expanded
 
         dispatch({
@@ -45,7 +45,7 @@ export function removeCodeAtIndex(index) {
     return (dispatch, getState) => {
         const { codeKeys } = getState().code
 
-        let keysClone = Array.from(codeKeys)
+        let keysClone = _.cloneDeep(codeKeys)
         keysClone.splice(index, 1)
 
         dispatch({
@@ -62,7 +62,7 @@ export function updateIfActive(pageKey, fieldKey, origin, value) {
         const activeIndex = _.findIndex(codeKeys, i => i.pageKey === pageKey && i.fieldKey === fieldKey)
 
         if (activeIndex !== -1) {
-            let keysClone = Array.from(codeKeys)
+            let keysClone = _.cloneDeep(codeKeys)
             keysClone[activeIndex].code = dispatch(getCode(origin, value))
 
             dispatch({

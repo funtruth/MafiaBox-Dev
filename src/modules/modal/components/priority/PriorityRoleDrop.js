@@ -12,7 +12,7 @@ const itemTarget = {
 
         if (yIndex === itemYIndex) return;
 
-        const workspaceClone = Array.from(workspace)
+        let workspaceClone = workspace.slice()
 
         const [removed] = workspaceClone[itemYIndex].splice(itemXIndex, 1)
         workspaceClone[yIndex].push(removed)

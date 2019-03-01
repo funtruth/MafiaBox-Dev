@@ -1,41 +1,41 @@
 import React, { useState } from 'react'
 import './EditPriority.css'
-import { Droppable } from 'react-beautiful-dnd';
+import _ from 'lodash'
+import { connect } from 'react-redux'
 
-import { droppableType } from '../../common/types';
+import { saveAllPriorities } from '../../page/PageReducer'
 
 import ModalOptions from '../components/ModalOptions'
 import PriorityRowAdd from '../components/priority/PriorityRowAdd'
 import PriorityRoleDrop from '../components/priority/PriorityRoleDrop';
 import PriorityRoleDrag from '../components/priority/PriorityRoleDrag';
+import ModalCheckSave from '../components/ModalCheckSave';
 
-const getEmptyListStyle = isDraggingOver => ({
-    display: 'flex',
-    flexDirection: 'row',
-    padding: isDraggingOver ? '0px 12px' : '12px 12px',
-    minWidth: '90%',
-    maxHeight: 24,
-    backgroundColor: isDraggingOver && 'red',
-});
-
-export default function EditPriority(props) {
-    let [workspace, setWorkspace] = useState(props.attach)
+function EditPriority(props) {
+    let [workspace, setWorkspace] = useState(_.cloneDeep(props.attach))
     
     let handleSave = () => {
-        props.onSave()
+        props.saveAllPriorities(workspace)
         props.popModalBy(1)
     }
 
+    let handleClose = () => props.popModalBy(1)
+    
     return (
-        <div
-            cancel-appclick="true"
-            style={{
-                minWidth: 600,
-                width: '75vw',
-            }}
+        <ModalCheckSave
+            {...props}
+            past={props.attach}
+            current={workspace}
+            handleSave={handleSave}
         >
-            {workspace.map((list, yIndex) => {
-                return (
+            <div
+                cancel-appclick="true"
+                style={{
+                    minWidth: 600,
+                    width: '75vw',
+                }}
+            >
+                {workspace.map((list, yIndex) => (
                     <div key={yIndex} className="priority-row">
                         <div className="priority-gutter">
                             <PriorityRowAdd
@@ -60,12 +60,19 @@ export default function EditPriority(props) {
                             ))}
                         </PriorityRoleDrop>
                     </div>
-                )
-            })}
-            <ModalOptions
-                onSave={handleSave}
-                onClose={props.onClose}
-            />
-        </div>
+                ))}
+                <ModalOptions
+                    onSave={handleSave}
+                    onClose={handleClose}
+                />
+            </div>
+        </ModalCheckSave>
     )
 }
+
+export default connect(
+    null,
+    {
+        saveAllPriorities,
+    }
+)(EditPriority)

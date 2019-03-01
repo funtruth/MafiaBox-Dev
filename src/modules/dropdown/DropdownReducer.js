@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { dropdownType, DROP_TITLE_HEIGHT } from './types'
 
 const initialState = {
@@ -19,7 +20,7 @@ export function showDropdown(key, e, params={}, index=0) {
                 payload: [],
             })
         } else {
-            let keysClone = Array.from(dropdownKeys).slice(0, index + 1)
+            let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
 
             const prev = keysClone[keysClone.length - 1]
             if (keysClone.length) {
@@ -93,7 +94,7 @@ export function popDropdownTo(index) {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
 
-        const keysClone = Array.from(dropdownKeys).slice(0, index + 1)
+        const keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
 
         dispatch({
             type: UPDATE_KEYS,
