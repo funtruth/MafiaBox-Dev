@@ -3,13 +3,15 @@ import { dropdownType, DROP_TITLE_HEIGHT } from './types'
 
 const initialState = {
     dropdownKeys: [],
+    statefulSource: '',
 }
 
 const UPDATE_KEYS = 'dropdown/update-keys'
+const UPDATE_SOURCE = 'dropdown/update-source'
 
-export function showDropdown(key, e, params={}, index=0) {
+export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
     return (dispatch, getState) => {
-        const { dropdownKeys } = getState().dropdown
+        const { dropdownKeys, statefulSource } = getState().dropdown
         const { modalKeys } = getState().modal
 
         if (!key) {
@@ -18,6 +20,10 @@ export function showDropdown(key, e, params={}, index=0) {
             dispatch({
                 type: UPDATE_KEYS,
                 payload: [],
+            })
+            dispatch({
+                type: UPDATE_SOURCE,
+                payload: '',
             })
         } else {
             let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
@@ -86,6 +92,12 @@ export function showDropdown(key, e, params={}, index=0) {
                 type: UPDATE_KEYS,
                 payload: keysClone,
             })
+            if (!statefulSource) {
+                dispatch({
+                    type: UPDATE_SOURCE,
+                    payload: statefulSourceId,
+                })
+            }
         }  
     }
 }
@@ -107,6 +119,8 @@ export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_KEYS:
             return { ...state, dropdownKeys: action.payload }
+        case UPDATE_SOURCE:
+            return { ...state, statefulSource: action.payload }
         default:
             return state;
     }

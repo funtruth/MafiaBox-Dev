@@ -94,6 +94,10 @@ export const fuseType = {
     }
 }
 
+export const StatefulSourceId = {
+    editToast: 'edit-toast',
+}
+
 export const DROP_TITLE_HEIGHT = 21
 
 export const VAR_DEFAULTS = {

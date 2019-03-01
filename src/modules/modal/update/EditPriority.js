@@ -18,8 +18,6 @@ function EditPriority(props) {
         props.saveAllPriorities(workspace)
         props.popModalBy(1)
     }
-
-    let handleClose = () => props.popModalBy(1)
     
     return (
         <ModalCheckSave
@@ -63,7 +61,7 @@ function EditPriority(props) {
                 ))}
                 <ModalOptions
                     onSave={handleSave}
-                    onClose={handleClose}
+                    onClose={props.close}
                 />
             </div>
         </ModalCheckSave>

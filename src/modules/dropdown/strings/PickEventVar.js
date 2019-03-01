@@ -8,12 +8,9 @@ import { variableType } from '../../logic/types'
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
 
-class PickVar extends React.Component{
+class PickEventVar extends React.Component{
     _onSelect = (item) => {
-        const { attach, selectedKey, range } = this.props
-        const selectedItem = selectedKey ? (attach.value && attach.value[selectedKey]) || {} : attach
-        const string = selectedItem.string || ''
-
+        const { string, range } = this.props
         const { startIndex, endIndex } = range
         
         this.props.updatePage({
@@ -91,4 +88,4 @@ export default connect(
     state => ({
         updateRef: state.template.updateRef,
     })
-)(PickVar)
+)(PickEventVar)

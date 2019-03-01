@@ -1,6 +1,5 @@
 import React from 'react'
 import './modals.css'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
@@ -76,6 +75,7 @@ class ModalView extends React.Component {
                 let props = Object.assign({}, item)
 
                 props.popModalBy = (pops) => this.props.popModalTo(index - pops) 
+                props.close = () => this.props.popModalTo(index - 1)
 
                 switch(props.updateSource) {
                     case updateSourceType.repo:
@@ -134,42 +134,6 @@ class ModalView extends React.Component {
                             ['attach', 'value', stringKey],
                             value,
                         )
-                        break
-                    case modalType.editToast:
-                        props.onSave = () => this.props.updateRepo(
-                            [props.pageKey, props.fieldKey, props.indexKey, 'data'],
-                            {
-                                ...props.attach,
-                                key: 'toast',
-                            },
-                        )
-                        props.onEdit = (value) => this.props.updateTopModal(
-                            ['attach'],
-                            value,
-                        )
-                        break
-                    case modalType.assignVar: //TODO WIP
-                        props.onSave = (value) => this.props.updateRepo(props.path, value, props.subpath)
-                        break
-                    default:
-                }
-
-                switch(props.key) {
-                    case modalType.editTrigger:
-                    case modalType.editEvent:
-                    case modalType.editToast:
-                    case modalType.assignVar:
-                        props.showSaveDialogue = true
-                        props.onClose = () => {
-                            if (_.isEqual(props.attach, props._attach)) {
-                                this.props.popModalTo(index - 1) 
-                            } else {
-                                this.props.showModal(modalType.saveChanges, {
-                                    onSave: props.onSave,
-                                    onClose: this.props.showModal,
-                                })
-                            }
-                        }
                         break
                     default:
                 }

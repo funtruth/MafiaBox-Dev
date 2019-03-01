@@ -70,7 +70,7 @@ import ShowLogicOptions from './logic/ShowLogicOptions';
 
 class DropdownView extends React.Component{
     _renderItem = (item, index) => {
-        const { update, mutate } = this.props
+        const { update, mutate, setWorkspace } = this.props
         let props = Object.assign({}, item)
         
         props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
@@ -103,6 +103,7 @@ class DropdownView extends React.Component{
             default:
                 props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
         }
+        if (setWorkspace) props.updatePage = setWorkspace
 
         switch(props.key) {
             case dropdownType.pickBoolean:
@@ -231,8 +232,10 @@ class DropdownView extends React.Component{
     }
 
     render() {
-        const { dropdownKeys } = this.props
+        const { dropdownKeys, statefulSource, sourceId } = this.props
         
+        if (statefulSource && statefulSource !== sourceId) return null 
+
         return (
             dropdownKeys.map((item, index) => {
                 return (
@@ -248,6 +251,7 @@ class DropdownView extends React.Component{
 export default connect(
     state => ({
         dropdownKeys: state.dropdown.dropdownKeys,
+        statefulSource: state.dropdown.statefulSource,
         update: state.template.update,
         mutate: state.template.mutate,
     }),
