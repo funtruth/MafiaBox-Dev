@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class TextBlur extends React.Component {
+export default class EventBlur extends React.Component {
     render() {
         return (
             <div

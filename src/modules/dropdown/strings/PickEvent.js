@@ -5,39 +5,36 @@ import { updateSourceType } from '../../common/types';
 import { showModal } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/types';
 
-class PickEvent extends React.Component{
-    _addTrigger = () => {
-        const { attach, subfieldKey } = this.props
-        this.props.showModal(modalType.editEvent, {
+function PickEvent(props) {
+    const { attach, subfieldKey } = props
+
+    let handlePress = () => {
+        props.showModal(modalType.editEvent, {
             attach: attach[subfieldKey] || {},
-            path: ['attach'],
             updateSource: updateSourceType.topModal,
         })
-        this.props.showDropdown()
+        props.showDropdown()
     }
 
-    render() {
-        const { subfieldKey, attach } = this.props
-        const value = (attach[subfieldKey] && attach[subfieldKey].value) || {}
-        
-        return (
-            Object.keys(value).length ?
-                <div
-                    className="drop-down-menu-option"
-                    onClick={this._addTrigger}
-                >
-                    <i className="drop-down-menu-icon mdi mdi-calendar"/>
-                    edit events
-                </div>
-                :<div
-                    className="drop-down-menu-option"
-                    onClick={this._addTrigger}
-                >
-                    <i className="drop-down-menu-icon mdi mdi-calendar-plus"/>
-                    create event
-                </div>
-        )
-    }
+    const value = (attach[subfieldKey] && attach[subfieldKey].value) || {}
+    
+    return (
+        Object.keys(value).length ?
+            <div
+                className="drop-down-menu-option"
+                onClick={handlePress}
+            >
+                <i className="drop-down-menu-icon mdi mdi-calendar"/>
+                edit events
+            </div>
+            :<div
+                className="drop-down-menu-option"
+                onClick={handlePress}
+            >
+                <i className="drop-down-menu-icon mdi mdi-calendar-plus"/>
+                create event
+            </div>
+    )
 }
 
 export default connect(

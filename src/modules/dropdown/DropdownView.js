@@ -1,6 +1,7 @@
 import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
+import * as helpers from '../common/helpers'
 
 import { updateSourceType } from '../common/types';
 import { dropdownType } from './types'
@@ -68,184 +69,197 @@ import PickEventVarProp from './strings/PickEventVarProp';
 import PickOperator from './logic/PickOperator';
 import ShowLogicOptions from './logic/ShowLogicOptions';
 
-class DropdownView extends React.Component{
-    _renderItem = (item, index) => {
-        const { update, mutate, setWorkspace } = this.props
-        let props = Object.assign({}, item)
+function DropdownView(props) {
+    const { update, mutate, state, updateState, dropdownKeys, statefulSource, sourceId } = props
+
+    //if there is statefulSource, only show from DropdownView at sourceId
+    if (statefulSource && statefulSource !== sourceId) return null 
+
+    //hide stateful DropdownViews if no statefulSource
+    if (sourceId && !statefulSource) return null
+
+    let renderItem = (item, index) => {
+        //create temporary props that are not stored in redux
+        let renderProps = Object.assign({}, item)
         
-        props.showDropdown = (key, e, params) => this.props.showDropdown(key, e, params, index)
-        props.popDropdownTo = (forcedIndex) => this.props.popDropdownTo(forcedIndex || index)
+        //some APIs
+        renderProps.showDropdown = (key, e, params) => props.showDropdown(key, e, params, index)
+        renderProps.popDropdownTo = (forcedIndex) => props.popDropdownTo(forcedIndex || index)
 
-        switch(props.updateSource) {
-            case updateSourceType.repo:
-                props.updatePage = (value) => {
-                    if (props.ignoreSubpath) {
-                        this.props.updateRepo(props.path, value)
-                    } else {
-                        this.props.updateRepo(props.path, value, props.subpath)
+        //if there is a stateful update method ...
+        if (updateState) {
+            renderProps.updatePage = (value) => {
+                updateState(
+                    helpers.updateByPath(
+                        renderProps.statefulPath,
+                        value,
+                        state,
+                    )
+                )
+            }
+        } else {
+            switch(renderProps.updateSource) {
+                case updateSourceType.repo:
+                    renderProps.updatePage = (value) => {
+                        if (renderProps.ignoreSubpath) {
+                            props.updateRepo(renderProps.path, value)
+                        } else {
+                            props.updateRepo(renderProps.path, value, renderProps.subpath)
+                        }
                     }
-                }
-                break
-            case updateSourceType.function:
-                props.updatePage = (value) => {
-                    if (props.ignoreSubpath) {
-                        this.props.updateFunction(props.path, value)
-                    } else {
-                        this.props.updateFunction(props.path, value, props.subpath)
+                    break
+                case updateSourceType.function:
+                    renderProps.updatePage = (value) => {
+                        if (renderProps.ignoreSubpath) {
+                            props.updateFunction(renderProps.path, value)
+                        } else {
+                            props.updateFunction(renderProps.path, value, renderProps.subpath)
+                        }
                     }
-                }
-                break
-            case updateSourceType.topModal:
-                props.updatePage = (value) => {
-                    this.props.updateTopModal(props.path, value, props.subpath)
-                }
-                break
-            default:
-                props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+                    break
+                case updateSourceType.topModal:
+                    renderProps.updatePage = (value) => {
+                        props.updateTopModal(renderProps.path, value, renderProps.subpath)
+                    }
+                    break
+                default:
+                    renderProps.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+            }
         }
-        if (setWorkspace) props.updatePage = setWorkspace
-
-        switch(props.key) {
+        
+        switch(renderProps.key) {
             case dropdownType.pickBoolean:
             case dropdownType.pickHealth:
             case dropdownType.pickUid:
             case dropdownType.pickUpdate:
             case dropdownType.pickTimer:
             case dropdownType.pickChoice:
-                props.update = update
-                props.mutate = mutate
+                renderProps.update = update
+                renderProps.mutate = mutate
                 break
             default:
         }
         
         //TODO proper obj
-        switch(props.key) {
+        switch(renderProps.key) {
             case dropdownType.storyShowMore:
-                return <StoryShowMore {...props}/>
+                return <StoryShowMore {...renderProps}/>
             case dropdownType.inputValue:
-                return <InputValue {...props}/>
+                return <InputValue {...renderProps}/>
             case dropdownType.storyMapLib:
-                return <StoryMapLib {...props}/>
+                return <StoryMapLib {...renderProps}/>
             case dropdownType.pageLib:
-                return <PageLib {...props}/>
+                return <PageLib {...renderProps}/>
 
             case dropdownType.dropInput:
-                return <DropInput {...props}/>
+                return <DropInput {...renderProps}/>
 
             case dropdownType.pickLogic:
-                return <PickLogic {...props}/>
+                return <PickLogic {...renderProps}/>
             case dropdownType.pickOperator:
-                return <PickOperator {...props}/>
+                return <PickOperator {...renderProps}/>
             case dropdownType.pickDeleteMode:
-                return <PickDeleteMode {...props}/>
+                return <PickDeleteMode {...renderProps}/>
             case dropdownType.pickReturnType:
-                return <PickReturnType {...props}/>
+                return <PickReturnType {...renderProps}/>
             case dropdownType.showLogicOptions:
-                return <ShowLogicOptions {...props}/>
+                return <ShowLogicOptions {...renderProps}/>
 
             case dropdownType.editTag:
-                return <EditTag {...props}/>
+                return <EditTag {...renderProps}/>
             case dropdownType.addTag:
-                return <AddTag {...props}/>
+                return <AddTag {...renderProps}/>
             case dropdownType.pickFieldType:
-                return <PickFieldType {...props}/>
+                return <PickFieldType {...renderProps}/>
             case dropdownType.addTemplateField:
-                return <AddTemplateField {...props}/>
+                return <AddTemplateField {...renderProps}/>
             case dropdownType.templateTitleOptions:
-                return <TemplateTitleOptions {...props}/>
+                return <TemplateTitleOptions {...renderProps}/>
                 
             case dropdownType.addVar:
-                return <AddVar {...props}/>
+                return <AddVar {...renderProps}/>
             case dropdownType.declareVar:
-                return <DeclareVar {...props}/>
+                return <DeclareVar {...renderProps}/>
             case dropdownType.editVar:
-                return <EditVar {...props}/>
+                return <EditVar {...renderProps}/>
             case dropdownType.editVarName:
-                return <EditVarName {...props}/>
+                return <EditVarName {...renderProps}/>
             case dropdownType.pickVar:
-                return <PickVar {...props}/>
+                return <PickVar {...renderProps}/>
             case dropdownType.pickVarProp:
-                return <PickVarProp {...props}/>
+                return <PickVarProp {...renderProps}/>
             case dropdownType.pickUidObject:
-                return <PickUidObject {...props}/>
+                return <PickUidObject {...renderProps}/>
             case dropdownType.pickVarType:
-                return <PickVarType {...props}/>
+                return <PickVarType {...renderProps}/>
             case dropdownType.pickComparison:
-                return <PickComparison {...props}/>
+                return <PickComparison {...renderProps}/>
             case dropdownType.writeVarType:
-                return <WriteVarType {...props}/>
+                return <WriteVarType {...renderProps}/>
                 
             case dropdownType.pickBooleanAssign:
-                return <PickBooleanAssign {...props}/>
+                return <PickBooleanAssign {...renderProps}/>
             case dropdownType.pickUidAssign:
-                return <PickUidAssign {...props}/>
+                return <PickUidAssign {...renderProps}/>
             case dropdownType.declareVarType:
-                return <DeclareVarType {...props}/>
+                return <DeclareVarType {...renderProps}/>
 
             case dropdownType.pickOp:
-                return <PickOp {...props}/>
+                return <PickOp {...renderProps}/>
             case dropdownType.pickOpType:
-                return <PickOpType {...props}/>
+                return <PickOpType {...renderProps}/>
             case dropdownType.changeOp:
-                return <ChangeOp {...props}/>
+                return <ChangeOp {...renderProps}/>
             case dropdownType.pickAssignableVar:
-                return <PickAssignableVar {...props}/>
+                return <PickAssignableVar {...renderProps}/>
             case dropdownType.setOpValueTo:
-                return <SetOpValueTo {...props}/>
+                return <SetOpValueTo {...renderProps}/>
 
             case dropdownType.pickBoolean: 
-                return <PickBoolean {...props}/>
+                return <PickBoolean {...renderProps}/>
             case dropdownType.pickChoice:
-                return <PickChoice {...props}/>
+                return <PickChoice {...renderProps}/>
             case dropdownType.pickHealth:
-                return <PickHealth {...props}/>
+                return <PickHealth {...renderProps}/>
             case dropdownType.pickTimer:
-                return <PickTimer {...props}/>
+                return <PickTimer {...renderProps}/>
             case dropdownType.pickTeam:
-                return <PickTeam {...props}/>
+                return <PickTeam {...renderProps}/>
             case dropdownType.pickTrigger:
-                return <PickTrigger {...props}/>
+                return <PickTrigger {...renderProps}/>
             case dropdownType.pickUid:
-                return <PickUid {...props}/>
+                return <PickUid {...renderProps}/>
             case dropdownType.pickUpdate:
-                return <PickUpdate {...props}/>
+                return <PickUpdate {...renderProps}/>
             case dropdownType.pickPhase:
-                return <SearchBoard {...props} boardType={boardType.phases.key}/>
+                return <SearchBoard {...renderProps} boardType={boardType.phases.key}/>
             case dropdownType.pickRole:
-                return <SearchBoard {...props} boardType={boardType.roles.key}/>
+                return <SearchBoard {...renderProps} boardType={boardType.roles.key}/>
             case dropdownType.pickLibrary:
-                return <SearchBoard {...props} boardType={boardType.library.key}/>
+                return <SearchBoard {...renderProps} boardType={boardType.library.key}/>
             case dropdownType.showSubfields:
-                return <ShowSubfields {...props}/>
+                return <ShowSubfields {...renderProps}/>
 
             case dropdownType.pickEvent:
-                return <PickEvent {...props}/>
+                return <PickEvent {...renderProps}/>
             case dropdownType.pickEventVar:
-                return <PickEventVar {...props}/>
+                return <PickEventVar {...renderProps}/>
             case dropdownType.pickEventVarProp:
-                return <PickEventVarProp {...props}/>
+                return <PickEventVarProp {...renderProps}/>
             case dropdownType.pickRecipient:
-                return <PickRecipient {...props}/>
+                return <PickRecipient {...renderProps}/>
             default:
                 return null
         }
     }
 
-    render() {
-        const { dropdownKeys, statefulSource, sourceId } = this.props
-        
-        if (statefulSource && statefulSource !== sourceId) return null 
-
-        return (
-            dropdownKeys.map((item, index) => {
-                return (
-                    <Dropdown {...item} key={index}>
-                        {this._renderItem(item, index)}
-                    </Dropdown>
-                )}
-            )
-        )
-    }
+    return (
+        dropdownKeys.map((item, index) => (
+            <Dropdown {...item} key={index}>
+                {renderItem(item, index)}
+            </Dropdown>
+        ))
+    )
 }
 
 export default connect(

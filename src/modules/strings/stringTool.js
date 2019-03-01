@@ -4,7 +4,7 @@ import { dropdownType } from '../dropdown/types'
 
 import { convertString } from '../logic/LogicReducer'
 
-export function braceToHtml(string='', sourceId) {
+export function braceToHtml(string='', sourceId, statefulPath=[]) {
     let parts = []
     let startIndex = 0
     let leftBraceSaved = false
@@ -32,6 +32,7 @@ export function braceToHtml(string='', sourceId) {
                             },
                             string,
                             currentValue: segment,
+                            statefulPath,
                         })}
                     >
                         {segment}
@@ -52,12 +53,15 @@ export function braceToHtml(string='', sourceId) {
     parts.push(string.slice(startIndex))
     
     return parts.map((i, j) => {
-        return typeof i === 'string' ?
-            i.replace(/\s/g, ' /123/')
-            .split('/123/')
-            .map((k, l) => {
-                return <pre key={`${j}-${l}`}>{k}</pre>
-            }):i
+        return (
+            typeof i === 'string' ?
+                i.replace(/\s/g, ' /123/')
+                    .split('/123/')
+                    .map((k, l) => {
+                        return <pre key={`${j}-${l}`}>{k}</pre>
+                    })
+                :i
+        )
     })
 }
 

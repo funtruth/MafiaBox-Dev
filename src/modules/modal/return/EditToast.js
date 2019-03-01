@@ -21,10 +21,13 @@ export default function EditToast(props) {
             return setError('Toast message cannot be empty.')
         }
 
-        props.updatePage(path, {
-            ...workspace,
-            key: 'toast', //TODO used in PickReturnType and LogicReducer
-        })
+        props.updatePage(
+            path,
+            {
+                ...workspace,
+                key: 'toast', //TODO used in PickReturnType and LogicReducer
+            },
+        )
         props.popModalBy(1)
     }
     
@@ -56,7 +59,8 @@ export default function EditToast(props) {
             </div>
             <DropdownView
                 sourceId={StatefulSourceId.editToast}
-                setWorkspace={setWorkspace}
+                state={workspace}
+                updateState={setWorkspace}
             />
         </ModalCheckSave>
     )

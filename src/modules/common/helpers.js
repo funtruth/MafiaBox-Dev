@@ -14,7 +14,7 @@ export function genUID(key, repo, suffix='-xxxx') {
 
 //updates a property deep inside an object and returns the entire object
 //WARNING: cannot delete properties (THIS IS A FEATURE)
-export function updateByPath(path, update, repo, pathIndex=0) {
+export function updateByPath(path=[], update, repo, pathIndex=0) {
     const typeofUpdate = typeof update
     const endOfPath = path.length <= pathIndex
 
