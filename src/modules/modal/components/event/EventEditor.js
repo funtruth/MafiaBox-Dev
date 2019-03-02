@@ -12,7 +12,7 @@ export default function EventEditor(props) {
     
     const { selectedKey, value } = workspace
     const selectedItem = value[selectedKey] || {}
-    const { title, string } = selectedItem
+    const { string } = selectedItem
 
     useEffect(() => {
         const target = document.getElementById('text-editor-input')
@@ -60,27 +60,9 @@ export default function EventEditor(props) {
         }
     })
 
-    let handleTitleType = e => setWorkspace(
-        helpers.updateByPath(
-            ['value', selectedKey, 'title'],
-            e.target.value,
-            workspace,
-        )
-    )
-
     return (
         <div className="dashboard-edit -y-p">
-            <div className="dashboard-section-title">EVENT NAME</div>
-            <input
-                id="text-editor-title-input"
-                className="tag-input"
-                value={title || ''}
-                onChange={handleTitleType}
-                placeholder="Name the event"
-                type='text'
-            />
-            <div className="-sep"/>
-            <div className="dashboard-section-title">RAW TEXT</div>
+            <div className="dashboard-section-title">Event Text</div>
             <div
                 id="text-editor-input"
                 className="string-edit-box"
@@ -90,7 +72,7 @@ export default function EventEditor(props) {
                 {string || ''}
             </div>
             <div className="-sep"/>
-            <div className="dashboard-section-title">MARKDOWN AND VARIABLES</div>
+            <div className="dashboard-section-title">Markdown and Variables</div>
             <div className="text-box string-edit-box">
                 {stringTool.braceToHtml(
                     string,
@@ -99,7 +81,7 @@ export default function EventEditor(props) {
                 )}
             </div>
             <div className="-sep"/>
-            <div className="dashboard-section-title">RECIPIENTS</div>
+            <div className="dashboard-section-title">Recipients</div>
             <EventRecipients {...props}/>
             {!selectedKey && <EventBlur/>}
         </div>

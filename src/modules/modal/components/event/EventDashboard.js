@@ -1,26 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import _ from 'lodash'
-import Fuse from 'fuse.js'
 import * as helpers from '../../../common/helpers'
-
-import { fuseType } from '../../../dropdown/types'
 
 import EventEditor from './EventEditor';
 
 export default function EventDashboard(props) {
     const { workspace, setWorkspace } = props
-
-    let [searchText, setSearchText] = useState('')
-    let [results, setResults] = useState([])
-    let fuse = new Fuse(_.toArray(workspace.value), fuseType.stringDashboard)
-    
-    let handleType = (e) => {
-        setSearchText(e.target.value)
-        setResults(fuse.search(e.target.value))
-    }
+    const arrayedItems = _.toArray(workspace.value)
 
     let handleItemClick = (item) => {
-        document.getElementById('text-editor-title-input').focus()
+        document.getElementById('text-editor-input').focus()
         setWorkspace({
             ...workspace,
             selectedKey: item.key,
@@ -34,7 +23,7 @@ export default function EventDashboard(props) {
             lastEdit: Date.now()
         }
 
-        document.getElementById('text-editor-title-input').focus()
+        document.getElementById('text-editor-input').focus()
         setWorkspace({
             ...workspace,
             selectedKey: newKey,
@@ -45,52 +34,25 @@ export default function EventDashboard(props) {
         })
     }
 
-    const current = searchText ? results : _.toArray(workspace.value)
-
     return (
         <div className="dashboard" cancel-appclick="true">
-            <div className="dashboard-results border-right">
-                <input
-                    className="tag-input"
-                    value={searchText}
-                    onChange={handleType}
-                    placeholder="Search for event"
-                    type='text'
-                    autoFocus
-                    style={{
-                        margin: '12px 10px 0px 10px',
-                    }}
-                />
+            <div className="dashboard-results border-right -y-p">
+                <div className="dashboard-section-title">Events</div>
+                    {arrayedItems.map(item => (
+                        <div
+                            key={item.key}
+                            highlight="true"
+                            className="dashboard-item"
+                            onClick={handleItemClick}
+                        >
+                            {item.string}
+                        </div>
+                    ))}
+                    {!arrayedItems.length && <div className="empty-text">No events found</div>}
                 <div className="-sep"/>
-                {current.length ?
-                    current.map((item, index) => {
-                        return (
-                            <div
-                                key={index}
-                                highlight="true"
-                                className="dashboard-item"
-                                onClick={handleItemClick}
-                            >
-                                <div className="dashboard-item-title">
-                                    {item.title}
-                                </div>
-                                {item.string}
-                            </div>
-                        )
-                    })
-                    :<div className="empty-text">
-                        No events found
-                    </div>
-                }
-                <div className="-sep"/>
-                <div
-                    className="dashboard-item dashboard-new-item"
-                    onClick={handleCreate}
-                >
-                    <div className="dashboard-item-title">
-                        Create Event
-                    </div>
-                    Make a new event from scratch
+                <div className="dashboard-new-item" onClick={handleCreate}>
+                    <i className="mdi mdi-calendar-plus" style={{ marginRight: 4 }}></i>
+                    <div className="dashboard-item-title">Create Event</div>
                 </div>
             </div>
             <EventEditor {...props}/>

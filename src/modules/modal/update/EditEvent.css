@@ -23,12 +23,25 @@
     color: #a6a6a6;
     font: 400 12px Arial;
     padding: 12px 12px;
-    margin: 0px 10px 8px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    animation: fadein 0.25s, heightin 2s;
+    margin: 0px 10px;
+    margin-bottom: 8px;
     cursor: pointer;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: clip;
+}
+
+.dashboard-new-item {
+    border-radius: 4px;
+    background-color: rgba(47, 49, 54, 1);
+    color: #a6a6a6;
+    font: 400 12px Arial;
+    padding: 12px 12px;
+    margin: 0px 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .dashboard-new-item:hover {
@@ -38,7 +51,6 @@
 .dashboard-item-title {
     color: #d6d6d6;
     font: 600 13px Arial;
-    margin-bottom: 2px;
 }
 
 .underline-input {
@@ -82,11 +94,9 @@
 }
 
 .dashboard-section-title {
-    font: 600 11px Arial;
-    color: #aaa;
-    letter-spacing: 0.6px;
+    font: 600 13px Arial;
+    color: #d6d6d6;
     padding: 0px 14px 6px 14px;
-    text-transform: uppercase;
 }
 
 .empty-text {

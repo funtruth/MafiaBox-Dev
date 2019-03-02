@@ -11,7 +11,7 @@ import ModalCheckSave from '../components/ModalCheckSave';
 import DropdownView from '../../dropdown/DropdownView'
 
 export default function EditEvent(props) {
-    let [workspace, setWorkspace] = useState(Object.assign(WS_EDIT_EVENT, props.attach))
+    let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
     
     let handleSave = () => {
         props.updatePage(

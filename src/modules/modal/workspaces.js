@@ -2,7 +2,6 @@
     selectedKey: '',
     value: {
         [key]: {
-            title: '',
             string: '',
             lastEdit: '',
             showTo: {
@@ -19,7 +18,6 @@ export const WS_EDIT_EVENT = {
     value: {},
 }
 export const WS_EDIT_EVENT_VALUE = {
-    title: '',
     string: '',
     lastEdit: '',
     showTo: {},
