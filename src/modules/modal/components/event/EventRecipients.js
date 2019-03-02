@@ -1,16 +1,17 @@
 import React from 'react'
 
-import { dropdownType } from '../../../dropdown/types'
+import { dropdownType, StatefulSourceId } from '../../../dropdown/types'
 
 export default function EventRecipients(props) {
-    const { attach, selectedKey } = props
-    const selectedItem = (attach.value && attach.value[selectedKey]) || {}
+    const { workspace } = props
+    const { value, selectedKey } = workspace
+    const selectedItem = (value && value[selectedKey]) || {}
     const { showTo, hideFrom } = selectedItem
 
     //showing only to selected uid's
     const exclusive = Object.keys(showTo || {}).length > 0
     const inclusive = Object.keys(hideFrom || {}).length > 0
-
+    
     return (
         <div
             className="row-nowrap"
@@ -23,8 +24,11 @@ export default function EventRecipients(props) {
             {!exclusive && <div
                 className="cute-button app-onclick"
                 menu-type={dropdownType.pickRecipient}
+                stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
-                    selectionType: 'showTo'
+                    selectionType: 'showTo',
+                    selectedKey,
+                    statefulPath: ['value', selectedKey],
                 })}
             >
                 everyone
@@ -32,8 +36,11 @@ export default function EventRecipients(props) {
             {exclusive && <div
                 className="cute-button app-onclick"
                 menu-type={dropdownType.pickRecipient}
+                stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
-                    selectionType: 'showTo'
+                    selectionType: 'showTo',
+                    selectedKey,
+                    statefulPath: ['value', selectedKey],
                 })}
             >
                 {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
@@ -42,8 +49,11 @@ export default function EventRecipients(props) {
                 className="row cute-button app-onclick"
                 empty="true"
                 menu-type={dropdownType.pickRecipient}
+                stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
-                    selectionType: 'hideFrom'
+                    selectionType: 'hideFrom',
+                    selectedKey,
+                    statefulPath: ['value', selectedKey],
                 })}
                 style={{
                     marginLeft: 6,

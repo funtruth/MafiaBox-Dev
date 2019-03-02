@@ -42,7 +42,6 @@ export default function EditEvent(props) {
                 }}
             >
                 <EventDashboard
-                    {...props}
                     workspace={workspace}
                     setWorkspace={setWorkspace}
                 />

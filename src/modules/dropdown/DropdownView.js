@@ -71,7 +71,7 @@ import ShowLogicOptions from './logic/ShowLogicOptions';
 
 function DropdownView(props) {
     const { update, mutate, state, updateState, dropdownKeys, statefulSource, sourceId } = props
-
+    
     //if there is statefulSource, only show from DropdownView at sourceId
     if (statefulSource && statefulSource !== sourceId) return null 
 
@@ -96,7 +96,8 @@ function DropdownView(props) {
                         state,
                     )
                 )
-            }
+            };
+            renderProps.state = state;
         } else {
             switch(renderProps.updateSource) {
                 case updateSourceType.repo:

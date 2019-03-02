@@ -115,26 +115,6 @@ class ModalView extends React.Component {
                             },
                         )
                         break
-                    case modalType.editEvent:
-                        props.onSave = () => this.props.updateRepo(
-                            [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
-                            {
-                                ...props.attach,
-                                updateViewType: updateViewType.events,
-                            }
-                        )
-                        props.onAttach = () => this.props.updateTopModal(
-                            ['attach', 'value', props.subfieldKey],
-                            {
-                                ...props.attach,
-                                updateViewType: updateViewType.events,
-                            }
-                        )
-                        props.onEdit = (stringKey, value) => this.props.updateTopModal(
-                            ['attach', 'value', stringKey],
-                            value,
-                        )
-                        break
                     default:
                 }
                 

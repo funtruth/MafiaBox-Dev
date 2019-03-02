@@ -18,12 +18,12 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
             if (!dropdownKeys.length) return
 
             dispatch({
-                type: UPDATE_KEYS,
-                payload: [],
-            })
-            dispatch({
                 type: UPDATE_SOURCE,
                 payload: '',
+            })
+            dispatch({
+                type: UPDATE_KEYS,
+                payload: [],
             })
         } else {
             let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
@@ -88,16 +88,16 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
                 })
             }
 
-            dispatch({
-                type: UPDATE_KEYS,
-                payload: keysClone,
-            })
             if (!statefulSource) {
                 dispatch({
                     type: UPDATE_SOURCE,
                     payload: statefulSourceId,
                 })
             }
+            dispatch({
+                type: UPDATE_KEYS,
+                payload: keysClone,
+            })
         }  
     }
 }

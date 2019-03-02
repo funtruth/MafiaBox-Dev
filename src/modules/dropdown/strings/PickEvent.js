@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateSourceType } from '../../common/types';
 import { showModal } from '../../modal/ModalReducer'
 import { modalType } from '../../modal/types';
 
@@ -11,7 +10,6 @@ function PickEvent(props) {
     let handlePress = () => {
         props.showModal(modalType.editEvent, {
             attach: attach[subfieldKey] || {},
-            updateSource: updateSourceType.topModal,
         })
         props.showDropdown()
     }

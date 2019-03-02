@@ -12,7 +12,7 @@ export default function EventDashboard(props) {
 
     let [searchText, setSearchText] = useState('')
     let [results, setResults] = useState([])
-    let fuse = new Fuse(_.toArray(props.attach), fuseType.stringDashboard)
+    let fuse = new Fuse(_.toArray(workspace.value), fuseType.stringDashboard)
     
     let handleType = (e) => {
         setSearchText(e.target.value)
