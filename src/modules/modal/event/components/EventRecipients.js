@@ -3,9 +3,9 @@ import React from 'react'
 import { dropdownType, StatefulSourceId } from '../../../dropdown/types'
 
 export default function EventRecipients(props) {
-    const { workspace } = props
-    const { value, selectedKey } = workspace
-    const selectedItem = (value && value[selectedKey]) || {}
+    const { workspace, selectedItem } = props
+    
+    const { selectedKey } = workspace
     const { showTo, hideFrom } = selectedItem
 
     //showing only to selected uid's
@@ -17,7 +17,6 @@ export default function EventRecipients(props) {
             className="row-nowrap"
             style={{
                 padding: '0px 10px',
-                alignItems: 'center',
                 color: '#a6a6a6',
             }}
         >

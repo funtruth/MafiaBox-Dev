@@ -21,10 +21,11 @@ function collect(connect, monitor) {
 }
 
 function EventBarDrop(props) {
-    const { connectDropTarget, workspace, setWorkspace } = props
+    const { connectDropTarget, workspace, setWorkspace, selectedKey, setError } = props
 
     let handleSelect = (item) => {
         document.getElementById('event-editor-textarea').focus()
+        setError('')
         setWorkspace({
             ...workspace,
             selectedKey: item.key,
@@ -40,6 +41,7 @@ function EventBarDrop(props) {
         }
 
         document.getElementById('event-editor-textarea').focus()
+        setError('')
         setWorkspace({
             ...workspace,
             selectedKey: newKey,
@@ -54,6 +56,7 @@ function EventBarDrop(props) {
         return (
             <EventBarItemDrag
                 key={item.key}
+                selectedKey={selectedKey}
                 item={item}
                 onClick={handleSelect}
             />
@@ -61,12 +64,12 @@ function EventBarDrop(props) {
     }
 
     const data = _(workspace.value)
-        .filter(i => i.string.length)
+        .filter(i => i.key)
         .sortBy(i => i.index)
         .value()
 
     return connectDropTarget(
-        <div className="dashboard-results border-right -y-p">
+        <div className="event-bar">
             <div className="dashboard-section-title">Events</div>
             {data.map(renderItem)}
             <div className="dashboard-item" onClick={handleCreate}>

@@ -4,13 +4,22 @@
     flex-direction: column;
     min-width: 600;
     width: 75vw;
-    max-height: 75vh;
+    height: 60vh;
+}
+
+.event-bar {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    border-right: 1px solid #464646;
+    padding: 10px 0px;
 }
 
 .event-playground {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 65%;
     padding-top: 10px;
     border-right: 1px solid #464646;
 }
@@ -21,15 +30,32 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+    height: 70%;
 }
 
 .event-playground-item {
-    color: #d6d6d6;
     border-radius: 4px;
     padding: 6px 10px;
     font: 300 13px Arial;
     background-color: rgba(40, 43, 48,1);
     margin-bottom: 6px;
+}
+
+.event-detailer {
+    flex-grow: 1;
+    padding: 10px 0px;
+}
+.event-color-picker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;   
+}
+.event-color-drag {
+    height: 1.6em;
+    width: 1.6em;
+    border-radius: 2px;
+    margin-right: 4px;
+    cursor: pointer;
 }
 
 .dashboard-edit {
@@ -42,14 +68,13 @@
     background-color: rgba(47, 49, 54, 1);
     color: #bbb;
     font: 600 23px Arial;
-    margin: 0px 10px;
     margin-bottom: 10px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 2em;
-    width: 2em;
+    height: 1.7em;
+    width: 1.7em;
 }
 
 .dashboard-item:hover {
@@ -74,7 +99,6 @@
     background-color: transparent;
     cursor: text;
     width: 100%;
-    margin-top: auto;
     border-top: 1px solid #464646;
     overflow-y: hidden;
     resize: none;

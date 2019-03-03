@@ -16,26 +16,22 @@ function collect(connect, monitor) {
     }
 }
   
-function EventBarItemDrag(props) {
-    const { item, onClick, connectDragSource } = props
-    
-    let char = '*'
-    if (item.string[0]) {
-        char = item.string[0].string && item.string[0].string.charAt(0)
-    }
+function EventColorDrag(props) {
+    const { item, connectDragSource } = props
+    const { hexcode } = item
 
     return connectDragSource(
         <div
-            className="dashboard-item"
-            onClick={() => onClick(item)}
-        >
-            {char}
-        </div>
+            className="event-color-drag"
+            style={{
+                backgroundColor: hexcode,
+            }}
+        />
     );
 }
 
 export default DragSource(
-    ItemTypes.EVENT_STRING,
+    ItemTypes.EVENT_COLOR,
     itemSource,
     collect
-)(EventBarItemDrag);
+)(EventColorDrag);

@@ -9,7 +9,7 @@ export default function ModalOptions(props) {
                     marginLeft: 8,
                 }}
             >
-                {props.errorMessage || ''}
+                {props.error || ''}
             </div>
             <div
                 className="modal-button"

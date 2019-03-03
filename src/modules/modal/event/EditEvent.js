@@ -15,16 +15,23 @@ import EventDetailer from './components/EventDetailer';
 
 export default function EditEvent(props) {
     let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
+    let [error, setError] = useState('')
     
     const { selectedKey, value } = workspace
     const selectedItem = value[selectedKey] || WS_EDIT_EVENT_VALUE
-    const mainProps = { workspace, setWorkspace, selectedItem }
+    
+    const mainProps = {
+        workspace,
+        setWorkspace,
+        selectedItem,
+        setError,
+    }
 
     let handleSave = () => {
         props.updatePage(
             props.path,
             {
-                ...workspace,
+                value: workspace.value,
                 updateViewType: updateViewType.events,
             },
             props.subpath,
@@ -40,7 +47,7 @@ export default function EditEvent(props) {
             handleSave={handleSave}
         >
             <div className="event-modal" cancel-appclick="true">
-                <div className="row">
+                <div className="row" style={{ height: '100%' }}>
                     <EventBarDrop {...mainProps}/>
                     <EventPlayground {...mainProps}/>
                     <EventDetailer {...mainProps}/>
@@ -51,6 +58,7 @@ export default function EditEvent(props) {
                     updateState={setWorkspace}
                 />
                 <ModalOptions
+                    error={error}
                     onSave={handleSave}
                     onClose={props.close}
                 />

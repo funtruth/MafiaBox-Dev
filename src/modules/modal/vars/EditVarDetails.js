@@ -35,7 +35,7 @@ export default function EditVarDetails(props) {
         >
             <ToastEditor {...props}/>
             <ModalOptions
-                errorMessage={error}
+                error={error}
                 onSave={handleSave}
                 onClose={props.onClose}
             />

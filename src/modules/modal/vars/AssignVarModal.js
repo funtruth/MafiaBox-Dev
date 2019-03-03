@@ -99,7 +99,7 @@ export default function AssignVarModal(props) {
                     </div>
                 </div>
                 <ModalOptions
-                    errorMessage={error}
+                    error={error}
                     onSave={handleSave}
                     onClose={props.close}
                 />

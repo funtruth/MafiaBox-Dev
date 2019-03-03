@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
 import * as helpers from '../../../common/helpers'
 
-export default function EventTextInput({workspace, setWorkspace}) {
+export default function EventTextInput(props) {
     let [text, setText] = useState('')
 
+    const { workspace, setWorkspace, selectedItem, setError } = props
+    const { selectedKey } = workspace
+
     let handleSubmit = () => {
-        const { value, selectedKey } = workspace
-        const oldInfo = value[selectedKey].string
+        if (!text) return;
+        if (!selectedKey) {
+            setError('You must select an event first.')
+            return;
+        }
+
+        const oldInfo = selectedItem.string
         const newString = {
             string: text,
             color: '#fff',
@@ -28,6 +36,7 @@ export default function EventTextInput({workspace, setWorkspace}) {
     let handleKey = (e) => {
         switch(e.nativeEvent.key) {
             case 'Enter':
+            handleSubmit();
                 e.preventDefault();
                 handleSubmit();
                 break

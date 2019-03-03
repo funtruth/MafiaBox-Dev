@@ -52,7 +52,7 @@ export default function EditToast(props) {
                     setWorkspace={setWorkspace}
                 />
                 <ModalOptions
-                    errorMessage={error}
+                    error={error}
                     onSave={handleSave}
                     onClose={props.onClose}
                 />
