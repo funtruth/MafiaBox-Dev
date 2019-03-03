@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './EditEvent.css'
 
 import { updateViewType } from '../../logic/types'
-import { WS_EDIT_EVENT } from '../workspaces'
+import { WS_EDIT_EVENT, WS_EDIT_EVENT_VALUE } from '../workspaces'
 import { StatefulSourceId } from '../../dropdown/types'
 
 import ModalOptions from '../components/ModalOptions'
@@ -16,6 +16,10 @@ import EventDetailer from './components/EventDetailer';
 export default function EditEvent(props) {
     let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
     
+    const { selectedKey, value } = workspace
+    const selectedItem = value[selectedKey] || WS_EDIT_EVENT_VALUE
+    const mainProps = { workspace, setWorkspace, selectedItem }
+
     let handleSave = () => {
         props.updatePage(
             props.path,
@@ -35,19 +39,11 @@ export default function EditEvent(props) {
             current={workspace}
             handleSave={handleSave}
         >
-            <div
-                cancel-appclick="true"
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minWidth: 600,
-                    width: '75vw',
-                }}
-            >
+            <div className="event-modal" cancel-appclick="true">
                 <div className="row">
-                    <EventBarDrop workspace={workspace} setWorkspace={setWorkspace}/>
-                    <EventPlayground workspace={workspace} setWorkspace={setWorkspace}/>
-                    <EventDetailer workspace={workspace} setWorkspace={setWorkspace}/>
+                    <EventBarDrop {...mainProps}/>
+                    <EventPlayground {...mainProps}/>
+                    <EventDetailer {...mainProps}/>
                 </div>
                 <DropdownView
                     sourceId={StatefulSourceId.editEvent}

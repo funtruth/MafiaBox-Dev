@@ -3,6 +3,8 @@ import _ from 'lodash'
 import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
+import { WS_EDIT_EVENT_VALUE } from '../../workspaces';
+
 import EventBarItemDrag from './EventBarItemDrag'
 
 const itemTarget = {
@@ -20,14 +22,9 @@ function collect(connect, monitor) {
 
 function EventBarDrop(props) {
     const { connectDropTarget, workspace, setWorkspace } = props
-    
-    const data = _(workspace.value)
-        .filter(i => i.string)
-        .sortBy(i => i.index)
-        .value()
 
     let handleSelect = (item) => {
-        document.getElementById('text-editor-input').focus()
+        document.getElementById('event-editor-textarea').focus()
         setWorkspace({
             ...workspace,
             selectedKey: item.key,
@@ -37,11 +34,12 @@ function EventBarDrop(props) {
     let handleCreate = () => {
         const newKey = helpers.genUID('string', workspace.value)
         const newItem = {
+            ...WS_EDIT_EVENT_VALUE,
             key: newKey,
             lastEdit: Date.now()
         }
 
-        document.getElementById('text-editor-input').focus()
+        document.getElementById('event-editor-textarea').focus()
         setWorkspace({
             ...workspace,
             selectedKey: newKey,
@@ -61,6 +59,11 @@ function EventBarDrop(props) {
             />
         )
     }
+
+    const data = _(workspace.value)
+        .filter(i => i.string.length)
+        .sortBy(i => i.index)
+        .value()
 
     return connectDropTarget(
         <div className="dashboard-results border-right -y-p">

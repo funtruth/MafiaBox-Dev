@@ -16,16 +16,14 @@ function collect(connect, monitor) {
     }
 }
   
-function EventBarItemDrag(props) {
-    const { item, onClick, connectDragSource } = props
-    const char = item.string && item.string[0].string && item.string[0].string.charAt(0)
+function EventPlaygroundDrag(props) {
+    const { children, connectDragSource } = props
 
     return connectDragSource(
         <div
-            className="dashboard-item"
-            onClick={() => onClick(item)}
+            className="event-playground-item"
         >
-            {char}
+            {children}
         </div>
     );
 }
@@ -34,4 +32,4 @@ export default DragSource(
     ItemTypes.EVENT_ITEM,
     itemSource,
     collect
-)(EventBarItemDrag);
+)(EventPlaygroundDrag);

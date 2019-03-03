@@ -99,13 +99,16 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
 
 export function popDropdownTo(index) {
     return (dispatch, getState) => {
-        const { dropdownKeys } = getState().dropdown
+        const { dropdownKeys, statefulSource } = getState().dropdown
 
         const keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
 
         dispatch({
             type: UPDATE_KEYS,
-            payload: keysClone,
+            payload: {
+                keys: keysClone,
+                statefulSource,
+            }
         })
     }
 }

@@ -2,7 +2,12 @@
     selectedKey: '',
     value: {
         [key]: {
-            string: '',
+            string: [
+                {
+                    string: '',
+                    color: '',
+                },
+            ],
             lastEdit: '',
             showTo: {
                 [key]: boolean,
@@ -18,7 +23,7 @@ export const WS_EDIT_EVENT = {
     value: {},
 }
 export const WS_EDIT_EVENT_VALUE = {
-    string: '',
+    string: [],
     lastEdit: '',
     showTo: {},
     hideFrom: {},

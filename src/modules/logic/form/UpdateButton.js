@@ -51,14 +51,11 @@ class UpdateButton extends React.Component{
                 break
             case updateViewType.events:
                 onClick = () => this.props.showModal(modalType.editEvent, {
-                    pageKey,
-                    indexKey,
-                    fieldKey,
                     subfieldKey: prefix,
                     attach: (logicInfo.data && logicInfo.data[prefix]) || {},
                     attachVar: vars,
-                    path: ['attach'],
-                    updateSource: updateSourceType.topModal,
+                    path,
+                    subpath: [prefix],
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
