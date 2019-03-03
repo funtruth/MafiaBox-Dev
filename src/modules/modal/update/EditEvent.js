@@ -5,10 +5,12 @@ import { updateViewType } from '../../logic/types'
 import { WS_EDIT_EVENT } from '../workspaces'
 import { StatefulSourceId } from '../../dropdown/types'
 
-import EventDashboard from '../components/event/EventDashboard';
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
 import DropdownView from '../../dropdown/DropdownView'
+import EventBarDrop from '../components/event/EventBarDrop';
+import EventPlayground from '../components/event/EventPlayground';
+import EventDetailer from '../components/event/EventDetailer';
 
 export default function EditEvent(props) {
     let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
@@ -41,10 +43,11 @@ export default function EditEvent(props) {
                     width: '75vw',
                 }}
             >
-                <EventDashboard
-                    workspace={workspace}
-                    setWorkspace={setWorkspace}
-                />
+                <div className="row">
+                    <EventBarDrop workspace={workspace} setWorkspace={setWorkspace}/>
+                    <EventPlayground workspace={workspace} setWorkspace={setWorkspace}/>
+                    <EventDetailer workspace={workspace} setWorkspace={setWorkspace}/>
+                </div>
                 <DropdownView
                     sourceId={StatefulSourceId.editEvent}
                     state={workspace}

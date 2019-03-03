@@ -1,50 +1,36 @@
-.dashboard {
+.event-playground {
     display: flex;
-    flex-direction: row;
-    position: relative;
-    overflow: auto;
+    flex-direction: column;
+    min-width: 50%;
+    padding-top: 10px;
 }
 
 .dashboard-results {
     display: flex;
     flex-direction: column;
-    width: 30%;
 }
 
 .dashboard-edit {
     display: flex;
     flex-direction: column;
-    width: 70%;
 }
 
 .dashboard-item {
-    border-radius: 4px;
+    border-radius: 2px;
     background-color: rgba(47, 49, 54, 1);
-    color: #a6a6a6;
-    font: 400 12px Arial;
-    padding: 12px 12px;
+    color: #bbb;
+    font: 600 23px Arial;
     margin: 0px 10px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    overflow: hidden;
-    word-break: break-all;
-    text-overflow: clip;
-}
-
-.dashboard-new-item {
-    border-radius: 4px;
-    background-color: rgba(47, 49, 54, 1);
-    color: #a6a6a6;
-    font: 400 12px Arial;
-    padding: 12px 12px;
-    margin: 0px 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
+    height: 2.2em;
+    width: 2.2em;
 }
 
-.dashboard-new-item:hover {
+.dashboard-item:hover {
     background-color: rgba(75, 75, 80, 1);
 }
 
@@ -53,20 +39,26 @@
     font: 600 13px Arial;
 }
 
-.underline-input {
+.dashboard-input {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
     border: none;
-    padding: 8px 0px;
+    border-radius: 2px;
+    padding: 10px 10px;
     font: 450 14px Arial;
-    color: #d6d6d6;
-    background-color: rgba(54, 57, 64);
+    color: #c6c6c6;
+    cursor: pointer;
+    background-color: transparent;
     cursor: text;
-    border: 0;
-    border-bottom: 1px solid #666;
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid #464646;
+    overflow-y: hidden;
+    resize: none;
 }
-
-.underline-input:focus {
+.dashboard-input:focus {
     outline: none;
-    border-bottom: 1px solid #a6a6a6;
 }
 
 .text-box {

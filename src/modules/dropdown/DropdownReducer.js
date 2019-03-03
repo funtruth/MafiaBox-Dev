@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const UPDATE_KEYS = 'dropdown/update-keys'
-const UPDATE_SOURCE = 'dropdown/update-source'
 
 export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
     return (dispatch, getState) => {
@@ -18,12 +17,11 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
             if (!dropdownKeys.length) return
 
             dispatch({
-                type: UPDATE_SOURCE,
-                payload: '',
-            })
-            dispatch({
                 type: UPDATE_KEYS,
-                payload: [],
+                payload: {
+                    keys: [],
+                    source: '',
+                }
             })
         } else {
             let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
@@ -88,15 +86,12 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
                 })
             }
 
-            if (!statefulSource) {
-                dispatch({
-                    type: UPDATE_SOURCE,
-                    payload: statefulSourceId,
-                })
-            }
             dispatch({
                 type: UPDATE_KEYS,
-                payload: keysClone,
+                payload: {
+                    keys: keysClone,
+                    source: statefulSourceId || statefulSource || '',
+                }
             })
         }  
     }
@@ -118,9 +113,7 @@ export function popDropdownTo(index) {
 export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_KEYS:
-            return { ...state, dropdownKeys: action.payload }
-        case UPDATE_SOURCE:
-            return { ...state, statefulSource: action.payload }
+            return { ...state, dropdownKeys: action.payload.keys, statefulSource: action.payload.source }
         default:
             return state;
     }
