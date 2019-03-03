@@ -8,9 +8,10 @@ import { StatefulSourceId } from '../../dropdown/types'
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
 import DropdownView from '../../dropdown/DropdownView'
-import EventBarDrop from '../components/event/EventBarDrop';
-import EventPlayground from '../components/event/EventPlayground';
-import EventDetailer from '../components/event/EventDetailer';
+
+import EventBarDrop from './components/EventBarDrop';
+import EventPlayground from './components/EventPlayground';
+import EventDetailer from './components/EventDetailer';
 
 export default function EditEvent(props) {
     let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))

@@ -21,7 +21,7 @@ import TemplateModal from './keys/TemplateModal'
 
 import SaveChanges from './components/SaveChanges';
 import EditTrigger from './update/EditTrigger'
-import EditEvent from './update/EditEvent'
+import EditEvent from './event/EditEvent'
 import EditToast from './return/EditToast'
 import EditPriority from './update/EditPriority'
 import EditVarDetails from './vars/EditVarDetails'
