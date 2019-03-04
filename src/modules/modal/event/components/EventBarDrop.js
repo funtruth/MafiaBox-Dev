@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { DropTarget } from 'react-dnd'
 
-import { WS_EDIT_EVENT_VALUE } from '../../workspaces';
+import { WS_EDIT_EVENT_VALUE } from './EventConstants';
 
 import EventBarItemDrag from './EventBarItemDrag'
 

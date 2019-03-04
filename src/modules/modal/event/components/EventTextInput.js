@@ -1,6 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 
+import { WS_EDIT_EVENT_STRING } from './EventConstants';
+
 export default function EventTextInput(props) {
     const { workspace, setWorkspace, text, setText, selectedEvent, setError } = props
     const { eventIndex, stringIndex, selectedColor, eventArr } = workspace
@@ -15,6 +17,7 @@ export default function EventTextInput(props) {
         let arrClone = _.cloneDeep(eventArr)
         if (stringIndex === '') {
             arrClone[eventIndex].stringArr.push({
+                ...WS_EDIT_EVENT_STRING,
                 string: text,
                 color: selectedColor,
             })

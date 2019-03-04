@@ -3,6 +3,8 @@ import React from 'react'
 import EventRecipients from './EventRecipients'
 import EventTextInput from './EventTextInput';
 import EventStringDragDrop from './EventStringDragDrop';
+import EventFunctionDragDrop from './EventFunctionDragDrop';
+import { PartTypes } from './EventConstants';
 
 export default function EventPlayground(props) {
     const { workspace, setWorkspace, setText, stringIndex, selectedEvent } = props
@@ -23,6 +25,31 @@ export default function EventPlayground(props) {
         }
     }
 
+    let renderItem = (item, index) => {
+        switch(item.partType) {
+            case PartTypes.string:
+                return (
+                    <EventStringDragDrop
+                        {...props}
+                        key={index}
+                        item={item}
+                        index={index}
+                    />
+                )
+            case PartTypes.function:
+                return (
+                    <EventFunctionDragDrop
+                        {...props}
+                        key={index}
+                        item={item}
+                        index={index}
+                    />
+                )
+            default:
+                return null
+        }
+    }
+
     return (
         <div className="event-playground" cancel-appclick="true">
             <div className="dashboard-section-title">Recipients</div>
@@ -33,14 +60,7 @@ export default function EventPlayground(props) {
                 className="event-playground-view"
                 onClick={handleClick}
             >
-                {stringArr.map((item, index) => (
-                    <EventStringDragDrop
-                        {...props}
-                        key={index}
-                        item={item}
-                        index={index}
-                    />
-                ))}
+                {stringArr.map(renderItem)}
             </div>
             <EventTextInput {...props}/>
         </div>

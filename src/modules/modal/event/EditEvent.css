@@ -52,6 +52,16 @@
     margin-right: 6px;
     color: #ddd;
 }
+.event-function {
+    border-radius: 4px;
+    padding: 6px 10px;
+    font: 300 13px Arial;
+    background-color: #992600;
+    margin-bottom: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    color: #fff;
+}
 
 .event-detailer {
     width: 5px;

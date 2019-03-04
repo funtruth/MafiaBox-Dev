@@ -1,6 +1,7 @@
 import React from 'react'
 import EventColorPicker from './EventColorPicker';
 import EventVarPicker from './EventVarPicker';
+import EventFunctionPicker from './EventFunctionPicker';
 
 export default function EventDetailer(props) {
 
@@ -10,7 +11,7 @@ export default function EventDetailer(props) {
             <EventColorPicker {...props}/>
             <div className="-sep"/>
             <div className="dashboard-section-title">Functions</div>
-            
+            <EventFunctionPicker {...props}/>
             <div className="-sep"/>
             <div className="dashboard-section-title">Variables</div>
             <EventVarPicker {...props}/>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './EditEvent.css'
 
 import { updateViewType } from '../../logic/types'
-import { WS_EDIT_EVENT, WS_EDIT_EVENT_VALUE } from '../workspaces'
+import { WS_EDIT_EVENT, WS_EDIT_EVENT_VALUE } from './components/EventConstants'
 import { StatefulSourceId } from '../../dropdown/types'
 
 import ModalOptions from '../components/ModalOptions'
