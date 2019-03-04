@@ -34,7 +34,6 @@ const itemTarget = {
             default:
         }
     },
-
     canDrop(props, monitor) {
         const item = monitor.getItem()
         if (item.dragIndex === props.index) return false

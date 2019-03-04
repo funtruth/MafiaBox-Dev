@@ -1,10 +1,12 @@
 import React from 'react'
 
+import { PartTypes } from './EventConstants';
+
 import EventRecipients from './EventRecipients'
 import EventTextInput from './EventTextInput';
+import EventPlaygroundDrop from './EventPlaygroundDrop'
 import EventStringDragDrop from './EventStringDragDrop';
 import EventFunctionDragDrop from './EventFunctionDragDrop';
-import { PartTypes } from './EventConstants';
 
 export default function EventPlayground(props) {
     const { workspace, setWorkspace, setText, stringIndex, selectedEvent } = props
@@ -29,12 +31,13 @@ export default function EventPlayground(props) {
         switch(item.partType) {
             case PartTypes.string:
                 return (
-                    <EventStringDragDrop
-                        {...props}
-                        key={index}
-                        item={item}
-                        index={index}
-                    />
+                    <EventPlaygroundDrop key={index}>
+                        <EventStringDragDrop
+                            {...props}
+                            item={item}
+                            index={index}
+                        />
+                    </EventPlaygroundDrop>
                 )
             case PartTypes.function:
                 return (
