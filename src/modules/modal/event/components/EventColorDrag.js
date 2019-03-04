@@ -19,19 +19,28 @@ function collect(connect, monitor) {
 }
   
 function EventColorDrag(props) {
-    const { workspace, item, connectDragSource } = props
+    const { workspace, setWorkspace, item, connectDragSource } = props
     const { selectedColor } = workspace
 
     const selected = item === selectedColor
-    
+
+    let handleSelect = (color) => {
+        setWorkspace({
+            ...workspace,
+            selectedColor: color,
+        })
+    }
+
     return connectDragSource(
         <div
-            className="event-color-drag color-check"
+            className="event-color-drag"
+            onClick={() => handleSelect(item)}
             style={{
                 backgroundColor: item,
+                border: selected && '2px solid #ddd',
             }}
         >
-            {selected && <i className="mdi mdi-check color-check"></i>}
+            {selected && <i className="mdi mdi-spellcheck outlined-text"></i>}
         </div>
     );
 }

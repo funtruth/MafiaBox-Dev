@@ -15,7 +15,7 @@ export default function EventTextInput(props) {
         const oldInfo = selectedItem.string
         const newString = {
             string: text,
-            color: '#fff',
+            color: workspace.selectedColor,
         }
 
         setText('')

@@ -1,6 +1,8 @@
 export const ItemTypes = {
     EVENT_STRING: 'rankingItem',
     EVENT_COLOR: 'eventColor',
+    EVENT_VAR: 'eventVar',
+    EVENT_UID: 'eventUid',
 }
 
 export const EventTextColors = [
@@ -18,3 +20,7 @@ export const EventTextColors = [
     '#C0508C',
     '#db4757',
 ]
+
+export const EventFunctions = {
+
+}

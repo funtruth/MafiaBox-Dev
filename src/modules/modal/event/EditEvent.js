@@ -28,6 +28,7 @@ export default function EditEvent(props) {
         setText,
         setError,
         selectedItem,
+        vars: props.attachVar,
     }
 
     let handleSave = () => {

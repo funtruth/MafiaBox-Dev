@@ -1,13 +1,13 @@
 import React from 'react'
-import _ from 'lodash'
 import { DragSource, DropTarget } from 'react-dnd'
-import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './EventConstants'
 
 const itemSource = {
     beginDrag(props) {
-        return {}
+        return {
+            dragIndex: props.index,
+        }
     }
 }
 
@@ -20,11 +20,12 @@ const itemTarget = {
         const itemType = monitor.getItemType()
 
         const { selectedItem, workspace, index } = props
-        let wsClone = _.cloneDeep(workspace)
+        let wsClone = Object.assign({}, workspace)
+        let wsString = wsClone.value[selectedItem.key].string
 
         switch(itemType) {
             case ItemTypes.EVENT_COLOR:
-                wsClone.value[selectedItem.key].string[index].color = item.hexcode
+                wsString[index].color = item.hexcode
                 props.setWorkspace(wsClone)
                 break
             case ItemTypes.EVENT_STRING:
@@ -32,6 +33,12 @@ const itemTarget = {
                 break
             default:
         }
+    },
+
+    canDrop(props, monitor) {
+        const item = monitor.getItem()
+        if (item.dragIndex === props.index) return false
+        return true
     }
 }
 
@@ -39,6 +46,7 @@ function collectDrop(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver({ shallow: true }),
+        canDrop: monitor.canDrop(),
     }
 }
 
@@ -50,7 +58,7 @@ function collectDrag(connect, monitor) {
 }
   
 function EventStringDragDrop(props) {
-    const { item, connectDragSource, connectDropTarget } = props
+    const { item, connectDragSource, connectDropTarget, canDrop, isOver } = props
     const { string, color } = item
 
     return connectDragSource(connectDropTarget(
@@ -58,6 +66,7 @@ function EventStringDragDrop(props) {
             className="event-playground-item"
             style={{
                 color: color || '#d6d6d6',
+                backgroundColor: canDrop && isOver && 'rgba(70, 73, 78, 1)',
             }}
         >
             {string}
