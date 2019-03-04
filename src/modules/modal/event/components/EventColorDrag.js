@@ -5,7 +5,9 @@ import { ItemTypes } from './EventConstants'
 
 const itemSource = {
     beginDrag(props) {
-        return {}
+        return {
+            hexcode: props.item,
+        }
     }
 }
 
@@ -17,16 +19,20 @@ function collect(connect, monitor) {
 }
   
 function EventColorDrag(props) {
-    const { item, connectDragSource } = props
-    const { hexcode } = item
+    const { workspace, item, connectDragSource } = props
+    const { selectedColor } = workspace
 
+    const selected = item === selectedColor
+    
     return connectDragSource(
         <div
-            className="event-color-drag"
+            className="event-color-drag color-check"
             style={{
-                backgroundColor: hexcode,
+                backgroundColor: item,
             }}
-        />
+        >
+            {selected && <i className="mdi mdi-check color-check"></i>}
+        </div>
     );
 }
 

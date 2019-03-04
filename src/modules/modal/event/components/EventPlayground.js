@@ -2,7 +2,7 @@ import React from 'react'
 
 import EventRecipients from './EventRecipients'
 import EventTextInput from './EventTextInput';
-import EventPlaygroundDrag from './EventPlaygroundDrag';
+import EventStringDragDrop from './EventStringDragDrop';
 
 export default function EventPlayground(props) {
     const { selectedItem } = props
@@ -16,9 +16,11 @@ export default function EventPlayground(props) {
             <div className="dashboard-section-title">Event Text</div>
             <div className="event-playground-view">
                 {string.map((item, index) => (
-                    <EventPlaygroundDrag
+                    <EventStringDragDrop
+                        {...props}
                         key={index}
                         item={item}
+                        index={index}
                     />
                 ))}
             </div>

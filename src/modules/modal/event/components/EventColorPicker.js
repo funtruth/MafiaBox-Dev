@@ -6,7 +6,13 @@ import EventColorDrag from './EventColorDrag';
 export default function EventColorPicker(props) {
     return (
         <div className="event-color-picker">
-            {EventTextColors.map(item => <EventColorDrag key={item.hexcode} item={item}/>)}
+            {EventTextColors.map(item => (
+                <EventColorDrag
+                    {...props}
+                    key={item}
+                    item={item}
+                />
+            ))}
         </div>
     )
 }

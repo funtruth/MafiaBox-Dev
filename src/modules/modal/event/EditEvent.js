@@ -15,16 +15,19 @@ import EventDetailer from './components/EventDetailer';
 
 export default function EditEvent(props) {
     let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
+    let [text, setText] = useState('')
     let [error, setError] = useState('')
     
     const { selectedKey, value } = workspace
     const selectedItem = value[selectedKey] || WS_EDIT_EVENT_VALUE
-    
+
     const mainProps = {
         workspace,
         setWorkspace,
-        selectedItem,
+        text,
+        setText,
         setError,
+        selectedItem,
     }
 
     let handleSave = () => {

@@ -1,5 +1,7 @@
 import React from 'react'
+import _ from 'lodash'
 import { DragSource, DropTarget } from 'react-dnd'
+import * as helpers from '../../../common/helpers'
 
 import { ItemTypes } from './EventConstants'
 
@@ -17,9 +19,13 @@ const itemTarget = {
         const item = monitor.getItem()
         const itemType = monitor.getItemType()
 
+        const { selectedItem, workspace, index } = props
+        let wsClone = _.cloneDeep(workspace)
+
         switch(itemType) {
             case ItemTypes.EVENT_COLOR:
-                console.log("thats a color!")
+                wsClone.value[selectedItem.key].string[index].color = item.hexcode
+                props.setWorkspace(wsClone)
                 break
             case ItemTypes.EVENT_STRING:
                 console.log("thats a string!")
@@ -43,7 +49,7 @@ function collectDrag(connect, monitor) {
     }
 }
   
-function EventPlaygroundDrag(props) {
+function EventStringDragDrop(props) {
     const { item, connectDragSource, connectDropTarget } = props
     const { string, color } = item
 
@@ -67,6 +73,6 @@ export default DragSource(
     [ItemTypes.EVENT_COLOR, ItemTypes.EVENT_STRING],
     itemTarget,
     collectDrop,
-)(EventPlaygroundDrag));
+)(EventStringDragDrop));
 
 

@@ -21,7 +21,7 @@ function collect(connect, monitor) {
 }
 
 function EventBarDrop(props) {
-    const { connectDropTarget, workspace, setWorkspace, selectedKey, setError } = props
+    const { connectDropTarget, workspace, setWorkspace, text, setText, selectedKey, setError } = props
 
     let handleSelect = (item) => {
         document.getElementById('event-editor-textarea').focus()

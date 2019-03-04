@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import * as helpers from '../../../common/helpers'
 
 export default function EventTextInput(props) {
-    let [text, setText] = useState('')
-
-    const { workspace, setWorkspace, selectedItem, setError } = props
+    const { workspace, setWorkspace, text, setText, selectedItem, setError } = props
     const { selectedKey } = workspace
 
     let handleSubmit = () => {

@@ -6,7 +6,7 @@ export default function EventDetailer(props) {
     return (
         <div className="event-detailer">
             <div className="dashboard-section-title">Colors</div>
-            <EventColorPicker/>
+            <EventColorPicker {...props}/>
             <div className="-sep"/>
             <div className="dashboard-section-title">Functions</div>
             

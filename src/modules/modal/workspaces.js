@@ -20,6 +20,7 @@
 */
 export const WS_EDIT_EVENT = {
     selectedKey: '',
+    selectedColor: '#fff',
     value: {},
 }
 export const WS_EDIT_EVENT_VALUE = {

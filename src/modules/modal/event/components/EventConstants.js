@@ -4,20 +4,17 @@ export const ItemTypes = {
 }
 
 export const EventTextColors = [
-    {
-        text: 'blue',
-        hexcode: '#0e7db4',
-    },
-    {
-        text: 'green',
-        hexcode: '#1e9939',
-    },
-    {
-        text: 'yellow',
-        hexcode: '#af8c40',
-    },
-    {
-        text: 'red',
-        hexcode: '#db4757',
-    },
+    '#fff',
+    '#F9F871',
+    '#9DEB84',
+    '#30D6A4',
+    '#00BCBD',
+    '#009EC4',
+    '#0e7db4',
+    '#4578BB',
+    '#6C70BB',
+    '#8E66B3',
+    '#AB5AA3',
+    '#C0508C',
+    '#db4757',
 ]
