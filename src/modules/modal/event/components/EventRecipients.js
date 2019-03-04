@@ -3,10 +3,8 @@ import React from 'react'
 import { dropdownType, StatefulSourceId } from '../../../dropdown/types'
 
 export default function EventRecipients(props) {
-    const { workspace, selectedItem } = props
-    
-    const { selectedKey } = workspace
-    const { showTo, hideFrom } = selectedItem
+    const { selectedEvent, eventIndex } = props
+    const { showTo, hideFrom } = selectedEvent
 
     //showing only to selected uid's
     const exclusive = Object.keys(showTo || {}).length > 0
@@ -26,8 +24,7 @@ export default function EventRecipients(props) {
                 stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
                     selectionType: 'showTo',
-                    selectedKey,
-                    statefulPath: ['value', selectedKey],
+                    eventIndex,
                 })}
             >
                 everyone
@@ -38,8 +35,7 @@ export default function EventRecipients(props) {
                 stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
                     selectionType: 'showTo',
-                    selectedKey,
-                    statefulPath: ['value', selectedKey],
+                    eventIndex,
                 })}
             >
                 {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
@@ -51,8 +47,7 @@ export default function EventRecipients(props) {
                 stateful-source={StatefulSourceId.editEvent}
                 app-onclick-props={JSON.stringify({
                     selectionType: 'hideFrom',
-                    selectedKey,
-                    statefulPath: ['value', selectedKey],
+                    eventIndex,
                 })}
                 style={{
                     marginLeft: 6,

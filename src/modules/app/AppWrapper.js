@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { DragDropContext } from 'react-beautiful-dnd';
-import { DragDropContextProvider } from 'react-dnd'
+import { DragDropContext as BeautifulDND } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import * as helpers from '../common/helpers'
@@ -115,16 +115,14 @@ class AppWrapper extends React.Component{
 
     render() {
         return (
-            <DragDropContext onDragEnd={this._onDragEnd}>
-                <DragDropContextProvider backend={HTML5Backend}>
-                    {this.props.children}
-                </DragDropContextProvider>
-            </DragDropContext>
+            <BeautifulDND onDragEnd={this._onDragEnd}>
+                {this.props.children}
+            </BeautifulDND>
         )
     }
 }
 
-export default connect(
+export default DragDropContext(HTML5Backend)(connect(
     state => ({
         storyMap: state.page.storyMap,
         dropdownKeys: state.dropdown.dropdownKeys,
@@ -134,4 +132,4 @@ export default connect(
         showModal,
         handleDragEnd,
     }
-)(AppWrapper)
+)(AppWrapper))

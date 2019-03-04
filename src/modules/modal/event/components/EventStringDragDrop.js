@@ -19,9 +19,9 @@ const itemTarget = {
         const item = monitor.getItem()
         const itemType = monitor.getItemType()
 
-        const { selectedItem, workspace, index } = props
+        const { eventIndex, workspace, index } = props
         let wsClone = Object.assign({}, workspace)
-        let wsString = wsClone.value[selectedItem.key].string
+        let wsString = wsClone.eventArr[eventIndex].stringArr
 
         switch(itemType) {
             case ItemTypes.EVENT_COLOR:
@@ -58,16 +58,32 @@ function collectDrag(connect, monitor) {
 }
   
 function EventStringDragDrop(props) {
-    const { item, connectDragSource, connectDropTarget, canDrop, isOver } = props
+    const { item, index, stringIndex, workspace, setWorkspace, setText,
+        connectDragSource, connectDropTarget, canDrop, isOver } = props
     const { string, color } = item
+
+    let handleSelect = () => {
+        setWorkspace({
+            ...workspace,
+            stringIndex: index,
+            selectedColor: color,
+        })
+        setText(string)
+        document.getElementById('event-editor-textarea').focus()
+    }
+
+    const selected = index === stringIndex
 
     return connectDragSource(connectDropTarget(
         <div
             className="event-playground-item"
+            onClick={handleSelect}
             style={{
                 color: color || '#d6d6d6',
-                backgroundColor: canDrop && isOver && 'rgba(70, 73, 78, 1)',
+                backgroundColor: selected ? 'rgba(14, 125, 180, 0.4)' : (canDrop && isOver && 'rgba(70, 73, 78, 1)'),
+                pointerEvents: 'all',
             }}
+            onBlur={() => alert('no')}
         >
             {string}
         </div>

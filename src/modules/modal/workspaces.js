@@ -1,14 +1,14 @@
 /* EditEvent
-    selectedKey: '',
-    value: {
+    eventIndex: '',
+    selectedColor: '#fff',
+    eventArr: {
         [key]: {
-            string: [
+            stringArr: [
                 {
                     string: '',
                     color: '',
                 },
             ],
-            lastEdit: '',
             showTo: {
                 [key]: boolean,
             },
@@ -19,13 +19,13 @@
     }
 */
 export const WS_EDIT_EVENT = {
-    selectedKey: '',
+    eventIndex: 0,
+    stringIndex: '',
     selectedColor: '#fff',
-    value: {},
+    eventArr: [],
 }
 export const WS_EDIT_EVENT_VALUE = {
-    string: [],
-    lastEdit: '',
+    stringArr: [],
     showTo: {},
     hideFrom: {},
 }

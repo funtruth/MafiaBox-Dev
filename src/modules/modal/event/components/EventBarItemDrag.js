@@ -17,17 +17,17 @@ function collect(connect, monitor) {
 }
   
 function EventBarItemDrag(props) {
-    const { item, onClick, connectDragSource } = props
+    const { item, index, eventIndex, connectDragSource, onClick } = props
     
     let char = '*'
-    if (item.string[0]) {
-        char = item.string[0].string && item.string[0].string.charAt(0)
+    if (item.stringArr[0]) {
+        char = item.stringArr[0].string && item.stringArr[0].string.charAt(0)
     }
 
     return connectDragSource(
         <div
             className="dashboard-item"
-            onClick={() => onClick(item)}
+            onClick={() => onClick(index)}
         >
             {char}
         </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
@@ -19,16 +20,23 @@ function collect(connect, monitor) {
 }
   
 function EventColorDrag(props) {
-    const { workspace, setWorkspace, item, connectDragSource } = props
+    const { workspace, setWorkspace, eventIndex, stringIndex, item, connectDragSource } = props
     const { selectedColor } = workspace
 
     const selected = item === selectedColor
 
     let handleSelect = (color) => {
-        setWorkspace({
-            ...workspace,
-            selectedColor: color,
-        })
+        if (stringIndex === '') {
+            setWorkspace({
+                ...workspace,
+                selectedColor: color,
+            })
+        } else {
+            let wsClone = _.cloneDeep(workspace)
+            wsClone.eventArr[eventIndex].stringArr[stringIndex].color = color
+            wsClone.selectedColor = color
+            setWorkspace(wsClone)
+        }
     }
 
     return connectDragSource(

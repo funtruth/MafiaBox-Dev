@@ -1,36 +1,51 @@
 import React from 'react'
-import * as helpers from '../../../common/helpers'
+import _ from 'lodash'
 
 export default function EventTextInput(props) {
-    const { workspace, setWorkspace, text, setText, selectedItem, setError } = props
-    const { selectedKey } = workspace
+    const { workspace, setWorkspace, text, setText, selectedEvent, setError } = props
+    const { eventIndex, stringIndex, selectedColor, eventArr } = workspace
 
     let handleSubmit = () => {
         if (!text) return;
-        if (!selectedKey) {
+        if (!selectedEvent) {
             setError('You must select an event first.')
             return;
         }
 
-        const oldInfo = selectedItem.string
-        const newString = {
-            string: text,
-            color: workspace.selectedColor,
+        let arrClone = _.cloneDeep(eventArr)
+        if (stringIndex === '') {
+            arrClone[eventIndex].stringArr.push({
+                string: text,
+                color: selectedColor,
+            })
+            setWorkspace({
+                ...workspace,
+                eventArr: arrClone,
+                stringIndex: '',
+            })
+        } else {
+            setWorkspace({
+                ...workspace,
+                stringIndex: '',
+            })
         }
-
+        
         setText('')
-        setWorkspace(
-            helpers.updateByPath(
-                ['value', selectedKey],
-                {
-                    string: [...oldInfo, newString],
-                },
-                workspace,
-            )
-        )
     }
 
-    let handleChange = (e) => setText(e.target.value)
+    let handleChange = (e) => {
+        if (stringIndex !== '') {
+            let arrClone = _.cloneDeep(eventArr)
+            arrClone[eventIndex].stringArr[stringIndex].string = e.target.value
+            setWorkspace({
+                ...workspace,
+                eventArr: arrClone,
+            })
+        }
+
+        setText(e.target.value)
+    }
+
     let handleKey = (e) => {
         switch(e.nativeEvent.key) {
             case 'Enter':

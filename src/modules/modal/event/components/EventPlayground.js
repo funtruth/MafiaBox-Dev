@@ -5,8 +5,23 @@ import EventTextInput from './EventTextInput';
 import EventStringDragDrop from './EventStringDragDrop';
 
 export default function EventPlayground(props) {
-    const { selectedItem } = props
-    const { string } = selectedItem
+    const { workspace, setWorkspace, setText, stringIndex, selectedEvent } = props
+    const { stringArr } = selectedEvent
+
+    let handleClick = (e) => {
+        //if background is being clicked ...
+        if (e.target.classList.contains('event-playground-view')) {
+            //if an existing string is being editted ...
+            if (stringIndex !== '') {
+                //reset workspace.
+                setWorkspace({
+                    ...workspace,
+                    stringIndex: '',
+                })
+                setText('')
+            }
+        }
+    }
 
     return (
         <div className="event-playground" cancel-appclick="true">
@@ -14,8 +29,11 @@ export default function EventPlayground(props) {
             <EventRecipients {...props}/>
             <div className="-sep"/>
             <div className="dashboard-section-title">Event Text</div>
-            <div className="event-playground-view">
-                {string.map((item, index) => (
+            <div
+                className="event-playground-view"
+                onClick={handleClick}
+            >
+                {stringArr.map((item, index) => (
                     <EventStringDragDrop
                         {...props}
                         key={index}

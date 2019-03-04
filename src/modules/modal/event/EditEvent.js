@@ -18,24 +18,22 @@ export default function EditEvent(props) {
     let [text, setText] = useState('')
     let [error, setError] = useState('')
     
-    const { selectedKey, value } = workspace
-    const selectedItem = value[selectedKey] || WS_EDIT_EVENT_VALUE
+    const { eventIndex, stringIndex, eventArr } = workspace
+    const selectedEvent = eventArr[eventIndex] || WS_EDIT_EVENT_VALUE
 
     const mainProps = {
-        workspace,
-        setWorkspace,
-        text,
-        setText,
+        workspace, setWorkspace,
+        text, setText,
         setError,
-        selectedItem,
-        vars: props.attachVar,
+        eventIndex, stringIndex,
+        selectedEvent,
     }
 
     let handleSave = () => {
         props.updatePage(
             props.path,
             {
-                value: workspace.value,
+                eventArr: workspace.eventArr,
                 updateViewType: updateViewType.events,
             },
             props.subpath,
@@ -46,15 +44,15 @@ export default function EditEvent(props) {
     return (
         <ModalCheckSave
             {...props}
-            past={props.attach}
-            current={workspace}
+            past={props.attach.eventArr}
+            current={eventArr}
             handleSave={handleSave}
         >
             <div className="event-modal" cancel-appclick="true">
                 <div className="row" style={{ height: '100%' }}>
                     <EventBarDrop {...mainProps}/>
                     <EventPlayground {...mainProps}/>
-                    <EventDetailer {...mainProps}/>
+                    <EventDetailer {...mainProps} vars={props.attachVar}/>
                 </div>
                 <DropdownView
                     sourceId={StatefulSourceId.editEvent}

@@ -1,6 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
 import { WS_EDIT_EVENT_VALUE } from '../../workspaces';
@@ -21,57 +20,48 @@ function collect(connect, monitor) {
 }
 
 function EventBarDrop(props) {
-    const { connectDropTarget, workspace, setWorkspace, selectedKey, setError } = props
+    const { connectDropTarget, workspace, setWorkspace, setText, eventIndex, setError } = props
+    const { eventArr } = workspace
 
-    let handleSelect = (item) => {
+    let handleSelect = (index) => {
         document.getElementById('event-editor-textarea').focus()
-        setError('')
         setWorkspace({
             ...workspace,
-            selectedKey: item.key,
+            eventIndex: index,
+            stringIndex: '',
         })
+        setText('')
+        setError('')
     }
 
     let handleCreate = () => {
-        const newKey = helpers.genUID('string', workspace.value)
-        const newItem = {
-            ...WS_EDIT_EVENT_VALUE,
-            key: newKey,
-            lastEdit: Date.now()
-        }
-
         document.getElementById('event-editor-textarea').focus()
-        setError('')
         setWorkspace({
             ...workspace,
-            selectedKey: newKey,
-            value: {
-                ...workspace.value,
-                [newKey]: newItem,
-            }
+            eventIndex: eventArr.length,
+            stringIndex: '',
+            eventArr: _.cloneDeep(eventArr).concat(WS_EDIT_EVENT_VALUE)
         })
+        setText('')
+        setError('')
     }
 
-    let renderItem = (item) => {
+    let renderItem = (item, index) => {
         return (
             <EventBarItemDrag
-                key={item.key}
-                selectedKey={selectedKey}
+                key={index}
+                eventIndex={eventIndex}
                 item={item}
+                index={index}
                 onClick={handleSelect}
             />
         )
     }
 
-    const data = _(workspace.value)
-        .filter(i => i.key)
-        .sortBy(i => i.index)
-        .value()
-
     return connectDropTarget(
         <div className="event-bar">
             <div className="dashboard-section-title">Events</div>
-            {data.map(renderItem)}
+            {eventArr.map(renderItem)}
             <div className="dashboard-item" onClick={handleCreate}>
                 <i className="mdi mdi-plus"></i>
             </div>
