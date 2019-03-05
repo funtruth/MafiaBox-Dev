@@ -10,8 +10,6 @@ class PickTrigger extends React.Component{
         const { attach, subfieldKey } = this.props
         this.props.showModal(modalType.editTrigger, {
             attach: attach[subfieldKey] || {},
-            isTrigger: true,
-            path: ['attach', 'value'],
             updateSource: updateSourceType.topModal,
         })
         this.props.showDropdown()

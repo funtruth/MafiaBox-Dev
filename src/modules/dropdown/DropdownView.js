@@ -91,7 +91,7 @@ function DropdownView(props) {
             renderProps.updatePage = (value) => {
                 updateState(
                     helpers.updateByPath(
-                        renderProps.statefulPath,
+                        renderProps.path.concat(renderProps.subpath),
                         value,
                         state,
                     )

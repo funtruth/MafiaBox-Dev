@@ -6,9 +6,10 @@ import { LOGIC_TESTS } from '../../testhub/tests';
 
 import * as helpers from '../../common/helpers'
 import { getCode } from '../../logic/LogicReducer'
-import { pushCode, updateIfActive } from '../../code/CodeReducer'
+import { showModal } from '../../modal/ModalReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
+import { modalType } from '../../modal/types';
 
 class LogicBoard extends React.Component {
     _runCode(origin, value) {
@@ -20,27 +21,18 @@ class LogicBoard extends React.Component {
     }
 
     _showCode(origin, value) {
-        const { pageKey, fieldKey, pageInfo, fieldInfo } = this.props
         const code = this.props.getCode(origin, value)
-        
-        this.props.pushCode({
-            pageKey: pageKey,
-            source: pageInfo.title,
-            fieldKey: fieldKey,
-            subsource: fieldInfo.title,
+        this.props.showModal(modalType.showCode, {
             code,
-            expanded: true,
         })
     }
 
     render() {
-        const { pageKey, fieldKey, fieldInfo, value } = this.props
+        const { value, vars: attachVars } = this.props
         
         const origin = _.findKey(value, i => !i.source)
-        const vars = helpers.swapVarFormat(fieldInfo.vars, true)
+        const vars = helpers.swapVarFormat(attachVars, true)
 
-        this.props.updateIfActive(pageKey, fieldKey, origin, value)
-        
         if (!value) return null
         
         return (
@@ -73,8 +65,7 @@ export default connect(
         updateRef: state.template.updateRef,
     }),
     {
+        showModal,
         getCode,
-        pushCode,
-        updateIfActive,
     }
 )(LogicBoard)

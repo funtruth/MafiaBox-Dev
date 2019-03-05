@@ -23,7 +23,6 @@ function ShowLogicOptions(props) {
         props.showDropdown()
     }
 
-
     return (
         <div>
             <DropTitle>options</DropTitle>

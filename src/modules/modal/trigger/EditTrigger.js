@@ -2,48 +2,45 @@ import React, { useState } from 'react'
 import './EditTrigger.css'
 import { connect } from 'react-redux'
 
-import { triggerNewVars, logicType } from '../../logic/types'
+import { triggerNewVars, logicType, defaultLogic } from '../../logic/types'
 import { StatefulSourceId } from '../../dropdown/types'
-
-import { getUpdateCode } from '../../logic/LogicReducer'
+import { updateSourceType } from '../../common/types';
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
-import LogicObject from '../../logic/form/LogicObject';
-import CodeField from '../../code/components/CodeField';
 import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
 import DropdownView from '../../dropdown/DropdownView';
-
-var beautify_js = require('js-beautify');
+import LogicBoard from '../../fields/components/LogicBoard';
 
 function EditTrigger(props) {
-    let [workspace, setWorkspace] = useState('')
-
-    const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, path, updateRef } = props
+    let [workspace, setWorkspace] = useState(Object.assign({}, defaultLogic, props.attach))
+    console.log(workspace)
+    const { pageKey, fieldKey, indexKey, subfieldKey, attachVar } = props
 
     let handleSave = () => {
         props.onSave()
         props.popModalBy(1)
     }
 
-    const data = attach && attach.value
     const iprops = {
         indexKey,
         logicInfo: {
-            data,
+            data: workspace,
             logicType: logicType.update.key,
         },
         pageKey,
         fieldKey,
         subfieldKey,
+        value: workspace || {},
         vars: {
             ...attachVar,
             ...triggerNewVars,
         },
-        path,
+        path: [],
+        subpath: [],
+        statefulSource: StatefulSourceId.editTrigger,
+        updateSource: updateSourceType.topModal,
     }
-    
-    const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})
     
     return (
         <ModalCheckSave
@@ -51,32 +48,18 @@ function EditTrigger(props) {
         >
             <div
                 cancel-appclick="true"
+                style={{
+                    minWidth: 600,
+                    width: '75vw',
+                }}
             >
-                <div className="row">
-                    <div className="border-right -t-m">
-                        <div className="dashboard-section-title">VARIABLES</div>
-                        <div className="-x-p">
-                            <LogicNewVars newVars={attachVar}/>
-                        </div>
-                        <div className="-sep"/>
-                        <div className="dashboard-section-title">NEW VARIABLES</div>
-                        <div className="-x-p">
-                            <LogicNewVars newVars={triggerNewVars}/>
-                        </div>
-                        <div className="-sep"/>
-                        <div className="dashboard-section-title">UPDATES ON TRIGGER</div>
-                        <div className="-x-p -y-p">
-                            <LogicObject {...iprops} updateRef={updateRef}/>
-                        </div>
+                <div className="border-right -t-m">
+                    <div className="dashboard-section-title">NEW VARIABLES</div>
+                    <div className="-x-p">
+                        <LogicNewVars newVars={triggerNewVars}/>
                     </div>
-                    <div style={{ backgroundColor: '#272822', padding: '10px 8px 10px 0px' }}>
-                        <CodeField
-                            code={code}
-                            options={{
-                                readOnly: 'nocursor',
-                            }}
-                        />
-                    </div>
+                    <div className="-sep"/>
+                    <LogicBoard {...iprops}/>
                 </div>
                 <ModalOptions
                     onSave={handleSave}

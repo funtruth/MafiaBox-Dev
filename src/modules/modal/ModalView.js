@@ -18,6 +18,7 @@ import AddNewField from './keys/AddNewField'
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
+import ModalCodeView from './components/ModalCodeView'
 
 import DialogSave from './dialogs/DialogSave';
 
@@ -41,6 +42,8 @@ class ModalView extends React.Component {
             case modalType.deleteStory:
                 return <DeleteStory {...props}/>
 
+            case modalType.showCode:
+                return <ModalCodeView {...props}/>
             case modalType.showPage:
                 return <PageModal {...props} location={this.props.location}/>
             case modalType.showTemplate:
@@ -50,7 +53,7 @@ class ModalView extends React.Component {
             
             case modalType.saveChanges:
                 return <DialogSave {...props}/>
-                
+
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>
             case modalType.editEvent:

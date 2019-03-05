@@ -19,7 +19,7 @@ import LogicDetails from './components/LogicDetails';
 function LogicBlock(props) {
     const rng = helpers.genUID('rng')
 
-    const { pageKey, fieldKey, indexKey, vars, path, updateSource, updateRef, value } = props
+    const { pageKey, fieldKey, indexKey, vars, subpath, path, updateSource, statefulSource, updateRef, value } = props
     
     const logicInfo = value[indexKey]
     if (!logicInfo) return null
@@ -33,6 +33,8 @@ function LogicBlock(props) {
         fieldKey,
         vars,
         path: [...path, indexKey],
+        subpath,
+        statefulSource,
         updateSource,
     }
     

@@ -13,7 +13,6 @@ import AppWrapper from '../app/AppWrapper'
 import HomeView from '../home/HomeView'
 import DropdownView from '../dropdown/DropdownView'
 import ModalView from '../modal/ModalView'
-import CodeView from '../code/CodeView'
 
 export default class AppNavigator extends React.Component {
     render() {
@@ -27,7 +26,6 @@ export default class AppNavigator extends React.Component {
                                 <Route path="/" component={HomeView}/>
                                 <Route path="/" component={DropdownView}/>
                                 <Route path="/" component={ModalView}/>
-                                <Route path="/" component={CodeView}/>
                             </div>
                         </HashRouter>
                     </AppWrapper>

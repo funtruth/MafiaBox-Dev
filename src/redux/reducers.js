@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 
 import AppReducer from '../modules/app/AppReducer'
-import CodeReducer from '../modules/code/CodeReducer'
 import DBReducer from '../modules/firebase/DBReducer'
 import DropdownReducer from '../modules/dropdown/DropdownReducer'
 import FieldReducer from '../modules/fields/FieldReducer'
@@ -14,7 +13,6 @@ import UserReducer from '../modules/user/UserReducer'
 
 const reducers = {
     app: AppReducer,
-    code: CodeReducer,
     db: DBReducer,
     dropdown: DropdownReducer,
     field: FieldReducer,
