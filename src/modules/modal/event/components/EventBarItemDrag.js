@@ -17,7 +17,7 @@ function collect(connect, monitor) {
 }
   
 function EventBarItemDrag(props) {
-    const { item, index, eventIndex, connectDragSource, onClick } = props
+    const { item, index, connectDragSource, onClick } = props
     
     let char = '*'
     if (item.stringArr[0]) {

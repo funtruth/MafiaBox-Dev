@@ -41,12 +41,13 @@ export default function EventPlayground(props) {
                 )
             case PartTypes.function:
                 return (
-                    <EventFunctionDragDrop
-                        {...props}
-                        key={index}
-                        item={item}
-                        index={index}
-                    />
+                    <EventPlaygroundDrop key={index}>
+                        <EventFunctionDragDrop
+                            {...props}
+                            item={item}
+                            index={index}
+                        />
+                    </EventPlaygroundDrop>
                 )
             default:
                 return null
@@ -55,14 +56,13 @@ export default function EventPlayground(props) {
 
     return (
         <div className="event-playground" cancel-appclick="true">
-            <div className="dashboard-section-title">Recipients</div>
             <EventRecipients {...props}/>
             <div className="-sep"/>
-            <div className="dashboard-section-title">Event Text</div>
             <div
                 className="event-playground-view"
                 onClick={handleClick}
             >
+                <div className="dashboard-section-title">Event Text</div>
                 {stringArr.map(renderItem)}
             </div>
             <EventTextInput {...props}/>

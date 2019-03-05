@@ -24,7 +24,7 @@ const itemTarget = {
         let wsString = wsClone.eventArr[eventIndex].stringArr
 
         switch(itemType) {
-            case ItemTypes.EVENT_COLOR:
+            case ItemTypes.EVENT_FUNCTION:
                 wsString[index].color = item.hexcode
                 props.setWorkspace(wsClone)
                 break
@@ -58,32 +58,19 @@ function collectDrag(connect, monitor) {
 }
   
 function EventFunctionDragDrop(props) {
-    const { item, index, stringIndex, workspace, setWorkspace, setText,
-        connectDragSource, connectDropTarget, canDrop, isOver } = props
-    const { string, color } = item
-
-    let handleSelect = () => {
-        setWorkspace({
-            ...workspace,
-            stringIndex: index,
-            selectedColor: color,
-        })
-        setText(string)
-        document.getElementById('event-editor-textarea').focus()
-    }
+    const { item, connectDragSource, connectDropTarget, canDrop, isOver } = props
+    const { functionKey } = item
 
     return connectDragSource(connectDropTarget(
         <div
             className="event-playground-item"
-            onClick={handleSelect}
             style={{
-                color: color || '#d6d6d6',
-                backgroundColor: '#ff8c1a',
+                color: '#fff',
+                backgroundColor: '#992600',
                 pointerEvents: 'all',
             }}
-            onBlur={() => alert('no')}
         >
-            {string}
+            {functionKey}
         </div>
     ));
 }
@@ -93,7 +80,7 @@ export default DragSource(
     itemSource,
     collectDrag,
 )(DropTarget(
-    [ItemTypes.EVENT_COLOR, ItemTypes.EVENT_STRING],
+    [ItemTypes.EVENT_UID],
     itemTarget,
     collectDrop,
 )(EventFunctionDragDrop));

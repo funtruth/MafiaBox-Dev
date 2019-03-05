@@ -8,7 +8,6 @@ const itemTarget = {
         const didDrop = monitor.didDrop()
         if (didDrop) return;
 
-        const item = monitor.getItem()
         const itemType = monitor.getItemType()
 
         switch(itemType) {

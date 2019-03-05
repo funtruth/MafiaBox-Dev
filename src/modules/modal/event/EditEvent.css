@@ -13,7 +13,7 @@
     flex-direction: column;
     overflow: auto;
     border-right: 1px solid #464646;
-    padding: 10px 0px;
+    padding: 10px 10px;
 }
 
 .event-playground {
@@ -98,7 +98,18 @@
 .event-color-drag:hover {
     border: 2px solid #ddd;
 }
-
+.event-var-picker {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.event-var-section {
+    padding: 0px 10px;
+}
 .dashboard-edit {
     display: flex;
     flex-direction: column;
@@ -175,7 +186,7 @@
 .dashboard-section-title {
     font: 600 13px Arial;
     color: #d6d6d6;
-    padding: 0px 14px 6px 14px;
+    padding: 0px 0px 6px 0px;
 }
 
 .empty-text {

@@ -1,7 +1,8 @@
 import React from 'react'
+import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
-import { ItemTypes } from './EventConstants'
+import { ItemTypes, WS_EDIT_EVENT_STRING, PartTypes } from './EventConstants'
 
 const itemSource = {
     beginDrag(props) {
@@ -17,11 +18,22 @@ function collect(connect, monitor) {
 }
   
 function EventFunctionDrag(props) {
-    const { item, connectDragSource } = props
+    const { workspace, setWorkspace, eventIndex, item, connectDragSource } = props
+
+    let handleSelect = () => {
+        let wsClone = _.cloneDeep(workspace)
+        wsClone.eventArr[eventIndex].stringArr.push({
+            ...WS_EDIT_EVENT_STRING,
+            functionKey: item.key,
+            partType: PartTypes.function,
+        })
+        setWorkspace(wsClone)
+    }
     
     return connectDragSource(
         <div
             className="event-function"
+            onClick={handleSelect}
         >
             {item.key}
         </div>

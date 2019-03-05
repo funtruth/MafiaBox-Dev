@@ -6,13 +6,16 @@ import EventColorDrag from './EventColorDrag';
 export default function EventColorPicker(props) {
     return (
         <div className="event-color-picker">
-            {EventTextColors.map(item => (
-                <EventColorDrag
-                    {...props}
-                    key={item}
-                    item={item}
-                />
-            ))}
+            <div className="dashboard-section-title">Text Color</div>
+            <div className="row"> 
+                {EventTextColors.map(item => (
+                    <EventColorDrag
+                        {...props}
+                        key={item}
+                        item={item}
+                    />
+                ))}
+            </div>
         </div>
     )
 }
