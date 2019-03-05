@@ -6,10 +6,10 @@ import { connect } from 'react-redux'
 import { saveAllPriorities } from '../../page/PageReducer'
 
 import ModalOptions from '../components/ModalOptions'
-import PriorityRowAdd from '../components/priority/PriorityRowAdd'
-import PriorityRoleDrop from '../components/priority/PriorityRoleDrop';
-import PriorityRoleDrag from '../components/priority/PriorityRoleDrag';
 import ModalCheckSave from '../components/ModalCheckSave';
+import PriorityRowAdd from './components/PriorityRowAdd'
+import PriorityRoleDrop from './components/PriorityRoleDrop';
+import PriorityRoleDrag from './components/PriorityRoleDrag';
 
 function EditPriority(props) {
     let [workspace, setWorkspace] = useState(_.cloneDeep(props.attach))

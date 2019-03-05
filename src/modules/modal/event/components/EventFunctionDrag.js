@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes, WS_EDIT_EVENT_STRING, PartTypes } from './EventConstants'
-import { COLLECT_DRAG } from '../EventDND';
+import { COLLECT_DRAG } from '../../ModalDND';
 
 const itemSource = {
     beginDrag(props) {

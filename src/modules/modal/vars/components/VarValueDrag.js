@@ -3,6 +3,7 @@ import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './Constants'
 import { opType, opValueType } from './ops' 
+import { COLLECT_DRAG } from '../../ModalDND';
 
 const itemSource = {
     beginDrag(props) {
@@ -14,13 +15,6 @@ const itemSource = {
     }
 }
 
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
-    }
-}
-  
 function VarValueDrag(props) {
     const { item, connectDragSource } = props
     return connectDragSource(
@@ -33,5 +27,5 @@ function VarValueDrag(props) {
 export default DragSource(
     ItemTypes.VALUE,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(VarValueDrag);

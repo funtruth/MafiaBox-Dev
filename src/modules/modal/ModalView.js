@@ -23,7 +23,7 @@ import SaveChanges from './components/SaveChanges';
 import EditTrigger from './update/EditTrigger'
 import EditEvent from './event/EditEvent'
 import EditToast from './return/EditToast'
-import EditPriority from './update/EditPriority'
+import EditPriority from './priority/EditPriority'
 import EditVarDetails from './vars/EditVarDetails'
 import AssignVarModal from './vars/AssignVarModal'
 

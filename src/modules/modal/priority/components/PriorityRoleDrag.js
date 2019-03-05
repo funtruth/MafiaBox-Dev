@@ -2,6 +2,7 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './PriorityConstants'
+import { COLLECT_DRAG } from '../../ModalDND';
 
 const itemSource = {
     beginDrag(props) {
@@ -10,13 +11,6 @@ const itemSource = {
             itemXIndex: xIndex,
             itemYIndex: yIndex,
         }
-    }
-}
-
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
     }
 }
   
@@ -32,5 +26,5 @@ function PriorityRoleDrag(props) {
 export default DragSource(
     ItemTypes.ROLE,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(PriorityRoleDrag);
