@@ -79,28 +79,33 @@ class ModalView extends React.Component {
                 props.popModalBy = (pops) => this.props.popModalTo(index - pops) 
                 props.close = () => this.props.popModalTo(index - 1)
 
+                props.setWorkspace = (value) => this.props.updateTopModal(['attach'], value)
                 switch(props.updateSource) {
                     case updateSourceType.repo:
-                        props.updatePage = (path, value, subpath) => {
+                        props.updatePage = (value) => {
                             if (props.ignoreSubpath) {
-                                this.props.updateRepo(path, value)
+                                this.props.updateRepo(props.path, value)
                             } else {
-                                this.props.updateRepo(path, value, subpath)
+                                this.props.updateRepo(props.path, value, props.subpath)
                             }
                         }
                         break
                     case updateSourceType.function:
-                        props.updatePage = (path, value, subpath) => {
+                        props.updatePage = (value) => {
                             if (props.ignoreSubpath) {
-                                this.props.updateFunction(path, value)
+                                this.props.updateFunction(props.path, value)
                             } else {
-                                this.props.updateFunction(path, value, subpath)
+                                this.props.updateFunction(props.path, value, props.subpath)
                             }
                         }
                         break
                     case updateSourceType.topModal:
-                        props.updatePage = (path, value, subpath) => {
-                            this.props.updateTopModal(path, value, subpath)
+                        props.updatePage = (value) => {
+                            if (props.ignoreSubpath) {
+                                this.props.updateTopModal(props.path, value)
+                            } else {
+                                this.props.updateTopModal(props.path, value, props.subpath)
+                            }
                         }
                         break
                     default:

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import * as stringTool from '../stringTool'
-import { StatefulSourceId } from '../../../dropdown/types';
 
 export default function ToastWorkspace(props) {
     useEffect(() => {
@@ -59,7 +58,7 @@ export default function ToastWorkspace(props) {
             <div className="-sep"/>
             <div className="dashboard-section-title">MARKDOWN AND VARIABLES</div>
             <div className="text-box string-edit-box">
-                {stringTool.braceToHtml(string, StatefulSourceId.editToast)}
+                {stringTool.braceToHtml(string)}
             </div>
         </div>
     )

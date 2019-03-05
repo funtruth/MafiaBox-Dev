@@ -6,10 +6,6 @@
 - className*: "app-onclick" 
 - menu-type*: dropdownType
 - app-onclick-props: JSON.strigified Object
-- stateful-source: sourceId if Dropdown originates in Component
 
 ##Global Dropdown
 - Handled at AppNavigator
-    
-##Stateful Dropdown
-- Handled inside Component where state & setState are being declared

@@ -2,63 +2,51 @@ import React, { useState } from 'react'
 import './EditEvent.css'
 
 import { updateViewType } from '../../logic/types'
-import { WS_EDIT_EVENT, WS_EDIT_EVENT_VALUE } from './components/EventConstants'
-import { StatefulSourceId } from '../../dropdown/types'
+import { WS_EDIT_EVENT_VALUE } from './components/EventConstants'
+import { updateSourceType } from '../../common/types';
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
-import DropdownView from '../../dropdown/DropdownView'
 
 import EventBarDrop from './components/EventBarDrop';
 import EventPlayground from './components/EventPlayground';
 import EventDetailer from './components/EventDetailer';
 
 export default function EditEvent(props) {
-    let [workspace, setWorkspace] = useState(Object.assign({}, WS_EDIT_EVENT, props.attach))
     let [text, setText] = useState('')
     let [error, setError] = useState('')
+
+    const workspace = props.attach
     
     const { eventIndex, stringIndex, eventArr } = workspace
     const selectedEvent = eventArr[eventIndex] || WS_EDIT_EVENT_VALUE
 
     const mainProps = {
-        workspace, setWorkspace,
+        workspace,
+        setWorkspace: props.setWorkspace,
         text, setText,
         setError,
         eventIndex, stringIndex,
         selectedEvent,
+        updateSource: updateSourceType.topModal,
     }
 
     let handleSave = () => {
-        props.updatePage(
-            props.path,
-            {
-                eventArr: workspace.eventArr,
-                updateViewType: updateViewType.events,
-            },
-            props.subpath,
-        )
+        props.updatePage({
+            eventArr: workspace.eventArr,
+            updateViewType: updateViewType.events,
+        })
         props.popModalBy(1)
     }
     
     return (
-        <ModalCheckSave
-            {...props}
-            past={props.attach.eventArr}
-            current={eventArr}
-            handleSave={handleSave}
-        >
+        <ModalCheckSave {...props} handleSave={handleSave}>
             <div className="event-modal" cancel-appclick="true">
                 <div className="row" style={{ height: '100%' }}>
                     <EventBarDrop {...mainProps}/>
                     <EventPlayground {...mainProps}/>
                     <EventDetailer {...mainProps} vars={props.attachVar}/>
                 </div>
-                <DropdownView
-                    sourceId={StatefulSourceId.editEvent}
-                    state={workspace}
-                    updateState={setWorkspace}
-                />
                 <ModalOptions
                     error={error}
                     onSave={handleSave}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './AssignVarModal.css'
 import _ from 'lodash'
+import './AssignVarModal.css'
 
 import { basicOpType, DEFAULT_ASSIGN, compileMath } from './components/ops'
 
@@ -12,13 +12,18 @@ import ValueDrag from './components/ValueDrag';
 import ModalCheckSave from '../components/ModalCheckSave';
 
 export default function AssignVarModal(props) {
-    const { attachVar, path } = props
-
-    let [workspace, setWorkspace] = useState(_.cloneDeep(props.attach))
     let [error, setError] = useState('')
 
-    const clearWorkspace = () => setWorkspace({...props.attach, assign: DEFAULT_ASSIGN})
-    const resetWorkspace = () => setWorkspace(props.attach)
+    const { attachVar } = props
+
+    const workspace = props.attach
+    const mainProps = {
+        workspace,
+        setWorkspace: props.setWorkspace,
+    }
+
+    const clearWorkspace = () => console.log('clear')
+    const resetWorkspace = () => console.log('reset')
 
     const variableInfo = workspace || { variableTypes: [], assign: DEFAULT_ASSIGN }
     const { variableTypes, assign } = variableInfo
@@ -35,17 +40,12 @@ export default function AssignVarModal(props) {
             return
         }
 
-        props.updatePage(path, workspace)
+        props.updatePage(workspace)
         props.popModalBy(1)
     }
     
     return (
-        <ModalCheckSave
-            {...props}
-            past={props.attach}
-            current={workspace}
-            handleSave={handleSave}
-        >
+        <ModalCheckSave {...props} handleSave={handleSave}>
             <div
                 cancel-appclick="true"
                 style={{
@@ -73,11 +73,10 @@ export default function AssignVarModal(props) {
                 </div>
                 <div className="-sep-no-m"></div>
                 <PlaygroundDrop
+                    {...mainProps}
                     opInfo={assign}
                     setError={setError}
                     subpath={['assign']}
-                    workspace={workspace}
-                    setWorkspace={setWorkspace}
                     clearWorkspace={clearWorkspace}
                     resetWorkspace={resetWorkspace}
                 />

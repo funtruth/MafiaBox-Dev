@@ -3,26 +3,26 @@ import './EditTrigger.css'
 import { connect } from 'react-redux'
 
 import { triggerNewVars, logicType, defaultLogic } from '../../logic/types'
-import { StatefulSourceId } from '../../dropdown/types'
 import { updateSourceType } from '../../common/types';
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
 import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
-import DropdownView from '../../dropdown/DropdownView';
 import LogicBoard from '../../fields/components/LogicBoard';
 
 function EditTrigger(props) {
-    let [workspace, setWorkspace] = useState(Object.assign({}, defaultLogic, props.attach))
-    console.log(workspace)
     const { pageKey, fieldKey, indexKey, subfieldKey, attachVar } = props
+
+    const workspace = props.attach
 
     let handleSave = () => {
         props.onSave()
         props.popModalBy(1)
     }
 
-    const iprops = {
+    const mainProps = {
+        workspace,
+        setWorkspace: props.setWorkspace,
         indexKey,
         logicInfo: {
             data: workspace,
@@ -36,16 +36,13 @@ function EditTrigger(props) {
             ...attachVar,
             ...triggerNewVars,
         },
-        path: [],
+        path: ['attach'],
         subpath: [],
-        statefulSource: StatefulSourceId.editTrigger,
         updateSource: updateSourceType.topModal,
     }
     
     return (
-        <ModalCheckSave
-            {...props}
-        >
+        <ModalCheckSave {...props} handleSave={handleSave}>
             <div
                 cancel-appclick="true"
                 style={{
@@ -59,18 +56,13 @@ function EditTrigger(props) {
                         <LogicNewVars newVars={triggerNewVars}/>
                     </div>
                     <div className="-sep"/>
-                    <LogicBoard {...iprops}/>
+                    <LogicBoard {...mainProps}/>
                 </div>
                 <ModalOptions
                     onSave={handleSave}
                     onClose={props.onClose}
                 />
             </div>
-            <DropdownView
-                sourceId={StatefulSourceId.editTrigger}
-                state={workspace}
-                updateState={setWorkspace}
-            />
         </ModalCheckSave>
     )
 }

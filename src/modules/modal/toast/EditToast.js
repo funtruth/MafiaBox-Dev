@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import _ from 'lodash'
-
-import { StatefulSourceId } from '../../dropdown/types'
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
-import DropdownView from '../../dropdown/DropdownView';
 import ToastWorkspace from './components/ToastWorkspace';
 
 export default function EditToast(props) {
-    const { path } = props
-    
-    let [workspace, setWorkspace] = useState(_.cloneDeep(props.attach))
     let [error, setError] = useState('')
+
+    const workspace = props.attach
+
+    const mainProps = {
+        workspace,
+        setWorkspace: props.setWorkspace,
+    }
     
     let handleSave = () => {
         const { string } = workspace
@@ -21,23 +21,15 @@ export default function EditToast(props) {
             return setError('Toast message cannot be empty.')
         }
 
-        props.updatePage(
-            path,
-            {
-                ...workspace,
-                key: 'toast', //TODO used in PickReturnType and LogicReducer
-            },
-        )
+        props.updatePage({
+            ...workspace,
+            key: 'toast', //TODO used in PickReturnType and LogicReducer
+        })
         props.popModalBy(1)
     }
     
     return (
-        <ModalCheckSave
-            {...props}
-            past={props.attach}
-            current={workspace}
-            handleSave={handleSave}
-        >
+        <ModalCheckSave {...props} handleSave={handleSave}>
             <div
                 cancel-appclick="true"
                 style={{
@@ -47,21 +39,13 @@ export default function EditToast(props) {
                     width: '45vw',
                 }}
             >
-                <ToastWorkspace
-                    workspace={workspace}
-                    setWorkspace={setWorkspace}
-                />
+                <ToastWorkspace {...mainProps}/>
                 <ModalOptions
                     error={error}
                     onSave={handleSave}
                     onClose={props.onClose}
                 />
             </div>
-            <DropdownView
-                sourceId={StatefulSourceId.editToast}
-                state={workspace}
-                updateState={setWorkspace}
-            />
         </ModalCheckSave>
     )
 }

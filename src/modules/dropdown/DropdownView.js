@@ -1,7 +1,6 @@
 import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
-import * as helpers from '../common/helpers'
 
 import { updateSourceType } from '../common/types';
 import { dropdownType } from './types'
@@ -70,14 +69,8 @@ import PickOperator from './logic/PickOperator';
 import ShowLogicOptions from './logic/ShowLogicOptions';
 
 function DropdownView(props) {
-    const { update, mutate, state, updateState, dropdownKeys, statefulSource, sourceId } = props
+    const { update, mutate, dropdownKeys } = props
     
-    //if there is statefulSource, only show from DropdownView at sourceId
-    if (statefulSource && statefulSource !== sourceId) return null 
-
-    //hide stateful DropdownViews if no statefulSource
-    if (sourceId && !statefulSource) return null
-
     let renderItem = (item, index) => {
         //create temporary props that are not stored in redux
         let renderProps = Object.assign({}, item)
@@ -86,46 +79,32 @@ function DropdownView(props) {
         renderProps.showDropdown = (key, e, params) => props.showDropdown(key, e, params, index)
         renderProps.popDropdownTo = (forcedIndex) => props.popDropdownTo(forcedIndex || index)
 
-        //if there is a stateful update method ...
-        if (updateState) {
-            renderProps.updatePage = (value) => {
-                updateState(
-                    helpers.updateByPath(
-                        renderProps.path.concat(renderProps.subpath),
-                        value,
-                        state,
-                    )
-                )
-            };
-            renderProps.state = state;
-        } else {
-            switch(renderProps.updateSource) {
-                case updateSourceType.repo:
-                    renderProps.updatePage = (value) => {
-                        if (renderProps.ignoreSubpath) {
-                            props.updateRepo(renderProps.path, value)
-                        } else {
-                            props.updateRepo(renderProps.path, value, renderProps.subpath)
-                        }
+        switch(renderProps.updateSource) {
+            case updateSourceType.repo:
+                renderProps.updatePage = (value) => {
+                    if (renderProps.ignoreSubpath) {
+                        props.updateRepo(renderProps.path, value)
+                    } else {
+                        props.updateRepo(renderProps.path, value, renderProps.subpath)
                     }
-                    break
-                case updateSourceType.function:
-                    renderProps.updatePage = (value) => {
-                        if (renderProps.ignoreSubpath) {
-                            props.updateFunction(renderProps.path, value)
-                        } else {
-                            props.updateFunction(renderProps.path, value, renderProps.subpath)
-                        }
+                }
+                break
+            case updateSourceType.function:
+                renderProps.updatePage = (value) => {
+                    if (renderProps.ignoreSubpath) {
+                        props.updateFunction(renderProps.path, value)
+                    } else {
+                        props.updateFunction(renderProps.path, value, renderProps.subpath)
                     }
-                    break
-                case updateSourceType.topModal:
-                    renderProps.updatePage = (value) => {
-                        props.updateTopModal(renderProps.path, value, renderProps.subpath)
-                    }
-                    break
-                default:
-                    renderProps.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
-            }
+                }
+                break
+            case updateSourceType.topModal:
+                renderProps.updatePage = (value) => {
+                    props.updateTopModal(renderProps.path, value, renderProps.subpath)
+                }
+                break
+            default:
+                renderProps.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
         }
         
         switch(renderProps.key) {
@@ -266,7 +245,6 @@ function DropdownView(props) {
 export default connect(
     state => ({
         dropdownKeys: state.dropdown.dropdownKeys,
-        statefulSource: state.dropdown.statefulSource,
         update: state.template.update,
         mutate: state.template.mutate,
     }),

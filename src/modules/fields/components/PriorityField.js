@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
-import { updateSourceType } from '../../common/types';
 
 import { showModal } from '../../modal/ModalReducer'
 import { rolePrioritySort } from '../FieldReducer'
@@ -17,7 +16,6 @@ function PriorityField(props) {
             fieldKey,
             path,
             attach: rolePrioritySort(pageRepo),
-            updateSource: updateSourceType.topModal,
         })
     }
 

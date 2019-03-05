@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const CIPHER = {
     A26: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     A26wSPACE: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ',
@@ -20,6 +22,8 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
 
     if (endOfPath) {
         if (typeofUpdate === 'string' || typeofUpdate === 'number') {
+            return update
+        } else if (_.isArray(update)) {
             return update
         }
     }

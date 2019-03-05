@@ -78,7 +78,6 @@ class AppWrapper extends React.Component{
 
         if (targetIsAppClick) {
             const menuClick = e.target.getAttribute('menu-type')
-            const statefulSourceId = e.target.getAttribute('stateful-source')
             
             //re-clicking target hides dropdown
             if (this.prevClick === e.target.outerHTML) {
@@ -92,7 +91,7 @@ class AppWrapper extends React.Component{
             if (menuClick) {
                 this.props.showDropdown(menuClick, e, {
                     ...JSON.parse(e.target.getAttribute('app-onclick-props')),
-                }, 0, statefulSourceId)
+                })
             }
         }
     }

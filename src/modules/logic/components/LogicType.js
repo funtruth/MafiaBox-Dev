@@ -3,7 +3,7 @@ import { dropdownType } from '../../dropdown/types'
 import { logicType, operatorType } from '../types'
 
 export default function LogicType(props) {
-    const { indexKey, logicInfo, fieldKey, pageKey, path, subpath, statefulSource, updateSource } = props
+    const { indexKey, logicInfo, fieldKey, pageKey, path, subpath, updateSource } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
@@ -15,7 +15,6 @@ export default function LogicType(props) {
         <i 
             className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
             menu-type={dropdownType.pickLogic}
-            stateful-source={statefulSource}
             app-onclick-props={JSON.stringify({
                 pageKey,
                 fieldKey,

@@ -33,7 +33,6 @@ class FieldView extends React.Component {
             vars: fieldInfo.vars || {},
             path: [...path, key],
             subpath,
-            statefulSource: '',
             updateSource,
             updatePage,
         }

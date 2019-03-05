@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { dropdownType, StatefulSourceId } from '../../../dropdown/types'
+import { dropdownType } from '../../../dropdown/types'
 
 export default function EventRecipients(props) {
-    const { selectedEvent, eventIndex } = props
+    const { selectedEvent, eventIndex, updateSource } = props
     const { showTo, hideFrom } = selectedEvent
 
     //showing only to selected uid's
@@ -22,10 +22,10 @@ export default function EventRecipients(props) {
                 {!exclusive && <div
                     className="cute-button app-onclick"
                     menu-type={dropdownType.pickRecipient}
-                    stateful-source={StatefulSourceId.editEvent}
                     app-onclick-props={JSON.stringify({
                         selectionType: 'showTo',
                         eventIndex,
+                        updateSource,
                     })}
                 >
                     everyone
@@ -33,10 +33,10 @@ export default function EventRecipients(props) {
                 {exclusive && <div
                     className="cute-button app-onclick"
                     menu-type={dropdownType.pickRecipient}
-                    stateful-source={StatefulSourceId.editEvent}
                     app-onclick-props={JSON.stringify({
                         selectionType: 'showTo',
                         eventIndex,
+                        updateSource,
                     })}
                 >
                     {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
@@ -45,10 +45,10 @@ export default function EventRecipients(props) {
                     className="row cute-button app-onclick"
                     empty="true"
                     menu-type={dropdownType.pickRecipient}
-                    stateful-source={StatefulSourceId.editEvent}
                     app-onclick-props={JSON.stringify({
                         selectionType: 'hideFrom',
                         eventIndex,
+                        updateSource,
                     })}
                     style={{
                         marginLeft: 6,

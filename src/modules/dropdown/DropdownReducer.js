@@ -3,14 +3,13 @@ import { dropdownType, DROP_TITLE_HEIGHT } from './types'
 
 const initialState = {
     dropdownKeys: [],
-    statefulSource: '',
 }
 
 const UPDATE_KEYS = 'dropdown/update-keys'
 
-export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
+export function showDropdown(key, e, params={}, index=0) {
     return (dispatch, getState) => {
-        const { dropdownKeys, statefulSource } = getState().dropdown
+        const { dropdownKeys } = getState().dropdown
         const { modalKeys } = getState().modal
 
         if (!key) {
@@ -18,10 +17,7 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
 
             dispatch({
                 type: UPDATE_KEYS,
-                payload: {
-                    keys: [],
-                    source: '',
-                }
+                payload: [],
             })
         } else {
             let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
@@ -88,10 +84,7 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
 
             dispatch({
                 type: UPDATE_KEYS,
-                payload: {
-                    keys: keysClone,
-                    source: statefulSourceId || statefulSource || '',
-                }
+                payload: keysClone,
             })
         }  
     }
@@ -99,16 +92,13 @@ export function showDropdown(key, e, params={}, index=0, statefulSourceId="") {
 
 export function popDropdownTo(index) {
     return (dispatch, getState) => {
-        const { dropdownKeys, statefulSource } = getState().dropdown
+        const { dropdownKeys } = getState().dropdown
 
         const keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
 
         dispatch({
             type: UPDATE_KEYS,
-            payload: {
-                keys: keysClone,
-                statefulSource,
-            }
+            payload: keysClone,
         })
     }
 }
@@ -116,7 +106,7 @@ export function popDropdownTo(index) {
 export default (state = initialState, action) => {
     switch(action.type){
         case UPDATE_KEYS:
-            return { ...state, dropdownKeys: action.payload.keys, statefulSource: action.payload.source }
+            return { ...state, dropdownKeys: action.payload }
         default:
             return state;
     }
