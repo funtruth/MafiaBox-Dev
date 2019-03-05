@@ -82,7 +82,6 @@ function EventStringDragDrop(props) {
                 backgroundColor: selected ? 'rgba(14, 125, 180, 0.4)' : (canDrop && isOver && 'rgba(70, 73, 78, 1)'),
                 pointerEvents: 'all',
             }}
-            onBlur={() => alert('no')}
         >
             {string}
         </div>

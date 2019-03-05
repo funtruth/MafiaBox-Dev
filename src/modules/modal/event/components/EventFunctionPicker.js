@@ -10,7 +10,7 @@ export default function EventFunctionPicker(props) {
 
     return (
         <div className="event-color-picker">
-            <div className="dashboard-section-title">Functions</div>
+            <div className="dashboard-section-title">Uid Functions</div>
             <div className="row">
                 {functions.map(item => (
                     <EventFunctionDrag

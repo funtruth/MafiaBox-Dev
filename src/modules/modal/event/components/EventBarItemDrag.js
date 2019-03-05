@@ -17,17 +17,28 @@ function collect(connect, monitor) {
 }
   
 function EventBarItemDrag(props) {
-    const { item, index, connectDragSource, onClick } = props
+    const { workspace, setWorkspace, setText, setError, item, index, connectDragSource } = props
     
     let char = '*'
     if (item.stringArr[0]) {
         char = item.stringArr[0].string && item.stringArr[0].string.charAt(0)
     }
 
+    let handleSelect = () => {
+        document.getElementById('event-editor-textarea').focus()
+        setWorkspace({
+            ...workspace,
+            eventIndex: index,
+            stringIndex: '',
+        })
+        setText('')
+        setError('')
+    }
+
     return connectDragSource(
         <div
             className="dashboard-item"
-            onClick={() => onClick(index)}
+            onClick={handleSelect}
         >
             {char}
         </div>

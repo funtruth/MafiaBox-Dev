@@ -81,5 +81,3 @@ export default DropTarget(
     itemTarget,
     collectDrop,
 )(EventStringDragDrop)
-
-

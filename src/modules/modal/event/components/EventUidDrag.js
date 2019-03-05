@@ -5,7 +5,9 @@ import { ItemTypes } from './EventConstants'
 
 const itemSource = {
     beginDrag(props) {
-        return {}
+        return {
+            item: props.item,
+        }
     }
 }
 

@@ -26,12 +26,14 @@ export const EventFunctions = {
     getNameFromUid: {
         key: 'getNameFromUid',
         label: 'Name',
-        wrapper: (s) => `rss.lobby[${s}].name`,
+        lstring: 'rss.lobby[',
+        rstring: '].name',
     },
     getRoleFromUid: {
         key: 'getRoleFromUid',
         label: 'Role',
-        wrapper: (s) => `rss.lobby[${s}].role.name`,
+        lstring: 'rss.lobby[',
+        rstring: '].role.name',
     },
 }
 

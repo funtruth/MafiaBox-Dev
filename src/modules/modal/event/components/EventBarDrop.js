@@ -23,17 +23,6 @@ function EventBarDrop(props) {
     const { connectDropTarget, workspace, setWorkspace, setText, eventIndex, setError } = props
     const { eventArr } = workspace
 
-    let handleSelect = (index) => {
-        document.getElementById('event-editor-textarea').focus()
-        setWorkspace({
-            ...workspace,
-            eventIndex: index,
-            stringIndex: '',
-        })
-        setText('')
-        setError('')
-    }
-
     let handleCreate = () => {
         document.getElementById('event-editor-textarea').focus()
         setWorkspace({
@@ -50,10 +39,9 @@ function EventBarDrop(props) {
         return (
             <EventBarItemDrag
                 key={index}
-                eventIndex={eventIndex}
+                {...props}
                 item={item}
                 index={index}
-                onClick={handleSelect}
             />
         )
     }

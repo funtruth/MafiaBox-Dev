@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { variableType } from '../../../logic/types';
 import EventVarDrag from './EventVarDrag';
+import EventUidDrag from './EventUidDrag';
 
 export default function EventVarPicker(props) {
     const { vars } = props
@@ -39,7 +40,7 @@ export default function EventVarPicker(props) {
                 <div className="dashboard-section-title">Uids</div>
                 <div className="row">
                     {uids.map(item => (
-                        <EventVarDrag
+                        <EventUidDrag
                             key={item.key}
                             item={item}
                         />

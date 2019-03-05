@@ -2,6 +2,7 @@ import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import EventFunctionDrop from './EventFunctionDrop';
 
 const itemSource = {
     beginDrag(props) {
@@ -58,12 +59,12 @@ function collectDrag(connect, monitor) {
 }
   
 function EventFunctionDragDrop(props) {
-    const { item, connectDragSource, connectDropTarget, canDrop, isOver } = props
+    const { item, connectDragSource, connectDropTarget } = props
     const { functionKey } = item
 
     return connectDragSource(connectDropTarget(
         <div
-            className="event-playground-item"
+            className="event-function-item"
             style={{
                 color: '#fff',
                 backgroundColor: '#992600',
@@ -71,6 +72,7 @@ function EventFunctionDragDrop(props) {
             }}
         >
             {functionKey}
+            <EventFunctionDrop item={item} {...props}/>
         </div>
     ));
 }
@@ -80,7 +82,7 @@ export default DragSource(
     itemSource,
     collectDrag,
 )(DropTarget(
-    [ItemTypes.EVENT_UID],
+    [ItemTypes.EVENT_FUNCTION],
     itemTarget,
     collectDrop,
 )(EventFunctionDragDrop));
