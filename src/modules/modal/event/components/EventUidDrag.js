@@ -2,19 +2,13 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
 
 const itemSource = {
     beginDrag(props) {
         return {
             item: props.item,
         }
-    }
-}
-
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
     }
 }
   
@@ -33,5 +27,5 @@ function EventUidDrag(props) {
 export default DragSource(
     ItemTypes.EVENT_UID,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(EventUidDrag);

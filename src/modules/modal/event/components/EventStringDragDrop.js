@@ -2,6 +2,7 @@ import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
 
 const itemSource = {
     beginDrag(props) {
@@ -48,13 +49,6 @@ function collectDrop(connect, monitor) {
         canDrop: monitor.canDrop(),
     }
 }
-
-function collectDrag(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
-    }
-}
   
 function EventStringDragDrop(props) {
     const { item, index, stringIndex, workspace, setWorkspace, setText,
@@ -91,7 +85,7 @@ function EventStringDragDrop(props) {
 export default DragSource(
     ItemTypes.EVENT_STRING,
     itemSource,
-    collectDrag,
+    COLLECT_DRAG,
 )(DropTarget(
     [ItemTypes.EVENT_COLOR, ItemTypes.EVENT_STRING],
     itemTarget,

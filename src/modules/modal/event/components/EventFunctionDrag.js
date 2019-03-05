@@ -3,6 +3,7 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes, WS_EDIT_EVENT_STRING, PartTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
 
 const itemSource = {
     beginDrag(props) {
@@ -10,13 +11,6 @@ const itemSource = {
     }
 }
 
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
-    }
-}
-  
 function EventFunctionDrag(props) {
     const { workspace, setWorkspace, eventIndex, item, connectDragSource } = props
 
@@ -43,5 +37,5 @@ function EventFunctionDrag(props) {
 export default DragSource(
     ItemTypes.EVENT_FUNCTION,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(EventFunctionDrag);

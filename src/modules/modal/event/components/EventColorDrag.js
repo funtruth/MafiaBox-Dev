@@ -3,19 +3,13 @@ import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
 
 const itemSource = {
     beginDrag(props) {
         return {
             hexcode: props.item,
         }
-    }
-}
-
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
     }
 }
   
@@ -56,5 +50,5 @@ function EventColorDrag(props) {
 export default DragSource(
     ItemTypes.EVENT_COLOR,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(EventColorDrag);

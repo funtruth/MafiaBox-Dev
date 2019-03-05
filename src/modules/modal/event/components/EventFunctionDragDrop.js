@@ -2,6 +2,8 @@ import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
+
 import EventFunctionDrop from './EventFunctionDrop';
 
 const itemSource = {
@@ -51,13 +53,6 @@ function collectDrop(connect, monitor) {
     }
 }
 
-function collectDrag(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
-    }
-}
-  
 function EventFunctionDragDrop(props) {
     const { item, connectDragSource, connectDropTarget } = props
     const { functionKey } = item
@@ -80,7 +75,7 @@ function EventFunctionDragDrop(props) {
 export default DragSource(
     ItemTypes.EVENT_STRING,
     itemSource,
-    collectDrag,
+    COLLECT_DRAG,
 )(DropTarget(
     [ItemTypes.EVENT_FUNCTION],
     itemTarget,

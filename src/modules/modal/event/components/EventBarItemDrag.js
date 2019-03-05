@@ -2,17 +2,11 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
+import { COLLECT_DRAG } from '../EventDND';
 
 const itemSource = {
     beginDrag(props) {
         return {}
-    }
-}
-
-function collect(connect, monitor) {
-    return {
-        connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
     }
 }
   
@@ -48,5 +42,5 @@ function EventBarItemDrag(props) {
 export default DragSource(
     ItemTypes.EVENT_STRING,
     itemSource,
-    collect
+    COLLECT_DRAG,
 )(EventBarItemDrag);
