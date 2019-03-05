@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import * as stringTool from '../stringTool'
-import { StatefulSourceId } from '../../dropdown/types';
+import { StatefulSourceId } from '../../../dropdown/types';
 
-export default function ToastEditor(props) {
+export default function ToastWorkspace(props) {
     useEffect(() => {
         const target = document.getElementById('toast-editor-input')
 

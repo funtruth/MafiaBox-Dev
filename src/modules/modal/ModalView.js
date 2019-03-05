@@ -22,9 +22,8 @@ import TemplateModal from './keys/TemplateModal'
 import SaveChanges from './components/SaveChanges';
 import EditTrigger from './update/EditTrigger'
 import EditEvent from './event/EditEvent'
-import EditToast from './return/EditToast'
+import EditToast from './toast/EditToast'
 import EditPriority from './priority/EditPriority'
-import EditVarDetails from './vars/EditVarDetails'
 import AssignVarModal from './vars/AssignVarModal'
 
 class ModalView extends React.Component {
@@ -58,8 +57,6 @@ class ModalView extends React.Component {
                 return <EditToast {...props}/>
             case modalType.editPriority:    
                 return <EditPriority {...props}/>
-            case modalType.editVar:
-                return <EditVarDetails {...props}/>
             case modalType.assignVar:
                 return <AssignVarModal {...props}/>
             default:

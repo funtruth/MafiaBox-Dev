@@ -1,7 +1,7 @@
 import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
 import * as helpers from '../common/helpers'
 import { orderOfOp } from '../modal/vars/components/ops'
-import { stringToCode } from '../strings/stringTool';
+import { stringToCode } from '../modal/toast/stringTool';
 
 var beautify_js = require('js-beautify');
 

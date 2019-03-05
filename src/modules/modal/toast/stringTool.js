@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { dropdownType } from '../dropdown/types'
+import { dropdownType } from '../../dropdown/types'
 
-import { convertString } from '../logic/LogicReducer'
+import { convertString } from '../../logic/LogicReducer'
 
 export function braceToHtml(string='', sourceId, statefulPath=[]) {
     let parts = []

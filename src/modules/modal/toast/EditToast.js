@@ -4,9 +4,9 @@ import _ from 'lodash'
 import { StatefulSourceId } from '../../dropdown/types'
 
 import ModalOptions from '../components/ModalOptions'
-import ToastEditor from '../../strings/components/ToastEditor';
 import ModalCheckSave from '../components/ModalCheckSave';
 import DropdownView from '../../dropdown/DropdownView';
+import ToastWorkspace from './components/ToastWorkspace';
 
 export default function EditToast(props) {
     const { path } = props
@@ -47,7 +47,7 @@ export default function EditToast(props) {
                     width: '45vw',
                 }}
             >
-                <ToastEditor
+                <ToastWorkspace
                     workspace={workspace}
                     setWorkspace={setWorkspace}
                 />
