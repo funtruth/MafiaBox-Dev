@@ -1,7 +1,7 @@
 import React from 'react'
-import Modal from './Modal';
+import Modal from '../components/Modal';
 
-export default function SaveChanges(props) {
+export default function DialogSave(props) {
     let _onSave = () => {
         props.onSave()
     }

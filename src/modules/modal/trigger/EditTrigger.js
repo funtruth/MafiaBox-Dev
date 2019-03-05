@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
+import './EditTrigger.css'
 import { connect } from 'react-redux'
 
-import { triggerNewVars } from '../../logic/types'
-import { logicType } from '../../logic/types'
+import { triggerNewVars, logicType } from '../../logic/types'
+import { StatefulSourceId } from '../../dropdown/types'
 
 import { getUpdateCode } from '../../logic/LogicReducer'
 
@@ -10,39 +11,47 @@ import LogicNewVars from '../../logic/components/LogicNewVars'
 import LogicObject from '../../logic/form/LogicObject';
 import CodeField from '../../code/components/CodeField';
 import ModalOptions from '../components/ModalOptions';
+import ModalCheckSave from '../components/ModalCheckSave';
+import DropdownView from '../../dropdown/DropdownView';
 
 var beautify_js = require('js-beautify');
 
-class EditTrigger extends React.Component {
-    _onSave = () => {
-        this.props.onSave()
-        this.props.popModalBy(1)
+function EditTrigger(props) {
+    let [workspace, setWorkspace] = useState('')
+
+    const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, path, updateRef } = props
+
+    let handleSave = () => {
+        props.onSave()
+        props.popModalBy(1)
+    }
+
+    const data = attach && attach.value
+    const iprops = {
+        indexKey,
+        logicInfo: {
+            data,
+            logicType: logicType.update.key,
+        },
+        pageKey,
+        fieldKey,
+        subfieldKey,
+        vars: {
+            ...attachVar,
+            ...triggerNewVars,
+        },
+        path,
     }
     
-    render() {
-        const { pageKey, fieldKey, indexKey, subfieldKey, attach, attachVar, path, updateRef } = this.props
-        
-        const data = attach && attach.value
-        const iprops = {
-            indexKey,
-            logicInfo: {
-                data,
-                logicType: logicType.update.key,
-            },
-            pageKey,
-            fieldKey,
-            subfieldKey,
-            vars: {
-                ...attachVar,
-                ...triggerNewVars,
-            },
-            path,
-        }
-        
-        const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})
-        
-        return (
-            <div cancel-appclick="true">
+    const code = beautify_js(getUpdateCode(data), {brace_style: 'end-expand'})
+    
+    return (
+        <ModalCheckSave
+            {...props}
+        >
+            <div
+                cancel-appclick="true"
+            >
                 <div className="row">
                     <div className="border-right -t-m">
                         <div className="dashboard-section-title">VARIABLES</div>
@@ -70,12 +79,17 @@ class EditTrigger extends React.Component {
                     </div>
                 </div>
                 <ModalOptions
-                    onSave={this._onSave}
-                    onClose={this.props.onClose}
+                    onSave={handleSave}
+                    onClose={props.onClose}
                 />
             </div>
-        )
-    }
+            <DropdownView
+                sourceId={StatefulSourceId.editTrigger}
+                state={workspace}
+                updateState={setWorkspace}
+            />
+        </ModalCheckSave>
+    )
 }
 
 export default connect(

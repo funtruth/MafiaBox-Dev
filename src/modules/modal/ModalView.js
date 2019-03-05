@@ -19,8 +19,9 @@ import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
 
-import SaveChanges from './components/SaveChanges';
-import EditTrigger from './update/EditTrigger'
+import DialogSave from './dialogs/DialogSave';
+
+import EditTrigger from './trigger/EditTrigger'
 import EditEvent from './event/EditEvent'
 import EditToast from './toast/EditToast'
 import EditPriority from './priority/EditPriority'
@@ -48,7 +49,8 @@ class ModalView extends React.Component {
                 return <FunctionPageModal {...props} location={this.props.location}/>
             
             case modalType.saveChanges:
-                return <SaveChanges {...props}/>
+                return <DialogSave {...props}/>
+                
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>
             case modalType.editEvent:

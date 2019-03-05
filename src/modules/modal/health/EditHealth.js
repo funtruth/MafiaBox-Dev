@@ -1,4 +1,5 @@
 import React from 'react'
+import './EditHealth.css'
 
 import StringDashboard from '../../strings/StringDashboard';
 import ModalOptions from '../components/ModalOptions'
