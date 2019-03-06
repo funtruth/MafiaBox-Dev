@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateSourceType } from '../../common/types';
 import { updateType, updateViewType } from '../types';
 import { modalType } from '../../modal/types'
 
@@ -15,7 +14,8 @@ class UpdateButton extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, config, value, prefix, vars, pageRepo, showOptions, path, nested } = this.props
+        const { pageKey, fieldKey, indexKey, config, value, updateSource,
+            prefix, vars, pageRepo, showOptions, path, nested } = this.props
         const info = (value.data && value.data[prefix]) || {}
 
         let buttonText = "", onClick
@@ -43,9 +43,9 @@ class UpdateButton extends React.Component{
                     subfieldKey: prefix,
                     attach: (value.data && value.data[prefix]) || {},
                     attachVar: vars,
-                    isTrigger: true,
-                    path: ['attach', 'value'],
-                    updateSource: updateSourceType.topModal,
+                    path, //WIPneed to update this
+                    subpath: [prefix],
+                    updateSource,
                 })
                 buttonText = <i className="mdi mdi-flag"/>
                 break
@@ -56,6 +56,7 @@ class UpdateButton extends React.Component{
                     attachVar: vars,
                     path,
                     subpath: [prefix],
+                    updateSource,
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
@@ -93,6 +94,7 @@ class UpdateButton extends React.Component{
                             attachVar: vars,
                             path,
                             subpath: [prefix],
+                            updateSource,
                         })}
                     >
                         {buttonText}
@@ -115,6 +117,7 @@ class UpdateButton extends React.Component{
                             attachVar: vars,
                             path,
                             subpath: [prefix],
+                            updateSource,
                         })}
                     />)}
                     {nested && <i

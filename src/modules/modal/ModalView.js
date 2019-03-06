@@ -8,7 +8,6 @@ import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
 import { updateSourceType } from '../common/types'
-import { updateViewType } from '../logic/types'
 
 import FunctionPageModal from './components/FunctionPageModal';
 
@@ -91,22 +90,9 @@ class ModalView extends React.Component {
                         props.updatePage = (path, value) => this.props.updateTopModal(path, value)
                         break
                     default:
-                        props.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+                        props.updatePage = () => console.warn('updatePage is not set up for this Modal.')
                 }
 
-                switch(props.key) {
-                    case modalType.editTrigger:
-                        props.onSave = () => this.props.updateRepo(
-                            [props.pageKey, props.fieldKey, props.indexKey, 'data', props.subfieldKey],
-                            {
-                                ...props.attach,
-                                updateViewType: updateViewType.trigger,
-                            },
-                        )
-                        break
-                    default:
-                }
-                
                 return this._renderItem(props)
             })
         )

@@ -8,9 +8,9 @@ var beautify_js = require('js-beautify');
 const initialState = {}
 
 //THUNK FUNCTIONS
-export function getCode(key, library) {
+export function getCode(library) {
     return (dispatch) => {
-        return beautify_js(`(rss, write, choice)=>{${recursive(key, library)}}`, {brace_style: 'end-expand'})
+        return beautify_js(`(rss, write, choice)=>{${recursive(library)}}`, {brace_style: 'end-expand'})
     }
 }
 
@@ -62,13 +62,15 @@ export function updateVariables(logicInfo) {
     }
 }
 
-function recursive(key, library) {
-    if (!key || !library[key] || !library[key].logicType) return
+function recursive(library) {
+    if (!library || !library.logicType) return ""
 
-    const type = library[key].logicType
-    const opType = library[key].operatorType
-    const data = library[key].data
-
+    const {
+        logicType: type,
+        operatorType: opType,
+        data,
+    } = library
+    
     let codeCurrent = ''
     switch(type) {
         case logicType.operator.key:
@@ -97,7 +99,7 @@ function recursive(key, library) {
     if (!codeCurrent) codeCurrent = ''
 
     let codeBody = ''
-    let codeRight = recursive(library[key].right, library) || ''
+    let codeRight = recursive(library.right) || ''
     switch(type) {
         case logicType.operator.key:
             switch(opType) {
@@ -132,7 +134,7 @@ function recursive(key, library) {
             codeBody = ''
     }
     
-    let codeDown = library[key].down ? recursive(library[key].down, library) : ''
+    let codeDown = recursive(library.down)
 
     return helpers.swapVarFormat(`${codeBody}${codeDown}`, false)
 }
@@ -250,7 +252,6 @@ export function getUpdateCode(data) {
     let string = ''
     for (var field in data) {
         const info = data[field]
-        if (!info.value) continue
 
         if (info.update) {
             string = string.concat(
@@ -266,7 +267,7 @@ export function getUpdateCode(data) {
 
         switch(info.updateViewType) {
             case updateViewType.trigger:
-                string = string.concat(`rss.${convertPropertyFields(field)}=(visitor)=>{${getUpdateCode(info.value)}}`)
+                string = string.concat(`rss.${convertPropertyFields(field)}=(visitor)=>{${recursive(info)}}`)
                 break
             case updateViewType.events:
                 string = string.concat(

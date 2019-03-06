@@ -3,10 +3,10 @@ import './logic.css'
 import { connect } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
 
-import * as maptool from './maptool'
+//import * as maptool from './maptool'
 import { updateVariables } from './LogicReducer'
 
-import LogicErrors from './components/LogicErrors'
+//import LogicErrors from './components/LogicErrors'
 import LogicType from './components/LogicType';
 import LogicOptions from './components/LogicOptions'
 import LogicPanels from './components/LogicPanels';
@@ -21,7 +21,7 @@ function LogicBlock(props) {
     //const errors = maptool.compile(indexKey, value)
     //const collapsed = logicInfo.collapsed
     
-    const newVars = {} //props.updateVariables(logicInfo)
+    const newVars = props.updateVariables(value)
     const compiledVars = Object.assign({}, vars, newVars)
 
     return (
