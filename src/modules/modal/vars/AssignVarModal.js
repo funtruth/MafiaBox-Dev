@@ -14,9 +14,9 @@ import ModalCheckSave from '../components/ModalCheckSave';
 export default function AssignVarModal(props) {
     let [error, setError] = useState('')
 
-    const { attachVar } = props
+    const { attach, attachVar, path } = props
 
-    const workspace = props.attach
+    const workspace = attach
     const mainProps = {
         workspace,
         setWorkspace: props.setWorkspace,
@@ -40,7 +40,7 @@ export default function AssignVarModal(props) {
             return
         }
 
-        props.updatePage(workspace)
+        props.updatePage(path, workspace)
         props.popModalBy(1)
     }
     

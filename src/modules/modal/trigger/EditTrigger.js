@@ -20,6 +20,10 @@ function EditTrigger(props) {
         props.popModalBy(1)
     }
 
+    let updatePage = (path, value) => {
+        props.setWorkspace(value, path)
+    }
+
     const mainProps = {
         workspace,
         setWorkspace: props.setWorkspace,
@@ -38,6 +42,7 @@ function EditTrigger(props) {
         },
         path: ['attach'],
         subpath: [],
+        updatePage,
         updateSource: updateSourceType.topModal,
     }
     

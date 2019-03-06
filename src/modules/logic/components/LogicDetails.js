@@ -8,12 +8,12 @@ import LogicExpandable from '../form/LogicExpandable';
 import LogicVarWrapper from '../vars/LogicVarWrapper'
 
 export default function LogicDetails(props) {
-    const { updateRef, logicInfo } = props
+    const { updateRef, value } = props
     const { 
         data,
         logicType: type,
         operatorType: otype,
-    } = logicInfo
+    } = value
 
     switch(type) {
         case logicType.operator.key:

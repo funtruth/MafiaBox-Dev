@@ -23,20 +23,20 @@ class LogicExpandable extends React.Component{
     }
 
     _toggle = () => {
-        const { pageKey, fieldKey, indexKey, subfieldKey, logicInfo, prefix } = this.props
+        const { pageKey, fieldKey, indexKey, subfieldKey, value, prefix } = this.props
         
         if (subfieldKey) {
             this.props.updateTopModal(
                 ['attach', 'value', prefix],
                 {
-                    hide: !logicInfo.data || !logicInfo.data[prefix] || !logicInfo.data[prefix].hide,
+                    hide: !value.data || !value.data[prefix] || !value.data[prefix].hide,
                 }
             )
         } else {
             this.props.updateRepo(
                 [pageKey, fieldKey, indexKey, 'data', prefix],
                 {
-                    hide: !logicInfo.data || !logicInfo.data[prefix] || !logicInfo.data[prefix].hide
+                    hide: !value.data || !value.data[prefix] || !value.data[prefix].hide
                 }
             )
         }
@@ -61,11 +61,11 @@ class LogicExpandable extends React.Component{
     }
 
     render() {
-        const { logicInfo, nested, property, updateRef, prefix } = this.props
+        const { value, nested, property, updateRef, prefix } = this.props
         const { showOptions } = this.state
     
-        const hidden = logicInfo.data && logicInfo.data[prefix] && logicInfo.data[prefix].hide
-        const attributes = proptool.getSubfields(prefix, logicInfo.data)
+        const hidden = value.data && value.data[prefix] && value.data[prefix].hide
+        const attributes = proptool.getSubfields(prefix, value.data)
         const hasAttr = attributes.length > 0
         const isVarField = property.charAt(0) === '$'
 

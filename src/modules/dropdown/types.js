@@ -7,10 +7,8 @@ export const dropdownType = {
     dropInput: 'dropdownType/drop-input',
 
     pickLogic: 'dropdownType/show-logic',
-    showLogicOptions: 'dropdownType/show-logic-options',
     pickOperator: 'dropdownType/pick-operator',
     deleteLogic: 'dropdownType/delete-logic',
-    pickDeleteMode: 'dropdownType/pick-delete-mode',
     pickReturnType: 'dropdownType/pick-return-type',
 
     editTag: 'dropdownType/edit-tag',

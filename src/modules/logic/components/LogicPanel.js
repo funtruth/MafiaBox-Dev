@@ -6,8 +6,8 @@ import { dataPropToTitle } from '../LogicReducer'
 class LogicPanel extends React.Component{
     render() {
         const { pageKey, fieldKey, indexKey, subfieldKey,
-            logicInfo, vars, placeholder, dropdown, path } = this.props
-        const { data } = logicInfo
+            value, vars, placeholder, dropdown, path } = this.props
+        const { data } = value
         const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 
         return (

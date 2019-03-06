@@ -20,7 +20,6 @@ import StoryMapLib from './library/StoryMapLib';
 import PageLib from './library/PageLib';
 
 import PickLogic from './logic/PickLogic';
-import PickDeleteMode from './logic/PickDeleteMode'
 import PickReturnType from './logic/PickReturnType';
 
 import EditTag from './template/EditTag'
@@ -66,7 +65,6 @@ import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
 import PickOperator from './logic/PickOperator';
-import ShowLogicOptions from './logic/ShowLogicOptions';
 
 function DropdownView(props) {
     const { update, mutate, dropdownKeys } = props
@@ -138,12 +136,8 @@ function DropdownView(props) {
                 return <PickLogic {...renderProps}/>
             case dropdownType.pickOperator:
                 return <PickOperator {...renderProps}/>
-            case dropdownType.pickDeleteMode:
-                return <PickDeleteMode {...renderProps}/>
             case dropdownType.pickReturnType:
                 return <PickReturnType {...renderProps}/>
-            case dropdownType.showLogicOptions:
-                return <ShowLogicOptions {...renderProps}/>
 
             case dropdownType.editTag:
                 return <EditTag {...renderProps}/>

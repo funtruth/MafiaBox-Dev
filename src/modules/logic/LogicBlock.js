@@ -15,62 +15,53 @@ import LogicDetails from './components/LogicDetails';
 function LogicBlock(props) {
     //const rng = helpers.genUID('rng')
 
-    const { pageKey, fieldKey, indexKey, vars, subpath, path, updateSource, updateRef, value } = props
+    const { vars, path, value, indent, showBorderLeft } = props
+    if (!value) return null
     
-    const logicInfo = value[indexKey]
-    if (!logicInfo) return null
-    
-    const errors = maptool.compile(indexKey, value)
+    //const errors = maptool.compile(indexKey, value)
     //const collapsed = logicInfo.collapsed
-    const iprops = {
-        indexKey,
-        boardInfo: value,
-        logicInfo,
-        pageKey,
-        fieldKey,
-        vars,
-        path: [...path, indexKey],
-        subpath,
-        updateSource,
-    }
     
-    const newVars = props.updateVariables(logicInfo)
+    const newVars = {} //props.updateVariables(logicInfo)
     const compiledVars = Object.assign({}, vars, newVars)
-
-    const isVerticalParent = !logicInfo.source || logicInfo.sourceDir === 'right'
-    const isHorizontalChild = logicInfo.sourceDir === 'right'
 
     return (
         <div
             style={{
-                marginTop: 8,
-                marginLeft: isHorizontalChild ? 40 : 0,
-                borderLeft: isVerticalParent ? '1px dashed #666' : null,
+                marginTop: 4,
+                marginLeft: indent ? 40 : 0,
+                borderLeft: showBorderLeft ? '1px dashed #666' : null,
                 borderRadius: 2,
+                font: '500 13px Arial',
             }}
         >
-            <div
-                className="row-nowrap"
-                style={{
-                    marginBottom: 'auto',
-                    cursor: 'default',
-                    userSelect: 'none',
-                    paddingLeft: 4,
-                }}
-            >
+            <div className="row-nowrap" style={{ paddingLeft: 4 }}>
+                <LogicType {...props}/>
                 <div>
-                    <div className="row-nowrap">
-                        <LogicType {...iprops}/>
-                        <LogicPanels {...iprops} path={[...path, indexKey, 'data']}/>
-                        <LogicOptions {...iprops}/>
+                    <div className="row">
+                        <LogicPanels {...props} path={[...path, 'data']}/>
+                        <LogicOptions {...props}/>
                     </div>
-                    <LogicDetails {...iprops} updateRef={updateRef} path={[...path, indexKey, 'data']}/>
-                    <LogicErrors errors={errors}/>
+                    <LogicDetails {...props} path={[...path, 'data']}/>
                 </div>
-                <ReactTooltip place="right"/>
             </div>
-            {logicInfo.right && <LogicBlock {...props} indexKey={logicInfo.right} vars={compiledVars}/>}
-            {logicInfo.down && <LogicBlock {...props} indexKey={logicInfo.down} vars={compiledVars}/>}
+            {/*<LogicErrors errors={errors}/>*/}
+            <ReactTooltip place="right"/>
+            <LogicBlock
+                {...props}
+                indent={true}
+                showBorderLeft={true}
+                value={value.right}
+                path={[...path, 'right']}
+                vars={compiledVars}
+            />
+            <LogicBlock
+                {...props}
+                indent={false}
+                showBorderLeft={false}
+                value={value.down}
+                path={[...path, 'down']}
+                vars={compiledVars}
+            />
         </div>
     )
 }

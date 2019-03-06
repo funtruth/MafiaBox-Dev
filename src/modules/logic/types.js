@@ -286,10 +286,12 @@ export const updateType = {
     },
 }
 
-export const defaultLogic = {
-    START: {
-        logicType: '',
-    }
+export const DEFAULT_LOGIC = {
+    logicType: "",
+    operatorType: "",
+    data: {},
+    right: "",
+    down: "",
 }
 
 export const variableType = {

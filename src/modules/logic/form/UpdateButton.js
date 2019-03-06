@@ -15,8 +15,8 @@ class UpdateButton extends React.Component{
     }
 
     render() {
-        const { pageKey, fieldKey, indexKey, config, logicInfo, prefix, vars, pageRepo, showOptions, path, nested } = this.props
-        const info = (logicInfo.data && logicInfo.data[prefix]) || {}
+        const { pageKey, fieldKey, indexKey, config, value, prefix, vars, pageRepo, showOptions, path, nested } = this.props
+        const info = (value.data && value.data[prefix]) || {}
 
         let buttonText = "", onClick
         switch(info.updateViewType) {
@@ -41,7 +41,7 @@ class UpdateButton extends React.Component{
                     indexKey,
                     fieldKey,
                     subfieldKey: prefix,
-                    attach: (logicInfo.data && logicInfo.data[prefix]) || {},
+                    attach: (value.data && value.data[prefix]) || {},
                     attachVar: vars,
                     isTrigger: true,
                     path: ['attach', 'value'],
@@ -52,7 +52,7 @@ class UpdateButton extends React.Component{
             case updateViewType.events:
                 onClick = () => this.props.showModal(modalType.editEvent, {
                     subfieldKey: prefix,
-                    attach: (logicInfo.data && logicInfo.data[prefix]) || {},
+                    attach: (value.data && value.data[prefix]) || {},
                     attachVar: vars,
                     path,
                     subpath: [prefix],
@@ -89,7 +89,7 @@ class UpdateButton extends React.Component{
                             indexKey,
                             fieldKey,
                             subfieldKey: prefix,
-                            attach: logicInfo.data || {},
+                            attach: value.data || {},
                             attachVar: vars,
                             path,
                             subpath: [prefix],
@@ -111,7 +111,7 @@ class UpdateButton extends React.Component{
                             indexKey,
                             fieldKey,
                             subfieldKey: prefix,
-                            attach: logicInfo.data || {},
+                            attach: value.data || {},
                             attachVar: vars,
                             path,
                             subpath: [prefix],

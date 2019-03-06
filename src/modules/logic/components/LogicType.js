@@ -1,35 +1,47 @@
 import React from 'react'
+
 import { dropdownType } from '../../dropdown/types'
-import { logicType, operatorType } from '../types'
+import { logicType, operatorType, DEFAULT_LOGIC } from '../types'
 
 export default function LogicType(props) {
-    const { indexKey, logicInfo, fieldKey, pageKey, path, subpath, updateSource } = props
+    const { value, path, subpath, updateSource } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
-    } = logicInfo
+    } = value
     
-    const item = selectedOperator ? operatorType[selectedOperator] : selectedLogic ? logicType[selectedLogic] : {}
+    const item = selectedOperator ?
+        operatorType[selectedOperator]
+        :(selectedLogic ? logicType[selectedLogic] : {})
     
+    let handleAdd = () => {
+        props.updatePage(path, {
+            down: {
+                ...DEFAULT_LOGIC,
+                down: value.down,
+            },
+        })
+    }
+
     return (
-        <i 
-            className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
-            menu-type={dropdownType.pickLogic}
-            app-onclick-props={JSON.stringify({
-                pageKey,
-                fieldKey,
-                indexKey,
-                attach: logicInfo,
-                updateSource,
-                path,
-                subpath,
-            })}
-            style={{
-                backgroundColor: item.color || '#767676',
-                color: '#fff',
-                width: 18,
-                borderRadius: '4px 0px 0px 4px',
-            }}
-        />
+        <div>
+            <i 
+                className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
+                menu-type={dropdownType.pickLogic}
+                app-onclick-props={JSON.stringify({
+                    attach: value,
+                    updateSource,
+                    path,
+                    subpath,
+                })}
+                style={{
+                    backgroundColor: item.color || '#767676',
+                }}
+            />
+            <i 
+                className="logic-option mdi mdi-server-plus"
+                onClick={handleAdd}
+            />
+        </div>
     )
 }

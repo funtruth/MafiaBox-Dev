@@ -6,11 +6,11 @@ import { dropdownType } from '../../dropdown/types'
 import LogicPanel from './LogicPanel'
 
 export default function LogicPanels(props) {
-    const { logicInfo } = props
+    const { value } = props
     const {
         logicType: selectedLogic,
         operatorType: selectedOperator,
-    } = logicInfo
+    } = value
     
     switch(selectedLogic) {
         case logicType.operator.key:

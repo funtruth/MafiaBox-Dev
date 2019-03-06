@@ -30,10 +30,8 @@ class LogicBoard extends React.Component {
     render() {
         const { value, vars: attachVars } = this.props
         
-        const origin = _.findKey(value, i => !i.source)
+        const origin = ""
         const vars = helpers.swapVarFormat(attachVars, true)
-
-        if (!value) return null
         
         return (
             <div className="logic-board">
@@ -50,8 +48,9 @@ class LogicBoard extends React.Component {
                 <div style={{ margin: '0px 6px' }}>
                     <LogicBlock
                         {...this.props}
+                        indent={false}
+                        showBorderLeft={true}
                         value={value}
-                        indexKey={origin}
                         vars={vars}
                     />
                 </div>

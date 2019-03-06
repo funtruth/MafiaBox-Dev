@@ -16,7 +16,8 @@ export default function EditEvent(props) {
     let [text, setText] = useState('')
     let [error, setError] = useState('')
 
-    const workspace = props.attach
+    const { attach, attachVar, path } = props
+    const workspace = attach
     
     const { eventIndex, stringIndex, eventArr } = workspace
     const selectedEvent = eventArr[eventIndex] || WS_EDIT_EVENT_VALUE
@@ -32,7 +33,7 @@ export default function EditEvent(props) {
     }
 
     let handleSave = () => {
-        props.updatePage({
+        props.updatePage(path, {
             eventArr: workspace.eventArr,
             updateViewType: updateViewType.events,
         })
@@ -45,7 +46,7 @@ export default function EditEvent(props) {
                 <div className="row" style={{ height: '100%' }}>
                     <EventBarDrop {...mainProps}/>
                     <EventPlayground {...mainProps}/>
-                    <EventDetailer {...mainProps} vars={props.attachVar}/>
+                    <EventDetailer {...mainProps} vars={attachVar}/>
                 </div>
                 <ModalOptions
                     error={error}

@@ -7,7 +7,9 @@ import ToastWorkspace from './components/ToastWorkspace';
 export default function EditToast(props) {
     let [error, setError] = useState('')
 
-    const workspace = props.attach
+    const { attach, path } = props
+
+    const workspace = attach
 
     const mainProps = {
         workspace,
@@ -21,7 +23,7 @@ export default function EditToast(props) {
             return setError('Toast message cannot be empty.')
         }
 
-        props.updatePage({
+        props.updatePage(path, {
             ...workspace,
             key: 'toast', //TODO used in PickReturnType and LogicReducer
         })
