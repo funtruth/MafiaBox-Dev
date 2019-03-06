@@ -22,6 +22,8 @@ export default function ModalCheckSave(props) {
             }
         }
     }
+
+    if (!attach) console.warn('ModalCheckSave is being used without an attach value.')
         
     return (
         <div id="parent-only" className="modal" onClick={handleClick}>

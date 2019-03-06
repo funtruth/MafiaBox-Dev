@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './EditTrigger.css'
 import { connect } from 'react-redux'
 
-import { triggerNewVars, logicType, defaultLogic } from '../../logic/types'
+import { triggerNewVars, logicType } from '../../logic/types'
 import { updateSourceType } from '../../common/types';
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
@@ -55,7 +55,9 @@ function EditTrigger(props) {
                     <div className="-x-p">
                         <LogicNewVars newVars={triggerNewVars}/>
                     </div>
-                    <div className="-sep"/>
+                </div>
+                <div className="-sep"/>
+                <div className="edit-trigger-board">
                     <LogicBoard {...mainProps}/>
                 </div>
                 <ModalOptions
