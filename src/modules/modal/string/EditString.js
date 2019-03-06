@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './EditEvent.css'
+import './EditString.css'
 
 import { updateViewType } from '../../logic/types'
 import { WS_EDIT_EVENT_VALUE, WS_EDIT_EVENT } from './components/EventConstants'
@@ -8,11 +8,10 @@ import { updateSourceType } from '../../common/types';
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
 
-import EventBarDrop from './components/EventBarDrop';
 import EventPlayground from './components/EventPlayground';
 import EventDetailer from './components/EventDetailer';
 
-export default function EditEvent(props) {
+export default function EditString(props) {
     let [text, setText] = useState('')
     let [error, setError] = useState('')
 
@@ -46,7 +45,6 @@ export default function EditEvent(props) {
         <ModalCheckSave {...props} handleSave={handleSave}>
             <div className="event-modal" cancel-appclick="true">
                 <div className="row" style={{ height: '100%' }}>
-                    <EventBarDrop {...mainProps}/>
                     <EventPlayground {...mainProps}/>
                     <EventDetailer {...mainProps} vars={attachVar}/>
                 </div>

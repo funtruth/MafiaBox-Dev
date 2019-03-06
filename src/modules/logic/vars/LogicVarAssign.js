@@ -20,8 +20,16 @@ function LogicVarAssign(props) {
     const isUid = item.variableTypes.includes(variableType.uid.key)
     const isBoolean = item.variableTypes.includes(variableType.boolean.key)
 
-    let handleModal = () => {
+    let handleNumber = () => {
         props.showModal(modalType.assignVar, {
+            attachVar: vars,
+            attach: item,
+            path: newPath,
+        })
+    }
+
+    let handleString = () => {
+        props.showModal(modalType.editString, {
             attachVar: vars,
             attach: item,
             path: newPath,
@@ -34,7 +42,7 @@ function LogicVarAssign(props) {
                 <div
                     className="logic-pick-update"
                     highlight="true"
-                    onClick={handleModal}
+                    onClick={handleNumber}
                 >
                     {orderOfOp(item.assign) || '...'}
                 </div>
@@ -72,7 +80,15 @@ function LogicVarAssign(props) {
                 </div>
             )
         } else {
-            return <div className="logic-pick-update">coming soon</div>
+            return (
+                <div
+                    className="logic-pick-update"
+                    highlight="true"
+                    onClick={handleString}
+                >
+                    {'...'}
+                </div>
+            )
         }
     }
 

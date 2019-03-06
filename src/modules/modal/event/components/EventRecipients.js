@@ -3,7 +3,7 @@ import React from 'react'
 import { dropdownType } from '../../../dropdown/types'
 
 export default function EventRecipients(props) {
-    const { selectedEvent, eventIndex, updateSource } = props
+    const { workspace, selectedEvent, eventIndex, updateSource, path, subpath } = props
     const { showTo, hideFrom } = selectedEvent
 
     //showing only to selected uid's
@@ -23,9 +23,12 @@ export default function EventRecipients(props) {
                     className="cute-button app-onclick"
                     menu-type={dropdownType.pickRecipient}
                     app-onclick-props={JSON.stringify({
+                        attach: workspace,
                         selectionType: 'showTo',
                         eventIndex,
                         updateSource,
+                        path,
+                        subpath,
                     })}
                 >
                     everyone
@@ -34,9 +37,12 @@ export default function EventRecipients(props) {
                     className="cute-button app-onclick"
                     menu-type={dropdownType.pickRecipient}
                     app-onclick-props={JSON.stringify({
+                        attach: workspace,
                         selectionType: 'showTo',
                         eventIndex,
                         updateSource,
+                        path,
+                        subpath,
                     })}
                 >
                     {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
@@ -46,9 +52,12 @@ export default function EventRecipients(props) {
                     empty="true"
                     menu-type={dropdownType.pickRecipient}
                     app-onclick-props={JSON.stringify({
+                        attach: workspace,
                         selectionType: 'hideFrom',
                         eventIndex,
                         updateSource,
+                        path,
+                        subpath,
                     })}
                     style={{
                         marginLeft: 6,

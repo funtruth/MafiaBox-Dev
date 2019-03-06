@@ -20,7 +20,7 @@ function collect(connect, monitor) {
 }
 
 function EventBarDrop(props) {
-    const { connectDropTarget, workspace, setWorkspace, setText, eventIndex, setError } = props
+    const { connectDropTarget, workspace, setWorkspace, setText, setError } = props
     const { eventArr } = workspace
 
     let handleCreate = () => {

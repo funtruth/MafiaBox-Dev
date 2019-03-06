@@ -1,8 +1,10 @@
-import _ from 'lodash'
-
 const CIPHER = {
     A26: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     A26wSPACE: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ',
+}
+
+function isArray(obj){
+    return !!obj && obj.constructor === Array;
 }
 
 export function genUID(key, repo, suffix='-xxxx') {
@@ -20,10 +22,11 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
     const typeofUpdate = typeof update
     const endOfPath = path.length <= pathIndex
 
+    //handling String, Number, and Array updates
     if (endOfPath) {
         if (typeofUpdate === 'string' || typeofUpdate === 'number') {
             return update
-        } else if (_.isArray(update)) {
+        } else if (isArray(update)) {
             return update
         }
     }
@@ -37,7 +40,7 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
                     path,
                     update,
                     repo[path[pathIndex]]||{},
-                    pathIndex + 1
+                    pathIndex + 1,
                 ),
             }
         ),

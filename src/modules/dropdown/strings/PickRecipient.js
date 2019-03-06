@@ -6,8 +6,8 @@ import DropTitle from '../components/DropTitle';
 import DropEmpty from '../components/DropEmpty';
 
 export default function PickRecipient(props) {
-    const { selectionType, state, attachVar, eventIndex } = props
-    let wsClone = _.cloneDeep(state)
+    const { selectionType, attach, attachVar, eventIndex } = props
+    let wsClone = _.cloneDeep(attach)
 
     let pickUid = (item, info) => {
         const otherType = selectionType === 'showTo' ? 'hideFrom' : 'showTo'
@@ -35,7 +35,7 @@ export default function PickRecipient(props) {
 
     const inclusive = selectionType === 'showTo'
     
-    const selectedItem = (state.eventArr && state.eventArr[eventIndex]) || {}
+    const selectedItem = (wsClone.eventArr && wsClone.eventArr[eventIndex]) || {}
     const info = selectedItem[selectionType] || {}
     const everyone = Object.keys(selectedItem.showTo || {}).length === 0
     

@@ -16,4 +16,5 @@ export const modalType = {
     editToast: 'modalType/edit-toast',
     editPriority: 'modalType/edit-priority',
     assignVar: 'modalType/assign-var',
+    editString: 'modalType/edit-string',
 }
