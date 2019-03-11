@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModal } from '../modal/ModalReducer'
-import { navigate, goBack } from '../navigation/NavReducer'
-import { addPageToMap } from '../page/PageReducer'
+import { showModal } from '../../modal/ModalReducer'
+import { navigate, goBack } from '../../navigation/NavReducer'
+import { addPageToMap } from '../../page/PageReducer'
 
-import { modalType } from '../modal/types'
-import { boardType } from '../fields/defaults'
-import { developType } from '../navigation/paths'
+import { modalType } from '../../modal/types'
+import { boardType } from '../../fields/defaults'
+import { developType } from '../../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {

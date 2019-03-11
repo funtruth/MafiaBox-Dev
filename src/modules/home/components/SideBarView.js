@@ -4,9 +4,9 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { developType } from '../navigation/paths'
+import { developType } from '../../navigation/paths'
 
-import { navigate } from '../navigation/NavReducer'
+import { navigate } from '../../navigation/NavReducer'
 
 function SideBarView(props) {
     const { location, path } = props
@@ -45,13 +45,13 @@ function SideBarView(props) {
 
     return (
         <div className="side-bar-view">
-            {renderRedirect()}
             <div className="side-bar-header">
             </div>
             <div className="-sep"></div>
             <div className="side-bar-section-title">Develop</div>
             <div className="-sep"></div>
             {items.map(renderItem)}
+            {renderRedirect()}
         </div>
     )
 }

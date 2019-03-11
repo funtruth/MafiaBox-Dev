@@ -2,8 +2,8 @@ import React from 'react'
 import './home.css'
 import { Route, Switch } from 'react-router-dom'
 
-import SideBarView from './SideBarView';
-import HeaderView from './HeaderView';
+import SideBarView from './components/SideBarView';
+import HeaderView from './components/HeaderView';
 
 import LandingView from './LandingView'
 import FunctionView from '../board/views/FunctionView'

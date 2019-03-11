@@ -9,7 +9,6 @@ import ModalReducer from '../modules/modal/ModalReducer'
 import NavReducer from '../modules/navigation/NavReducer'
 import PageReducer from '../modules/page/PageReducer'
 import TemplateReducer from '../modules/template/TemplateReducer'
-import UserReducer from '../modules/user/UserReducer'
 
 const reducers = {
     app: AppReducer,
@@ -21,7 +20,6 @@ const reducers = {
     nav: NavReducer,
     page: PageReducer,
     template: TemplateReducer,
-    user: UserReducer,
 }
 
-export default combineReducers( reducers )
+export default combineReducers(reducers)

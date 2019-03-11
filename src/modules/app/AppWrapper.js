@@ -10,6 +10,8 @@ import { handleDragEnd } from './AppReducer'
 import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
 
+import AuthWrapper from '../auth/AuthWrapper'
+
 class AppWrapper extends React.Component{
     constructor(props) {
         super(props)
@@ -89,9 +91,9 @@ class AppWrapper extends React.Component{
             }
 
             if (menuClick) {
-                this.props.showDropdown(menuClick, e, {
-                    ...JSON.parse(e.target.getAttribute('app-onclick-props')),
-                })
+                this.props.showDropdown(menuClick, e, JSON.parse(
+                    e.target.getAttribute('app-onclick-props')
+                ))
             }
         }
     }
@@ -115,7 +117,9 @@ class AppWrapper extends React.Component{
     render() {
         return (
             <BeautifulDND onDragEnd={this._onDragEnd}>
-                {this.props.children}
+                <AuthWrapper>
+                    {this.props.children}
+                </AuthWrapper>
             </BeautifulDND>
         )
     }
@@ -123,7 +127,6 @@ class AppWrapper extends React.Component{
 
 export default DragDropContext(HTML5Backend)(connect(
     state => ({
-        storyMap: state.page.storyMap,
         dropdownKeys: state.dropdown.dropdownKeys,
     }),
     {

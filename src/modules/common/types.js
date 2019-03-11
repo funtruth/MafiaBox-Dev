@@ -1,9 +1,3 @@
-export const authType = {
-    pending: 'authType/pending',
-    no: 'authType/no',
-    yes: 'authType/yes',
-}
-
 export const droppableType = {
     board: 'droppableType/board',
     functionBoard: 'droppableType/function-board',

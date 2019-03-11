@@ -14,12 +14,11 @@ import HomeView from '../home/HomeView'
 import DropdownView from '../dropdown/DropdownView'
 import ModalView from '../modal/ModalView'
 
-export default class AppNavigator extends React.Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <Shell/>
+export default function AppNavigator(props) {
+    return (
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <Shell>
                     <AppWrapper>
                         <HashRouter>
                             <div>
@@ -29,8 +28,8 @@ export default class AppNavigator extends React.Component {
                             </div>
                         </HashRouter>
                     </AppWrapper>
-                </PersistGate>
-            </Provider>
-        )
-    }
+                </Shell>
+            </PersistGate>
+        </Provider>
+    )
 }
