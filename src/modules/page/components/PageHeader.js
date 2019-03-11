@@ -5,56 +5,36 @@ import { navigate } from '../../navigation/NavReducer'
 import { showModal } from '../../modal/ModalReducer'
 import { savePageToDB, publishPage } from '../../firebase/DBReducer'
 
-const leftBtns = [
-    { key: 'resize', title: 'Open as Page', icon: 'ion-ios-resize' }
-]
+function PageHeader(props) {
+    const { pageKey, location, match } = props
+    if (match) return null
 
-const rightBtns = [
-    { key: 'share', title: 'Share' },
-    { key: 'updates', title: 'Updates' },
-    { key: 'options', icon: 'ion-ios-more' },
-]
-
-class PageHeader extends React.Component{
-    _onClick = (key) => {
-        const { pageKey, location } = this.props
-        switch(key) {
-            case 'resize':
-                this.props.navigate(`${location.pathname}/${pageKey}`)
-                this.props.showModal()
-                break
-            case 'updates':
-                this.props.savePageToDB(pageKey)
-                break
-            case 'share':
-                this.props.publishPage(pageKey)
-                break
-            default:
-        }
+    let handleResize = () => {
+        props.navigate(`${location.pathname}/${pageKey}`)
+        props.showModal()
     }
 
-    _renderItem = (item, index) => {
-        return (
-            <div key={item.key} className="row header-button" onClick={this._onClick.bind(this, item.key)}>
-                <i className={`option-icon ${item.icon}`}></i>
-                {item.icon && item.title && <div style={{ width: 6 }}/>}
-                {item.title}
+    let handlePublish = () => {
+        props.savePageToDB(pageKey)
+        props.publishPage(pageKey)
+    }
+
+    return (
+        <div className="row page-header">
+            <div className="row header-button" onClick={handleResize}>
+                <i className="option-icon ion-ios-resize"></i>
+                Open as Page
             </div>
-        )
-    }
-
-    render() {
-        const { match } = this.props
-        if (match) return null
-
-        return (
-            <div className="row page-header">
-                {leftBtns.map(this._renderItem)}
-                <div style={{ marginRight: 'auto' }}/>
-                {rightBtns.map(this._renderItem)}
+            <div style={{ marginRight: 'auto' }}/>
+            <div className="row header-button" onClick={handlePublish}>
+                <i className="option-icon mdi mdi-publish"></i>
+                Publish
             </div>
-        )
-    }
+            <div className="row header-button" onClick={handlePublish}>
+                <i className="option-icon ion-ios-more"></i>
+            </div>
+        </div>
+    )
 }
 
 export default connect(

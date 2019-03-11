@@ -7,7 +7,7 @@ import { addPageToMap } from '../page/PageReducer'
 
 import { modalType } from '../modal/types'
 import { boardType } from '../fields/defaults'
-import { pathType } from '../navigation/paths'
+import { developType } from '../navigation/paths'
 
 class HeaderView extends React.Component{
     constructor(props) {
@@ -26,8 +26,8 @@ class HeaderView extends React.Component{
     }
 
     _getPathTitle(key) {
-        if (pathType[key]) {
-            return pathType[key] && pathType[key].label
+        if (developType[key]) {
+            return developType[key] && developType[key].label
         }
         else {
             return (this.props.pageRepo[key] && this.props.pageRepo[key].title) || 'Untitled'
@@ -48,28 +48,28 @@ class HeaderView extends React.Component{
         ]
         
         switch(paths[1]) {
-            case pathType.library.key:
+            case developType.library.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                     { key: 'editTemplate', boardType: boardType.library.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathType.roles.key:
+            case developType.roles.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                     { key: 'editTemplate', boardType: boardType.roles.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathType.phases.key:
+            case developType.phases.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },
                     { key: 'editTemplate', boardType: boardType.phases.key, title: 'Edit Defaults', icon: 'ion-md-browsers' },
                 ]
                 break
-            case pathType.events.key:
+            case developType.events.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
                     { key: 'addStory', title: 'Add a Story', icon: 'ion-md-browsers' },

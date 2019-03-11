@@ -1,6 +1,6 @@
 const initialState = {
-    path: false,
-    lastPath: null,
+    path: "/",
+    lastPath: "/",
 }
 
 const REMOTE_NAVIGATION = 'nav/remote-navigation'
