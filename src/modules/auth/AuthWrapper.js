@@ -1,27 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import './Auth.css';
+import { connect } from 'react-redux'
 import firebase from '../firebase/firebase'
 
 import { AUTH_SCREEN } from './AuthConstants'
 
+import { onAuthUser } from '../firebase/FirebaseReducer'
+
 import AuthLogin from './components/AuthLogin';
 import AuthRegister from './components/AuthRegister';
 
-export default function AuthWrapper(props) {
+function AuthWrapper(props) {
 	let [authState, setAuthState] = useState("")
 	let [authScreen, setAuthScreen] = useState(AUTH_SCREEN.LOGIN)
 
 	const AT_LOGIN = authScreen === AUTH_SCREEN.LOGIN
 
 	useEffect(() => {
-	firebase.auth().onAuthStateChanged(user => {
-		if (user) {
-			setAuthState('loggedIn')
-			console.log('logged in, User', {user})
-		} else {
-			setAuthState("notLoggedIn")
-		}
-	})
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				setAuthState("loggedIn")
+				const { uid } = user
+				const userRef = firebase.database().ref(`users/${uid}`)
+				const projectRef = firebase.database().ref(`projects/${uid}`)
+
+				userRef.on('value', snap => props.onAuthUser(snap.val()))
+				projectRef.on('value', e => console.log({e: e.val()}))
+
+				return () => {
+					if (userRef) userRef.off()
+					if (projectRef) projectRef.off()
+				};
+			} else {
+				setAuthState("notLoggedIn")
+			}
+		})
 	}, [])
 
 	let handleScreen = () => {
@@ -51,3 +64,10 @@ export default function AuthWrapper(props) {
 	
 	return <div className="auth-wrapper"></div>
 }
+
+export default connect(
+	null,
+	{
+		onAuthUser,
+	}
+)(AuthWrapper)

@@ -22,9 +22,16 @@ export default function AuthRegister(props) {
         }
 
         firebase.auth().createUserWithEmailAndPassword(id, pw)
-        .then(user => user.updateProfile({
-            displayName: `${firstName} ${lastName}`,
-        }))
+        .then(({user}) => {
+            const { email, photoURL, uid } = user
+            firebase.database().ref(`users/${user.uid}`).set({
+                firstName: firstName,
+                lastName: lastName,
+                email: email || "",
+                photoUrl: photoURL || "",
+                uid: uid || "",
+            })
+        })
         .catch(error => {
             switch(error.code) {
                 case 'auth/email-already-in-use':
@@ -100,7 +107,7 @@ export default function AuthRegister(props) {
                 className="auth-button"
                 onClick={handleLogin}
             >
-                Login
+                Complete Registration
             </div>
         </>
     );

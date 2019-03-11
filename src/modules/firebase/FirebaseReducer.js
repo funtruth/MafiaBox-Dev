@@ -5,8 +5,28 @@ import { getCode } from '../logic/LogicReducer';
 
 const initialState = {
     gameKey: 'mafia',
+    authUser: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        emailVerified: false,
+        photoUrl: "",
+        uid: "",
+    },
 }
 
+const AUTH_USER_INFO = 'listener/auth-user-info'
+
+export function onAuthUser(user) {
+    return (dispatch) => {
+        dispatch({
+            type: AUTH_USER_INFO,
+            payload: user,
+        })
+    }
+}
+
+//TESTING ACTIONS
 export function savePageToDB(pageKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
@@ -60,16 +80,10 @@ export function publishPage(pageKey) {
     }
 }
 
-/*function testFunction(string) {
-    console.time('hello!')
-    for (var i=0; i<100; i++) {
-        Function(`return ${string}`)()({lobby: {michael: {}, immy: {},}, gameState: {}, updates: {}}, 'michael', 'immy')
-    }
-    console.timeEnd('hello!')
-}*/
-
 export default (state = initialState, action) => {
     switch(action.type){
+        case AUTH_USER_INFO:
+            return { ...state, authUser: Object.assign({}, state.authUser, action.payload) }
         default:
             return state;
     }

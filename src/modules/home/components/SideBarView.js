@@ -1,12 +1,15 @@
 import React from 'react'
 import './SideBarView.css'
 import _ from 'lodash'
+import firebase from '../../firebase/firebase'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { developType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
+
+import AccountDetails from './AccountDetails';
 
 function SideBarView(props) {
     const { location, path } = props
@@ -20,6 +23,9 @@ function SideBarView(props) {
     }
     
     let handleClick = (item) => props.navigate(`/${item.key}`)
+    let handleSettings = () => {
+        firebase.database().ref('lol').set('hahahah')
+    }
 
     let renderItem = (item) => {
         let path = location.pathname
@@ -45,11 +51,15 @@ function SideBarView(props) {
 
     return (
         <div className="side-bar-view">
-            <div className="side-bar-header">
+            <AccountDetails/>
+            <div className="-sep"></div>
+            <div className="side-bar-section-title">Project</div>
+            <div className="side-bar-item" onClick={handleSettings}>
+                <i className="mdi mdi-settings side-bar-icon"></i>
+                <div className="side-bar-title">{"Settings & Members"}</div>
             </div>
             <div className="-sep"></div>
             <div className="side-bar-section-title">Develop</div>
-            <div className="-sep"></div>
             {items.map(renderItem)}
             {renderRedirect()}
         </div>
@@ -59,6 +69,7 @@ function SideBarView(props) {
 export default connect(
     state => ({
         path: state.nav.path,
+
     }),
     {
         navigate,

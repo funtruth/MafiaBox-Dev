@@ -12,16 +12,16 @@ export default function AuthLogin(props) {
         .catch(error => {
             switch(error.code) {
             case 'auth/invalid-email':
-                setError({id: "Invalid email address"})
+                setError({id: "*Invalid email address"})
                 break
             case 'auth/user-disabled':
-                setError({pw: error.message})
+                setError({pw: "*Account disabled"})
                 break
             case 'auth/user-not-found':
-                setError({id: error.message})
+                setError({id: "*User not found"})
                 break
             case 'auth/wrong-password':
-                setError({pw: "This password is invalid"})
+                setError({pw: "*This password is invalid"})
                 break
             default:
             }

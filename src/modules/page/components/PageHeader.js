@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { navigate } from '../../navigation/NavReducer'
 import { showModal } from '../../modal/ModalReducer'
-import { savePageToDB, publishPage } from '../../firebase/DBReducer'
+import { savePageToDB, publishPage } from '../../firebase/FirebaseReducer'
 
 function PageHeader(props) {
     const { pageKey, location, match } = props
