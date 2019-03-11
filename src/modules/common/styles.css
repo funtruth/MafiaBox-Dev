@@ -75,6 +75,9 @@ div[chosen=true] > .mdi-check {
 .adjust-right {
     margin-left: auto;
 }
+.autocap {
+  text-transform: capitalize;
+}
 
 .border-right {
     border-right: 1px solid #464646;

@@ -46,8 +46,8 @@
 }
 
 .auth-error {
-  margin-left: auto;
-  font: 500 13px Arial;
+  margin-left: 1em;
+  font: 500 12px Arial;
   color: #db4757;
 }
 
@@ -64,6 +64,7 @@
 }
 .auth-input:focus {
   outline: none;
+  border: 2px solid #555;
 }
 
 .auth-view-text {
