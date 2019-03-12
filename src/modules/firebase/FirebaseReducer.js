@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import './firebase'
 import firebaseService from './firebaseService'
 import { fieldType } from '../fields/defaults'
 import { getCode } from '../logic/LogicReducer';

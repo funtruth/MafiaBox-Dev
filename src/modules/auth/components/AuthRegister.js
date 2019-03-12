@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import firebase from '../../firebase/firebase'
+import firebase from 'firebase'
 
 export default function AuthRegister(props) {
     let [firstName, setFirstName] = useState("")

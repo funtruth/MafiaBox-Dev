@@ -14,6 +14,9 @@ import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
 import DropInput from './components/DropInput'
 
+import AccountOptions from './account/AccountOptions'
+import PickProject from './account/PickProject'
+
 import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
 import StoryMapLib from './library/StoryMapLib';
@@ -118,8 +121,12 @@ function DropdownView(props) {
             default:
         }
         
-        //TODO proper obj
         switch(renderProps.key) {
+            case dropdownType.accountOptions:
+                return <AccountOptions {...renderProps}/>
+            case dropdownType.pickProject:
+                return <PickProject {...renderProps}/>
+
             case dropdownType.storyShowMore:
                 return <StoryShowMore {...renderProps}/>
             case dropdownType.inputValue:

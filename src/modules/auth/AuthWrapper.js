@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Auth.css';
 import { connect } from 'react-redux'
-import firebase from '../firebase/firebase'
+import firebase from 'firebase'
 
 import { AUTH_SCREEN } from './AuthConstants'
 

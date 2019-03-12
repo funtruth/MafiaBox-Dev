@@ -1,7 +1,7 @@
 import React from 'react'
 import './SideBarView.css'
 import _ from 'lodash'
-import firebase from '../../firebase/firebase'
+import firebase from 'firebase'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -52,7 +52,7 @@ function SideBarView(props) {
     return (
         <div className="side-bar-view">
             <AccountDetails/>
-            <div className="-sep"></div>
+            <div className="-sep-no-m"></div>
             <div className="side-bar-section-title">Project</div>
             <div className="side-bar-item" onClick={handleSettings}>
                 <i className="mdi mdi-settings side-bar-icon"></i>
