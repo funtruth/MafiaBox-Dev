@@ -84,7 +84,6 @@ const styles = {
     listStyle: {
         display: 'flex',
         overflow: 'auto',
-        minHeight: 'calc(100vh - 76px)',
     }
 }
 

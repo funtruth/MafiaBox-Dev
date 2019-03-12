@@ -1,6 +1,4 @@
 .story-view {
-    height: calc(100vh - 76px);
-    width: calc(100vw - 208px);
     padding: 0px 2px 2px 8px;
     overflow: auto;
     transition: color 0.3s;

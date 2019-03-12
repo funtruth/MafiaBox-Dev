@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
+  flex: 1;
   background-color: rgba(37, 39, 44, 1);
 }
 

@@ -21,7 +21,7 @@ export default function AppNavigator(props) {
                 <Shell>
                     <AppWrapper>
                         <HashRouter>
-                            <div>
+                            <div style={{ display: 'flex', flex: 1 }}>
                                 <Route path="/" component={HomeView}/>
                                 <Route path="/" component={DropdownView}/>
                                 <Route path="/" component={ModalView}/>

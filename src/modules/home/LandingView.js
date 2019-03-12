@@ -1,13 +1,15 @@
 import React from 'react'
+import './Landing.css'
 
-class LandingView extends React.Component{
-    render() {
-        return (
-            <div className="story-view">
-            
+export default function LandingView(props) {
+    return (
+        <div className="landing-view">
+            <i className="landing-image mdi mdi-selection-drag"></i>
+            <div className="landing-title">
+                {'Select or '} 
+                <div className="landing-link">Create</div>
             </div>
-        )
-    }
+            <div className="landing-subtitle">project to get started</div>
+        </div>
+    )
 }
-
-export default LandingView

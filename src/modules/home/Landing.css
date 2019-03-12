@@ -1,0 +1,34 @@
+.landing-view {
+    display: flex;
+    flex-direction: column;
+    flex: 0.8;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.landing-image {
+    font-size: 105px;
+    color: #666;
+}
+
+.landing-link {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.landing-link:hover {
+    color: #ccc;
+}
+
+.landing-title {
+    font: 600 24px Arial;
+    color: #999;
+    display: flex;
+    flex-direction: row;
+    white-space: pre;
+}
+
+.landing-subtitle {
+    font: 500 18px Arial;
+    color: #999;
+}

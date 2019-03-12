@@ -13,7 +13,7 @@ import ProjectDetails from '../components/ProjectDetails';
 import SideBarTitle from '../components/SideBarTitle'
 
 function SideBarView(props) {
-    const { location, path } = props
+    const { location, path, activeProject } = props
     const { pathname } = location
 
     let renderRedirect = () => {
@@ -24,7 +24,12 @@ function SideBarView(props) {
         }
     }
     
-    let handleClick = (item) => props.navigate(`/${item.key}`)
+    let handleClick = (item) => {
+        if (!activeProject) {
+            return;
+        }
+        props.navigate(`/${item.key}`)
+    }
 
     let renderItem = (item) => {
         let paths = pathname.split('/')
