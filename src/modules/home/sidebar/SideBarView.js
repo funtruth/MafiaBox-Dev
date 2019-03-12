@@ -9,7 +9,8 @@ import { developType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
 
-import AccountDetails from './AccountDetails';
+import AccountDetails from '../components/AccountDetails';
+import ProjectDetails from '../components/ProjectDetails';
 
 function SideBarView(props) {
     const { location, path } = props
@@ -23,9 +24,6 @@ function SideBarView(props) {
     }
     
     let handleClick = (item) => props.navigate(`/${item.key}`)
-    let handleSettings = () => {
-        firebase.database().ref('lol').set('hahahah')
-    }
 
     let renderItem = (item) => {
         let path = location.pathname
@@ -51,14 +49,9 @@ function SideBarView(props) {
 
     return (
         <div className="side-bar-view">
-            <AccountDetails/>
-            <div className="-sep-no-m"></div>
+            <AccountDetails {...props}/>
             <div className="side-bar-section-title">Project</div>
-            <div className="side-bar-item" onClick={handleSettings}>
-                <i className="mdi mdi-settings side-bar-icon"></i>
-                <div className="side-bar-title">{"Settings & Members"}</div>
-            </div>
-            <div className="-sep"></div>
+            <ProjectDetails {...props}/>
             <div className="side-bar-section-title">Develop</div>
             {items.map(renderItem)}
             {renderRedirect()}
@@ -69,7 +62,9 @@ function SideBarView(props) {
 export default connect(
     state => ({
         path: state.nav.path,
-
+        authUser: state.firebase.authUser,
+        activeProject: state.firebase.activeProject,
+        projects: state.firebase.projects,
     }),
     {
         navigate,

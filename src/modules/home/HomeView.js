@@ -2,7 +2,7 @@ import React from 'react'
 import './home.css'
 import { Route, Switch } from 'react-router-dom'
 
-import SideBarView from './components/SideBarView';
+import SideBarView from './sidebar/SideBarView';
 import HeaderView from './components/HeaderView';
 
 import LandingView from './LandingView'

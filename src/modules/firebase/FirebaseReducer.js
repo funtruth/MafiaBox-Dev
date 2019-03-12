@@ -5,7 +5,6 @@ import { fieldType } from '../fields/defaults'
 import { getCode } from '../logic/LogicReducer';
 
 const initialState = {
-    gameKey: 'mafia',
     authUser: {
         firstName: "",
         lastName: "",
@@ -14,15 +13,27 @@ const initialState = {
         photoUrl: "",
         uid: "",
     },
+    activeProject: "",
+    projects: {},
 }
 
-const AUTH_USER_INFO = 'listener/auth-user-info'
+const USER_LISTENER = 'listener/user'
+const PROJECT_LISTENER = 'listener/projects'
 
-export function onAuthUser(user) {
+export function userListener(user) {
     return (dispatch) => {
         dispatch({
-            type: AUTH_USER_INFO,
+            type: USER_LISTENER,
             payload: user,
+        })
+    }
+}
+
+export function projectListener(projects) {
+    return (dispatch) => {
+        dispatch({
+            type: PROJECT_LISTENER,
+            payload: projects || {},
         })
     }
 }
@@ -83,8 +94,10 @@ export function publishPage(pageKey) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case AUTH_USER_INFO:
+        case USER_LISTENER:
             return { ...state, authUser: Object.assign({}, state.authUser, action.payload) }
+        case PROJECT_LISTENER:
+            return { ...state, projects: action.payload }
         default:
             return state;
     }

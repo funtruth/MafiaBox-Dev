@@ -5,7 +5,7 @@ import firebase from 'firebase'
 
 import { AUTH_SCREEN } from './AuthConstants'
 
-import { onAuthUser } from '../firebase/FirebaseReducer'
+import { userListener, projectListener } from '../firebase/FirebaseReducer'
 
 import AuthLogin from './components/AuthLogin';
 import AuthRegister from './components/AuthRegister';
@@ -24,8 +24,8 @@ function AuthWrapper(props) {
 				const userRef = firebase.database().ref(`users/${uid}`)
 				const projectRef = firebase.database().ref(`projects/${uid}`)
 
-				userRef.on('value', snap => props.onAuthUser(snap.val()))
-				projectRef.on('value', e => console.log({e: e.val()}))
+				userRef.on('value', snap => props.userListener(snap.val()))
+				projectRef.on('value', snap => props.projectListener(snap.val()))
 
 				return () => {
 					if (userRef) userRef.off()
@@ -68,6 +68,7 @@ function AuthWrapper(props) {
 export default connect(
 	null,
 	{
-		onAuthUser,
+		userListener,
+		projectListener,
 	}
 )(AuthWrapper)

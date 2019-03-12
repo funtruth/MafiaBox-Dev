@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { dropdownType } from '../../dropdown/types'
 
-import { navigate } from '../../navigation/NavReducer'
-
-function SideBarView(props) {
+export default function SideBarView(props) {
     const { authUser } = props
     const { firstName, email } = authUser
 
@@ -19,12 +16,3 @@ function SideBarView(props) {
         </div>
     )
 }
-
-export default connect(
-    state => ({
-        authUser: state.firebase.authUser,
-    }),
-    {
-        navigate,
-    }
-)(SideBarView)
