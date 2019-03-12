@@ -11,6 +11,9 @@ import { updateSourceType } from '../common/types'
 
 import FunctionPageModal from './components/FunctionPageModal';
 
+import EditAccount from './account/EditAccount'
+import CreateProject from './account/CreateProject';
+
 import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
@@ -41,6 +44,11 @@ class ModalView extends React.Component {
                 return <AddNewField {...props}/>
             case modalType.deleteStory:
                 return <DeleteStory {...props}/>
+
+            case modalType.editAccount:
+                return <EditAccount {...props}/>
+            case modalType.createProject:
+                return <CreateProject {...props}/>
 
             case modalType.showCode:
                 return <ModalCodeView {...props}/>

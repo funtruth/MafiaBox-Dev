@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 import DropItem from '../components/DropItem'
 import DropTitle from '../components/DropTitle'

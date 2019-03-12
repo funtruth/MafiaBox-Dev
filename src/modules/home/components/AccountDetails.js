@@ -11,8 +11,19 @@ export default function SideBarView(props) {
             className="account-details app-onclick"
             menu-type={dropdownType.accountOptions}
         >
-            {firstName || email}
-            <i className="mdi mdi-dots-vertical" style={{ marginLeft: 'auto' }}></i>
+            <div>
+                {firstName}
+                <div className="project-subtitle">
+                    {email}
+                </div>
+            </div>
+            <i
+                className="mdi mdi-dots-vertical"
+                style={{
+                    marginLeft: 'auto',
+                    fontSize: 18,
+                }}
+            ></i>
         </div>
     )
 }

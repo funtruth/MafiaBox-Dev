@@ -5,6 +5,9 @@ export const modalType = {
     deleteStory: 'modalType/delete-story',
     editPhase: 'modalType/edit-phase',
 
+    editAccount: 'modalType/edit-account',
+    createProject: 'modalType/create-project',
+
     showCode: 'modalType/show-code',
     showPage: 'modalType/show-page',
     showTemplate: 'modalType/show-template',

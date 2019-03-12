@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Auth.css';
 import { connect } from 'react-redux'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 import { AUTH_SCREEN } from './AuthConstants'
 
@@ -22,7 +22,7 @@ function AuthWrapper(props) {
 				setAuthState("loggedIn")
 				const { uid } = user
 				const userRef = firebase.database().ref(`users/${uid}`)
-				const projectRef = firebase.database().ref(`projects/${uid}`)
+				const projectRef = firebase.database().ref(`userProjects/${uid}`)
 
 				userRef.on('value', snap => props.userListener(snap.val()))
 				projectRef.on('value', snap => props.projectListener(snap.val()))

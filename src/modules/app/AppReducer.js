@@ -18,7 +18,6 @@ export function handleDragEnd(source, destination) {
         const sources = source.droppableId.split('.')
         const dests = destination.droppableId.split('.')
 
-        //TODO probably move this into a reducer of some sort
         switch(sources[0]) {
             case droppableType.board:
                 dispatch(moveStory(sources[1], source.index, destination.index))

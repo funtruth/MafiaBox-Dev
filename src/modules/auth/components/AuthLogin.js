@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export default function AuthLogin(props) {
     let [id, setId] = useState("")

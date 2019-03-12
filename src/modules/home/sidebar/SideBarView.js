@@ -1,7 +1,6 @@
 import React from 'react'
 import './SideBarView.css'
 import _ from 'lodash'
-import firebase from 'firebase'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -11,12 +10,14 @@ import { navigate } from '../../navigation/NavReducer'
 
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
+import SideBarTitle from '../components/SideBarTitle'
 
 function SideBarView(props) {
     const { location, path } = props
+    const { pathname } = location
 
     let renderRedirect = () => {
-        if (location.pathname !== path) {
+        if (pathname !== path) {
             return (
                 <Redirect to={path}/>
             )
@@ -26,8 +27,7 @@ function SideBarView(props) {
     let handleClick = (item) => props.navigate(`/${item.key}`)
 
     let renderItem = (item) => {
-        let path = location.pathname
-        let paths = path.split('/')
+        let paths = pathname.split('/')
         let selected = item.key === paths[1]
 
         return (
@@ -50,9 +50,9 @@ function SideBarView(props) {
     return (
         <div className="side-bar-view">
             <AccountDetails {...props}/>
-            <div className="side-bar-section-title">Project</div>
+            <SideBarTitle>Project</SideBarTitle>
             <ProjectDetails {...props}/>
-            <div className="side-bar-section-title">Develop</div>
+            <SideBarTitle>Develop</SideBarTitle>
             {items.map(renderItem)}
             {renderRedirect()}
         </div>
