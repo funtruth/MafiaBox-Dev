@@ -1,6 +1,7 @@
 const CIPHER = {
     A26: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
     A26wSPACE: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ',
+    A26N10wDESC: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 !?#%',
 }
 
 function isArray(obj){
@@ -8,7 +9,7 @@ function isArray(obj){
 }
 
 export function genUID(key, repo, suffix='-xxxx') {
-    return `${key}${suffix}`.replace(/[xy]/g, function(c) {
+    return key.replace(" ", "") + suffix.replace(/[xy]/g, function(c) {
         // eslint-disable-next-line
         var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
         var q = v.toString(16);

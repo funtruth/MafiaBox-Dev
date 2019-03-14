@@ -6,11 +6,7 @@ import { modalType } from '../../modal/types'
 import { showModal } from '../../modal/ModalReducer'
 
 function ProjectNewItem(props) {
-    const handleClick = () => {
-        props.showModal(modalType.createProject, {
-
-        })
-    }
+    const handleClick = () => props.showModal(modalType.createProject)
 
     return (
         <div className="project-item" onClick={handleClick}>

@@ -1,7 +1,7 @@
-export const authType = {
-    pending: 'authType/pending',
-    no: 'authType/no',
-    yes: 'authType/yes',
+export const AUTH_STATE = {
+    pending: 'pending',
+    loggedIn: 'loggedIn',
+    notLoggedIn: 'notLoggedIn',
 }
 
 export const AUTH_SCREEN = {

@@ -65,7 +65,6 @@ export default function AuthRegister(props) {
                         className="auth-input autocap"
                         value={firstName} 
                         type="text"
-                        autoCapitalize="words"
                         onChange={handleFirstName}
                     />
                 </div>
@@ -78,7 +77,6 @@ export default function AuthRegister(props) {
                         className="auth-input autocap"
                         value={lastName}
                         type="text"
-                        autoCapitalize="words"
                         onChange={handleLastName}
                     />
                 </div>

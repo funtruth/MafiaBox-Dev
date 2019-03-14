@@ -4,18 +4,30 @@ import { connect } from 'react-redux'
 import firebase from 'firebase/app'
 import * as helpers from '../../common/helpers'
 
+import { DEFAULT_MEMBER_INFO, MEMBER_TYPE } from './UserConstants';
+
+import { getMyInfo, switchToProject } from '../../firebase/FirebaseReducer'
+
+import FormInput from '../../common/components/FormInput'
 import ModalOptions from '../components/ModalOptions'
-import ModalCheckSave from '../components/ModalCheckSave';
+import Modal from '../components/Modal';
 
 function CreateProject(props) {
-    const { attach, path, uid } = props
-    const workspace = attach
+    const { uid } = props
 
-    let [error, setError] = useState('')
+    let [errors, setErrors] = useState({})
     
     //initializing project
     let [gameKey, setGameKey] = useState('')
-    let [members, setMembers] = useState({})
+    let [description, setDescription] = useState('')
+    let [members] = useState({
+        [uid]: {
+            ...DEFAULT_MEMBER_INFO,
+            type: MEMBER_TYPE.OWNER,
+            acceptedInvite: true,
+            ...props.getMyInfo(),
+        },
+    })
 
     //get existing project keys
     let [projects, setProjects] = useState({})
@@ -25,50 +37,71 @@ function CreateProject(props) {
     }, [])
     
     let handleSave = () => {
-        let batchUpdate = {}
-        
-        const projectKey = helpers.genUID(gameKey, projects, '-xxxx')
-
-        batchUpdate[`userProjects/${uid}/${projectKey}`] = {
-            key: projectKey,
-            members,
+        //validate user inputs
+        if (!gameKey || !description) {
+            setErrors({
+                gameKey: !!gameKey ? "" : "*This is a required field.",
+                description: !!description ? "" : "*This is a required field",
+            })
+            return;
+        }
+        if (!helpers.checkAlpha(gameKey, 'A26wSPACE')) {
+            setErrors({gameKey: '*Only Alphabetic characters are allowed.'})
+            return;
+        }
+        if (!description || !helpers.checkAlpha(description, 'A26N10wDESC')) {
+            setErrors({description: '*Only Alphabetic characters are allowed.'})
+            return;
         }
         
-        firebase.database().ref().update(batchUpdate)
+        //initialize a new project
+        const projectKey = helpers.genUID(gameKey, projects, '-xxxx')
+        const projectsRef = firebase.database().ref(`projects/${projectKey}`)
+        projectsRef.update({
+            title: gameKey,
+            description,
+            projectKey,
+            members,
+        })
+
+        props.switchToProject(projectKey)
         props.popModalBy(1)
     }
 
-    const handleId = (e) => setGameKey(e.target.value)
+    const handleGameKey = (e) => setGameKey(e.target.value)
+    const handleDescription = (e) => setDescription(e.target.value)
     
     return (
-        <ModalCheckSave {...props} handleSave={handleSave}>
+        <Modal>
             <div className="create-modal" cancel-appclick="true">
-                <div className="create-modal-view">
-                    <div
-                        style={{
-                            width: '50%',
-                        }}
-                    >
-                        <input
-                            className="create-input"
-                            value={gameKey} 
-                            type="text"
-                            onChange={handleId}
-                        />
-                    </div>
-                </div>
+                <FormInput
+                    title="Game Title"
+                    error={errors.gameKey}
+                    value={gameKey}
+                    setValue={handleGameKey}
+                />
+                <FormInput
+                    title="Game Description"
+                    error={errors.description}
+                    value={description}
+                    setValue={handleDescription}
+                />
                 <ModalOptions
-                    error={error}
+                    error={errors.modal}
                     onSave={handleSave}
                     onClose={props.onClose}
                 />
             </div>
-        </ModalCheckSave>
+        </Modal>
     )
 }
 
 export default connect(
     state => ({
         uid: state.firebase.authUser.uid,
-    })
+    }),
+    {
+        getMyInfo,
+        switchToProject,
+    }
 )(CreateProject)

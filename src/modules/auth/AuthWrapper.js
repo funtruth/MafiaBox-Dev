@@ -3,7 +3,7 @@ import './Auth.css';
 import { connect } from 'react-redux'
 import firebase from 'firebase/app'
 
-import { AUTH_SCREEN } from './AuthConstants'
+import { AUTH_STATE, AUTH_SCREEN } from './AuthConstants'
 
 import { userListener, userProjectsListener } from '../firebase/FirebaseReducer'
 
@@ -11,7 +11,7 @@ import AuthLogin from './components/AuthLogin';
 import AuthRegister from './components/AuthRegister';
 
 function AuthWrapper(props) {
-	let [authState, setAuthState] = useState("")
+	let [authState, setAuthState] = useState(AUTH_STATE.pending)
 	let [authScreen, setAuthScreen] = useState(AUTH_SCREEN.LOGIN)
 
 	const AT_LOGIN = authScreen === AUTH_SCREEN.LOGIN
@@ -19,7 +19,7 @@ function AuthWrapper(props) {
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged(user => {
 			if (user) {
-				setAuthState("loggedIn")
+				setAuthState(AUTH_STATE.loggedIn)
 				const { uid } = user
 				const userRef = firebase.database().ref(`users/${uid}`)
 				const projectRef = firebase.database().ref(`userProjects/${uid}`)
@@ -32,7 +32,7 @@ function AuthWrapper(props) {
 					if (projectRef) projectRef.off()
 				};
 			} else {
-				setAuthState("notLoggedIn")
+				setAuthState(AUTH_STATE.notLoggedIn)
 			}
 		})
 	}, [])
@@ -45,11 +45,11 @@ function AuthWrapper(props) {
 		}
 	}
 
-	if (authState === 'loggedIn') {
+	if (authState === AUTH_STATE.loggedIn) {
 		return props.children
 	}
 
-	if (authState === 'notLoggedIn') {
+	if (authState === AUTH_STATE.notLoggedIn) {
 		return (
 			<div className="auth-wrapper">
 				<div className="auth-view">
