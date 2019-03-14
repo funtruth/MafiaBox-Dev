@@ -6,6 +6,8 @@
 }
 
 .header {
+    display: flex;
+    flex-direction: row;
     padding: 8px;
     max-height: 30px;
     background-color: rgba(54, 57, 64);

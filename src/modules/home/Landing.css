@@ -1,7 +1,7 @@
 .landing-view {
     display: flex;
     flex-direction: column;
-    flex: 0.8;
+    flex: 0.9;
     align-items: center;
     justify-content: center;
     user-select: none;
@@ -29,6 +29,7 @@
 }
 
 .landing-subtitle {
-    font: 500 18px Arial;
+    font: 500 16px Arial;
     color: #999;
+    margin-top: 4px;
 }

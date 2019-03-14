@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
 import { showModal } from '../../modal/ModalReducer'
@@ -9,7 +9,7 @@ import { modalType } from '../../modal/types'
 import { boardType } from '../../fields/defaults'
 import { developType } from '../../navigation/paths'
 
-class HeaderView extends React.Component{
+class HeaderView extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -41,11 +41,7 @@ class HeaderView extends React.Component{
 
     _getHeader(path) {
         let paths = path.split('/')
-        let leftBtns = [], rightBtns = []
-        
-        leftBtns = [
-            { key: 'back', icon: 'ion-ios-undo' },
-        ]
+        let rightBtns = []
         
         switch(paths[1]) {
             case developType.library.key:
@@ -82,7 +78,6 @@ class HeaderView extends React.Component{
         return {
             mainPath: paths[1],
             childPath: paths[2],
-            leftBtns,
             rightBtns
         }
     }
@@ -155,8 +150,7 @@ class HeaderView extends React.Component{
 
     render() {
         return (
-            <div className="row header">
-                {this.state.leftBtns.map(this._renderItem)}
+            <div className="header">
                 {this._renderPath()}
                 {this.state.rightBtns.map(this._renderItem)}
             </div>

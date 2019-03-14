@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import './firebase'
-import firebaseService from './firebaseService'
+import firebase from 'firebase/app'
 import { fieldType } from '../fields/defaults'
 import { getCode } from '../logic/LogicReducer';
 
@@ -14,11 +14,11 @@ const initialState = {
         uid: "",
     },
     activeProject: "",
-    projects: {},
+    userProjects: {},
 }
 
-const USER_LISTENER = 'listener/user'
-const PROJECT_LISTENER = 'listener/projects'
+const USER_LISTENER = 'listener/user-update'
+const USER_PROJECTS_LISTENER = 'listener/user-projects-update'
 
 export function userListener(user) {
     return (dispatch) => {
@@ -29,10 +29,10 @@ export function userListener(user) {
     }
 }
 
-export function projectListener(projects) {
+export function userProjectsListener(projects) {
     return (dispatch) => {
         dispatch({
-            type: PROJECT_LISTENER,
+            type: USER_PROJECTS_LISTENER,
             payload: projects || {},
         })
     }
@@ -51,9 +51,11 @@ export function savePageToDB(pageKey) {
 
         if (!boardType) return
 
-        firebaseService.update(
-            `dev/${gameKey}/${boardType}/${pageKey}`,
-            JSON.parse(JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾'))
+        firebase.database().ref(`dev/${gameKey}/${boardType}/${pageKey}`)
+        .update(
+            JSON.parse(
+                JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾')
+            )
         )
     }
 }
@@ -88,7 +90,7 @@ export function publishPage(pageKey) {
             }
         })
         
-        firebaseService.update(path, batchUpdate)
+        firebase.database().ref(path).update(batchUpdate)
     }
 }
 
@@ -96,7 +98,7 @@ export default (state = initialState, action) => {
     switch(action.type){
         case USER_LISTENER:
             return { ...state, authUser: Object.assign({}, state.authUser, action.payload) }
-        case PROJECT_LISTENER:
+        case USER_PROJECTS_LISTENER:
             return { ...state, projects: action.payload }
         default:
             return state;

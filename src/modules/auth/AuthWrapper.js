@@ -5,7 +5,7 @@ import firebase from 'firebase/app'
 
 import { AUTH_SCREEN } from './AuthConstants'
 
-import { userListener, projectListener } from '../firebase/FirebaseReducer'
+import { userListener, userProjectsListener } from '../firebase/FirebaseReducer'
 
 import AuthLogin from './components/AuthLogin';
 import AuthRegister from './components/AuthRegister';
@@ -25,7 +25,7 @@ function AuthWrapper(props) {
 				const projectRef = firebase.database().ref(`userProjects/${uid}`)
 
 				userRef.on('value', snap => props.userListener(snap.val()))
-				projectRef.on('value', snap => props.projectListener(snap.val()))
+				projectRef.on('value', snap => props.userProjectsListener(snap.val()))
 
 				return () => {
 					if (userRef) userRef.off()
@@ -55,7 +55,7 @@ function AuthWrapper(props) {
 				<div className="auth-view">
 					{AT_LOGIN ? <AuthLogin/> : <AuthRegister/>}
 					<div className="auth-view-text" onClick={handleScreen}>
-					{AT_LOGIN ? "Create an account" : "Already have an account"}
+						{AT_LOGIN ? "Create an account" : "Already have an account"}
 					</div>
 				</div>
 			</div>
@@ -69,6 +69,6 @@ export default connect(
 	null,
 	{
 		userListener,
-		projectListener,
+		userProjectsListener,
 	}
 )(AuthWrapper)
