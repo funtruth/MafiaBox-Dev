@@ -1,8 +1,13 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+admin.initializeApp()
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+import {
+    onProjectMemberChange,
+} from './projects/flatten'
+
+/* Flattening functions
+    functions used to ensure that data is consistent at multiple locations
+*/
+exports.onProjectMemberChange = functions.database.ref('projects/{projectKey}/members/{uid}')
+    .onUpdate((change, event) => onProjectMemberChange(change, event))
