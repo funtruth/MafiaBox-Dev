@@ -19,18 +19,6 @@
     color: #d6d6d6;
     background-color: hsla(0,0%,100%,.1);
 }
-.project-details {
-    font: 600 14px Arial;
-    color: #d6d6d6;
-    padding: 8px 0px;
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-}
-.project-details:hover {
-    color: #d6d6d6;
-    background-color: hsla(0,0%,100%,.1);
-}
 
 .side-bar-section-title {
     font: 600 14px Arial;
@@ -66,56 +54,4 @@
 .side-bar-item:hover {
     color: #d6d6d6;
     background-color: hsla(0,0%,100%,.1);
-}
-
-.project-item {
-    font: 500 13px Arial;
-    padding: 0px 1em;
-    color: #aaa;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-}
-
-.project-new-icon {
-    height: 1.3em;
-    width: 1.3em;
-    border-radius: 4px;
-    background-color: #989898;
-    opacity: 0.5;
-    color: rgba(47, 49, 54, 1);
-    font: 600 25px Arial;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.project-icon {
-    height: 1.6em;
-    width: 1.6em;
-    border-radius: 4px;
-    background-color: rgba(47, 49, 54, 1);
-    color: #bbb;
-    font: 600 21px Arial;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.project-text {
-    padding: 0px 0.9em;
-}
-.project-new {
-    color: #ccc;
-    font: 400 14px Arial;
-}
-.project-title {
-    color: #ccc;
-    font: 600 18px Arial;
-}
-.project-subtitle {
-    color: #999;
-    font: 400 12px Arial;
 }

@@ -1,0 +1,57 @@
+.project-item {
+    font: 500 13px Arial;
+    padding: 8px 1em;
+    color: #aaa;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+.project-item:hover {
+    color: #d6d6d6;
+    background-color: hsla(0,0%,100%,.1);
+}
+
+.project-new-icon {
+    height: 1.3em;
+    width: 1.3em;
+    border-radius: 4px;
+    background-color: #989898;
+    opacity: 0.5;
+    color: rgba(47, 49, 54, 1);
+    font: 600 25px Arial;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.project-icon {
+    height: 1.3em;
+    width: 1.3em;
+    border-radius: 4px;
+    background-color: #989898;
+    opacity: 0.5;
+    color: rgba(47, 49, 54, 1);
+    font: 600 25px Arial;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.project-text {
+    padding: 0px 0.9em;
+}
+.project-new {
+    color: #ccc;
+    font: 400 14px Arial;
+}
+.project-title {
+    color: #ccc;
+    font: 600 18px Arial;
+}
+.project-subtitle {
+    color: #999;
+    font: 400 12px Arial;
+}

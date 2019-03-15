@@ -15,10 +15,12 @@ const initialState = {
     },
     activeProject: "",
     userProjects: {},
+    projects: {},
 }
 
 const USER_LISTENER = 'fblistener/user-update'
 const USER_PROJECTS_LISTENER = 'fblistener/user-projects-update'
+const PROJECT_LISTENER = 'fblistener/project-update'
 const CHANGE_ACTIVE_PROJECT = ' fb/change-active-project'
 
 export function userListener(user) {
@@ -35,6 +37,22 @@ export function userProjectsListener(projects) {
         dispatch({
             type: USER_PROJECTS_LISTENER,
             payload: projects || {},
+        })
+    }
+}
+
+export function projectListener(snap) {
+    return (dispatch, getState) => {
+        const { projects } = getState().firebase
+        
+        const mergedProjects = {
+            ...projects,
+            [snap.key]: snap.val(),
+        }
+        
+        dispatch({
+            type: PROJECT_LISTENER,
+            payload: mergedProjects,
         })
     }
 }
@@ -61,6 +79,7 @@ export function getMyInfo() {
 
 export function switchToProject(projectKey) {
     return (dispatch) => {
+
         
         dispatch({
             type: CHANGE_ACTIVE_PROJECT,
@@ -130,6 +149,8 @@ export default (state = initialState, action) => {
         case USER_LISTENER:
             return { ...state, authUser: Object.assign({}, state.authUser, action.payload) }
         case USER_PROJECTS_LISTENER:
+            return { ...state, userProjects: action.payload }
+        case PROJECT_LISTENER:
             return { ...state, projects: action.payload }
         case CHANGE_ACTIVE_PROJECT:
             return { ...state, activeProject: action.payload }

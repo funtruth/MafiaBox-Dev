@@ -17,22 +17,17 @@ function AuthWrapper(props) {
 	const AT_LOGIN = authScreen === AUTH_SCREEN.LOGIN
 
 	useEffect(() => {
-		firebase.auth().onAuthStateChanged(user => {
+		return firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				setAuthState(AUTH_STATE.loggedIn)
 				const { uid } = user
 				const userRef = firebase.database().ref(`users/${uid}`)
-				const projectRef = firebase.database().ref(`userProjects/${uid}`)
+				const userProjectsRef = firebase.database().ref(`userProjects/${uid}`)
 
 				userRef.on('value', snap => props.userListener(snap.val()))
-				projectRef.on('value', snap => props.userProjectsListener(snap.val()))
-
-				return () => {
-					if (userRef) userRef.off()
-					if (projectRef) projectRef.off()
-				};
+				userProjectsRef.on('value', snap => props.userProjectsListener(snap.val()))
 			} else {
-				setAuthState(AUTH_STATE.notLoggedIn)
+				setAuthState(AUTH_STATE.notLoggedIn);
 			}
 		})
 	}, [])

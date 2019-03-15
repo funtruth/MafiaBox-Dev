@@ -56,14 +56,18 @@ function CreateProject(props) {
         
         //initialize a new project
         const projectKey = helpers.genUID(gameKey, projects, '-xxxx')
-        const projectsRef = firebase.database().ref(`projects/${projectKey}`)
-        projectsRef.update({
+
+        let multiUpdate = {}
+        
+        multiUpdate[`userProjects/${uid}/${projectKey}`] = true
+        multiUpdate[`projects/${projectKey}`] = {
+            projectKey,
             title: gameKey,
             description,
-            projectKey,
             members,
-        })
-
+        }
+        
+        firebase.database().ref().update(multiUpdate)
         props.switchToProject(projectKey)
         props.popModalBy(1)
     }

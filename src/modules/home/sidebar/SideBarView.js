@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 import { developType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
+import { projectListener } from '../../firebase/FirebaseReducer'
 
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
@@ -70,8 +71,10 @@ export default connect(
         authUser: state.firebase.authUser,
         activeProject: state.firebase.activeProject,
         projects: state.firebase.projects,
+        userProjects: state.firebase.userProjects,
     }),
     {
         navigate,
+        projectListener,
     }
 )(SideBarView)

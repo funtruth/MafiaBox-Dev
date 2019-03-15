@@ -7,10 +7,7 @@ export const MEMBER_TYPE = {
 
 export const DEFAULT_MEMBER_INFO = {
     type: MEMBER_TYPE.GUEST,
-    firstName: "",
-    lastName: "",
-    email: "",
+    permissions: "",
     uid: "",
-    photoUrl: "",
     acceptedInvite: false,
 }
