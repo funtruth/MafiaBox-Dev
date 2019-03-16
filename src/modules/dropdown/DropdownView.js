@@ -234,12 +234,16 @@ function DropdownView(props) {
         }
     }
 
+    if (dropdownKeys.length === 0) return null
+
     return (
-        dropdownKeys.map((item, index) => (
-            <Dropdown {...item} key={index}>
-                {renderItem(item, index)}
-            </Dropdown>
-        ))
+        <div className="drop-down-pause">
+            {dropdownKeys.map((item, index) => (
+                <Dropdown {...item} key={index} index={index}>
+                    {renderItem(item, index)}
+                </Dropdown>
+            ))}
+        </div>
     )
 }
 

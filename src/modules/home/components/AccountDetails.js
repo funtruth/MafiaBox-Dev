@@ -10,6 +10,7 @@ export default function SideBarView(props) {
         <div
             className="account-details app-onclick"
             menu-type={dropdownType.accountOptions}
+            place="right"
         >
             <div>
                 {firstName}

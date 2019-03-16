@@ -26,6 +26,7 @@ export default function ProjectDetails(props) {
             className="app-onclick"
             highlight="true"
             menu-type={dropdownType.pickProject}
+            place="right"
         >
             <ProjectItem project={projects[activeProject]}/>
         </div>

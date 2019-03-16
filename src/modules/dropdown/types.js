@@ -96,6 +96,7 @@ export const fuseType = {
     }
 }
 
+export const DROPDOWN_Y_MARGIN = 8
 export const DROP_TITLE_HEIGHT = 21
 
 export const VAR_DEFAULTS = {

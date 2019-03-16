@@ -1,22 +1,19 @@
 import React from 'react'
 import FunctionPageView from '../../functions/FunctionPageView'
+import Modal from './Modal'
 
-class FunctionPageModal extends React.Component {
-    render() {
-        return (
-            <div
-                style={{
-                    minHeight: 400,
-                    minWidth: 600,
-                    height: '60vh',
-                    width: '65vw',
-                    overflow: 'scroll',
-                }}
-            >
-                <FunctionPageView {...this.props}/>
-            </div>
-        )
-    }
+export default function FunctionPageModal(props) {
+    return (
+        <Modal
+            style={{
+                minHeight: 400,
+                minWidth: 600,
+                height: '60vh',
+                width: '65vw',
+                overflow: 'scroll',
+            }}
+        >
+            <FunctionPageView {...props}/>
+        </Modal>
+    )
 }
-
-export default FunctionPageModal

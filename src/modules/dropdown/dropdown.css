@@ -1,11 +1,19 @@
+.drop-down-pause {
+    position: fixed;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    z-index: 3;
+}
+
 .drop-down-menu {
     position: fixed;
     background-color: rgba(54, 57, 64, 1);
     border-radius: 4px;
     min-width: 160px;
+    max-height: 30vh;
+    overflow-y: auto;
     padding: 8px 0px;
     user-select: none;
-    z-index: 3;
 
     animation: fadein 0.2s, scalein 0.2s;
     -webkit-animation: fadein 0.2s, scalein 0.2s;
@@ -16,7 +24,7 @@
 
 .drop-down-menu-autow {
     position: fixed;
-    background-color: rgba(54, 57, 64, 1);
+    background-color: rgb(47, 55, 73);
     border-radius: 4px;
     padding: 8px 0px;
 

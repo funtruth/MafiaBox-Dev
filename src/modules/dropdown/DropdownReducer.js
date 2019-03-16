@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { dropdownType, DROP_TITLE_HEIGHT } from './types'
+import { DROP_TITLE_HEIGHT, DROPDOWN_Y_MARGIN } from './types'
 
 const initialState = {
     dropdownKeys: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 const UPDATE_KEYS = 'dropdown/update-keys'
 
-export function showDropdown(key, e, params={}, index=0) {
+export function showDropdown(key, e, params={}, index=0, place="down") {
     return (dispatch, getState) => {
         const { dropdownKeys } = getState().dropdown
         const { modalKeys } = getState().modal
@@ -24,61 +24,32 @@ export function showDropdown(key, e, params={}, index=0) {
 
             const prev = keysClone[keysClone.length - 1]
             if (keysClone.length) {
-                let offsetY = 0
-                switch(key) {
-                    case dropdownType.assignVar:
-                    case dropdownType.declareVar:
-                    case dropdownType.pageLib:
-                    case dropdownType.pickComparison:
-                    case dropdownType.pickBoolean:
-                    case dropdownType.pickDeleteMode:
-                    case dropdownType.pickEventVarProp:
-                    case dropdownType.pickHealth:
-                    case dropdownType.pickOperator:
-                    case dropdownType.pickOpType:
-                    case dropdownType.pickTimer:
-                    case dropdownType.pickUid:
-                    case dropdownType.pickUpdate:
-                    case dropdownType.pickVarProp:
-                    case dropdownType.pickVarType:
-                    case dropdownType.pickRecipient:
-                    case dropdownType.pickReturnType:
-                    case dropdownType.showSubfields:
-                    case dropdownType.storyMapLib:
-                        offsetY = DROP_TITLE_HEIGHT
-                        break
-                    default:
-                }
-
                 keysClone.push({
                     ...modalKeys[modalKeys.length - 1],
                     ...prev,
                     ...params,
-                    pageX: prev.pageX + e.target.offsetWidth,
-                    pageY: e.pageY - (e.pageY - prev.pageY - e.target.offsetTop) % e.target.offsetHeight - 8 - offsetY,
                     key,
+                    position: {
+                        place,
+                        pageX: e.pageX - e.nativeEvent.offsetX + e.target.offsetWidth,
+                        pageY: e.pageY - e.nativeEvent.offsetY - DROPDOWN_Y_MARGIN - DROP_TITLE_HEIGHT,
+                        sourceHeight: e.target.offsetHeight,
+                        sourceWidth: e.target.offsetWidth, 
+                    },
                 })
             } else {
-                let offsetX = 0, offsetY = 0
-                switch(e.type) {
-                    case 'click':
-                        offsetX = e.offsetX
-                        offsetY = e.offsetY
-                        break
-                    case 'mouseover':
-                        offsetX = e.nativeEvent.offsetX
-                        offsetY = e.nativeEvent.offsetY
-                        break
-                    default:
-                }
-
                 keysClone.push({
                     ...modalKeys[modalKeys.length - 1],
                     ...prev,
                     ...params,
-                    pageX: e.pageX - offsetX - 8,
-                    pageY: e.pageY - offsetY + e.target.offsetHeight,
                     key,
+                    position: {
+                        place,
+                        pageX: e.pageX - e.offsetX - 8,
+                        pageY: e.pageY - e.offsetY + e.target.offsetHeight,
+                        sourceHeight: e.target.offsetHeight,
+                        sourceWidth: e.target.offsetWidth, 
+                    },
                 })
             }
 
