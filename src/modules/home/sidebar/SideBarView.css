@@ -29,28 +29,28 @@
     align-items: center;
 }
 
+.side-bar-item {
+    color: #aaa;
+    padding: 6px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+}
+
 .side-bar-icon {
-    font-size: 16px;
+    font-size: 18px;
     margin-right: 0.5em;
 }
 
 .side-bar-title {
-    line-height: 1.3;
+    font: 600 14px Arial;
     letter-spacing: 0.3;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.side-bar-item {
-    font: 500 13px Arial;
-    color: #aaa;
-    padding: 6px 1.5em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-}
 .side-bar-item:hover {
     color: #d6d6d6;
     background-color: hsla(0,0%,100%,.1);

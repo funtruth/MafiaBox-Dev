@@ -16,7 +16,7 @@ class PageHeader extends React.Component{
     }
     _renderItem = (item, index) => {
         return (
-            <div key={item.key} className="row header-button" onClick={this._onClick.bind(this, item.key)}>
+            <div key={item.key} className="row page-header-button" onClick={this._onClick.bind(this, item.key)}>
                 <i className={`option-icon ${item.icon}`}></i>
                 {item.icon && item.title && <div style={{ width: 6 }}/>}
                 {item.title}

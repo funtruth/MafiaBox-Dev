@@ -1,4 +1,4 @@
-.header-button {
+.page-header-button {
     padding: 6px 8px;
     border-radius: 4px;
     font: 500 14px Arial;
@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.header-button:hover {
+.page-header-button:hover {
     background-color: hsla(0,0%,100%,.1);
     color: #fff;
 }

@@ -11,7 +11,7 @@ export default function ProjectItem(props) {
     return (
         <div className="project-item" chosen={chosen}>
             <div className="project-icon">{firstLetter}</div>
-            <div className="project-text">
+            <div className="project-text text-ellipsis">
                 <div className="project-title">{title}</div>
             </div>
             <i

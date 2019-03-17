@@ -10,6 +10,10 @@ import { modalType } from '../../modal/types'
 import { boardType } from '../../fields/defaults'
 import { developType } from '../../navigation/paths'
 
+import HeaderSearch from './HeaderSearch';
+import HeaderAddItem from './HeaderAddItem';
+import HeaderAddStory from './HeaderAddStory';
+
 class HeaderView extends React.Component {
     constructor(props) {
         super(props)
@@ -44,7 +48,7 @@ class HeaderView extends React.Component {
         let paths = path.split('/')
         let rightBtns = []
         
-        switch(paths[1]) {
+        switch(paths[2]) {
             case developType.library.key:
                 rightBtns = [
                     { key: 'addPage', title: 'New Item', icon: 'ion-ios-add-circle' },
@@ -135,12 +139,17 @@ class HeaderView extends React.Component {
         let paths = pathname.split('/')
         
         return (
-            <div className="row" style={{ marginRight: 'auto' }}>
+            <div className="row" style={{ marginRight: 'auto', alignItems: 'center' }}>
                 {paths.map((item, index) => (
                     <div key={index} className="row-centered path-view">
-                        {index > 1 ? <div className="path-separator">{'/'}</div>
-                        :<div style={{width: 2}}/>}
-                        {item && <div className="path-button" onClick={this._onPathClick.bind(this, paths, index)}>
+                        {index > 1 ?
+                            <div className="path-separator">{'/'}</div>
+                            :<div style={{width: 2}}/>
+                        }
+                        {item &&
+                            <div className="path-button"
+                            onClick={this._onPathClick.bind(this, paths, index)}
+                        >
                             {this._getPathTitle(item)}
                         </div>}
                     </div>
@@ -150,10 +159,17 @@ class HeaderView extends React.Component {
     }
 
     render() {
+        const { location } = this.props
+        const paths = location.pathname.split('/')
+        const boardPath = paths[2] || ""
+        const { addItem, addStory } = developType[boardPath] || {}
+
         return (
             <div className="header">
                 {this._renderPath()}
-                {this.state.rightBtns.map(this._renderItem)}
+                <HeaderSearch/>
+                {addItem && <HeaderAddItem/>}
+                {addStory && <HeaderAddStory/>}
             </div>
         )
     }

@@ -21,16 +21,16 @@ function PageHeader(props) {
 
     return (
         <div className="row page-header">
-            <div className="row header-button" onClick={handleResize}>
+            <div className="row page-header-button" onClick={handleResize}>
                 <i className="option-icon ion-ios-resize"></i>
                 Open as Page
             </div>
             <div style={{ marginRight: 'auto' }}/>
-            <div className="row header-button" onClick={handlePublish}>
+            <div className="row page-header-button" onClick={handlePublish}>
                 <i className="option-icon mdi mdi-publish"></i>
                 Publish
             </div>
-            <div className="row header-button" onClick={handlePublish}>
+            <div className="row page-header-button" onClick={handlePublish}>
                 <i className="option-icon ion-ios-more"></i>
             </div>
         </div>

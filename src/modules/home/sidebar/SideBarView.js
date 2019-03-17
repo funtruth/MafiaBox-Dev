@@ -34,7 +34,7 @@ function SideBarView(props) {
 
     let renderItem = (item) => {
         let paths = pathname.split('/')
-        let selected = item.key === paths[1]
+        let selected = item.key === paths[2]
 
         return (
             <div
