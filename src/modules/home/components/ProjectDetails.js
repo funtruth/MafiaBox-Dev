@@ -17,7 +17,9 @@ export default function ProjectDetails(props) {
         projectRef.on('value', snap => props.projectListener(snap))
 
         return () => {
-            console.log(`turn off listener at ${activeProject}`)
+            if (projectRef) {
+                projectRef.off();
+            }
         }
     }, [activeProject])
 

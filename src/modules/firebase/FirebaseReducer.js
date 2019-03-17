@@ -2,7 +2,9 @@ import _ from 'lodash'
 import './firebase'
 import firebase from 'firebase/app'
 import { fieldType } from '../fields/defaults'
+
 import { getCode } from '../logic/LogicReducer';
+import { navigate } from '../navigation/NavReducer'
 
 const initialState = {
     authUser: {
@@ -41,6 +43,16 @@ export function userProjectsListener(projects) {
     }
 }
 
+export function switchToProject(projectKey) {
+    return (dispatch) => {
+        dispatch(navigate("/" + projectKey))
+        dispatch({
+            type: CHANGE_ACTIVE_PROJECT,
+            payload: projectKey,
+        })
+    }
+}
+
 export function projectListener(snap) {
     return (dispatch, getState) => {
         const { projects } = getState().firebase
@@ -74,17 +86,6 @@ export function getMyInfo() {
             photoUrl,
             uid
         }))(authUser)
-    }
-}
-
-export function switchToProject(projectKey) {
-    return (dispatch) => {
-
-        
-        dispatch({
-            type: CHANGE_ACTIVE_PROJECT,
-            payload: projectKey,
-        })
     }
 }
 

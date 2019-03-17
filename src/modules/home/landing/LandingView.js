@@ -2,9 +2,9 @@ import React from 'react'
 import './Landing.css'
 import { connect } from 'react-redux'
 
-import { modalType } from '../modal/types'
+import { modalType } from '../../modal/types'
 
-import { showModal } from '../modal/ModalReducer'
+import { showModal } from '../../modal/ModalReducer'
 
 function LandingView(props) {
     const handleCreate = () => props.showModal(modalType.createProject)

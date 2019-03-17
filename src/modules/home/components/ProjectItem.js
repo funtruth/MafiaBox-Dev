@@ -5,7 +5,7 @@ export default function ProjectItem(props) {
 
     if (!project) return null;
 
-    const { title, description } = project
+    const { title } = project
     const firstLetter = title.charAt(0) || '*'
 
     return (
@@ -13,9 +13,14 @@ export default function ProjectItem(props) {
             <div className="project-icon">{firstLetter}</div>
             <div className="project-text">
                 <div className="project-title">{title}</div>
-                <div className="project-subtitle">{description}</div>
             </div>
-            <i className="mdi mdi-check"></i>
+            <i
+                className="mdi mdi-dots-vertical"
+                style={{
+                    marginLeft: 'auto',
+                    fontSize: 18,
+                }}
+            ></i>
         </div>
     )
 }

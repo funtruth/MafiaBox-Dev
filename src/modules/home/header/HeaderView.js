@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './Header.css'
 import { connect } from 'react-redux'
 
 import { showModal } from '../../modal/ModalReducer'

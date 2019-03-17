@@ -29,7 +29,7 @@ function SideBarView(props) {
         if (!activeProject) {
             return;
         }
-        props.navigate(`/${item.key}`)
+        props.navigate("/" + activeProject + "/" + item.key)
     }
 
     let renderItem = (item) => {

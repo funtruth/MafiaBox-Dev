@@ -35,6 +35,8 @@ export default function Dropdown(props) {
                     break
                 case "up":
                 case "left":
+                    console.warn('functionality is not available yet')
+                    break
                 case "right":
                     if (window.innerHeight - THRESHOLD < offsetHeight + offsetTop) {
                         setStyles({

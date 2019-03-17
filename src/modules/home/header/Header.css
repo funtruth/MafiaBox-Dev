@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    max-height: 30px;
+    background-color: rgba(54, 57, 64);
+}
+
+.path-separator {
+    animation: fadein 0.25s;
+    -webkit-animation: fadein 0.25s;
+    padding: 0px 5px;
+    color: #969696;
+}

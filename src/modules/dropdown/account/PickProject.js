@@ -2,8 +2,8 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
-import ProjectNewItem from '../../home/components/ProjectNewItem'
-import ProjectItem from '../../home/components/ProjectItem';
+import ProjectListItem from '../../home/components/ProjectListItem';
+import ProjectNewListItem from '../../home/components/ProjectNewListItem';
 
 function PickProject(props) {
     const { projects, activeProject } = props
@@ -17,14 +17,11 @@ function PickProject(props) {
 
                 return (
                     <div key={item.projectKey} className="project-details">
-                        <ProjectItem project={item} chosen={chosen}/>
+                        <ProjectListItem project={item} chosen={chosen}/>
                     </div>
                 )
             })}
-            <ProjectNewItem
-                firstLetter="+"
-                title="New project"
-            />
+            <ProjectNewListItem/>
         </div>
     )
 }
