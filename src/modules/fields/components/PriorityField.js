@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
 
+import { unnormalize } from '../../common/selectors';
 import { showModal } from '../../modal/ModalReducer'
 import { rolePrioritySort } from '../FieldReducer'
 
@@ -30,7 +31,7 @@ function PriorityField(props) {
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        pageRepo: unnormalize(state.page.pageRepo),
     }),
     {
         showModal,

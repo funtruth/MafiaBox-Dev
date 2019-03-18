@@ -5,7 +5,7 @@ export default function PageAbstract(props) {
     const { title } = pageInfo
 
     let handleChange = e => {
-        props.updatePage([path, 'title'], e.target.value)
+        props.updatePage([...path, 'title'], e.target.value)
     }
 
     return (

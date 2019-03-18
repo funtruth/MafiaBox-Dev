@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { updateType, updateViewType } from '../types';
 import { modalType } from '../../modal/types'
 
+import { unnormalize } from '../../common/selectors';
 import { showModal } from '../../modal/ModalReducer'
 import { deleteProp } from '../../page/PageReducer'
 
@@ -133,7 +134,7 @@ class UpdateButton extends React.Component{
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        pageRepo: unnormalize(state.page.pageRepo),
     }),
     {
         showModal,

@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -20,24 +19,25 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     marginBottom: 8,
 });
 
-const getListStyle = isDraggingOver => ({
+function StoryList(props) {
+    const {
+        column,     //storyMap[boardType].byId[storyMapId]
+        repo,       //pageRepo[storyMapId]
+        boardType,
+    } = props
+    const { byId, byIndex } = repo
     
-});
-
-
-class StoryList extends React.Component{
-    _onAdd = (itemCount) => {
-        const { item, boardType } = this.props
-        this.props.addPageToMap(item.key, itemCount, boardType)
+    const handleAdd = () => {
+        props.addPageToMap(column.key, boardType)
     }
 
-    _onClick = (item, snapshot) => {
+    const handleClick = (item, snapshot) => {
         if (!snapshot.isDragging){
-            this.props.showModal(
+            props.showModal(
                 modalType.showPage,
                 {
                     pageKey: item.pageKey,
-                    path: [item.pageKey],
+                    path: [column.key, 'byId', item.pageKey],
                     updateSource: updateSourceType.repo,
                     boardType: item.boardType,
                 },
@@ -45,61 +45,52 @@ class StoryList extends React.Component{
         }
     }
 
-    render() {  
-        const { item, index, repo } = this.props
-
-        const filteredPageRepo = _.filter(repo, i => i.storyType === item.key)
-        
-        const itemCount = filteredPageRepo.length
-        const isEmpty = filteredPageRepo.length === 0
-
-        return (
-            <div>
-                <div className="story-title">
-                    <div className={`${item.palette || "black-grey"} story-label`}>
-                        {item.title}
-                    </div>
-                    <div
-                        className="story-option app-onclick"
-                        menu-type={dropdownType.storyShowMore}
-                        app-onclick-props={JSON.stringify({
-                            fieldKey: index,
-                        })}
-                    >
-                        <i
-                            className="ion-ios-more"
-                            style={{
-                                fontSize: 16,
-                            }}
-                        ></i>
-                    </div>
-                    <div
-                        className="story-option"
-                        onClick={this._onAdd.bind(this, itemCount)}
-                    >
-                        <i
-                            className="ion-ios-add"
-                            style={{
-                                fontSize: 19,
-                            }}
-                        ></i>
-                    </div>
-                    
+    return (
+        <div>
+            <div className="story-title">
+                <div className={`${column.palette || "black-grey"} story-label`}>
+                    {column.title}
                 </div>
-                <Droppable droppableId={`${droppableType.page}.${item.key}`} type="ITEM">
-                    {(provided, snapshot) => (
-                        <div
-                            className="story-list"
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                        >
-                            {isEmpty?<div className="story-empty">There is nothing here yet</div>
-                                :filteredPageRepo.map((item, index) => (
+                <div
+                    className="story-option app-onclick"
+                    menu-type={dropdownType.storyShowMore}
+                    app-onclick-props={JSON.stringify({
+                        boardType,
+                        mapKey: column.key,
+                    })}
+                >
+                    <i
+                        className="ion-ios-more"
+                        style={{
+                            fontSize: 16,
+                        }}
+                    ></i>
+                </div>
+                <div className="story-option" onClick={handleAdd}>
+                    <i
+                        className="ion-ios-add"
+                        style={{
+                            fontSize: 19,
+                        }}
+                    ></i>
+                </div>
+            </div>
+            <Droppable droppableId={`${droppableType.page}.${column.key}`} type="ITEM">
+                {(provided, snapshot) => (
+                    <div
+                        className="story-list"
+                        ref={provided.innerRef}
+                    >
+                        {byIndex.length?
+                            byIndex.map((id, index) => {
+                                const item = byId[id] || {}
+                                
+                                return (
                                     <Draggable key={item.pageKey} draggableId={item.pageKey} index={index}>
                                         {(provided, snapshot) => (
                                             <div
                                                 className="story-tag"
-                                                onClick={this._onClick.bind(this, item, snapshot)}
+                                                onClick={() => handleClick(item, snapshot)}
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
                                                 {...provided.dragHandleProps}
@@ -112,16 +103,16 @@ class StoryList extends React.Component{
                                             </div>
                                         )}
                                     </Draggable>
-                                ))
-                            }
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </div>
-                
-        )
-    }
+                                )
+                            })
+                            :<div className="story-empty">There is nothing here yet</div>
+                        }
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </div>
+    )
 }
 
 export default connect(

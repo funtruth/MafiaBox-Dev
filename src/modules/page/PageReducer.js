@@ -3,7 +3,7 @@ import * as helpers from '../common/helpers'
 import { modalType } from '../modal/types'
 import { showModal } from '../modal/ModalReducer';
 
-import { initStoryMap } from './defaults'
+import { initStoryMap, DEFAULT_NORMAL } from './defaults'
 import { boardType } from '../fields/defaults'
 import { updateSourceType } from '../common/types';
 
@@ -15,6 +15,7 @@ const initialState = {
 
 //storyMap:
 const ADD_STORY = 'story/add-story-to'
+const REMOVE_STORY = 'story/remove-story'
 const MOVE_STORY = 'story/move-story'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
@@ -23,17 +24,29 @@ const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const UPDATE_REPO = 'page/update-repo'
 const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
-const UPDATE_PAGE = 'page/update-page'
 
-export function addStory(title, boardType) {
+//TODO
+export function addStory(boardType) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
+
+        let storyMapClone = _.cloneDeep(storyMap)
+
         const storyKey = helpers.genUID('story', storyMap)
 
-        let storyMapClone = Object.assign({}, storyMap)
-        storyMapClone[storyKey] = {
+        if (!storyMapClone[boardType]) {
+            console.warn('board || .byId does not exist')
+            return;
+        }
+
+        //set pointer
+        let pointer = storyMapClone[boardType]
+
+        //add story
+        pointer.byIndex.push(storyKey)
+        pointer.byId[storyKey] = {
             key: storyKey,
-            title,
+            title: "",
             boardType,
             default: false,
         }
@@ -45,50 +58,77 @@ export function addStory(title, boardType) {
     }
 }
 
-export function moveStory(boardKey, startIndex, endIndex) {
+export function removeStory(boardType, mapKey) {
     return (dispatch, getState) => {
-        const { storyMap } = getState().page
-        let storyMapClone = Object.assign({}, storyMap)
+        const { storyMap, pageRepo } = getState().page
 
-        let relatedStories = _(storyMapClone)
-            .filter(i => i.boardType === boardKey)
-            .sortBy(i => i.index)
-            .value()
+        let repoClone = _.cloneDeep(pageRepo)
+        let storyMapClone = _.cloneDeep(storyMap)
 
-        const [removed] = relatedStories.splice(startIndex, 1)
-        relatedStories.splice(endIndex, 0, removed)
+        //set pointer
+        let storyMapPointer = storyMapClone[boardType]
 
-        //re-index
-        relatedStories.forEach((i, x) => storyMapClone[i.key].index = x)
-        
+        //remove from storyMap
+        delete storyMapPointer.byId[mapKey]
+        _.pull(storyMapPointer.byIndex, mapKey)
+
+        //remove all pages from pageRepo
+        delete repoClone[mapKey]
+
         dispatch({
-            type: MOVE_STORY,
-            payload: storyMapClone
+            type: REMOVE_STORY,
+            payload: {
+                pageRepo: repoClone,
+                storyMap: storyMapClone,
+            }
         })
     }
 }
 
-//TODO itemCount should be replaced because it places the item on BOTTOM, should be on TOP UX
-export function addPageToMap(mapKey, itemCount, boardType) {
+export function moveStory(boardKey, startIndex, endIndex) {
+    return (dispatch, getState) => {
+        const { storyMap } = getState().page
+
+        let storyMapClone = _.cloneDeep(storyMap)
+
+        //set pointer
+        let pointer = storyMapClone[boardKey].byIndex
+
+        //move item
+        const [removed] = pointer.splice(startIndex, 1)
+        pointer.splice(endIndex, 0, removed)
+        
+        dispatch({
+            type: MOVE_STORY,
+            payload: storyMapClone,
+        })
+    }
+}
+
+export function addPageToMap(mapKey, boardType) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         const { fieldRepo } = getState().field
 
         let repoClone = Object.assign({}, pageRepo)
-        const pageKey = helpers.genUID(boardType, pageRepo)
+        if (!repoClone[mapKey]) {
+            repoClone[mapKey] = _.cloneDeep(DEFAULT_NORMAL)
+        }
+        
+        const pageKey = helpers.genUID(boardType, repoClone[mapKey].byId)
 
         //set-up defaults
         let defaultInfo = {}
         _.filter(fieldRepo, i => i.boardType === boardType && i.default)
             .forEach(i => defaultInfo[i.key] = i.default)
 
-        repoClone[pageKey] = {
+        repoClone[mapKey].byId[pageKey] = {
             pageKey,
             boardType,
             storyType: mapKey,
-            index: itemCount,
             ...defaultInfo,
         }
+        repoClone[mapKey].byIndex.unshift(pageKey)
 
         dispatch({
             type: ADD_PAGE,
@@ -96,7 +136,7 @@ export function addPageToMap(mapKey, itemCount, boardType) {
         })
         dispatch(showModal(modalType.showPage, {
             pageKey,
-            path: [pageKey],
+            path: [mapKey, 'byId', pageKey],
             updateSource: updateSourceType.repo,
         }))
     }
@@ -106,22 +146,18 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
-        let pageRepoClone = Object.assign({}, pageRepo)
+        let repoClone = _.cloneDeep(pageRepo)
 
-        let relatedPages = _(pageRepo)
-            .filter(i => i.storyType === mapKey)
-            .sortBy(i => i.index)
-            .value()
+        //set pointer
+        let pointer = repoClone[mapKey].byIndex
         
-        const [removed] = relatedPages.splice(startIndex, 1)
-        relatedPages.splice(endIndex, 0, removed)
-        
-        //re-index
-        relatedPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
+        //move item
+        const [removed] = pointer.splice(startIndex, 1)
+        pointer.splice(endIndex, 0, removed)
 
         dispatch({
             type: MOVE_PAGE_WITHIN_MAP,
-            payload: pageRepoClone
+            payload: repoClone,
         })
     }
 }
@@ -129,43 +165,48 @@ export function movePageWithinMap(mapKey, startIndex, endIndex) {
 export function movePageToOtherMap(startMapKey, endMapKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
+        
+        let repoClone = _.cloneDeep(pageRepo)
 
-        let pageRepoClone = Object.assign({}, pageRepo)
+        //set pointers
+        let startPointer = repoClone[startMapKey]
+        if(!repoClone[endMapKey]) repoClone[endMapKey] = _.cloneDeep(DEFAULT_NORMAL)
+        let endPointer = repoClone[endMapKey]
+        
+        //get item information
+        const pageKey = startPointer.byIndex[startIndex]
+        const pageInfo = startPointer.byId[pageKey]
+        
+        //adjust .byIndex of start and end
+        const [removed] = startPointer.byIndex.splice(startIndex, 1)
+        endPointer.byIndex.splice(endIndex, 0, removed)
 
-        let startPages = _(pageRepo)
-            .filter(i => i.storyType === startMapKey)
-            .sortBy(i => i.index)
-            .value()
-        let endPages = _(pageRepo)
-            .filter(i => i.storyType === endMapKey)
-            .sortBy(i => i.index)
-            .value()
+        //move the item to end location
+        endPointer.byId[pageKey] = pageInfo
 
-        startPages[startIndex].storyType = endMapKey
-        const [removed] = startPages.splice(startIndex, 1)
-        endPages.splice(endIndex, 0, removed)
-
-        //re-index
-        startPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
-        endPages.forEach((i, x) => pageRepoClone[i.pageKey].index = x)
-    
         dispatch({
             type: MOVE_PAGE_TO_OTHER_MAP,
-            payload: pageRepoClone
+            payload: repoClone,
         })
     }
 }
 
-export function removePage(pageKey) {
+export function removePage(pageKey, mapKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
         
-        let pageRepoClone = Object.assign({}, pageRepo)
-        delete pageRepoClone[pageKey]
+        let repoClone = _.cloneDeep(pageRepo)
+        
+        //set pointer
+        let pointer = repoClone[mapKey]
 
+        //remove from .byId and .byIndex
+        delete pointer.byId[pageKey]
+        _.pull(pointer.byIndex, pageKey)
+        
         dispatch({
             type: REMOVE_PAGE,
-            payload: pageRepoClone
+            payload: repoClone
         })
     }
 }
@@ -232,9 +273,9 @@ export default (state = initialState, action) => {
         case ADD_PAGE:
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
-            
-        case UPDATE_PAGE:
-            return { ...state, pageRepo: { ...state.pageRepo, [action.payload.pageKey]: action.payload }}
+
+        case REMOVE_STORY:
+            return { ...state, pageRepo: action.payload.pageRepo, storyMap: action.payload.storyMap }
         default:
             return state;
     }

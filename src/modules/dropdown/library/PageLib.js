@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { panelType, updateViewType } from '../../logic/types'
-import DropTitle from '../components/DropTitle';
 import { VAR_DEFAULTS } from '../types';
+
+import { unnormalize } from '../../common/selectors';
+
+import DropTitle from '../components/DropTitle';
 
 class PageLib extends React.Component{
     _onClick = (item) => {
@@ -43,6 +46,6 @@ class PageLib extends React.Component{
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        pageRepo: unnormalize(state.page.pageRepo),
     }),
 )(PageLib)

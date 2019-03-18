@@ -1,51 +1,51 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { showModal } from '../ModalReducer'
-import { navigate } from '../../navigation/NavReducer'
+import { removeStory } from '../../page/PageReducer'
+import { unnormalize } from '../../common/selectors';
 
-class DeleteStory extends React.Component {
-    _onCancel = () => {
-        this.props.showModal()
+import Modal from '../components/Modal'
+
+function DeleteStory(props) {
+    const { boardType, mapKey, storyMap } = props
+    const storyInfo = storyMap[mapKey]
+
+    const handleCancel = () => {
+        props.showModal()
     }
 
-    _onDelete = () => {
-        //TODO delete story
-        this.props.showModal()
+    const handleDelete = () => {
+        props.removeStory(boardType, mapKey)
+        props.showModal()
     }
-
-    render() {
-        const { storyIndex, pageRepo } = this.props
-        
-        return (
-            <div>
-                <div style={{ padding: 16 }}>
-                    <div className="modal-title">
-                        {`Delete '${pageRepo[storyIndex].title}'?`}
-                    </div>
-                    <div className="modal-subtitle">
-                        {`Are you sure you want to delete ${pageRepo[storyIndex].title}?`}
-                    </div>
+    
+    return (
+        <Modal>
+            <div style={{ padding: 16 }}>
+                <div className="modal-title">
+                    {`Delete '${storyInfo.title}'?`}
                 </div>
-                <div className="row dark-grey modal-options">
-                    <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={this._onCancel}>
-                        {`Cancel`}
-                    </div>
-                    <div className="delete-button" onClick={this._onDelete}>
-                        {`Delete Story`}
-                    </div>
+                <div className="modal-subtitle">
+                    {`Are you sure you want to delete ${storyInfo.title}?`}
                 </div>
             </div>
-        )
-    }
+            <div className="row dark-grey modal-options">
+                <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={handleCancel}>
+                    {`Cancel`}
+                </div>
+                <div className="delete-button" onClick={handleDelete}>
+                    {`Delete Story`}
+                </div>
+            </div>
+        </Modal>
+    )
 }
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        storyMap: unnormalize(state.page.storyMap),
     }),
     {
-        showModal,
-        navigate,
+        removeStory,
     }
 )(DeleteStory)

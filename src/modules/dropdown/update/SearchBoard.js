@@ -5,14 +5,18 @@ import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
 
+import { unnormalize } from '../../common/selectors';
+
 import StoryMapLib from '../library/StoryMapLib';
 import DropTitle from '../components/DropTitle';
 
 function SearchBoard(props) {
+    const { pageRepo, boardType } = props
+
     let [searchText, setSearchText] = useState('')
     let [results, setResults] = useState([])
 
-    let fuse = new Fuse(_.filter(props.pageRepo, i => i.boardType === props.boardType), fuseType.searchBoard)
+    let fuse = new Fuse(_.filter(pageRepo, i => i.boardType === boardType), fuseType.searchBoard)
 
     let handleType = e => {
         setSearchText(e.target.value)
@@ -23,8 +27,6 @@ function SearchBoard(props) {
         console.log({props})
     }
     
-    const { pageRepo, boardType } = props
-        
     return (
         <div>
             <input
@@ -70,6 +72,6 @@ function SearchBoard(props) {
 
 export default connect(
     state => ({
-        pageRepo: state.page.pageRepo,
+        pageRepo: unnormalize(state.page.pageRepo),
     }),
 )(SearchBoard)

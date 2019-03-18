@@ -1,13 +1,12 @@
 import React from 'react'
 import './board.css'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { addPageToMap } from '../page/PageReducer'
+import { DEFAULT_NORMAL } from '../page/defaults';
+import { droppableType } from '../common/types';
 
 import StoryList from './components/StoryList'
-import { droppableType } from '../common/types';
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -25,16 +24,10 @@ const getListStyle = isDraggingOver => ({
 class StoryBoard extends React.Component{
     render() {
         const { storyMap, pageRepo, boardType } = this.props
+        const storyInfo = storyMap[boardType] || DEFAULT_NORMAL
 
-        const filteredStoryMap = _(storyMap)
-            .filter(i => i.boardType === boardType)
-            .sortBy(i => i.index)
-            .value()
-        const filteredPageRepo = _(pageRepo)
-            .filter(i => i.boardType === boardType)
-            .sortBy(i => i.index)
-            .value()
-        
+        const { byId, byIndex } = storyInfo
+
         return (
             <div className="story-view">
                 <Droppable droppableId={`${droppableType.board}.${boardType}`} direction="horizontal" type="COLUMN">
@@ -44,29 +37,33 @@ class StoryBoard extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {filteredStoryMap.map((item, index) => (
-                                <Draggable key={item.key} draggableId={item.key} index={index}>
-                                    {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={getItemStyle(
-                                                snapshot.isDragging,
-                                                provided.draggableProps.style
-                                            )}
-                                        >
-                                            <StoryList
-                                                item={item}
-                                                storyIndex={index}
-                                                boardType={boardType}
-                                                dragging={snapshot.isDragging}
-                                                repo={filteredPageRepo}
-                                            />
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
+                            {byIndex.map((id, index) => {
+                                const column = byId[id] || {}
+                                const repo = pageRepo[id] || DEFAULT_NORMAL
+                                
+                                return (
+                                    <Draggable key={id} draggableId={id} index={index}>
+                                        {(provided, snapshot) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
+                                                style={getItemStyle(
+                                                    snapshot.isDragging,
+                                                    provided.draggableProps.style
+                                                )}
+                                            >
+                                                <StoryList
+                                                    column={column}
+                                                    repo={repo}
+                                                    boardType={boardType}
+                                                    dragging={snapshot.isDragging}
+                                                />
+                                            </div>
+                                        )}
+                                    </Draggable>
+                                )
+                            })}
                             {provided.placeholder}
                         </div>
                     )}
@@ -97,7 +94,4 @@ export default connect(
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
     }),
-    {
-        addPageToMap,
-    }
 )(StoryBoard)

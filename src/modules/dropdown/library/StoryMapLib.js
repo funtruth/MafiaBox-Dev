@@ -4,6 +4,8 @@ import _ from 'lodash'
 
 import { dropdownType } from '../types'
 
+import { unnormalize } from '../../common/selectors';
+
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
 
@@ -41,6 +43,6 @@ class StoryMapLib extends React.Component{
 export default connect(
     state => ({
         storyMap: state.page.storyMap,
-        pageRepo: state.page.pageRepo,
+        pageRepo: unnormalize(state.page.pageRepo),
     }),
 )(StoryMapLib)
