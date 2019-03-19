@@ -23,10 +23,8 @@ const getListStyle = isDraggingOver => ({
 
 class StoryBoard extends React.Component{
     render() {
-        const { storyMap, pageRepo, boardType } = this.props
-        const storyInfo = storyMap[boardType] || DEFAULT_NORMAL
-
-        const { byId, byIndex } = storyInfo
+        const { storyRepo, storyMap, pageRepo, boardType } = this.props
+        const stories = storyMap[boardType] || []
 
         return (
             <div className="story-view">
@@ -37,12 +35,12 @@ class StoryBoard extends React.Component{
                             ref={provided.innerRef}
                             style={getListStyle(snapshot.isDraggingOver)}
                         >
-                            {byIndex.map((id, index) => {
-                                const column = byId[id] || {}
-                                const repo = pageRepo[id] || DEFAULT_NORMAL
+                            {stories.map((storyKey, index) => {
+                                const column = storyRepo[storyKey] || {}
+                                const repo = pageRepo[storyKey] || DEFAULT_NORMAL
                                 
                                 return (
-                                    <Draggable key={id} draggableId={id} index={index}>
+                                    <Draggable key={storyKey} draggableId={storyKey} index={index}>
                                         {(provided, snapshot) => (
                                             <div
                                                 ref={provided.innerRef}
@@ -54,6 +52,7 @@ class StoryBoard extends React.Component{
                                                 )}
                                             >
                                                 <StoryList
+                                                    storyKey={storyKey}
                                                     column={column}
                                                     repo={repo}
                                                     boardType={boardType}
@@ -91,6 +90,7 @@ const styles = {
 
 export default connect(
     state => ({
+        storyRepo: state.page.storyRepo,
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
     }),

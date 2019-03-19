@@ -7,12 +7,10 @@ import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
 
 function PageView(props) {
-    const { pageRepo, path } = props
+    const { pageKey, pageRepo } = props
+    console.log({props})
 
-    const mapKey = path[0]
-    const pageKey = path[2]
-
-    const pageInfo = (pageRepo[mapKey] && pageRepo[mapKey].byId && pageRepo[mapKey].byId[pageKey]) || {}
+    const pageInfo = pageRepo[pageKey] || {}
     console.log("PageView console", pageInfo)
     
     return (

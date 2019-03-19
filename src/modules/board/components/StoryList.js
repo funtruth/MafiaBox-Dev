@@ -21,11 +21,14 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
 function StoryList(props) {
     const {
-        column,     //storyMap[boardType].byId[storyMapId]
-        repo,       //pageRepo[storyMapId]
+        pageRepo,
+        pageMap,
+        column,
         boardType,
+        storyKey,
     } = props
-    const { byId, byIndex } = repo
+    
+    const indexPages = pageMap[storyKey] || {}
 
     let [title, setTitle] = useState(column.title)
     let [showInput, setShowInput] = useState(false)
@@ -38,7 +41,7 @@ function StoryList(props) {
     }
     const handleTitleClick = () => setShowInput(true)
     const handleTextBlur = () => {
-        props.updateStory(boardType, column.key, {
+        props.updateStory(column.key, {
             title,
         })
         setShowInput(false)
@@ -54,7 +57,7 @@ function StoryList(props) {
                 modalType.showPage,
                 {
                     pageKey: item.pageKey,
-                    path: [column.key, 'byId', item.pageKey],
+                    path: [item.pageKey],
                     updateSource: updateSourceType.repo,
                     boardType: item.boardType,
                 },
@@ -111,9 +114,10 @@ function StoryList(props) {
                         className="story-list"
                         ref={provided.innerRef}
                     >
-                        {byIndex.length?
-                            byIndex.map((id, index) => {
-                                const item = byId[id] || {}
+                        {indexPages.length?
+                            indexPages.map((pageKey, index) => {
+                                const item = pageRepo[pageKey]
+                                if (!item) return null;
                                 
                                 return (
                                     <Draggable key={item.pageKey} draggableId={item.pageKey} index={index}>
@@ -146,7 +150,10 @@ function StoryList(props) {
 }
 
 export default connect(
-    null,
+    state => ({
+        pageRepo: state.page.pageRepo,
+        pageMap: state.page.pageMap,
+    }),
     {
         showModal,
         addPageToMap,
