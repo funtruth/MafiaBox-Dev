@@ -1,6 +1,7 @@
 .story-view {
+    display: flex;
+    flex: 1;
     padding: 0px 2px 2px 8px;
-    overflow: auto;
     transition: color 0.3s;
     color: rgba(54, 57, 64, 1);
     background-color: rgba(54, 57, 64);
@@ -35,8 +36,24 @@
 
 .story-label {
     border-radius: 2px;
-    padding: 2px 10px;
+    padding: 4px 10px;
     margin-right: auto;
+    cursor: pointer;
+}
+
+.story-input {
+    padding: 4px 10px 3px 10px;
+    width: 60%;
+    font: 400 14px Arial;
+    margin-right: auto;
+    border: none;
+    cursor: text;
+    color: #d6d6d6;
+    background-color: rgba(40, 43, 48,1);
+}
+.story-input:focus {
+    outline: none;
+    border-bottom: 1px solid #aaa;
 }
 
 .story-list {

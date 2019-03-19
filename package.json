@@ -8,6 +8,7 @@
   "dependencies": {
     "codemirror": "^5.42.0",
     "concurrently": "^4.1.0",
+    "deep-diff": "^1.0.2",
     "electron-is-dev": "^1.0.1",
     "firebase": "^5.5.4",
     "fuse.js": "^3.3.0",

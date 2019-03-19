@@ -42,7 +42,7 @@ class StoryMapLib extends React.Component{
 
 export default connect(
     state => ({
-        storyMap: state.page.storyMap,
+        storyMap: unnormalize(state.page.storyMap),
         pageRepo: unnormalize(state.page.pageRepo),
     }),
 )(StoryMapLib)

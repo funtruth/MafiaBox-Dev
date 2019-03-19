@@ -80,12 +80,12 @@ const styles = {
         font: '500 14px Arial',
         cursor: 'pointer',
         pointerEvents: 'none',
-        minWidth: 180,
+        minWidth: 200,
         marginRight: 12,
     },
     listStyle: {
         display: 'flex',
-        overflow: 'auto',
+        flex: 1,
     }
 }
 

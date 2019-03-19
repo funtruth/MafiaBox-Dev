@@ -1,31 +1,38 @@
 import _ from 'lodash'
+import { diff } from 'deep-diff'
 import * as helpers from '../common/helpers'
-import { modalType } from '../modal/types'
-import { showModal } from '../modal/ModalReducer';
+import firebase from 'firebase/app'
 
+import { modalType } from '../modal/types'
 import { initStoryMap, DEFAULT_NORMAL } from './defaults'
 import { boardType } from '../fields/defaults'
 import { updateSourceType } from '../common/types';
+
+import { pathToFirebase, valueToFirebase } from '../common/translators'
+import { showModal } from '../modal/ModalReducer';
+import { unnormalize } from '../common/selectors';
 
 const initialState = {
     storyMap: initStoryMap,
     boardRepo: boardType,
     pageRepo: {},
+    pageStorage: {},
 }
 
-//storyMap:
 const ADD_STORY = 'story/add-story-to'
+const UPDATE_STORY = 'story/update-story'
 const REMOVE_STORY = 'story/remove-story'
 const MOVE_STORY = 'story/move-story'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
-//[repo]sitory: holds all the pages keyed by pageKey
 const UPDATE_REPO = 'page/update-repo'
 const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
 
-//TODO
+const SWAP_FROM_STORAGE = 'page/swap-from-storage'
+const UPDATE_STORAGE = 'page/update-storage'
+
 export function addStory(boardType) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
@@ -85,6 +92,22 @@ export function removeStory(boardType, mapKey) {
     }
 }
 
+export function updateStory(boardType, mapKey, update) {
+    return(dispatch, getState) => {
+        const { storyMap } = getState().page
+
+        let storyMapClone = _.cloneDeep(storyMap)
+
+        let pointer = storyMapClone[boardType].byId[mapKey]
+        Object.assign(pointer, update)
+
+        dispatch({
+            type: UPDATE_STORY,
+            payload: storyMapClone,
+        })
+    }
+}
+
 export function moveStory(boardKey, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
@@ -110,12 +133,12 @@ export function addPageToMap(mapKey, boardType) {
         const { pageRepo } = getState().page
         const { fieldRepo } = getState().field
 
-        let repoClone = Object.assign({}, pageRepo)
+        let repoClone = _.cloneDeep(pageRepo)
         if (!repoClone[mapKey]) {
             repoClone[mapKey] = _.cloneDeep(DEFAULT_NORMAL)
         }
         
-        const pageKey = helpers.genUID(boardType, repoClone[mapKey].byId)
+        const pageKey = helpers.genUID(boardType, pageRepo)
 
         //set-up defaults
         let defaultInfo = {}
@@ -211,11 +234,55 @@ export function removePage(pageKey, mapKey) {
     }
 }
 
+export function getProjectFromStorage(projectKey) {
+    return (dispatch, getState) => {
+
+        dispatch({
+            type: SWAP_FROM_STORAGE,
+            payload: {
+
+            }
+        })
+    }
+}
+
+//projectKey [DEV]
+//keyType -> storyMap, pageRepo
+export function updateStorage(projectKey, keyType, value) {
+    return (dispatch, getState) => {
+        const { pageStorage } = getState().page
+
+        const storageClone = helpers.updateByPath([projectKey, keyType], value, pageStorage)
+
+        dispatch({
+            type: UPDATE_STORAGE,
+            payload: storageClone,
+        })
+    }
+}
+
 export function updateRepo(path, update, extraPath=[]) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
-        const repoClone = helpers.updateByPath(path.concat(extraPath), update, pageRepo)
-        
+
+        const totalPath = path.concat(extraPath)
+        const repoClone = helpers.updateByPath(totalPath, update, pageRepo)
+
+        dispatch(pushAndUpdateRepo(repoClone))
+    }
+}
+
+export function pushAndUpdateRepo(repoClone) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        const { activeProject } = getState().firebase 
+
+        let batchUpdate = {},
+            pathToRepo = `dev/${activeProject}/`;
+
+        diff(pageRepo, repoClone).forEach(item => batchUpdate[pathToRepo + item.path.join('/')] = item.rhs)
+        firebase.database().ref().update(batchUpdate)
+
         dispatch({
             type: UPDATE_REPO,
             payload: repoClone,
@@ -264,6 +331,7 @@ export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
+        case UPDATE_STORY:
         case MOVE_STORY:
             return { ...state, storyMap: action.payload }
             
@@ -274,8 +342,11 @@ export default (state = initialState, action) => {
         case REMOVE_PAGE:
             return { ...state, pageRepo: action.payload }
 
+        case UPDATE_STORAGE:
+            return { ...state, pageStorage: action.payload }
         case REMOVE_STORY:
-            return { ...state, pageRepo: action.payload.pageRepo, storyMap: action.payload.storyMap }
+        case SWAP_FROM_STORAGE:
+            return { ...state, ...action.payload }
         default:
             return state;
     }

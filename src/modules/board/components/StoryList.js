@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -7,7 +7,7 @@ import { dropdownType } from '../../dropdown/types'
 import { droppableType, updateSourceType } from '../../common/types';
 
 import { showModal } from '../../modal/ModalReducer'
-import { addPageToMap } from '../../page/PageReducer'
+import { addPageToMap, updateStory } from '../../page/PageReducer'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -26,6 +26,23 @@ function StoryList(props) {
         boardType,
     } = props
     const { byId, byIndex } = repo
+
+    let [title, setTitle] = useState(column.title)
+    let [showInput, setShowInput] = useState(false)
+
+    const handleText = (e) => setTitle(e.target.value)
+    const handleKeyPress = (e) => {
+        if(e.key === 'Enter') {    
+            e.target.blur() 
+        }
+    }
+    const handleTitleClick = () => setShowInput(true)
+    const handleTextBlur = () => {
+        props.updateStory(boardType, column.key, {
+            title,
+        })
+        setShowInput(false)
+    }
     
     const handleAdd = () => {
         props.addPageToMap(column.key, boardType)
@@ -48,9 +65,22 @@ function StoryList(props) {
     return (
         <div>
             <div className="story-title">
-                <div className={`${column.palette || "black-grey"} story-label`}>
-                    {column.title}
-                </div>
+                {showInput ?
+                    <input
+                        className="story-input"
+                        value={title}
+                        onChange={handleText}
+                        autoFocus={true}
+                        onBlur={handleTextBlur}
+                        onKeyPress={handleKeyPress}
+                    />
+                    :<div
+                        className={`${column.palette || "black-grey"} story-label`}
+                        onClick={handleTitleClick}
+                    >
+                        {column.title || "Untitled"}
+                    </div>
+                }
                 <div
                     className="story-option app-onclick"
                     menu-type={dropdownType.storyShowMore}
@@ -120,5 +150,6 @@ export default connect(
     {
         showModal,
         addPageToMap,
+        updateStory,
     }
 )(StoryList)

@@ -15,11 +15,9 @@ export default function LogicType(props) {
         :(selectedLogic ? logicType[selectedLogic] : {})
     
     let handleAdd = () => {
-        props.updatePage(path, {
-            down: {
-                ...DEFAULT_LOGIC,
-                down: value.down,
-            },
+        props.updatePage([...path, 'down'], {
+            ...DEFAULT_LOGIC,
+            down: value.down,
         })
     }
 

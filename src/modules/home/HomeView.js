@@ -19,7 +19,7 @@ export default function HomeView(props) {
     return (
         <div className="home-view">
             <SideBarView {...props}/>
-            <div style={{ flex: 1, flexDirection: 'column', display: 'flex', }}>
+            <div style={{ flex: 1, flexDirection: 'column', display: 'flex', overflow: 'auto' }}>
                 <HeaderView {...props}/>
                 <Switch>
                     <Route exact path="/" component={LandingView}/>
