@@ -1,7 +1,7 @@
-#Architecture
+# Architecture
 - Basic documentation on database nodes
 
-##users
+## users
 ```javascript
 users
     {uid}
@@ -12,7 +12,7 @@ users
         photoUrl
 ```
 
-##projects
+## projects
 ```javascript
 projects
     {projectKey}
@@ -27,7 +27,7 @@ projects
                 acceptedInvite
 ```
 
-##userProjects
+## userProjects
 ```javascript
 userProjects
     {uid}

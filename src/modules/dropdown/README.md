@@ -1,20 +1,20 @@
-#Dropdown Documentation
+# Dropdown Documentation
 
-##General Rules (* => required fields)
+## General Rules (* => required fields)
 1. Dropdowns are triggered by elements at the global level (attached to AppWrapper)
 2. In order to trigger a Dropdown, element should have:
 - className*: "app-onclick" 
 - menu-type*: dropdownType
 - app-onclick-props: JSON.strigified Object
 
-##Global Dropdown
+## Global Dropdown
 - Handled at AppNavigator
 
-##Dropdown Position
+## Dropdown Position
 - Dropdowns can potentially be rendered outside of the window, this should ideally never happen
 - The following cases are considered:
 
-###Initial Dropdown (index === 0)
+### Initial Dropdown (index === 0)
 - Primary axis (Dropdown side attached to div)
     - results in a flip
     - defaults to Y (place: "down")
@@ -33,14 +33,14 @@ dir: "left" & "right"
         flip X
 ```
 
-###Nested Dropdown (index !== 0, originate from Dropdown)
+### Nested Dropdown (index !== 0, originate from Dropdown)
 ```javascript
 
 ```
 
-##Dropdown Reducer
+## Dropdown Reducer
 
-###Magic equations
+### Magic equations
 ```javascript
 //these handlers have different magic equations because the events have different values available
 if (keysClone.length) {
