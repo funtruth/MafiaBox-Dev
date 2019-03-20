@@ -4,7 +4,6 @@ import * as helpers from '../common/helpers'
 import firebase from 'firebase/app'
 
 import { modalType } from '../modal/types'
-import { initStoryMap, DEFAULT_NORMAL } from './defaults'
 import { boardType } from '../fields/defaults'
 import { updateSourceType } from '../common/types';
 
@@ -18,7 +17,10 @@ const initialState = {
     storyRepo: {},
     storyMap: {},
     pageStorage: {},
+
+    projectStorage: {},
 }
+const VALID_PROPS = ['pageRepo', 'pageMap', 'storyRepo', 'storyMap']
 
 const ADD_STORY = 'story/add-story-to'
 const UPDATE_STORY = 'story/update-story'
@@ -30,6 +32,10 @@ const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const UPDATE_REPO = 'page/update-repo'
 const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
+
+const RECEIVE_EVENT = 'page/receive-event'
+const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
+const RESET_REDUCER = 'page/reset-reducer'
 
 const SWAP_FROM_STORAGE = 'page/swap-from-storage'
 const UPDATE_STORAGE = 'page/update-storage'
@@ -56,13 +62,13 @@ export function addStory(boardType) {
             default: false,
         }
 
-        dispatch({
+        dispatch(receiveAction({
             type: ADD_STORY,
             payload: {
                 storyRepo:  storyRepoClone,
                 storyMap:   storyMapClone,
             },
-        })
+        }))
     }
 }
 
@@ -85,7 +91,7 @@ export function removeStory(boardType, storyKey) {
         })
         pageMapClone[storyKey] = null
 
-        dispatch({
+        dispatch(receiveAction({
             type: REMOVE_STORY,
             payload: {
                 pageRepo: pageRepoClone,
@@ -93,7 +99,7 @@ export function removeStory(boardType, storyKey) {
                 storyRepo: storyRepoClone,
                 storyMap: storyMapClone,
             }
-        })
+        }))
     }
 }
 
@@ -106,12 +112,12 @@ export function updateStory(storyKey, update) {
 
         Object.assign(storyRepoClone[storyKey], update)
 
-        dispatch({
+        dispatch(receiveAction({
             type: UPDATE_STORY,
             payload: {
                 storyRepo: storyRepoClone,
             },
-        })
+        }))
     }
 }
 
@@ -128,12 +134,12 @@ export function moveStory(boardType, startIndex, endIndex) {
         const [removed] = pointer.splice(startIndex, 1)
         pointer.splice(endIndex, 0, removed)
         
-        dispatch({
+        dispatch(receiveAction({
             type: MOVE_STORY,
             payload: {
                 storyMap: storyMapClone,
             },
-        })
+        }))
     }
 }
 
@@ -166,13 +172,13 @@ export function addPageToMap(storyKey, boardType) {
         }
         pageMapClone[storyKey].unshift(pageKey)
 
-        dispatch({
+        dispatch(receiveAction({
             type: ADD_PAGE,
             payload: {
                 pageRepo: pageRepoClone,
                 pageMap: pageMapClone,
-            },
-        })
+            }
+        }))
         dispatch(showModal(modalType.showPage, {
             pageKey,
             path: [pageKey],
@@ -194,12 +200,12 @@ export function movePageWithinMap(storyKey, startIndex, endIndex) {
         const [removed] = pointer.splice(startIndex, 1)
         pointer.splice(endIndex, 0, removed)
 
-        dispatch({
+        dispatch(receiveAction({
             type: MOVE_PAGE_WITHIN_MAP,
             payload: {
                 pageMap: pageMapClone,
             },
-        })
+        }))
     }
 }
 
@@ -220,12 +226,12 @@ export function movePageToOtherMap(startKey, endKey, startIndex, endIndex) {
         const [removed] = startPointer.splice(startIndex, 1)
         endPointer.splice(endIndex, 0, removed)
 
-        dispatch({
+        dispatch(receiveAction({
             type: MOVE_PAGE_TO_OTHER_MAP,
             payload: {
                 pageMap: pageMapClone,
             },
-        })
+        }))
     }
 }
 
@@ -240,39 +246,55 @@ export function removePage(pageKey, storyKey) {
         _.pull(pageMapClone[storyKey], pageKey)
         pageRepoClone[pageKey] = null
         
-        dispatch({
+        dispatch(receiveAction({
             type: REMOVE_PAGE,
             payload: {
                 pageRepo: pageRepoClone,
                 pageMap: pageMapClone,
             },
-        })
+        }))
     }
 }
 
-export function getProjectFromStorage(projectKey) {
-    return (dispatch, getState) => {
-
+export function resetPageReducer() {
+    return (dispatch) => {
         dispatch({
-            type: SWAP_FROM_STORAGE,
+            type: RESET_REDUCER,
             payload: {
-
-            }
+                pageRepo: {},
+                pageMap: {},
+                storyRepo: {},
+                storyMap: {},
+            },
         })
     }
 }
 
-//projectKey [DEV]
-//keyType -> storyMap, pageRepo
-export function updateStorage(projectKey, keyType, value) {
+export function receiveEvent(snap, key) {
     return (dispatch, getState) => {
-        const { pageStorage } = getState().page
+        const { page } = getState()
 
-        const storageClone = helpers.updateByPath([projectKey, keyType], value, pageStorage)
+        let stateClone = _.cloneDeep(page)
+        if (!stateClone[key]) stateClone[key] = {}
+        stateClone[key][snap.key] = snap.val()
 
         dispatch({
-            type: UPDATE_STORAGE,
-            payload: storageClone,
+            type: RECEIVE_CHILD_EVENT,
+            payload: stateClone,
+        })
+    }
+}
+export function receiveDeleteEvent(snap, key) {
+    return (dispatch, getState) => {
+        const { page } = getState()
+
+        let stateClone = _.cloneDeep(page)
+        if (!stateClone[key]) return;
+        stateClone[key][snap.key] = null
+
+        dispatch({
+            type: RECEIVE_CHILD_EVENT,
+            payload: stateClone,
         })
     }
 }
@@ -284,25 +306,47 @@ export function updateRepo(path, update, extraPath=[]) {
         const totalPath = path.concat(extraPath)
         const repoClone = helpers.updateByPath(totalPath, update, pageRepo)
 
-        dispatch(pushAndUpdateRepo(repoClone))
+        dispatch(receiveAction({
+            type: UPDATE_REPO,
+            payload: {
+                pageRepo: repoClone,
+            },
+        }))
     }
 }
 
-export function pushAndUpdateRepo(repoClone) {
+//intercepts redux action/payload and checks diffs to properly update firebase
+//dispatches the action/payload
+export function receiveAction({type, payload}) {
     return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        const { activeProject } = getState().firebase 
+        const { page } = getState()
+        const { activeProject, userOnline } = getState().firebase 
 
         let batchUpdate = {},
             pathToRepo = `dev/${activeProject}/`;
 
-        diff(pageRepo, repoClone).forEach(item => batchUpdate[pathToRepo + item.path.join('/')] = item.rhs)
-        firebase.database().ref().update(batchUpdate)
-
-        dispatch({
-            type: UPDATE_REPO,
-            payload: repoClone,
-        })
+        for (var prop in payload) {
+            if (!VALID_PROPS.includes(prop)) {
+                console.warn('This is not a valid prop', prop, 'error coming from action:', type)
+                continue
+            }
+            
+            diff(page[prop], payload[prop]).forEach(item => {
+                switch(item.kind) {
+                    case "A":
+                        batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
+                        break
+                    default:
+                        batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
+                }
+            })
+        }
+        console.log({batchUpdate})
+        try {
+            firebase.database().ref(pathToRepo).update(batchUpdate)
+        } catch {
+            console.log('there was an error updating to Firebase', {batchUpdate})
+        }
     }
 }
 
@@ -354,15 +398,15 @@ export default (state = initialState, action) => {
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
         case REMOVE_PAGE:
-            return { ...state, ...action.payload }
-            
+        case SWAP_FROM_STORAGE:
+        case RECEIVE_EVENT:
+        case RECEIVE_CHILD_EVENT:
         case UPDATE_REPO:
-            return { ...state, pageRepo: action.payload }
+        case RESET_REDUCER:
+            return { ...state, ...action.payload }
 
         case UPDATE_STORAGE:
             return { ...state, pageStorage: action.payload }
-        case SWAP_FROM_STORAGE:
-            return { ...state, ...action.payload }
         default:
             return state;
     }

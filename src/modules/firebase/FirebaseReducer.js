@@ -5,6 +5,7 @@ import { fieldType } from '../fields/defaults'
 
 import { getCode } from '../logic/LogicReducer';
 import { navigate } from '../navigation/NavReducer'
+import { resetPageReducer } from '../page/PageReducer';
 
 const initialState = {
     authUser: {
@@ -15,6 +16,7 @@ const initialState = {
         photoUrl: "",
         uid: "",
     },
+    userOnline: false,
     activeProject: "",
     userProjects: {},
     projects: {},
@@ -46,6 +48,7 @@ export function userProjectsListener(projects) {
 export function switchToProject(projectKey) {
     return (dispatch) => {
         dispatch(navigate("/" + projectKey))
+        dispatch(resetPageReducer())
         dispatch({
             type: CHANGE_ACTIVE_PROJECT,
             payload: projectKey,
