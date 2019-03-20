@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 
 import { fuseType, dropdownType } from '../types'
 
-import { unnormalize } from '../../common/selectors';
-
 import DropParent from '../components/DropParent'
 
 class BoardLib extends React.Component{
@@ -93,6 +91,6 @@ class BoardLib extends React.Component{
 
 export default connect(
     state => ({
-        pageRepo: unnormalize(state.page.pageRepo),
+        pageRepo: state.page.pageRepo,
     }),
 )(BoardLib)

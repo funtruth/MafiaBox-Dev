@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { removeStory } from '../../page/PageReducer'
-import { unnormalize } from '../../common/selectors';
 
 import Modal from '../components/Modal'
 
@@ -43,7 +42,7 @@ function DeleteStory(props) {
 
 export default connect(
     state => ({
-        storyMap: unnormalize(state.page.storyMap),
+        storyMap: state.page.storyMap,
     }),
     {
         removeStory,

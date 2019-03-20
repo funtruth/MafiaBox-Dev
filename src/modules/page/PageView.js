@@ -8,7 +8,6 @@ import FieldView from '../fields/FieldView';
 
 function PageView(props) {
     const { pageKey, pageRepo } = props
-    console.log({props})
 
     const pageInfo = pageRepo[pageKey] || {}
     console.log("PageView console", pageInfo)

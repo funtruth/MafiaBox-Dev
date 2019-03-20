@@ -5,8 +5,6 @@ import _ from 'lodash'
 import { panelType, updateViewType } from '../../logic/types'
 import { VAR_DEFAULTS } from '../types';
 
-import { unnormalize } from '../../common/selectors';
-
 import DropTitle from '../components/DropTitle';
 
 class PageLib extends React.Component{
@@ -46,6 +44,6 @@ class PageLib extends React.Component{
 
 export default connect(
     state => ({
-        pageRepo: unnormalize(state.page.pageRepo),
+        pageRepo: state.page.pageRepo,
     }),
 )(PageLib)

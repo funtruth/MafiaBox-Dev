@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 
 import { fuseType } from '../types'
 
-import { unnormalize } from '../../common/selectors';
-
 import StoryMapLib from '../library/StoryMapLib';
 import DropTitle from '../components/DropTitle';
 
@@ -72,6 +70,6 @@ function SearchBoard(props) {
 
 export default connect(
     state => ({
-        pageRepo: unnormalize(state.page.pageRepo),
+        pageRepo: state.page.pageRepo,
     }),
 )(SearchBoard)

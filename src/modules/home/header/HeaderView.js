@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import { developType } from '../../navigation/paths'
 
-import { unnormalize } from '../../common/selectors';
 import { navigate } from '../../navigation/NavReducer'
 
 import HeaderSearch from './HeaderSearch';
@@ -67,7 +66,7 @@ function HeaderView(props) {
 
 export default connect(
     state => ({
-        pageRepo: unnormalize(state.page.pageRepo),
+        pageRepo: state.page.pageRepo,
     }),
     {
         navigate,
