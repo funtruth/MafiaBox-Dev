@@ -1,9 +1,6 @@
 import _ from 'lodash'
 import './firebase'
-import firebase from 'firebase/app'
-import { fieldType } from '../fields/defaults'
 
-import { getCode } from '../logic/LogicReducer';
 import { navigate } from '../navigation/NavReducer'
 import { resetPageReducer } from '../page/PageReducer';
 
@@ -89,62 +86,6 @@ export function getMyInfo() {
             photoUrl,
             uid
         }))(authUser)
-    }
-}
-
-//TESTING ACTIONS
-export function savePageToDB(pageKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        const { gameKey } = getState().db
-        
-        if (!pageKey || !gameKey) return
-
-        const pageInfo = pageRepo[pageKey] || {}
-        const { boardType } = pageInfo
-
-        if (!boardType) return
-
-        firebase.database().ref(`dev/${gameKey}/${boardType}/${pageKey}`)
-        .update(
-            JSON.parse(
-                JSON.stringify(pageInfo).replace(/\$/g, '½').replace(/\./g, '¾')
-            )
-        )
-    }
-}
-
-export function publishPage(pageKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        const { fieldRepo } = getState().field
-        const { gameKey } = getState().db
-        
-        if (!pageKey || !gameKey) return
-
-        const pageInfo = pageRepo[pageKey] || {}
-        
-        let batchUpdate = Object.assign({}, pageInfo)
-        const path = `library/${gameKey}/${pageKey}`
-
-        Object.keys(batchUpdate).forEach(i => {
-            if (fieldRepo[i]) {
-                switch(fieldRepo[i].fieldType) {
-                    case fieldType.logic.key:
-                        const origin = _.findKey(pageInfo[i], i => !i.source)
-                        batchUpdate[i] = dispatch(getCode(origin, pageInfo[i]))
-                            .replace(/(\r\n|\n|\r|\s\s\s\s)/gm,"")
-                        break
-                    case fieldType.playerTag.key:
-                        Object.keys(pageInfo[i]).forEach(j => pageInfo[i][j] && (batchUpdate[j] = true))
-                        batchUpdate[i] = null
-                        break
-                    default:
-                }
-            }
-        })
-        
-        firebase.database().ref(path).update(batchUpdate)
     }
 }
 

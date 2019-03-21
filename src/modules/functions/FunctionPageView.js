@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import PageHeader from '../page/components/PageHeader';
+import PageHeader from '../page/header/PageHeader';
 import PageAbstract from '../page/components/PageAbstract'
 import FieldView from '../fields/FieldView';
 

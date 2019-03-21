@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import './page.css'
 
-import PageHeader from './components/PageHeader';
+import PageHeader from './header/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
 

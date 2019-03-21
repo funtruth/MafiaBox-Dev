@@ -211,9 +211,10 @@ export function movePageWithinMap(storyKey, startIndex, endIndex) {
 
 export function movePageToOtherMap(startKey, endKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { pageMap } = getState().page
+        const { pageRepo, pageMap } = getState().page
         
-        let pageMapClone = _.cloneDeep(pageMap)
+        let pageRepoClone   = _.cloneDeep(pageRepo)
+        let pageMapClone    = _.cloneDeep(pageMap)
 
         //set pointers
         let startPointer = pageMapClone[startKey]
@@ -225,10 +226,12 @@ export function movePageToOtherMap(startKey, endKey, startIndex, endIndex) {
         //move item
         const [removed] = startPointer.splice(startIndex, 1)
         endPointer.splice(endIndex, 0, removed)
+        pageRepoClone[removed].storyType = endKey;
 
         dispatch(receiveAction({
             type: MOVE_PAGE_TO_OTHER_MAP,
             payload: {
+                pageRepo: pageRepoClone,
                 pageMap: pageMapClone,
             },
         }))
@@ -331,17 +334,20 @@ export function receiveAction({type, payload}) {
                 continue
             }
             
-            diff(page[prop], payload[prop]).forEach(item => {
-                switch(item.kind) {
-                    case "A":
-                        batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
-                        break
-                    default:
-                        batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
-                }
-            })
+            const diffs = diff(page[prop], payload[prop])
+            if (diffs) {
+                diffs.forEach(item => {
+                    switch(item.kind) {
+                        case "A":
+                            batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
+                            break
+                        default:
+                            batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
+                    }
+                })
+            }
         }
-        console.log({batchUpdate})
+        
         try {
             firebase.database().ref(pathToRepo).update(batchUpdate)
         } catch {

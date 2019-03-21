@@ -13,12 +13,10 @@ class WindowPageView extends React.Component {
 
         const pageProps = {
             pageKey,
+            path: [pageKey],
             showModal: this.props.showModal,
             popModalBy: (pops) => this.props.popModalTo(-1 - pops),
-            updatePage: (fieldKey, value) => this.props.updateRepo(
-                [pageKey, fieldKey],
-                value,
-            )
+            updatePage: this.props.updateRepo,
         }
 
         return (

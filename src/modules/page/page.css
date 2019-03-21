@@ -1,35 +1,11 @@
-.page-header-button {
-    padding: 6px 8px;
-    border-radius: 4px;
-    font: 500 14px Arial;
-    color: #d6d6d6;
-    cursor: pointer;
-
-    display: flex;
-    align-items: center;
-}
-
-.page-header-button:hover {
-    background-color: hsla(0,0%,100%,.1);
-    color: #fff;
-}
-
 .page {
     display: flex;
+    flex: 1;
     flex-direction: column;
 }
 
 .page-content {
-    padding: 40px 55px;
-}
-
-.page-header {
-    padding: 8px 12px;
-    position: sticky;
-    top: 0;
-    background-color: rgba(54, 57, 64);
-    border-radius: 4px;
-    z-index: 4;
+    padding: 4vh 4vw;
 }
 
 .page-title-input {

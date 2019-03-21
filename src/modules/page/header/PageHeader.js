@@ -1,12 +1,14 @@
 import React from 'react'
+import './PageHeader.css'
 import { connect } from 'react-redux'
 
 import { navigate } from '../../navigation/NavReducer'
 import { showModal } from '../../modal/ModalReducer'
-import { savePageToDB, publishPage } from '../../firebase/FirebaseReducer'
+
+import PagePublishing from './PagePublishing'
 
 function PageHeader(props) {
-    const { pageKey, location, match } = props
+    const { pageKey, path, location, match } = props
     if (match) return null
 
     let handleResize = () => {
@@ -15,23 +17,22 @@ function PageHeader(props) {
     }
 
     let handlePublish = () => {
-        props.savePageToDB(pageKey)
-        props.publishPage(pageKey)
+        props.updatePage(path, {
+            published: true,
+            publishedAt: Date.now(),
+        })
     }
 
     return (
         <div className="row page-header">
             <div className="row page-header-button" onClick={handleResize}>
-                <i className="option-icon ion-ios-resize"></i>
+                <i className="page-header-icon mdi mdi-arrow-expand"></i>
                 Open as Page
             </div>
             <div style={{ marginRight: 'auto' }}/>
+            <PagePublishing {...props}/>
             <div className="row page-header-button" onClick={handlePublish}>
-                <i className="option-icon mdi mdi-publish"></i>
-                Publish
-            </div>
-            <div className="row page-header-button" onClick={handlePublish}>
-                <i className="option-icon ion-ios-more"></i>
+                <i className="ion-ios-more"></i>
             </div>
         </div>
     )
@@ -42,7 +43,5 @@ export default connect(
     {
         navigate,
         showModal,
-        savePageToDB,
-        publishPage,
     }
 )(PageHeader)

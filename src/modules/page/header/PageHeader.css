@@ -1,0 +1,29 @@
+.page-header {
+    padding: 8px 8px;
+    position: sticky;
+    top: 0;
+    background-color: rgba(54, 57, 64);
+    border-radius: 4px;
+    z-index: 4;
+    min-height: 1.7em;
+}
+
+.page-header-button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font: 500 14px Arial;
+    color: #d6d6d6;
+    cursor: pointer;
+    align-items: center;
+}
+
+.page-header-button:hover {
+    background-color: hsla(0,0%,100%,.1);
+    color: #fff;
+}
+
+.page-header-icon {
+    font-size: 16px;
+    color: #fff;
+    margin-right: 4px;
+}

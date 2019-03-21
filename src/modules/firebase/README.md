@@ -4,7 +4,7 @@
 ## users
 ```javascript
 users
-    {uid}
+    [uid]
         uid
         firstName
         lastName
@@ -15,12 +15,12 @@ users
 ## projects
 ```javascript
 projects
-    {projectKey}
+    [projectKey]
         projectKey
         title
         description
         members
-            {uid}
+            [uid]
                 uid
                 type
                 permissions
@@ -30,6 +30,25 @@ projects
 ## userProjects
 ```javascript
 userProjects
-    {uid}
-        {projectKey}: <boolean>
+    [uid]
+        [projectKey]: <boolean>
+```
+
+## dev
+- full documentation is available in page/README.md
+```javascript
+dev
+    [projectKey]
+        pageRepo
+        pageMap
+        storyRepo
+        storyMap
+```
+
+## rooms
+```javascript
+rooms
+    [roomKey]
+        config
+        lobby
 ```
