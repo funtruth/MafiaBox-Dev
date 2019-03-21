@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-const THRESHOLD = 40
+const THRESHOLD = 20
 
 export default function Dropdown(props) {
     const { children, index, position } = props

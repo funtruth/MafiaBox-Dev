@@ -6,21 +6,15 @@ import { navigate } from '../../navigation/NavReducer'
 import { showModal } from '../../modal/ModalReducer'
 
 import PagePublishing from './PagePublishing'
+import PageOptions from './PageOptions'
 
 function PageHeader(props) {
-    const { pageKey, path, location, match } = props
+    const { pageKey, location, match } = props
     if (match) return null
 
     let handleResize = () => {
         props.navigate(`${location.pathname}/${pageKey}`)
         props.showModal()
-    }
-
-    let handlePublish = () => {
-        props.updatePage(path, {
-            published: true,
-            publishedAt: Date.now(),
-        })
     }
 
     return (
@@ -31,9 +25,7 @@ function PageHeader(props) {
             </div>
             <div style={{ marginRight: 'auto' }}/>
             <PagePublishing {...props}/>
-            <div className="row page-header-button" onClick={handlePublish}>
-                <i className="ion-ios-more"></i>
-            </div>
+            <PageOptions/>
         </div>
     )
 }

@@ -105,7 +105,6 @@ export function removeStory(boardType, storyKey) {
 
 export function updateStory(storyKey, update) {
     return(dispatch, getState) => {
-        console.log({storyKey, update})
         const { storyRepo } = getState().page
 
         let storyRepoClone = _.cloneDeep(storyRepo)
@@ -356,6 +355,7 @@ export function receiveAction({type, payload}) {
     }
 }
 
+//TODO do this in component & send diffs here
 export function saveAllPriorities(attach) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page

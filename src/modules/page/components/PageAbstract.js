@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 export default function PageAbstract(props) {
     const { path, pageInfo } = props
 
-    const [title, setTitle] = useState(pageInfo.title)
+    const [title, setTitle] = useState(pageInfo.title || "")
 
     const handleChange = e => {
         setTitle(e.target.value)

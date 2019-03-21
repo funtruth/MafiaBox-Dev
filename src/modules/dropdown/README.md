@@ -60,3 +60,8 @@ if (keysClone.length) {
     //absolute cursor Y position - cursor Y offset inside MouseEvent div - some constants
 }
 ```
+
+## Edge Cases
+
+### Dropdown Opened, Clicking outside of Dropdown
+- When a Dropdown exists, the whole window is covered by a div with className="drop-down-pause", stopping any other clicks in the application itself. Any click on "drop-down-pause" simply clears dropdownKeys

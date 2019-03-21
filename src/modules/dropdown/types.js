@@ -21,6 +21,10 @@ export const dropdownType = {
     accountOptions: 'dropdownType/account-options',
     pickProject: 'dropdownType/pick-project',
 
+    //page
+    pageHistory: 'dropdownType/page-history',
+    pageOptions: 'dropdownType/page-options',
+
     //functions
     declareVar: 'dropdownType/declare-var',
     editVarName: 'dropdownType/edit-var-name',

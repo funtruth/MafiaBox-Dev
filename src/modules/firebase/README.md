@@ -45,6 +45,13 @@ dev
         storyMap
 ```
 
+## library
+```javascript
+library
+    [projectKey]
+        pageRepo
+```
+
 ## rooms
 ```javascript
 rooms

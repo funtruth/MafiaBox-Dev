@@ -15,7 +15,6 @@ import AuthWrapper from '../auth/AuthWrapper'
 class AppWrapper extends React.Component{
     constructor(props) {
         super(props)
-        this.prevClick = ''
         this.originalTarget = {}
     }
 
@@ -70,26 +69,14 @@ class AppWrapper extends React.Component{
 
         const targetIsAppClick = e.target.matches('.app-onclick')
 
-        //if click is not inside a dropdown element, close dropdowns
-        if (!helpers.isElementDropdown(e.target)) {
-            if (!targetIsAppClick) {
-                this.prevClick = ''
-            }
+        if (e.target.classList.contains('drop-down-pause')) {
             this.props.showDropdown()
+            return;
         }
 
         if (targetIsAppClick) {
             const menuClick = e.target.getAttribute('menu-type')
             const place = e.target.getAttribute('place') || "down"
-            
-            //re-clicking target hides dropdown
-            if (this.prevClick === e.target.outerHTML) {
-                this.prevClick = ''
-                this.props.showDropdown()
-                return
-            } else {
-                this.prevClick = e.target.outerHTML
-            }
 
             if (menuClick) {
                 this.props.showDropdown(menuClick, e, JSON.parse(

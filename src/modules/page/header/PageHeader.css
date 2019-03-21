@@ -1,4 +1,7 @@
 .page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 8px 8px;
     position: sticky;
     top: 0;
@@ -26,4 +29,10 @@
     font-size: 16px;
     color: #fff;
     margin-right: 4px;
+}
+
+.page-header-error {
+    padding: 0px 0.5em;
+    font: 500 12px Arial;
+    color: #db4757;
 }
