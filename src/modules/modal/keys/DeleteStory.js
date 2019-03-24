@@ -6,8 +6,8 @@ import { removeStory } from '../../page/PageReducer'
 import Modal from '../components/Modal'
 
 function DeleteStory(props) {
-    const { boardType, mapKey, storyMap } = props
-    const storyInfo = storyMap[mapKey]
+    const { boardType, mapKey, storyRepo } = props
+    const storyInfo = storyRepo[mapKey]
 
     const handleCancel = () => {
         props.showModal()
@@ -42,7 +42,7 @@ function DeleteStory(props) {
 
 export default connect(
     state => ({
-        storyMap: state.page.storyMap,
+        storyRepo: state.page.storyRepo,
     }),
     {
         removeStory,

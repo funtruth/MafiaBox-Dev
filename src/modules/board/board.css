@@ -50,7 +50,7 @@
     border: none;
     cursor: text;
     color: #d6d6d6;
-    background-color: rgba(40, 43, 48,1);
+    background-color: rgba(40, 43, 48, 1);
 }
 .story-input:focus {
     outline: none;

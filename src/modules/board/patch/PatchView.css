@@ -1,0 +1,91 @@
+.patch-container {
+    flex: 1;
+    padding: 0px 8px;
+}
+
+.patch-item {
+    flex: 1;
+    background-color: rgba(47, 49, 54, 1);
+    border-radius: 6px;
+    color: #fff;
+    line-height: 1.2;
+    font: 500 14px Arial;
+    cursor: pointer;
+    margin-right: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.patch-item-title {
+    font: 600 17px Arial;
+    color: #bbb;
+    padding: 10px 0px;
+    background-color: rgba(40, 43, 48, 1);
+    margin-right: auto;
+    cursor: pointer;
+}
+
+.patch-item-input {
+    padding: 4px 10px 3px 0px;
+    font: 600 17px Arial;
+    width: 100%;
+    margin-right: auto;
+    border: none;
+    cursor: text;
+    color: #d6d6d6;
+    background-color: rgba(40, 43, 48, 1);
+}
+.patch-item-input:focus {
+    outline: none;
+    border-bottom: 1px solid #aaa;
+}
+
+.patch-item-header {
+    background-color: rgba(40, 43, 48, 1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 10px;
+}
+
+.patch-item-option {
+    color: #a6a6a6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 2em;
+    padding: 0px 10px;
+    font-size: 20px;
+}
+
+.patch-item-option:hover {
+    background-color: hsla(0,0%,100%,.1)
+}
+
+.patch-collapse {
+    display: flex;
+    flex-direction: row;
+    padding: 0px 8px;
+}
+
+.patch-list-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+}
+
+.patch-list-item {
+    padding: 12px 10px;
+    border-radius: 4px;
+    color: #d6d6d6;
+    background-color: rgba(40, 43, 48,1);
+    font: 550 14px Arial;
+    pointer-events: auto;
+    line-height: 1.2;
+    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
+}

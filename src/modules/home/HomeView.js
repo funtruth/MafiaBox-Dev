@@ -8,7 +8,7 @@ import HeaderView from './header/HeaderView';
 import LandingView from './landing/LandingView'
 import DashboardView from './dashboard/DashboardView'
 import FunctionView from '../board/views/FunctionView'
-import StoryView from '../board/views/StoryView';
+import PatchView from '../board/patch/PatchView';
 import FlowView from '../board/views/FlowView'
 import WindowTemplateView from '../template/WindowTemplateVIew'
 import TestHubView from '../testhub/TestHubView'
@@ -26,7 +26,7 @@ export default function HomeView(props) {
                     <Route exact path="/:projectKey" component={DashboardView}/>
                     <Route exact path="/:projectKey/library" component={FunctionView}/>
                     <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
-                    <Route exact path="/:projectKey/roles" component={StoryView}/>
+                    <Route exact path="/:projectKey/roles" component={PatchView}/>
                     <Route exact path="/:projectKey/roles/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/defaults/:boardType" component={WindowTemplateView}/>
                     <Route exact path="/:projectKey/phases" component={FlowView}/>

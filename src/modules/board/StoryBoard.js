@@ -67,7 +67,7 @@ class StoryBoard extends React.Component{
                         </div>
                     )}
                 </Droppable>
-            </div>  
+            </div>
         )
     }
 }

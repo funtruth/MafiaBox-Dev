@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function PageAbstract(props) {
     const { path, pageInfo } = props
 
     const [title, setTitle] = useState(pageInfo.title || "")
+    useEffect(() => {
+        setTitle(pageInfo.title)
+    }, [pageInfo.title])
 
     const handleChange = e => {
         setTitle(e.target.value)
