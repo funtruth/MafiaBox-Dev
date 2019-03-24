@@ -7,7 +7,6 @@ import { modalType } from '../modal/types'
 import { boardType } from '../fields/defaults'
 import { updateSourceType } from '../common/types';
 
-import { pathToFirebase, valueToFirebase } from '../common/translators'
 import { showModal } from '../modal/ModalReducer';
 
 const initialState = {
@@ -322,10 +321,20 @@ export function updateRepo(path, update, extraPath=[]) {
 export function receiveAction({type, payload}) {
     return (dispatch, getState) => {
         const { page } = getState()
-        const { activeProject, userOnline } = getState().firebase 
+        const { activeProject } = getState().firebase 
 
         let batchUpdate = {},
             pathToRepo = `dev/${activeProject}/`;
+
+        const handleDiff = (item) => {
+            switch(item.kind) {
+                case "A":
+                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
+                    break
+                default:
+                    batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
+            }
+        }
 
         for (var prop in payload) {
             if (!VALID_PROPS.includes(prop)) {
@@ -334,17 +343,7 @@ export function receiveAction({type, payload}) {
             }
             
             const diffs = diff(page[prop], payload[prop])
-            if (diffs) {
-                diffs.forEach(item => {
-                    switch(item.kind) {
-                        case "A":
-                            batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
-                            break
-                        default:
-                            batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
-                    }
-                })
-            }
+            if (diffs) diffs.forEach(handleDiff)
         }
         
         try {

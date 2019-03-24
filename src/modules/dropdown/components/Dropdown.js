@@ -14,9 +14,9 @@ export default function Dropdown(props) {
         
         if (index === 0) {
             const xRightOverflow = window.innerWidth - THRESHOLD < offsetWidth + offsetLeft
-            const xLeftOverflow = offsetLeft < 0
+            //const xLeftOverflow = offsetLeft < 0
             const yBottomOverflow = window.innerHeight - THRESHOLD < offsetHeight + offsetTop
-            const yTopOverflow = offsetTop < 0
+            //const yTopOverflow = offsetTop < 0
 
             switch(place) {
                 case "down":

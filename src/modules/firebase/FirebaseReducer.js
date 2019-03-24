@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import './firebase'
 
 import { navigate } from '../navigation/NavReducer'

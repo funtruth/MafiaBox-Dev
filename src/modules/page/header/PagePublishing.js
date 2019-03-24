@@ -10,7 +10,7 @@ function PagePublishing(props) {
     const [error, setError] = useState("") //TODO error needs to be an object passed to FieldView
 
     const { path, pageInfo, pageKey, activeProject } = props
-    const { title, published, publishedAt } = pageInfo
+    const { title, published } = pageInfo
 
     useEffect(() => {
         const repoRef       = firebase.database().ref(`library/${activeProject}/pageRepo/${pageKey}`)

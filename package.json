@@ -30,6 +30,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "^0.6.1",
+    "storm-react-diagrams": "^5.2.1",
     "wait-on": "^3.2.0"
   },
   "build": {
