@@ -1,15 +1,15 @@
 .patch-container {
-    display: block;
     flex: 1;
     padding: 8px 8px;
-    width: 900px;
+    display: block;
 }
 
 .patch-item {
+    display: flex;
+    flex-direction: column;
     float: left;
-    width: 300px;
-    height: 100px;
-    background-color: rgba(47, 49, 54, 1);
+    width: 20vw;
+    height: 18vw;
     border-radius: 6px;
     color: #fff;
     line-height: 1.2;
@@ -17,21 +17,29 @@
     cursor: pointer;
     margin-right: 12px;
     margin-bottom: 10px;
-    justify-content: center;
     overflow: hidden;
+    background-color: rgba(40, 43, 48, 1);
+}
+
+.patch-item-footer {
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    justify-content: flex-end;
+    background-color: rgba(47, 49, 54, 1);
 }
 
 .patch-item-title {
     font: 600 17px Arial;
     color: #bbb;
-    padding: 10px 0px;
-    background-color: rgba(40, 43, 48, 1);
+    padding: 14px 14px;
     margin-right: auto;
     cursor: pointer;
+    max-width: 60%;
 }
 
 .patch-item-input {
-    padding: 4px 10px 3px 0px;
+    display: block;
     font: 600 17px Arial;
     width: 100%;
     margin-right: auto;
@@ -45,22 +53,12 @@
     border-bottom: 1px solid #aaa;
 }
 
-.patch-item-header {
-    background-color: rgba(40, 43, 48, 1);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    overflow: hidden;
-    padding-left: 10px;
-}
-
 .patch-item-option {
     color: #a6a6a6;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 2em;
-    padding: 0px 10px;
+    padding: 6px 8px;
     font-size: 20px;
 }
 

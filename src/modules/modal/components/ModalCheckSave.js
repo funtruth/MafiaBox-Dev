@@ -9,28 +9,26 @@ export default function ModalCheckSave(props) {
     let [savedValue] = useState(_.cloneDeep(attach))
 
     let handleClick = e => {
-        if (e.target.id === 'parent-only') {
-            //TODO this is broken for un-original clicks. See AppWrapper 64
-            //onClick triggers when click starts in modal but ends outside the modal
-            if (_.isEqual(attach, savedValue)) {
-                props.popModalBy(1)
-            } else {
-                props.showModal(modalType.saveChanges, {
-                    onSave: props.handleSave,
-                    onClose: props.showModal,
-                })
-            }
+        //TODO this is broken for un-original clicks. See AppWrapper 64
+        //onClick triggers when click starts in modal but ends outside the modal
+        if (_.isEqual(attach, savedValue)) {
+            props.popModalBy(1)
+        } else {
+            props.showModal(modalType.saveChanges, {
+                onSave: props.handleSave,
+                onClose: props.showModal,
+            })
         }
     }
+
+    const handlePropagate = e => e.stopPropagation();
 
     if (!attach) console.warn('ModalCheckSave is being used without an attach value.')
         
     return (
         <div id="parent-only" className="modal" onClick={handleClick}>
-            <div style={{ pointerEvents: 'none' }}>
-                <div className="modal-child" style={{ pointerEvents: 'all' }}>
-                    {children}
-                </div>
+            <div className="modal-child" onClick={handlePropagate}>
+                {children}
             </div>
         </div>
     )

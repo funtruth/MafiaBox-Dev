@@ -8,6 +8,11 @@
     to   { transform: scale(1); }
 }
 
+@keyframes slideinfrombottom {
+    from { transform: translateY(200px); }
+    to   { transform: translateY(0px); }
+}
+
 @keyframes heightin {
     from { max-height: 10px; }
     to   { max-height: 1000px; }

@@ -1,44 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PatchView.css'
 import { connect } from 'react-redux'
-import { Droppable } from 'react-beautiful-dnd';
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
-import { droppableType } from '../../common/types';
 import { boardType } from '../../fields/defaults'
 
+import { moveStory } from '../../page/PageReducer'
+
 import PatchItem from './components/PatchItem';
-import PatchList from './components/PatchList';
+import RoleView from '../roles/RoleView';
 
 const SortableItem = SortableElement((props) => {
-    const { index, patchInfo, storyKey } = props
+    const { index, patchInfo } = props
 
     return (
         <PatchItem
             index={index}
             patchInfo={patchInfo}
-        >
-            <PatchList
-                index={index}
-                title="Developing"
-                storyKey={storyKey}
-            />
-            <PatchList
-                index={index}
-                title="Published"
-                storyKey={patchInfo.publishKey}
-            />
-        </PatchItem>
+            onClick={props.onClick}
+        />
     )
 })
 
 const SortableList = SortableContainer((props) => {
-    const { items, storyRepo, storyKey } = props
-    const patchInfo = storyRepo[storyKey] || {}
-
+    const { items, storyRepo } = props
+    
     return (
         <div className="patch-container">
             {items.map((storyKey, index) => {
+                const patchInfo = storyRepo[storyKey] || {}
+
                 return (
                     <SortableItem
                         key={`item-${storyKey}`}
@@ -54,14 +45,37 @@ const SortableList = SortableContainer((props) => {
 })
 
 function PatchView(props) {
+    const [selectedStory, setSelectedStory] = useState("")
+
     const { storyMap } = props
     const stories = storyMap[boardType.roles.key]
 
     const areStories = !!stories
 
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        props.moveStory(boardType.roles.key, oldIndex, newIndex)
+    }
+
+    const handleClick = (storyKey) => setSelectedStory(storyKey)
+    const handleHide = () => setSelectedStory("")
+
     return (
         <div className="story-view">
-            {areStories && <SortableList {...props} items={stories} onSortEnd={() => {}} axis={'xy'}></SortableList>}
+            {areStories &&
+                <SortableList
+                    {...props}
+                    items={stories}
+                    onSortEnd={onSortEnd}
+                    onClick={handleClick}
+                    axis={'xy'}
+                    transitionDuration={500}
+                    distance={2}
+                />
+            }
+            <RoleView
+                storyKey={selectedStory}
+                onHide={handleHide}
+            />
         </div>
     )
 }
@@ -71,4 +85,7 @@ export default connect(
         storyRepo: state.page.storyRepo,
         storyMap: state.page.storyMap,
     }),
+    {
+        moveStory,
+    }
 )(PatchView)
