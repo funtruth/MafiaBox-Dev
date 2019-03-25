@@ -106,7 +106,6 @@
     color: #a6a6a6;
     padding: 0px 6px;
     border-radius: 4px;
-
     display: flex;
     align-items: center;
     height: 20px;
@@ -114,4 +113,16 @@
 
 .story-option:hover {
     background-color: hsla(0,0%,100%,.1)
+}
+
+.empty-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font: 600 18px Arial;
+    letter-spacing: -0.1px;
+    background-color: hsla(0,0%,100%,.05);
+    box-shadow: none;
 }

@@ -9,6 +9,7 @@ import RoleGrid from './components/RoleGrid'
 
 function RoleView(props) {
     const { storyKey, storyRepo, pageMap } = props
+    
     const storyInfo = storyRepo[storyKey] || {}
     const { publishKey } = storyInfo
 
@@ -30,8 +31,9 @@ function RoleView(props) {
     return (
         <div className="role-modal" onClick={props.onHide}>
             <div className="role-view" onClick={handleClick}>
-                <RoleHeader storyKey={storyKey}/>
+                <RoleHeader storyKey={storyKey} onHide={props.onHide}/>
                 <RoleGrid
+                    storyKey={storyKey}
                     items={devStories}
                     title="In Development"
                     onSortEnd={onDevEnd}
@@ -40,6 +42,8 @@ function RoleView(props) {
                     distance={2}
                 />
                 <RoleGrid
+                    storyKey={publishKey}
+                    hideAdd
                     items={pubStories}
                     title="Published"
                     onSortEnd={onPubEnd}

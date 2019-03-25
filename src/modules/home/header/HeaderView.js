@@ -7,7 +7,6 @@ import { developType } from '../../navigation/paths'
 import { navigate } from '../../navigation/NavReducer'
 
 import HeaderSearch from './HeaderSearch';
-import HeaderAddItem from './HeaderAddItem';
 import HeaderAddStory from './HeaderAddStory';
 
 function HeaderView(props) {
@@ -17,7 +16,7 @@ function HeaderView(props) {
     const paths = pathname.split('/')
     const boardPath = paths[2] || ""
 
-    const { addItem, addStory } = developType[boardPath] || {}
+    const { addStory } = developType[boardPath] || {}
 
     const getPathTitle = (key) => {
         if (developType[key]) {
@@ -58,7 +57,6 @@ function HeaderView(props) {
         <div className="header">
             {renderPath()}
             <HeaderSearch/>
-            {addItem && <HeaderAddItem/>}
             {addStory && <HeaderAddStory boardType={boardPath}/>}
         </div>
     )

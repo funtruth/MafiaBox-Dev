@@ -22,15 +22,17 @@ const RoleGridItem = SortableElement((props) => {
         })
     }
 
+    const handlePropagate = e => e.stopPropagation();
+
     return (
         <div
-            className="patch-item"
+            className="role-grid-item"
             onClick={handleClick}
         >
             <div className="patch-item-title">
                 {title || 'Untitled'}
             </div>
-            <div className="patch-item-footer">
+            <div className="patch-item-footer" onClick={handlePropagate}>
                 <div
                     className="patch-item-option app-onclick"
                     menu-type={dropdownType.storyShowMore}
