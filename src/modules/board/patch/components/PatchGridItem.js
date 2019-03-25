@@ -11,11 +11,11 @@ const PatchGridItem = SortableElement((props) => {
 
     const { boardType, title } = storyInfo
     
-    const handleClick = () => {
-        props.onClick(storyKey)
+    const handleClick = (e) => {
+        if (e.target.classList.contains('patch-item')) {
+            props.onClick(storyKey)
+        }
     }
-
-    const handlePropagate = e => e.stopPropagation();
 
     return (
         <div
@@ -25,13 +25,13 @@ const PatchGridItem = SortableElement((props) => {
             <div className="patch-item-title">
                 {title || 'Untitled'}
             </div>
-            <div className="patch-item-footer" onClick={handlePropagate}>
+            <div className="patch-item-footer">
                 <div
                     className="patch-item-option app-onclick"
-                    menu-type={dropdownType.storyShowMore}
+                    menu-type={dropdownType.patchItemOptions}
                     app-onclick-props={JSON.stringify({
                         boardType,
-                        mapKey: storyKey,
+                        storyKey,
                     })}
                 >
                     <i className="mdi mdi-dots-horizontal"></i>

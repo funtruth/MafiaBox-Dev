@@ -16,7 +16,11 @@ function RoleView(props) {
     const devStories = pageMap[storyKey] || []
     const pubStories = pageMap[publishKey] || []
 
-    const handleClick = (e) => e.stopPropagation();
+    const handleHide = (e) => {
+        if (e.target.classList.contains('role-modal')) {
+            props.onHide()
+        }
+    }
 
     const onDevEnd = ({oldIndex, newIndex}) => {
         props.movePageWithinMap(storyKey, oldIndex, newIndex)
@@ -29,8 +33,8 @@ function RoleView(props) {
     if (!storyKey) return null
 
     return (
-        <div className="role-modal" onClick={props.onHide}>
-            <div className="role-view" onClick={handleClick}>
+        <div className="role-modal" onClick={handleHide}>
+            <div className="role-view">
                 <RoleHeader storyKey={storyKey} onHide={props.onHide}/>
                 <RoleGrid
                     storyKey={storyKey}

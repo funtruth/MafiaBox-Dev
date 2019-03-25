@@ -13,16 +13,16 @@ const RoleGridItem = SortableElement((props) => {
     const pageInfo = pageRepo[pageKey] || {}
     const { title } = pageInfo
     
-    const handleClick = () => {
-        props.showModal(modalType.showPage, {
-            pageKey,
-            path: [pageKey],
-            updateSource: updateSourceType.repo,
-            boardType: boardType.roles.key,
-        })
+    const handleClick = (e) => {
+        if (e.target.classList.contains('role-grid-item')) {
+            props.showModal(modalType.showPage, {
+                pageKey,
+                path: [pageKey],
+                updateSource: updateSourceType.repo,
+                boardType: boardType.roles.key,
+            })
+        }
     }
-
-    const handlePropagate = e => e.stopPropagation();
 
     return (
         <div
@@ -32,12 +32,13 @@ const RoleGridItem = SortableElement((props) => {
             <div className="patch-item-title">
                 {title || 'Untitled'}
             </div>
-            <div className="patch-item-footer" onClick={handlePropagate}>
+            <div className="patch-item-footer">
                 <div
                     className="patch-item-option app-onclick"
-                    menu-type={dropdownType.storyShowMore}
+                    menu-type={dropdownType.roleItemOptions}
                     app-onclick-props={JSON.stringify({
-                        
+                        attach: pageInfo,
+                        pageKey,
                     })}
                 >
                     <i className="mdi mdi-dots-horizontal"></i>

@@ -6,15 +6,17 @@ import { removeStory } from '../../page/PageReducer'
 import Modal from '../components/Modal'
 
 function DeleteStory(props) {
-    const { boardType, mapKey, storyRepo } = props
-    const storyInfo = storyRepo[mapKey]
+    const { boardType, storyKey, storyRepo } = props
+    const storyInfo = storyRepo[storyKey] || {}
+
+    const { title } = storyInfo
 
     const handleCancel = () => {
         props.showModal()
     }
 
     const handleDelete = () => {
-        props.removeStory(boardType, mapKey)
+        props.removeStory(boardType, storyKey)
         props.showModal()
     }
     
@@ -22,10 +24,10 @@ function DeleteStory(props) {
         <Modal>
             <div style={{ padding: 16 }}>
                 <div className="modal-title">
-                    {`Delete '${storyInfo.title}'?`}
+                    {`Delete '${title || "this patch"}'?`}
                 </div>
                 <div className="modal-subtitle">
-                    {`Are you sure you want to delete ${storyInfo.title}?`}
+                    {`Are you sure you want to delete ${title || "this patch"}?`}
                 </div>
             </div>
             <div className="row dark-grey modal-options">

@@ -28,7 +28,11 @@ const PatchGrid = SortableContainer((props) => {
                     />
                 )
             })}
-            <EmptyGridComponent className="patch-item" text="New Patch" onClick={handleAdd}/>
+            <EmptyGridComponent
+                className="patch-item"
+                text="New Patch"
+                onClick={handleAdd}
+            />
         </div>
     )
 })

@@ -17,10 +17,12 @@ import DropInput from './components/DropInput'
 import AccountOptions from './account/AccountOptions'
 import PickProject from './account/PickProject'
 
+import PatchItemOptions from './board/PatchItemOptions'
+import RoleItemOptions from './board/RoleItemOptions'
+
 import PageHistory from './page/PageHistory'
 import PageOptions from './page/PageOptions'
 
-import StoryShowMore from './story/StoryShowMore';
 import InputValue from './components/InputValue'
 import StoryMapLib from './library/StoryMapLib';
 import PageLib from './library/PageLib';
@@ -130,13 +132,16 @@ function DropdownView(props) {
             case dropdownType.pickProject:
                 return <PickProject {...renderProps}/>
 
+            case dropdownType.patchItemOptions:
+                return <PatchItemOptions {...renderProps}/>
+            case dropdownType.roleItemOptions:
+                return <RoleItemOptions {...renderProps}/>
+
             case dropdownType.pageHistory:
                 return <PageHistory {...renderProps}/>
             case dropdownType.pageOptions:
                 return <PageOptions {...renderProps}/>
 
-            case dropdownType.storyShowMore:
-                return <StoryShowMore {...renderProps}/>
             case dropdownType.inputValue:
                 return <InputValue {...renderProps}/>
             case dropdownType.storyMapLib:

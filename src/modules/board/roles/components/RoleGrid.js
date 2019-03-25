@@ -22,7 +22,7 @@ const RoleGrid = SortableContainer((props) => {
                 <div className="role-grid-title">{title}</div>
                 <div className="role-grid-buttons">
                     {!hideAdd && <div className="role-grid-button" onClick={handleAdd}>
-                        <i className="mdi mdi-plus" style={{ fontSize: 24 }}></i>
+                        <i className="mdi mdi-plus" style={{ fontSize: 20 }}></i>
                         Add
                     </div>}
                 </div>
@@ -36,7 +36,11 @@ const RoleGrid = SortableContainer((props) => {
                     />
                 )
             })}
-            <EmptyGridComponent className="role-grid-item" text="Add Role" onClick={handleAdd}/>
+            {!hideAdd && <EmptyGridComponent
+                className="role-grid-item"
+                text="Add Role"
+                onClick={handleAdd}
+            />}
         </div>
     )
 })

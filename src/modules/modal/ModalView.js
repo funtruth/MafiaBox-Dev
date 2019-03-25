@@ -14,9 +14,9 @@ import FunctionPageModal from './components/FunctionPageModal';
 import EditAccount from './account/EditAccount'
 import CreateProject from './account/CreateProject';
 
-import DeleteRole from './keys/DeleteRole';
 import AddNewStory from './keys/AddNewStory'
 import AddNewField from './keys/AddNewField'
+import DeletePage from './keys/DeletePage';
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
 import TemplateModal from './keys/TemplateModal'
@@ -37,12 +37,12 @@ class ModalView extends React.Component {
         props.showModal = this.props.showModal
 
         switch(props.key) {
-            case modalType.deleteRole:
-                return <DeleteRole {...props}/>
             case modalType.addNewStory:
                 return <AddNewStory {...props}/>
             case modalType.addNewField:
                 return <AddNewField {...props}/>
+            case modalType.deletePage:
+                return <DeletePage {...props}/>
             case modalType.deleteStory:
                 return <DeleteStory {...props}/>
 

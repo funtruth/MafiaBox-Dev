@@ -1,5 +1,4 @@
 export const dropdownType = {
-    storyShowMore: 'dropdownType/story-show-more',
     inputValue: 'dropdownType/input-value',
     storyMapLib: 'dropdownType/story-map-lib',
     pageLib: 'dropdownType/page-lib',
@@ -20,6 +19,10 @@ export const dropdownType = {
     //account
     accountOptions: 'dropdownType/account-options',
     pickProject: 'dropdownType/pick-project',
+
+    //board
+    patchItemOptions: 'dropdownType/patch-item-options',
+    roleItemOptions: 'dropdownType/role-item-options',
 
     //page
     pageHistory: 'dropdownType/page-history',

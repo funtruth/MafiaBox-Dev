@@ -33,7 +33,7 @@ export default function EditVar(props) {
     }
 
     return (
-        <div>
+        <>
             <DropTitle>variable declaration</DropTitle>
             <input
                 className="tag-input"
@@ -51,20 +51,11 @@ export default function EditVar(props) {
                 icon="mdi mdi-language-typescript"
                 text="variable type"
             />
-            <DropItem
-                leftIcon="mdi mdi-ray-start-arrow"
-                rightIcon="mdi mdi-dots-horizontal adjust-right"
-                onClick={handleSave}
-            >
+            <DropItem onClick={handleSave} leftIcon="mdi mdi-ray-start-arrow" rightIcon="mdi mdi-dots-horizontal adjust-right">
                 initialize as
             </DropItem>
             <DropTitle>options</DropTitle>
-            <DropItem
-                leftIcon="mdi mdi-checkbox-marked-outline"
-                onClick={handleSave}
-            >
-                save variable
-            </DropItem>
-        </div>
+            <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline">save variable</DropItem>
+        </>
     )
 }

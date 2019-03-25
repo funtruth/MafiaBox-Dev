@@ -81,6 +81,11 @@ export function removeStory(boardType, storyKey) {
         _.pull(storyMapClone[boardType], storyKey)
         storyRepoClone[storyKey] = null
 
+        //null checks
+        if (!pageMapClone[storyKey]) {
+            pageMapClone[storyKey] = []
+        }
+
         //remove affected pages
         pageMapClone[storyKey].forEach(item => {
             pageRepoClone[item] = null

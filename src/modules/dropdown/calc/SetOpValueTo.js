@@ -40,12 +40,7 @@ export default function SetOpValueTo(props) {
                 autoFocus
             />
             <div className="-sep"/>
-            <DropItem
-                onClick={handleSubmit}
-                leftIcon="mdi mdi-checkbox-marked"
-            >
-                save
-            </DropItem>
+            <DropItem onClick={handleSubmit} leftIcon="mdi mdi-checkbox-marked">save</DropItem>
         </>
     )
 }

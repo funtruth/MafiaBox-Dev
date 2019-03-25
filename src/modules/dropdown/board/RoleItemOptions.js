@@ -5,12 +5,14 @@ import { modalType } from '../../modal/types'
 
 import { showModal } from '../../modal/ModalReducer'
 
-function StoryShowMore(props) {
+function RoleItemOptions(props) {
+    const { boardType, storyKey } = props
+
     const handleDelete = () => {
         props.showDropdown()
-        props.showModal(modalType.deleteStory, {
-            boardType: props.boardType,
-            mapKey: props.mapKey,
+        props.showModal(modalType.deletePage, {
+            boardType,
+            storyKey,
         })
     }
 
@@ -24,15 +26,6 @@ function StoryShowMore(props) {
                 <i className="drop-down-menu-icon ion-ios-trash"></i>
                 Delete
             </div>
-            <div className="-sep"/>
-            <div className="drop-down-menu-option">
-                <i className="drop-down-menu-icon ion-ios-flag"></i>
-                Flag
-            </div>
-            <div className="drop-down-menu-option">
-                <i className="drop-down-menu-icon ion-ios-bug"></i>
-                Bug Report
-            </div>
         </>
     )
 }
@@ -42,4 +35,4 @@ export default connect(
     {
         showModal,
     }
-)(StoryShowMore)
+)(RoleItemOptions)

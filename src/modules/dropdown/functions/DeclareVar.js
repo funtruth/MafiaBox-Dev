@@ -81,12 +81,7 @@ export default function DeclareVar(props) {
                     marginBottom: 6,
                 }}
             />
-            <DropItem
-                leftIcon="mdi mdi-checkbox-marked-outline"
-                onClick={handleSave}
-            >
-                save variable
-            </DropItem>
+            <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline">save variable</DropItem>
             <DropTitle>assign</DropTitle>
             <DropScrollable>
                 {assignable.map(item => (
