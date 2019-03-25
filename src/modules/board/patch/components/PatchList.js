@@ -7,7 +7,9 @@ import { droppableType } from '../../../common/types'
 import PatchListItem from './PatchListItem'
 
 function PatchList(props) {
-    const { roleInfo, storyKey, pageRepo, title } = props
+    const { storyKey, pageRepo, pageMap, title } = props
+    const roleInfo = pageMap[storyKey] || {}
+
     const hasItems = !!roleInfo.length
 
     return (
@@ -17,10 +19,11 @@ function PatchList(props) {
             </div>
             <Droppable
                 droppableId={`${droppableType.page}.${storyKey}`}
-                type="LIST"
+                type={title}
             >
                 {(provided, snapshot) => (
                     <div
+                        className="patch-list-drop"
                         ref={provided.innerRef}
                     >
                         {hasItems ? roleInfo.map((item, index) => {
@@ -35,7 +38,7 @@ function PatchList(props) {
                                 )
                             })
                             :<div className="story-empty">
-                                There is nothing here yet
+                                There is nothing here yet.
                             </div>
                         }
                         {provided.placeholder}
@@ -49,5 +52,6 @@ function PatchList(props) {
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
+        pageMap: state.page.pageMap,
     })
 )(PatchList)

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 export default function PageAbstract(props) {
     const { path, pageInfo } = props
 
-    const [title, setTitle] = useState(pageInfo.title || "")
+    const [title, setTitle] = useState(pageInfo.title)
     useEffect(() => {
         setTitle(pageInfo.title)
     }, [pageInfo.title])
@@ -25,7 +25,7 @@ export default function PageAbstract(props) {
     return (
         <input
             className="page-title-input"
-            value={title}
+            value={title || ""}
             onChange={handleChange}
             onBlur={handleTextBlur}
             onKeyPress={handleKeyPress}

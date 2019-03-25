@@ -5,6 +5,8 @@ import firebase from 'firebase/app'
 import { dropdownType } from '../../dropdown/types'
 
 import { showDropdown } from '../../dropdown/DropdownReducer'
+import { showModal } from '../../modal/ModalReducer'
+import { publishPage } from '../PageReducer'
 
 function PagePublishing(props) {
     const [error, setError] = useState("") //TODO error needs to be an object passed to FieldView
@@ -37,14 +39,9 @@ function PagePublishing(props) {
             return;
         }
 
-        props.updatePage(path, {
-            published: true,
-            publishedAt: Date.now(),
-        })
+        props.showModal(); //TODO for non-modal
+        props.publishPage(pageKey)
         
-        const repoRef = firebase.database().ref(`library/${activeProject}/pageRepo/${pageKey}`)
-        repoRef.update(pageInfo)
-
         setError("")
     }
     
@@ -76,5 +73,7 @@ export default connect(
     }),
     {
         showDropdown,
+        showModal,
+        publishPage,
     }
 )(PagePublishing)

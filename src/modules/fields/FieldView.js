@@ -15,8 +15,6 @@ import PropertyField from './components/PropertyField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
-import FooterSpacer from './components/FooterSpacer'
-
 class FieldView extends React.Component {
     _renderItem = (item) => {
         const { pageKey, pageInfo, fieldRepo, path, subpath, updateSource, updatePage } = this.props
@@ -86,7 +84,7 @@ class FieldView extends React.Component {
                         </React.Fragment>
                     )
                 })}
-                <FooterSpacer/>
+                <div style={{ height: '30vh' }}></div>
             </>
         )
     }

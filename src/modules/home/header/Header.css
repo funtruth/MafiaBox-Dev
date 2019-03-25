@@ -6,6 +6,7 @@
   padding: 8px;
   background-color: rgba(54, 57, 64);
   align-items: center;
+  box-shadow: 0 3px 5px rgba(37, 33, 32, 0.3);
 }
 
 .path-separator {

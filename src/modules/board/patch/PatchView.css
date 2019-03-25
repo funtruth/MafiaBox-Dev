@@ -1,6 +1,6 @@
 .patch-container {
     flex: 1;
-    padding: 0px 8px;
+    padding: 8px 8px;
 }
 
 .patch-item {
@@ -79,6 +79,11 @@
     padding: 10px;
 }
 
+.patch-list-drop {
+    margin-top: 8px;
+    min-height: 10vh;
+}
+
 .patch-list-item {
     padding: 12px 10px;
     border-radius: 4px;
@@ -88,4 +93,6 @@
     pointer-events: auto;
     line-height: 1.2;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }

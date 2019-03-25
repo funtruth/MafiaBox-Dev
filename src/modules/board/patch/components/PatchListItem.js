@@ -13,8 +13,6 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   
     // styles we need to apply on draggables
     ...draggableStyle,
-    cursor: 'pointer',
-    marginBottom: 8,
 });
 
 function PatchListItem(props) {

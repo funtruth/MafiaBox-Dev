@@ -31,13 +31,11 @@ const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const UPDATE_REPO = 'page/update-repo'
 const ADD_PAGE = 'page/add-page'
 const REMOVE_PAGE = 'page/remove-page'
+const PUBLISH_PAGE = 'page/publish-page'
 
 const RECEIVE_EVENT = 'page/receive-event'
 const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
 const RESET_REDUCER = 'page/reset-reducer'
-
-const SWAP_FROM_STORAGE = 'page/swap-from-storage'
-const UPDATE_STORAGE = 'page/update-storage'
 
 export function addStory(boardType) {
     return (dispatch, getState) => {
@@ -56,6 +54,7 @@ export function addStory(boardType) {
         storyMapClone[boardType].push(storyKey)
         storyRepoClone[storyKey] = {
             key: storyKey,
+            publishKey: storyKey + "-live",
             title: "",
             boardType,
             default: false,
@@ -236,6 +235,43 @@ export function movePageToOtherMap(startKey, endKey, startIndex, endIndex) {
     }
 }
 
+export function publishPage(pageKey) {
+    return (dispatch, getState) => {
+        const { pageRepo, pageMap, storyRepo } = getState().page
+
+        let pageRepoClone   = _.cloneDeep(pageRepo)
+        let pageMapClone    = _.cloneDeep(pageMap)
+
+        const pageInfo = pageRepoClone[pageKey] || {}
+        const { storyType } = pageInfo
+
+        const storyInfo = storyRepo[storyType] || {}
+        const { publishKey } = storyInfo
+
+        //check if published Map exists
+        if (!_.isArray(pageMapClone[publishKey])) {
+            pageMapClone[publishKey] = []
+        }
+
+        //push to new story, remove from old
+        pageMapClone[publishKey].unshift(pageKey)
+        _.pull(pageMapClone[storyType], pageKey)
+
+        //update some properties
+        pageInfo.storyType      = publishKey
+        pageInfo.published      = true
+        pageInfo.publishedAt    = Date.now()
+
+        dispatch(receiveAction({
+            type: PUBLISH_PAGE,
+            payload: {
+                pageRepo: pageRepoClone,
+                pageMap: pageMapClone,
+            }
+        }))
+    }
+}
+
 export function removePage(pageKey, storyKey) {
     return (dispatch, getState) => {
         const { pageRepo, pageMap } = getState().page
@@ -400,18 +436,15 @@ export default (state = initialState, action) => {
         case UPDATE_STORY:
         case MOVE_STORY:
         case ADD_PAGE:
+        case PUBLISH_PAGE:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
         case REMOVE_PAGE:
-        case SWAP_FROM_STORAGE:
         case RECEIVE_EVENT:
         case RECEIVE_CHILD_EVENT:
         case UPDATE_REPO:
         case RESET_REDUCER:
             return { ...state, ...action.payload }
-
-        case UPDATE_STORAGE:
-            return { ...state, pageStorage: action.payload }
         default:
             return state;
     }

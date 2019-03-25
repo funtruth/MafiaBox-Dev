@@ -14,8 +14,10 @@ const getListStyle = isDraggingOver => ({
 });
 
 function PatchView(props) {
-    const { storyRepo, storyMap, pageRepo, pageMap } = props
+    const { storyRepo, storyMap } = props
     const stories = storyMap[boardType.roles.key]
+
+    const areStories = !!stories
 
     return (
         <div className="story-view">
@@ -29,9 +31,8 @@ function PatchView(props) {
                         ref={provided.innerRef}
                         style={getListStyle(snapshot.isDraggingOver)}
                     >
-                        {stories.map((storyKey, index) => {
+                        {areStories && stories.map((storyKey, index) => {
                             const patchInfo = storyRepo[storyKey] || {}
-                            const roleInfo = pageMap[storyKey] || {}
                             
                             return (
                                 <PatchItem
@@ -43,13 +44,11 @@ function PatchView(props) {
                                         index={index}
                                         title="Developing"
                                         storyKey={storyKey}
-                                        roleInfo={roleInfo}
                                     />
                                     <PatchList
                                         index={index}
                                         title="Published"
-                                        storyKey={"nani"}
-                                        roleInfo={[]}
+                                        storyKey={patchInfo.publishKey}
                                     />
                                 </PatchItem>
                             )
@@ -67,6 +66,5 @@ export default connect(
         storyRepo: state.page.storyRepo,
         storyMap: state.page.storyMap,
         pageRepo: state.page.pageRepo,
-        pageMap: state.page.pageMap,
     }),
 )(PatchView)

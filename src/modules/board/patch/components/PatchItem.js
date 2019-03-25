@@ -34,9 +34,6 @@ function PatchItem(props) {
         })
         setShowInput(false)
     }
-
-    let [collapsed, setCollapsed] = useState(false)
-    const handleCollapse = () => setCollapsed(!collapsed)
     
     const handleAdd = () => {
         props.addPageToMap(storyKey, boardType)
@@ -55,10 +52,7 @@ function PatchItem(props) {
                         provided.draggableProps.style
                     )}
                 >
-                    <div
-                        className="patch-item-header"
-                        onClick={handleCollapse}
-                    >
+                    <div className="patch-item-header">
                         {showInput ?
                             <input
                                 className="patch-item-input"
@@ -87,7 +81,7 @@ function PatchItem(props) {
                         </div>
                     </div>
                     <div className="patch-collapse">
-                        {!collapsed && props.children}
+                        {props.children}
                     </div>
                 </div>
             )}
