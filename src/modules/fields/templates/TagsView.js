@@ -10,7 +10,7 @@ class TagsView extends React.Component{
         const { fieldKey } = this.props
 
         const style = {
-            backgroundColor: 'rgba(40, 43, 48,1)',
+            backgroundColor: 'rgba(40, 43, 48, 1)',
             color: item.title ? '#fff' : '#969696',
             marginBottom: 6,
         }

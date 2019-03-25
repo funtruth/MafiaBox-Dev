@@ -8,7 +8,7 @@ import { DEFAULT_MEMBER_INFO, MEMBER_TYPE } from './UserConstants';
 
 import { getMyInfo, switchToProject } from '../../firebase/FirebaseReducer'
 
-import FormInput from '../../common/components/FormInput'
+import FormInput from '../../components/FormInput'
 import ModalOptions from '../components/ModalOptions'
 import Modal from '../components/Modal';
 

@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 import { removePage } from '../../page/PageReducer' 
 
 import Modal from '../components/Modal';
+import Button from '../../components/Button'
 
 function DeletePage(props) {
-    const _onCancel = () => {
+    const handleCancel = () => {
         props.showModal()
     }
 
-    const _onDelete = () => {
+    const handleDelete = () => {
         props.showModal()
     }
     
@@ -25,12 +26,8 @@ function DeletePage(props) {
                 </div>
             </div>
             <div className="row dark-grey modal-options">
-                <div className="underline-button" style={{ marginLeft: 'auto' }} onClick={_onCancel}>
-                    {`Cancel`}
-                </div>
-                <div className="delete-button" onClick={_onDelete}>
-                    {`Delete Role`}
-                </div>
+                <Button theme="grey" onClick={handleCancel}>Cancel</Button>
+                <Button theme="red" onClick={handleDelete}>Delete</Button>
             </div>
         </Modal>
     )

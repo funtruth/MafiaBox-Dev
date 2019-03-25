@@ -1,0 +1,50 @@
+.--button {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+}
+
+.--button-small {
+    border-radius: 12px;
+    padding: 8px 14px;
+    font: 700 14px 'Segoe UI';
+    letter-spacing: -0.4px;
+}
+.--button-medium {
+    border-radius: 12px;
+    padding: 8px 14px;
+    font: 700 16px 'Segoe UI';
+    letter-spacing: -0.4px;
+}
+.--button-large {
+    border-radius: 12px;
+    padding: 12px 14px;
+    font: 700 18px 'Segoe UI';
+    letter-spacing: -0.4px;
+}
+
+.--button-black {
+    color: #fff;
+    background-color: #282b30;
+}
+.--button-red {
+    color: #fff;
+    background-color: #db4757;
+}
+.--button-lightgrey {
+    color: #fff;
+    background-color: #424650;
+}
+.--button-grey {
+    color: #fff;
+    background-color: #424650;
+}
+.--button-darkgrey {
+    color: #fff;
+    background-color: #424650;
+}
+.--button-transparent {
+    color: #fff;
+    background-color: transparent;
+}
