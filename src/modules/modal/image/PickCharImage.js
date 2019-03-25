@@ -15,7 +15,7 @@ function PickCharImage(props) {
     
     return (
         <Modal>
-            <img className="pick-char-image" src={images} width="200"/>
+            <img className="pick-char-image" src={images} width="200" alt=""/>
             <ModalOptions
                 onClose={props.close}
             />

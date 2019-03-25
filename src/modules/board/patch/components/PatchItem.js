@@ -40,52 +40,41 @@ function PatchItem(props) {
     }
 
     return (
-        <Draggable draggableId={storyKey} index={index}>
-            {(provided, snapshot) => (
-                <div
-                    ref={provided.innerRef}
-                    className="patch-item"
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                    )}
-                >
-                    <div className="patch-item-header">
-                        {showInput ?
-                            <input
-                                className="patch-item-input"
-                                value={title}
-                                onChange={handleText}
-                                autoFocus={true}
-                                onBlur={handleTextBlur}
-                                onKeyPress={handleKeyPress}
-                            />
-                            :<div className="patch-item-title" onClick={handleTitleClick}>
-                                {title || 'Untitled'}
-                            </div>
-                        }
-                        <div className="patch-item-option" onClick={handleAdd}>
-                            <i className="mdi mdi-plus"></i>
-                        </div>
-                        <div
-                            className="patch-item-option app-onclick"
-                            menu-type={dropdownType.storyShowMore}
-                            app-onclick-props={JSON.stringify({
-                                boardType,
-                                mapKey: storyKey,
-                            })}
-                        >
-                            <i className="mdi mdi-dots-horizontal"></i>
-                        </div>
+        <div
+            className="patch-item"
+        >
+            <div className="patch-item-header">
+                {showInput ?
+                    <input
+                        className="patch-item-input"
+                        value={title}
+                        onChange={handleText}
+                        autoFocus={true}
+                        onBlur={handleTextBlur}
+                        onKeyPress={handleKeyPress}
+                    />
+                    :<div className="patch-item-title" onClick={handleTitleClick}>
+                        {title || 'Untitled'}
                     </div>
-                    <div className="patch-collapse">
-                        {props.children}
-                    </div>
+                }
+                <div className="patch-item-option" onClick={handleAdd}>
+                    <i className="mdi mdi-plus"></i>
                 </div>
-            )}
-        </Draggable>
+                <div
+                    className="patch-item-option app-onclick"
+                    menu-type={dropdownType.storyShowMore}
+                    app-onclick-props={JSON.stringify({
+                        boardType,
+                        mapKey: storyKey,
+                    })}
+                >
+                    <i className="mdi mdi-dots-horizontal"></i>
+                </div>
+            </div>
+            <div className="patch-collapse">
+                {props.children}
+            </div>
+        </div>
     )
 }
 
