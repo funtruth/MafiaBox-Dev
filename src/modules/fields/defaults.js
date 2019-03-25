@@ -42,6 +42,12 @@ export const fieldType = {
         icon: 'mdi mdi-numeric',
         title: 'Number',
     },
+    image: {
+        key: 'image',
+        index: 2,
+        icon: 'mdi mdi-image',
+        title: 'Image',
+    },
     logic: {
         key: 'logic',
         index: 3,
@@ -168,6 +174,13 @@ export const initFieldRepo = {
                 title: 'Neutral',
             },
         },
+        boardType: boardType.roles.key,
+    },
+    roleImage: {
+        key: 'roleImage',
+        index: 2,
+        fieldType: fieldType.image.key,
+        title: "Role Image",
         boardType: boardType.roles.key,
     },
     playerTags: {

@@ -15,10 +15,8 @@ const initialState = {
     pageMap: {},
     storyRepo: {},
     storyMap: {},
-    pageStorage: {},
-
-    projectStorage: {},
 }
+
 const VALID_PROPS = ['pageRepo', 'pageMap', 'storyRepo', 'storyMap']
 
 const ADD_STORY = 'story/add-story-to'

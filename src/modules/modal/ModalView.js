@@ -30,6 +30,7 @@ import EditToast from './toast/EditToast'
 import EditPriority from './priority/EditPriority'
 import AssignVarModal from './vars/AssignVarModal'
 import EditString from './string/EditString'
+import PickCharImage from './image/PickCharImage'
 
 class ModalView extends React.Component {
     _renderItem(props) {
@@ -74,6 +75,8 @@ class ModalView extends React.Component {
                 return <AssignVarModal {...props}/>
             case modalType.editString:
                 return <EditString {...props}/>
+            case modalType.pickCharacterImage:
+                return <PickCharImage {...props}/>
             default:
                 return null
         }

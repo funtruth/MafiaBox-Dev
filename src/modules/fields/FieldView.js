@@ -8,6 +8,7 @@ import { fieldType } from './defaults'
 import CallField from './components/CallField'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
+import ImageField from './components/ImageField'
 import TagField from './components/TagField';
 import PlayerTagField from './components/PlayerTagField'
 import PriorityField from './components/PriorityField'
@@ -42,6 +43,8 @@ class FieldView extends React.Component {
                 return <TextField {...props}/>
             case fieldType.number.key:
                 return <NumberField {...props}/>
+            case fieldType.image.key:
+                return <ImageField {...props}/>
             case fieldType.logic.key:
                 return <LogicBoard {...props} pageInfo={pageInfo}/>
             case fieldType.tag.key:

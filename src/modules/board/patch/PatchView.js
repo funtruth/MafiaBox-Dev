@@ -65,6 +65,5 @@ export default connect(
     state => ({
         storyRepo: state.page.storyRepo,
         storyMap: state.page.storyMap,
-        pageRepo: state.page.pageRepo,
     }),
 )(PatchView)

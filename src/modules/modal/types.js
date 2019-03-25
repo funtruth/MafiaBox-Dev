@@ -20,4 +20,5 @@ export const modalType = {
     editPriority: 'modalType/edit-priority',
     assignVar: 'modalType/assign-var',
     editString: 'modalType/edit-string',
+    pickCharacterImage: 'modalType/pick-character-image',
 }
