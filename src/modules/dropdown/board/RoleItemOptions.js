@@ -6,13 +6,13 @@ import { modalType } from '../../modal/types'
 import { showModal } from '../../modal/ModalReducer'
 
 function RoleItemOptions(props) {
-    const { boardType, storyKey } = props
+    const { pageKey, attach } = props
 
     const handleDelete = () => {
         props.showDropdown()
         props.showModal(modalType.deletePage, {
-            boardType,
-            storyKey,
+            pageKey,
+            attach,
         })
     }
 
