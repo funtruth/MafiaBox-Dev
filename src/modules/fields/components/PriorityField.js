@@ -6,7 +6,20 @@ import { modalType } from '../../modal/types';
 import { showModal } from '../../modal/ModalReducer'
 import { rolePrioritySort } from '../FieldReducer'
 
-const ORDER_CIPHER = { 1: '1st', 2: '2nd', 3: '3rd' }
+import {
+    Body,
+    Button,
+ } from '../../components/Common'
+
+const formatNumber = (v) => {
+    if (!v)         return '...'
+    switch(v) {
+        case 1:     return '1st'
+        case 2:     return '2nd'
+        case 3:     return '3rd'
+        default:    return v + 'th'
+    }
+}
 
 function PriorityField(props) {
     const { fieldKey, path, value, pageRepo } = props
@@ -20,11 +33,11 @@ function PriorityField(props) {
     }
 
     return (
-        <div className="row -x-p">
-            <div className="field-tag" onClick={handleClick}>
-                {ORDER_CIPHER[value] || (value ? value + 'th' : 'N/A')}
-            </div>
-        </div>
+        <Body size="s">
+            <Button size="s" onClick={handleClick}>
+                {formatNumber(value)}
+            </Button>
+        </Body>
     )
 }
 

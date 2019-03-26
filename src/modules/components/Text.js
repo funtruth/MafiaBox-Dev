@@ -43,6 +43,7 @@ export default function Text(props) {
     const {
         children,
         bold,
+        underline,
         align = "",
         className = "",
         size = 'medium',
@@ -60,9 +61,14 @@ export default function Text(props) {
         color: getColor(color),
         ...styles,
     }
+
+    const classes = [
+        underline ? '--text-underline' : '',
+        className,
+    ].join(" ")
     
     return (
-        <div className={className} style={textStyle}>
+        <div className={classes} style={textStyle}>
             {children}
         </div>
     )

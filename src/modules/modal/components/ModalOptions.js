@@ -1,31 +1,15 @@
 import React from 'react'
 
+import {
+    Footer,
+    Button
+} from '../../components/Common'
+
 export default function ModalOptions(props) {
     return (
-        <div className="row modal-options">
-            <div
-                className="error-text"
-                style={{
-                    marginLeft: 8,
-                }}
-            >
-                {props.error || ''}
-            </div>
-            <div
-                className="modal-button"
-                onClick={props.onSave}
-                style={{
-                    marginLeft: 'auto',
-                }}
-            >
-                Save
-            </div>
-            <div
-                className="underline-button"
-                onClick={props.onClose}
-            >
-                Cancel
-            </div>
-        </div>
+        <Footer align="r">
+            <Button theme="grey" size="s" onClick={props.onSave}>Save</Button>
+            <Button theme="clear" size="s" onClick={props.onClose} style={{marginLeft: 6}}>Cancel</Button>
+        </Footer>
     )
 }

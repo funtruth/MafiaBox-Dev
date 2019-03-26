@@ -56,10 +56,7 @@ function EditPriority(props) {
                         </PriorityRoleDrop>
                     </div>
                 ))}
-                <ModalOptions
-                    onSave={handleSave}
-                    onClose={props.close}
-                />
+                <ModalOptions onSave={handleSave} onClose={props.close}/>
             </div>
         </ModalCheckSave>
     )

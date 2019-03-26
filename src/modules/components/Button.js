@@ -1,21 +1,22 @@
 import React from 'react';
+import './Button.css'
 
 import Text from './Text'
+
+const getPadding = (size) => {
+    switch(size) {
+        case 'xs':          return '8px 12px'
+        case 's':           return '8px 12px'
+        case 'l':           return '10px 14px'
+        case 'xl':          return '12px 14px'
+        case 'xxl':         return '12px 14px'
+        default:            return '10px 12px'
+    }
+}
 
 const getColor = (theme) => {
     switch(theme) {
         default:            return '#fff'
-    }
-}
-
-const getBackground = (theme) => {
-    switch(theme) {
-        case 'lightgrey':   return '#424650'
-        case 'grey':        return '#424650'
-        case 'darkgrey':    return '#424650'
-        case 'red':         return '#B34B50'
-        case 'clear':       return 'transparent'
-        default:            return '#282b30'
     }
 }
 
@@ -29,18 +30,20 @@ export default function Button(props) {
         style,
     } = props
 
+    const padding           = getPadding(size)
     const color             = getColor(theme)
-    const backgroundColor   = getBackground(theme)
+    const underline         = theme === 'clear'
 
     const classes = [
         'accessibilityOutline',
         '--button',
+        `--button-${theme}`,
         className,
     ].join(" ")
 
     const buttonStyle = {
         color,
-        backgroundColor,
+        padding,
         ...style,
     }
     
@@ -50,7 +53,7 @@ export default function Button(props) {
             style={buttonStyle}
             onClick={event => onClick && onClick({ event })}
         >
-            <Text size={size} theme={theme} bold>
+            <Text size={size} theme={theme} underline={underline}>
                 {children}
             </Text>
         </button>

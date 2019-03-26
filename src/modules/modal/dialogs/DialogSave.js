@@ -1,40 +1,30 @@
 import React from 'react'
 import Modal from '../components/Modal';
+import {
+    Body,
+    Button,
+    Footer,
+    Separator,
+    Text,
+} from '../../components/Common';
 
 export default function DialogSave(props) {
-    let _onSave = () => {
-        props.onSave()
-    }
-
-    let _onClose = () => {
-        props.popModalBy(1)
-    }
-
-    let _onQuit = () => {
-        props.popModalBy(2)
-    }
+    const onSave    = () => props.onSave()
+    const onCancel  = () => props.popModalBy(1)
+    const onQuit    = () => props.popModalBy(2)
 
     return (
         <Modal>
-            <div style={{ padding: 16 }}>
-                <div className="modal-title">
-                    Save changes?
-                </div>
-                <div className="modal-subtitle">
-                    your changes will be lost if you do not save.
-                </div>
-            </div>
-            <div className="row modal-options">
-                <div className="underline-button" onClick={_onSave}>
-                    Save
-                </div>
-                <div className="underline-button" onClick={_onClose}>
-                    Cancel
-                </div>
-                <div className="delete-button" onClick={_onQuit}>
-                    Don't Save
-                </div>
-            </div>
+            <Body>
+                <Text size="l" align="c">Save changes?</Text>
+                <Separator size={8}></Separator>
+                <Text color="grey">your changes will be lost if you do not save.</Text>
+            </Body>
+            <Footer align="l">
+                <Button theme="grey" size="s" onClick={onSave}>Save</Button>
+                <Button theme="red" size="s" onClick={onQuit} style={{marginLeft: 12}}>Don't Save</Button>
+                <Button theme="clear" size="s" onClick={onCancel} style={{marginLeft: 'auto'}}>Cancel</Button>
+            </Footer>
         </Modal>
     )
 }

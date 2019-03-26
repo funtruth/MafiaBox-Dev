@@ -3,13 +3,8 @@
     outline: 0;
 }
 
-.--button {
-    cursor: pointer;
-    box-sizing: border-box;
-    border: none;
-    background: none;
-    border-radius: 12px;
-    padding: 8px 14px;
+.--text-underline:hover {
+    text-decoration: underline;
 }
 
 .--footer {

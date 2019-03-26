@@ -29,7 +29,7 @@ function DeletePage(props) {
                 <Text size="xl" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
                 </Text>
-                <Separator m={10}/>
+                <Separator size={10}/>
                 <Text size="m" color="grey">Are you sure you want to delete this role?</Text>
             </Body>
             <Footer align="r">

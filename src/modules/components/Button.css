@@ -1,0 +1,40 @@
+.--button {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    border-radius: 8px;
+}
+.--button-lightgrey {
+    background-color: #424650;
+}
+.--button-lightgrey:hover {
+    background-color: #424650aa;
+}
+.--button-grey {
+    background-color: #424650;
+}
+.--button-grey:hover {
+    background-color: #424650aa;
+}
+.--button-darkgrey {
+    background-color: #424650;
+}
+.--button-darkgrey:hover {
+    background-color: #424650aa;
+}
+.--button-red {
+    background-color: #B34B50;
+}
+.--button-red:hover {
+    background-color: #B34B50aa;
+}
+.--button-clear {
+    background-color: transparent;
+}
+.--button-black {
+    background-color: #282b30;
+}
+.--button-black:hover {
+    background-color: #282b30aa;
+}

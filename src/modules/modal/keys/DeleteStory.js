@@ -31,14 +31,14 @@ function DeleteStory(props) {
                 <Text size="l" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
                 </Text>
-                <Separator m={10}/>
+                <Separator size={10}/>
                 <Text size="m" color="grey">
                     {`Are you sure you want to delete '${title || "Untitled"}'?`}
                 </Text>
             </Body>
             <Footer align="r">
                 <Button theme="grey" onClick={handleCancel}>Cancel</Button>
-                <Button theme="red" onClick={handleDelete} style={{ marginLeft: 12 }}>Delete</Button>
+                <Button theme="red" onClick={handleDelete} style={{marginLeft: 12}}>Delete</Button>
             </Footer>
         </Modal>
     )

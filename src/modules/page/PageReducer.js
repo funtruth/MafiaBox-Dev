@@ -324,6 +324,7 @@ export function receiveEvent(snap, key) {
         })
     }
 }
+//TODO need a proper delete, should be run on startup or something
 export function receiveDeleteEvent(snap, key) {
     return (dispatch, getState) => {
         const { page } = getState()
