@@ -5,17 +5,17 @@ import { ItemTypes } from './PriorityConstants'
 
 const itemTarget = {
     drop(props, monitor) {
-        const { workspace, yIndex } = props
+        const { workspace, index } = props
 
         const item = monitor.getItem()
         const { itemXIndex, itemYIndex } = item
 
-        if (yIndex === itemYIndex) return;
+        if (index === itemYIndex) return;
 
         let workspaceClone = workspace.slice()
 
         const [removed] = workspaceClone[itemYIndex].splice(itemXIndex, 1)
-        workspaceClone[yIndex].push(removed)
+        workspaceClone[index].push(removed)
 
         props.setWorkspace(workspaceClone)
     }

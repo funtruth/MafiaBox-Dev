@@ -2,7 +2,11 @@ import React from 'react'
 import './EditPriority.css'
 import { connect } from 'react-redux'
 
-import { saveAllPriorities } from '../../page/PageReducer'
+import { diffPriorities } from '../../page/PageReducer'
+
+import {
+    Header,
+} from '../../components/Common'
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
@@ -11,7 +15,8 @@ import PriorityRoleDrop from './components/PriorityRoleDrop';
 import PriorityRoleDrag from './components/PriorityRoleDrag';
 
 function EditPriority(props) {
-    const workspace = props.attach
+    const { attach, pageKey } = props
+    const workspace = attach
     
     const mainProps = {
         workspace,
@@ -19,7 +24,7 @@ function EditPriority(props) {
     }
 
     let handleSave = () => {
-        props.saveAllPriorities(workspace)
+        props.diffPriorities(workspace)
         props.popModalBy(1)
     }
     
@@ -32,23 +37,16 @@ function EditPriority(props) {
                     width: '75vw',
                 }}
             >
+                <Header text="Edit Priority"></Header>
                 {workspace.map((list, yIndex) => (
                     <div key={yIndex} className="priority-row">
-                        <div className="priority-gutter">
-                            <PriorityRowAdd
-                                {...mainProps}
-                                yIndex={yIndex}
-                            />
-                            {yIndex}
-                        </div>
-                        <PriorityRoleDrop
-                            {...mainProps}
-                            yIndex={yIndex}
-                        >
+                        <PriorityRowAdd {...mainProps} index={yIndex}/>
+                        <PriorityRoleDrop {...mainProps} index={yIndex}>
                             {list.map((item, xIndex) => (
                                 <PriorityRoleDrag
                                     key={item.pageKey}
                                     item={item}
+                                    pageKey={pageKey}
                                     yIndex={yIndex}
                                     xIndex={xIndex}
                                 />
@@ -65,6 +63,6 @@ function EditPriority(props) {
 export default connect(
     null,
     {
-        saveAllPriorities,
+        diffPriorities,
     }
 )(EditPriority)

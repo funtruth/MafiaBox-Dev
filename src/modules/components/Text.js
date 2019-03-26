@@ -32,9 +32,10 @@ const getPaddingBottom = (size) => {
 
 const getColor = (color) => {
     switch(color) {
-        case 'lightgrey':   return '#666'
+        case 'darkgrey':    return '#666'
         case 'grey':        return '#999'
-        case 'darkgrey':    return '#ddd'
+        case 'lightgrey':   return '#bbb'
+        case 'whitish':     return '#ddd'
         default:            return '#fff'
     }
 }

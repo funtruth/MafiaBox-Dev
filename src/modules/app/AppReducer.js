@@ -11,7 +11,11 @@ import {
     moveRoleToEmpty,
 } from '../fields/FieldReducer'
 
-const initialState = {}
+const initialState = {
+    preferences: {},
+}
+
+const SET_PREFERENCE = 'app/set-preference'
 
 export function handleDragEnd(source, destination) {
     return (dispatch) => {
@@ -98,6 +102,8 @@ export function handleDragEnd(source, destination) {
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case SET_PREFERENCE:
+            return { ...state, preferences: action.payload }
         default:
             return state;
     }

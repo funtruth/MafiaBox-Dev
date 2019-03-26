@@ -3,7 +3,7 @@ import './modals.css'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
-import { updateRepo, saveAllPriorities } from '../page/PageReducer'
+import { updateRepo } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
@@ -121,7 +121,6 @@ export default connect(
         showModal,
         updateRepo,
         updateFunction,
-        saveAllPriorities,
         popModalTo,
         updateTopModal,
     }
