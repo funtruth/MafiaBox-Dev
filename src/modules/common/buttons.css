@@ -1,6 +1,6 @@
 .underline-button {
     padding: 8px 16px;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
     color: #fff;
     cursor: pointer;
 }
@@ -12,7 +12,7 @@
 .modal-button {
     padding: 8px 16px;
     border-radius: 4px;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
     color: #fff;
     cursor: pointer;
     background-color: rgb(66, 70, 80);
@@ -21,7 +21,7 @@
 .delete-button {
     padding: 8px 16px;
     border-radius: 4px;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
     color: #fff;
     cursor: pointer;
     background-color: #db4757;
@@ -34,7 +34,7 @@
 .cute-button {
     padding: 6px 12px;
     border-radius: 4px;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
     color: #fff;
     cursor: pointer;
     background-color: rgba(40, 43, 48,1);
@@ -45,13 +45,12 @@
 }
 
 .path-view {
-    font: 400 15px Arial;
+    font: 400 15px Segoe UI;
 }
 
 .path-button {
     animation: fadein 0.25s;
     -webkit-animation: fadein 0.25s;
-    
     padding: 6px 10px;
     display: flex;
     justify-content: center;
@@ -59,6 +58,7 @@
     border-radius: 4px;
     cursor: pointer;
     color: #fff;
+    font: 500 16px Segoe UI;
 }
 
 .path-button:hover {
@@ -87,5 +87,5 @@
     display: flex;
     justify-content: center;
     max-width: 80px;
-    font: 600 13px Arial;
+    font: 600 13px Segoe UI;
 }

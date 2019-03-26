@@ -17,7 +17,7 @@ const styles = {
         backgroundColor: '#989898',
         opacity: 0.5,
         color: 'rgba(47, 49, 54, 1)',
-        font: '600 25px Arial',
+        font: '600 25px Segoe UI',
         cursor: 'pointer',
         display: 'flex',
         justifyContent: 'center',
@@ -29,7 +29,7 @@ const styles = {
     },
     title: {
         color: '#ccc',
-        font: '400 14px Arial',
+        font: '400 14px Segoe UI',
     },
 }
 

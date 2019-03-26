@@ -75,7 +75,7 @@
     color: #d6d6d6;
     border-radius: 4px;
     padding: 2px 6px;
-    font: 300 12px Arial;
+    font: 300 12px Segoe UI;
     margin-left: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -85,7 +85,7 @@
     color: #d6d6d6;
     background-color: rgba(60, 63, 68,1);
     padding: 3px 6px 3px 6px;
-    font: 300 12px Arial;
+    font: 300 12px Segoe UI;
 }
 
 .icon-pop {
@@ -97,5 +97,5 @@
     color: #d6d6d6;
 }
 .letter-s {
-    font: 300 15px Arial;
+    font: 300 15px Segoe UI;
 }

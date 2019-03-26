@@ -13,7 +13,7 @@
     border-radius: 6px;
     color: #fff;
     line-height: 1.2;
-    font: 500 14px Arial;
+    font: 700 18px Segoe UI;
     cursor: pointer;
     margin-right: 12px;
     margin-bottom: 10px;
@@ -31,7 +31,8 @@
 }
 
 .patch-item-title {
-    font: 600 17px Arial;
+    font: 700 20px Segoe UI;
+    letter-spacing: -0.3px;
     color: #bbb;
     padding: 14px 14px;
     margin-right: auto;
@@ -41,7 +42,7 @@
 
 .patch-item-input {
     display: block;
-    font: 600 17px Arial;
+    font: 600 17px Segoe UI;
     width: 100%;
     margin-right: auto;
     border: none;
@@ -90,7 +91,7 @@
     border-radius: 4px;
     color: #d6d6d6;
     background-color: rgba(40, 43, 48,1);
-    font: 550 14px Arial;
+    font: 550 14px Segoe UI;
     pointer-events: auto;
     line-height: 1.2;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;

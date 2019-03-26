@@ -7,7 +7,7 @@
 }
 
 .account-details {
-    font: 600 14px Arial;
+    font: 600 14px Segoe UI;
     color: #d6d6d6;
     padding: 1em;
     display: flex;
@@ -21,7 +21,7 @@
 }
 
 .side-bar-section-title {
-    font: 600 14px Arial;
+    font: 600 14px Segoe UI;
     color: #d6d6d6;
     padding: 0.5em 0px;
     display: flex;
@@ -44,7 +44,7 @@
 }
 
 .side-bar-title {
-    font: 600 14px Arial;
+    font: 600 14px Segoe UI;
     letter-spacing: 0.3;
     white-space: nowrap;
     overflow: hidden;

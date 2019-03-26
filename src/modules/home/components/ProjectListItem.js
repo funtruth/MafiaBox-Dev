@@ -10,7 +10,7 @@ const styles = {
         width: '1.3em',
         borderRadius: 4,
         color: 'rgba(47, 49, 54, 1)',
-        font: '600 23px Arial',
+        font: '600 23px Segoe UI',
         cursor: 'pointer',
         display: 'flex',
         justifyContent: 'center',
@@ -22,11 +22,11 @@ const styles = {
     },
     title: {
         color: '#ccc',
-        font: '600 14px Arial',
+        font: '600 14px Segoe UI',
     },
     subtitle: {
         color: '#999',
-        font: '400 12px Arial',
+        font: '400 12px Segoe UI',
         width: 80,
     },
 }

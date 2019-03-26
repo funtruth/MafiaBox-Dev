@@ -13,7 +13,7 @@ const PatchGridItem = SortableElement((props) => {
     
     const handleClick = (e) => {
         if (e.target.classList.contains('patch-item')) {
-            props.onClick(storyKey)
+            props.onClick(storyKey) //cancelling improperly
         }
     }
 

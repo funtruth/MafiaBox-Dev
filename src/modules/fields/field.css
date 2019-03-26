@@ -2,7 +2,7 @@
     border: none;
     background-color: transparent;
     padding: 4px 7px;
-    font: 500 18px Arial;
+    font: 500 18px Segoe UI;
     color: #d6d6d7;
 }
 
@@ -18,8 +18,8 @@
 }
 
 .field-label {
-    font: 600 15px Arial;
-    letter-spacing: .1px;
+    font: 700 18px Segoe UI;
+    letter-spacing: -.3px;
     color: #a6a6a6;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .field-view-code {
-    font: 500 13px Arial;
+    font: 500 13px Segoe UI;
     color: #a6a6a6;
     cursor: pointer;
     margin-left: auto;
@@ -37,7 +37,7 @@
     border: none;
     background-color: rgba(54, 57, 64);
     padding: 2px 7px;
-    font: 600 15px Arial;
+    font: 600 15px Segoe UI;
     color: #aaa;
 }
 
@@ -50,7 +50,7 @@
     border-radius: 2px;
     padding: 10px 10px;
     margin: 0px 4px;
-    font: 450 14px Arial;
+    font: 450 14px Segoe UI;
     color: #c6c6c6;
     width: calc(100% - 28px);
     outline: none;
@@ -65,7 +65,7 @@
     border-radius: 2px;
     padding: 6px 6px;
     margin: 2px 8px;
-    font: 450 14px Arial;
+    font: 450 14px Segoe UI;
     color: #c6c6c6;
     width: 50px;
     outline: none;
@@ -78,7 +78,7 @@
 .field-time-input {
     border: none;
     padding: 10px 10px;
-    font: 450 14px Arial;
+    font: 450 14px Segoe UI;
     color: #c6c6c6;
     width: 60px;
     outline: none;
@@ -91,7 +91,7 @@
 .field-tag {
     padding: 6px 12px;
     border-radius: 4px;
-    font: 500 13px Arial;
+    font: 500 13px Segoe UI;
     color: #fff;
     background-color: #282b30;
     cursor: pointer;

@@ -19,7 +19,7 @@
     -webkit-animation: fadein 0.2s, scalein 0.2s;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
     color: #b6b6b6;
-    font: 520 14px Arial;
+    font: 520 14px Segoe UI;
 }
 
 .drop-down-menu-autow {
@@ -32,7 +32,7 @@
     -webkit-animation: fadein 0.2s, scalein 0.2s;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
     color: #b6b6b6;
-    font: 520 14px Arial;
+    font: 520 14px Segoe UI;
 }
 
 .drop-down-menu-option {
@@ -90,7 +90,7 @@
     border: none;
     border-radius: 2px;
     padding: 10px 10px;
-    font: 450 14px Arial;
+    font: 450 14px Segoe UI;
     color: #c6c6c6;
     cursor: pointer;
     background-color: rgba(37, 39, 44, 1);
@@ -111,7 +111,7 @@
 }
 
 .drop-down-title {
-    font: 600 11px Arial;
+    font: 600 12px Segoe UI;
     color: #777;
     letter-spacing: 0.6px;
     padding: 4px 4px;

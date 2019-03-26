@@ -1,5 +1,5 @@
 .project-item {
-    font: 500 13px Arial;
+    font: 500 13px Segoe UI;
     padding: 8px 14px;
     color: #aaa;
     display: flex;
@@ -19,7 +19,7 @@
     background-color: #989898;
     opacity: 0.5;
     color: rgba(47, 49, 54, 1);
-    font: 600 25px Arial;
+    font: 600 25px Segoe UI;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -32,7 +32,7 @@
     background-color: #989898;
     opacity: 0.5;
     color: rgba(47, 49, 54, 1);
-    font: 600 20px Arial;
+    font: 600 20px Segoe UI;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -45,13 +45,13 @@
 }
 .project-new {
     color: #ccc;
-    font: 400 14px Arial;
+    font: 400 14px Segoe UI;
 }
 .project-title {
     color: #ccc;
-    font: 600 15px Arial;
+    font: 600 15px Segoe UI;
 }
 .project-subtitle {
     color: #999;
-    font: 400 12px Arial;
+    font: 400 12px Segoe UI;
 }

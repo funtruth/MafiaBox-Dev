@@ -15,7 +15,7 @@
 
 .modal-title {
     padding: 8px 12px;
-    font: 600 18px Arial;
+    font: 600 18px Segoe UI;
     color: #fff;
 }
 
@@ -23,7 +23,7 @@
     padding: 4px 4px;
     line-height: 1.4;
     letter-spacing: 0.2px;
-    font: 400 14px Arial;
+    font: 400 14px Segoe UI;
     color: #d6d6d6;
     align-items: flex-end;
 }
@@ -48,5 +48,5 @@
 
 .error-text {
     color: #db4757;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
 }

@@ -31,7 +31,7 @@ function LogicBlock(props) {
                 marginLeft: indent ? 40 : 0,
                 borderLeft: showBorderLeft ? '1px dashed #666' : null,
                 borderRadius: 2,
-                font: '500 13px Arial',
+                font: '500 13px Segoe UI',
             }}
         >
             <div className="row-nowrap" style={{ paddingLeft: 4 }}>

@@ -75,7 +75,7 @@ const styles = {
     itemStyle: {
         color: '#fff',
         lineHeight: 1.2,
-        font: '500 14px Arial',
+        font: '500 14px Segoe UI',
         cursor: 'pointer',
         pointerEvents: 'none',
         minWidth: 180,

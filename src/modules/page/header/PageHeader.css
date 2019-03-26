@@ -14,7 +14,7 @@
 .page-header-button {
     padding: 6px 10px;
     border-radius: 4px;
-    font: 500 14px Arial;
+    font: 500 14px Segoe UI;
     color: #d6d6d6;
     cursor: pointer;
     align-items: center;
@@ -33,6 +33,6 @@
 
 .page-header-error {
     padding: 0px 0.5em;
-    font: 500 12px Arial;
+    font: 500 12px Segoe UI;
     color: #db4757;
 }

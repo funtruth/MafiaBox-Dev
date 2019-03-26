@@ -3,7 +3,7 @@
     border-radius: 4px;
     color: #d6d6d6;
     background-color: rgba(40, 43, 48,1);
-    font: 550 14px Arial;
+    font: 550 14px Segoe UI;
     pointer-events: auto;
     line-height: 1.2;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
@@ -25,7 +25,7 @@
     position: sticky;
     left: 0px;
     background-color: #363940;
-    font: 600 18px Arial;
+    font: 600 18px Segoe UI;
     color: #999;
     display: flex;
     align-items: center;
@@ -34,7 +34,7 @@
     padding: 6px 12px; 
 }
 .priority-gutter-add {
-    font: 600 18px Arial;
+    font: 600 18px Segoe UI;
     color: #666;
     display: flex;
     flex-direction: column;

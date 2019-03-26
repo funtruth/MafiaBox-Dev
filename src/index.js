@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './modules/components/Common.css'
 import AppNavigator from './modules/navigation/AppNavigator';
 import * as serviceWorker from './serviceWorker';
 

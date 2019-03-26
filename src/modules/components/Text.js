@@ -2,9 +2,12 @@ import React from 'react';
 
 const getFontSize = (size) => {
     switch(size) {
-        case 'small':       return 14
-        case 'large':       return 18
-        default:            return 14
+        case 'xs':          return 12
+        case 's':           return 14
+        case 'l':           return 18
+        case 'xl':          return 21
+        case 'xxl':         return 25
+        default:            return 16 //'m'
     }
 }
 
@@ -14,18 +17,7 @@ const getColor = (theme) => {
     }
 }
 
-const getBackground = (theme) => {
-    switch(theme) {
-        case 'lightgrey':   return '#424650'
-        case 'grey':        return '#424650'
-        case 'darkgrey':    return '#424650'
-        case 'red':         return '#db4757'
-        case 'clear':       return 'transparent'
-        default:            return '#282b30'
-    }
-}
-
-export default function Button(props) {
+export default function Text(props) {
     const {
         children,
         onClick,
@@ -37,25 +29,20 @@ export default function Button(props) {
 
     const fontSize          = getFontSize(size)
     const color             = getColor(theme)
-    const backgroundColor   = getBackground(theme)
-
-    const classes = [
-        'accessibilityOutline',
-        '--button',
-        className,
-    ].join(" ")
 
     const buttonStyle = {
+        cursor: 'pointer',
+        boxSizing: 'border-box',
+        padding: '8px 14px',
         font: `700 ${fontSize}px Segoe UI`,
         letterSpacing: -0.4,
         color,
-        backgroundColor,
         ...styles,
     }
     
     return (
         <button
-            className={classes}
+            className={className}
             style={buttonStyle}
             onClick={event => onClick && onClick({ event })}
         >

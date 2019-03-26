@@ -5,7 +5,7 @@
   border: 2px solid rgba(37, 39, 44, 1);
   border-radius: 4px;
   padding: 10px 10px;
-  font: 450 14px Arial;
+  font: 450 14px Segoe UI;
   color: #c6c6c6;
   background-color: #2a2f2f;
   cursor: text;
@@ -29,13 +29,13 @@
 }
 
 .form-input-title {
-  font: 600 13px Arial;
+  font: 600 13px Segoe UI;
   color: #aaa;
   letter-spacing: 0.4px;
 }
 
 .form-input-error {
   margin-left: 1em;
-  font: 500 12px Arial;
+  font: 500 12px Segoe UI;
   color: #db4757;
 }

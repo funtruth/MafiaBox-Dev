@@ -34,7 +34,7 @@
     color: #d6d6d6;
     border-radius: 4px;
     padding: 2px 6px;
-    font: 300 13px Arial;
+    font: 300 13px Segoe UI;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +44,7 @@
     color: #d6d6d6;
     border-radius: 4px;
     padding: 4px 8px;
-    font: 300 13px Arial;
+    font: 300 13px Segoe UI;
     display: inline-block;
 }
 

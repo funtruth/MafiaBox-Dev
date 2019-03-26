@@ -12,7 +12,7 @@
 .path-separator {
   animation: fadein 0.25s;
   -webkit-animation: fadein 0.25s;
-  padding: 0px 8px;
+  padding: 0px 4px;
   color: #969696;
 }
 
@@ -30,7 +30,7 @@
   border: none;
   border-bottom: 1px solid #888;
   padding: 4px 4px;
-  font: 500 15px Arial;
+  font: 500 15px Segoe UI;
   color: #c6c6c6;
   background-color: transparent;
   cursor: text;
@@ -44,7 +44,7 @@
   padding: 6px 12px;
   margin-left: 8px;
   border-radius: 4px;
-  font: 500 14px Arial;
+  font: 500 14px Segoe UI;
   color: #fff;
   cursor: pointer;
   background-color: rgba(40, 43, 48,1);

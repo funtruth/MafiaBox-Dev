@@ -1,0 +1,13 @@
+.accessibilityOutline:focus {
+    box-shadow: 0 0 0 4px rgba(190, 190, 190, 0.5);
+    outline: 0;
+}
+
+.--button {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    border-radius: 12px;
+    padding: 8px 14px;
+}

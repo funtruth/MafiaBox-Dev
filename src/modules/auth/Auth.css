@@ -22,7 +22,7 @@
   padding: 14px 0px;
   margin-bottom: 10px;
   border-radius: 4px;
-  font: 500 14px Arial;
+  font: 500 14px Segoe UI;
   color: #fff;
   cursor: pointer;
   background-color: rgba(40, 43, 48, 1);
@@ -40,14 +40,14 @@
 }
 
 .auth-title {
-  font: 600 13px Arial;
+  font: 600 13px Segoe UI;
   color: #aaa;
   letter-spacing: 0.4px;
 }
 
 .auth-error {
   margin-left: 1em;
-  font: 500 12px Arial;
+  font: 500 12px Segoe UI;
   color: #db4757;
 }
 
@@ -56,7 +56,7 @@
   border-radius: 4px;
   padding: 10px 10px;
   margin-bottom: 12px;
-  font: 450 14px Arial;
+  font: 450 14px Segoe UI;
   color: #c6c6c6;
   cursor: pointer;
   background-color: #2a2f2f;
@@ -68,7 +68,7 @@
 }
 
 .auth-view-text {
-  font: 500 13px Arial;
+  font: 500 13px Segoe UI;
   color: #aaa;
   cursor: pointer;
   align-self: flex-start;

@@ -8,7 +8,7 @@
     align-items: center;
 }
 .playground-title {
-    font: 600 11px Arial;
+    font: 600 11px Segoe UI;
     color: #aaa;
     letter-spacing: 0.6px;
     padding: 0px 14px 6px 14px;
@@ -18,7 +18,7 @@
     left: 0px;
 }
 .playground-erase {
-    font: 600 11px Arial;
+    font: 600 11px Segoe UI;
     color: #aaa;
     padding: 0px 14px 6px 14px;
     text-transform: uppercase;
@@ -51,7 +51,7 @@
     border: none;
     border-radius: 4px;
     padding: 3px 6px 3px 6px;
-    font: 300 12px Arial;
+    font: 300 12px Segoe UI;
     color: #d6d6d6;
     cursor: text;
     transition: .3s width ease-in-out;
