@@ -28,6 +28,7 @@ import EditTrigger from './trigger/EditTrigger'
 import EditEvent from './event/EditEvent'
 import EditToast from './toast/EditToast'
 import EditPriority from './priority/EditPriority'
+import RemovePriorityRow from './priority/RemovePriorityRow'
 import AssignVarModal from './vars/AssignVarModal'
 import EditString from './string/EditString'
 import PickCharImage from './image/PickCharImage'
@@ -71,6 +72,8 @@ class ModalView extends React.Component {
                 return <EditToast {...props}/>
             case modalType.editPriority:    
                 return <EditPriority {...props}/>
+            case modalType.removePriorityRow:
+                return <RemovePriorityRow {...props}/>
             case modalType.assignVar:
                 return <AssignVarModal {...props}/>
             case modalType.editString:

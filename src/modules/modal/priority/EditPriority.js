@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { diffPriorities } from '../../page/PageReducer'
-import { sortPriorities } from '../../fields/FieldReducer'
+import { setPref } from '../../app/AppReducer'
 
 import {
     Header,
@@ -16,8 +16,10 @@ import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
 import PriorityList from './components/PriorityList'
 
+const EDIT_PRIO_SWITCH = 'edit-prio-switch'
+
 function EditPriority(props) {
-    const { attach, pageKey, pageRepo } = props
+    const { attach, pageKey, pageRepo, prefs } = props
 
     const [controlRepo] = useState(_.cloneDeep(attach))
     const [storyKey] = useState(pageRepo[pageKey].storyType)
@@ -47,9 +49,11 @@ function EditPriority(props) {
         props.setWorkspace(workspaceClone)
     }
 
-    const [switched, setSwitched] = useState(false)
+    const prefValue = prefs[EDIT_PRIO_SWITCH]
+    const [switched, setSwitched] = useState(prefValue || false)
     const handleSwitch = () => {
         setSwitched(!switched)
+        props.setPref(EDIT_PRIO_SWITCH, !switched)
     }
     
     return (
@@ -69,7 +73,6 @@ function EditPriority(props) {
                 </Header>
                 <PriorityList
                     {...mainProps}
-                    items={workspace}
                     switched={switched}
                     onSortEnd={onSortEnd}
                     transitionDuration={300}
@@ -85,8 +88,10 @@ function EditPriority(props) {
 export default connect(
     state => ({
         pageRepo: state.page.pageRepo,
+        prefs: state.app.prefs,
     }),
     {
         diffPriorities,
+        setPref,
     }
 )(EditPriority)

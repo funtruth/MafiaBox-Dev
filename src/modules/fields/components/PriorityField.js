@@ -27,7 +27,6 @@ function PriorityField(props) {
     let handleClick = () => {
         props.showModal(modalType.editPriority, {
             fieldKey,
-            path,
             attach: sortPriorities(pageRepo),
         })
     }

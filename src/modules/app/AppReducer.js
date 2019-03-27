@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { droppableType } from '../common/types'
 
 import { moveStory, movePageWithinMap, movePageToOtherMap } from '../page/PageReducer'
@@ -9,10 +11,24 @@ import {
 } from '../fields/FieldReducer'
 
 const initialState = {
-    preferences: {},
+    prefs: {},
 }
 
-const SET_PREFERENCE = 'app/set-preference'
+const SET_PREF = 'app/set-preference'
+
+export function setPref(key, value) {
+    return (dispatch, getState) => {
+        const { prefs } = getState().app
+
+        const prefsClone = _.cloneDeep(prefs)
+        prefsClone[key] = value
+
+        dispatch({
+            type: SET_PREF,
+            payload: prefsClone,
+        })
+    }
+}
 
 export function handleDragEnd(source, destination) {
     return (dispatch) => {
@@ -77,8 +93,8 @@ export function handleDragEnd(source, destination) {
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case SET_PREFERENCE:
-            return { ...state, preferences: action.payload }
+        case SET_PREF:
+            return { ...state, prefs: action.payload }
         default:
             return state;
     }

@@ -18,6 +18,7 @@ export const modalType = {
     editEvent: 'modalType/edit-event',
     editToast: 'modalType/edit-toast',
     editPriority: 'modalType/edit-priority',
+    removePriorityRow: 'modalType/remove-priority-row',
     assignVar: 'modalType/assign-var',
     editString: 'modalType/edit-string',
     pickCharacterImage: 'modalType/pick-character-image',

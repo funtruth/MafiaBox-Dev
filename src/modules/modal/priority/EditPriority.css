@@ -7,8 +7,8 @@
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
     cursor: pointer;
     margin-right: 10px;
-    margin-top: 6px;
-    margin-bottom: 4px;
+    margin-top: 5px;
+    margin-bottom: 6px;
     white-space: nowrap;
 }
 
@@ -18,7 +18,7 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    padding: 8px 10px;
+    padding: 2px 10px;
 }
 
 .priority-row-handle {
@@ -27,14 +27,13 @@
     align-items: center;
     justify-content: center;
     cursor: grab;
-    padding: 8px 2px;
+    padding: 10px 2px;
 }
 
 .priority-row-options {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 4px 8px;
 }
 
 .priority-row {

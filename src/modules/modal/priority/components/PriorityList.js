@@ -4,13 +4,13 @@ import { SortableContainer, SortableHandle, SortableElement } from 'react-sortab
 import PriorityRowAdd from './PriorityRowAdd'
 import PriorityRoleDrop from './PriorityRoleDrop';
 import PriorityRoleDrag from './PriorityRoleDrag';
-import PriorityListOptions from './PriorityRowOptions'
+import PriorityRowOptions from './PriorityRowOptions'
 
 const PriorityListHandle = SortableHandle((props) => <PriorityRowAdd {...props}/>)
 
 const PriorityListItem = SortableElement((props) => {
     const { items, index, switched, pageKey, storyKey } = props
-
+    //TODO move the switch logic into here, so we can show a component that says ...+5 other roles
     return (
         <div key={index} className="priority-row">
             <PriorityListHandle/>
@@ -27,16 +27,16 @@ const PriorityListItem = SortableElement((props) => {
                     />
                 ))}
             </PriorityRoleDrop>
-            <PriorityListOptions {...props} index={index}/>
+            <PriorityRowOptions {...props} index={index}/>
         </div>
     )
 })
 
 export default SortableContainer((props) => {
-    const { items } = props
+    const { workspace } = props
     return (
         <div style={{ maxHeight: '70vh', overflow: 'auto' }}>
-            {items.map((list, index) => (
+            {workspace.map((list, index) => (
                 <PriorityListItem {...props} key={index} items={list} index={index}/>
             ))}
         </div>
