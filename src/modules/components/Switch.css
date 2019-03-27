@@ -1,0 +1,51 @@
+.--switch {
+    --height: 24px;
+    --width: 40px;
+    --border: 1px;
+}
+
+.--switch {
+    position: relative;
+    border-radius: calc(var(--height) * 2);
+    border: solid 1px #282b30;
+    border-width: var(--border);
+    flex-shrink: 0;
+    height: var(--height);
+    transition: background-color 250ms cubic-bezier(0.25, 0.375, 0.1, 0.975),
+        border-color 250ms cubic-bezier(0.25, 0.375, 0.1, 0.975);
+    width: var(--width);
+}
+
+.--switch-on {
+    background-color: #282b30;
+}
+.--switch-off {
+    background-color: #424650;
+}
+
+.--switch-input {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+}
+
+.--switch-slider {
+    position: absolute;
+    border: solid 1px #282b30;
+    border-width: 1px;
+    height: var(--height);
+    margin: -1px;
+    width: var(--height);
+    border-radius: calc(var(--height) * 2);
+}
+
+.--switch-slider-right {
+    right: 0;
+    background-color: #ccc;
+}
+.--switch-slider-left {
+    left: 0;
+    background-color: #aaa;
+}

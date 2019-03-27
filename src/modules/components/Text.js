@@ -49,7 +49,7 @@ export default function Text(props) {
         className = "",
         size = 'medium',
         color = '#fff',
-        styles,
+        style,
     } = props
 
     const textStyle = {
@@ -60,7 +60,7 @@ export default function Text(props) {
         alignSelf: getAlign(align),
         paddingBottom: getPaddingBottom(size),
         color: getColor(color),
-        ...styles,
+        ...style,
     }
 
     const classes = [

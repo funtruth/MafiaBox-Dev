@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { modalType } from '../../modal/types';
 
 import { showModal } from '../../modal/ModalReducer'
-import { rolePrioritySort } from '../FieldReducer'
+import { sortPriorities } from '../FieldReducer'
 
 import {
     Body,
@@ -25,12 +25,10 @@ function PriorityField(props) {
     const { fieldKey, path, value, pageRepo } = props
 
     let handleClick = () => {
-        const rolesByPrio = rolePrioritySort(pageRepo)
         props.showModal(modalType.editPriority, {
             fieldKey,
             path,
-            attach: rolesByPrio,
-            _attach: rolesByPrio,
+            attach: sortPriorities(pageRepo),
         })
     }
 

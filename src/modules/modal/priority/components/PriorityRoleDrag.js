@@ -18,7 +18,7 @@ const itemSource = {
 }
 
 function PriorityRoleDrag(props) {
-    const { item, pageKey, connectDragSource } = props
+    const { item, switched, pageKey, storyKey, connectDragSource } = props
 
     const itemStyle = {
         color: pageKey === item.pageKey ? '#fff' : '#d6d6d6',
@@ -27,6 +27,8 @@ function PriorityRoleDrag(props) {
     useEffect(() => {
         console.log('item mounting, add fadeIn', item)
     }, [])
+
+    if (!switched && item.storyType !== storyKey) return null
 
     return connectDragSource(
         <div className="priority-role-drag" style={itemStyle}>

@@ -9,7 +9,7 @@ import PriorityListOptions from './PriorityRowOptions'
 const PriorityListHandle = SortableHandle((props) => <PriorityRowAdd {...props}/>)
 
 const PriorityListItem = SortableElement((props) => {
-    const { items, index, pageKey } = props
+    const { items, index, switched, pageKey, storyKey } = props
 
     return (
         <div key={index} className="priority-row">
@@ -19,6 +19,8 @@ const PriorityListItem = SortableElement((props) => {
                     <PriorityRoleDrag
                         key={item.pageKey}
                         item={item}
+                        storyKey={storyKey}
+                        switched={switched}
                         pageKey={pageKey}
                         yIndex={index}
                         xIndex={xIndex}
@@ -33,7 +35,7 @@ const PriorityListItem = SortableElement((props) => {
 export default SortableContainer((props) => {
     const { items } = props
     return (
-        <div>
+        <div style={{ maxHeight: '70vh', overflow: 'auto' }}>
             {items.map((list, index) => (
                 <PriorityListItem {...props} key={index} items={list} index={index}/>
             ))}

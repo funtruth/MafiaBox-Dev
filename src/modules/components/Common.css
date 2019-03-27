@@ -2,6 +2,10 @@
     box-shadow: 0 0 0 4px #778AA688;
     outline: 0;
 }
+.accessibilityOutlineFocus {
+    box-shadow: 0 0 0 4px #778AA688;
+    outline: 0;
+}
 
 .--text-underline:hover {
     text-decoration: underline;

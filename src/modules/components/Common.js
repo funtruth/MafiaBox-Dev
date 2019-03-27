@@ -7,6 +7,7 @@ import Header from './Header'
 import Icon from './Icon'
 import Separator from './Separator'
 import Text from './Text'
+import Switch from './Switch'
 
 export {
     Body,
@@ -16,4 +17,5 @@ export {
     Icon,
     Separator,
     Text,
+    Switch,
 }

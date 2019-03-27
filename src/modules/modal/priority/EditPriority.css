@@ -32,10 +32,9 @@
 
 .priority-row-options {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 4px 12px;
+    padding: 4px 8px;
 }
 
 .priority-row {
@@ -45,4 +44,13 @@
     background-color: #363940;
     border: 1px solid #464646;
     z-index: 2;
+}
+
+.priority-row .priority-row-options .hovering {
+    display: none;
+}
+.priority-row:hover .priority-row-options .hovering {
+    display: flex;
+    animation: fadein 0.4s;
+    -webkit-animation: fadein 0.4s;
 }

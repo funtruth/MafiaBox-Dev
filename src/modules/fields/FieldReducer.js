@@ -236,7 +236,7 @@ export function moveLogic(pageKey, fieldKey, origin, startIndex, endIndex) {
 }
 
 //Role priority sort
-export function rolePrioritySort(pageRepo) {
+export function sortPriorities(pageRepo) {
     return _(pageRepo)
         .filter(i => i && i.boardType === _boardType.roles.key)
         .groupBy(i => i.priority)
