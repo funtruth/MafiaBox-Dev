@@ -18,6 +18,7 @@ function PatchView(props) {
     const areStories = !!stories
 
     const onSortEnd = ({oldIndex, newIndex}) => {
+        if (oldIndex === newIndex) return;
         props.moveStory(boardType.roles.key, oldIndex, newIndex)
     }
 

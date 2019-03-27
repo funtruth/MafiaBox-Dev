@@ -7,7 +7,8 @@
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
     cursor: pointer;
     margin-right: 10px;
-    margin-bottom: 10px;
+    margin-top: 6px;
+    margin-bottom: 4px;
     white-space: nowrap;
 }
 
@@ -17,26 +18,32 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    padding: 12px 16px;
+    padding: 8px 16px;
 }
 
 .priority-gutter-add {
-    font: 600 18px Segoe UI;
-    color: #666;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     border-right: 2px solid #464646;
+    cursor: grab;
+    position: relative;
 }
 
-.priority-icon {
-    cursor: pointer;
+.priority-row .priority-gutter-add .hovering {
+    display: none;
+    animation: fadein 0.4s;
+    -webkit-animation: fadein 0.4s;
 }
-.priority-icon:hover {
-    color: #bbb;
+.priority-row:hover .priority-gutter-add .hovering {
+    display: block;
 }
 
 .priority-row {
     display: flex;
     flex-direction: row;
-    border-top: 2px solid #464646;
+    border-radius: 2px;
+    background-color: #363940;
+    border: 1px solid #464646;
+    z-index: 2;
 }

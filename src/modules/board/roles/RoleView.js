@@ -23,10 +23,12 @@ function RoleView(props) {
     }
 
     const onDevEnd = ({oldIndex, newIndex}) => {
+        if (oldIndex === newIndex) return;
         props.movePageWithinMap(storyKey, oldIndex, newIndex)
     }
 
     const onPubEnd = ({oldIndex, newIndex}) => {
+        if (oldIndex === newIndex) return;
         props.movePageWithinMap(publishKey, oldIndex, newIndex)
     }
 

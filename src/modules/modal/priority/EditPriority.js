@@ -1,5 +1,6 @@
 import React from 'react'
 import './EditPriority.css'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import { diffPriorities } from '../../page/PageReducer'
@@ -10,15 +11,14 @@ import {
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
-import PriorityRowAdd from './components/PriorityRowAdd'
-import PriorityRoleDrop from './components/PriorityRoleDrop';
-import PriorityRoleDrag from './components/PriorityRoleDrag';
+import PriorityList from './components/PriorityList'
 
 function EditPriority(props) {
     const { attach, pageKey } = props
     const workspace = attach
     
     const mainProps = {
+        pageKey,
         workspace,
         setWorkspace: props.setWorkspace,
     }
@@ -26,6 +26,17 @@ function EditPriority(props) {
     let handleSave = () => {
         props.diffPriorities(workspace)
         props.popModalBy(1)
+    }
+
+    const onSortEnd = ({oldIndex, newIndex}) => {
+        if (oldIndex === newIndex) return;
+        
+        let workspaceClone = _.cloneDeep(workspace)
+
+        const [removed] = workspaceClone.splice(oldIndex, 1)
+        workspaceClone.splice(newIndex, 0, removed)
+
+        props.setWorkspace(workspaceClone)
     }
     
     return (
@@ -38,22 +49,14 @@ function EditPriority(props) {
                 }}
             >
                 <Header text="Edit Priority"></Header>
-                {workspace.map((list, yIndex) => (
-                    <div key={yIndex} className="priority-row">
-                        <PriorityRowAdd {...mainProps} index={yIndex}/>
-                        <PriorityRoleDrop {...mainProps} index={yIndex}>
-                            {list.map((item, xIndex) => (
-                                <PriorityRoleDrag
-                                    key={item.pageKey}
-                                    item={item}
-                                    pageKey={pageKey}
-                                    yIndex={yIndex}
-                                    xIndex={xIndex}
-                                />
-                            ))}
-                        </PriorityRoleDrop>
-                    </div>
-                ))}
+                <PriorityList
+                    {...mainProps}
+                    items={workspace}
+                    onSortEnd={onSortEnd}
+                    transitionDuration={300}
+                    distance={2}
+                    useDragHandle={true}
+                />
                 <ModalOptions onSave={handleSave} onClose={props.close}/>
             </div>
         </ModalCheckSave>

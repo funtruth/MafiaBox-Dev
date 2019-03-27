@@ -25,10 +25,12 @@ function PriorityField(props) {
     const { fieldKey, path, value, pageRepo } = props
 
     let handleClick = () => {
+        const rolesByPrio = rolePrioritySort(pageRepo)
         props.showModal(modalType.editPriority, {
             fieldKey,
             path,
-            attach: rolePrioritySort(pageRepo),
+            attach: rolesByPrio,
+            _attach: rolesByPrio,
         })
     }
 

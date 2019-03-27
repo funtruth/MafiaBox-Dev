@@ -6,9 +6,6 @@ import {
     moveLogic,
     moveField,
     moveTagWithinField,
-    moveRoleWithinPrio,
-    moveRoleToOtherPrio,
-    moveRoleToEmpty,
 } from '../fields/FieldReducer'
 
 const initialState = {
@@ -65,28 +62,6 @@ export function handleDragEnd(source, destination) {
                     ))
                 } else {
                     dispatch(movePageToOtherMap(
-                        sources[1],
-                        dests[1],
-                        source.index,
-                        destination.index,
-                    ))
-                }
-                break
-            case droppableType.priority:
-                if (dests[0] === droppableType.priorityNew) {
-                    dispatch(moveRoleToEmpty(
-                        parseInt(sources[1]),
-                        parseInt(dests[1]),
-                        source.index,
-                    ))
-                } else if (sources[1] === dests[1]) {
-                    dispatch(moveRoleWithinPrio(
-                        sources[1],
-                        source.index,
-                        destination.index,
-                    ))
-                } else {
-                    dispatch(moveRoleToOtherPrio(
                         sources[1],
                         dests[1],
                         source.index,

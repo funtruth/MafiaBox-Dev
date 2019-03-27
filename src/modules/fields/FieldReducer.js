@@ -6,7 +6,6 @@ import { fieldType, boardType as _boardType } from './defaults'
 import { initFieldRepo } from './defaults'
 
 import { updateRepo } from '../page/PageReducer'
-import { updateTopModal } from '../modal/ModalReducer'
 
 const initialState = {
     fieldRepo: initFieldRepo,
@@ -243,51 +242,6 @@ export function rolePrioritySort(pageRepo) {
         .groupBy(i => i.priority)
         .sortBy((i, k) => k)
         .value()
-}
-
-export function moveRoleWithinPrio(prio, startIndex, endIndex) {
-    return (dispatch, getState) => {
-        const { modalKeys } = getState().modal
-        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
-
-        const [removed] = attachClone[prio].splice(startIndex, 1)
-        attachClone[prio].splice(endIndex, 0, removed)
-        
-        dispatch(updateTopModal(
-            ['attach'],
-            attachClone,
-        ))
-    }
-}
-
-export function moveRoleToOtherPrio(startPrio, endPrio, startIndex, endIndex) {
-    return (dispatch, getState) => {
-        const { modalKeys } = getState().modal
-        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
-
-        const [removed] = attachClone[startPrio].splice(startIndex, 1)
-        attachClone[endPrio].splice(endIndex, 0, removed)
-        
-        dispatch(updateTopModal(
-            ['attach'],
-            attachClone,
-        ))
-    }
-}
-
-export function moveRoleToEmpty(startPrio, endPrio, startIndex) {
-    return (dispatch, getState) => {
-        const { modalKeys } = getState().modal
-        let attachClone = _.cloneDeep(modalKeys[modalKeys.length - 1].attach)
-
-        const [removed] = attachClone[startPrio].splice(startIndex, 1)
-        attachClone.splice(endPrio + 1, 0, [removed])
-
-        dispatch(updateTopModal(
-            ['attach'],
-            attachClone,
-        ))
-    }
 }
 
 export default (state = initialState, action) => {
