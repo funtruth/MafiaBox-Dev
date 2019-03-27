@@ -4,6 +4,7 @@ import { SortableContainer, SortableHandle, SortableElement } from 'react-sortab
 import PriorityRowAdd from './PriorityRowAdd'
 import PriorityRoleDrop from './PriorityRoleDrop';
 import PriorityRoleDrag from './PriorityRoleDrag';
+import PriorityListOptions from './PriorityRowOptions'
 
 const PriorityListHandle = SortableHandle((props) => <PriorityRowAdd {...props}/>)
 
@@ -12,7 +13,7 @@ const PriorityListItem = SortableElement((props) => {
 
     return (
         <div key={index} className="priority-row">
-            <PriorityListHandle {...props} index={index}/>
+            <PriorityListHandle/>
             <PriorityRoleDrop {...props} index={index}>
                 {items.map((item, xIndex) => (
                     <PriorityRoleDrag
@@ -24,13 +25,13 @@ const PriorityListItem = SortableElement((props) => {
                     />
                 ))}
             </PriorityRoleDrop>
+            <PriorityListOptions {...props} index={index}/>
         </div>
     )
 })
 
 export default SortableContainer((props) => {
     const { items } = props
-
     return (
         <div>
             {items.map((list, index) => (

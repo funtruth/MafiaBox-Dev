@@ -1,3 +1,6 @@
+.--icon-hover {
+    cursor: pointer;
+}
 .--icon-hover:hover {
     color: #fff;
 }

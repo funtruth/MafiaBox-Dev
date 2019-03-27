@@ -18,25 +18,24 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    padding: 8px 16px;
+    padding: 8px 10px;
 }
 
-.priority-gutter-add {
+.priority-row-handle {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    border-right: 2px solid #464646;
     cursor: grab;
-    position: relative;
+    padding: 8px 2px;
 }
 
-.priority-row .priority-gutter-add .hovering {
-    display: none;
-    animation: fadein 0.4s;
-    -webkit-animation: fadein 0.4s;
-}
-.priority-row:hover .priority-gutter-add .hovering {
-    display: block;
+.priority-row-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
 }
 
 .priority-row {

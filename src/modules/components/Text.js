@@ -25,7 +25,7 @@ const getPaddingBottom = (size) => {
         case 's':           return 2
         case 'l':           return 3
         case 'xl':          return 4
-        case 'xxl':         return 5
+        case 'xxl':         return 4
         default:            return 2 //'m'
     }
 }
