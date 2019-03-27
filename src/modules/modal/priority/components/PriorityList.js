@@ -7,27 +7,31 @@ import PriorityRoleDrag from './PriorityRoleDrag';
 import PriorityRowOptions from './PriorityRowOptions'
 
 const PriorityListHandle = SortableHandle((props) => <PriorityRowAdd {...props}/>)
+const PriorityListSpace = SortableHandle(() => <div className="priority-row-space"></div>)
 
 const PriorityListItem = SortableElement((props) => {
     const { items, index, switched, pageKey, storyKey } = props
     //TODO move the switch logic into here, so we can show a component that says ...+5 other roles
     return (
-        <div key={index} className="priority-row">
-            <PriorityListHandle/>
+        <div style={{zIndex: 2}}>
             <PriorityRoleDrop {...props} index={index}>
-                {items.map((item, xIndex) => (
-                    <PriorityRoleDrag
-                        key={item.pageKey}
-                        item={item}
-                        storyKey={storyKey}
-                        switched={switched}
-                        pageKey={pageKey}
-                        yIndex={index}
-                        xIndex={xIndex}
-                    />
-                ))}
+                <PriorityListHandle/>
+                <div className="row">
+                    {items.map((item, xIndex) => (
+                        <PriorityRoleDrag
+                            key={item.pageKey}
+                            item={item}
+                            storyKey={storyKey}
+                            switched={switched}
+                            pageKey={pageKey}
+                            yIndex={index}
+                            xIndex={xIndex}
+                        />
+                    ))}
+                </div>
+                <PriorityRowOptions {...props} index={index}/>
+                <PriorityListSpace/>
             </PriorityRoleDrop>
-            <PriorityRowOptions {...props} index={index}/>
         </div>
     )
 })

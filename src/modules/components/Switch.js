@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Switch.css'
 
 export default function Switch(props) {
@@ -7,10 +7,6 @@ export default function Switch(props) {
         style,
     } = props
 
-    const [focus, setFocus] = useState(false)
-
-    const handleBlur = () => setFocus(false);
-    const handleFocus = () => setFocus(true);
     const handleChange = (event) => {
         const { checked } = event.target;
         if (props.onChange) {
@@ -20,7 +16,6 @@ export default function Switch(props) {
 
     const switchClasses = [
         '--switch',
-        focus ? 'accessibilityOutlineFocus' : '',
         `--switch-${switched ? 'on' : 'off'}`,
     ].join(" ")
 
@@ -38,9 +33,7 @@ export default function Switch(props) {
             <input
                 className={inputClasses}
                 checked={switched}
-                onBlur={handleBlur}
                 onChange={handleChange}
-                onFocus={handleFocus}
                 type="checkbox"
             />
             <div className={sliderClasses}/>

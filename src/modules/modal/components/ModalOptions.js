@@ -8,7 +8,8 @@ import {
 export default function ModalOptions(props) {
     return (
         <Footer align="r">
-            <Button theme="grey" size="s" onClick={props.onSave}>Save</Button>
+            {props.children}
+            <Button theme="grey" size="m" onClick={props.onSave}>Save</Button>
             <Button theme="clear" size="s" onClick={props.onClose} style={{marginLeft: 6}}>Cancel</Button>
         </Footer>
     )

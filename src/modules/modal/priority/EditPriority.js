@@ -3,6 +3,8 @@ import './EditPriority.css'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
+import { prefType } from '../../app/PrefKeys'
+
 import { diffPriorities } from '../../page/PageReducer'
 import { setPref } from '../../app/AppReducer'
 
@@ -15,8 +17,6 @@ import {
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
 import PriorityList from './components/PriorityList'
-
-const EDIT_PRIO_SWITCH = 'edit-prio-switch'
 
 function EditPriority(props) {
     const { attach, pageKey, pageRepo, prefs } = props
@@ -35,7 +35,7 @@ function EditPriority(props) {
 
     let handleSave = () => {
         props.diffPriorities(workspace)
-        props.popModalBy(1)
+        props.close()
     }
 
     const onSortEnd = ({oldIndex, newIndex}) => {
@@ -49,11 +49,11 @@ function EditPriority(props) {
         props.setWorkspace(workspaceClone)
     }
 
-    const prefValue = prefs[EDIT_PRIO_SWITCH]
+    const prefValue = prefs[prefType.EDIT_PRIO_SWITCH]
     const [switched, setSwitched] = useState(prefValue || false)
     const handleSwitch = () => {
         setSwitched(!switched)
-        props.setPref(EDIT_PRIO_SWITCH, !switched)
+        props.setPref(prefType.EDIT_PRIO_SWITCH, !switched)
     }
     
     return (
@@ -65,11 +65,7 @@ function EditPriority(props) {
                     width: '75vw',
                 }}
             >
-                <Header text="Edit Priority">
-                    <Switch switched={switched} onChange={handleSwitch} style={{marginLeft: 12}}/>
-                    <Text size="m" color="grey" align="c" style={{marginLeft: 12}}>
-                        Show roles from all patches
-                    </Text>
+                <Header text="Edit Priority" onClose={props.close}>
                 </Header>
                 <PriorityList
                     {...mainProps}
@@ -79,7 +75,12 @@ function EditPriority(props) {
                     distance={2}
                     useDragHandle={true}
                 />
-                <ModalOptions onSave={handleSave} onClose={props.close}/>
+                <ModalOptions onSave={handleSave} onClose={props.close}>
+                    <Switch switched={switched} onChange={handleSwitch}/>
+                    <Text size="m" color="grey" align="c" style={{marginLeft: 12, marginRight: 'auto'}}>
+                        Show roles from all patches
+                    </Text>
+                </ModalOptions>
             </div>
         </ModalCheckSave>
     )

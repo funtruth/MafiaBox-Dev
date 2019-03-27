@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from './Common';
+import { Text, Icon } from './Common';
 
 const getAlign = (align) => {
     switch(align) {
@@ -38,7 +38,14 @@ export default function Footer(props) {
         >
             <Text size="xxl" bold color="lightgrey">{text}</Text>
             {children}
-            {onClose && <i className="mdi mdi-close"></i>}
+            {onClose &&
+                <Icon
+                    className="mdi mdi-close"
+                    style={{marginLeft: 'auto'}}
+                    size="xxl" color="lightgrey"
+                    hover onClick={event => onClose && onClose({ event })}
+                />
+            }
         </div>
     )
 }
