@@ -19,16 +19,16 @@ class PickEventVarProp extends React.Component{
         const { startIndex, endIndex } = range
         
         this.props.updatePage({
-            string: `${string.slice(0, startIndex)}${prefix}.${item}${string.slice(endIndex)}`
+            string: `${string.slice(0, startIndex)}${prefix}_${item}${string.slice(endIndex)}`
         })
         this.props.showDropdown()
     }
 
     _renderItem = (item) => {
         const { currentValue, prefix, updateRef } = this.props
-        const chosen = typeof currentValue === 'string' && currentValue === `${prefix}.${item}`
+        const chosen = typeof currentValue === 'string' && currentValue === `${prefix}_${item}`
         
-        const vars = proptool.getSubfields(`${prefix}.${item}`, updateRef)
+        const vars = proptool.getSubfields(`${prefix}_${item}`, updateRef)
         const isObject = vars.length > 0
         
         if (isObject) {
@@ -38,7 +38,7 @@ class PickEventVarProp extends React.Component{
                     key={item}
                     dropdownType={dropdownType.pickEventVarProp}
                     params={{
-                        prefix: `${prefix}.${item}`,
+                        prefix: `${prefix}_${item}`,
                     }}
                     text={item}
                 />
@@ -66,7 +66,7 @@ class PickEventVarProp extends React.Component{
         return (
             <div className="drop-down-scrollable">
                 {subfields.length ?
-                    subfields[0].subfield === '$' ?
+                    subfields[0].subfield === '@' ?
                         <>
                             <DropTitle>uids</DropTitle>
                             {uids.map(item => this._renderItem(`${item.key}`))}

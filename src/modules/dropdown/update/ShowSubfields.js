@@ -5,31 +5,29 @@ import * as proptool from '../../logic/proptool'
 import DropParent from '../components/DropParent';
 import DropTitle from '../components/DropTitle'
 
-class ShowSubfields extends React.Component{
-    render() {
-        const { subfieldKey, updateRef } = this.props
-        const items = proptool.getSubfields(subfieldKey, updateRef)
-        
-        return (
-            <div>
-                <DropTitle>subfields</DropTitle>
-                {items.map(item => {
-                    return (
-                        <DropParent
-                            {...this.props}
-                            key={item.subfield}
-                            dropdownType={item.dropdown}
-                            params={{
-                                subfieldKey: `${subfieldKey}.${item.subfield}`,
-                                subpath: [`${subfieldKey}.${item.subfield}`],
-                            }}
-                            text={item.subfield}
-                        />
-                    )
-                })}
-            </div>
-        )
-    }
+function ShowSubfields(props) {
+    const { subfieldKey, updateRef } = props
+    const items = proptool.getSubfields(subfieldKey, updateRef)
+    
+    return (
+        <>
+            <DropTitle>subfields</DropTitle>
+            {items.map(item => {
+                return (
+                    <DropParent
+                        {...props}
+                        key={item.subfield}
+                        dropdownType={item.dropdown}
+                        params={{
+                            subfieldKey: `${subfieldKey}_${item.subfield}`,
+                            subpath: [`${subfieldKey}_${item.subfield}`],
+                        }}
+                        text={item.subfield}
+                    />
+                )
+            })}
+        </>
+    )
 }
 
 export default connect(

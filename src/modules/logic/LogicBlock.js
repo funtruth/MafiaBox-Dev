@@ -8,6 +8,7 @@ import { updateVariables } from './LogicReducer'
 
 //import LogicErrors from './components/LogicErrors'
 import LogicType from './components/LogicType';
+import LogicAddBelow from './components/LogicAddBelow'
 import LogicOptions from './components/LogicOptions'
 import LogicPanels from './components/LogicPanels';
 import LogicDetails from './components/LogicDetails';
@@ -35,13 +36,12 @@ function LogicBlock(props) {
         >
             <div className="row-nowrap" style={{ paddingLeft: 4 }}>
                 <LogicType {...props}/>
-                <div>
-                    <div className="row">
-                        <LogicPanels {...props}/>
-                        <LogicOptions {...props}/>
-                    </div>
-                    <LogicDetails {...props} path={[...path, 'data']}/>
-                </div>
+                <LogicPanels {...props}/>
+                <LogicOptions {...props}/>
+            </div>
+            <div className="row">
+                <LogicAddBelow {...props}/>
+                <LogicDetails {...props} path={[...path, 'data']}/>
             </div>
             {/*<LogicErrors errors={errors}/>*/}
             <ReactTooltip place="right"/>

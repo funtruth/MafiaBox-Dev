@@ -2,16 +2,16 @@ import _ from 'lodash'
 
 //returns properties of prefix existing in updateRef
 export function getSubfields(prefix, updateRef) {
-    const parts = prefix.split('.').filter(i => i !== "")
+    const parts = prefix.split('_').filter(i => i !== "")
     let fields = []
     for (var key in updateRef) {
-        const newParts = key.split('.')
+        const newParts = key.split('_')
         let match = true
 
         if (newParts.length <= parts.length) continue
 
         for (var i=0; i<parts.length; i++) {
-            if (newParts[i] !== parts[i] && newParts[i] !== '$') {
+            if (newParts[i] !== parts[i] && newParts[i] !== '@') {
                 match = false
                 break
             }
@@ -30,16 +30,16 @@ export function getSubfields(prefix, updateRef) {
 
 //returns the proper update config to LogicExpandable using prefix
 export function getUpdateConfig(prefix, updateRef) {
-    const parts = prefix.split('.')
+    const parts = prefix.split('_')
 
     for (var ref in updateRef) {
-        const refParts = ref.split('.')
+        const refParts = ref.split('_')
 
         if (parts.length !== refParts.length) continue
 
         let match = true
         for (var i=0; i<refParts.length; i++) {
-            if (parts[i] !== refParts[i] && refParts[i] !== '$') {
+            if (parts[i] !== refParts[i] && refParts[i] !== '@') {
                 match = false
                 break
             }

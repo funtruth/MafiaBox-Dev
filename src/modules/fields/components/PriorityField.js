@@ -22,7 +22,7 @@ const formatNumber = (v) => {
 }
 
 function PriorityField(props) {
-    const { fieldKey, path, value, pageRepo } = props
+    const { fieldKey, value, pageRepo } = props
 
     let handleClick = () => {
         props.showModal(modalType.editPriority, {

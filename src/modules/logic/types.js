@@ -344,6 +344,13 @@ export const variableType = {
         subtype: 'object',
         declarable: false,
     },
+    rssObject: {
+        key: 'rssObject',
+        title: 'Room Snapshot',
+        icon: 'mdi mdi-film',
+        subtype: 'object',
+        declarable: false,
+    },
 }
 
 export const returnType = {

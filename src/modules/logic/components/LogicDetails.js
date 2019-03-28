@@ -41,14 +41,16 @@ export default function LogicDetails(props) {
             )
         case logicType.update.key:
             return (
-                proptool.getSubfields('', updateRef).map((item, index) => (
-                    <LogicExpandable
-                        {...props}
-                        key={index}
-                        property={item.subfield}
-                        prefix={item.subfield}
-                    />
-                ))
+                <div className="column">
+                    {proptool.getSubfields('', updateRef).map((item, index) => (
+                        <LogicExpandable
+                            {...props}
+                            key={index}
+                            property={item.subfield}
+                            prefix={item.subfield}
+                        />
+                    ))}
+                </div>
             )
         default:
             return null

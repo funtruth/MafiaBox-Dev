@@ -1,9 +1,12 @@
 import React from 'react'
 
 import { dropdownType } from '../../dropdown/types'
-import { logicType, operatorType, DEFAULT_LOGIC } from '../types'
+import { logicType, operatorType } from '../types'
 
-import Icon from '../../components/Icon';
+import {
+    Icon,
+    Text,
+ } from '../../components/Common';
 
 export default function LogicType(props) {
     const { value, path, subpath, updateSource } = props
@@ -15,30 +18,31 @@ export default function LogicType(props) {
     const item = selectedOperator ?
         operatorType[selectedOperator]
         :(selectedLogic ? logicType[selectedLogic] : {})
-    
-    let handleAdd = () => {
-        props.updatePage([...path, 'down'], {
-            ...DEFAULT_LOGIC,
-            down: value.down,
-        })
-    }
 
+    const {
+        title,
+        icon,
+        color = '#767676',
+    } = item
+
+    //TODO add/color the keyword and icon to make UX more readable
     return (
-        <div className="column" style={{alignItems: 'center'}}>
-            <i 
-                className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
-                menu-type={dropdownType.pickLogic}
-                app-onclick-props={JSON.stringify({
-                    attach: value,
-                    updateSource,
-                    path,
-                    subpath,
-                })}
-                style={{
-                    borderLeft: `4px solid ${item.color || '#767676'}`,
-                }}
-            />
-            <Icon className="mdi mdi-server-plus" size="l" color="grey" hover onClick={handleAdd}></Icon>
+        <div
+            className="logic-label app-onclick"
+            menu-type={dropdownType.pickLogic}
+            app-onclick-props={JSON.stringify({
+                attach: value,
+                updateSource,
+                path,
+                subpath,
+            })}
+            style={{
+                color,
+                borderLeft: `4px solid ${color}`,
+            }}
+        >
+            <Icon className={`${icon || 'ion-md-create'}`}></Icon>
+            {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
         </div>
     )
 }

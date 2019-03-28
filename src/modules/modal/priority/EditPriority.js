@@ -21,7 +21,7 @@ import PriorityList from './components/PriorityList'
 function EditPriority(props) {
     const { attach, pageKey, pageRepo, prefs } = props
 
-    const [controlRepo] = useState(_.cloneDeep(attach))
+    //const [controlRepo] = useState(_.cloneDeep(attach))
     const [storyKey] = useState(pageRepo[pageKey].storyType)
     
     const workspace = attach

@@ -25,7 +25,7 @@ class PickUid extends React.Component{
 
     _renderItem = (item) => {
         const { attach, updateRef, subfieldKey } = this.props
-        const newKey = `${subfieldKey}.${item.key}`
+        const newKey = `${subfieldKey}_${item.key}`
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof selectedKey === 'string' && selectedKey === item.key
         
@@ -66,12 +66,12 @@ class PickUid extends React.Component{
         const fields = proptool.getSubfields(subfieldKey, this.props.updateRef)
         
         return (
-            <div>
+            <>
                 <DropTitle>uids</DropTitle>
                 {uids.map(this._renderItem)}
                 <DropEmpty>no UIDS found</DropEmpty>
                 {!fields.length && <UpdateType {...this.props}/>}
-            </div>
+            </>
         )
     }
 }

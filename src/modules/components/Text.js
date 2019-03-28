@@ -19,14 +19,14 @@ const getFontSize = (size) => {
     }
 }
 
-const getPaddingBottom = (size) => {
+const getMarginTop = (size) => {
     switch(size) {
-        case 'xs':          return 2
-        case 's':           return 2
-        case 'l':           return 3
-        case 'xl':          return 4
-        case 'xxl':         return 4
-        default:            return 2 //'m'
+        case 'xs':          return -1
+        case 's':           return -2
+        case 'l':           return -3
+        case 'xl':          return -4
+        case 'xxl':         return -4
+        default:            return -2 //'m'
     }
 }
 
@@ -58,7 +58,7 @@ export default function Text(props) {
         fontFamily: 'Segoe UI',
         letterSpacing: -0.4,
         alignSelf: getAlign(align),
-        paddingBottom: getPaddingBottom(size),
+        marginTop: getMarginTop(size),
         color: getColor(color),
         ...style,
     }

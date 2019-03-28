@@ -42,8 +42,6 @@ export default function LogicPanels(props) {
                             />
                         </div>
                     )
-                case operatorType.else.key:
-                    return <div className="logic-panel-disabled">N/A</div>
                 case operatorType.forin.key:
                     return (
                         <LogicPanel
@@ -53,11 +51,19 @@ export default function LogicPanels(props) {
                             dropdown={dropdownType.pickUidObject}
                         />
                     )
+                case operatorType.else.key:
                 default:
                     return null
             }
         case logicType.update.key:
-            return <div className="logic-panel-disabled">N/A</div>
+            return (
+                <LogicPanel
+                    {...props}
+                    placeholder="select logic ..."
+                    subfieldKey="rss"
+                    dropdown={dropdownType.showSubfields}
+                />
+            )
         case logicType.variable.key:
             return (
                 <LogicPanel

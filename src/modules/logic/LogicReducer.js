@@ -157,22 +157,22 @@ function declareOrAssign(data) {
 
 //replace variable properties from foo.$bar to foo[bar]
 export function convertPropertyFields(string) {
-    let parts = string.split('.')
+    let parts = string.split('_')
 
     for (var i=0; i<parts.length; i++) {
-        if (parts[i].charAt(0) === '$') {
+        if (parts[i].charAt(0) === '@') {
             parts[i] = `${parts[i]}]`
         }
     }
 
-    parts = parts.join('.').replace(/\$/g, '[').replace(/\.\[/g, '[')
+    parts = parts.join('_').replace(/\$/g, '[').replace(/\.\[/g, '[')
 
     return parts
 }
 
 //$user to ${user} without []'s
 export function convertString(string) {
-    return string.split(' ').map(c => c.charAt(0) === '$' ? `$\{${c.substr(1)}}` : c).join(' ')
+    return string.split(' ').map(c => c.charAt(0) === '@' ? `$\{${c.substr(1)}}` : c).join(' ')
 }
 
 //converts the variables in event text properly
@@ -199,7 +199,7 @@ function getCodeFromDataProp(obj = {}) {
                 case updateViewType.uid:
                     return obj.value.substr(1)
                 case updateViewType.variable:
-                    return `rss.${convertPropertyFields(applyAdjust(obj))}`
+                    return convertPropertyFields(applyAdjust(obj))
                 case updateViewType.staticVal:
                 case updateViewType.dynamicVal:
                     return updateType[obj.value].title
@@ -256,13 +256,13 @@ export function getUpdateCode(data) {
 
         if (info.update) {
             string = string.concat(
-                `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}`:i).join('/')}\`]=${convertValue(data, field)};`
+                `write.updates[\`${field.split('_').map(i => i.charAt(0) === '@' ? `\${${i.substring(1)}}`:i).join('/')}\`]=${convertValue(data, field)};`
             )
         }
         
         if (info.mutate) {
             string = string.concat(
-                `rss.${convertPropertyFields(field)}=${convertValue(data, field)};`
+                `${convertPropertyFields(field)}=${convertValue(data, field)};`
             )
         }
 
@@ -279,7 +279,7 @@ export function getUpdateCode(data) {
                 break
             case updateViewType.timer:
                 string = string.concat(
-                    `write.updates[\`${field.split('.').map(i => i.charAt(0) === '$' ? `\${${i.substring(1)}}` : i)
+                    `write.updates[\`${field.split('_').map(i => i.charAt(0) === '@' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=Date.now() + ${info.value};`)
                 break
             default:

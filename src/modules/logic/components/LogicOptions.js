@@ -1,16 +1,21 @@
 import React from 'react'
 
+import {
+    Icon
+} from '../../components/Common'
+
 export default function LogicOptions(props) {
     const { value, path } = props
-
-    let handleDelete = () => props.updatePage(path, value.down)
+    const handleDelete = () => props.updatePage(path, value.down)
 
     return (
         <div>
-            <i 
-                className="logic-option mdi mdi-window-close"
-                onClick={handleDelete}
-            />
+            <Icon
+                className="mdi mdi-window-close"
+                style={{padding: 4}}
+                size="m" color="grey"
+                hover onClick={handleDelete}
+            ></Icon>
         </div>
     )
 }

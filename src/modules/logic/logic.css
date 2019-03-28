@@ -1,7 +1,6 @@
 .logic-label {
-    padding: 4px 4px;
+    padding: 4px 8px;
     height: 1.4em;
-    width: 1.6em;
     pointer-events: auto;
     display: flex;
     justify-content: center;
@@ -9,10 +8,17 @@
     letter-spacing: 0.6px;
     cursor: pointer;
     color: #fff;
-    background-color: rgba(40, 43, 48,1);
+    background-color: rgba(40, 43, 48, 1);
 }
 .logic-label:hover {
     background-color: #424650;
+}
+
+.logic-panel-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40px;
 }
 
 .logic-panel-disabled {

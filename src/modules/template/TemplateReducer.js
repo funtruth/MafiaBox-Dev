@@ -3,8 +3,17 @@ import { variableType } from '../logic/types'
 
 const initialState = {
     updateRef: {
-        'gameState': {
-            key: 'gameState',
+        'rss': {
+            key: 'rss',
+            subfield: 'rss',
+            dropdown: dropdownType.showSubfields,
+            variableTypes: [
+                variableType.object,
+                variableType.rssObject,
+            ],
+        },
+        'rss_gameState': {
+            key: 'rss_gameState',
             subfield: 'gameState',
             dropdown: dropdownType.showSubfields,
             variableTypes: [
@@ -12,16 +21,16 @@ const initialState = {
                 variableType.rss.key,
             ],
         },
-        'gameState.phase': {
-            key: 'gameState.phase',
+        'rss_gameState_phase': {
+            key: 'rss_gameState_phase',
             subfield: 'phase',
             dropdown: dropdownType.pickPhase,
             variableTypes: [
                 variableType.string.key,
             ],
         },
-        'gameState.counter': {
-            key: 'gameState.counter',
+        'rss_gameState_counter': {
+            key: 'rss_gameState_counter',
             subfield: 'counter',
             dropdown: dropdownType.pickUpdate,
             update: true,
@@ -30,8 +39,8 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'gameState.veto': {
-            key: 'gameState.veto',
+        'rss_gameState_veto': {
+            key: 'rss_gameState_veto',
             subfield: 'veto',
             dropdown: dropdownType.pickUpdate,
             update: true,
@@ -40,8 +49,8 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'gameState.timer': {
-            key: 'gameState.timer',
+        'rss_gameState_timer': {
+            key: 'rss_gameState_timer',
             subfield: 'timer',
             dropdown: dropdownType.pickTimer,
             update: true,
@@ -50,8 +59,8 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'lobby': {
-            key: 'lobby',
+        'rss_lobby': {
+            key: 'rss_lobby',
             subfield: 'lobby',
             dropdown: dropdownType.pickUid,
             variableTypes: [
@@ -60,24 +69,24 @@ const initialState = {
                 variableType.rss.key,
             ],
         },
-        'lobby.$': {
-            key: 'lobby.$',
-            subfield: '$',
+        'rss_lobby_@': {
+            key: 'rss_lobby_@',
+            subfield: '@',
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'lobby.$.role': {
-            key: 'lobby.$.role',
+        'rss_lobby_@_role': {
+            key: 'rss_lobby_@_role',
             subfield: 'role',
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'lobby.$.role.roleId': {
-            key: 'lobby.$.role.roleId',
+        'rss_lobby_@_role_roleId': {
+            key: 'rss_lobby_@_role_roleId',
             subfield: 'roleId',
             dropdown: dropdownType.pickRole,
             update: true,
@@ -86,8 +95,8 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'lobby.$.role.team': {
-            key: 'lobby.$.role.team',
+        'rss_lobby_@_role_team': {
+            key: 'rss_lobby_@_role_team',
             subfield: 'team',
             dropdown: dropdownType.pickTeam, //TODO
             update: true,
@@ -96,8 +105,8 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'lobby.$.role.action': {
-            key: 'lobby.$.role.action',
+        'rss_lobby_@_role_action': {
+            key: 'rss_lobby_@_role_action',
             subfield: 'action',
             dropdown: dropdownType.pickRole,
             update: true,
@@ -106,8 +115,8 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'lobby.$.role.charges': {
-            key: 'lobby.$.role.charges',
+        'rss_lobby_@_role_charges': {
+            key: 'rss_lobby_@_role_charges',
             subfield: 'charges',
             dropdown: dropdownType.pickUpdate,
             update: true,
@@ -116,8 +125,8 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'lobby.$.role.suspicious': {
-            key: 'lobby.$.role.suspicious',
+        'rss_lobby_@_role_suspicious': {
+            key: 'rss_lobby_@_role_suspicious',
             subfield: 'suspicious',
             dropdown: dropdownType.pickBoolean,
             update: false,
@@ -127,8 +136,8 @@ const initialState = {
             ],
             tag: true,
         },
-        'lobby.$.role.focus': {
-            key: 'lobby.$.role.focus',
+        'rss_lobby_@_role_focus': {
+            key: 'rss_lobby_@_role_focus',
             subfield: 'focus',
             dropdown: dropdownType.pickBoolean,
             update: false,
@@ -138,8 +147,8 @@ const initialState = {
             ],
             tag: true,
         },
-        'lobby.$.role.sneak': {
-            key: 'lobby.$.role.sneak',
+        'rss_lobby_@_role_sneak': {
+            key: 'rss_lobby_@_role_sneak',
             subfield: 'sneak',
             dropdown: dropdownType.pickBoolean,
             update: false,
@@ -149,8 +158,8 @@ const initialState = {
             ],
             tag: true,
         },
-        'lobby.$.health': {
-            key: 'lobby.$.health',
+        'rss_lobby_@_health': {
+            key: 'rss_lobby_@_health',
             subfield: 'health',
             dropdown: dropdownType.pickHealth,
             update: true,
@@ -159,8 +168,8 @@ const initialState = {
                 variableType.object.key,
             ],
         },
-        'lobby.$.dead': {
-            key: 'lobby.$.dead',
+        'rss_lobby_@_dead': {
+            key: 'rss_lobby_@_dead',
             subfield: 'dead',
             dropdown: dropdownType.pickBoolean,
             update: true,
@@ -169,8 +178,8 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'lobby.$.king': {
-            key: 'lobby.$.king',
+        'rss_lobby_@_king': {
+            key: 'rss_lobby_@_king',
             subfield: 'king',
             dropdown: dropdownType.pickBoolean,
             update: true,
@@ -179,8 +188,8 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'lobby.$.clown': {
-            key: 'lobby.$.clown',
+        'rss_lobby_@_clown': {
+            key: 'rss_lobby_@_clown',
             subfield: 'clown',
             dropdown: dropdownType.pickBoolean,
             update: true,
@@ -189,25 +198,25 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'lobby.$.trigger': {
-            key: 'lobby.$.trigger',
+        'rss_lobby_@_trigger': {
+            key: 'rss_lobby_@_trigger',
             subfield: 'trigger',
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'lobby.$.trigger.$': {
-            key: 'lobby.$.trigger.$',
-            subfield: '$',
+        'rss_lobby_@_trigger_@': {
+            key: 'rss_lobby_@_trigger_@',
+            subfield: '@',
             dropdown: dropdownType.pickTrigger,
             mutate: true,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'choices': {
-            key: 'choices',
+        'rss_choices': {
+            key: 'rss_choices',
             subfield: 'choices',
             dropdown: dropdownType.pickUid,
             variableTypes: [
@@ -216,32 +225,33 @@ const initialState = {
                 variableType.rss.key,
             ],
         },
-        'choices.$': {
-            key: 'choices.$',
-            subfield: '$',
+        'rss_choices_@': {
+            key: 'rss_choices_@',
+            subfield: '@',
             dropdown: dropdownType.showSubfields,
             variableTypes: [
+                variableType.object.key,
                 variableType.uid.key,
             ],
         },
-        'choices.$.user': {
-            key: 'choices.$.user',
+        'rss_choices_@_user': {
+            key: 'rss_choices_@_user',
             subfield: 'user',
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'choices.$.target': {
-            key: 'choices.$.target',
+        'rss_choices_@_target': {
+            key: 'rss_choices_@_target',
             subfield: 'target',
             dropdown: dropdownType.pickChoice,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'choices.$.multitarget': {
-            key: 'choices.$.multitarget',
+        'rss_choices_@_multitarget': {
+            key: 'rss_choices_@_multitarget',
             subfield: 'multitarget',
             dropdown: dropdownType.pickUid,
             variableTypes: [
@@ -249,24 +259,24 @@ const initialState = {
                 variableType.uidObject.key,
             ],
         },
-        'choices.$.multitarget.$': {
-            key: 'choices.$.multitarget.$',
-            subfield: '$',
+        'rss_choices_@_multitarget_@': {
+            key: 'rss_choices_@_multitarget_@',
+            subfield: '@',
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.number.key,
             ],
         },
-        'choices.$.value': {
-            key: 'choices.$.value',
+        'rss_choices_@_value': {
+            key: 'rss_choices_@_value',
             subfield: 'value',
             dropdown: dropdownType.pickVar,
             variableTypes: [
                 variableType.number.key,
             ],
         },
-        'events': {
-            key: 'events',
+        'rss_events': {
+            key: 'rss_events',
             subfield: 'events',
             dropdown: dropdownType.pickEvent,
             variableTypes: [
