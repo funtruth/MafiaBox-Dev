@@ -14,7 +14,6 @@ import LogicDetails from './components/LogicDetails';
 
 function LogicBlock(props) {
     //const rng = helpers.genUID('rng')
-
     const { vars, path, value, indent, showBorderLeft } = props
     if (!value) return null
     
@@ -38,7 +37,7 @@ function LogicBlock(props) {
                 <LogicType {...props}/>
                 <div>
                     <div className="row">
-                        <LogicPanels {...props} path={[...path, 'data']}/>
+                        <LogicPanels {...props}/>
                         <LogicOptions {...props}/>
                     </div>
                     <LogicDetails {...props} path={[...path, 'data']}/>

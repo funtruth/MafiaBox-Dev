@@ -14,7 +14,7 @@ function SearchBoard(props) {
     let [searchText, setSearchText] = useState('')
     let [results, setResults] = useState([])
 
-    let fuse = new Fuse(_.filter(pageRepo, i => i.boardType === boardType), fuseType.searchBoard)
+    let fuse = new Fuse(_.filter(pageRepo, i => i && i.boardType === boardType), fuseType.searchBoard)
 
     let handleType = e => {
         setSearchText(e.target.value)

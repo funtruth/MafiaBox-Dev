@@ -3,6 +3,8 @@ import React from 'react'
 import { dropdownType } from '../../dropdown/types'
 import { logicType, operatorType, DEFAULT_LOGIC } from '../types'
 
+import Icon from '../../components/Icon';
+
 export default function LogicType(props) {
     const { value, path, subpath, updateSource } = props
     const {
@@ -22,7 +24,7 @@ export default function LogicType(props) {
     }
 
     return (
-        <div>
+        <div className="column" style={{alignItems: 'center'}}>
             <i 
                 className={`${item.icon || 'ion-md-create'} logic-label app-onclick`}
                 menu-type={dropdownType.pickLogic}
@@ -33,13 +35,10 @@ export default function LogicType(props) {
                     subpath,
                 })}
                 style={{
-                    backgroundColor: item.color || '#767676',
+                    borderLeft: `4px solid ${item.color || '#767676'}`,
                 }}
             />
-            <i 
-                className="logic-option mdi mdi-server-plus"
-                onClick={handleAdd}
-            />
+            <Icon className="mdi mdi-server-plus" size="l" color="grey" hover onClick={handleAdd}></Icon>
         </div>
     )
 }

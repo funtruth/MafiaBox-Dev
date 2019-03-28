@@ -34,7 +34,7 @@ class BoardLib extends React.Component{
         const { searchText } = this.state
 
         const boards = _(pageRepo)
-            .filter(i => i.boardType)
+            .filter(i => i && i.boardType)
             .groupBy(i => i.boardType)
             .value()
         

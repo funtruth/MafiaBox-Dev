@@ -43,7 +43,8 @@ export function updateVariables(logicInfo) {
             case logicType.operator.key:
                 switch(logicInfo.operatorType) {
                     case operatorType.forin.key:
-                        newVars = logicInfo.data.declare ? {[logicInfo.data.declare.key]: logicInfo.data.declare} : {}
+                        newVars = logicInfo.data && logicInfo.data.declare ?
+                            {[logicInfo.data.declare.key]: logicInfo.data.declare} : {}
                         break
                     default:
                 }

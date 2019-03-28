@@ -5,11 +5,14 @@
     - ...
 
 #Standard Props of LogicItem
-- data: {}
+- data is set as a string be default for firebase storage
+
+- data: ""
 - down: ""
 - logicType: ""
 - operatorType: ""
 - right: ""
 - updateViewType: ""
+
 ##Needs to be added
 - collapsed: false

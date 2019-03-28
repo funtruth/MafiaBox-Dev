@@ -29,6 +29,7 @@ function LogicBoard(props) {
         })
     }
     
+    console.log('source value',{value})
     return (
         <div className="logic-board">
             <div className="row field-view-code">

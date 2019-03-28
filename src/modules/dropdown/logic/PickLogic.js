@@ -9,26 +9,14 @@ import DropTitle from '../components/DropTitle';
 export default function PickLogic(props) {
     const { attach } = props
 
+    //Normal logic cannot have Internal Logic apart from Operator Logic
     let handleSelect = (item) => {
-        let update = {}
-        
-        update.logicType = item.key
-        update.operatorType = ''
-
-        switch(item.key) {
-            case logicType.update.key:
-            case logicType.return.key:
-            case logicType.variable.key:
-            case logicType.operator.key:
-                update.data = {}
-                break
-            case logicType.function.key:
-                update.data = ''
-                break
-            default:
-        }
-        
-        props.updatePage(update)
+        props.updatePage({
+            logicType: item.key,
+            operatorType: '',
+            data: '',
+            right: '',
+        })
         props.showDropdown()
     }
 

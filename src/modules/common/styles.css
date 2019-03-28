@@ -3,6 +3,11 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
 
 .row-nowrap {
     display: flex;

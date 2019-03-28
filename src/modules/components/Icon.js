@@ -15,6 +15,7 @@ const getFontSize = (size) => {
 export default function Icon(props) {
     const {
         className = "",
+        title,
         size = 'medium',
         color = '#fff',
         style,
@@ -38,6 +39,7 @@ export default function Icon(props) {
         <i
             className={classes}
             style={textStyle}
+            title={title}
             onClick={event => onClick && onClick({ event })}
         />
     )

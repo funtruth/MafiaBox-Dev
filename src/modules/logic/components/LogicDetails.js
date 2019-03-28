@@ -19,7 +19,7 @@ export default function LogicDetails(props) {
         case logicType.operator.key:
             switch(otype) {
                 case operatorType.forin.key:
-                    if (!data.declare) return null
+                    if (!data || !data.declare) return null
                     return (
                         <div className="row" style={{ marginTop: 2 }}>
                             <div className="common-bubble --var">{data.declare.key}</div>

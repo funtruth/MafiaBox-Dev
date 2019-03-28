@@ -289,7 +289,7 @@ export const updateType = {
 export const DEFAULT_LOGIC = {
     logicType: "",
     operatorType: "",
-    data: {},
+    data: "",
     right: "",
     down: "",
 }

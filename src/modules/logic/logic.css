@@ -9,7 +9,10 @@
     letter-spacing: 0.6px;
     cursor: pointer;
     color: #fff;
-    border-radius: 4px 0px 0px 4px;
+    background-color: rgba(40, 43, 48,1);
+}
+.logic-label:hover {
+    background-color: #424650;
 }
 
 .logic-panel-disabled {
@@ -29,6 +32,7 @@
     height: 1.4em;
     display: flex;
     align-items: center;
+    border-left: 1px solid #444;
 }
 
 .logic-button:hover {

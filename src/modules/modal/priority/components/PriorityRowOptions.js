@@ -33,12 +33,12 @@ function PriorityRowOptions({ workspace, setWorkspace, index, showModal }) {
     return (
         <div className="priority-row-options">
             <Icon
-                className="mdi mdi-playlist-plus hovering"
+                className="mdi mdi-playlist-plus hovering" title="Add row below"
                 color="grey" size="xl" style={{marginLeft: 8}}
                 hover onClick={addAfter}
             ></Icon>
             <Icon
-                className="mdi mdi-close hovering"
+                className="mdi mdi-close hovering" title="Delete row"
                 color="grey" size="xl" style={{marginLeft: 4, marginRight: 8}}
                 hover onClick={remove}
             ></Icon>

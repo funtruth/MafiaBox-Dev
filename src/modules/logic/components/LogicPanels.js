@@ -6,7 +6,7 @@ import { dropdownType } from '../../dropdown/types'
 import LogicPanel from './LogicPanel'
 
 export default function LogicPanels(props) {
-    const { value } = props
+    const { value, path } = props
     const {
         logicType: selectedLogic,
         operatorType: selectedOperator,
@@ -18,23 +18,26 @@ export default function LogicPanels(props) {
                 case operatorType.if.key:
                 case operatorType.elseif.key:
                     return (
-                        <div>
+                        <div className="row">
                             <LogicPanel
                                 {...props}
                                 subfieldKey="var1"
                                 placeholder="variable"
+                                path={[...path, 'data']}
                                 dropdown={dropdownType.pickVar}
                             />
                             <LogicPanel
                                 {...props}
                                 subfieldKey="comparison"
                                 placeholder="operator"
+                                path={[...path, 'data']}
                                 dropdown={dropdownType.pickComparison}
                             />
                             <LogicPanel
                                 {...props}
                                 subfieldKey="var2"
                                 placeholder="variable"
+                                path={[...path, 'data']}
                                 dropdown={dropdownType.pickVar}
                             />
                         </div>
@@ -46,6 +49,7 @@ export default function LogicPanels(props) {
                         <LogicPanel
                             {...props}
                             placeholder="UID object ..."
+                            path={[...path, 'data']}
                             dropdown={dropdownType.pickUidObject}
                         />
                     )
@@ -59,6 +63,7 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="variable ..."
+                    path={[...path, 'data']}
                     dropdown={dropdownType.declareVar}
                     
                 />
@@ -69,6 +74,7 @@ export default function LogicPanels(props) {
                     {...props}
                     subfieldKey="var1"
                     placeholder="Pick a function ..."
+                    path={[...path, 'data']}
                     dropdown={dropdownType.pickLibrary}
                 />
             )
@@ -77,10 +83,17 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="return ..."
+                    path={[...path, 'data']}
                     dropdown={dropdownType.pickReturnType}
                 />
             )
         default:
-            return <div className="logic-panel-disabled">select logic ...</div>
+            return (
+                <LogicPanel
+                    {...props}
+                    placeholder="select logic ..."
+                    dropdown={dropdownType.pickLogic}
+                />
+            )
     }
 }
