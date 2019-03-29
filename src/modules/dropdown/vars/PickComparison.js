@@ -2,41 +2,39 @@ import React from 'react'
 import _ from 'lodash'
 
 import { comparisonType } from '../../logic/types'
-import DropTitle from '../components/DropTitle';
 
-class PickComparison extends React.Component{
-    _renderItem = (item) => {
-        const { attach, subfieldKey } = this.props
-        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+import DropTitle from '../components/DropTitle';
+import DropItem from '../components/DropItem';
+
+export default function PickComparison(props) {
+    const { attach, subfieldKey } = props
+
+    const handleSelect = (item) => {
+        props.updatePage(item)
+        props.showDropdown()
+    }
+
+    const renderItem = (item) => {
+        const selectedKey = attach[subfieldKey] && attach[subfieldKey].key
         const chosen = typeof selectedKey === 'string' && selectedKey === item.key
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
-                onClick={this._select.bind(this, item)}
+                chosen={chosen}
+                onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightIcon="mdi mdi-check"
             >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
 
-    _select = (item) => {
-        this.props.updatePage(item)
-        this.props.showDropdown()
-    }
-
-    render() {
-        return (
-            <div>
-                <DropTitle>pick comparison</DropTitle>
-                {_.toArray(comparisonType).map(this._renderItem)}
-            </div>
-        )
-    }
+    return (
+        <>
+            <DropTitle>pick comparison</DropTitle>
+            {_.toArray(comparisonType).map(renderItem)}
+        </>
+    )
 }
-
-export default PickComparison

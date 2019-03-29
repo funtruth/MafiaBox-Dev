@@ -7,7 +7,7 @@ import { opType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
-import DropScrollable from '../components/DropScrollable'
+import DropScroll from '../components/DropScroll'
 import DropEmpty from '../components/DropEmpty';
 
 export default function DeclareVar(props) {
@@ -83,7 +83,7 @@ export default function DeclareVar(props) {
             />
             <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline">save variable</DropItem>
             <DropTitle>assign</DropTitle>
-            <DropScrollable>
+            <DropScroll>
                 {assignable.map(item => (
                     <DropItem
                         key={item.key}
@@ -93,7 +93,7 @@ export default function DeclareVar(props) {
                     </DropItem>
                 ))}
                 <DropEmpty>no assignable vars ...</DropEmpty>
-            </DropScrollable>
+            </DropScroll>
         </div>
     )
 }

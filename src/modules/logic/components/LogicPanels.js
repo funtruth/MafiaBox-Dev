@@ -88,7 +88,8 @@ export default function LogicPanels(props) {
             return (
                 <LogicPanel
                     {...props}
-                    placeholder="return ..."
+                    title={value.data && value.data.key}
+                    placeholder="return type ..."
                     path={[...path, 'data']}
                     dropdown={dropdownType.pickReturnType}
                 />

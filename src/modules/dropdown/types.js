@@ -2,6 +2,7 @@ export const dropdownType = {
     inputValue: 'dropdownType/input-value',
     storyMapLib: 'dropdownType/story-map-lib',
     pageLib: 'dropdownType/page-lib',
+    pageDetailLib: 'dropdownType/page-detail-lib',
 
     dropInput: 'dropdownType/drop-input',
 
@@ -43,7 +44,7 @@ export const dropdownType = {
     editVar: 'dropdownType/edit-var',
     pickVar: 'dropdownType/pick-var',
     pickVarProp: 'dropdownType/pick-var-prop',
-    pickUidObject: 'dropdownType/pick-object',
+    pickUidObject: 'dropdownType/pick-uid-object',
     pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',
 
@@ -106,15 +107,17 @@ export const fuseType = {
 export const DROPDOWN_Y_MARGIN = 8
 export const DROP_TITLE_HEIGHT = 21
 
+/* @params logicItem.data
+    declare: if the data in the logic item shows there are new variable(s)
+*/
 export const VAR_DEFAULTS = {
     adjust: "",
-    declare: {},
-    hide: false,
+    declare: "",
     length: false,
     mutate: false,
     panelType: "",
     update: false,
     updateViewType: "",
     value: "",
-    variableTypes: [],
+    variableTypes: "",
 }

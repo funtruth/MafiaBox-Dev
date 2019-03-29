@@ -22,9 +22,9 @@ const getFontSize = (size) => {
 const getMarginTop = (size) => {
     switch(size) {
         case 'xs':          return -1
-        case 's':           return -2
-        case 'l':           return -3
-        case 'xl':          return -4
+        case 's':           return -1
+        case 'l':           return -2
+        case 'xl':          return -3
         case 'xxl':         return -4
         default:            return -2 //'m'
     }

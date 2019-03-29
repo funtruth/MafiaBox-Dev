@@ -15,7 +15,6 @@ export default function LogicAddBelow(props) {
         })
     }
 
-    //TODO add/color the keyword and icon to make UX more readable
     return (
         <div className="logic-panel-add">
             <Icon className="mdi mdi-server-plus" size="l" color="grey" hover onClick={handleAdd}></Icon>

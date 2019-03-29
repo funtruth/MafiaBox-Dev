@@ -12,19 +12,19 @@ export default function Dropdown(props) {
     useEffect(() => {
         const { offsetHeight, offsetWidth, offsetTop, offsetLeft } = dropdownRef.current
         
-        if (index === 0) {
-            const xRightOverflow = window.innerWidth - THRESHOLD < offsetWidth + offsetLeft
-            //const xLeftOverflow = offsetLeft < 0
-            const yBottomOverflow = window.innerHeight - THRESHOLD < offsetHeight + offsetTop
-            //const yTopOverflow = offsetTop < 0
+        const rightOverflow = window.innerWidth - THRESHOLD < offsetWidth + offsetLeft
+        //const xLeftOverflow = offsetLeft < 0
+        const bottomOverflow = window.innerHeight - THRESHOLD < offsetHeight + offsetTop
+        //const yTopOverflow = offsetTop < 0
 
+        if (index === 0) {
             switch(place) {
                 case "down":
-                    if (xRightOverflow || yBottomOverflow) {
+                    if (rightOverflow || bottomOverflow) {
                         setStyles({
-                            right: xRightOverflow && THRESHOLD,
-                            left: !xRightOverflow && pageX,
-                            top: yBottomOverflow ? (pageY - sourceHeight - offsetHeight) : pageY,
+                            right: rightOverflow && THRESHOLD,
+                            left: !rightOverflow && pageX,
+                            top: bottomOverflow ? (pageY - sourceHeight - offsetHeight) : pageY,
                         })
                     } else {
                         setStyles({
@@ -38,10 +38,10 @@ export default function Dropdown(props) {
                     console.warn('functionality is not available yet')
                     break
                 case "right":
-                    if (window.innerHeight - THRESHOLD < offsetHeight + offsetTop) {
+                    if (rightOverflow) {
                         setStyles({
-                            left: xRightOverflow ? (pageX - sourceWidth - offsetWidth) : pageX,
-                            bottom: yBottomOverflow && THRESHOLD,
+                            left: rightOverflow ? (pageX - sourceWidth - offsetWidth) : pageX,
+                            bottom: bottomOverflow && THRESHOLD,
                         })
                     } else {
                         setStyles({
@@ -53,15 +53,15 @@ export default function Dropdown(props) {
                 default:
             }
         } else {
-            if (window.innerWidth - THRESHOLD < offsetWidth + offsetLeft) {
+            if (rightOverflow) {
                 setStyles({
                     left: pageX - sourceWidth - offsetWidth,
                     top: pageY,
                 })
-            } else if (window.innerHeight - THRESHOLD < offsetHeight + offsetTop) {
+            } else if (bottomOverflow) {
                 setStyles({
                     left: pageX,
-                    top: pageY - sourceHeight - offsetHeight,
+                    bottom: THRESHOLD,
                 })
             } else {
                 setStyles({

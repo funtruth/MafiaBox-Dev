@@ -6,12 +6,19 @@ import _ from 'lodash'
 import { VAR_DEFAULTS } from '../types'
 import { variableType, panelType } from '../../logic/types'
 
-import DropTitle from '../components/DropTitle';
-import DropEmpty from '../components/DropEmpty';
+import {
+    DropEmpty,
+    DropItem,
+    DropScroll,
+    DropTitle,
+} from '../components/Common'
 
+/*accessed from
+    LogicBlock -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
+*/
 function PickUidObject(props) {
     const { attach, subfieldKey, attachVar, updateRef } = props
-    let selectedValue = attach[subfieldKey] || {}
+    const selectedValue = attach[subfieldKey] || {}
 
     let uidObjects = _(attachVar)
         .filter(i => i.variableTypes && i.variableTypes.includes(variableType.uidObject.key))
@@ -23,14 +30,12 @@ function PickUidObject(props) {
         .value()
 
     let handleSelect = (item) => {
-        const rssVar = item.variableTypes.includes(variableType.rss.key)//TODO hacky
-
         props.updatePage({
             ...VAR_DEFAULTS,
             panelType: panelType.var.key,
-            value: rssVar ? `rss.${item.key}` : item.key,
+            value: item.key,
             declare: {
-                key: helpers.genUID('$uid', attachVar, '_x'),
+                key: helpers.genUID('@uid-', attachVar, 'x'),
                 variableTypes: [
                     variableType.uid.key,
                     variableType.string.key,
@@ -44,29 +49,26 @@ function PickUidObject(props) {
         const chosen = selectedValue.value === item.key
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
-            >
-                {item.key}
-                <i className="mdi mdi-check"/>
-            </div>
+                rightIcon="mdi mdi-check"
+            >{item.key}</DropItem>
         )
     }
 
     return (
         <>
             <DropTitle>UID Objects</DropTitle>
-            <div className="drop-down-scrollable">
+            <DropScroll>
                 {uidObjects.map(renderItem)}
                 <DropEmpty>no results found</DropEmpty>
-            </div>
+            </DropScroll>
             <DropTitle>game values</DropTitle>
-            <div className="drop-down-scrollable">
+            <DropScroll>
                 {rssUidObjects.map(renderItem)}
-            </div>
+            </DropScroll>
         </>
     )
 }

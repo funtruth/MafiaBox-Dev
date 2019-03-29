@@ -26,6 +26,7 @@ import PageOptions from './page/PageOptions'
 import InputValue from './components/InputValue'
 import StoryMapLib from './library/StoryMapLib';
 import PageLib from './library/PageLib';
+import PageDetailLib from './library/PageDetailLib';
 
 import PickLogic from './logic/PickLogic';
 import PickReturnType from './logic/PickReturnType';
@@ -148,6 +149,8 @@ function DropdownView(props) {
                 return <StoryMapLib {...renderProps}/>
             case dropdownType.pageLib:
                 return <PageLib {...renderProps}/>
+            case dropdownType.pageDetailLib:
+                return <PageDetailLib {...renderProps}/>
 
             case dropdownType.dropInput:
                 return <DropInput {...renderProps}/>

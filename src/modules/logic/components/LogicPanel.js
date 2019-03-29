@@ -5,7 +5,7 @@ import { dataPropToTitle } from '../LogicReducer'
 
 function LogicPanel(props) {
     const { pageKey, fieldKey, indexKey, subfieldKey,
-        value, vars, placeholder, dropdown, path } = props
+        value, vars, title, placeholder, dropdown, path } = props
     const data = value.data || {}
     const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 
@@ -29,7 +29,7 @@ function LogicPanel(props) {
             }}
         >
             <div className="text-ellipsis">
-                {dataProp.code || props.dataPropToTitle(dataProp) || placeholder || 'select ...'}
+                {dataProp.code || props.dataPropToTitle(dataProp) || title || placeholder}
             </div> 
         </div>
     )
