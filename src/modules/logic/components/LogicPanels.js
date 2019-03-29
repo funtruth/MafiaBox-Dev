@@ -68,7 +68,7 @@ export default function LogicPanels(props) {
             return (
                 <LogicPanel
                     {...props}
-                    placeholder="variable ..."
+                    placeholder="pick ..."
                     path={[...path, 'data']}
                     dropdown={dropdownType.declareVar}
                     

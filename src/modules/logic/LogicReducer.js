@@ -137,7 +137,7 @@ function recursive(library) {
     
     let codeDown = recursive(library.down)
 
-    return helpers.swapVarFormat(`${codeBody}${codeDown}`, false)
+    return `${codeBody}${codeDown}`
 }
 
 function declareOrAssign(data) {

@@ -46,6 +46,7 @@
 - logic item -> data -> comparison, is set to comparison type
 ### Picking a Variable
 - user clicks on the left or right LogicPanel in the group of 3 LogicPanels to show PickVar
+TODO
 
 ## ELSE Operator
 - not much going on here, user cannot apply logic to an else operator
@@ -58,15 +59,28 @@
 - new uid is declared and can be used inside the loop
 
 ## VARIABLE Logic
+### Declaring a new variable
+- user clicks on the LogicPanel to show DeclareVar
+- user types in new variable name
+- user hits enter or presses save button
+- logic item -> data -> variableName
+### Modifying a declared variable type
+TODO
+### Assigning a value to a new variable
+TODO
+### Assigning a variable to a new value
+TODO
 
 ## FUNCTION Logic
+TODO
 
 ## UPDATE Logic
+TODO
 
 ## RETURN Logic
 ## Picking the Return Type
 - user clicks on the LogicPanel to show PickReturnType
 - user selects a toast type from the list
 - preset options generate key
-- toaster generates string
+- toaster generates string TODO
 - logic item -> data -> key, string

@@ -91,23 +91,7 @@ export function getDropdownParentTarget(ele) {
     return null
 }
 
-export function swapVarFormat(string, ugly) {
-    const itemType = typeof string
-    switch(itemType) {
-        case 'string':
-            return ugly ?
-                string.replace(/\./g, '§')
-                :string.replace(/§/g, '.')
-        case 'object':
-            return JSON.parse(swapVarFormat(JSON.stringify(string), ugly))
-        case 'undefined':
-            return string
-        default:
-            return console.warn('Unexpected input, helpers swapVarFormat', {string})
-    }   
-}
-
-export const remove$ = (string='') => string.charAt(0) === '$' ? string.substr(1) : string
+export const remove$ = (string='') => string.charAt(0) === '@' ? string.substr(1) : string
 
 export function checkAlpha(string, cipher='A26') {
     for (var i=0; i<string.length; i++) {

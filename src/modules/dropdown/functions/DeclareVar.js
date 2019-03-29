@@ -5,20 +5,21 @@ import * as helpers from '../../common/helpers'
 
 import { opType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
-import DropTitle from '../components/DropTitle'
-import DropItem from '../components/DropItem'
-import DropScroll from '../components/DropScroll'
-import DropEmpty from '../components/DropEmpty';
+import {
+    DropEmpty,
+    DropItem,
+    DropTitle,
+    DropScroll,
+} from '../components/Common'
 
 export default function DeclareVar(props) {
+    const { currentValue, attachVar } = props
+
     let [value, setValue] = useState('')
     let handleChange = e => setValue(e.target.value)
 
     let handleSave = () => {
-        const { currentValue } = props
-
         const isAlpha = helpers.checkAlpha(value)
-        
         if (!isAlpha) {
             return
         }
@@ -28,9 +29,9 @@ export default function DeclareVar(props) {
         }
 
         props.updatePage({
-            [`$${value}`]: {
-                key: `$${value}`,
-                variableTypes: [],
+            [`@${value}`]: {
+                key: `@${value}`,
+                variableTypes: "",
                 assign: {
                     ...DEFAULT_ASSIGN,
                     opType: opType.NaN.key,
@@ -50,15 +51,11 @@ export default function DeclareVar(props) {
         }
     }
 
-    const assignable = _(props.attachVar)
-        .filter(i => i.isNotDefault)
-        .value()
-    
     let handleSelect = (item) => {
         props.updatePage({
             [item.key]: {
                 key: item.key,
-                variableTypes: item.variableTypes,
+                variableTypes: item.variableTypes || "",
                 assign: DEFAULT_ASSIGN,
                 isBeingAssigned: true,
             }
@@ -66,8 +63,10 @@ export default function DeclareVar(props) {
         props.showDropdown()
     }
 
+    const assignable = _.filter(attachVar, i => i.isNotDefault)
+
     return (
-        <div>
+        <>
             <DropTitle>declare</DropTitle>
             <input
                 className="tag-input"
@@ -94,6 +93,6 @@ export default function DeclareVar(props) {
                 ))}
                 <DropEmpty>no assignable vars ...</DropEmpty>
             </DropScroll>
-        </div>
+        </>
     )
 }

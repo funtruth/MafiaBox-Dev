@@ -14,7 +14,7 @@ export const logicType = {
         index: 1,
         title: 'variable',
         icon: 'mdi mdi-pen',
-        color: '#2e6db4',
+        color: 'Mediumslateblue',
     },
     function: {
         key: 'function',
@@ -79,7 +79,7 @@ export const operatorType = {
         index: 3,
         title: 'for ... in',
         icon: 'mdi mdi-sync',
-        color: '#2e6db4',
+        color: '#f9812a',
         logicType: logicType.operator.key,
     },
 }

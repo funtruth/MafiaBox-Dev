@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { LOGIC_TESTS } from '../../testhub/tests';
 
-import * as helpers from '../../common/helpers'
 import { getCode } from '../../logic/LogicReducer'
 import { showModal } from '../../modal/ModalReducer'
 
@@ -11,8 +10,7 @@ import LogicBlock from '../../logic/LogicBlock'
 import { modalType } from '../../modal/types';
 
 function LogicBoard(props) {
-    const { value, vars: attachVars } = props
-    const vars = helpers.swapVarFormat(attachVars, true)
+    const { value, vars } = props
 
     let runCode = () => {
         const code = props.getCode(value)
@@ -29,7 +27,6 @@ function LogicBoard(props) {
         })
     }
     
-    console.log('source value',{value})
     return (
         <div className="logic-board">
             <div className="row field-view-code">

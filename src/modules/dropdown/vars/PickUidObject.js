@@ -28,14 +28,14 @@ function PickUidObject(props) {
         .filter(i => i.variableTypes && i.variableTypes.includes(variableType.rss.key) &&
             i.variableTypes.includes(variableType.uidObject.key))
         .value()
-
+        
     let handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
             panelType: panelType.var.key,
             value: item.key,
             declare: {
-                key: helpers.genUID('@uid-', attachVar, 'x'),
+                key: helpers.genUID('@uid', attachVar, 'x'),
                 variableTypes: [
                     variableType.uid.key,
                     variableType.string.key,

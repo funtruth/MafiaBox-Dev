@@ -5,6 +5,7 @@ import { variableType } from '../types';
 
 export default function LogicVarType(props) {
     const { item, path } = props
+    const variableTypes = item.variableTypes || []
 
     let newPath = [...path, item.key]
 
@@ -22,7 +23,7 @@ export default function LogicVarType(props) {
                 className="logic-pick-update app-onclick"
                 menu-type={dropdownType.declareVarType}
                 app-onclick-props={JSON.stringify({
-                    currentValue: item.variableTypes,
+                    currentValue: variableTypes,
                     path: newPath,
                 })}
                 highlight="true"
@@ -30,8 +31,8 @@ export default function LogicVarType(props) {
                     borderRadius: '0px 6px 6px 0px',
                 }}
             >
-                {item.variableTypes.map(type => <i key={type} className={`${variableType[type].icon} letter-s`}/>)}
-                {item.variableTypes.length === 0 && '...'}
+                {variableTypes.map(type => <i key={type} className={`${variableType[type].icon} letter-s`}/>)}
+                {variableTypes.length === 0 && '...'}
             </div>
         </div>
     )
