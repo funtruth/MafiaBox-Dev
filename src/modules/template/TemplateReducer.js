@@ -3,35 +3,56 @@ import { variableType } from '../logic/types'
 
 const initialState = {
     updateRef: {
-        'rss': {
-            key: 'rss',
+        '(rss)': {
+            key: '(rss)',
             subfield: 'rss',
-            dropdown: dropdownType.showSubfields,
+            fields: [
+                'rss',
+            ],
+            fieldLength: 1,
+            dropdown: dropdownType.pickSubfield,
             variableTypes: [
                 variableType.object,
                 variableType.rssObject,
             ],
         },
-        'rss_gameState': {
-            key: 'rss_gameState',
+        '(rss)(gameState)': {
+            key: '(rss)(gameState)',
             subfield: 'gameState',
-            dropdown: dropdownType.showSubfields,
+            fields: [
+                'rss',
+                'gameState',
+            ],
+            fieldLength: 2,
+            dropdown: dropdownType.pickSubfield,
             variableTypes: [
                 variableType.object.key,
                 variableType.rss.key,
             ],
         },
-        'rss_gameState_phase': {
-            key: 'rss_gameState_phase',
+        '(rss)(gameState)(phase)': {
+            key: '(rss)(gameState)(phase)',
             subfield: 'phase',
+            fields: [
+                'rss',
+                'gameState',
+                'phase',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.pickPhase,
             variableTypes: [
                 variableType.string.key,
             ],
         },
-        'rss_gameState_counter': {
-            key: 'rss_gameState_counter',
+        '(rss)(gameState)(counter)': {
+            key: '(rss)(gameState)(counter)',
             subfield: 'counter',
+            fields: [
+                'rss',
+                'gameState',
+                'counter',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
@@ -39,9 +60,15 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'rss_gameState_veto': {
-            key: 'rss_gameState_veto',
+        '(rss)(gameState)(veto)': {
+            key: '(rss)(gameState)(veto)',
             subfield: 'veto',
+            fields: [
+                'rss',
+                'gameState',
+                'veto',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
@@ -49,9 +76,15 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'rss_gameState_timer': {
-            key: 'rss_gameState_timer',
+        '(rss)(gameState)(timer)': {
+            key: '(rss)(gameState)(timer)',
             subfield: 'timer',
+            fields: [
+                'rss',
+                'gameState',
+                'timer',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.pickTimer,
             update: true,
             mutate: false,
@@ -59,9 +92,14 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'rss_lobby': {
-            key: 'rss_lobby',
+        '(rss)(lobby)': {
+            key: '(rss)(lobby)',
             subfield: 'lobby',
+            fields: [
+                'rss',
+                'lobby',
+            ],
+            fieldLength: 2,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
@@ -69,25 +107,46 @@ const initialState = {
                 variableType.rss.key,
             ],
         },
-        'rss_lobby_@': {
-            key: 'rss_lobby_@',
+        '(rss)(lobby)(@)': {
+            key: '(rss)(lobby)(@)',
             subfield: '@',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'rss_lobby_@_role': {
-            key: 'rss_lobby_@_role',
+        '(rss)(lobby)(@)(role)': {
+            key: '(rss)(lobby)(@)(role)',
             subfield: 'role',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'rss_lobby_@_role_roleId': {
-            key: 'rss_lobby_@_role_roleId',
+        '(rss)(lobby)(@)(role)(roleId)': {
+            key: '(rss)(lobby)(@)(role)(roleId)',
             subfield: 'roleId',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'roleId',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickRole,
             update: true,
             mutate: true,
@@ -95,9 +154,17 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'rss_lobby_@_role_team': {
-            key: 'rss_lobby_@_role_team',
+        '(rss)(lobby)(@)(role)(team)': {
+            key: '(rss)(lobby)(@)(role)(team)',
             subfield: 'team',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'team',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickTeam, //TODO
             update: true,
             mutate: true,
@@ -105,9 +172,17 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'rss_lobby_@_role_action': {
-            key: 'rss_lobby_@_role_action',
+        '(rss)(lobby)(@)(role)(action)': {
+            key: '(rss)(lobby)(@)(role)(action)',
             subfield: 'action',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'action',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickRole,
             update: true,
             mutate: true,
@@ -115,9 +190,17 @@ const initialState = {
                 variableType.string.key,
             ],
         },
-        'rss_lobby_@_role_charges': {
-            key: 'rss_lobby_@_role_charges',
+        '(rss)(lobby)(@)(role)(charges)': {
+            key: '(rss)(lobby)(@)(role)(charges)',
             subfield: 'charges',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'team',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickUpdate,
             update: true,
             mutate: false,
@@ -125,9 +208,17 @@ const initialState = {
                 variableType.number.key,
             ],
         },
-        'rss_lobby_@_role_suspicious': {
-            key: 'rss_lobby_@_role_suspicious',
+        '(rss)(lobby)(@)(role)(suspicious)': {
+            key: '(rss)(lobby)(@)(role)(suspicious)',
             subfield: 'suspicious',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'suspicious',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
@@ -136,9 +227,17 @@ const initialState = {
             ],
             tag: true,
         },
-        'rss_lobby_@_role_focus': {
-            key: 'rss_lobby_@_role_focus',
+        '(rss)(lobby)(@)(role)(focus)': {
+            key: '(rss)(lobby)(@)(role)(focus)',
             subfield: 'focus',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'focus',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
@@ -147,9 +246,17 @@ const initialState = {
             ],
             tag: true,
         },
-        'rss_lobby_@_role_sneak': {
-            key: 'rss_lobby_@_role_sneak',
+        '(rss)(lobby)(@)(role)(sneak)': {
+            key: '(rss)(lobby)(@)(role)(sneak)',
             subfield: 'sneak',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'role',
+                'sneak',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
             update: false,
             mutate: true,
@@ -158,9 +265,16 @@ const initialState = {
             ],
             tag: true,
         },
-        'rss_lobby_@_health': {
-            key: 'rss_lobby_@_health',
+        '(rss)(lobby)(@)(health)': {
+            key: '(rss)(lobby)(@)(health)',
             subfield: 'health',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'health',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickHealth,
             update: true,
             mutate: false,
@@ -168,9 +282,16 @@ const initialState = {
                 variableType.object.key,
             ],
         },
-        'rss_lobby_@_dead': {
-            key: 'rss_lobby_@_dead',
+        '(rss)(lobby)(@)(dead)': {
+            key: '(rss)(lobby)(@)(dead)',
             subfield: 'dead',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'dead',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: true,
@@ -178,9 +299,16 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'rss_lobby_@_king': {
-            key: 'rss_lobby_@_king',
+        '(rss)(lobby)(@)(king)': {
+            key: '(rss)(lobby)(@)(king)',
             subfield: 'king',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'king',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: false,
@@ -188,9 +316,16 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'rss_lobby_@_clown': {
-            key: 'rss_lobby_@_clown',
+        '(rss)(lobby)(@)(clown)': {
+            key: '(rss)(lobby)(@)(clown)',
             subfield: 'clown',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'clown',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
             update: true,
             mutate: false,
@@ -198,26 +333,46 @@ const initialState = {
                 variableType.boolean.key,
             ],
         },
-        'rss_lobby_@_trigger': {
-            key: 'rss_lobby_@_trigger',
+        '(rss)(lobby)(@)(trigger)': {
+            key: '(rss)(lobby)(@)(trigger)',
             subfield: 'trigger',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'trigger',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'rss_lobby_@_trigger_@': {
-            key: 'rss_lobby_@_trigger_@',
+        '(rss)(lobby)(@)(trigger)(@)': {
+            key: '(rss)(lobby)(@)(trigger)(@)',
             subfield: '@',
+            fields: [
+                'rss',
+                'lobby',
+                '@',
+                'trigger',
+                '@',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickTrigger,
             mutate: true,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'rss_choices': {
-            key: 'rss_choices',
+        '(rss)(choices)': {
+            key: '(rss)(choices)',
             subfield: 'choices',
+            fields: [
+                'rss',
+                'choices',
+            ],
+            fieldLength: 2,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
@@ -225,58 +380,105 @@ const initialState = {
                 variableType.rss.key,
             ],
         },
-        'rss_choices_@': {
-            key: 'rss_choices_@',
+        '(rss)(choices)(@)': {
+            key: '(rss)(choices)(@)',
             subfield: '@',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+            ],
+            fieldLength: 3,
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
             ],
         },
-        'rss_choices_@_user': {
-            key: 'rss_choices_@_user',
+        '(rss)(choices)(@)(user)': {
+            key: '(rss)(choices)(@)(user)',
             subfield: 'user',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+                'user',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'rss_choices_@_target': {
-            key: 'rss_choices_@_target',
+        '(rss)(choices)(@)(target)': {
+            key: '(rss)(choices)(@)(target)',
             subfield: 'target',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+                'target',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickChoice,
             variableTypes: [
                 variableType.uid.key,
             ],
         },
-        'rss_choices_@_multitarget': {
-            key: 'rss_choices_@_multitarget',
+        '(rss)(choices)(@)(multitarget)': {
+            key: '(rss)(choices)(@)(multitarget)',
             subfield: 'multitarget',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+                'multitarget',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.object.key,
                 variableType.uidObject.key,
             ],
         },
-        'rss_choices_@_multitarget_@': {
-            key: 'rss_choices_@_multitarget_@',
+        '(rss)(choices)(@)(multitarget)(@)': {
+            key: '(rss)(choices)(@)(multitarget)(@)',
             subfield: '@',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+                'multitarget',
+                '@',
+            ],
+            fieldLength: 5,
             dropdown: dropdownType.pickUid,
             variableTypes: [
                 variableType.number.key,
             ],
         },
-        'rss_choices_@_value': {
-            key: 'rss_choices_@_value',
+        '(rss)(choices)(@)(value)': {
+            key: '(rss)(choices)(@)(value)',
             subfield: 'value',
+            fields: [
+                'rss',
+                'choices',
+                '@',
+                'value',
+            ],
+            fieldLength: 4,
             dropdown: dropdownType.pickVar,
             variableTypes: [
                 variableType.number.key,
             ],
         },
-        'rss_events': {
-            key: 'rss_events',
+        '(rss)(events)': {
+            key: '(rss)(events)',
             subfield: 'events',
+            fields: [
+                'rss',
+                'events',
+            ],
+            fieldLength: 2,
             dropdown: dropdownType.pickEvent,
             variableTypes: [
                 variableType.object.key,

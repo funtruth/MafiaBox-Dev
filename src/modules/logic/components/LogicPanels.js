@@ -3,6 +3,8 @@ import React from 'react'
 import { logicType, operatorType } from '../types'
 import { dropdownType } from '../../dropdown/types'
 
+import { concatField } from '../proptool';
+
 import LogicPanel from './LogicPanel'
 
 export default function LogicPanels(props) {
@@ -60,7 +62,7 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="select logic ..."
-                    subfieldKey="rss"
+                    subfieldKey={concatField('', 'rss')}
                     dropdown={dropdownType.showSubfields}
                 />
             )

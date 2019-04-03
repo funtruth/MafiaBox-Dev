@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { dropdownType, VAR_DEFAULTS } from '../types'
 import { variableType, panelType, updateViewType } from '../../logic/types'
 
+import { VARTYPE_IS_OBJ } from '../../common/arrows';
+
 import BoardLib from '../library/BoardLib';
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle';
@@ -27,9 +29,8 @@ function PickVar(props) {
 
     const renderItem = (item) => {
         const chosen = selectedValue.value === item.key
-        const isObject = item.variableTypes.includes(variableType.object.key)
 
-        if (isObject) {
+        if (VARTYPE_IS_OBJ(item)) {
             return (
                 <DropParent
                     {...props}

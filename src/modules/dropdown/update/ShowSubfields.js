@@ -1,13 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as proptool from '../../logic/proptool'
 
-import DropParent from '../components/DropParent';
-import DropTitle from '../components/DropTitle'
+import {
+    concatField,
+    getSubfields,
+} from '../../logic/proptool'
+
+import {
+    DropParent,
+    DropTitle,
+} from '../components/Common'
 
 function ShowSubfields(props) {
     const { subfieldKey, updateRef } = props
-    const items = proptool.getSubfields(subfieldKey, updateRef)
+    const items = getSubfields(subfieldKey, updateRef)
     
     return (
         <>
@@ -19,8 +25,8 @@ function ShowSubfields(props) {
                         key={item.subfield}
                         dropdownType={item.dropdown}
                         params={{
-                            subfieldKey: `${subfieldKey}_${item.subfield}`,
-                            subpath: [`${subfieldKey}_${item.subfield}`],
+                            subfieldKey: concatField(subfieldKey, item.subfield),
+                            subpath: concatField(subfieldKey, item.subfield),
                         }}
                         text={item.subfield}
                     />

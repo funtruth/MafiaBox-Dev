@@ -210,14 +210,14 @@ export const initFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Target Mode',
         vars: {
-            "@choice_user": {
-                key: '@choice_user',
+            "(@choice(user))": {
+                key: '(@choice(user))',
                 variableTypes: [
                     variableType.uid.key,
                 ],
             },
-            "@choice_target": {
-                key: '@choice_target',
+            "(@choice(target))": {
+                key: '(@choice(target))',
                 variableTypes: [
                     variableType.uid.key,
                 ],
@@ -232,27 +232,27 @@ export const initFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Action',
         vars: {
-            "@choice_user": {
-                key: '@choice_user',
+            "(@choice(user))": {
+                key: '(@choice(user))',
                 variableTypes: [
                     variableType.uid.key,
                 ],
             },
-            "@choice_target": {
-                key: '@choice_target',
+            "(@choice(target))": {
+                key: '(@choice(target))',
                 variableTypes: [
                     variableType.uid.key,
                 ],
             },
-            "@choice_multitarget": {
-                key: '@choice_multitarget',
+            "(@choice(multitarget))": {
+                key: '(@choice(multitarget))',
                 variableTypes: [
                     variableType.object.key,
                     variableType.uidObject.key,
                 ],
             },
-            "@choice_value": {
-                key: '@choice_value',
+            "(@choice(value))": {
+                key: '(@choice(value))',
                 variableTypes: [
                     variableType.string.key,
                 ],

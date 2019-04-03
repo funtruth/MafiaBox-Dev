@@ -1,7 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import * as proptool from '../../logic/proptool'
+import {
+    WILD_CHAR,
+    concatField,
+    getSubfields,
+} from '../../logic/proptool'
 
 import { dropdownType } from '../types'
 import { panelType, updateViewType } from '../../logic/types'
@@ -16,19 +20,23 @@ import {
     DropTitle,
  } from '../components/Common'
 
-//@param prefix -> used with updateRef to find the proper fields
+/*@param prefix -> used with updateRef to find the proper fields
+    PickVarProp should used to find the subfields of a field, AND THEN select
+    This follows a different path than ShowSubfields because we want to be able to refer to game values
+        example: gameState(phase)
+*/
 function PickVarProp(props) {
-    const { prefix, subfieldKey, updateRef, attach, attachVar } = props
+    const { prefix, updateRef, currentValue, attachVar } = props
 
-    const selectedValue = attach[subfieldKey] || {}
-    const subfields = proptool.getSubfields(prefix, updateRef)
-    console.log({subfields})
+    //get all subfields
+    const subfields = getSubfields(prefix, updateRef)
+    
     //if the entire field is an object, only render nested DropParents
     const isObject = subfields.length === 1 && VARTYPE_IS_OBJ(subfields[0])
 
     const handleSelect = (item, key) => {
         props.updatePage({
-            value: `${prefix}_${key}`,
+            value: concatField(prefix, key),
             variableTypes: item.variableTypes,
             updateViewType: updateViewType.variable,
             adjust: null,
@@ -40,6 +48,8 @@ function PickVarProp(props) {
 
     const renderItem = (item, key) => {
         const hasObject = VARTYPE_IS_OBJ(item)
+        const combinedField = concatField(prefix, key)
+
         if (isObject || hasObject) {
             return (
                 <DropParent
@@ -47,8 +57,8 @@ function PickVarProp(props) {
                     key={key}
                     dropdownType={dropdownType.pickVarProp}
                     params={{
-                        prefix: `${prefix}_${key}`,
-                        subpath: [`${prefix}_${key}`],
+                        prefix: combinedField,
+                        subpath: [combinedField],
                     }}
                     text={key}
                 />
@@ -56,7 +66,7 @@ function PickVarProp(props) {
         }
         
         //if item not nested, check if item is currently selected
-        const chosen = selectedValue.value === `${prefix}_${key}`
+        const chosen = currentValue.value === combinedField
         return (
             <DropItem
                 key={key}
@@ -81,7 +91,7 @@ function PickVarProp(props) {
         )
     }
 
-    if (subfields[0].subfield === '@') {
+    if (subfields[0].subfield === WILD_CHAR) {
         //get all uids from attached variables
         const uids = _.filter(attachVar, VARTYPE_IS_UID)
 
