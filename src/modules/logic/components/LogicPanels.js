@@ -25,21 +25,21 @@ export default function LogicPanels(props) {
                                 {...props}
                                 subfieldKey="var1"
                                 placeholder="variable"
-                                path={[...path, 'data']}
+                                path={[...path, 'data', 'var1']}
                                 dropdown={dropdownType.pickVar}
                             />
                             <LogicPanel
                                 {...props}
                                 subfieldKey="comparison"
                                 placeholder="operator"
-                                path={[...path, 'data']}
+                                path={[...path, 'data', 'comparison']}
                                 dropdown={dropdownType.pickComparison}
                             />
                             <LogicPanel
                                 {...props}
                                 subfieldKey="var2"
                                 placeholder="variable"
-                                path={[...path, 'data']}
+                                path={[...path, 'data', 'var2']}
                                 dropdown={dropdownType.pickVar}
                             />
                         </div>
@@ -63,6 +63,8 @@ export default function LogicPanels(props) {
                     {...props}
                     placeholder="select logic ..."
                     subfieldKey={concatField('', 'rss')}
+                    path={[...path, 'data']}
+                    includeSubpath
                     dropdown={dropdownType.showSubfields}
                 />
             )
@@ -81,7 +83,7 @@ export default function LogicPanels(props) {
                     {...props}
                     subfieldKey="var1"
                     placeholder="Pick a function ..."
-                    path={[...path, 'data']}
+                    path={[...path, 'data', 'var1']}
                     dropdown={dropdownType.pickLibrary}
                 />
             )

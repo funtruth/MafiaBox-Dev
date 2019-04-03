@@ -26,7 +26,7 @@ function ShowSubfields(props) {
                         dropdownType={item.dropdown}
                         params={{
                             subfieldKey: concatField(subfieldKey, item.subfield),
-                            subpath: concatField(subfieldKey, item.subfield),
+                            subpath: [concatField(subfieldKey, item.subfield)],
                         }}
                         text={item.subfield}
                     />

@@ -49,7 +49,8 @@
 - logic item -> data -> comparison, is set to comparison type
 ### Picking a Variable
 - user clicks on the left or right LogicPanel in the group of 3 LogicPanels to show PickVar
-TODO
+- user finds their variable
+- variable is stored using VAR_DEFAULTS format in dropdown/types
 
 ## ELSE Operator
 - not much going on here, user cannot apply logic to an else operator

@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
+
+import { dropdownType, VAR_DEFAULTS } from '../types'
+import { panelType, updateViewType } from '../../logic/types'
+
 import {
     WILD_CHAR,
     concatField,
     getSubfields,
 } from '../../logic/proptool'
-
-import { dropdownType } from '../types'
-import { panelType, updateViewType } from '../../logic/types'
-
 import { VARTYPE_IS_UID, VARTYPE_IS_OBJ } from '../../common/arrows';
 
 import {
@@ -20,7 +20,8 @@ import {
     DropTitle,
  } from '../components/Common'
 
-/*@param prefix -> used with updateRef to find the proper fields
+/*@param prefix => used with updateRef to find the proper fields
+  @param prefix: describes the previous prefix used to get to current PickVarProp
     PickVarProp should used to find the subfields of a field, AND THEN select
     This follows a different path than ShowSubfields because we want to be able to refer to game values
         example: gameState(phase)
@@ -28,20 +29,19 @@ import {
 function PickVarProp(props) {
     const { prefix, updateRef, currentValue, attachVar } = props
 
-    //get all subfields
+    //get subfields to show
     const subfields = getSubfields(prefix, updateRef)
-    
-    //if the entire field is an object, only render nested DropParents
-    const isObject = subfields.length === 1 && VARTYPE_IS_OBJ(subfields[0])
+
+    //field is a UidObject if there is only 1 subfield and the subfield is WILD_CHAR
+    const isUidObject = subfields.length === 1 && subfields[0].subfield === WILD_CHAR
 
     const handleSelect = (item, key) => {
         props.updatePage({
+            ...VAR_DEFAULTS,
+            panelType: panelType.var.key,
+            updateViewType: updateViewType.variable,
             value: concatField(prefix, key),
             variableTypes: item.variableTypes,
-            updateViewType: updateViewType.variable,
-            adjust: null,
-            panelType: panelType.var.key,
-            length: false,
         })
         props.showDropdown()
     }
@@ -50,7 +50,7 @@ function PickVarProp(props) {
         const hasObject = VARTYPE_IS_OBJ(item)
         const combinedField = concatField(prefix, key)
 
-        if (isObject || hasObject) {
+        if (isUidObject || hasObject) {
             return (
                 <DropParent
                     {...props}

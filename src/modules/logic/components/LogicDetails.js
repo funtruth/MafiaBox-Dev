@@ -1,14 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
-import * as proptool from '../proptool'
 
 import { logicType, operatorType } from '../types'
 
-import LogicExpandable from '../form/LogicExpandable';
 import LogicVarWrapper from '../vars/LogicVarWrapper'
+import LogicUpdateItem from '../update/LogicUpdateItem';
 
 export default function LogicDetails(props) {
-    const { updateRef, value } = props
+    const { value } = props
     const { 
         data,
         logicType: type,
@@ -40,14 +39,15 @@ export default function LogicDetails(props) {
                 </div>
             )
         case logicType.update.key:
+            console.log({data})
             return (
                 <div className="column">
-                    {proptool.getSubfields('', updateRef).map((item, index) => (
-                        <LogicExpandable
+                    {Object.keys(data).map((field, index) => (
+                        <LogicUpdateItem
                             {...props}
-                            key={index}
-                            property={item.subfield}
-                            prefix={item.subfield}
+                            key={field}
+                            prefix={field}
+                            data={data[field]}
                         />
                     ))}
                 </div>

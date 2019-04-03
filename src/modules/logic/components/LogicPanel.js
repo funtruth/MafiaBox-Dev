@@ -12,6 +12,7 @@ function LogicPanel(props) {
         placeholder,
         dropdown,
         path,
+        includeSubpath,
     } = props
 
     //get data of the logic item
@@ -31,8 +32,8 @@ function LogicPanel(props) {
                 currentValue: dataProp,
                 attach: data,
                 attachVar: vars,
-                path: subfieldKey ? [...path, subfieldKey] : path,
-                ignoreSubpath: true,
+                path,
+                ignoreSubpath: !includeSubpath,
             })}
             style={{
                 color: (dataProp.key || dataProp.value || dataProp.adjust) ? '#fff' : '#868686',

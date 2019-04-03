@@ -10,7 +10,7 @@ const initialState = {
                 'rss',
             ],
             fieldLength: 1,
-            dropdown: dropdownType.pickSubfield,
+            dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object,
                 variableType.rssObject,
@@ -24,7 +24,7 @@ const initialState = {
                 'gameState',
             ],
             fieldLength: 2,
-            dropdown: dropdownType.pickSubfield,
+            dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
                 variableType.rss.key,

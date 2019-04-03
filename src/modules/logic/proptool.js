@@ -43,12 +43,13 @@ export function separateField(prefix="") {
 }
 
 export function concatField(a="", b="") {return a + START_CHAR + b + END_CHAR}
+export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CHAR + START_CHAR) + END_CHAR}
 
 //returns properties of prefix existing in updateRef
 export function getSubfields(prefix, updateRef) {
     const parts = separateField(prefix),
           fields = [];
-    console.log({parts})
+          
     for (var key in updateRef) {
         let match = true;
         const fieldInfo = updateRef[key];
@@ -70,7 +71,6 @@ export function getSubfields(prefix, updateRef) {
         }
     }
     
-    console.log({fields})
     return fields;
 }
 
@@ -100,4 +100,12 @@ export function getUpdateConfig(prefix, updateRef) {
     }
 
     return {}
+}
+
+//display the variable in a way that makes more sense to the user, ONLY FOR FRONT-END
+//input => (rss)(lobby)((@choices(user)))(dead)
+//ouput => rss['lobby'][choices['user']]['dead']
+//TODOD
+export function presentVariable(string) {
+    return string.replace(/\(\(@/g, '[').replace(/\)\)/g, ']').replace(/\(/g, '[\'').replace(/\)/g, '\']')
 }

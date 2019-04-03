@@ -14,12 +14,6 @@ const getPadding = (size) => {
     }
 }
 
-const getColor = (theme) => {
-    switch(theme) {
-        default:            return '#fff'
-    }
-}
-
 export default function Button(props) {
     const {
         children,
@@ -31,7 +25,6 @@ export default function Button(props) {
     } = props
 
     const padding           = getPadding(size)
-    const color             = getColor(theme)
     const underline         = theme === 'clear'
 
     const classes = [
@@ -42,7 +35,6 @@ export default function Button(props) {
     ].join(" ")
 
     const buttonStyle = {
-        color,
         padding,
         ...style,
     }
