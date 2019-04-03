@@ -74,7 +74,7 @@ const initialState = {
             subfield: '@',
             dropdown: dropdownType.showSubfields,
             variableTypes: [
-                variableType.uid.key,
+                variableType.object.key,
             ],
         },
         'rss_lobby_@_role': {
@@ -231,7 +231,6 @@ const initialState = {
             dropdown: dropdownType.showSubfields,
             variableTypes: [
                 variableType.object.key,
-                variableType.uid.key,
             ],
         },
         'rss_choices_@_user': {

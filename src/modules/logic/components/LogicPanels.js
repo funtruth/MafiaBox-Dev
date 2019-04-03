@@ -71,7 +71,6 @@ export default function LogicPanels(props) {
                     placeholder="pick ..."
                     path={[...path, 'data']}
                     dropdown={dropdownType.declareVar}
-                    
                 />
             )
         case logicType.function.key:

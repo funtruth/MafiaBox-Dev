@@ -4,9 +4,19 @@ import { connect } from 'react-redux'
 import { dataPropToTitle } from '../LogicReducer'
 
 function LogicPanel(props) {
-    const { pageKey, fieldKey, indexKey, subfieldKey,
-        value, vars, title, placeholder, dropdown, path } = props
+    const {
+        pageKey, fieldKey, indexKey, subfieldKey,
+        value, //logic item
+        vars,
+        title,
+        placeholder,
+        dropdown,
+        path,
+    } = props
+
+    //get data of the logic item
     const data = value.data || {}
+    //get data of the logic panel
     const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 
     return (

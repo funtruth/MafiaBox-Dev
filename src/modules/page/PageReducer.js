@@ -391,10 +391,10 @@ export function receiveAction({type, payload}) {
         const handleDiff = (item) => {
             switch(item.kind) {
                 case "A":
-                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || null
+                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || ""
                     break
                 default:
-                    batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || null
+                    batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || ""
             }
         }
 

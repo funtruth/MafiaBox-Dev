@@ -3,6 +3,7 @@ export const modalType = {
     addNewField: 'modalType/add-new-field',
     deletePage: 'modalType/delete-page',
     deleteStory: 'modalType/delete-story',
+    deleteLogic: 'modalType/delete-logic',
     editPhase: 'modalType/edit-phase',
 
     editAccount: 'modalType/edit-account',

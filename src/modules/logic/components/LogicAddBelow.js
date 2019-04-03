@@ -11,7 +11,7 @@ export default function LogicAddBelow(props) {
     let handleAdd = () => {
         props.updatePage([...path, 'down'], {
             ...DEFAULT_LOGIC,
-            down: value.down,
+            down: value.down || "",
         })
     }
 

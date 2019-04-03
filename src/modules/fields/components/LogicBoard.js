@@ -45,6 +45,8 @@ function LogicBoard(props) {
                     indent={false}
                     showBorderLeft={true}
                     value={value}
+                    parentValue=""
+                    sourceValue=""
                     vars={vars}
                 />
             </div>

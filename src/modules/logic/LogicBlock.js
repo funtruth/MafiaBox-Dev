@@ -27,14 +27,13 @@ function LogicBlock(props) {
     return (
         <div
             style={{
-                marginTop: 4,
+                marginTop: 2,
                 marginLeft: indent ? 40 : 0,
                 borderLeft: showBorderLeft ? '1px dashed #666' : null,
-                borderRadius: 2,
                 font: '500 13px Segoe UI',
             }}
         >
-            <div className="row-nowrap" style={{ paddingLeft: 4 }}>
+            <div className="row-nowrap" style={{ paddingLeft: 2 }}>
                 <LogicType {...props}/>
                 <LogicPanels {...props}/>
                 <LogicOptions {...props}/>
@@ -50,6 +49,8 @@ function LogicBlock(props) {
                 indent={true}
                 showBorderLeft={true}
                 value={value.right}
+                parentValue={value}
+                sourceValue={value}
                 path={[...path, 'right']}
                 vars={compiledVars}
             />
@@ -58,6 +59,8 @@ function LogicBlock(props) {
                 indent={false}
                 showBorderLeft={false}
                 value={value.down}
+                parentValue=""
+                sourceValue={value}
                 path={[...path, 'down']}
                 vars={compiledVars}
             />

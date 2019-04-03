@@ -4,16 +4,27 @@ import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
-import { variableType, panelType, updateViewType } from '../../logic/types'
+import { panelType, updateViewType } from '../../logic/types'
 
-import DropParent from '../components/DropParent'
-import DropItem from '../components/DropItem'
-import DropTitle from '../components/DropTitle';
-import DropEmpty from '../components/DropEmpty';
+import { VARTYPE_IS_UID, VARTYPE_IS_OBJ } from '../../common/arrows';
+
+import {
+    DropEmpty,
+    DropItem,
+    DropParent,
+    DropScroll,
+    DropTitle,
+ } from '../components/Common'
 
 //@param prefix -> used with updateRef to find the proper fields
 function PickVarProp(props) {
     const { prefix, subfieldKey, updateRef, attach, attachVar } = props
+
+    const selectedValue = attach[subfieldKey] || {}
+    const subfields = proptool.getSubfields(prefix, updateRef)
+    console.log({subfields})
+    //if the entire field is an object, only render nested DropParents
+    const isObject = subfields.length === 1 && VARTYPE_IS_OBJ(subfields[0])
 
     const handleSelect = (item, key) => {
         props.updatePage({
@@ -28,10 +39,8 @@ function PickVarProp(props) {
     }
 
     const renderItem = (item, key) => {
-        //if item is an object, render another nested DropParent
-        const isObject = item.variableTypes && item.variableTypes.includes(variableType.object.key)
-
-        if (isObject) {
+        const hasObject = VARTYPE_IS_OBJ(item)
+        if (isObject || hasObject) {
             return (
                 <DropParent
                     {...props}
@@ -47,9 +56,7 @@ function PickVarProp(props) {
         }
         
         //if item not nested, check if item is currently selected
-        const selectedValue = attach[subfieldKey] || {}
         const chosen = selectedValue.value === `${prefix}_${key}`
-
         return (
             <DropItem
                 key={key}
@@ -64,32 +71,35 @@ function PickVarProp(props) {
     
 
     //get all subfields that exist in updateRef, corresponding to prefix
-    const subfields = proptool.getSubfields(prefix, updateRef)
+    //subfields is guaranteed to be an array
+    if (subfields.length === 0) {
+        return (
+            <DropScroll>
+                <DropTitle>results</DropTitle>
+                <DropEmpty>no results found</DropEmpty>
+            </DropScroll>
+        )
+    }
 
-    //get all uids from attached variables
-    const uids = _.filter(attachVar, i => i && i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-    
+    if (subfields[0].subfield === '@') {
+        //get all uids from attached variables
+        const uids = _.filter(attachVar, VARTYPE_IS_UID)
+
+        return (
+            <DropScroll>
+                <DropTitle>uids</DropTitle>
+                {uids.map(item => renderItem(item, item.key))}
+                <DropEmpty>no results found</DropEmpty>
+            </DropScroll>
+        )
+    }
+
     return (
-        <div className="drop-down-scrollable">
-            {subfields.length ?
-                //if subfield from updateRef is @, it means we must pick a uid to continue
-                subfields[0].subfield === '@' ?
-                    <>
-                        <DropTitle>uids</DropTitle>
-                        {uids.map(item => renderItem(item, item.key))}
-                        <DropEmpty>no results found</DropEmpty>
-                    </>
-                    :<>
-                        <DropTitle>subfields</DropTitle>
-                        {subfields.map(item => renderItem(item, item.subfield))}
-                        <DropEmpty>no results found</DropEmpty>
-                    </>
-                :<>
-                    <DropTitle>results</DropTitle>
-                    <DropEmpty>no results found</DropEmpty>
-                </>
-            }
-        </div>
+        <DropScroll>
+            <DropTitle>subfields</DropTitle>
+            {subfields.map(item => renderItem(item, item.subfield))}
+            <DropEmpty>no results found</DropEmpty>
+        </DropScroll>
     )
 }
 

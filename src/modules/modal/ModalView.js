@@ -23,6 +23,7 @@ import TemplateModal from './keys/TemplateModal'
 import ModalCodeView from './components/ModalCodeView'
 
 import DialogSave from './dialogs/DialogSave';
+import DeleteLogic from './dialogs/DeleteLogic'
 
 import EditTrigger from './trigger/EditTrigger'
 import EditEvent from './event/EditEvent'
@@ -63,6 +64,8 @@ class ModalView extends React.Component {
             
             case modalType.saveChanges:
                 return <DialogSave {...props}/>
+            case modalType.deleteLogic:
+                return <DeleteLogic {...props}/>
 
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>
