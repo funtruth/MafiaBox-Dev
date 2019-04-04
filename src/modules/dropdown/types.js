@@ -105,18 +105,3 @@ export const fuseType = {
 
 export const DROPDOWN_Y_MARGIN = 8
 export const DROP_TITLE_HEIGHT = 21
-
-/* @params logicItem.data
-    declare: if the data in the logic item shows there are new variable(s)
-*/
-export const VAR_DEFAULTS = {
-    adjust: "",
-    declare: "",
-    length: false,
-    mutate: false,
-    panelType: "",
-    update: false,
-    updateViewType: "",
-    value: "",
-    variableTypes: "",
-}

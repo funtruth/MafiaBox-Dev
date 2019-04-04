@@ -2,8 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { dropdownType, VAR_DEFAULTS } from '../types'
-import { panelType, updateViewType } from '../../logic/types'
+import { dropdownType } from '../types'
+import {
+    panelType,
+    updateViewType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 
 import {
     WILD_CHAR,

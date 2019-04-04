@@ -1,7 +1,10 @@
 import React from 'react'
 
-import { panelType, updateViewType } from '../../logic/types'
-import { VAR_DEFAULTS } from '../types';
+import {
+    panelType,
+    updateViewType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 
 import DropTitle from '../components/DropTitle';
 

@@ -286,12 +286,31 @@ export const updateType = {
     },
 }
 
+/* @params logicItem
+*/
 export const DEFAULT_LOGIC = {
     logicType: "",
     operatorType: "",
     data: "",
     right: "",
     down: "",
+}
+
+/* @params logicItem.data
+    declare: if the data in the logic item shows there are new variable(s)
+*/
+export const VAR_DEFAULTS = {
+    adjust: "",
+    declare: "",
+    length: false,
+    mutate: false,
+    panelType: "",
+    update: false,
+    updateViewType: "",
+    value: "",
+    variableTypes: "",
+    code: "",
+    display: "",
 }
 
 export const variableType = {

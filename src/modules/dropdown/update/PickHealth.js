@@ -1,8 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { updateType, updateFamilyType } from '../../logic/types'
-import { VAR_DEFAULTS } from '../types';
+import {
+    updateType,
+    updateFamilyType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 
 import UpdateType from './UpdateType'
 import DropTitle from '../components/DropTitle';

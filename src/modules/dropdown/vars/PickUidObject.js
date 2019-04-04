@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import * as helpers from '../../common/helpers'
 import _ from 'lodash'
 
-import { VAR_DEFAULTS } from '../types'
-import { variableType, panelType } from '../../logic/types'
+import {
+    variableType,
+    panelType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 
 import {
     DropEmpty,

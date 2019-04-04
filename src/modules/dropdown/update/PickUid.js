@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import * as proptool from '../../logic/proptool'
-import { variableType, updateViewType } from '../../logic/types'
-import { VAR_DEFAULTS } from '../types';
+import {
+    variableType,
+    updateViewType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import UpdateType from './UpdateType';
