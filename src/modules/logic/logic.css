@@ -99,6 +99,30 @@
     font: 300 12px Segoe UI;
 }
 
+.logic-updates {
+    display: flex;
+    flex-direction: row;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-left: 6px;
+}
+.logic-update {
+    padding: 4px 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+}
+.logic-display {
+    padding: 2px 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ddd;
+}
+
 .icon-pop {
     color: #999;
     cursor: pointer;

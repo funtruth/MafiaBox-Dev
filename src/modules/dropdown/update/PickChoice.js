@@ -2,29 +2,34 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    variableType,
     updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
-import UpdateType from './UpdateType';
-import DropTitle from '../components/DropTitle';
-import DropEmpty from '../components/DropEmpty'
+import {
+    VARTYPE_IS_UID,
+} from '../../common/arrows';
 
-class PickChoice extends React.Component{
-    _select = (item) => {
-        this.props.updatePage({
+import {
+    DropEmpty,
+    DropTitle,
+} from '../components/Common'
+
+export default function PickChoice(props) {
+    const { attachVar, attach, subfieldKey } = props
+
+    const handleSelect = (item) => {
+        props.updatePage({
             ...VAR_DEFAULTS,
-            update: this.props.update,
-            mutate: this.props.mutate,
+            update: props.update,
+            mutate: props.mutate,
             value: item.key || "$\"\"", //HACK
             updateViewType: updateViewType.uid,
         })
-        this.props.showDropdown()
+        props.showDropdown()
     }
 
-    _renderItem = (item) => {
-        const { attach, subfieldKey } = this.props
+    const renderItem = (item) => {
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof selectedKey === 'string' && selectedKey === item.key
 
@@ -33,7 +38,7 @@ class PickChoice extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={this._select.bind(this, item)}
+                onClick={() => handleSelect(item)}
             >
                 {item.key}
                 <i className="mdi mdi-check"/>
@@ -41,35 +46,28 @@ class PickChoice extends React.Component{
         )
     }
 
-    render() {
-        const { attachVar, attach, subfieldKey } = this.props
+    const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
+    const chosen = typeof selectedKey === 'string' && selectedKey === "$\"\""
 
-        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
-        const chosen = typeof selectedKey === 'string' && selectedKey === "$\"\""
-
-        const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-        
-        return (
+    const uids = _.filter(attachVar, VARTYPE_IS_UID)
+    
+    return (
+        <>
+            <DropTitle>uids</DropTitle>
             <div>
-                <DropTitle>uids</DropTitle>
-                <div>
-                    {uids.map(this._renderItem)}
-                    <DropEmpty>no UIDS found</DropEmpty>
-                </div>
-                <DropTitle>options</DropTitle>
-                <div
-                    className="drop-down-menu-option"
-                    chosen={chosen.toString()}
-                    onClick={this._select}
-                >
-                    <i className="drop-down-menu-icon mdi mdi-message-bulleted-off"/>
-                    no choice
-                    <i className="mdi mdi-check"/>
-                </div>
-                <UpdateType {...this.props}/>
+                {uids.map(renderItem)}
+                <DropEmpty>no UIDS found</DropEmpty>
             </div>
-        )
-    }
+            <DropTitle>options</DropTitle>
+            <div
+                className="drop-down-menu-option"
+                chosen={chosen.toString()}
+                onClick={handleSelect}
+            >
+                <i className="drop-down-menu-icon mdi mdi-message-bulleted-off"/>
+                no choice
+                <i className="mdi mdi-check"/>
+            </div>
+        </>
+    )
 }
-
-export default PickChoice

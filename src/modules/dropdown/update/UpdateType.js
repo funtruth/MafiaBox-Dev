@@ -61,9 +61,7 @@ class UpdateType extends React.Component{
 }
 
 export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
+    null,
     {
         initUpdateType,
         toggleUpdateType,

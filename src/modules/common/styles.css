@@ -121,3 +121,6 @@ div[chosen=true] > .mdi-check {
 .-t-m {
     margin-top: 10px;
 }
+.brighten:hover {
+    filter: brightness(140%);
+}

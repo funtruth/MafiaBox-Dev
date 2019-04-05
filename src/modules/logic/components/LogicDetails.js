@@ -39,7 +39,6 @@ export default function LogicDetails(props) {
                 </div>
             )
         case logicType.update.key:
-            console.log({data})
             return (
                 <div className="column">
                     {Object.keys(data).map((field, index) => (

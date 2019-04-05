@@ -66,7 +66,7 @@ import PickTimer from './update/PickTimer'
 import PickTeam from './update/PickTeam'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
-import PickUpdate from './update/PickUpdate'
+import PickNumUpdate from './update/PickNumUpdate'
 import ShowSubfields from './update/ShowSubfields';
 
 import PickEvent from './strings/PickEvent';
@@ -112,19 +112,6 @@ function DropdownView(props) {
                 break
             default:
                 renderProps.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
-        }
-        
-        switch(renderProps.key) {
-            case dropdownType.pickBoolean:
-            case dropdownType.pickHealth:
-            case dropdownType.pickUid:
-            case dropdownType.pickUpdate:
-            case dropdownType.pickTimer:
-            case dropdownType.pickChoice:
-                renderProps.update = update
-                renderProps.mutate = mutate
-                break
-            default:
         }
         
         switch(renderProps.key) {
@@ -226,8 +213,8 @@ function DropdownView(props) {
                 return <PickTrigger {...renderProps}/>
             case dropdownType.pickUid:
                 return <PickUid {...renderProps}/>
-            case dropdownType.pickUpdate:
-                return <PickUpdate {...renderProps}/>
+            case dropdownType.pickNumUpdate:
+                return <PickNumUpdate {...renderProps}/>
             case dropdownType.pickPhase:
                 return <SearchBoard {...renderProps} boardType={boardType.phases.key}/>
             case dropdownType.pickRole:
@@ -252,6 +239,7 @@ function DropdownView(props) {
 
     if (dropdownKeys.length === 0) return null
 
+    //covers the whole screen
     return (
         <div className="drop-down-pause">
             {dropdownKeys.map((item, index) => (

@@ -7,23 +7,23 @@ import {
     VAR_DEFAULTS,
 } from '../../logic/types'
 
-import UpdateType from './UpdateType'
 import DropTitle from '../components/DropTitle';
 
-class PickHealth extends React.Component{
-    _select = (item) => {
-        this.props.updatePage({
+export default function PickHealth(props) {
+    const { attach, subfieldKey, update, mutate } = props
+
+    const handleSelect = (item) => {
+        props.updatePage({
             ...VAR_DEFAULTS,
-            update: this.props.update,
-            mutate: this.props.mutate,
+            update,
+            mutate,
             updateViewType: item.updateViewType,
             value: item.key,
         })
-        this.props.showDropdown()
+        props.showDropdown()
     }
 
-    _renderItem = (item) => {
-        const { attach, subfieldKey } = this.props
+    const renderItem = (item) => {
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof selectedKey === 'string' && selectedKey === item.key
 
@@ -32,7 +32,7 @@ class PickHealth extends React.Component{
                 key={item.key}
                 className="drop-down-menu-option"
                 chosen={chosen.toString()}
-                onClick={this._select.bind(this, item)}
+                onClick={() => handleSelect(item)}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
@@ -41,20 +41,15 @@ class PickHealth extends React.Component{
         )
     }
 
-    render() {
-        let items = _(updateType)
-            .filter(i => i.family === updateFamilyType.health)
-            .sortBy(i => i.index)
-            .value()
+    let items = _(updateType)
+        .filter(i => i.family === updateFamilyType.health)
+        .sortBy(i => i.index)
+        .value()
 
-        return (
-            <div>
-                <DropTitle>health type</DropTitle>
-                {items.map(this._renderItem)}
-                <UpdateType {...this.props}/>
-            </div>
-        )
-    }
+    return (
+        <>
+            <DropTitle>health type</DropTitle>
+            {items.map(renderItem)}
+        </>
+    )
 }
-
-export default PickHealth

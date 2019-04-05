@@ -148,6 +148,43 @@ export const updateViewType = {
     boolean: 'updateViewType/boolean',
 }
 
+//show input for dynamic values
+export const numUpdateType = {
+    setTo: {
+        key: 'setTo',
+        index: 1,
+        title: 'set to',
+        icon: 'mdi mdi-numeric',
+        showInput: true,
+    },
+    incr: {
+        key: 'incr',
+        index: 2,
+        title: 'increment',
+        icon: 'mdi mdi-numeric-1-box',
+    },
+    incrBy: {
+        key: 'incrBy',
+        index: 3,
+        title: 'increment by',
+        icon: 'mdi mdi-alpha-n-box',
+        showInput: true,
+    },
+    decr: {
+        key: 'decr',
+        index: 4,
+        title: 'decrement',
+        icon: 'ion-md-arrow-round-down',
+    },
+    decrBy: {
+        key: 'decrBy',
+        index: 5,
+        title: 'decrement by',
+        icon: 'ion-md-download',
+        showInput: true,
+    },
+}
+
 //possible static and dynamic update types
 export const updateType = {
     null: {
@@ -164,8 +201,8 @@ export const updateType = {
         key: 'setTo',
         index: 1,
         family: updateFamilyType.number,
-        title: 'set to value',
-        label: 'set to value',
+        title: 'set to',
+        label: 'set to',
         icon: 'mdi mdi-numeric',
         updateViewType: updateViewType.dynamicVal,
         code: (data, field) => `${data[field].dynamic}`,
@@ -297,20 +334,20 @@ export const DEFAULT_LOGIC = {
 }
 
 /* @params logicItem.data
-    declare: if the data in the logic item shows there are new variable(s)
+    declare     => if the data in the logic item shows there are new variable(s)
+    code        => direct value from code
+    display     => what to show on the update button / FRONT-END
 */
 export const VAR_DEFAULTS = {
     adjust: "",
+    code: "",
     declare: "",
+    display: "",
     length: false,
     mutate: false,
-    panelType: "",
     update: false,
-    updateViewType: "",
     value: "",
     variableTypes: "",
-    code: "",
-    display: "",
 }
 
 export const variableType = {

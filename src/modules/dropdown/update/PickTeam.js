@@ -2,12 +2,11 @@ import React from 'react'
 
 import { VAR_DEFAULTS } from '../../logic/types';
 
-import UpdateType from './UpdateType'
 import DropTitle from '../components/DropTitle';
 
-class PickTeam extends React.Component{
-    _select = (item) => {
-        this.props.updatePage({
+export default function PickTeam(props) {
+    const handleSelect = (item) => {
+        props.updatePage({
             ...VAR_DEFAULTS,
             update: this.props.update,
             mutate: this.props.mutate,
@@ -17,7 +16,7 @@ class PickTeam extends React.Component{
         this.props.showDropdown()
     }
 
-    _renderItem = (item) => {
+    const renderItem = (item) => {
         const { attach, subfieldKey } = this.props
         const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
         const chosen = typeof selectedKey === 'string' && selectedKey === item.key
@@ -36,14 +35,9 @@ class PickTeam extends React.Component{
         )
     }
 
-    render() {
-        return (
-            <div>
-                <DropTitle>team</DropTitle>
-                <UpdateType {...this.props}/>
-            </div>
-        )
-    }
+    return (
+        <>
+            <DropTitle>team</DropTitle>
+        </>
+    )
 }
-
-export default PickTeam

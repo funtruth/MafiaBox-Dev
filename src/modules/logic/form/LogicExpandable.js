@@ -4,6 +4,7 @@ import * as proptool from '../proptool'
 
 import { updateRepo } from '../../page/PageReducer'
 import { updateTopModal } from '../../modal/ModalReducer'
+
 import UpdateButton from './UpdateButton'
 
 class LogicExpandable extends React.Component{

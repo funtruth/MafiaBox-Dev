@@ -53,9 +53,7 @@ const initialState = {
                 'counter',
             ],
             fieldLength: 3,
-            dropdown: dropdownType.pickUpdate,
-            update: true,
-            mutate: false,
+            dropdown: dropdownType.pickNumUpdate,
             variableTypes: [
                 variableType.number.key,
             ],
@@ -69,9 +67,7 @@ const initialState = {
                 'veto',
             ],
             fieldLength: 3,
-            dropdown: dropdownType.pickUpdate,
-            update: true,
-            mutate: false,
+            dropdown: dropdownType.pickNumUpdate,
             variableTypes: [
                 variableType.number.key,
             ],
@@ -86,8 +82,6 @@ const initialState = {
             ],
             fieldLength: 3,
             dropdown: dropdownType.pickTimer,
-            update: true,
-            mutate: false,
             variableTypes: [
                 variableType.number.key,
             ],
@@ -148,8 +142,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickRole,
-            update: true,
-            mutate: true,
             variableTypes: [
                 variableType.string.key,
             ],
@@ -166,8 +158,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickTeam, //TODO
-            update: true,
-            mutate: true,
             variableTypes: [
                 variableType.string.key,
             ],
@@ -184,8 +174,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickRole,
-            update: true,
-            mutate: true,
             variableTypes: [
                 variableType.string.key,
             ],
@@ -201,9 +189,7 @@ const initialState = {
                 'team',
             ],
             fieldLength: 5,
-            dropdown: dropdownType.pickUpdate,
-            update: true,
-            mutate: false,
+            dropdown: dropdownType.pickNumUpdate,
             variableTypes: [
                 variableType.number.key,
             ],
@@ -220,8 +206,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
-            update: false,
-            mutate: true,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -239,8 +223,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
-            update: false,
-            mutate: true,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -258,8 +240,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickBoolean,
-            update: false,
-            mutate: true,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -276,8 +256,6 @@ const initialState = {
             ],
             fieldLength: 4,
             dropdown: dropdownType.pickHealth,
-            update: true,
-            mutate: false,
             variableTypes: [
                 variableType.object.key,
             ],
@@ -293,8 +271,6 @@ const initialState = {
             ],
             fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
-            update: true,
-            mutate: true,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -310,8 +286,6 @@ const initialState = {
             ],
             fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
-            update: true,
-            mutate: false,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -327,8 +301,6 @@ const initialState = {
             ],
             fieldLength: 4,
             dropdown: dropdownType.pickBoolean,
-            update: true,
-            mutate: false,
             variableTypes: [
                 variableType.boolean.key,
             ],
@@ -360,7 +332,6 @@ const initialState = {
             ],
             fieldLength: 5,
             dropdown: dropdownType.pickTrigger,
-            mutate: true,
             variableTypes: [
                 variableType.uid.key,
             ],
@@ -486,53 +457,10 @@ const initialState = {
             ],
         },
     },
-    update: false,
-    mutate: false,
-}
-
-const INIT_UPDATE_TYPE = 'template/init-update-type'
-const TOGGLE_UPDATE_TYPE = 'template/toggle-update-type'
-
-export function initUpdateType(types) {
-    return (dispatch, getState) => {
-        const template = getState().template
-
-        let updates = {}
-        for (var key in types) {
-            if (key in template) {
-                updates[key] = types[key]
-            }
-        }
-
-        dispatch({
-            type: INIT_UPDATE_TYPE,
-            payload: updates,
-        })
-    }
-}
-
-export function toggleUpdateType(type) {
-    return (dispatch) => {
-        switch(type) {
-            case 'update':
-            case 'mutate':
-                dispatch({
-                    type: TOGGLE_UPDATE_TYPE,
-                    payload: type
-                })
-                break
-            default:
-        }
-
-    }
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
-        case INIT_UPDATE_TYPE:  
-            return { ...state, ...action.payload }
-        case TOGGLE_UPDATE_TYPE:
-            return { ...state, [action.payload]: !state[action.payload] }
         default:
             return state;
     }

@@ -8,6 +8,8 @@ import {
 import {
     Icon,
 } from '../../components/Common'
+import LogicUpdateTypes from './LogicUpdateTypes'
+import LogicUpdateDisplay from './LogicUpdateDisplay'
 
 export default function LogicUpdateItem(props) {
     const { prefix, data, updateRef, value, updateSource, vars, path } = props
@@ -29,8 +31,10 @@ export default function LogicUpdateItem(props) {
                             alignItems: 'center',
                         }}
                     >
+                        {!!index && <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>}
                         <div
                             className="logic-button app-onclick"
+                            highlight="true"
                             menu-type={config.dropdown}
                             app-onclick-props={JSON.stringify({
                                 subfieldKey: shortPrefix,
@@ -46,11 +50,12 @@ export default function LogicUpdateItem(props) {
                             }}
                         >
                             {field}
+                            {index + 1 === fields.length && <LogicUpdateDisplay {...props}/>}
                         </div>
-                        <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
                     </div>
                 )
             })}
+            <LogicUpdateTypes {...props}/>
         </div>
     )
 }
