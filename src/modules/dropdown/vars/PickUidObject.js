@@ -10,6 +10,14 @@ import {
 } from '../../logic/types'
 
 import {
+    VARTYPE_IS_UID_OBJ,
+    VARTYPE_IS_RSS,
+} from '../../common/arrows'
+import {
+    presentVariable,
+} from '../../logic/proptool'
+
+import {
     DropEmpty,
     DropItem,
     DropScroll,
@@ -22,23 +30,15 @@ import {
 function PickUidObject(props) {
     const { attach, subfieldKey, attachVar, updateRef } = props
     const selectedValue = attach[subfieldKey] || {}
-
-    let uidObjects = _(attachVar)
-        .filter(i => i.variableTypes && i.variableTypes.includes(variableType.uidObject.key))
-        .value()
-
-    const rssUidObjects = _(updateRef)
-        .filter(i => i.variableTypes && i.variableTypes.includes(variableType.rss.key) &&
-            i.variableTypes.includes(variableType.uidObject.key))
-        .value()
         
     let handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
             panelType: panelType.var.key,
             value: item.key,
+            display: presentVariable(item.key),
             declare: {
-                key: helpers.genUID('@uid', attachVar, 'x'),
+                key: helpers.genUID('@uid_', attachVar, 'x'),
                 variableTypes: [
                     variableType.uid.key,
                     variableType.string.key,
@@ -57,9 +57,14 @@ function PickUidObject(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 rightIcon="mdi mdi-check"
-            >{item.key}</DropItem>
+            >
+                {item.key}
+            </DropItem>
         )
     }
+
+    const uidObjects = _.filter(attachVar, VARTYPE_IS_UID_OBJ)
+    const rssUidObjects = _(updateRef).filter(VARTYPE_IS_RSS).filter(VARTYPE_IS_UID_OBJ).value()
 
     return (
         <>

@@ -2,53 +2,56 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateType,
-    updateFamilyType,
-    panelType,
+    boolUpdateType,
     variableType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
-import DropTitle from '../components/DropTitle';
+import {
+    DropItem,
+    DropTitle,
+ } from '../components/Common';
 
 export default function PickBoolean(props) {
     const { attach, subfieldKey } = props
 
+    const currentValue = attach[subfieldKey] || {}
+
+    //defaults => update: true, mutate: false
+    const updateValue = {
+        update: currentValue.update === undefined ? true : currentValue.update,
+        mutate: currentValue.mutate === undefined ? true : currentValue.mutate,
+    }
+
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            update: item.update,
-            mutate: item.mutate,
-            panelType: panelType.var.key,
-            updateViewType: item.updateViewType,
+            ...updateValue,
             value: item.key,
+            display: item.key,
+            code: item.key,
             variableTypes: [variableType.boolean.key],
         })
         props.showDropdown()
     }
 
     const renderItem = (item) => {
-        const value = attach[subfieldKey] && attach[subfieldKey].value
-        const chosen = typeof value === 'string' && value === item.key
+        const chosen = currentValue.value === item.key
         
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightIcon="mdi mdi-check"
             >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
 
-    let items = _(updateType)
-        .filter(i => i.family === updateFamilyType.boolean)
-        .sortBy(i => i.index)
-        .value()
+    const items = _.sortBy(boolUpdateType, i => i.index)
     
     return (
         <>

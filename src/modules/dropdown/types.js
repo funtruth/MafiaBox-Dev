@@ -64,6 +64,7 @@ export const dropdownType = {
     pickRole: 'dropdownType/pick-role',
     pickLibrary: 'dropdownType/pick-library',
     showSubfields: 'dropdownType/show-subfields',
+    showUidSubfield: 'dropdownType/show-uid-subfield',
 
     pickEvent: 'dropdownType/pick-event',
     pickEventVar: 'dropdownType/pick-event-var',

@@ -1,10 +1,13 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 
 import {
     concatField,
-    getSubfields,
+    getUpdateConfig,
+    WILD_CHAR,
 } from '../../logic/proptool'
+import { VARTYPE_IS_UID } from '../../common/arrows';
 
 import {
     DropParent,
@@ -12,26 +15,28 @@ import {
 } from '../components/Common'
 
 function ShowUidSubfield(props) {
-    const { subfieldKey, updateRef } = props
-    const items = getSubfields(subfieldKey, updateRef)
+    const { attachVar, subfieldKey, updateRef } = props
+
+    //get config for uid/wildcard field
+    const config = getUpdateConfig(concatField(subfieldKey, WILD_CHAR), updateRef)
+    
+    const uids = _.filter(attachVar, VARTYPE_IS_UID)
     
     return (
         <>
             <DropTitle>subfields</DropTitle>
-            {items.map(item => {
-                return (
-                    <DropParent
-                        {...props}
-                        key={item.subfield}
-                        dropdownType={item.dropdown}
-                        params={{
-                            subfieldKey: concatField(subfieldKey, item.subfield),
-                            subpath: [concatField(subfieldKey, item.subfield)],
-                        }}
-                        text={item.subfield}
-                    />
-                )
-            })}
+            {uids.map(item => (
+                <DropParent
+                    {...props}
+                    key={item.key}
+                    dropdownType={config.dropdown}
+                    params={{
+                        subfieldKey: concatField(subfieldKey, item.key),
+                        subpath: [concatField(subfieldKey, item.key)],
+                    }}
+                    text={item.key}
+                />
+            ))}
         </>
     )
 }

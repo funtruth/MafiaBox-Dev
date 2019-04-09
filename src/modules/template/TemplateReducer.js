@@ -94,7 +94,7 @@ const initialState = {
                 'lobby',
             ],
             fieldLength: 2,
-            dropdown: dropdownType.pickUid,
+            dropdown: dropdownType.showUidSubfield,
             variableTypes: [
                 variableType.object.key,
                 variableType.uidObject.key,

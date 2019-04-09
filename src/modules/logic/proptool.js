@@ -102,7 +102,7 @@ export function getUpdateConfig(prefix, updateRef) {
 
 //display the variable in proper javascript
 //input => (rss)(lobby)((choices)(user))(dead)
-//ouput => rss['lobby'][choices['user']]['dead']
+//ouput => rss.lobby[choices.user].dead
 export function presentVariable(string) {
     const fields = separateField(string)
     let str = fields[0]
@@ -111,7 +111,7 @@ export function presentVariable(string) {
         if (fields[i].charAt(0) === START_CHAR && fields[i].charAt(fields[i].length - 1) === END_CHAR) {
             str += '[' + presentVariable(fields[i]) +']'
         } else {
-            str += '[\'' + fields[i] + '\']'
+            str += '.' + fields[i]
         }
     }
        

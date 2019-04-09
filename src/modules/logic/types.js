@@ -148,7 +148,7 @@ export const updateViewType = {
     boolean: 'updateViewType/boolean',
 }
 
-//show input for dynamic values
+//@param showInput for dynamic values
 export const numUpdateType = {
     setTo: {
         key: 'setTo',
@@ -182,6 +182,21 @@ export const numUpdateType = {
         title: 'decrement by',
         icon: 'ion-md-download',
         showInput: true,
+    },
+}
+
+export const boolUpdateType = {
+    true: {
+        key: 'true',
+        index: 0,
+        title: 'true',
+        icon: 'mdi mdi-code-tags-check',
+    },
+    false: {
+        key: 'false',
+        index: 1,
+        title: 'false',
+        icon: 'mdi mdi-close-box-outline',
     },
 }
 

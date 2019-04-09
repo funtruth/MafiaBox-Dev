@@ -68,6 +68,7 @@ import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
 import PickNumUpdate from './update/PickNumUpdate'
 import ShowSubfields from './update/ShowSubfields';
+import ShowUidSubfield from './update/ShowUidSubfield';
 
 import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
@@ -223,6 +224,8 @@ function DropdownView(props) {
                 return <SearchBoard {...renderProps} boardType={boardType.library.key}/>
             case dropdownType.showSubfields:
                 return <ShowSubfields {...renderProps}/>
+            case dropdownType.showUidSubfield:
+                return <ShowUidSubfield {...renderProps}/>
 
             case dropdownType.pickEvent:
                 return <PickEvent {...renderProps}/>
