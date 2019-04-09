@@ -1,56 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class InputValue extends React.Component{
-    constructor(props) {
-        super(props)
+export default function InputValue(props) {
+    const { type, inputText, currentValue } = props
+    const [text, setText] = useState(currentValue || "")
 
-        const data = (props.attach && props.subfieldKey && props.attach[props.subfieldKey]) || {}
-        this.state = {
-            value: props.showValue ? data.dynamic : ''
-        }
-    }
-
-    _onType = e => {
-        this.setState({
-            value: e.target.value
-        })
-    }
-
-    _onKeyDown = e => {
+    const handleType = e => setText(e.target.value)
+    const handleSubmit = () => props.onSubmit(text)
+    const handleKeyDown = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                this._onSubmit()
+                handleSubmit()
                 break
             default:
         }
     }
 
-    _onSubmit = () => {
-        this.props.onSubmit(this.state.value)
-    }
 
-    render() {
-        const { type, inputText } = this.props
-
-        return (
-            <>
-                <input
-                    className="tag-input"
-                    value={this.state.value || ''}
-                    onChange={this._onType}
-                    onKeyDown={this._onKeyDown}
-                    placeholder={inputText || "Set value"}
-                    type={type || "number"}
-                    autoFocus
-                />
-                <div className="-sep"/>
-                <div className="drop-down-menu-option" onClick={this._onSubmit}>
-                    <i className="drop-down-menu-icon mdi mdi-checkbox-marked"></i>
-                    save
-                </div>
-            </>
-        )
-    }
+    return (
+        <>
+            <input
+                className="tag-input"
+                value={text}
+                onChange={handleType}
+                onKeyDown={handleKeyDown}
+                placeholder={inputText || "Set value"}
+                type={type || "number"}
+                autoFocus
+            />
+            <div className="-sep"/>
+            <div className="drop-down-menu-option" onClick={handleSubmit}>
+                <i className="drop-down-menu-icon mdi mdi-checkbox-marked"></i>
+                save
+            </div>
+        </>
+    )
 }
-
-export default InputValue

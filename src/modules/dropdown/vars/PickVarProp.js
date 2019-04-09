@@ -14,7 +14,10 @@ import {
     concatField,
     getSubfields,
 } from '../../logic/proptool'
-import { VARTYPE_IS_UID, VARTYPE_IS_OBJ } from '../../common/arrows';
+import {
+    VARTYPE_IS_UID,
+    VARTYPE_IS_OBJ,
+} from '../../common/arrows';
 
 import {
     DropEmpty,

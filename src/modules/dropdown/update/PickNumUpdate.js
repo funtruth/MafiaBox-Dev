@@ -3,12 +3,14 @@ import _ from 'lodash'
 
 import {
     numUpdateType,
-    updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 import { dropdownType } from '../types'
 
+import { codeNumUpdate } from '../../logic/codetool'
+
 import {
+    DropItem,
     DropParent,
     DropTitle,
 } from '../components/Common'
@@ -32,7 +34,7 @@ export default function PickNumUpdate(props) {
             value: item.key,
             adjust: number,
             display: item.title + ' ' + number,
-            updateViewType: item.updateViewType,
+            code: codeNumUpdate(item.key, subfieldKey, number),
         })
         props.showDropdown()
     }
@@ -43,7 +45,7 @@ export default function PickNumUpdate(props) {
             ...updateValue,
             value: item.key,
             display: item.key,
-            updateViewType: item.updateViewType,
+            code: codeNumUpdate(item.key, subfieldKey),
         })
         props.showDropdown()
     }
@@ -60,7 +62,7 @@ export default function PickNumUpdate(props) {
                     params={{
                         inputText: 'Enter a number',
                         type: 'number',
-                        showValue: chosen,
+                        currentValue: chosen ? currentValue.adjust : "",
                         onSubmit: (n) => selectDynamic(item, n),
                     }}
                     icon={item.icon}
@@ -71,16 +73,15 @@ export default function PickNumUpdate(props) {
         }
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightIcon="mdi mdi-check"
             >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
 

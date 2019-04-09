@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 export const START_CHAR = '('
 export const END_CHAR = ')'
 export const WILD_CHAR = '@'
@@ -7,8 +5,8 @@ export const WILD_CHAR = '@'
 export const START_REGEX = /\(/g
 export const END_REGEX = /\)/g
 
-//input => "(rss)(lobby)(choices(user))"
-//ouput => ["rss", "lobby", "choices(user)"]
+//input => "(rss)(lobby)((choices)(user))"
+//ouput => ["rss", "lobby", "(choices)(user)"]
 export function separateField(prefix="") {
     //make sure string is valid
     const a = (prefix.match(START_REGEX)||[]).length,
@@ -102,10 +100,20 @@ export function getUpdateConfig(prefix, updateRef) {
     return {}
 }
 
-//display the variable in a way that makes more sense to the user, ONLY FOR FRONT-END
-//input => (rss)(lobby)((@choices(user)))(dead)
+//display the variable in proper javascript
+//input => (rss)(lobby)((choices)(user))(dead)
 //ouput => rss['lobby'][choices['user']]['dead']
-//TODOD
 export function presentVariable(string) {
-    return string.replace(/\(\(@/g, '[').replace(/\)\)/g, ']').replace(/\(/g, '[\'').replace(/\)/g, '\']')
+    const fields = separateField(string)
+    let str = fields[0]
+
+    for (var i=1; i<fields.length; i++) {
+        if (fields[i].charAt(0) === START_CHAR && fields[i].charAt(fields[i].length - 1) === END_CHAR) {
+            str += '[' + presentVariable(fields[i]) +']'
+        } else {
+            str += '[\'' + fields[i] + '\']'
+        }
+    }
+       
+    return str
 }

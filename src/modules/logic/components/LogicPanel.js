@@ -8,7 +8,6 @@ function LogicPanel(props) {
         pageKey, fieldKey, indexKey, subfieldKey,
         value, //logic item
         vars,
-        title,
         placeholder,
         dropdown,
         path,
@@ -36,11 +35,11 @@ function LogicPanel(props) {
                 ignoreSubpath: !includeSubpath,
             })}
             style={{
-                color: (dataProp.key || dataProp.value || dataProp.adjust) ? '#fff' : '#868686',
+                color: dataProp.display ? '#fff' : '#868686',
             }}
         >
             <div className="text-ellipsis">
-                {dataProp.code || props.dataPropToTitle(dataProp) || title || placeholder}
+                {dataProp.display || placeholder}
             </div> 
         </div>
     )

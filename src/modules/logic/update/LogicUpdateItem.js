@@ -12,7 +12,7 @@ import LogicUpdateTypes from './LogicUpdateTypes'
 import LogicUpdateDisplay from './LogicUpdateDisplay'
 
 export default function LogicUpdateItem(props) {
-    const { prefix, data, updateRef, value, updateSource, vars, path } = props
+    const { prefix, updateRef, value, updateSource, vars, path } = props
 
     const fields = separateField(prefix)
     

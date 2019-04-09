@@ -2,9 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import { returnType } from '../../logic/types'
+import {
+    returnType,
+    VAR_DEFAULTS,
+} from '../../logic/types'
 import { modalType } from '../../modal/types';
 
+import { codeReturnType } from '../../logic/codetool';
 import { showModal } from '../../modal/ModalReducer'
 
 import {
@@ -34,7 +38,10 @@ function PickReturnType(props) {
 
     const handleSelect = (item) => {
         props.updatePage({
+            ...VAR_DEFAULTS,
             key: item.key,
+            display: item.key,
+            code: codeReturnType(item.key),
             string: '',
         })
         props.showDropdown()

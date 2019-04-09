@@ -76,7 +76,7 @@ import PickEventVarProp from './strings/PickEventVarProp';
 import PickOperator from './logic/PickOperator';
 
 function DropdownView(props) {
-    const { update, mutate, dropdownKeys } = props
+    const { dropdownKeys } = props
     
     let renderItem = (item, index) => {
         //create temporary props that are not stored in redux
@@ -254,8 +254,6 @@ function DropdownView(props) {
 export default connect(
     state => ({
         dropdownKeys: state.dropdown.dropdownKeys,
-        update: state.template.update,
-        mutate: state.template.mutate,
     }),
     {
         showDropdown,
