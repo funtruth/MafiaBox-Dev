@@ -123,23 +123,17 @@ export const comparisonType = {
     },
 }
 
-/*used to get value for UpdateButton TODO remove
-    this is separate from variableType because in an UpdateButton view
-    there are multiple possible strings to be shown, such as the difference
-    between "increment" and "increment by 2"
-*/
-export const updateViewType = {
-    number: 'updateViewType/number',
-    variable: 'updateViewType/variable',
-    staticVal: 'updateViewType/staticVal',
-    dynamicVal: 'updateViewType/dynamicVal',
-    page: 'updateViewType/page',
-    uid: 'updateViewType/uid',
-    health: 'updateViewType/health',
-    trigger: 'updateViewType/trigger',
-    events: 'updateViewType/events',
-    timer: 'updateViewType/timer',
-    boolean: 'updateViewType/boolean',
+export const updateType = {
+    number: 'updateType/number',
+    boolean: 'updateType/boolean',
+
+    variable: 'updateType/variable',
+    page: 'updateType/page',
+    uid: 'updateType/uid',
+    health: 'updateType/health',
+    trigger: 'updateType/trigger',
+    events: 'updateType/events',
+    timer: 'updateType/timer',
 }
 
 //@param showInput for dynamic values
@@ -201,7 +195,7 @@ export const healthUpdateType = {
         title: 'Basic Attack',
         label: ['mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '-1',
     },
     attack2: {
@@ -210,7 +204,7 @@ export const healthUpdateType = {
         title: 'Strong Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '-2',
     },
     attack3: {
@@ -219,7 +213,7 @@ export const healthUpdateType = {
         title: 'Superior Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '-100',
     },
     defend1: {
@@ -228,7 +222,7 @@ export const healthUpdateType = {
         title: 'Basic Defense',
         label: ['mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-half-full',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '1',
     },
     defend2: {
@@ -237,7 +231,7 @@ export const healthUpdateType = {
         title: 'Strong Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '2',
     },
     defend3: {
@@ -246,7 +240,7 @@ export const healthUpdateType = {
         title: 'Superior Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-plus',
-        updateViewType: updateViewType.health,
+        updateType: updateType.health,
         code: () => '100',
     },
 }
@@ -274,6 +268,7 @@ export const VAR_DEFAULTS = {
     length: false,
     mutate: false,
     update: false,
+    updateType: "",
     value: "",
     variableTypes: "",
 }
@@ -369,8 +364,8 @@ export const returnType = {
 }
 
 export const triggerNewVars = {
-    "$visitor": {
-        key: '$visitor',
+    "(visitor)": {
+        key: '(visitor)',
         variableTypes: [
             variableType.uid.key,
             variableType.string.key,

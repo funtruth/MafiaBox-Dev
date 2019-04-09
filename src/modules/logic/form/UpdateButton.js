@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateType, updateViewType } from '../types';
+import { updateType } from '../types';
 import { modalType } from '../../modal/types'
 
 import { showModal } from '../../modal/ModalReducer'
@@ -19,23 +19,19 @@ class UpdateButton extends React.Component{
         const info = (value.data && value.data[prefix]) || {}
 
         let buttonText = "", onClick
-        switch(info.updateViewType) {
-            case updateViewType.page:
+        switch(info.updateType) {
+            case updateType.page:
                 buttonText = pageRepo[info.value].title
                 break
-            case updateViewType.number:
-            case updateViewType.uid:
-            case updateViewType.variable:
+            case updateType.number:
+            case updateType.uid:
+            case updateType.variable:
                 buttonText = info.value
                 break
-            case updateViewType.dynamicVal:
-            case updateViewType.staticVal:
-                buttonText = updateType[info.value].title
+            case updateType.health:
+                //buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
                 break
-            case updateViewType.health:
-                buttonText = updateType[info.value].label.map((item, index) => <i className={item} key={index}/>)
-                break
-            case updateViewType.trigger:
+            case updateType.trigger:
                 onClick = () => this.props.showModal(modalType.editTrigger, {
                     pageKey,
                     indexKey,
@@ -49,7 +45,7 @@ class UpdateButton extends React.Component{
                 })
                 buttonText = <i className="mdi mdi-flag"/>
                 break
-            case updateViewType.events:
+            case updateType.events:
                 onClick = () => this.props.showModal(modalType.editEvent, {
                     subfieldKey: prefix,
                     attach: (value.data && value.data[prefix]) || {},
@@ -60,7 +56,7 @@ class UpdateButton extends React.Component{
                 })
                 buttonText = <i className="mdi mdi-calendar"/>
                 break
-            case updateViewType.timer:
+            case updateType.timer:
                 buttonText = `${Math.floor(info.value / 60 / 1000)}m${info.value % 60000 / 1000}s`
                 break
             default:

@@ -16,6 +16,8 @@ export default function LogicPanel(props) {
     //get data of the logic panel
     const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 
+    const { display } = dataProp
+
     return (
         <div
             className="logic-button app-onclick"
@@ -32,12 +34,10 @@ export default function LogicPanel(props) {
                 ignoreSubpath: !includeSubpath,
             })}
             style={{
-                color: dataProp.display ? '#fff' : '#868686',
+                color: display ? '#fff' : '#868686',
             }}
         >
-            <div className="text-ellipsis">
-                {dataProp.display || placeholder}
-            </div> 
+            <div className="text-ellipsis">{display || placeholder}</div> 
         </div>
     )
 }

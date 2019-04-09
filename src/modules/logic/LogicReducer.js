@@ -1,4 +1,4 @@
-import { logicType, returnType, updateViewType, operatorType } from './types'
+import { logicType, returnType, updateType, operatorType } from './types'
 import * as helpers from '../common/helpers'
 import { orderOfOp } from '../modal/vars/components/ops'
 import { stringToCode } from '../modal/toast/stringTool';
@@ -60,7 +60,7 @@ function recursive(library) {
     let codeCurrent = ''
     switch(type) {
         case logicType.operator.key:
-            codeCurrent = `${getCodeFromDataProp(data.var1)}${(data.comparison && data.comparison.code)||''}${getCodeFromDataProp(data.var2)}`
+            codeCurrent = `${handleOperator(data.var1)}${(data.comparison && data.comparison.code)||''}${handleOperator(data.var2)}`
             break
         case logicType.variable.key:
             codeCurrent = declareOrAssign(data)
@@ -140,7 +140,7 @@ function declareOrAssign(data) {
     return string
 }
 
-//replace variable properties from foo.$bar to foo[bar]
+//replace variable properties from foo.$bar to foo[bar] REMOVE
 export function convertPropertyFields(string) {
     let parts = string.split('_')
 
@@ -155,7 +155,7 @@ export function convertPropertyFields(string) {
     return parts
 }
 
-//$user to ${user} without []'s
+//$user to ${user} without []'s REMOVE
 export function convertString(string) {
     return string.split(' ').map(c => c.charAt(0) === '@' ? `$\{${c.substr(1)}}` : c).join(' ')
 }
@@ -173,16 +173,14 @@ function eventText(object) {
     }).join('')
 }
 
-function getCodeFromDataProp(obj = {}) {
-    switch(obj.updateViewType) {
-        case updateViewType.number:
+function handleOperator(obj = {}) {
+    switch(obj.updateType) {
+        case updateType.number:
             return applyAdjust(obj)
-        case updateViewType.uid:
-            return obj.value.substr(1)
-        case updateViewType.variable:
+        case updateType.uid:
+            return obj.value
+        case updateType.variable:
             return convertPropertyFields(applyAdjust(obj))
-        case updateViewType.staticVal:
-        case updateViewType.dynamicVal:
         default:
             return ''
     }
@@ -201,15 +199,13 @@ function applyAdjust(obj = {}) {
 function convertValue(data, field) {
     switch(typeof data[field].value) {
         case 'string':
-            switch(data[field].updateViewType) {
-                case updateViewType.staticVal:
-                case updateViewType.dynamicVal:
-                case updateViewType.number:
-                case updateViewType.variable:
+            switch(data[field].updateType) {
+                case updateType.number:
+                case updateType.variable:
                     return `\`${convertString(data[field].value)}\``
-                case updateViewType.health:
+                case updateType.health:
                     return `'${data[field].value}'`
-                case updateViewType.uid:
+                case updateType.uid:
                     return data[field].value.substr(1)
                 default:
                     return data[field].value
@@ -242,18 +238,18 @@ export function getUpdateCode(data) {
             )
         }
 
-        switch(info.updateViewType) {
-            case updateViewType.trigger:
+        switch(info.updateType) {
+            case updateType.trigger:
                 string = string.concat(`rss.${convertPropertyFields(field)}=(visitor)=>{${recursive(info)}}`)
                 break
-            case updateViewType.events:
+            case updateType.events:
                 string = string.concat(
                     Object.keys(info.value)
                         .map(stringKey => `write.updates[\`events/\${write.ts++}\`]={${eventText(info.value[stringKey])}};`)
                         .join('')
                 )
                 break
-            case updateViewType.timer:
+            case updateType.timer:
                 string = string.concat(
                     `write.updates[\`${field.split('_').map(i => i.charAt(0) === '@' ? `\${${i.substring(1)}}` : i)
                     .join('/')}\`]=Date.now() + ${info.value};`)

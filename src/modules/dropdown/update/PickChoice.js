@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateViewType,
+    updateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -24,7 +24,7 @@ export default function PickChoice(props) {
             update: props.update,
             mutate: props.mutate,
             value: item.key || "$\"\"", //HACK
-            updateViewType: updateViewType.uid,
+            updateType: updateType.uid,
         })
         props.showDropdown()
     }

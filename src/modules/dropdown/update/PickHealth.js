@@ -23,7 +23,7 @@ export default function PickHealth(props) {
         props.updatePage({
             ...VAR_DEFAULTS,
             ...updateValue,
-            updateViewType: item.updateViewType,
+            updateType: item.updateType,
             value: item.key,
         })
         props.showDropdown()

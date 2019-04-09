@@ -7,16 +7,18 @@ import DropTitle from '../components/DropTitle';
 import DropItem from '../components/DropItem';
 
 export default function PickComparison(props) {
-    const { attach, subfieldKey } = props
+    const { currentValue } = props
 
     const handleSelect = (item) => {
-        props.updatePage(item)
+        props.updatePage({
+            ...item,
+            display: item.title,
+        })
         props.showDropdown()
     }
 
     const renderItem = (item) => {
-        const selectedKey = attach[subfieldKey] && attach[subfieldKey].key
-        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
+        const chosen = currentValue.key === item.key
 
         return (
             <DropItem

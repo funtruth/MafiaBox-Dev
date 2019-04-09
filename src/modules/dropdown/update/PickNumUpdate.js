@@ -2,12 +2,11 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
+    updateType,
     numUpdateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 import { dropdownType } from '../types'
-
-import { codeNumUpdate } from '../../logic/codetool'
 
 import {
     DropItem,
@@ -16,10 +15,7 @@ import {
 } from '../components/Common'
 
 export default function PickNumUpdate(props) {
-    const { attach, subfieldKey } = props
-
-    const currentValue = attach[subfieldKey] || {}
-    const currentKey = currentValue.value
+    const { currentValue } = props
 
     //defaults => update: true, mutate: false
     const updateValue = {
@@ -34,7 +30,7 @@ export default function PickNumUpdate(props) {
             value: item.key,
             adjust: number,
             display: item.title + ' ' + number,
-            code: codeNumUpdate(item.key, subfieldKey, number),
+            updateType: updateType.number,
         })
         props.showDropdown()
     }
@@ -45,13 +41,13 @@ export default function PickNumUpdate(props) {
             ...updateValue,
             value: item.key,
             display: item.key,
-            code: codeNumUpdate(item.key, subfieldKey),
+            updateType: updateType.number,
         })
         props.showDropdown()
     }
 
     const renderItem = (item) => {
-        const chosen = currentKey === item.key
+        const chosen = currentValue.value === item.key
         
         if (item.showInput) {
             return (

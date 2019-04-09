@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-    updateViewType,
+    updateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -17,7 +17,7 @@ export default function PageDetailLib(props) {
             ...VAR_DEFAULTS,
             value: pageKey,
             display: pageRepo[pageKey].title,
-            updateViewType: updateViewType.page,
+            updateType: updateType.page,
         })
         props.showDropdown()
     }

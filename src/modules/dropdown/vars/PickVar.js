@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { dropdownType } from '../types'
 import {
     variableType,
-    updateViewType,
+    updateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -20,13 +20,12 @@ import {
 } from '../components/Common'
 
 function PickVar(props) {
-    const { attachVar, attach, subfieldKey, updateRef } = props
-    const selectedValue = attach[subfieldKey] || {}
+    const { attachVar, currentValue, updateRef } = props
 
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            updateViewType: updateViewType.uid,
+            updateType: updateType.uid,
             value: item.key,
             display: item.key,
             variableTypes: item.variableTypes,
@@ -35,7 +34,7 @@ function PickVar(props) {
     }
 
     const renderItem = (item) => {
-        const chosen = selectedValue.value === item.key
+        const chosen = currentValue.value === item.key
 
         if (VARTYPE_IS_OBJ(item)) {
             return (
@@ -68,22 +67,24 @@ function PickVar(props) {
             ...VAR_DEFAULTS,
             adjust: value,
             display: value,
-            updateViewType: updateViewType.number,
+            updateType: updateType.number,
         })
         props.showDropdown()
     }
 
     const setAdjustment = (value) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...currentValue,
             adjust: value,
+            display: currentValue.value + (value > 0 ? '+' : '') + value,
+            updateType: updateType.number,
         })
         props.showDropdown()
     }
 
     const setLength = () => {
         props.updatePage({
-            length: !selectedValue.length,
+            length: !currentValue.length,
         })
         props.showDropdown()
     }
@@ -144,7 +145,7 @@ function PickVar(props) {
             />
             <DropOption
                 show={false}
-                chosen={selectedValue.length}
+                chosen={currentValue.length}
                 onClick={setLength}
                 icon="mdi mdi-code-braces"
             >length</DropOption>

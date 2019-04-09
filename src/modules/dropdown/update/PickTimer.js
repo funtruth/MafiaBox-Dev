@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-    updateViewType,
+    updateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -46,7 +46,7 @@ class PickTimer extends React.Component{
         this.props.updatePage({
             ...VAR_DEFAULTS,
             value: timer,
-            updateViewType: updateViewType.timer,
+            updateType: updateType.timer,
         })
         this.props.showDropdown()
     }

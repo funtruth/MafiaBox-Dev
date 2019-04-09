@@ -13,6 +13,7 @@ import LogicUpdateDisplay from './LogicUpdateDisplay'
 
 export default function LogicUpdateItem(props) {
     const { prefix, updateRef, value, updateSource, vars, path } = props
+    const attach = value.data || {}
 
     const fields = separateField(prefix)
     
@@ -38,7 +39,8 @@ export default function LogicUpdateItem(props) {
                             menu-type={config.dropdown}
                             app-onclick-props={JSON.stringify({
                                 subfieldKey: shortPrefix,
-                                attach: value.data || {},
+                                attach,
+                                currentValue: attach[shortPrefix] || {},
                                 attachVar: vars,
                                 path,
                                 subpath: [shortPrefix],

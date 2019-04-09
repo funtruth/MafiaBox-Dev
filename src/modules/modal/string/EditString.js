@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './EditString.css'
 
-import { updateViewType } from '../../logic/types'
+import { updateType } from '../../logic/types'
 import { WS_EDIT_EVENT_VALUE, WS_EDIT_EVENT } from './components/EventConstants'
 import { updateSourceType } from '../../common/types';
 
@@ -36,7 +36,7 @@ export default function EditString(props) {
     let handleSave = () => {
         props.updatePage(path, {
             eventArr: workspace.eventArr,
-            updateViewType: updateViewType.events,
+            updateType: updateType.events,
         })
         props.popModalBy(1)
     }

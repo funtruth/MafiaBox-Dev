@@ -2,7 +2,7 @@ import React from 'react'
 import './EditTrigger.css'
 import { connect } from 'react-redux'
 
-import { triggerNewVars, logicType, updateViewType } from '../../logic/types'
+import { triggerNewVars, logicType, updateType } from '../../logic/types'
 import { updateSourceType } from '../../common/types';
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
@@ -18,7 +18,7 @@ function EditTrigger(props) {
     let handleSave = () => {
         props.updatePage(path.concat(subpath), {
             ...workspace,
-            updateViewType: updateViewType.trigger,
+            updateType: updateType.trigger,
         })
         props.popModalBy(1)
     }
