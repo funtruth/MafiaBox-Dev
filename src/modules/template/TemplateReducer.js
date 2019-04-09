@@ -175,7 +175,7 @@ const initialState = {
             fieldLength: 5,
             dropdown: dropdownType.pickRole,
             variableTypes: [
-                variableType.string.key,
+                variableType.function.key,
             ],
         },
         '(rss)(lobby)(@)(role)(charges)': {

@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { dropdownType } from '../types'
 import {
     variableType,
-    panelType,
     updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
@@ -13,9 +12,12 @@ import {
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 
 import BoardLib from '../library/BoardLib';
-import DropParent from '../components/DropParent'
-import DropTitle from '../components/DropTitle';
-import DropOption from '../components/DropOption'
+import {
+    DropItem,
+    DropOption,
+    DropParent,
+    DropTitle,
+} from '../components/Common'
 
 function PickVar(props) {
     const { attachVar, attach, subfieldKey, updateRef } = props
@@ -24,9 +26,9 @@ function PickVar(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            panelType: panelType.var.key,
             updateViewType: updateViewType.uid,
             value: item.key,
+            display: item.key,
             variableTypes: item.variableTypes,
         })
         props.showDropdown()
@@ -50,15 +52,14 @@ function PickVar(props) {
         }
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
+                rightIcon="mdi mdi-check"
             >
                 {item.key}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
 
@@ -66,7 +67,7 @@ function PickVar(props) {
         props.updatePage({
             ...VAR_DEFAULTS,
             adjust: value,
-            panelType: panelType.var.key,
+            display: value,
             updateViewType: updateViewType.number,
         })
         props.showDropdown()

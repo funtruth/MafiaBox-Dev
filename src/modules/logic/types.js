@@ -123,12 +123,6 @@ export const comparisonType = {
     },
 }
 
-export const updateFamilyType = {
-    number: 'family/number',
-    boolean: 'family/boolean',
-    health: 'family/health',
-}
-
 /*used to get value for UpdateButton TODO remove
     this is separate from variableType because in an UpdateButton view
     there are multiple possible strings to be shown, such as the difference
@@ -200,86 +194,10 @@ export const boolUpdateType = {
     },
 }
 
-//possible static and dynamic update types
-export const updateType = {
-    null: {
-        key: 'null',
-        index: 0,
-        family: updateFamilyType.number,
-        title: 'null',
-        label: 'null',
-        icon: 'mdi mdi-swap-horizontal-bold',
-        updateViewType: updateViewType.staticVal,
-        code: () => 'null',
-    },
-    setTo: {
-        key: 'setTo',
-        index: 1,
-        family: updateFamilyType.number,
-        title: 'set to',
-        label: 'set to',
-        icon: 'mdi mdi-numeric',
-        updateViewType: updateViewType.dynamicVal,
-        code: (data, field) => `${data[field].dynamic}`,
-    },
-    incr: {
-        key: 'incr',
-        index: 2,
-        family: updateFamilyType.number,
-        title: 'increment',
-        icon: 'mdi mdi-numeric-1-box',
-        updateViewType: updateViewType.staticVal,
-        code: (data, field) => `${field} + 1`,
-    },
-    incrBy: {
-        key: 'incrBy',
-        index: 3,
-        family: updateFamilyType.number,
-        title: 'increment by',
-        icon: 'mdi mdi-alpha-n-box',
-        updateViewType: updateViewType.dynamicVal,
-        code: (data, field) => `${field} + ${data[field].dynamic}`,
-    },
-    decr: {
-        key: 'decr',
-        index: 4,
-        family: updateFamilyType.number,
-        title: 'decrement',
-        icon: 'ion-md-arrow-round-down',
-        updateViewType: updateViewType.staticVal,
-        code: (data, field) => `${field} - 1`,
-    },
-    decrBy: {
-        key: 'decrBy',
-        index: 5,
-        family: updateFamilyType.number,
-        title: 'decrement by',
-        icon: 'ion-md-download',
-        updateViewType: updateViewType.dynamicVal,
-        code: (data, field) => `${field} - ${data[field].dynamic}`,
-    },
-    true: {
-        key: 'true',
-        index: 6,
-        family: updateFamilyType.boolean,
-        title: 'true',
-        icon: 'mdi mdi-code-tags-check',
-        updateViewType: updateViewType.staticVal,
-        code: () => 'true',
-    },
-    false: {
-        key: 'false',
-        index: 7,
-        family: updateFamilyType.boolean,
-        title: 'false',
-        icon: 'mdi mdi-close-box-outline',
-        updateViewType: updateViewType.staticVal,
-        code: () => 'false',
-    },
+export const healthUpdateType = {
     attack1: {
         key: 'attack1',
         index: 0,
-        family: updateFamilyType.health,
         title: 'Basic Attack',
         label: ['mdi mdi-sword'],
         icon: 'mdi mdi-sword',
@@ -289,7 +207,6 @@ export const updateType = {
     attack2: {
         key: 'attack2',
         index: 1,
-        family: updateFamilyType.health,
         title: 'Strong Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
@@ -299,7 +216,6 @@ export const updateType = {
     attack3: {
         key: 'attack3',
         index: 2,
-        family: updateFamilyType.health,
         title: 'Superior Attack',
         label: ['mdi mdi-sword', 'mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
@@ -309,7 +225,6 @@ export const updateType = {
     defend1: {
         key: 'defend1',
         index: 3,
-        family: updateFamilyType.health,
         title: 'Basic Defense',
         label: ['mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-half-full',
@@ -319,7 +234,6 @@ export const updateType = {
     defend2: {
         key: 'defend2',
         index: 4,
-        family: updateFamilyType.health,
         title: 'Strong Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield',
@@ -329,7 +243,6 @@ export const updateType = {
     defend3: {
         key: 'defend3',
         index: 5,
-        family: updateFamilyType.health,
         title: 'Superior Defense',
         label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-plus',
@@ -420,6 +333,13 @@ export const variableType = {
         title: 'Room Snapshot',
         icon: 'mdi mdi-film',
         subtype: 'object',
+        declarable: false,
+    },
+    function: {
+        key: 'function',
+        title: 'Function',
+        icon: 'mdi mdi-function',
+        subtype: '',
         declarable: false,
     },
 }

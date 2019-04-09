@@ -1,4 +1,4 @@
-import { logicType, returnType, updateType, updateViewType, operatorType, panelType } from './types'
+import { logicType, returnType, updateViewType, operatorType } from './types'
 import * as helpers from '../common/helpers'
 import { orderOfOp } from '../modal/vars/components/ops'
 import { stringToCode } from '../modal/toast/stringTool';
@@ -11,21 +11,6 @@ const initialState = {}
 export function getCode(library) {
     return (dispatch) => {
         return beautify_js(`(rss, write, choice)=>{${recursive(library)}}`, {brace_style: 'end-expand'})
-    }
-}
-
-//used for LogicPanel to get proper title
-export function dataPropToTitle(obj) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        switch(obj.panelType) {
-            case panelType.page.key:
-                return pageRepo[obj.value] && pageRepo[obj.value].title
-            case panelType.var.key:
-                return applyAdjust(obj)
-            default:
-        }
     }
 }
 
@@ -189,23 +174,15 @@ function eventText(object) {
 }
 
 function getCodeFromDataProp(obj = {}) {
-    switch(obj.panelType) {
-        case panelType.page.key:
-            return `'${obj.value}'`
-        case panelType.var.key:
-            switch(obj.updateViewType) {
-                case updateViewType.number:
-                    return applyAdjust(obj)
-                case updateViewType.uid:
-                    return obj.value.substr(1)
-                case updateViewType.variable:
-                    return convertPropertyFields(applyAdjust(obj))
-                case updateViewType.staticVal:
-                case updateViewType.dynamicVal:
-                    return updateType[obj.value].title
-                default:
-                    return ''
-            }
+    switch(obj.updateViewType) {
+        case updateViewType.number:
+            return applyAdjust(obj)
+        case updateViewType.uid:
+            return obj.value.substr(1)
+        case updateViewType.variable:
+            return convertPropertyFields(applyAdjust(obj))
+        case updateViewType.staticVal:
+        case updateViewType.dynamicVal:
         default:
             return ''
     }
@@ -227,7 +204,6 @@ function convertValue(data, field) {
             switch(data[field].updateViewType) {
                 case updateViewType.staticVal:
                 case updateViewType.dynamicVal:
-                    return updateType[data[field].value].code(data, convertPropertyFields(field))
                 case updateViewType.number:
                 case updateViewType.variable:
                     return `\`${convertString(data[field].value)}\``

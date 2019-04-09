@@ -1,9 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import { dataPropToTitle } from '../LogicReducer'
-
-function LogicPanel(props) {
+export default function LogicPanel(props) {
     const {
         pageKey, fieldKey, indexKey, subfieldKey,
         value, //logic item
@@ -44,10 +41,3 @@ function LogicPanel(props) {
         </div>
     )
 }
-
-export default connect(
-    null,
-    {
-        dataPropToTitle,
-    }
-)(LogicPanel)

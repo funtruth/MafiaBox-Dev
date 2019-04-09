@@ -4,7 +4,6 @@ import _ from 'lodash'
 
 import { dropdownType } from '../types'
 import {
-    panelType,
     updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
@@ -45,9 +44,9 @@ function PickVarProp(props) {
     const handleSelect = (item, key) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            panelType: panelType.var.key,
             updateViewType: updateViewType.variable,
             value: concatField(prefix, key),
+            display: concatField(prefix, key),
             variableTypes: item.variableTypes,
         })
         props.showDropdown()

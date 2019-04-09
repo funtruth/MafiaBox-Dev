@@ -1,7 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { updateType, updateFamilyType, variableType } from '../../logic/types'
+import {
+    variableType,
+    boolUpdateType,
+} from '../../logic/types'
 import { DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
 
 import DropTitle from '../components/DropTitle';
@@ -20,13 +23,10 @@ export default function PickBooleanAssign(props) {
         props.showDropdown()
     }
 
-    let items = _(updateType)
-        .filter(i => i.family === updateFamilyType.boolean)
-        .sortBy(i => i.index)
-        .value()
+    let items = _.sortBy(boolUpdateType, i => i.index)
     
     return (
-        <div>
+        <>
             <DropTitle>boolean type</DropTitle>
             {items.map(item => {
                 const chosen = typeof selectedValue === 'string' && selectedValue === item.key
@@ -43,6 +43,6 @@ export default function PickBooleanAssign(props) {
                     </DropItem>
                 )
             })}
-        </div>
+        </>
     )
 }

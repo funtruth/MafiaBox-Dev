@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-    panelType,
     updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
@@ -17,7 +16,7 @@ export default function PageDetailLib(props) {
         props.updatePage({
             ...VAR_DEFAULTS,
             value: pageKey,
-            panelType: panelType.page.key,
+            display: pageRepo[pageKey].title,
             updateViewType: updateViewType.page,
         })
         props.showDropdown()

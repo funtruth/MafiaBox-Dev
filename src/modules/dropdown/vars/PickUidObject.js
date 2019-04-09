@@ -5,7 +5,6 @@ import _ from 'lodash'
 
 import {
     variableType,
-    panelType,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -34,7 +33,6 @@ function PickUidObject(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            panelType: panelType.var.key,
             value: item.key,
             display: presentVariable(item.key),
             declare: {

@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {
-    panelType,
     updateViewType,
     VAR_DEFAULTS,
 } from '../../logic/types'
@@ -18,7 +17,7 @@ function PageLib(props) {
         props.updatePage({
             ...VAR_DEFAULTS,
             value: pageKey,
-            panelType: panelType.page.key,
+            display: pageRepo[pageKey].title,
             updateViewType: updateViewType.page,
         })
         props.showDropdown()
