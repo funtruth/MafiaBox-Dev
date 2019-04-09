@@ -39,16 +39,6 @@ export const logicType = {
     },
 }
 
-//helps us process the LogicPanel string
-export const panelType = {
-    page: {
-        key: 'page',
-    },
-    var: {
-        key: 'var',
-    },
-}
-
 export const operatorType = {
     if: {
         key: 'if',
@@ -126,14 +116,14 @@ export const comparisonType = {
 export const updateType = {
     number: 'updateType/number',
     boolean: 'updateType/boolean',
+    health: 'updateType/health',
+    timer: 'updateType/timer',
 
     variable: 'updateType/variable',
     page: 'updateType/page',
     uid: 'updateType/uid',
-    health: 'updateType/health',
     trigger: 'updateType/trigger',
     events: 'updateType/events',
-    timer: 'updateType/timer',
 }
 
 //@param showInput for dynamic values
@@ -193,54 +183,42 @@ export const healthUpdateType = {
         key: 'attack1',
         index: 0,
         title: 'Basic Attack',
-        label: ['mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateType: updateType.health,
         code: () => '-1',
     },
     attack2: {
         key: 'attack2',
         index: 1,
         title: 'Strong Attack',
-        label: ['mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateType: updateType.health,
         code: () => '-2',
     },
     attack3: {
         key: 'attack3',
         index: 2,
         title: 'Superior Attack',
-        label: ['mdi mdi-sword', 'mdi mdi-sword', 'mdi mdi-sword'],
         icon: 'mdi mdi-sword',
-        updateType: updateType.health,
         code: () => '-100',
     },
     defend1: {
         key: 'defend1',
         index: 3,
         title: 'Basic Defense',
-        label: ['mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-half-full',
-        updateType: updateType.health,
         code: () => '1',
     },
     defend2: {
         key: 'defend2',
         index: 4,
         title: 'Strong Defense',
-        label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield',
-        updateType: updateType.health,
         code: () => '2',
     },
     defend3: {
         key: 'defend3',
         index: 5,
         title: 'Superior Defense',
-        label: ['mdi mdi-shield-half-full', 'mdi mdi-shield-half-full', 'mdi mdi-shield-half-full'],
         icon: 'mdi mdi-shield-plus',
-        updateType: updateType.health,
         code: () => '100',
     },
 }

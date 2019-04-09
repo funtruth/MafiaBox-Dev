@@ -16,11 +16,11 @@ export function codeNumUpdate(item, field) {
         case numUpdateType.setTo.key:
             return adjust
         case numUpdateType.incr.key:
-            return fieldJS + '+1'
+            return '+=1'
         case numUpdateType.incrBy.key:
-            return fieldJS + '+' + adjust
+            return '+=' + adjust
         case numUpdateType.decr.key:
-            return fieldJS + '-1'
+            return '-=1'
         case numUpdateType.decrBy.key:
             return fieldJS + '-' + adjust
         default:

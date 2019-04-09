@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
+    updateType,
     VAR_DEFAULTS,
     healthUpdateType,
 } from '../../logic/types'
@@ -10,7 +11,6 @@ import DropTitle from '../components/DropTitle';
 
 export default function PickHealth(props) {
     const { attach, subfieldKey } = props
-
     const currentValue = attach[subfieldKey] || {}
 
     //defaults => update: true, mutate: false
@@ -23,8 +23,9 @@ export default function PickHealth(props) {
         props.updatePage({
             ...VAR_DEFAULTS,
             ...updateValue,
-            updateType: item.updateType,
             value: item.key,
+            display: item.title,
+            updateType: updateType.health,
         })
         props.showDropdown()
     }
@@ -47,7 +48,6 @@ export default function PickHealth(props) {
     }
 
     const items = _.sortBy(healthUpdateType, i => i.index)
-
     return (
         <>
             <DropTitle>health type</DropTitle>

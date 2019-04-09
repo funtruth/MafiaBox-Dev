@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
     updateType,
@@ -7,85 +7,66 @@ import {
 
 import DropTitle from '../components/DropTitle';
 
-class PickTimer extends React.Component{
-    constructor(props) {
-        super(props)
-        const timer = (props.attach[props.subfieldKey] && props.attach[props.subfieldKey].value) || 0
-        this.state = {
-            min: Math.floor(timer / 60 / 1000),
-            sec: timer % 60000 / 1000,
-        }
-    }
-
-    _onMin = (e) => {
-        this.setState({
-            min: e.target.value,
-        })
-    }
+export default function PickTimer(props) {
+    const { attach, subfieldKey } = props
+    const currentValue = attach[subfieldKey]
     
-    _onSec = (e) => {
-        this.setState({
-            sec: e.target.value,
-        })
-    }
+    const timer = currentValue.value || 0
 
-    _onFocus = () => {
-        const { min, sec } = this.state
+    const [min, setMin] = useState(Math.floor(timer / 60 / 1000))
+    const [sec, setSec] = useState(timer % 60000 / 1000)
+
+    const onMin = (e) => setMin(e.target.value)
+    const onSec = (e) => setSec(e.target.value)
+
+    const onFocus = () => {
         if (sec > 60) {
-            this.setState({
-                min: min + Math.floor(sec / 60),
-                sec: sec % 60,
-            })
+            setMin(min + Math.floor(sec / 60))
+            setSec(sec % 60)
         }
     }
 
-    _onSave = () => {
-        const { min, sec } = this.state
+    const onSave = () => {
         const timer = (60 * parseInt(min) + parseInt(sec)) * 1000
         
-        this.props.updatePage({
+        props.updatePage({
             ...VAR_DEFAULTS,
             value: timer,
+            display: min + 'm' + sec + 's',
             updateType: updateType.timer,
         })
-        this.props.showDropdown()
+        props.showDropdown()
     }
 
-    render() {
-        const { min, sec } = this.state
-        
-        return (
-            <div>
-                <DropTitle>set a timer</DropTitle>
-                <div className="row" style={{ justifyContent: 'center' }}>
-                    <input
-                        className="field-time-input border-right"
-                        value={min || ''}
-                        placeholder="00m"
-                        type="number"
-                        onChange={this._onMin}
-                        onFocus={this._onFocus}
-                    />
-                    <input
-                        className="field-time-input"
-                        value={sec || ''}
-                        placeholder="00s"
-                        type="number"
-                        onChange={this._onSec}
-                        onFocus={this._onFocus}
-                    />
-                </div>
-                <div className="-sep"/>
-                <div
-                    className="drop-down-menu-option"
-                    onClick={this._onSave}
-                >
-                    <i className="drop-down-menu-icon mdi mdi-content-save"/>
-                    save
-                </div>
+    return (
+        <>
+            <DropTitle>set a timer</DropTitle>
+            <div className="row" style={{ justifyContent: 'center' }}>
+                <input
+                    className="field-time-input border-right"
+                    value={min}
+                    placeholder="00m"
+                    type="number"
+                    onChange={onMin}
+                    onFocus={onFocus}
+                />
+                <input
+                    className="field-time-input"
+                    value={sec}
+                    placeholder="00s"
+                    type="number"
+                    onChange={onSec}
+                    onFocus={onFocus}
+                />
             </div>
-        )
-    }
+            <div className="-sep"/>
+            <div
+                className="drop-down-menu-option"
+                onClick={onSave}
+            >
+                <i className="drop-down-menu-icon mdi mdi-content-save"/>
+                save
+            </div>
+        </>
+    )
 }
-
-export default PickTimer

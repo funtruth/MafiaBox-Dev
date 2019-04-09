@@ -3,8 +3,11 @@ import _ from 'lodash'
 
 import { logicType } from '../../logic/types'
 
-import DropParent from '../components/DropParent'
-import DropTitle from '../components/DropTitle';
+import {
+    DropItem,
+    DropParent,
+    DropTitle,
+} from '../components/Common'
 
 export default function PickLogic(props) {
     const { attach } = props
@@ -43,25 +46,26 @@ export default function PickLogic(props) {
         }
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightIcon="mdi mdi-check"
                 style={{
                     backgroundColor: chosen && item.color,
                 }}
             >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
                 {item.title}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
+
+    const items = _.orderBy(logicType, i => i.index)
     return (
         <>
             <DropTitle>logic types</DropTitle>
-            {_.orderBy(logicType, i => i.index).map(renderItem)}
+            {items.map(renderItem)}
         </>
     )
 }

@@ -14,7 +14,8 @@ import {
  } from '../components/Common';
 
 export default function PickBoolean(props) {
-    const { currentValue } = props
+    const { attach, subfieldKey } = props
+    const currentValue = attach[subfieldKey]
 
     //defaults => update: true, mutate: false
     const updateValue = {
