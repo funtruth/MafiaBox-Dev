@@ -315,7 +315,7 @@ const initialState = {
                 'trigger',
             ],
             fieldLength: 4,
-            dropdown: dropdownType.pickUid,
+            dropdown: dropdownType.showUidSubfield,
             variableTypes: [
                 variableType.object.key,
             ],

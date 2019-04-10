@@ -8,7 +8,7 @@ import DropItem from '../components/DropItem';
 
 export default function PickComparison(props) {
     const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey]
+    const currentValue = attach[subfieldKey] || {}
 
     const handleSelect = (item) => {
         props.updatePage({

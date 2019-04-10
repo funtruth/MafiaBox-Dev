@@ -15,7 +15,7 @@ import {
 
 export default function PickBoolean(props) {
     const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey]
+    const currentValue = attach[subfieldKey] || {}
 
     //defaults => update: true, mutate: false
     const updateValue = {

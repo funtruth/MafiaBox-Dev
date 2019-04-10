@@ -9,7 +9,7 @@ import DropTitle from '../components/DropTitle';
 
 export default function PickTimer(props) {
     const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey]
+    const currentValue = attach[subfieldKey] || {}
     
     const timer = currentValue.value || 0
 

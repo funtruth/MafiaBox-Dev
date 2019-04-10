@@ -16,7 +16,7 @@ import {
 
 export default function PickNumUpdate(props) {
     const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey]
+    const currentValue = attach[subfieldKey] || {}
 
     //defaults => update: true, mutate: false
     const updateValue = {

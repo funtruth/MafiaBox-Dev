@@ -67,7 +67,6 @@ div[chosen=true] > .mdi-check {
 }
 .mdi-check {
     opacity: 0;
-    margin-left: auto;
     padding-left: 10px;
     text-align: center;
 }
