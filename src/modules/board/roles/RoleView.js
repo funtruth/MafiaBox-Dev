@@ -8,19 +8,15 @@ import RoleHeader from './components/RoleHeader';
 import RoleGrid from './components/RoleGrid'
 
 function RoleView(props) {
-    const { storyKey, storyRepo, pageMap } = props
+    const { match, storyRepo, pageMap } = props
+    const { params } = match
+    const { storyKey } = params
     
     const storyInfo = storyRepo[storyKey] || {}
     const { publishKey } = storyInfo
 
     const devStories = pageMap[storyKey] || []
     const pubStories = pageMap[publishKey] || []
-
-    const handleHide = (e) => {
-        if (e.target.classList.contains('role-modal')) {
-            props.onHide()
-        }
-    }
 
     const onDevEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
@@ -32,32 +28,28 @@ function RoleView(props) {
         props.movePageWithinMap(publishKey, oldIndex, newIndex)
     }
 
-    if (!storyKey) return null
-
     return (
-        <div className="role-modal" onClick={handleHide}>
-            <div className="role-view">
-                <RoleHeader storyKey={storyKey} onHide={props.onHide}/>
-                <RoleGrid
-                    storyKey={storyKey}
-                    items={devStories}
-                    title="In Development"
-                    onSortEnd={onDevEnd}
-                    axis={'xy'}
-                    transitionDuration={500}
-                    distance={2}
-                />
-                <RoleGrid
-                    storyKey={publishKey}
-                    hideAdd
-                    items={pubStories}
-                    title="Published"
-                    onSortEnd={onPubEnd}
-                    axis={'xy'}
-                    transitionDuration={500}
-                    distance={2}
-                />
-            </div>
+        <div className="role-view">
+            <RoleHeader storyKey={storyKey} onHide={props.onHide}/>
+            <RoleGrid
+                storyKey={storyKey}
+                items={devStories}
+                title="In Development"
+                onSortEnd={onDevEnd}
+                axis={'xy'}
+                transitionDuration={500}
+                distance={2}
+            />
+            <RoleGrid
+                storyKey={publishKey}
+                hideAdd
+                items={pubStories}
+                title="Published"
+                onSortEnd={onPubEnd}
+                axis={'xy'}
+                transitionDuration={500}
+                distance={2}
+            />
         </div>
     )
 }

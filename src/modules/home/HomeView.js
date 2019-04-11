@@ -9,8 +9,10 @@ import LandingView from './landing/LandingView'
 import DashboardView from './dashboard/DashboardView'
 import FunctionView from '../board/views/FunctionView'
 import PatchView from '../board/patch/PatchView';
-import FlowView from '../board/views/FlowView'
+import RoleView from '../board/roles/RoleView';
 import WindowTemplateView from '../template/WindowTemplateVIew'
+import PhaseModeView from '../board/patch/PhaseModeView';
+import PhaseFlowView from '../board/phases/PhaseFlowView';
 import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
 import EventView from '../board/views/EventView'
@@ -27,10 +29,12 @@ export default function HomeView(props) {
                     <Route exact path="/:projectKey/library" component={FunctionView}/>
                     <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
                     <Route exact path="/:projectKey/roles" component={PatchView}/>
-                    <Route exact path="/:projectKey/roles/:pageKey" component={WindowPageView}/>
+                    <Route exact path="/:projectKey/roles/:storyKey" component={RoleView}/>
+                    <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/defaults/:boardType" component={WindowTemplateView}/>
-                    <Route exact path="/:projectKey/phases" component={FlowView}/>
-                    <Route exact path="/:projectKey/phases/:pageKey" component={WindowPageView}/>
+                    <Route exact path="/:projectKey/phases" component={PhaseModeView}/>
+                    <Route exact path="/:projectKey/phases/:storyKey" component={PhaseFlowView}/>
+                    <Route exact path="/:projectKey/phases/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/events" component={EventView}/>
                     <Route exact path="/:projectKey/testhub" component={TestHubView}/>
                 </Switch>

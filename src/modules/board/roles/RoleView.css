@@ -16,11 +16,6 @@
 .role-view {
     display: flex;
     flex-direction: column;
-    height: 90%;
-    width: 85%;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: rgba(54, 57, 64);
     animation: slideinfrombottom 0.25s;
     -webkit-animation: slideinfrombottom 0.25s;
 }

@@ -8,15 +8,15 @@ import { moveStory } from '../../page/PageReducer'
 
 import PatchGrid from './components/PatchGrid';
 
-function PatchView(props) {
+function PhaseModeView(props) {
     const { storyMap } = props
-    const stories = storyMap[boardType.roles.key]
+    const stories = storyMap[boardType.phases.key]
 
     const areStories = !!stories
 
     const onSortEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
-        props.moveStory(boardType.roles.key, oldIndex, newIndex)
+        props.moveStory(boardType.phases.key, oldIndex, newIndex)
     }
 
     return (
@@ -25,7 +25,7 @@ function PatchView(props) {
                 <PatchGrid
                     {...props}
                     items={stories}
-                    boardType={boardType.roles.key}
+                    boardType={boardType.phases.key}
                     onSortEnd={onSortEnd}
                     axis={'xy'}
                     transitionDuration={500}
@@ -43,4 +43,4 @@ export default connect(
     {
         moveStory,
     }
-)(PatchView)
+)(PhaseModeView)

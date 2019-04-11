@@ -2,18 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { SortableContainer } from 'react-sortable-hoc';
 
-import { boardType } from '../../../fields/defaults';
-
 import { addStory } from '../../../page/PageReducer'
+import { navigate } from '../../../navigation/NavReducer'
 
 import PatchGridItem from './PatchGridItem';
 import EmptyGridComponent from '../../components/EmptyGridComponent';
 
 const PatchGrid = SortableContainer((props) => {
-    const { items } = props
+    const { items, boardType, location } = props
+
+    const handleClick = (storyKey) => {
+        if (!storyKey) return;
+        props.navigate(location.pathname + '/' + storyKey)
+    }
 
     const handleAdd = () => {
-        props.addStory(boardType.roles.key)
+        props.addStory(boardType)
     }
     
     return (
@@ -24,7 +28,7 @@ const PatchGrid = SortableContainer((props) => {
                         key={`item-${storyKey}`}
                         storyKey={storyKey}
                         index={index}
-                        onClick={props.onClick}
+                        onClick={handleClick}
                     />
                 )
             })}
@@ -41,5 +45,6 @@ export default connect(
     null,
     {
         addStory,
+        navigate,
     }
 )(PatchGrid)

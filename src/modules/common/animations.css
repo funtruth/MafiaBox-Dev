@@ -9,7 +9,7 @@
 }
 
 @keyframes slideinfrombottom {
-    from { transform: translateY(200px); }
+    from { transform: translateY(50px); }
     to   { transform: translateY(0px); }
 }
 
