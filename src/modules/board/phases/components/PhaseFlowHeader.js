@@ -8,7 +8,8 @@ import {
     addPageToMap,
 } from '../../../page/PageReducer'
 
-function RoleHeader(props) {
+function PhaseFlowHeader(props) {
+    console.log({props})
     const { storyKey, storyRepo } = props
     const storyInfo = storyRepo[storyKey] || {}
     
@@ -36,7 +37,7 @@ function RoleHeader(props) {
     }
 
     const handleAdd = () => {
-        props.addPageToMap(storyKey, boardType.roles.key)
+        props.addPageToMap(storyKey, boardType.phases.key)
     }
 
     return (
@@ -74,4 +75,4 @@ export default connect(
         updateStory,
         addPageToMap,
     }
-)(RoleHeader)
+)(PhaseFlowHeader)

@@ -2,7 +2,9 @@ import React from 'react'
 import './RoleView.css'
 import { connect } from 'react-redux'
 
-import { movePageWithinMap } from '../../page/PageReducer'
+import {
+    movePageWithinMap,
+} from '../../page/PageReducer'
 
 import RoleHeader from './components/RoleHeader';
 import RoleGrid from './components/RoleGrid'
@@ -30,7 +32,7 @@ function RoleView(props) {
 
     return (
         <div className="role-view">
-            <RoleHeader storyKey={storyKey} onHide={props.onHide}/>
+            <RoleHeader storyKey={storyKey}/>
             <RoleGrid
                 storyKey={storyKey}
                 items={devStories}

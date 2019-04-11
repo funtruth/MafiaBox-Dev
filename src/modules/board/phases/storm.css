@@ -46,7 +46,7 @@
 }
 
 .srd-node--selected>* {
-    border-color: #00c0ff !important
+    border: 2px solid #00c0ff !important
 }
 
 .srd-port {
@@ -62,6 +62,7 @@
 
 .srd-default-node {
     border-radius: 5px;
+    border: 2px solid #666;
     font-family: sans-serif;
     color: white;
     overflow: visible;
