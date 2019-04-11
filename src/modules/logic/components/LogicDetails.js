@@ -7,16 +7,24 @@ import LogicUpdateItem from '../update/LogicUpdateItem';
 
 export default function LogicDetails(props) {
     const { value, path } = props
-    const { data, vars } = value
+    const { data, declare, assign } = value
 
     return (
         <div className="column">
-            {vars && Object.keys(vars).map(variable => (
+            {declare && Object.keys(declare).map(variable => (
                 <LogicVarWrapper
                     {...props}
                     key={variable}
-                    item={vars[variable]}
-                    path={[...path, 'vars']}
+                    item={declare[variable]}
+                    path={[...path, 'declare']}
+                />
+            ))}
+            {assign && Object.keys(assign).map(variable => (
+                <LogicVarWrapper
+                    {...props}
+                    key={variable}
+                    item={assign[variable]}
+                    path={[...path, 'assign']}
                 />
             ))}
             {value.logicType === logicType.update.key &&

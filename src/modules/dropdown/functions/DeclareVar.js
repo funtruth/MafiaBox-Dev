@@ -36,16 +36,18 @@ export default function DeclareVar(props) {
 
         const variableName = START_CHAR + value + END_CHAR
         props.updatePage({
-            [variableName]: {
-                ...VAR_DEFAULTS,
-                value: variableName,
-                display: parseJS(variableName),
-                variableTypes: "",
-                assign: {
-                    ...DEFAULT_ASSIGN,
-                    opType: opType.NaN.key,
+            declare: {
+                [variableName]: {
+                    ...VAR_DEFAULTS,
+                    value: variableName,
+                    display: parseJS(variableName),
+                    variableTypes: "",
+                    assign: {
+                        ...DEFAULT_ASSIGN,
+                        opType: opType.NaN.key,
+                    },
                 },
-            }
+            },
         })
         props.showDropdown()
     }
@@ -61,12 +63,15 @@ export default function DeclareVar(props) {
 
     let handleSelect = (item) => {
         props.updatePage({
-            [item.key]: {
-                key: item.key,
-                variableTypes: item.variableTypes || "",
-                assign: DEFAULT_ASSIGN,
-                isBeingAssigned: true,
-            }
+            assign: {
+                [item.key]: {
+                    ...VAR_DEFAULTS,
+                    value: item.key,
+                    display: parseJS(item.key),
+                    variableTypes: item.variableTypes || "",
+                    assign: DEFAULT_ASSIGN,
+                },
+            },
         })
         props.showDropdown()
     }

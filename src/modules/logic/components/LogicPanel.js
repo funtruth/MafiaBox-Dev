@@ -29,7 +29,6 @@ export default function LogicPanel(props) {
                 currentValue: dataProp,
                 attach: data,
                 attachVar: vars,
-                logicItem: value,
                 path,
                 ignoreSubpath: !includeSubpath,
             })}

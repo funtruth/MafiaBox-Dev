@@ -224,6 +224,8 @@ export const healthUpdateType = {
 }
 
 /* @params logicItem
+    declare => any new variables
+    assign  => any changed variables
 */
 export const DEFAULT_LOGIC = {
     data: "",
@@ -231,7 +233,8 @@ export const DEFAULT_LOGIC = {
     logicType: "",
     operatorType: "",
     right: "",
-    vars: "",
+    declare: "",
+    assign: "",
 }
 
 /* @params logicItem.data

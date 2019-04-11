@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as helpers from '../../common/helpers'
 import _ from 'lodash'
 
 import {
@@ -17,6 +16,7 @@ import {
     START_CHAR,
     END_CHAR,
 } from '../../logic/proptool'
+import * as helpers from '../../common/helpers'
 
 import {
     DropEmpty,
@@ -29,14 +29,15 @@ import {
     LogicBlock -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
 */
 function PickUidObject(props) {
-    const { logicItem, attach, attachVar, updateRef } = props
+    const { attach, attachVar, updateRef } = props
     const { source, variableName } = attach
         
     let handleSelect = (item) => {
+        //if variable has already been set, keep the same variable
         const newName = variableName || helpers.genUID(START_CHAR + 'uid_', attachVar, 'x' + END_CHAR)
 
         props.updatePage({
-            vars: {
+            declare: {
                 [newName]: {
                     ...VAR_DEFAULTS,
                     value: newName,
