@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function LogicPanel(props) {
     const {
-        pageKey, fieldKey, indexKey, subfieldKey,
+        pageKey, fieldKey, subfieldKey,
         value, //logic item
         vars,
         placeholder,
@@ -25,11 +25,11 @@ export default function LogicPanel(props) {
             app-onclick-props={JSON.stringify({
                 pageKey,
                 fieldKey,
-                indexKey,
                 subfieldKey,
                 currentValue: dataProp,
                 attach: data,
                 attachVar: vars,
+                logicItem: value,
                 path,
                 ignoreSubpath: !includeSubpath,
             })}

@@ -226,25 +226,25 @@ export const healthUpdateType = {
 /* @params logicItem
 */
 export const DEFAULT_LOGIC = {
+    data: "",
+    down: "",
     logicType: "",
     operatorType: "",
-    data: "",
     right: "",
-    down: "",
+    vars: "",
 }
 
 /* @params logicItem.data
-    declare     => if the data in the logic item shows there are new variable(s)
-    code        => direct value from code
-    display     => what to show on the update button / FRONT-END
+    TODO: replacing adjust with assign?
+    display => what to show on the update button / FRONT-END
+    static  => unable to be assigned / type cannot be changed
 */
 export const VAR_DEFAULTS = {
     adjust: "",
-    code: "",
-    declare: "",
     display: "",
     length: false,
     mutate: false,
+    static: false,
     update: false,
     updateType: "",
     value: "",

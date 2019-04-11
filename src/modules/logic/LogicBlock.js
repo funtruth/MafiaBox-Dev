@@ -40,7 +40,7 @@ function LogicBlock(props) {
             </div>
             <div className="row">
                 <LogicAddBelow {...props}/>
-                <LogicDetails {...props} path={[...path, 'data']}/>
+                <LogicDetails {...props}/>
             </div>
             {/*<LogicErrors errors={errors}/>*/}
             <ReactTooltip place="right"/>

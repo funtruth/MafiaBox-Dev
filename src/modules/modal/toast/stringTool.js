@@ -4,7 +4,7 @@ import { dropdownType } from '../../dropdown/types'
 
 import { convertString } from '../../logic/LogicReducer'
 
-export function braceToHtml(string='', sourceId, statefulPath=[]) {
+export function braceToHtml(string='') {
     let parts = []
     let startIndex = 0
     let leftBraceSaved = false
@@ -24,7 +24,6 @@ export function braceToHtml(string='', sourceId, statefulPath=[]) {
                         key={i}
                         className="app-onclick string-var"
                         menu-type={dropdownType.pickEventVar}
-                        stateful-source={sourceId}
                         app-onclick-props={JSON.stringify({
                             range: {
                                 startIndex: startIndex + 1,
@@ -32,7 +31,6 @@ export function braceToHtml(string='', sourceId, statefulPath=[]) {
                             },
                             string,
                             currentValue: segment,
-                            statefulPath,
                         })}
                     >
                         {segment}
@@ -58,6 +56,7 @@ export function braceToHtml(string='', sourceId, statefulPath=[]) {
                 i.replace(/\s/g, ' /123/')
                     .split('/123/')
                     .map((k, l) => {
+                        if (k === ' ') return null
                         return <pre key={`${j}-${l}`}>{k}</pre>
                     })
                 :i

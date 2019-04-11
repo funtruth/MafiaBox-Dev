@@ -13,7 +13,9 @@ import {
     VARTYPE_IS_RSS,
 } from '../../common/arrows'
 import {
-    presentVariable,
+    parseJS,
+    START_CHAR,
+    END_CHAR,
 } from '../../logic/proptool'
 
 import {
@@ -27,27 +29,36 @@ import {
     LogicBlock -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
 */
 function PickUidObject(props) {
-    const { attach, subfieldKey, attachVar, updateRef } = props
-    const selectedValue = attach[subfieldKey] || {}
+    const { logicItem, attach, attachVar, updateRef } = props
+    const { source, variableName } = attach
         
     let handleSelect = (item) => {
+        const newName = variableName || helpers.genUID(START_CHAR + 'uid_', attachVar, 'x' + END_CHAR)
+
         props.updatePage({
-            ...VAR_DEFAULTS,
-            value: item.key,
-            display: presentVariable(item.key),
-            declare: {
-                key: helpers.genUID('@uid_', attachVar, 'x'),
-                variableTypes: [
-                    variableType.uid.key,
-                    variableType.string.key,
-                ],
+            vars: {
+                [newName]: {
+                    ...VAR_DEFAULTS,
+                    value: newName,
+                    display: parseJS(newName),
+                    variableTypes: [
+                        variableType.uid.key,
+                        variableType.string.key,
+                    ],
+                    static: true,
+                }
+            },
+            data: {
+                variableName: newName,
+                source: item.key,
+                display: parseJS(item.key),
             },
         })
         props.showDropdown()
     }
 
     const renderItem = (item) => {
-        const chosen = selectedValue.value === item.key
+        const chosen = source === item.key
 
         return (
             <DropItem

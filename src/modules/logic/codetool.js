@@ -4,13 +4,13 @@ import {
 } from './types'
 
 import {
-    presentVariable,
+    parseJS,
 } from './proptool'
 
 //PickNumUpdate
 export function codeNumUpdate(item, field) {
     const { value, adjust } = item
-    const fieldJS = presentVariable(field)
+    const fieldJS = parseJS(field)
     
     switch(value) {
         case numUpdateType.setTo.key:

@@ -14,9 +14,9 @@ export default function LogicDetails(props) {
     return (
         <div className="row-nowrap" style={{ marginTop: 2 }}>
             <div className="common-bubble" style={theme}>
-                <div style={{marginRight: 6}}>{item.key}</div>
+                <div style={{marginRight: 6}}>{item.display}</div>
                 {item && !item.isBeingAssigned && <LogicVarType {...props} item={item}/>}
-                <LogicVarAssign {...props} item={item}/>
+                {false && <LogicVarAssign {...props} item={item}/>}
             </div>
         </div>
     )

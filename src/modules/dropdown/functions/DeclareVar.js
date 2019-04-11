@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import * as helpers from '../../common/helpers'
-
 import { opType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import { VAR_DEFAULTS } from '../../logic/types';
+
+import * as helpers from '../../common/helpers'
+import {
+    START_CHAR,
+    END_CHAR,
+    parseJS,
+} from '../../logic/proptool';
 
 import {
     DropEmpty,
@@ -28,15 +34,17 @@ export default function DeclareVar(props) {
             return
         }
 
+        const variableName = START_CHAR + value + END_CHAR
         props.updatePage({
-            [`@${value}`]: {
-                key: `@${value}`,
+            [variableName]: {
+                ...VAR_DEFAULTS,
+                value: variableName,
+                display: parseJS(variableName),
                 variableTypes: "",
                 assign: {
                     ...DEFAULT_ASSIGN,
                     opType: opType.NaN.key,
                 },
-                isNotDefault: true,
             }
         })
         props.showDropdown()
@@ -63,8 +71,7 @@ export default function DeclareVar(props) {
         props.showDropdown()
     }
 
-    const assignable = _.filter(attachVar, i => i.isNotDefault)
-
+    const assignable = _.filter(attachVar, i => !i.static)
     return (
         <>
             <DropTitle>declare</DropTitle>

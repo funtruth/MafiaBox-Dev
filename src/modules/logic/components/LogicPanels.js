@@ -49,7 +49,6 @@ export default function LogicPanels(props) {
                         <LogicPanel
                             {...props}
                             placeholder="UID object ..."
-                            path={[...path, 'data']}
                             dropdown={dropdownType.pickUidObject}
                         />
                     )
@@ -73,7 +72,7 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="pick ..."
-                    path={[...path, 'data']}
+                    path={[...path, 'vars']}
                     dropdown={dropdownType.declareVar}
                 />
             )

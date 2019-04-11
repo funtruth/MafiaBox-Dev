@@ -7,8 +7,6 @@ export default function LogicVarType(props) {
     const { item, path } = props
     const variableTypes = item.variableTypes || []
 
-    let newPath = [...path, item.key]
-
     return (
         <div className="row-nowrap">
             <div
@@ -24,7 +22,7 @@ export default function LogicVarType(props) {
                 menu-type={dropdownType.declareVarType}
                 app-onclick-props={JSON.stringify({
                     currentValue: variableTypes,
-                    path: newPath,
+                    path: [...path, item.value],
                 })}
                 highlight="true"
                 style={{

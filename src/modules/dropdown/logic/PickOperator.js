@@ -1,7 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { operatorType, DEFAULT_LOGIC } from '../../logic/types'
+import {
+    operatorType,
+    DEFAULT_LOGIC,
+} from '../../logic/types'
 
 import DropTitle from '../components/DropTitle';
 
@@ -16,7 +19,8 @@ export default function PickOperator(props) {
     //Operators have internal logic by default
     let handleSelect = (item) => {
         props.updatePage({
-            data: "",
+            ...DEFAULT_LOGIC,
+            down: attach.down,
             logicType: hoverKey,
             operatorType: item.key,
             right: attach.right || DEFAULT_LOGIC,

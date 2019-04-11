@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import _ from 'lodash'
 import './AssignVarModal.css'
 
-import { basicOpType, DEFAULT_ASSIGN, compileMath } from './components/ops'
+import {
+    basicOpType,
+    DEFAULT_ASSIGN,
+    compileMath,
+} from './components/ops'
 
 import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
@@ -28,10 +32,6 @@ export default function AssignVarModal(props) {
     const variableInfo = workspace || { variableTypes: [], assign: DEFAULT_ASSIGN }
     const { variableTypes, assign } = variableInfo
 
-    const assignable = _(attachVar)
-        .filter(i => i.isNotDefault)
-        .value()
-
     let handleSave = () => {
         let badMath = compileMath(assign)
 
@@ -44,6 +44,7 @@ export default function AssignVarModal(props) {
         props.popModalBy(1)
     }
     
+    const assignable = _.filter(attachVar, i => !i.static)
     return (
         <ModalCheckSave {...props} handleSave={handleSave}>
             <div

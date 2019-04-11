@@ -1,11 +1,20 @@
 import React from 'react'
 import _ from 'lodash'
 
-import DropTitle from '../components/DropTitle';
-import DropItem from '../components/DropItem';
-import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import {
+    opType,
+    opValueType,
+    DEFAULT_ASSIGN,
+} from '../../modal/vars/components/ops';
+
+import {
+    DropItem,
+    DropTitle,
+} from '../components/Common'
 
 export default function PickAssignableVar(props) {
+    const { attachVar } = props
+
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
@@ -16,10 +25,7 @@ export default function PickAssignableVar(props) {
         props.showDropdown()
     }
 
-    let vars = _(props.attachVar)
-        .filter(i => i.isNotDefault)
-        .value()
-
+    const vars = _.filter(attachVar, i => !i.static)
     return (
         <>
             <DropTitle>vars</DropTitle>
