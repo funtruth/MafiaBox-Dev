@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import * as helpers from '../common/helpers'
-import { initFunctionMap } from "../page/defaults";
 
 import { modalType } from '../modal/types'
 import { updateSourceType } from '../common/types';
@@ -9,7 +8,7 @@ import { showModal } from '../modal/ModalReducer'
 
 const initialState = {
     functionRepo: {},
-    functionMap: initFunctionMap,
+    functionMap: {},
 }
 
 const MOVE_STORY = 'functions/move-story'

@@ -2,11 +2,21 @@ import React, { useState, useEffect } from 'react'
 import './CreateProject.css'
 import { connect } from 'react-redux'
 import firebase from 'firebase/app'
+
+import {
+    DEFAULT_MEMBER_INFO,
+    MEMBER_TYPE,
+} from './UserConstants';
+import {
+    defaultFieldMap,
+    defaultFieldRepo,
+} from '../../fields/defaults';
+
 import * as helpers from '../../common/helpers'
-
-import { DEFAULT_MEMBER_INFO, MEMBER_TYPE } from './UserConstants';
-
-import { getMyInfo, switchToProject } from '../../firebase/FirebaseReducer'
+import {
+    getMyInfo,
+    switchToProject,
+} from '../../firebase/FirebaseReducer'
 
 import FormInput from '../../components/FormInput'
 import ModalOptions from '../components/ModalOptions'
@@ -66,6 +76,8 @@ function CreateProject(props) {
             description,
             members,
         }
+        multiUpdate[`dev/${projectKey}/fieldMap`] = defaultFieldMap
+        multiUpdate[`dev/${projectKey}/fieldRepo`] = defaultFieldRepo
         
         firebase.database().ref().update(multiUpdate)
         props.switchToProject(projectKey)

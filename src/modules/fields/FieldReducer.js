@@ -3,13 +3,10 @@ import * as maptool from '../logic/maptool'
 import _ from 'lodash'
 
 import { fieldType, boardType as _boardType } from './defaults'
-import { initFieldRepo } from './defaults'
 
 import { updateRepo } from '../page/PageReducer'
 
-const initialState = {
-    fieldRepo: initFieldRepo,
-}
+const initialState = {}
 
 const ADD_FIELD = 'field/add-field'
 const UPDATE_FIELD = 'field/update-field'
@@ -188,17 +185,6 @@ export function moveTagToOtherField(startFieldKey, endFieldKey, startIndex, endI
             type: MOVE_TAG_TO_OTHER_FIELD,
             payload: fieldRepoClone
         })
-    }
-}
-
-export function toggleCollapse(itemKey, pageKey, fieldKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        const logicMap = Object.assign({}, pageRepo[pageKey][fieldKey])
-        const collapsed = !logicMap[itemKey].collapsed
-
-        dispatch(updateRepo([pageKey, fieldKey, itemKey], {collapsed}))
     }
 }
 

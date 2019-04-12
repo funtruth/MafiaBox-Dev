@@ -16,9 +16,11 @@ import PropertyField from './components/PropertyField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
-class FieldView extends React.Component {
-    _renderItem = (item) => {
-        const { pageKey, pageInfo, fieldRepo, path, subpath, updateSource, updatePage } = this.props
+function FieldView(props) {
+    const { pageKey, pageInfo, fieldMap, fieldRepo, path, subpath, updateSource, updatePage } = props
+    const { boardType } = pageInfo
+
+    const renderItem = (item) => {
         const fieldInfo = fieldRepo[item.key]
         const { key, data } = fieldInfo
         
@@ -61,40 +63,33 @@ class FieldView extends React.Component {
                 return null
         }
     }
+    
+    const fields = fieldMap[boardType] || []
+    return (
+        <>
+            {fields.map((field, index) => {
+                const item = fieldRepo[field]
+                const { icon } = fieldType[item.fieldType]
 
-    render() {
-        const { pageInfo, fieldRepo } = this.props
-        const { boardType } = pageInfo
-        
-        const fields = _(fieldRepo)
-            .filter(i => i.boardType === boardType)
-            .sortBy(i => i.index)
-            .value()
-
-        return (
-            <>
-                {fields.map((item, index) => {
-                    const { icon } = fieldType[item.fieldType]
-
-                    return (
-                        <React.Fragment key={index}>
-                            <div className="-sep"/>
-                            <div className="field-label">
-                                <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
-                                {item.title}
-                            </div>
-                            {this._renderItem(item)}
-                        </React.Fragment>
-                    )
-                })}
-                <div style={{ height: '30vh' }}></div>
-            </>
-        )
-    }
+                return (
+                    <React.Fragment key={index}>
+                        <div className="-sep"/>
+                        <div className="field-label">
+                            <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
+                            {item.title}
+                        </div>
+                        {renderItem(item)}
+                    </React.Fragment>
+                )
+            })}
+            <div style={{ height: '30vh' }}></div>
+        </>
+    )
 }
 
 export default connect(
     state => ({
-        fieldRepo: state.field.fieldRepo,
+        fieldRepo: state.page.fieldRepo,
+        fieldMap: state.page.fieldMap,
     }),
 )(FieldView)

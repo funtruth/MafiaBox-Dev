@@ -32,3 +32,17 @@ storyMap
     [boardType]: [storyKey, storyKey...],
     [boardType]: [storyKey, storyKey...]...
 ```
+
+## FieldRepo
+```javascript
+fieldRepo
+    [fieldKey]: {},
+    [fieldKey]: {}...
+```
+
+## FieldMap
+```javascript
+fieldMap
+    [boardType]: [fieldKey, fieldKey...],
+    [boardType]: [fieldKey, fieldKey...]...
+```

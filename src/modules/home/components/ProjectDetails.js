@@ -21,25 +21,34 @@ function ProjectDetails(props) {
         projectRef.on('value', snap => props.projectListener(snap))
 
         const pageRepoRef   = firebase.database().ref(`dev/${activeProject}/pageRepo`)
-        const pageMapRef    = firebase.database().ref(`dev/${activeProject}/pageMap`)
-        const storyRepoRef  = firebase.database().ref(`dev/${activeProject}/storyRepo`)
-        const storyMapRef   = firebase.database().ref(`dev/${activeProject}/storyMap`)
-
         pageRepoRef.on('child_added', snap => props.receiveEvent(snap, 'pageRepo'))
         pageRepoRef.on('child_changed', snap => props.receiveEvent(snap, 'pageRepo'))
         pageRepoRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'pageRepo'))
         
+        const pageMapRef    = firebase.database().ref(`dev/${activeProject}/pageMap`)
         pageMapRef.on('child_added', snap => props.receiveEvent(snap, 'pageMap'))
         pageMapRef.on('child_changed', snap => props.receiveEvent(snap, 'pageMap'))
         pageMapRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'pageMap'))
 
+        const storyRepoRef  = firebase.database().ref(`dev/${activeProject}/storyRepo`)
         storyRepoRef.on('child_added', snap => props.receiveEvent(snap, 'storyRepo'))
         storyRepoRef.on('child_changed', snap => props.receiveEvent(snap, 'storyRepo'))
         storyRepoRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'storyRepo'))
 
+        const storyMapRef   = firebase.database().ref(`dev/${activeProject}/storyMap`)
         storyMapRef.on('child_added', snap => props.receiveEvent(snap, 'storyMap'))
         storyMapRef.on('child_changed', snap => props.receiveEvent(snap, 'storyMap'))
         storyMapRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'storyMap'))
+        
+        const fieldRepoRef  = firebase.database().ref(`dev/${activeProject}/fieldRepo`)
+        fieldRepoRef.on('child_added', snap => props.receiveEvent(snap, 'fieldRepo'))
+        fieldRepoRef.on('child_changed', snap => props.receiveEvent(snap, 'fieldRepo'))
+        fieldRepoRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'fieldRepo'))
+
+        const fieldMapRef   = firebase.database().ref(`dev/${activeProject}/fieldMap`)
+        fieldMapRef.on('child_added', snap => props.receiveEvent(snap, 'fieldMap'))
+        fieldMapRef.on('child_changed', snap => props.receiveEvent(snap, 'fieldMap'))
+        fieldMapRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'fieldMap'))
 
         return () => {
             console.log('Turning off listeners at', activeProject)
@@ -48,6 +57,8 @@ function ProjectDetails(props) {
             if (pageMapRef)     pageMapRef.off();
             if (storyRepoRef)   storyRepoRef.off();
             if (storyMapRef)    storyMapRef.off();
+            if (fieldRepoRef)   fieldRepoRef.off();
+            if (fieldMapRef)    fieldMapRef.off();
         }
     }, [activeProject])
 

@@ -64,7 +64,7 @@ class EditTag extends React.Component{
 
 export default connect(
     state => ({
-        fieldRepo: state.field.fieldRepo,
+        fieldRepo: state.page.fieldRepo,
     }),
     {
         updateField,

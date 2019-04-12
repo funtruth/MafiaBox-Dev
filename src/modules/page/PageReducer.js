@@ -15,6 +15,8 @@ const initialState = {
     pageMap: {},
     storyRepo: {},
     storyMap: {},
+    fieldRepo: {},
+    fieldMap: {},
 }
 
 const VALID_PROPS = ['pageRepo', 'pageMap', 'storyRepo', 'storyMap']

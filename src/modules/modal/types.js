@@ -11,7 +11,6 @@ export const modalType = {
 
     showCode: 'modalType/show-code',
     showPage: 'modalType/show-page',
-    showTemplate: 'modalType/show-template',
     showFunctionPage: 'modalType/show-function-page',
 
     saveChanges: 'modalType/save-changes',

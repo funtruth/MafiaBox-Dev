@@ -3,7 +3,6 @@ import './board.css'
 import { connect } from 'react-redux'
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { DEFAULT_NORMAL } from '../page/defaults';
 import { droppableType } from '../common/types';
 
 import StoryList from './components/StoryList'
@@ -37,7 +36,7 @@ class StoryBoard extends React.Component{
                         >
                             {stories.map((storyKey, index) => {
                                 const column = storyRepo[storyKey] || {}
-                                const repo = pageRepo[storyKey] || DEFAULT_NORMAL
+                                const repo = pageRepo[storyKey]
                                 
                                 return (
                                     <Draggable key={storyKey} draggableId={storyKey} index={index}>
