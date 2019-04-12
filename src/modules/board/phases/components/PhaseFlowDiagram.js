@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
 import {
 	DiagramEngine,
@@ -11,12 +11,11 @@ import { modalType } from '../../../modal/types';
 import { updateSourceType } from '../../../common/types';
 
 import {
-    getPageKey,
-} from '../common/arrows'
-
-import {
     showModal,
 } from '../../../modal/ModalReducer'
+import {
+    updateRepo,
+} from '../../../page/PageReducer'
 
 export default connect(
     state => ({
@@ -25,57 +24,87 @@ export default connect(
     }),
     {
         showModal,
+        updateRepo,
     }
 )((props) => {
     const { pageMap, pageRepo, boardType, storyKey } = props
-
-    const handleClick = e => {
-        const pageKey = getPageKey(e.target)
-        if (!pageKey) return;
-
-        props.showModal(modalType.showPage, {
-            pageKey,
-            path: [pageKey],
-            updateSource: updateSourceType.repo,
-            boardType,
-        })
-    }
-
-    useEffect(() => {
-        console.log("mounting")
-        window.addEventListener('click', handleClick)
-        return () => {
-            window.removeEventListener('click', handleClick)
-        }
-    }, [])
-
-    //fetch the list
-    const list = (pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey])
-
-	//1) setup the diagram engine
-	var engine = new DiagramEngine();
-	engine.installDefaultFactories();
-
-	//2) setup the diagram model
-    var model = new DiagramModel();
-
-    list.forEach(item => {
-        var node = new DefaultNodeModel(item.title, '#ddd', item.pageKey)
-        node.addInPort('in')
-        node.addInPort('in')
-        node.addOutPort('out')
-        node.setPosition(500, 600)
-        
-        model.addNode(node)
-    })
-
-	//5) load model into engine
-    engine.setDiagramModel(model);
     
-    const config = {
-        maxNumberPointsPerLink: 0,
-    }
+    //action follows BaseAction props from storm-react-diagrams
+    const mouseDown = action => {
+        //check if a proper item is selected & get pageKey
+        if (action.selectionModels && action.selectionModels[0].model.pageKey) {
+            const pageKey = action.selectionModels[0].model.pageKey
 
-	//6) render the diagram!
-	return <DiagramWidget className="srd-demo-canvas" diagramEngine={engine} {...config}/>;
+            //function exists inside mouseDown so we have access to original action.XY
+            const mouseUp = e => {
+                //if item has moved, just send an update on XY
+                if (e.pageX !== action.mouseX || e.pageY !== action.mouseY) {
+                    props.updateRepo([pageKey], {
+                        diagramXY: {
+                            x: action.selectionModels[0].initialX + e.pageX - action.mouseX,
+                            y: action.selectionModels[0].initialY + e.pageY - action.mouseY,
+                        }
+                    })
+                //if item has not moved, count as user click
+                } else {
+                    props.showModal(modalType.showPage, {
+                        pageKey,
+                        path: [pageKey],
+                        updateSource: updateSourceType.repo,
+                        boardType,
+                    })
+                }
+                
+                //remove listener
+                window.removeEventListener('click', mouseUp)
+            }
+    
+            //add listener for mouseup
+            window.addEventListener('click', mouseUp)
+            return true;
+        } else return true;
+    }
+    
+    //fetch the list
+    const [list, setList] = useState((pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey]))
+    useEffect(() => {
+        setList((pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey]))
+    }, [pageRepo])
+
+    //setup the diagram engine
+    const [engine, setEngine] = useState("")
+    useEffect(() => {
+        var engineMount = new DiagramEngine();
+        engineMount.installDefaultFactories();
+
+        var model = new DiagramModel();
+
+        //setup all nodes
+        list.forEach(item => {
+            var node = new DefaultNodeModel(item.title, 'rgba(40, 43, 48, 1)', item.pageKey)
+            node.addInPort('in')
+            node.addOutPort('out')
+            if (item.diagramXY) {
+                node.setPosition(item.diagramXY.x, item.diagramXY.y)
+            } else {
+                node.setPosition(100, 100)
+            }
+            model.addNode(node)
+        })
+
+        //load model into engine
+        engineMount.setDiagramModel(model);
+        setEngine(engineMount)
+    }, [list])
+    
+    if (!engine) return null;
+    return (
+        <DiagramWidget
+            className="srd-demo-canvas"
+            diagramEngine={engine}
+            maxNumberPointsPerLink={2}
+            smartRouting={true}
+            actionStartedFiring={mouseDown}
+        />
+    )
 });

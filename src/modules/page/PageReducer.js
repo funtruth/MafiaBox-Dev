@@ -416,7 +416,7 @@ export function receiveAction({type, payload}) {
     }
 }
 
-//LogicBoard
+//LogicBoard DELETE
 export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page

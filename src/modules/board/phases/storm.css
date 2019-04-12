@@ -50,9 +50,10 @@
 }
 
 .srd-port {
-    width: 15px;
-    height: 15px;
-    background: rgba(255, 255, 255, 0.1)
+    width: 20px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px; 
 }
 
 .srd-port:hover,
@@ -73,7 +74,8 @@
 .srd-default-node__title {
     display: flex;
     white-space: nowrap;
-    background-color: rgba(40, 43, 48, 1);
+    font: 600 18px Segoe UI;
+    padding: 4px 8px;
 }
 
 .srd-default-node__title>* {
@@ -97,19 +99,30 @@
 
 .srd-default-node__ports {
     display: flex;
+    justify-content: center;
+    position: relative;
     background-color: rgba(47, 49, 54, 1);
+    height: 30px;
 }
 
 .srd-default-node__in,
 .srd-default-node__out {
     flex-grow: 1;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+    border-radius: 9px;
+    position: absolute;
+    top: 6px;
+}
+.srd-default-node__in {
+    left: -20px;
+}
+.srd-default-node__out {
+    right: -20px;
 }
 
 .srd-default-port {
     display: flex;
-    margin-top: 1px
 }
 
 .srd-default-port>* {
