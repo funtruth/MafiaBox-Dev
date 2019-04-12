@@ -5,11 +5,14 @@ import {
 	DiagramModel,
 	DefaultNodeModel,
     DiagramWidget,
-    DefaultPortModel,
 } from "storm-react-diagrams";
 
 import { modalType } from '../../../modal/types';
 import { updateSourceType } from '../../../common/types';
+
+import {
+    getPageKey,
+} from '../common/arrows'
 
 import {
     showModal,
@@ -27,16 +30,15 @@ export default connect(
     const { pageMap, pageRepo, boardType, storyKey } = props
 
     const handleClick = e => {
-        if (e.target.className && e.target.className.indexOf('srd-default') !== -1) {
-            const pageKey = e.target.pageKey
+        const pageKey = getPageKey(e.target)
+        if (!pageKey) return;
 
-            props.showModal(modalType.showPage, {
-                pageKey,
-                path: [pageKey],
-                updateSource: updateSourceType.repo,
-                boardType,
-            })
-        }
+        props.showModal(modalType.showPage, {
+            pageKey,
+            path: [pageKey],
+            updateSource: updateSourceType.repo,
+            boardType,
+        })
     }
 
     useEffect(() => {
@@ -49,7 +51,6 @@ export default connect(
 
     //fetch the list
     const list = (pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey])
-    console.log({list, props})
 
 	//1) setup the diagram engine
 	var engine = new DiagramEngine();
@@ -57,20 +58,13 @@ export default connect(
 
 	//2) setup the diagram model
     var model = new DiagramModel();
-    
-    const handleSelection = (e) => {
-        console.log({e})
-    }
 
     list.forEach(item => {
-        var node = new DefaultNodeModel(item.title, '#ddd')
+        var node = new DefaultNodeModel(item.title, '#ddd', item.pageKey)
         node.addInPort('in')
         node.addInPort('in')
         node.addOutPort('out')
         node.setPosition(500, 600)
-        node.addListener({
-            selectionChanged: handleSelection,
-        })
         
         model.addNode(node)
     })

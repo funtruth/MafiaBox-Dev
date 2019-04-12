@@ -42,7 +42,7 @@
     -webkit-user-select: none;
     user-select: none;
     cursor: move;
-    pointer-events: all
+    pointer-events: all;
 }
 
 .srd-node--selected>* {
@@ -72,7 +72,8 @@
 
 .srd-default-node__title {
     display: flex;
-    white-space: nowrap
+    white-space: nowrap;
+    background-color: rgba(40, 43, 48, 1);
 }
 
 .srd-default-node__title>* {
@@ -96,7 +97,7 @@
 
 .srd-default-node__ports {
     display: flex;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2))
+    background-color: rgba(47, 49, 54, 1);
 }
 
 .srd-default-node__in,

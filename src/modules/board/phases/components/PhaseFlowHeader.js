@@ -9,7 +9,6 @@ import {
 } from '../../../page/PageReducer'
 
 function PhaseFlowHeader(props) {
-    console.log({props})
     const { storyKey, storyRepo } = props
     const storyInfo = storyRepo[storyKey] || {}
     
