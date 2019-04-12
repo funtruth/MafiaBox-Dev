@@ -13,7 +13,6 @@ export const dropdownType = {
     editTag: 'dropdownType/edit-tag',
     addTag: 'dropdownType/add-tag',
     pickFieldType: 'dropdownType/pick-field-type',
-    addTemplateField: 'dropdownType/add-template-field',
     templateTitleOptions: 'dropdownType/template-title-options',
 
     //account

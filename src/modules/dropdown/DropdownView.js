@@ -34,7 +34,6 @@ import PickReturnType from './logic/PickReturnType';
 import EditTag from './template/EditTag'
 import AddTag from './template/AddTag'
 import PickFieldType from './template/PickFieldType'
-import AddTemplateField from './template/AddTemplateField'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
@@ -156,8 +155,6 @@ function DropdownView(props) {
                 return <AddTag {...renderProps}/>
             case dropdownType.pickFieldType:
                 return <PickFieldType {...renderProps}/>
-            case dropdownType.addTemplateField:
-                return <AddTemplateField {...renderProps}/>
             case dropdownType.templateTitleOptions:
                 return <TemplateTitleOptions {...renderProps}/>
                 

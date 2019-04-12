@@ -39,7 +39,7 @@ export function moveFunctionStory(startIndex, endIndex) {
 export function addFunction(mapKey, itemCount, boardType) {
     return (dispatch, getState) => {
         const { functionRepo } = getState().functions
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         let repoClone = Object.assign({}, functionRepo)
         const pageKey = helpers.genUID(boardType, functionRepo)

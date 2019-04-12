@@ -17,7 +17,7 @@ const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
 export function addField(boardType, text) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         //get index of new field, equal to length of existing fields
         const index = _.filter(fieldRepo, i => i.boardType === boardType).length
@@ -43,7 +43,7 @@ export function addField(boardType, text) {
 
 export function deleteField(fieldKey) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         //get the affected boardType
         const boardTarget = fieldRepo[fieldKey].boardType
@@ -71,7 +71,7 @@ export function deleteField(fieldKey) {
 
 export function moveField(boardType, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
         
         //get items in fieldRepo that may be affected
         let relatedRepo = _(fieldRepo)
@@ -99,7 +99,7 @@ export function moveField(boardType, startIndex, endIndex) {
 
 export function updateField(path, update) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
         
         const repoClone = helpers.updateByPath(path, update, fieldRepo)
 
@@ -112,7 +112,7 @@ export function updateField(path, update) {
 
 export function addTag(fieldKey, text) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         //clone data field for tags
         let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
@@ -133,7 +133,7 @@ export function addTag(fieldKey, text) {
 
 export function deleteTag(fieldKey, tagKey) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         //clone tags data and delete tag
         let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
@@ -149,7 +149,7 @@ export function deleteTag(fieldKey, tagKey) {
 
 export function moveTagWithinField(fieldKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
         
         let dataClone = Object.assign({}, fieldRepo[fieldKey].data)
 
@@ -168,7 +168,7 @@ export function moveTagWithinField(fieldKey, startIndex, endIndex) {
 
 export function moveTagToOtherField(startFieldKey, endFieldKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { fieldRepo } = getState().field
+        const { fieldRepo } = getState().page
 
         let fieldRepoClone = Object.assign({}, fieldRepo)
 

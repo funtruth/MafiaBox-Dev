@@ -19,7 +19,14 @@ const initialState = {
     fieldMap: {},
 }
 
-const VALID_PROPS = ['pageRepo', 'pageMap', 'storyRepo', 'storyMap']
+const VALID_PROPS = [
+    'pageRepo',
+    'pageMap',
+    'storyRepo',
+    'storyMap',
+    'fieldRepo',
+    'fieldMap',
+]
 
 const ADD_STORY = 'story/add-story-to'
 const UPDATE_STORY = 'story/update-story'
@@ -148,8 +155,7 @@ export function moveStory(boardType, startIndex, endIndex) {
 
 export function addPageToMap(storyKey, boardType) {
     return (dispatch, getState) => {
-        const { pageRepo, pageMap } = getState().page
-        const { fieldRepo } = getState().field
+        const { pageRepo, pageMap, fieldRepo, fieldMap } = getState().page
 
         let pageRepoClone   = _.cloneDeep(pageRepo)
         let pageMapClone    = _.cloneDeep(pageMap)
@@ -158,9 +164,12 @@ export function addPageToMap(storyKey, boardType) {
 
         //set-up defaults
         let defaultInfo = {}
-        _.filter(fieldRepo, i => i.boardType === boardType && i.default)
-            .forEach(i => defaultInfo[i.key] = i.default)
-
+        fieldMap[boardType].forEach(field => {
+            if (fieldRepo[field] && fieldRepo[field].default) {
+                defaultInfo[field] = fieldRepo[field].default
+            }
+        })
+        
         //set page info
         pageRepoClone[pageKey] = {
             pageKey,

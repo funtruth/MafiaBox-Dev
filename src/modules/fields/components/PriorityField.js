@@ -9,7 +9,7 @@ import { sortPriorities } from '../FieldReducer'
 import {
     Body,
     Button,
- } from '../../components/Common'
+} from '../../components/Common'
 
 const formatNumber = (v) => {
     if (!v)         return '...'
