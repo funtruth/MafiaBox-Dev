@@ -53,7 +53,6 @@ export const fieldType = {
         index: 3,
         icon: 'mdi mdi-codepen',
         title: 'Logic',
-        showRawCode: true,
     },
     tag: {
         key: 'tag',

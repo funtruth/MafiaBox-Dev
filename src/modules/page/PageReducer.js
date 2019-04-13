@@ -4,13 +4,11 @@ import * as helpers from '../common/helpers'
 import firebase from 'firebase/app'
 
 import { modalType } from '../modal/types'
-import { boardType } from '../fields/defaults'
 import { updateSourceType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer';
 
 const initialState = {
-    boardRepo: boardType,
     pageRepo: {},
     pageMap: {},
     storyRepo: {},

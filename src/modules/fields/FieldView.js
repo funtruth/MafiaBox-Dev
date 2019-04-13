@@ -9,7 +9,7 @@ import CallField from './components/CallField'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import ImageField from './components/ImageField'
-import TagField from './components/TagField';
+import UniqueTagField from './components/UniqueTagField';
 import PlayerTagField from './components/PlayerTagField'
 import PriorityField from './components/PriorityField'
 import PropertyField from './components/PropertyField'
@@ -39,18 +39,19 @@ function FieldView(props) {
         }
         
         switch(fieldInfo.fieldType) {
-            case fieldType.call.key:
-                return <CallField {...props}/>
             case fieldType.text.key:
                 return <TextField {...props}/>
             case fieldType.number.key:
                 return <NumberField {...props}/>
+
+            case fieldType.call.key:
+                return <CallField {...props}/>
             case fieldType.image.key:
                 return <ImageField {...props}/>
             case fieldType.logic.key:
-                return <LogicBoard {...props} pageInfo={pageInfo}/>
+                return <LogicBoard {...props}/>
             case fieldType.tag.key:
-                return <TagField {...props}/>
+                return <UniqueTagField {...props}/>
             case fieldType.playerTag.key:
                 return <PlayerTagField {...props}/>
             case fieldType.priority.key:

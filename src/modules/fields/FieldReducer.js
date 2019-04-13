@@ -15,32 +15,6 @@ const DELETE_FIELD = 'field/delete-field'
 
 const MOVE_TAG_TO_OTHER_FIELD = 'field/move-tag-to-other-field'
 
-export function addField(boardType, text) {
-    return (dispatch, getState) => {
-        const { fieldRepo } = getState().page
-
-        //get index of new field, equal to length of existing fields
-        const index = _.filter(fieldRepo, i => i.boardType === boardType).length
-        
-        let fieldRepoClone = Object.assign({}, fieldRepo)
-        const newItemKey = helpers.genUID('field', fieldRepo)
-
-        fieldRepoClone[newItemKey] = {
-            key: newItemKey,
-            fieldKey: newItemKey,
-            title: text,
-            fieldType: fieldType.text.key,
-            boardType,
-            index,
-        }
-
-        dispatch({
-            type: ADD_FIELD,
-            payload: fieldRepoClone,
-        })
-    }
-}
-
 export function deleteField(fieldKey) {
     return (dispatch, getState) => {
         const { fieldRepo } = getState().page
