@@ -1,6 +1,5 @@
 import React from 'react'
 import './EditTrigger.css'
-import { connect } from 'react-redux'
 
 import { triggerNewVars, logicType, updateType } from '../../logic/types'
 import { updateSourceType } from '../../common/types';
@@ -10,7 +9,7 @@ import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
 import LogicBoard from '../../fields/components/LogicBoard';
 
-function EditTrigger(props) {
+export default function EditTrigger(props) {
     const { path, subpath, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = props
 
     const workspace = props.attach
@@ -76,9 +75,3 @@ function EditTrigger(props) {
         </ModalCheckSave>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
-)(EditTrigger)

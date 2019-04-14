@@ -1,10 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import {
     variableType,
     VAR_DEFAULTS,
+    rssMap,
 } from '../../logic/types'
 
 import {
@@ -28,8 +28,8 @@ import {
 /*accessed from
     LogicBlock -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
 */
-function PickUidObject(props) {
-    const { attach, attachVar, updateRef } = props
+export default function PickUidObject(props) {
+    const { attach, attachVar } = props
     const { source, variableName } = attach
         
     let handleSelect = (item) => {
@@ -74,7 +74,7 @@ function PickUidObject(props) {
     }
 
     const uidObjects = _.filter(attachVar, VARTYPE_IS_UID_OBJ)
-    const rssUidObjects = _(updateRef).filter(VARTYPE_IS_RSS).filter(VARTYPE_IS_UID_OBJ).value()
+    const rssUidObjects = _(rssMap).filter(VARTYPE_IS_RSS).filter(VARTYPE_IS_UID_OBJ).value()
 
     return (
         <>
@@ -90,9 +90,3 @@ function PickUidObject(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    })
-)(PickUidObject)

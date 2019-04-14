@@ -1,16 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 import * as proptool from '../../logic/proptool'
 
 import { dropdownType } from '../types'
-import { variableType } from '../../logic/types'
+import {
+    variableType,
+} from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
 import DropEmpty from '../components/DropEmpty'
 
-class PickEventVarProp extends React.Component{
+export default class PickEventVarProp extends React.Component{
     _onSelect = (item) => {
         const { attach, selectedKey, range, prefix } = this.props
         const selectedItem = (attach.value && attach.value[selectedKey]) || {}
@@ -25,10 +26,10 @@ class PickEventVarProp extends React.Component{
     }
 
     _renderItem = (item) => {
-        const { currentValue, prefix, updateRef } = this.props
+        const { currentValue, prefix } = this.props
         const chosen = typeof currentValue === 'string' && currentValue === `${prefix}_${item}`
         
-        const vars = proptool.getSubfields(`${prefix}_${item}`, updateRef)
+        const vars = proptool.getSubfields(`${prefix}_${item}`)
         const isObject = vars.length > 0
         
         if (isObject) {
@@ -59,8 +60,8 @@ class PickEventVarProp extends React.Component{
     }
     
     render() {
-        const { updateRef, prefix, attachVar } = this.props
-        const subfields = proptool.getSubfields(prefix, updateRef)
+        const { prefix, attachVar } = this.props
+        const subfields = proptool.getSubfields(prefix)
         const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
         
         return (
@@ -86,9 +87,3 @@ class PickEventVarProp extends React.Component{
         )
     }
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
-)(PickEventVarProp)

@@ -42,9 +42,7 @@ function PickEvent(props) {
 }
 
 export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
+    null,
     {
         showModal,
     }

@@ -1,11 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import { dropdownType } from '../types'
 import {
     variableType,
     updateType,
+    rssMap,
     VAR_DEFAULTS,
 } from '../../logic/types'
 
@@ -19,8 +19,8 @@ import {
     DropTitle,
 } from '../components/Common'
 
-function PickVar(props) {
-    const { attachVar, currentValue, updateRef } = props
+export default function PickVar(props) {
+    const { attachVar, currentValue } = props
 
     const handleSelect = (item) => {
         props.updatePage({
@@ -90,7 +90,7 @@ function PickVar(props) {
     }
     
     const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-    const rssVars = _.filter(updateRef, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
+    const rssVars = _.filter(rssMap, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
 
     return (
         <>
@@ -154,9 +154,3 @@ function PickVar(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    })
-)(PickVar)

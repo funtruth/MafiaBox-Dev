@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import { dropdownType } from '../types'
@@ -26,17 +25,17 @@ import {
     DropTitle,
  } from '../components/Common'
 
-/*@param prefix => used with updateRef to find the proper fields
+/*@param prefix => used with rssMap to find the proper fields
   @param prefix: describes the previous prefix used to get to current PickVarProp
     PickVarProp should used to find the subfields of a field, AND THEN select
     This follows a different path than ShowSubfields because we want to be able to refer to game values
         example: gameState(phase)
 */
-function PickVarProp(props) {
-    const { prefix, updateRef, currentValue, attachVar } = props
+export default function PickVarProp(props) {
+    const { prefix, currentValue, attachVar } = props
 
     //get subfields to show
-    const subfields = getSubfields(prefix, updateRef)
+    const subfields = getSubfields(prefix)
 
     //field is a UidObject if there is only 1 subfield and the subfield is WILD_CHAR
     const isUidObject = subfields.length === 1 && subfields[0].subfield === WILD_CHAR
@@ -86,7 +85,7 @@ function PickVarProp(props) {
     }
     
 
-    //get all subfields that exist in updateRef, corresponding to prefix
+    //get all subfields that exist in rssMap, corresponding to prefix
     //subfields is guaranteed to be an array
     if (subfields.length === 0) {
         return (
@@ -118,9 +117,3 @@ function PickVarProp(props) {
         </DropScroll>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
-)(PickVarProp)

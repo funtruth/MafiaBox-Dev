@@ -1,3 +1,5 @@
+import { rssMap } from './types'
+
 export const START_CHAR = '('
 export const END_CHAR = ')'
 export const WILD_CHAR = '@'
@@ -43,14 +45,14 @@ export function separateField(prefix="") {
 export function concatField(a="", b="") {return a + START_CHAR + b + END_CHAR}
 export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CHAR + START_CHAR) + END_CHAR}
 
-//returns properties of prefix existing in updateRef
-export function getSubfields(prefix, updateRef) {
+//returns properties of prefix existing in rssMap
+export function getSubfields(prefix) {
     const parts = separateField(prefix),
           fields = [];
           
-    for (var key in updateRef) {
+    for (var key in rssMap) {
         let match = true;
-        const fieldInfo = updateRef[key];
+        const fieldInfo = rssMap[key];
 
         //if fieldInfo is a subfield, it's length will be 1 greater than the prefix
         if (fieldInfo.fieldLength !== parts.length + 1) continue
@@ -73,12 +75,12 @@ export function getSubfields(prefix, updateRef) {
 }
 
 //returns the proper update config to LogicExpandable using prefix
-export function getUpdateConfig(prefix, updateRef) {
+export function getUpdateConfig(prefix) {
     const parts = separateField(prefix)
 
-    for (var ref in updateRef) {
+    for (var ref in rssMap) {
         let match = true;
-        const fieldInfo = updateRef[ref];
+        const fieldInfo = rssMap[ref];
 
         //if fieldInfo is a match, it's length will be equal to prefix
         if (fieldInfo.fieldLength !== parts.length) continue

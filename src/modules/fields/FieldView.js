@@ -9,7 +9,7 @@ import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import ImageField from './components/ImageField'
 import UniqueTagField from './components/UniqueTagField';
-import PlayerTagField from './components/PlayerTagField'
+import GeneralTagField from './components/GeneralTagField'
 import PriorityField from './components/PriorityField'
 import PropertyField from './components/PropertyField'
 import LogicBoard from './components/LogicBoard';
@@ -42,6 +42,12 @@ function FieldView(props) {
                 return <TextField {...props}/>
             case fieldType.number.key:
                 return <NumberField {...props}/>
+            case fieldType.uniqueTag.key:
+                return <UniqueTagField {...props}/>
+            case fieldType.priority.key:
+                return <PriorityField {...props}/>
+            case fieldType.generalTag.key:
+                return <GeneralTagField {...props}/>
 
             case fieldType.call.key:
                 return <CallField {...props}/>
@@ -49,12 +55,6 @@ function FieldView(props) {
                 return <ImageField {...props}/>
             case fieldType.logic.key:
                 return <LogicBoard {...props}/>
-            case fieldType.tag.key:
-                return <UniqueTagField {...props}/>
-            case fieldType.playerTag.key:
-                return <PlayerTagField {...props}/>
-            case fieldType.priority.key:
-                return <PriorityField {...props}/>
             case fieldType.property.key:
                 return <PropertyField {...props}/>
             case fieldType.vars.key:
@@ -69,7 +69,7 @@ function FieldView(props) {
         <>
             {fields.map((field, index) => {
                 const item = fieldRepo[field]
-                const { icon } = fieldType[item.fieldType]
+                const { icon } = fieldType[item.fieldType] || ""
 
                 return (
                     <React.Fragment key={index}>

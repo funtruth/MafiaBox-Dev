@@ -54,8 +54,8 @@ export const fieldType = {
         icon: 'mdi mdi-codepen',
         title: 'Logic',
     },
-    tag: {
-        key: 'tag',
+    uniqueTag: {
+        key: 'uniqueTag',
         index: 4,
         icon: 'ion-ios-pricetag',
         title: 'Tag',
@@ -72,20 +72,14 @@ export const fieldType = {
         icon: 'ion-md-switch',
         title: 'Property',
     },
-    expertTag: {
-        key: 'expertTag',
-        index: 7,
-        icon: 'ion-ios-pricetags',
-        title: 'Expert Tag',
-    },
     choices: {
         key: 'choices',
         index: 9,
         icon: 'mdi mdi-source-branch',
         title: 'Choices',
     },
-    playerTag: {
-        key: 'playerTag',
+    generalTag: {
+        key: 'generalTag',
         index: 10,
         icon: 'ion-ios-pricetag',
         title: 'Player Tags',
@@ -133,7 +127,7 @@ export const defaultFieldRepo = {
     },
     roleTeam: {
         key: 'roleTeam',
-        fieldType: fieldType.tag.key,
+        fieldType: fieldType.uniqueTag.key,
         title: 'Team',
         boardType: boardType.roles.key,
     },
@@ -145,7 +139,7 @@ export const defaultFieldRepo = {
     },
     playerTags: {
         key: 'playerTags',
-        fieldType: fieldType.playerTag.key,
+        fieldType: fieldType.generalTag.key,
         title: 'Player Tags',
         boardType: boardType.roles.key,
     },

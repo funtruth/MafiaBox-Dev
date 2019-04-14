@@ -21,7 +21,7 @@ import {
 } from '../components/Common'
 
 export default function PickUid(props) {
-    const { attach, attachVar, subfieldKey, updateRef } = props
+    const { attach, attachVar, subfieldKey } = props
     
     const currentValue = attach[subfieldKey] || {}
     const currentKey = currentValue.value
@@ -46,7 +46,7 @@ export default function PickUid(props) {
         const newKey = concatField(subfieldKey, item.key)
         const chosen = currentKey === item.key
         
-        const config = getUpdateConfig(newKey, updateRef)
+        const config = getUpdateConfig(newKey)
 
         if (!config) {
             return (
@@ -78,7 +78,6 @@ export default function PickUid(props) {
     }
 
     const uids = _.filter(attachVar, VARTYPE_IS_UID)
-    
     return (
         <>
             <DropTitle>uids</DropTitle>

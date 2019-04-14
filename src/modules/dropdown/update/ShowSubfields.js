@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import {
     concatField,
@@ -11,9 +10,9 @@ import {
     DropTitle,
 } from '../components/Common'
 
-function ShowSubfields(props) {
-    const { subfieldKey, updateRef } = props
-    const items = getSubfields(subfieldKey, updateRef)
+export default function ShowSubfields(props) {
+    const { subfieldKey } = props
+    const items = getSubfields(subfieldKey)
     
     return (
         <>
@@ -35,9 +34,3 @@ function ShowSubfields(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
-)(ShowSubfields)

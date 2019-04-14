@@ -1,5 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
+import { rssMap } from '../types';
+
 import * as proptool from '../proptool'
 
 import { updateRepo } from '../../page/PageReducer'
@@ -42,13 +45,13 @@ class LogicExpandable extends React.Component{
     }
 
     render() {
-        const { value, nested, property, updateRef, prefix } = this.props
+        const { value, nested, property, prefix } = this.props
         const { showOptions } = this.state
     
         const attributes = proptool.getSubfields(prefix, value.data)
         const isVarField = property.charAt(0) === '$'
 
-        const config = proptool.getUpdateConfig(prefix, updateRef)
+        const config = proptool.getUpdateConfig(prefix)
         
         return (
             <div style={{ marginTop: 2, marginLeft: nested ? 12 : 0 }}>

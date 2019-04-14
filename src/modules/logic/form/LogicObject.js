@@ -1,17 +1,22 @@
 import React from 'react'
-import * as proptool from '../proptool'
 
-import { logicType } from '../types'
+import {
+    logicType,
+} from '../types'
+
+import {
+    getSubfields,
+} from '../proptool'
 
 import LogicExpandable from './LogicExpandable';
 
 export default function LogicObject(props) {
-    const { updateRef, logicInfo } = props
+    const { logicInfo } = props
 
     if (logicInfo.logicType !== logicType.update.key) return null
     
     return (
-        proptool.getSubfields('', updateRef).map((item, index) => (
+        getSubfields('').map((item, index) => (
             <LogicExpandable
                 {...props}
                 key={index}

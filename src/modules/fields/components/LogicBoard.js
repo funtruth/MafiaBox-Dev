@@ -55,9 +55,7 @@ function LogicBoard(props) {
 }
 
 export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
+    null,
     {
         showModal,
         getCode,

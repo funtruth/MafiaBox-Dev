@@ -1,14 +1,16 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import { dropdownType } from '../types'
-import { variableType } from '../../logic/types'
+import {
+    variableType,
+    rssMap,
+} from '../../logic/types'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
 
-class PickEventVar extends React.Component{
+export default class PickEventVar extends React.Component{
     _onSelect = (item) => {
         const { string, range } = this.props
         const { startIndex, endIndex } = range
@@ -53,11 +55,11 @@ class PickEventVar extends React.Component{
     }
 
     render() {
-        const { attachVar, updateRef } = this.props
+        const { attachVar } = this.props
         if (!attachVar) return null
 
         const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-        const rssVars = _.filter(updateRef, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
+        const rssVars = _.filter(rssMap, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
 
         return (
             <div>
@@ -83,9 +85,3 @@ class PickEventVar extends React.Component{
         )
     }
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    })
-)(PickEventVar)

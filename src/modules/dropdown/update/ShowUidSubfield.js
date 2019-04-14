@@ -1,12 +1,12 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import {
     concatField,
     getUpdateConfig,
     WILD_CHAR,
 } from '../../logic/proptool'
+
 import { VARTYPE_IS_UID } from '../../common/arrows';
 
 import {
@@ -14,14 +14,13 @@ import {
     DropTitle,
 } from '../components/Common'
 
-function ShowUidSubfield(props) {
-    const { attachVar, subfieldKey, updateRef } = props
+export default function ShowUidSubfield(props) {
+    const { attachVar, subfieldKey } = props
 
     //get config for uid/wildcard field
-    const config = getUpdateConfig(concatField(subfieldKey, WILD_CHAR), updateRef)
+    const config = getUpdateConfig(concatField(subfieldKey, WILD_CHAR))
     
     const uids = _.filter(attachVar, VARTYPE_IS_UID)
-    
     return (
         <>
             <DropTitle>subfields</DropTitle>
@@ -40,9 +39,3 @@ function ShowUidSubfield(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        updateRef: state.template.updateRef,
-    }),
-)(ShowUidSubfield)

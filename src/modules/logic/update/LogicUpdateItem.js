@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
     separateField,
     getUpdateConfig,
@@ -12,7 +13,7 @@ import LogicUpdateTypes from './LogicUpdateTypes'
 import LogicUpdateDisplay from './LogicUpdateDisplay'
 
 export default function LogicUpdateItem(props) {
-    const { prefix, updateRef, value, updateSource, vars, path } = props
+    const { prefix, value, updateSource, vars, path } = props
     const attach = value.data || {}
 
     const fields = separateField(prefix)
@@ -21,7 +22,7 @@ export default function LogicUpdateItem(props) {
         <div className="row-nowrap" style={{ marginTop: 2 }}>
             {fields.map((field, index) => {
                 const shortPrefix = combineFields(fields.slice(0, index + 1))
-                const config = getUpdateConfig(shortPrefix, updateRef)
+                const config = getUpdateConfig(shortPrefix)
 
                 return (
                     <div
