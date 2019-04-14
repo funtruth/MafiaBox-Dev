@@ -1,74 +1,42 @@
-import React from 'react'
-import * as helpers from '../../common/helpers'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 
-class DropParent extends React.Component{
-    constructor(props) {
-        super(props)
-        this.myDiv = null
-        this.parent = null
-        this.state = {
-            origin: false,
-        }
-    }
+import generatePushID from '../../common/generatePushID'
 
-    componentDidMount() {
-        if (this.myDiv) {
-            this.parent = helpers.getDropdownParentTarget(this.myDiv)
-            this.parent.addEventListener('mouseenter', this._handleOrigin)
-        }
-    }
+export default connect(
+    state => ({
+        dropdownKeys: state.dropdown.dropdownKeys,
+    })
+)(function DropParent(props) {
+    //generate a unique serial number
+    const [serialNo] = useState(generatePushID())
+    const { icon, text, chosen, style, dropdownType, params, dropdownKeys, serialList } = props
 
-    componentWillUnmount() {
-        if (this.parent) {
-            this.parent.removeEventListener('mouseenter', this._handleOrigin)
-        }
-    }
+    //if the top dropdown has current DropParent's serial number in it's serial list, highlight.
+    const isOrigin = !!dropdownKeys[dropdownKeys.length - 1].serialList
+        && dropdownKeys[dropdownKeys.length - 1].serialList.includes(serialNo)
 
-    _handleOrigin = () => {
-        this.setState({
-            origin: false,
+    //push serial number inside list
+    const onMouseOver = e => {
+        //if current DropParent is the origin, don't re-render the Dropdown
+        if (!dropdownType || isOrigin) return;
+        props.showDropdown(dropdownType, e, {
+            ...params,
+            serialList: (serialList||[]).concat(serialNo),
         })
     }
-
-    _onMouseOver = e => {
-        const { dropdownType, params } = this.props
-        if (!dropdownType) return
-
-        this.props.showDropdown(dropdownType, e, params)
-        this.setState({
-            origin: true,
-        })
-    }
-
-    _onMouseOut = e => {
-        if (e.nativeEvent.offsetX < e.target.offsetWidth) {
-            this.props.popDropdownTo()
-            this.setState({
-                origin: false,
-            })
-        }
-    }
-
-    render() {
-        const { icon, text, chosen, style } = this.props
-        const { origin } = this.state
-        
-        return (
-            <div
-                ref={ref => this.myDiv = ref}
-                className="drop-down-menu-option"
-                chosen={chosen ? chosen.toString() : undefined}
-                origin={origin.toString()}
-                onMouseOver={this._onMouseOver}
-                onMouseOut={this._onMouseOut}
-                style={style}
-            >
-                {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
-                {text || 'Parent'}
-                <i className="mdi mdi-play"/>
-            </div>
-        )
-    }
-}
-
-export default DropParent
+    
+    return (
+        <div
+            className="drop-down-menu-option"
+            chosen={chosen ? chosen.toString() : undefined}
+            origin={isOrigin.toString()}
+            onMouseOver={onMouseOver}
+            style={style}
+        >
+            {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
+            {text || 'Parent'}
+            <i className="mdi mdi-play"/>
+        </div>
+    )
+})

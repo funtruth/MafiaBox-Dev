@@ -509,7 +509,7 @@ export const rssMap = {
             'team',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickTeam, //TODO
+        dropdown: dropdownType.pickRoleTeam,
         variableTypes: [
             variableType.string.key,
         ],

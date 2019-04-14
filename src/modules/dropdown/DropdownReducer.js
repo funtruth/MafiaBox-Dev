@@ -21,37 +21,27 @@ export function showDropdown(key, e, params={}, index=0, place="down") {
             })
         } else {
             let keysClone = _.cloneDeep(dropdownKeys).slice(0, index + 1)
-
             const prev = keysClone[keysClone.length - 1]
-            if (keysClone.length) {
-                keysClone.push({
-                    ...modalKeys[modalKeys.length - 1],
-                    ...prev,
-                    ...params,
-                    key,
-                    position: {
-                        place,
-                        pageX: e.pageX - e.nativeEvent.offsetX + e.target.offsetWidth,
-                        pageY: e.pageY - e.nativeEvent.offsetY - DROPDOWN_Y_MARGIN - DROP_TITLE_HEIGHT,
-                        sourceHeight: e.target.offsetHeight,
-                        sourceWidth: e.target.offsetWidth, 
-                    },
-                })
-            } else {
-                keysClone.push({
-                    ...modalKeys[modalKeys.length - 1],
-                    ...prev,
-                    ...params,
-                    key,
-                    position: {
-                        place,
-                        pageX: e.pageX - e.offsetX - 8,
-                        pageY: e.pageY - e.offsetY + e.target.offsetHeight,
-                        sourceHeight: e.target.offsetHeight,
-                        sourceWidth: e.target.offsetWidth, 
-                    },
-                })
-            }
+            
+            const pageX = keysClone.length ?
+                e.pageX - e.nativeEvent.offsetX + e.target.offsetWidth
+                :e.pageX - e.offsetX - DROPDOWN_Y_MARGIN
+
+            const pageY = keysClone.length ?
+                e.pageY - e.nativeEvent.offsetY - DROPDOWN_Y_MARGIN - DROP_TITLE_HEIGHT
+                :e.pageY - e.offsetY + e.target.offsetHeight
+
+            keysClone.push({
+                ...modalKeys[modalKeys.length - 1],
+                ...prev,
+                ...params,
+                key,
+                position: {
+                    place, pageX, pageY,
+                    sourceHeight: e.target.offsetHeight,
+                    sourceWidth: e.target.offsetWidth, 
+                }
+            })
 
             dispatch({
                 type: UPDATE_KEYS,

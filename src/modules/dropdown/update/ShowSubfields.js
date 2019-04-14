@@ -17,20 +17,18 @@ export default function ShowSubfields(props) {
     return (
         <>
             <DropTitle>subfields</DropTitle>
-            {items.map(item => {
-                return (
-                    <DropParent
-                        {...props}
-                        key={item.subfield}
-                        dropdownType={item.dropdown}
-                        params={{
-                            subfieldKey: concatField(subfieldKey, item.subfield),
-                            subpath: [concatField(subfieldKey, item.subfield)],
-                        }}
-                        text={item.subfield}
-                    />
-                )
-            })}
+            {items.map(item => (
+                <DropParent
+                    {...props}
+                    key={item.subfield}
+                    dropdownType={item.dropdown}
+                    params={{
+                        subfieldKey: concatField(subfieldKey, item.subfield),
+                        subpath: [concatField(subfieldKey, item.subfield)],
+                    }}
+                    text={item.subfield}
+                />
+            ))}
         </>
     )
 }

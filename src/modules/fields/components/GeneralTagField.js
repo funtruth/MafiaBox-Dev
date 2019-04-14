@@ -10,22 +10,19 @@ import {
 export default function GeneralTagField(props) {
     const { path, fieldKey, value, data } = props
 
-    let handleClick = (item, active) => props.updatePage(path, { [item.subfield]: !active })
+    let handleClick = (item, active) => props.updatePage(path, {[item.key]: !active})
 
     const renderItem = (item) => {
-        const active = value && value[item.subfield]
+        const active = value && value[item.key]
                 
         return (
-            <div
+            <Tag
                 key={item.key}
-                className="field-tag"
-                style={{
-                    backgroundColor: active && (item.color || '#6279CA'),
-                }}
+                theme={active ? 'purple' : 'black'}
                 onClick={() => handleClick(item, active)}
             >
-                {item.subfield}
-            </div>
+                {item.title}
+            </Tag>
         )
     }
     

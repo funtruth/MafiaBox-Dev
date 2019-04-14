@@ -36,7 +36,7 @@ export default connect(
     }
 
     const onSubmit = () => {
-        const newKey = genUID('team', attach)
+        const newKey = genUID('tag', attach)
         props.updateField([...path, 'data', newKey], {
             key: newKey,
             title: value,
