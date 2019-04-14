@@ -1,0 +1,30 @@
+.--tag {
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+}
+.--tag:hover {
+    filter: brightness(120%);
+}
+.--tag-lightgrey {
+    background-color: #424650;
+}
+.--tag-yellow {
+    background-color: #af8c40;
+}
+.--tag-grey {
+    background-color: #424650;
+}
+.--tag-darkgrey {
+    background-color: #424650;
+}
+.--tag-red {
+    background-color: #B34B50;
+}
+.--tag-clear {
+    background-color: transparent;
+}
+.--tag-black {
+    background-color: #282b30;
+}

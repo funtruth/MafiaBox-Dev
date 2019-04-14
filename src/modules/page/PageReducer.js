@@ -30,18 +30,20 @@ const ADD_STORY = 'story/add-story-to'
 const UPDATE_STORY = 'story/update-story'
 const REMOVE_STORY = 'story/remove-story'
 const MOVE_STORY = 'story/move-story'
+const ADD_PAGE = 'page/add-page'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
-const UPDATE_REPO = 'page/update-repo'
-const ADD_PAGE = 'page/add-page'
-const REMOVE_PAGE = 'page/remove-page'
 const PUBLISH_PAGE = 'page/publish-page'
+const REMOVE_PAGE = 'page/remove-page'
+const UPDATE_REPO = 'page/update-repo'
 const DIFF_PRIORITIES = 'page/diff-priorities'
 
 const RECEIVE_EVENT = 'page/receive-event'
 const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
 const RESET_REDUCER = 'page/reset-reducer'
+
+const UPDATE_FIELD = 'page/update-field'
 
 export function addStory(boardType) {
     return (dispatch, getState) => {
@@ -334,6 +336,7 @@ export function receiveEvent(snap, key) {
         })
     }
 }
+
 //TODO need a proper delete, should be run on startup or something
 export function receiveDeleteEvent(snap, key) {
     return (dispatch, getState) => {
@@ -387,6 +390,41 @@ export function diffPriorities(attach) {
     }
 }
 
+//LogicBoard DELETE
+export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
+    return (dispatch, getState) => {
+        const { pageRepo } = getState().page
+        const repoClone = Object.assign({}, pageRepo)
+
+        if (!repoClone[pageKey]) return
+        if (!repoClone[pageKey][fieldKey]) return
+        if (!repoClone[pageKey][fieldKey][indexKey]) return
+        if (!repoClone[pageKey][fieldKey][indexKey].data) return
+        if (!repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]) return
+
+        delete repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]
+        dispatch({
+            type: UPDATE_REPO,
+            payload: repoClone,
+        })
+    }
+}
+
+export function updateField(path, update) {
+    return (dispatch, getState) => {
+        const { fieldRepo } = getState().page
+
+        const repoClone = helpers.updateByPath(path, update, fieldRepo)
+
+        dispatch(receiveAction({
+            type: UPDATE_FIELD,
+            payload: {
+                fieldRepo: repoClone,
+            },
+        }))
+    }
+}
+
 //intercepts redux action/payload and checks diffs to properly update firebase
 //dispatches the action/payload
 export function receiveAction({type, payload}) {
@@ -425,26 +463,6 @@ export function receiveAction({type, payload}) {
     }
 }
 
-//LogicBoard DELETE
-export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        const repoClone = Object.assign({}, pageRepo)
-
-        if (!repoClone[pageKey]) return
-        if (!repoClone[pageKey][fieldKey]) return
-        if (!repoClone[pageKey][fieldKey][indexKey]) return
-        if (!repoClone[pageKey][fieldKey][indexKey].data) return
-        if (!repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]) return
-
-        delete repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]
-        dispatch({
-            type: UPDATE_REPO,
-            payload: repoClone,
-        })
-    }
-}
-
 export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
@@ -461,6 +479,7 @@ export default (state = initialState, action) => {
         case RECEIVE_CHILD_EVENT:
         case UPDATE_REPO:
         case RESET_REDUCER:
+        case UPDATE_FIELD:
             return { ...state, ...action.payload }
         default:
             return state;

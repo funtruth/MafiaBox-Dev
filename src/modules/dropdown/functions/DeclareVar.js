@@ -16,6 +16,7 @@ import {
     DropItem,
     DropTitle,
     DropScroll,
+    DropSubmit,
 } from '../components/Common'
 
 export default function DeclareVar(props) {
@@ -80,19 +81,23 @@ export default function DeclareVar(props) {
     return (
         <>
             <DropTitle>declare</DropTitle>
-            <input
-                className="tag-input"
-                value={value}
-                onChange={handleChange}
-                onKeyDown={handleKeyPress}
-                placeholder="Variable name ..."
-                type='text'
-                autoFocus
-                style={{
-                    marginBottom: 6,
-                }}
-            />
-            <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline">save variable</DropItem>
+            <div className="row" style={{marginBottom: 6}}>
+                <input
+                    className="tag-input"
+                    value={value}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyPress}
+                    placeholder="Variable name ..."
+                    type='text'
+                    autoFocus
+                />
+                <DropSubmit
+                    onClick={handleSave}
+                    icon="mdi mdi-checkbox-marked-outline"
+                >
+                    save
+                </DropSubmit>
+            </div>
             <DropTitle>assign</DropTitle>
             <DropScroll>
                 {assignable.map(item => (

@@ -44,6 +44,17 @@
     color: #b6b6b6;
 }
 
+.drop-down-menu-submit {
+    padding: 0px 10px 0px 6px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #b6b6b6;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
 .drop-down-empty {
     padding: 6px 15px 6px 15px;
     display: flex;
@@ -69,7 +80,8 @@
 .drop-down-menu-option[origin=true] {
     background-color: hsla(0,0%,100%,.1);
 }
-.drop-down-menu-option:hover {
+.drop-down-menu-option:hover,
+.drop-down-menu-submit:hover {
     background-color: hsla(0,0%,100%,.1);
 }
 

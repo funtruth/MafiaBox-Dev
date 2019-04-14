@@ -6,6 +6,7 @@ import Footer from './Footer'
 import Header from './Header'
 import Icon from './Icon'
 import Separator from './Separator'
+import Tag from './Tag'
 import Text from './Text'
 import TextArea from './TextArea'
 import Switch from './Switch'
@@ -17,6 +18,7 @@ export {
     Header,
     Icon,
     Separator,
+    Tag,
     Text,
     TextArea,
     Switch,

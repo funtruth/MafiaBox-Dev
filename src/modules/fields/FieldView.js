@@ -1,7 +1,6 @@
 import React from 'react'
 import './field.css'
 import { connect } from 'react-redux';
-import _ from 'lodash'
 
 import { fieldType } from './defaults'
 
@@ -28,8 +27,8 @@ function FieldView(props) {
             key,
             pageKey,
             fieldKey: key,
-            value: pageInfo[key],
-            data,
+            value: pageInfo[key], //value related to the current page
+            data, //data related to the field
             fieldInfo,
             vars: fieldInfo.vars || {},
             path: [...path, key],

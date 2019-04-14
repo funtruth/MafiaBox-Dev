@@ -2,7 +2,7 @@ import * as helpers from '../common/helpers'
 import * as maptool from '../logic/maptool'
 import _ from 'lodash'
 
-import { fieldType, boardType as _boardType } from './defaults'
+import {  boardType as _boardType } from './defaults'
 
 import { updateRepo } from '../page/PageReducer'
 

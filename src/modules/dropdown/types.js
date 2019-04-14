@@ -11,7 +11,7 @@ export const dropdownType = {
     pickReturnType: 'dropdownType/pick-return-type',
 
     editTag: 'dropdownType/edit-tag',
-    addTag: 'dropdownType/add-tag',
+    createUniqueTag: 'dropdownType/create-unique-tag',
     pickFieldType: 'dropdownType/pick-field-type',
     templateTitleOptions: 'dropdownType/template-title-options',
 
