@@ -3,8 +3,10 @@ import  _ from 'lodash'
 import { connect } from 'react-redux'
 
 import {
-    concatField,
-} from '../../logic/proptool'
+    variableType,
+    updateType,
+    VAR_DEFAULTS,
+} from '../../logic/types';
 
 import {
     DropTitle,
@@ -18,20 +20,25 @@ export default connect(
         fieldRepo: state.page.fieldRepo,
     })
 )(function PickRoleTeam(props) {
-    const { subfieldKey, fieldRepo } = props
+    const { fieldRepo } = props
 
     const handleSelect = (item) => {
-
+        props.updatePage({
+            ...VAR_DEFAULTS,
+            value: item.key,
+            display: item.title,
+            variableTypes: [
+                variableType.string.key,
+            ],
+            updateType: updateType.string,
+        })
+        props.showDropdown();
     }
 
     const renderItem = (item) => {
         return (
             <DropItem
                 key={item.key}
-                params={{
-                    subfieldKey: concatField(subfieldKey, ROLE_TEAM_KEY),
-                    subpath: [concatField(subfieldKey, item.subfield)],
-                }}
                 onClick={() => handleSelect(item)}
             >
                 {item.title}
@@ -42,7 +49,7 @@ export default connect(
     const data = _.sortBy(fieldRepo[ROLE_TEAM_KEY].data, i => i.index)
     return (
         <>
-            <DropTitle>subfields</DropTitle>
+            <DropTitle>teams</DropTitle>
             {data.map(renderItem)}
         </>
     )

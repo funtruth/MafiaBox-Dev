@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 
 export default function DropInput(props){
-    let [value, setValue] = useState('')
+    const { type, inputText, currentValue } = props
+
+    let [value, setValue] = useState(currentValue || '')
 
     let handleType = e => setValue(e.target.value)
 
@@ -17,8 +19,6 @@ export default function DropInput(props){
             default:
         }
     }
-
-    const { type, inputText } = props
 
     return (
         <>

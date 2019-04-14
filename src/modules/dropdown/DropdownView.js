@@ -69,7 +69,7 @@ import PickUid from './update/PickUid'
 import PickNumUpdate from './update/PickNumUpdate'
 import ShowSubfields from './update/ShowSubfields';
 import ShowUidSubfield from './update/ShowUidSubfield';
-import PickGeneralTag from './update/PickGeneralTag';
+import ShowRoleSubfields from './update/ShowRoleSubfields'
 import PickRoleTeam from './update/PickRoleTeam';
 
 import PickEvent from './strings/PickEvent';
@@ -228,8 +228,8 @@ function DropdownView(props) {
                 return <ShowSubfields {...renderProps}/>
             case dropdownType.showUidSubfield:
                 return <ShowUidSubfield {...renderProps}/>
-            case dropdownType.pickGeneralTag:
-                return <PickGeneralTag {...renderProps}/>
+            case dropdownType.showRoleSubfields:
+                return <ShowRoleSubfields {...renderProps}/>
             case dropdownType.pickRoleTeam:
                 return <PickRoleTeam {...renderProps}/>
 
@@ -252,7 +252,12 @@ function DropdownView(props) {
     return (
         <div className="drop-down-pause">
             {dropdownKeys.map((item, index) => (
-                <Dropdown {...item} key={item.key + index + JSON.stringify(item.serialList)} index={index}>
+                <Dropdown
+                    {...item}
+                    key={item.key + index + JSON.stringify(item.serialList)}
+                    index={index}
+                    onClick={() => props.popDropdownTo(index)}
+                >
                     {renderItem(item, index)}
                 </Dropdown>
             ))}

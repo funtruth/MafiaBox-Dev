@@ -15,21 +15,8 @@
     padding: 8px 0px;
     user-select: none;
 
-    animation: fadein 0.2s, scalein 0.2s;
-    -webkit-animation: fadein 0.2s, scalein 0.2s;
-    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
-    color: #b6b6b6;
-    font: 520 14px Segoe UI;
-}
-
-.drop-down-menu-autow {
-    position: fixed;
-    background-color: rgb(47, 55, 73);
-    border-radius: 4px;
-    padding: 8px 0px;
-
-    animation: fadein 0.2s, scalein 0.2s;
-    -webkit-animation: fadein 0.2s, scalein 0.2s;
+    animation: fadein 0.4s, scalein 0.2s;
+    -webkit-animation: fadein 0.4s, scalein 0.2s;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px;
     color: #b6b6b6;
     font: 520 14px Segoe UI;

@@ -15,7 +15,6 @@ export default function InputValue(props) {
         }
     }
 
-
     return (
         <>
             <input

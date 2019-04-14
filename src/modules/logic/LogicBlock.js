@@ -38,7 +38,7 @@ function LogicBlock(props) {
                 <LogicPanels {...props}/>
                 <LogicOptions {...props}/>
             </div>
-            <div className="row">
+            <div className="row-nowrap">
                 <LogicAddBelow {...props}/>
                 <LogicDetails {...props}/>
             </div>

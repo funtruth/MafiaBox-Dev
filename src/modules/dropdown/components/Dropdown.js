@@ -3,15 +3,16 @@ import React, { useState, useEffect, useRef } from 'react'
 const THRESHOLD = 20
 
 export default function Dropdown(props) {
-    const { children, index, position } = props
+    const { children, index, position, onClick } = props
     const { place, pageX, pageY, sourceHeight, sourceWidth } = position
 
     //hide dropdown before calculating whether or not it needs to be re-positioned
     const [styles, setStyles] = useState({ display: 'none' })
 
     const dropdownRef = useRef(null);
+
     useEffect(() => {
-        const { offsetHeight, offsetWidth, offsetTop, offsetLeft } = dropdownRef.current
+        let { offsetHeight, offsetWidth, offsetTop, offsetLeft } = dropdownRef.current
         
         const rightOverflow = window.innerWidth - THRESHOLD < offsetWidth + offsetLeft
         //const xLeftOverflow = offsetLeft < 0
@@ -79,6 +80,7 @@ export default function Dropdown(props) {
             ref={dropdownRef}
             className="drop-down-menu" 
             style={styles}
+            onClick={() => onClick && onClick()}
         >
             {children}
         </div>

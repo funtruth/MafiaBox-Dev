@@ -13,7 +13,7 @@ export default connect(
     const { icon, text, chosen, style, dropdownType, params, dropdownKeys, serialList } = props
 
     //if the top dropdown has current DropParent's serial number in it's serial list, highlight.
-    const isOrigin = !!dropdownKeys[dropdownKeys.length - 1].serialList
+    const isOrigin = !!(dropdownKeys[dropdownKeys.length - 1]||[]).serialList
         && dropdownKeys[dropdownKeys.length - 1].serialList.includes(serialNo)
 
     //push serial number inside list
@@ -25,12 +25,15 @@ export default connect(
             serialList: (serialList||[]).concat(serialNo),
         })
     }
+
+    const handleClick = (e) => e.stopPropagation();
     
     return (
         <div
             className="drop-down-menu-option"
             chosen={chosen ? chosen.toString() : undefined}
             origin={isOrigin.toString()}
+            onClick={handleClick}
             onMouseOver={onMouseOver}
             style={style}
         >

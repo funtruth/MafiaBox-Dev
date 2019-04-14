@@ -118,6 +118,7 @@ export const updateType = {
     boolean: 'updateType/boolean',
     health: 'updateType/health',
     timer: 'updateType/timer',
+    string: 'updateType/string',
 
     variable: 'updateType/variable',
     page: 'updateType/page',
@@ -477,7 +478,7 @@ export const rssMap = {
             'role',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.showSubfields,
+        dropdown: dropdownType.showRoleSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -498,15 +499,15 @@ export const rssMap = {
             variableType.string.key,
         ],
     },
-    '(rss)(lobby)(@)(role)(team)': {
-        key: '(rss)(lobby)(@)(role)(team)',
-        subfield: 'team',
+    '(rss)(lobby)(@)(role)(roleTeam)': {
+        key: '(rss)(lobby)(@)(role)(roleTeam)',
+        subfield: 'roleTeam',
         fields: [
             'rss',
             'lobby',
             '@',
             'role',
-            'team',
+            'roleTeam',
         ],
         fieldLength: 5,
         dropdown: dropdownType.pickRoleTeam,
@@ -544,54 +545,6 @@ export const rssMap = {
         dropdown: dropdownType.pickNumUpdate,
         variableTypes: [
             variableType.number.key,
-        ],
-    },
-    '(rss)(lobby)(@)(role)(suspicious)': {
-        key: '(rss)(lobby)(@)(role)(suspicious)',
-        subfield: 'suspicious',
-        fields: [
-            'rss',
-            'lobby',
-            '@',
-            'role',
-            'suspicious',
-        ],
-        fieldLength: 5,
-        dropdown: dropdownType.pickBoolean,
-        variableTypes: [
-            variableType.boolean.key,
-        ],
-    },
-    '(rss)(lobby)(@)(role)(focus)': {
-        key: '(rss)(lobby)(@)(role)(focus)',
-        subfield: 'focus',
-        fields: [
-            'rss',
-            'lobby',
-            '@',
-            'role',
-            'focus',
-        ],
-        fieldLength: 5,
-        dropdown: dropdownType.pickBoolean,
-        variableTypes: [
-            variableType.boolean.key,
-        ],
-    },
-    '(rss)(lobby)(@)(role)(sneak)': {
-        key: '(rss)(lobby)(@)(role)(sneak)',
-        subfield: 'sneak',
-        fields: [
-            'rss',
-            'lobby',
-            '@',
-            'role',
-            'sneak',
-        ],
-        fieldLength: 5,
-        dropdown: dropdownType.pickBoolean,
-        variableTypes: [
-            variableType.boolean.key,
         ],
     },
     '(rss)(lobby)(@)(health)': {

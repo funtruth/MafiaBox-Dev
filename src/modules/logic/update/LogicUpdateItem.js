@@ -19,7 +19,7 @@ export default function LogicUpdateItem(props) {
     const fields = separateField(prefix)
     
     return (
-        <div className="row-nowrap" style={{ marginTop: 2 }}>
+        <div className="row" style={{ marginTop: 2 }}>
             {fields.map((field, index) => {
                 const shortPrefix = combineFields(fields.slice(0, index + 1))
                 const config = getUpdateConfig(shortPrefix)
