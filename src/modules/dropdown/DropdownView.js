@@ -63,7 +63,6 @@ import PickBoolean from './update/PickBoolean'
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
 import PickTimer from './update/PickTimer'
-import PickTeam from './update/PickTeam'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
 import PickNumUpdate from './update/PickNumUpdate'
@@ -210,8 +209,6 @@ function DropdownView(props) {
                 return <PickHealth {...renderProps}/>
             case dropdownType.pickTimer:
                 return <PickTimer {...renderProps}/>
-            case dropdownType.pickTeam:
-                return <PickTeam {...renderProps}/>
             case dropdownType.pickTrigger:
                 return <PickTrigger {...renderProps}/>
             case dropdownType.pickUid:

@@ -12,17 +12,18 @@ import {
 
 import {
     DropEmpty,
+    DropItem,
     DropTitle,
 } from '../components/Common'
 
 export default function PickChoice(props) {
     const { attachVar, attach, subfieldKey } = props
+    const currentValue = attach[subfieldKey] || {}
 
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            update: props.update,
-            mutate: props.mutate,
+            update: true,
             value: item.key || "$\"\"", //HACK
             updateType: updateType.uid,
         })
@@ -30,27 +31,23 @@ export default function PickChoice(props) {
     }
 
     const renderItem = (item) => {
-        const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
-        const chosen = typeof selectedKey === 'string' && selectedKey === item.key
+        const chosen = currentValue.value === item.key
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
+                rightIcon="mdi mdi-check"
             >
                 {item.key}
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         )
     }
 
-    const selectedKey = attach[subfieldKey] && attach[subfieldKey].value
-    const chosen = typeof selectedKey === 'string' && selectedKey === "$\"\""
+    const chosen = currentValue.value === "$\"\""
 
     const uids = _.filter(attachVar, VARTYPE_IS_UID)
-    
     return (
         <>
             <DropTitle>uids</DropTitle>
@@ -59,15 +56,14 @@ export default function PickChoice(props) {
                 <DropEmpty>no UIDS found</DropEmpty>
             </div>
             <DropTitle>options</DropTitle>
-            <div
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+            <DropItem
+                chosen={chosen}
                 onClick={handleSelect}
+                leftIcon="mdi mdi-message-bulleted-off"
+                rightIcon="mdi mdi-check"
             >
-                <i className="drop-down-menu-icon mdi mdi-message-bulleted-off"/>
                 no choice
-                <i className="mdi mdi-check"/>
-            </div>
+            </DropItem>
         </>
     )
 }

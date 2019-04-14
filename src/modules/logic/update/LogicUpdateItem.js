@@ -9,7 +9,6 @@ import {
 import {
     Icon,
 } from '../../components/Common'
-import LogicUpdateTypes from './LogicUpdateTypes'
 import LogicUpdateDisplay from './LogicUpdateDisplay'
 
 export default function LogicUpdateItem(props) {
@@ -58,7 +57,6 @@ export default function LogicUpdateItem(props) {
                     </div>
                 )
             })}
-            <LogicUpdateTypes {...props}/>
         </div>
     )
 }

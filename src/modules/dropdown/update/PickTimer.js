@@ -31,6 +31,7 @@ export default function PickTimer(props) {
         
         props.updatePage({
             ...VAR_DEFAULTS,
+            update: true,
             value: timer,
             display: min + 'm' + sec + 's',
             updateType: updateType.timer,

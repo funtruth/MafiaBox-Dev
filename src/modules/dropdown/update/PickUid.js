@@ -26,16 +26,10 @@ export default function PickUid(props) {
     const currentValue = attach[subfieldKey] || {}
     const currentKey = currentValue.value
 
-    //defaults => update: true, mutate: false
-    const updateValue = {
-        update: currentValue.update === undefined ? true : currentValue.update,
-        mutate: currentValue.mutate === undefined ? false : currentValue.mutate,
-    }
-
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            ...updateValue,
+            update: true,
             value: item.key,
             updateType: updateType.uid,
         })

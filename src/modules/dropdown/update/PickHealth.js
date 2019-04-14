@@ -13,16 +13,10 @@ export default function PickHealth(props) {
     const { attach, subfieldKey } = props
     const currentValue = attach[subfieldKey] || {}
 
-    //defaults => update: true, mutate: false
-    const updateValue = {
-        update: currentValue.update === undefined ? true : currentValue.update,
-        mutate: currentValue.mutate === undefined ? false : currentValue.mutate,
-    }
-
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            ...updateValue,
+            update: true,
             value: item.key,
             display: item.title,
             updateType: updateType.health,

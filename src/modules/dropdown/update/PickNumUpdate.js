@@ -18,16 +18,10 @@ export default function PickNumUpdate(props) {
     const { attach, subfieldKey } = props
     const currentValue = attach[subfieldKey] || {}
 
-    //defaults => update: true, mutate: false
-    const updateValue = {
-        update: currentValue.update === undefined ? true : currentValue.update,
-        mutate: currentValue.mutate === undefined ? false : currentValue.mutate,
-    }
-
     const selectDynamic = (item, number) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            ...updateValue,
+            update: true,
             value: item.key,
             adjust: number,
             display: item.title + ' ' + number,
@@ -39,7 +33,7 @@ export default function PickNumUpdate(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            ...updateValue,
+            update: true,
             value: item.key,
             display: item.key,
             updateType: updateType.number,
