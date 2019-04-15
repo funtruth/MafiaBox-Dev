@@ -3,14 +3,15 @@ import _ from 'lodash'
 import './AssignNumModal.css'
 
 import {
+    mathType,
     mathOperatorType,
     compileMath,
+    DEFAULT_ASSIGN,
 } from './components/types'
 
 import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
 import BasicOpDrag from './components/BasicOpDrag';
-import VarValueDrag from './components/VarValueDrag'
 import ValueDrag from './components/ValueDrag';
 import ModalCheckSave from '../components/ModalCheckSave';
 
@@ -18,8 +19,9 @@ export default function AssignVarModal(props) {
     let [error, setError] = useState('')
 
     const { attach, attachVar, path, subfieldKey } = props
-    const { assign } = attach
+    const assign = _.cloneDeep(attach.assign || DEFAULT_ASSIGN)
     console.log("workspace and assign", {attach, assign})
+
     const workspace = attach
     const mainProps = {
         workspace,
@@ -71,7 +73,10 @@ export default function AssignVarModal(props) {
                     <div className="dashboard-section-title">BASIC OPERATIONS</div>
                     <div className="row -x-p">
                         {_.toArray(mathOperatorType).map(item => (
-                            <BasicOpDrag key={item.key} item={item}/>
+                            <BasicOpDrag
+                                key={item.key}
+                                item={item}
+                            />
                         ))}
                     </div>
                 </div>
@@ -79,8 +84,15 @@ export default function AssignVarModal(props) {
                 <div className="-y-p">
                     <div className="dashboard-section-title">VARIABLES</div>
                     <div className="row -x-p">
-                        <ValueDrag value={0}/>
-                        {assignable.map(item => <VarValueDrag key={item.key} item={item}/>)}
+                        <ValueDrag value={0} text={0} mathType={mathType.number}/>
+                        {assignable.map(item => (
+                            <ValueDrag
+                                key={item.key}
+                                value={item}
+                                text={item.key}
+                                mathType={mathType.variable}
+                            />
+                        ))}
                     </div>
                 </div>
                 <ModalOptions

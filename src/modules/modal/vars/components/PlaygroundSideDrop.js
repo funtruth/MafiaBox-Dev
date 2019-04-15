@@ -2,9 +2,8 @@ import React from 'react'
 import { DropTarget } from 'react-dnd'
 
 import {
-    mathType,
     ItemTypes,
-    DEFAULT_BASIC_OP_ASSIGN,
+    DEFAULT_ASSIGN,
 } from './types'
 
 const itemTarget = {
@@ -13,16 +12,18 @@ const itemTarget = {
         const didDrop = monitor.didDrop()
         
         if (didDrop) return;
-        const dropSide = props.side === 'right' ? 'left' : 'right'
-        const newWorkspace = {
-            ...props.workspace,
+        const { workspace, assign, side } = props
+
+        const dropSide = side === 'right' ? 'left' : 'right'
+
+        props.setWorkspace({
+            ...workspace,
             assign: {
-                ...DEFAULT_BASIC_OP_ASSIGN,
-                mathOperatorType: item.mathOperatorType,
-                [dropSide]: props.workspace.assign,
+                ...DEFAULT_ASSIGN,
+                ...item,
+                [dropSide]: assign,
             }
-        }
-        props.setWorkspace(newWorkspace)
+        })
     }
 }
 
@@ -34,9 +35,11 @@ function collect(connect, monitor) {
 }
   
 function PlaygroundSideDrop(props) {
-    const { connectDropTarget, isOver, side, opInfo } = props
+    const { connectDropTarget, isOver, side, assign } = props
     
-    if (!opInfo || (opInfo.mathType === mathType.NaN.key)) return null
+    //if no math has been added, return null
+    //this is because we want to show the entire PlaygroundDrop instead of sides
+    if (!assign || !assign.mathType) return null
 
     return connectDropTarget(
         <div

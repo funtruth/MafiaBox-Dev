@@ -1,3 +1,5 @@
+import { parseJS } from "../../../logic/proptool";
+
 export const ItemTypes = {
     VALUE: 'value',
     OPERATION: 'operation',
@@ -5,6 +7,8 @@ export const ItemTypes = {
 
 export const mathType = {
     value: 'mathType/value',
+    number: 'mathType/number',
+    variable: 'mathType/variable',
     operation: 'mathType/operation',
 }
 
@@ -47,15 +51,15 @@ export const DEFAULT_ASSIGN = {
     left: "",
     right: "",
 }
-export const DEFAULT_VALUE_ASSIGN = DEFAULT_ASSIGN
-export const DEFAULT_BASIC_OP_ASSIGN = DEFAULT_ASSIGN
 
 export function orderOfOp(assign) {
     switch(assign.mathType) {
         case mathType.operation:
             return `(${orderOfOp(assign.left||{})} ${assign.mathOperatorType.char} ${orderOfOp(assign.right||{})})`
-        case mathType.value.key:
+        case mathType.number:
             return assign.value
+        case mathType.variable:
+            return parseJS(assign.value.key)
         default:
             return ''
     }

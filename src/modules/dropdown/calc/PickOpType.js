@@ -1,15 +1,20 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { mathOperatorType, mathType, DEFAULT_ASSIGN } from '../../modal/vars/components/types'
+import {
+    mathOperatorType,
+    mathType,
+} from '../../modal/vars/components/types'
 
-import DropTitle from '../components/DropTitle'
-import DropItem from '../components/DropItem'
+import {
+    DropTitle,
+    DropItem,
+} from '../components/Common'
 
 export default function PickOpType(props) {
-    let handleSelect = (item) => {
+    //does not use DEFAULT_ASSIGN to keep left/right, value is assumed to be "" already
+    const handleSelect = (item) => {
         props.updatePage({
-            ...DEFAULT_ASSIGN,
             mathType: mathType.operation,
             mathOperatorType: item,
         })

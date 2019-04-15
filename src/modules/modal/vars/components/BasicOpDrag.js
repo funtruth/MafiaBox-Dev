@@ -1,18 +1,17 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { mathType, ItemTypes } from './types' 
+import {
+    mathType,
+    ItemTypes,
+} from './types' 
 import { COLLECT_DRAG } from '../../ModalDND';
 
 const itemSource = {
     beginDrag(props) {
         return {
-            opInfo: {
-                mathOperatorType: props.item,
-                mathType: mathType.operation,
-            },
-            mathOperatorType: props.item,
             mathType: mathType.operation,
+            mathOperatorType: props.item,
         }
     }
 }

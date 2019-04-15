@@ -4,9 +4,8 @@ import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
 import {
-    mathType,
-    DEFAULT_BASIC_OP_ASSIGN,
     ItemTypes,
+    DEFAULT_ASSIGN,
 } from './types'
 
 import ActiveOp from './ActiveOp';
@@ -18,31 +17,21 @@ const itemTarget = {
         if (didDrop) return;
 
         const item = monitor.getItem()
-        const itemType = monitor.getItemType()
 
-        switch(itemType) {
-            case ItemTypes.OPERATION:
-                props.setWorkspace(helpers.updateByPath(
-                    props.subpath,
-                    Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo),
-                    props.workspace,
-                ))
-                break
-            case ItemTypes.VALUE:
-                props.setWorkspace(helpers.updateByPath(
-                    props.subpath,
-                    item,
-                    props.workspace,
-                ))
-                break
-            default:
-        }
+        props.setWorkspace(helpers.updateByPath(
+            props.subpath,
+            {
+                ...DEFAULT_ASSIGN,
+                ...item,
+            },
+            props.workspace,
+        ))
     },
 
+    //can only drop if there is no declared mathType.
     canDrop(props) {
-        const { opInfo } = props
-        const droppable = opInfo.mathType === mathType.NaN.key
-        return droppable
+        const { assign } = props
+        return !assign.mathType
     }
 }
 

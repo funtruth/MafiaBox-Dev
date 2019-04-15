@@ -13,6 +13,7 @@ export default function ActiveOp(props) {
     if (!assign) {
         return (
             <ValueDrop
+                assign={{}}
                 subpath={subpath}
                 workspace={workspace}
                 setWorkspace={setWorkspace}
@@ -23,11 +24,7 @@ export default function ActiveOp(props) {
     }
 
     switch(assign.mathType) {
-        case mathType.NaN.key:
-            return (
-                <div className="empty-text">Drag Operation or Value Here</div>
-            )
-        case mathType.value.key:
+        case mathType.number:
             return (
                 <ValueDrop
                     assign={assign}
@@ -35,7 +32,18 @@ export default function ActiveOp(props) {
                     workspace={workspace}
                     setWorkspace={setWorkspace}
                 >
-                    {buttonText}
+                    {assign.value}
+                </ValueDrop>
+            )
+        case mathType.variable:
+            return (
+                <ValueDrop
+                    assign={assign}
+                    subpath={subpath}
+                    workspace={workspace}
+                    setWorkspace={setWorkspace}
+                >
+                    {assign.value.key}
                 </ValueDrop>
             )
         case mathType.operation:
@@ -51,7 +59,9 @@ export default function ActiveOp(props) {
                         workspace={workspace}
                         setWorkspace={setWorkspace}
                     />
-                    <div className="basic-op-op">{assign.mathOperatorType.char}</div>
+                    <div className="basic-op-op">
+                        {assign.mathOperatorType.char}
+                    </div>
                     <ActiveOp
                         assign={assign.right}
                         subpath={[...subpath, 'right']}
@@ -61,6 +71,6 @@ export default function ActiveOp(props) {
                 </BasicOpDrop>
             )
         default:
-            return null
+            return <div className="empty-text">Drag Operation or Value Here</div>
     }
 }

@@ -2,26 +2,27 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import {
-    mathType,
     ItemTypes,
 } from './types' 
 import { COLLECT_DRAG } from '../../ModalDND';
 
+import {
+    Tag,
+} from '../../../components/Common';
+
 const itemSource = {
     beginDrag(props) {
         return {
+            mathType: props.mathType,
             value: props.value,
-            mathType: mathType.value.key,
         }
     }
 }
 
 function ValueDrag(props) {
-    const { value, connectDragSource } = props
+    const { text, connectDragSource } = props
     return connectDragSource(
-        <div className="assign-var-tag">
-            {value}
-        </div>
+        <div><Tag>{text}</Tag></div>
     );
 }
 
