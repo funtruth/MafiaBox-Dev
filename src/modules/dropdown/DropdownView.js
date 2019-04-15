@@ -38,7 +38,7 @@ import PickFieldType from './template/PickFieldType'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
-import DeclareVar from './functions/DeclareVar'
+import DeclareOrAssignVar from './functions/DeclareOrAssignVar'
 import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
@@ -51,7 +51,7 @@ import PickAssignableVar from './calc/PickAssignableVar'
 import SetOpValueTo from './calc/SetOpValueTo'
 
 import PickVar from './vars/PickVar'
-import PickVarProp from './vars/PickVarProp'
+import PickVarSubfield from './vars/PickVarSubfield'
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 
@@ -164,16 +164,16 @@ function DropdownView(props) {
                 
             case dropdownType.addVar:
                 return <AddVar {...renderProps}/>
-            case dropdownType.declareVar:
-                return <DeclareVar {...renderProps}/>
+            case dropdownType.declareOrAssignVar:
+                return <DeclareOrAssignVar {...renderProps}/>
             case dropdownType.editVar:
                 return <EditVar {...renderProps}/>
             case dropdownType.editVarName:
                 return <EditVarName {...renderProps}/>
             case dropdownType.pickVar:
                 return <PickVar {...renderProps}/>
-            case dropdownType.pickVarProp:
-                return <PickVarProp {...renderProps}/>
+            case dropdownType.pickVarSubfield:
+                return <PickVarSubfield {...renderProps}/>
             case dropdownType.pickUidObject:
                 return <PickUidObject {...renderProps}/>
             case dropdownType.pickVarType:

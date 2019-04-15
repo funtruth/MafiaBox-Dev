@@ -59,7 +59,7 @@ export default class PickEventVar extends React.Component{
         if (!attachVar) return null
 
         const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-        const rssVars = _.filter(rssMap, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
+        const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
         return (
             <div>

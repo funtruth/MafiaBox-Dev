@@ -380,7 +380,6 @@ export const rssMap = {
         dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
-            variableType.rss.key,
         ],
     },
     '(rss)(gameState)(phase)': {
@@ -451,7 +450,6 @@ export const rssMap = {
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
-            variableType.rss.key,
         ],
     },
     '(rss)(lobby)(@)': {
@@ -650,7 +648,6 @@ export const rssMap = {
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
-            variableType.rss.key,
         ],
     },
     '(rss)(choices)(@)': {
@@ -755,7 +752,6 @@ export const rssMap = {
         dropdown: dropdownType.pickEvent,
         variableTypes: [
             variableType.object.key,
-            variableType.rss.key,
         ],
     },
 }

@@ -9,7 +9,6 @@ import {
 
 import {
     VARTYPE_IS_UID_OBJ,
-    VARTYPE_IS_RSS,
 } from '../../common/arrows'
 import {
     parseJS,
@@ -74,7 +73,7 @@ export default function PickUidObject(props) {
     }
 
     const uidObjects = _.filter(attachVar, VARTYPE_IS_UID_OBJ)
-    const rssUidObjects = _(rssMap).filter(VARTYPE_IS_RSS).filter(VARTYPE_IS_UID_OBJ).value()
+    const rssUidObjects = _(rssMap).filter(i => i.fieldLength === 2).filter(VARTYPE_IS_UID_OBJ).value()
 
     return (
         <>

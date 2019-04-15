@@ -16,6 +16,7 @@ import {
     DropItem,
     DropOption,
     DropParent,
+    DropScroll,
     DropTitle,
 } from '../components/Common'
 
@@ -41,7 +42,7 @@ export default function PickVar(props) {
                 <DropParent
                     {...props}
                     key={item.key}
-                    dropdownType={dropdownType.pickVarProp}
+                    dropdownType={dropdownType.pickVarSubfield}
                     params={{
                         prefix: item.key,
                     }}
@@ -90,27 +91,21 @@ export default function PickVar(props) {
     }
     
     const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-    const rssVars = _.filter(rssMap, i => i.variableTypes && i.variableTypes.includes(variableType.rss.key))
+    const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
     return (
         <>
             {rssVars.length > 0 && <div>
                 <DropTitle>game values</DropTitle>
-                <div className="drop-down-scrollable">
-                    {rssVars.map(renderItem)}
-                </div>
+                <DropScroll>{rssVars.map(renderItem)}</DropScroll>
             </div>}
             {vars.true && <div>
                 <DropTitle>uids</DropTitle>
-                <div className="drop-down-scrollable">
-                    {vars.true.map(renderItem)}
-                </div>
+                <DropScroll>{vars.true.map(renderItem)}</DropScroll>
             </div>}
             {vars.false && <div>
                 <DropTitle>variables</DropTitle>
-                <div className="drop-down-scrollable">
-                    {vars.false.map(renderItem)}
-                </div>
+                <DropScroll>{vars.false.map(renderItem)}</DropScroll>
             </div>}
             <DropTitle>other options</DropTitle>
             <DropParent
@@ -148,7 +143,9 @@ export default function PickVar(props) {
                 chosen={currentValue.length}
                 onClick={setLength}
                 icon="mdi mdi-code-braces"
-            >length</DropOption>
+            >
+                length
+            </DropOption>
             <DropTitle>library</DropTitle>
             <BoardLib {...props}/>
         </>

@@ -26,12 +26,12 @@ import {
  } from '../components/Common'
 
 /*@param prefix => used with rssMap to find the proper fields
-  @param prefix: describes the previous prefix used to get to current PickVarProp
-    PickVarProp should used to find the subfields of a field, AND THEN select
+  @param prefix: describes the previous prefix used to get to current PickVarSubfield
+    PickVarSubfield should used to find the subfields of a field, AND THEN select
     This follows a different path than ShowSubfields because we want to be able to refer to game values
         example: gameState(phase)
 */
-export default function PickVarProp(props) {
+export default function PickVarSubfield(props) {
     const { prefix, currentValue, attachVar } = props
 
     //get subfields to show
@@ -60,7 +60,7 @@ export default function PickVarProp(props) {
                 <DropParent
                     {...props}
                     key={key}
-                    dropdownType={dropdownType.pickVarProp}
+                    dropdownType={dropdownType.pickVarSubfield}
                     params={{
                         prefix: combinedField,
                         subpath: [combinedField],

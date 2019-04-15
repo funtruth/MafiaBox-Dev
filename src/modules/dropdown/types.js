@@ -29,7 +29,7 @@ export const dropdownType = {
     pageOptions: 'dropdownType/page-options',
 
     //functions
-    declareVar: 'dropdownType/declare-var',
+    declareOrAssignVar: 'dropdownType/declare-var',
     editVarName: 'dropdownType/edit-var-name',
     writeVarType: 'dropdownType/write-var-type',
 
@@ -42,7 +42,7 @@ export const dropdownType = {
     addVar: 'dropdownType/add-var',
     editVar: 'dropdownType/edit-var',
     pickVar: 'dropdownType/pick-var',
-    pickVarProp: 'dropdownType/pick-var-prop',
+    pickVarSubfield: 'dropdownType/pick-var-prop',
     pickUidObject: 'dropdownType/pick-uid-object',
     pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',

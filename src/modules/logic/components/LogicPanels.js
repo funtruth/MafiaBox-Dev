@@ -72,7 +72,7 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="pick ..."
-                    dropdown={dropdownType.declareVar}
+                    dropdown={dropdownType.declareOrAssignVar}
                 />
             )
         case logicType.function.key:

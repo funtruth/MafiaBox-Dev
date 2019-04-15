@@ -18,8 +18,9 @@ import {
     DropScroll,
     DropSubmit,
 } from '../components/Common'
+import ShowSubfields from '../update/ShowSubfields';
 
-export default function DeclareVar(props) {
+export default function DeclareOrAssignVar(props) {
     const { currentValue, attachVar } = props
 
     let [value, setValue] = useState('')
@@ -99,6 +100,7 @@ export default function DeclareVar(props) {
                 </DropSubmit>
             </div>
             <DropTitle>assign</DropTitle>
+            <ShowSubfields {...props}/>
             <DropScroll>
                 {assignable.map(item => (
                     <DropItem
