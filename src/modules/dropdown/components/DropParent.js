@@ -10,7 +10,8 @@ export default connect(
 )(function DropParent(props) {
     //generate a unique serial number
     const [serialNo] = useState(generatePushID())
-    const { icon, text, chosen, style, dropdownType, params, dropdownKeys, serialList } = props
+    const { icon, text, chosen, style, dropdownType, params,
+        dropdownKeys, serialList } = props
 
     //if the top dropdown has current DropParent's serial number in it's serial list, highlight.
     const isOrigin = !!(dropdownKeys[dropdownKeys.length - 1]||[]).serialList

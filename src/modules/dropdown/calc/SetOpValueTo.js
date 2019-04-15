@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import { mathType, DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import DropItem from '../components/DropItem';
 
@@ -12,8 +12,7 @@ export default function SetOpValueTo(props) {
     let handleSubmit = () => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            opType: opType.value.key,
-            opValueType: opValueType.constant.key,
+            mathType: mathType.value.key,
             value,
         })
         props.showDropdown()

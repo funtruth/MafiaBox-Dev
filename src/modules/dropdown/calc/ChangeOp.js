@@ -1,19 +1,19 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { opType, basicOpType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops'
+import { mathType, mathOperatorType, DEFAULT_ASSIGN } from '../../modal/vars/components/types'
 
 import DropTitle from '../components/DropTitle'
 import DropItem from '../components/DropItem'
 
 export default function ChangeOp(props) {
-    let chosen = props.currentValue.basicOpType.key
+    let chosen = props.currentValue.mathOperatorType.key
     
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            opType: opType.basicOp.key,
-            basicOpType: item,
+            mathType: mathType.operation,
+            mathOperatorType: item,
         })
         props.showDropdown()
     }
@@ -21,7 +21,7 @@ export default function ChangeOp(props) {
     return (
         <>
             <DropTitle>operators</DropTitle>
-            {_.toArray(basicOpType).map(item => {
+            {_.toArray(mathOperatorType).map(item => {
                 const itemChosen = (chosen === item.key).toString()
 
                 return (

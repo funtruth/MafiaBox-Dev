@@ -2,23 +2,34 @@ import React, { useState, useEffect } from 'react'
 import { DropTarget } from 'react-dnd'
 import * as helpers from '../../../common/helpers'
 
-import { ItemTypes } from './Constants'
-import { opValueType, DEFAULT_VALUE_ASSIGN, DEFAULT_BASIC_OP_ASSIGN, DEFAULT_ASSIGN } from './ops'
+import {
+    ItemTypes,
+    mathType,
+    DEFAULT_ASSIGN,
+} from './types'
 
 const MAGIC_FACTOR = 6.5
 
 const itemTarget = {
     drop(props, monitor) {
-        const item = monitor.getItem() //item.opInfo = {item.basicOpType, item.opType}
+        const item = monitor.getItem() //item.opInfo = {item.mathOperatorType, item.mathType}
         const itemType = monitor.getItemType()
 
         let newItem;
         switch(itemType) {
-            case ItemTypes.BASIC_OP:
-                newItem = Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo)
+            case ItemTypes.OPERATION:
+                newItem = {
+                    ...DEFAULT_ASSIGN,
+                    mathType: mathType.operation,
+                    ...item.opInfo,
+                }
                 break
             case ItemTypes.VALUE:
-                newItem = Object.assign({}, DEFAULT_VALUE_ASSIGN, item)
+                newItem = {
+                    ...DEFAULT_ASSIGN,
+                    mathType: mathType.value,
+                    ...item,
+                }
                 break
             default:
                 console.warn('Item does not have appropriate Type.')
@@ -43,7 +54,7 @@ function collect(connect, monitor) {
 function ValueDrop(props) {
     let [rng] = useState(helpers.genUID('txt'))
     const { connectDropTarget, isOver, children, opInfo } = props
-    const isConstant = opInfo && (opInfo.opValueType === opValueType.constant.key)
+    const isConstant = opInfo
     
     useEffect(() => {
         const el = document.getElementById(rng)
@@ -103,7 +114,7 @@ function ValueDrop(props) {
 }
 
 export default DropTarget(
-    [ItemTypes.BASIC_OP, ItemTypes.VALUE],
+    [ItemTypes.OPERATION, ItemTypes.VALUE],
     itemTarget,
     collect
 )(ValueDrop);

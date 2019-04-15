@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import { opType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import {
+    mathType,
+    DEFAULT_ASSIGN,
+} from '../../modal/vars/components/types';
 import { VAR_DEFAULTS } from '../../logic/types';
 
 import * as helpers from '../../common/helpers'
@@ -47,7 +50,7 @@ export default function DeclareOrAssignVar(props) {
                     variableTypes: "",
                     assign: {
                         ...DEFAULT_ASSIGN,
-                        opType: opType.NaN.key,
+                        mathType: mathType.NaN.key,
                     },
                 },
             },

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
-import { orderOfOp } from '../../modal/vars/components/ops'
+import { orderOfOp } from '../../modal/vars/components/types'
 import { variableType } from '../types';
 import { dropdownType } from '../../dropdown/types'
 
@@ -21,7 +21,7 @@ function LogicVarAssign(props) {
     const isBoolean = item.variableTypes.includes(variableType.boolean.key)
 
     let handleNumber = () => {
-        props.showModal(modalType.assignVar, {
+        props.showModal(modalType.assignNum, {
             attachVar: vars,
             attach: item,
             path: newPath,

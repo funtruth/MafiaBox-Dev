@@ -5,7 +5,7 @@ import {
     variableType,
     boolUpdateType,
 } from '../../logic/types'
-import { DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import { DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import DropTitle from '../components/DropTitle';
 import DropItem from '../components/DropItem';

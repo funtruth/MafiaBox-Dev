@@ -6,7 +6,7 @@ import { updateSourceType } from '../common/types';
 import { dropdownType } from './types'
 import { boardType } from '../fields/defaults'
 import { showDropdown, popDropdownTo } from './DropdownReducer'
-import { updateTopModal } from '../modal/ModalReducer'
+import { updateTopModal, showModal } from '../modal/ModalReducer'
 import { updateRepo } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
@@ -87,6 +87,7 @@ function DropdownView(props) {
         //some APIs
         renderProps.showDropdown = (key, e, params) => props.showDropdown(key, e, params, index, 'right')
         renderProps.popDropdownTo = (forcedIndex) => props.popDropdownTo(forcedIndex || index)
+        renderProps.showModal = props.showModal
 
         switch(renderProps.updateSource) {
             case updateSourceType.repo:
@@ -269,6 +270,7 @@ export default connect(
     {
         showDropdown,
         popDropdownTo,
+        showModal,
         updateRepo,
         updateTopModal,
         updateFunction,

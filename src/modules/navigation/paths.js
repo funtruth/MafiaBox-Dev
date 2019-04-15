@@ -1,4 +1,4 @@
-export const developType = {
+export const develmathType = {
     roles: {
         key: 'roles',
         index: 0,

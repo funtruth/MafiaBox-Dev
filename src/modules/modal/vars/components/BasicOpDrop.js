@@ -1,8 +1,8 @@
 import React from 'react'
 import * as helpers from '../../../common/helpers'
-
-import { ItemTypes } from './Constants'
 import { DropTarget } from 'react-dnd'
+
+import { ItemTypes } from './types'
 
 const itemTarget = {
     drop(props, monitor) {
@@ -35,7 +35,7 @@ function BasicOpDrop(props) {
 }
 
 export default DropTarget(
-    ItemTypes.BASIC_OP,
+    ItemTypes.OPERATION,
     itemTarget,
     collect
 )(BasicOpDrop);

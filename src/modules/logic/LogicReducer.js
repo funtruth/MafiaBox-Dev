@@ -1,6 +1,6 @@
 import { logicType, returnType, updateType, operatorType } from './types'
 import * as helpers from '../common/helpers'
-import { orderOfOp } from '../modal/vars/components/ops'
+import { orderOfOp } from '../modal/vars/components/types'
 import { stringToCode } from '../modal/toast/stringTool';
 
 var beautify_js = require('js-beautify');
@@ -53,7 +53,7 @@ function recursive(library) {
 
     const {
         logicType: type,
-        operatorType: opType,
+        operatorType: mathType,
         data,
     } = library
     
@@ -88,7 +88,7 @@ function recursive(library) {
     let codeRight = recursive(library.right) || ''
     switch(type) {
         case logicType.operator.key:
-            switch(opType) {
+            switch(mathType) {
                 case operatorType.if.key:
                     codeBody = `if(${codeCurrent}){${codeRight}}`
                     break

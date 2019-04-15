@@ -3,8 +3,11 @@ import './Playground.css'
 import * as helpers from '../../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
-import { ItemTypes } from './Constants'
-import { opType, DEFAULT_BASIC_OP_ASSIGN } from './ops'
+import {
+    mathType,
+    DEFAULT_BASIC_OP_ASSIGN,
+    ItemTypes,
+} from './types'
 
 import ActiveOp from './ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
@@ -18,7 +21,7 @@ const itemTarget = {
         const itemType = monitor.getItemType()
 
         switch(itemType) {
-            case ItemTypes.BASIC_OP:
+            case ItemTypes.OPERATION:
                 props.setWorkspace(helpers.updateByPath(
                     props.subpath,
                     Object.assign({}, DEFAULT_BASIC_OP_ASSIGN, item.opInfo),
@@ -38,7 +41,7 @@ const itemTarget = {
 
     canDrop(props) {
         const { opInfo } = props
-        const droppable = opInfo.opType === opType.NaN.key
+        const droppable = opInfo.mathType === mathType.NaN.key
         return droppable
     }
 }
@@ -51,8 +54,8 @@ function collect(connect, monitor) {
 }
   
 function PlaygroundDrop(props) {
-    const { connectDropTarget, isOver, opInfo } = props
-    const highlight = isOver && opInfo.opType === opType.NaN.key
+    const { connectDropTarget, isOver, assign } = props
+    const highlight = isOver && !assign.mathType
 
     return connectDropTarget(
         <div className="playground" style={{ backgroundColor: highlight && 'rgba(70, 73, 78, 1)' }}>
@@ -75,7 +78,7 @@ function PlaygroundDrop(props) {
 }
 
 export default DropTarget(
-    [ItemTypes.BASIC_OP, ItemTypes.VALUE],
+    [ItemTypes.OPERATION, ItemTypes.VALUE],
     itemTarget,
     collect
 )(PlaygroundDrop);

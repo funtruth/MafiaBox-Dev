@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
-import './AssignVarModal.css'
+import './AssignNumModal.css'
 
 import {
-    basicOpType,
-    DEFAULT_ASSIGN,
+    mathOperatorType,
     compileMath,
-} from './components/ops'
+} from './components/types'
 
 import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
@@ -18,8 +17,9 @@ import ModalCheckSave from '../components/ModalCheckSave';
 export default function AssignVarModal(props) {
     let [error, setError] = useState('')
 
-    const { attach, attachVar, path } = props
-
+    const { attach, attachVar, path, subfieldKey } = props
+    const { assign } = attach
+    console.log("workspace and assign", {attach, assign})
     const workspace = attach
     const mainProps = {
         workspace,
@@ -28,9 +28,6 @@ export default function AssignVarModal(props) {
 
     const clearWorkspace = () => console.log('clear')
     const resetWorkspace = () => console.log('reset')
-
-    const variableInfo = workspace || { variableTypes: [], assign: DEFAULT_ASSIGN }
-    const { variableTypes, assign } = variableInfo
 
     let handleSave = () => {
         let badMath = compileMath(assign)
@@ -57,25 +54,13 @@ export default function AssignVarModal(props) {
                 }}
             >
                 <div className="row">
-                    <div className="-y-p border-right">
-                        <div className="dashboard-section-title">variable</div>
-                        <div className="-x-p">
-                            <div className="assign-var-tag">{workspace.key}</div>
-                        </div>
-                    </div>
-                    <div className="-y-p">
-                        <div className="dashboard-section-title">types</div>
-                        <div className="-x-p">
-                            {variableTypes.map(item => (
-                                <div key={item} className="assign-var-tag">{item}</div>
-                            ))}
-                        </div>
-                    </div>
+                    <div className="dashboard-section-title">variable</div>
+                    <div className="assign-var-tag">{subfieldKey}</div>
                 </div>
                 <div className="-sep-no-m"></div>
                 <PlaygroundDrop
                     {...mainProps}
-                    opInfo={assign}
+                    assign={assign}
                     setError={setError}
                     subpath={['assign']}
                     clearWorkspace={clearWorkspace}
@@ -85,7 +70,7 @@ export default function AssignVarModal(props) {
                 <div className="-y-p">
                     <div className="dashboard-section-title">BASIC OPERATIONS</div>
                     <div className="row -x-p">
-                        {_.toArray(basicOpType).map(item => (
+                        {_.toArray(mathOperatorType).map(item => (
                             <BasicOpDrag key={item.key} item={item}/>
                         ))}
                     </div>

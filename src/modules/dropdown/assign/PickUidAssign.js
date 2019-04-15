@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import { variableType } from '../../logic/types'
-import { opType, opValueType, DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import { mathType, DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import DropTitle from '../components/DropTitle';
 import DropEmpty from '../components/DropEmpty';
@@ -15,8 +15,7 @@ export default function PickUidForAssign(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            opType: opType.value.key,
-            opValueType: opValueType.variable.key,
+            mathType: mathType.value.key,
             value: item,
         })
         props.showDropdown()

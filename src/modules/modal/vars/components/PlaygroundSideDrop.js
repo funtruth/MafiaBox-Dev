@@ -1,8 +1,11 @@
 import React from 'react'
-
-import { ItemTypes } from './Constants'
-import { opType, DEFAULT_BASIC_OP_ASSIGN } from './ops'
 import { DropTarget } from 'react-dnd'
+
+import {
+    mathType,
+    ItemTypes,
+    DEFAULT_BASIC_OP_ASSIGN,
+} from './types'
 
 const itemTarget = {
     drop(props, monitor) {
@@ -15,7 +18,7 @@ const itemTarget = {
             ...props.workspace,
             assign: {
                 ...DEFAULT_BASIC_OP_ASSIGN,
-                basicOpType: item.basicOpType,
+                mathOperatorType: item.mathOperatorType,
                 [dropSide]: props.workspace.assign,
             }
         }
@@ -33,7 +36,7 @@ function collect(connect, monitor) {
 function PlaygroundSideDrop(props) {
     const { connectDropTarget, isOver, side, opInfo } = props
     
-    if (opInfo.opType === opType.NaN.key) return null
+    if (!opInfo || (opInfo.mathType === mathType.NaN.key)) return null
 
     return connectDropTarget(
         <div
@@ -44,7 +47,7 @@ function PlaygroundSideDrop(props) {
 }
 
 export default DropTarget(
-    ItemTypes.BASIC_OP,
+    ItemTypes.OPERATION,
     itemTarget,
     collect
 )(PlaygroundSideDrop);

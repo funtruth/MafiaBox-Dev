@@ -1,19 +1,18 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { ItemTypes } from './Constants'
-import { opType } from './ops' 
+import { mathType, ItemTypes } from './types' 
 import { COLLECT_DRAG } from '../../ModalDND';
 
 const itemSource = {
     beginDrag(props) {
         return {
             opInfo: {
-                basicOpType: props.item,
-                opType: opType.basicOp.key,
+                mathOperatorType: props.item,
+                mathType: mathType.operation,
             },
-            basicOpType: props.item,
-            opType: opType.basicOp.key,
+            mathOperatorType: props.item,
+            mathType: mathType.operation,
         }
     }
 }
@@ -30,7 +29,7 @@ function BasicOpDrag(props) {
 }
 
 export default DragSource(
-    ItemTypes.BASIC_OP,
+    ItemTypes.OPERATION,
     itemSource,
     COLLECT_DRAG,
 )(BasicOpDrag);

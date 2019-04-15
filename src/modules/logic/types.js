@@ -226,7 +226,6 @@ export const healthUpdateType = {
 
 /* @params logicItem
     declare => any new variables
-    assign  => any changed variables
 */
 export const DEFAULT_LOGIC = {
     data: "",
@@ -239,11 +238,12 @@ export const DEFAULT_LOGIC = {
 
 /* @params logicItem.data
     TODO: replacing adjust with assign?
+    assign  => see modal/vars/ops for architecture
     display => what to show on the update button / FRONT-END
     static  => unable to be assigned / type cannot be changed
 */
 export const VAR_DEFAULTS = {
-    adjust: "",
+    assign: "",
     display: "",
     length: false,
     static: false,
@@ -292,20 +292,6 @@ export const variableType = {
         key: 'uidObject',
         title: 'UID Object',
         icon: 'mdi mdi-code-braces',
-        subtype: 'object',
-        declarable: false,
-    },
-    rss: {
-        key: 'rss',
-        title: 'Room Info',
-        icon: 'mdi mdi-film',
-        subtype: 'object',
-        declarable: false,
-    },
-    rssObject: {
-        key: 'rssObject',
-        title: 'Room Snapshot',
-        icon: 'mdi mdi-film',
         subtype: 'object',
         declarable: false,
     },
@@ -363,7 +349,6 @@ export const rssMap = {
         dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object,
-            variableType.rssObject,
         ],
     },
     '(rss)(gameState)': {

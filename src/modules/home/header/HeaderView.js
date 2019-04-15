@@ -2,7 +2,7 @@ import React from 'react'
 import './Header.css'
 import { connect } from 'react-redux'
 
-import { developType } from '../../navigation/paths'
+import { develmathType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
 
@@ -16,11 +16,11 @@ function HeaderView(props) {
     const paths = pathname.split('/')
     const boardPath = paths[2] || ""
 
-    const { addStory } = developType[boardPath] || {}
+    const { addStory } = develmathType[boardPath] || {}
 
     const getPathTitle = (key) => {
-        if (developType[key]) {
-            return developType[key] && developType[key].label
+        if (develmathType[key]) {
+            return develmathType[key] && develmathType[key].label
         }
         else {
             return (pageRepo[key] && pageRepo[key].title) || 'Untitled'

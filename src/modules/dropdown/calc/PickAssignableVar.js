@@ -2,10 +2,9 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    opType,
-    opValueType,
+    mathType,
     DEFAULT_ASSIGN,
-} from '../../modal/vars/components/ops';
+} from '../../modal/vars/components/types';
 
 import {
     DropItem,
@@ -18,8 +17,7 @@ export default function PickAssignableVar(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            opType: opType.value.key,
-            opValueType: opValueType.variable.key,
+            mathType: mathType.value.key,
             value: item,
         })
         props.showDropdown()

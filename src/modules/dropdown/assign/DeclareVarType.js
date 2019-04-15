@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { DEFAULT_ASSIGN } from '../../modal/vars/components/ops';
+import { DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import { variableType } from '../../logic/types'
 import DropTitle from '../components/DropTitle';

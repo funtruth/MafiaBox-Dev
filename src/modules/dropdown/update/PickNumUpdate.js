@@ -7,6 +7,8 @@ import {
     VAR_DEFAULTS,
 } from '../../logic/types'
 import { dropdownType } from '../types'
+import { modalType } from '../../modal/types'
+import { DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import {
     DropItem,
@@ -23,6 +25,9 @@ export default function PickNumUpdate(props) {
             ...VAR_DEFAULTS,
             value: item.key,
             adjust: number,
+            assign: {
+                ...DEFAULT_ASSIGN,
+            },
             display: item.title + ' ' + number,
             updateType: updateType.number,
         })
@@ -37,6 +42,13 @@ export default function PickNumUpdate(props) {
             updateType: updateType.number,
         })
         props.showDropdown()
+    }
+
+    const handleAdvanced = () => {
+        props.showModal(modalType.assignNum, {
+            attach: currentValue,
+        });
+        props.showDropdown();
     }
 
     const renderItem = (item) => {
@@ -79,6 +91,12 @@ export default function PickNumUpdate(props) {
         <>
             <DropTitle>update value</DropTitle>
             {items.map(renderItem)}
+            <DropItem
+                onClick={handleAdvanced}
+                leftIcon="mdi mdi-calculator"
+            >
+                equation ...
+            </DropItem>
         </>
     )
 }
