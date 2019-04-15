@@ -25,16 +25,6 @@ export default function ActiveOp(props) {
 
     switch(assign.mathType) {
         case mathType.number:
-            return (
-                <ValueDrop
-                    assign={assign}
-                    subpath={subpath}
-                    workspace={workspace}
-                    setWorkspace={setWorkspace}
-                >
-                    {assign.value}
-                </ValueDrop>
-            )
         case mathType.variable:
             return (
                 <ValueDrop
@@ -43,7 +33,7 @@ export default function ActiveOp(props) {
                     workspace={workspace}
                     setWorkspace={setWorkspace}
                 >
-                    {assign.value.key}
+                    {assign.value}
                 </ValueDrop>
             )
         case mathType.operation:

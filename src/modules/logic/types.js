@@ -1,4 +1,5 @@
 import { dropdownType } from "../dropdown/types";
+import { mathOperatorType } from "../modal/vars/components/types";
 
 export const logicType = {
     operator: {
@@ -127,40 +128,26 @@ export const updateType = {
     events: 'updateType/events',
 }
 
-//@param showInput for dynamic values
 export const numUpdateType = {
     setTo: {
         key: 'setTo',
-        index: 1,
+        index: 0,
         title: 'set to',
         icon: 'mdi mdi-numeric',
-        showInput: true,
-    },
-    incr: {
-        key: 'incr',
-        index: 2,
-        title: 'increment',
-        icon: 'mdi mdi-numeric-1-box',
     },
     incrBy: {
         key: 'incrBy',
-        index: 3,
+        index: 1,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
-        showInput: true,
-    },
-    decr: {
-        key: 'decr',
-        index: 4,
-        title: 'decrement',
-        icon: 'ion-md-arrow-round-down',
+        mathOperatorType: mathOperatorType.add,
     },
     decrBy: {
         key: 'decrBy',
-        index: 5,
+        index: 2,
         title: 'decrement by',
         icon: 'ion-md-download',
-        showInput: true,
+        mathOperatorType: mathOperatorType.subtract,
     },
 }
 

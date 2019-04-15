@@ -84,11 +84,10 @@ export default function AssignVarModal(props) {
                 <div className="-y-p">
                     <div className="dashboard-section-title">VARIABLES</div>
                     <div className="row -x-p">
-                        <ValueDrag value={0} text={0} mathType={mathType.number}/>
+                        <ValueDrag text={0} mathType={mathType.number}/>
                         {assignable.map(item => (
                             <ValueDrag
                                 key={item.key}
-                                value={item}
                                 text={item.key}
                                 mathType={mathType.variable}
                             />

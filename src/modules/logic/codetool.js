@@ -1,33 +1,6 @@
 import {
-    numUpdateType,
     returnType,
 } from './types'
-
-import {
-    parseJS,
-} from './proptool'
-
-//PickNumUpdate
-export function codeNumUpdate(item, field) {
-    const { value, adjust } = item
-    const fieldJS = parseJS(field)
-    
-    switch(value) {
-        case numUpdateType.setTo.key:
-            return adjust
-        case numUpdateType.incr.key:
-            return '+=1'
-        case numUpdateType.incrBy.key:
-            return '+=' + adjust
-        case numUpdateType.decr.key:
-            return '-=1'
-        case numUpdateType.decrBy.key:
-            return fieldJS + '-' + adjust
-        default:
-            console.warn('case does not exist. codeNumUpdate, logic/types', value)
-            return ""
-    }
-}
 
 //PickReturnType
 export function codeReturnType(key) {

@@ -6,9 +6,12 @@ import {
     numUpdateType,
     VAR_DEFAULTS,
 } from '../../logic/types'
+import {
+    DEFAULT_ASSIGN,
+    mathType,
+} from '../../modal/vars/components/types';
 import { dropdownType } from '../types'
 import { modalType } from '../../modal/types'
-import { DEFAULT_ASSIGN } from '../../modal/vars/components/types';
 
 import {
     DropItem,
@@ -20,13 +23,39 @@ export default function PickNumUpdate(props) {
     const { attach, subfieldKey } = props
     const currentValue = attach[subfieldKey] || {}
 
+    const setTo = (item, number) => {
+        props.updatePage({
+            ...VAR_DEFAULTS,
+            value: item.key,
+            assign: {
+                ...DEFAULT_ASSIGN,
+                mathType: mathType.number,
+                value: number,
+            },
+            display: item.title + ' ' + number,
+            updateType: updateType.number,
+        })
+        props.showDropdown()
+    }
+
     const selectDynamic = (item, number) => {
         props.updatePage({
             ...VAR_DEFAULTS,
             value: item.key,
-            adjust: number,
             assign: {
                 ...DEFAULT_ASSIGN,
+                mathType: mathType.operation,
+                mathOperatorType: item.mathOperatorType,
+                left: {
+                    ...DEFAULT_ASSIGN,
+                    mathType: mathType.variable,
+                    value: subfieldKey,
+                },
+                right: {
+                    ...DEFAULT_ASSIGN,
+                    mathType: mathType.number,
+                    value: number,
+                },
             },
             display: item.title + ' ' + number,
             updateType: updateType.number,
@@ -34,16 +63,6 @@ export default function PickNumUpdate(props) {
         props.showDropdown()
     }
     
-    const handleSelect = (item) => {
-        props.updatePage({
-            ...VAR_DEFAULTS,
-            value: item.key,
-            display: item.key,
-            updateType: updateType.number,
-        })
-        props.showDropdown()
-    }
-
     const handleAdvanced = () => {
         props.showModal(modalType.assignNum, {
             attach: currentValue,
@@ -54,35 +73,21 @@ export default function PickNumUpdate(props) {
     const renderItem = (item) => {
         const chosen = currentValue.value === item.key
         
-        if (item.showInput) {
-            return (
-                <DropParent
-                    {...props}
-                    key={item.key}
-                    dropdownType={dropdownType.inputValue}
-                    params={{
-                        inputText: 'Enter a number',
-                        type: 'number',
-                        currentValue: chosen ? currentValue.adjust : "",
-                        onSubmit: (n) => selectDynamic(item, n),
-                    }}
-                    icon={item.icon}
-                    text={item.title}
-                    chosen={chosen}
-                />
-            )
-        }
-
         return (
-            <DropItem
+            <DropParent
+                {...props}
                 key={item.key}
+                dropdownType={dropdownType.inputValue}
+                params={{
+                    inputText: 'Enter a number',
+                    type: 'number',
+                    currentValue: chosen ? currentValue.adjust : "",
+                    onSubmit: item.mathOperatorType ? (n) => selectDynamic(item, n) : (n) => setTo(item, n),
+                }}
+                icon={item.icon}
+                text={item.title}
                 chosen={chosen}
-                onClick={() => handleSelect(item)}
-                leftIcon={item.icon}
-                rightIcon="mdi mdi-check"
-            >
-                {item.title}
-            </DropItem>
+            />
         )
     }
 

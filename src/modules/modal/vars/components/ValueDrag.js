@@ -14,7 +14,7 @@ const itemSource = {
     beginDrag(props) {
         return {
             mathType: props.mathType,
-            value: props.value,
+            value: props.text,
         }
     }
 }
