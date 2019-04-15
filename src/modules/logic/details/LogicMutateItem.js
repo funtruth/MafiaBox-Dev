@@ -9,10 +9,13 @@ import {
 import {
     Icon,
 } from '../../components/Common'
-import LogicUpdateDisplay from './LogicUpdateDisplay'
 
-export default function LogicUpdateItem(props) {
-    const { prefix, value, updateSource, vars, path } = props
+export default function LogicMutateItem(props) {
+    const { prefix, value, data, updateSource, vars, path } = props
+
+    if (!data) return null;
+    const { display } = data
+
     const attach = value.data || {}
 
     const fields = separateField(prefix)
@@ -48,11 +51,15 @@ export default function LogicUpdateItem(props) {
                             })}
                             style={{
                                 color: '#999',
-                                borderLeft: '4px solid #18449b',
+                                borderLeft: '4px solid Mediumslateblue',
                             }}
                         >
                             {field}
-                            {index + 1 === fields.length && <LogicUpdateDisplay {...props}/>}
+                            {index + 1 === fields.length && 
+                                <div className="logic-display">
+                                    {display}
+                                </div>
+                            }
                         </div>
                     </div>
                 )

@@ -52,7 +52,6 @@ import SetOpValueTo from './calc/SetOpValueTo'
 
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
-import PickVarAssign from './vars/PickVarAssign'
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 
@@ -175,8 +174,6 @@ function DropdownView(props) {
                 return <PickVar {...renderProps}/>
             case dropdownType.pickVarSubfield:
                 return <PickVarSubfield {...renderProps}/>
-            case dropdownType.pickVarAssign:
-                return <PickVarAssign {...renderProps}/>
             case dropdownType.pickUidObject:
                 return <PickUidObject {...renderProps}/>
             case dropdownType.pickVarType:

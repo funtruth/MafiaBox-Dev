@@ -23,7 +23,6 @@ export default function PickChoice(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            update: true,
             value: item.key || "$\"\"", //HACK
             updateType: updateType.uid,
         })

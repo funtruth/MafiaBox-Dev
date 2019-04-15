@@ -19,7 +19,7 @@ import {
     DropScroll,
     DropSubmit,
 } from '../components/Common'
-import PickVarAssign from '../vars/PickVarAssign';
+import ShowSubfields from '../update/ShowSubfields'
 
 export default function DeclareOrAssignVar(props) {
     const { currentValue, attachVar } = props
@@ -101,7 +101,7 @@ export default function DeclareOrAssignVar(props) {
                     save
                 </DropSubmit>
             </div>
-            <PickVarAssign {...props} prefix={concatField('', 'rss')}/>
+            <ShowSubfields {...props} subfieldKey={concatField('', 'rss')}/>
             <DropTitle>assign</DropTitle>
             <DropScroll>
                 {assignable.map(item => (

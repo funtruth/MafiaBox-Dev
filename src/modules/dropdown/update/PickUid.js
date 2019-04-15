@@ -29,7 +29,6 @@ export default function PickUid(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            update: true,
             value: item.key,
             updateType: updateType.uid,
         })

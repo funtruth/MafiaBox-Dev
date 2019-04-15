@@ -20,7 +20,6 @@ export default function PickBoolean(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            update: true,
             value: item.key,
             display: item.key,
             updateType: updateType.boolean,
