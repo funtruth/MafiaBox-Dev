@@ -8,6 +8,13 @@ import {
     DropSubmit,
 } from '../components/Common'
 
+const KEYWORDS = [
+    'roleTeam',
+    'action',
+    'charges',
+    'roleId',
+]
+
 export default connect(
     null,
     {
@@ -36,6 +43,10 @@ export default connect(
     }
 
     const onSubmit = () => {
+        if (KEYWORDS.includes(value)) {
+            return;
+        }
+
         const newKey = genUID('tag', attach)
         props.updateField([...path, 'data', newKey], {
             key: newKey,

@@ -9,6 +9,7 @@ import {
     START_CHAR,
     END_CHAR,
     parseJS,
+    concatField,
 } from '../../logic/proptool';
 
 import {
@@ -18,7 +19,7 @@ import {
     DropScroll,
     DropSubmit,
 } from '../components/Common'
-import ShowSubfields from '../update/ShowSubfields';
+import PickVarAssign from '../vars/PickVarAssign';
 
 export default function DeclareOrAssignVar(props) {
     const { currentValue, attachVar } = props
@@ -79,6 +80,7 @@ export default function DeclareOrAssignVar(props) {
     }
 
     const assignable = _.filter(attachVar, i => !i.static)
+
     return (
         <>
             <DropTitle>declare</DropTitle>
@@ -99,8 +101,8 @@ export default function DeclareOrAssignVar(props) {
                     save
                 </DropSubmit>
             </div>
+            <PickVarAssign {...props} prefix={concatField('', 'rss')}/>
             <DropTitle>assign</DropTitle>
-            <ShowSubfields {...props}/>
             <DropScroll>
                 {assignable.map(item => (
                     <DropItem

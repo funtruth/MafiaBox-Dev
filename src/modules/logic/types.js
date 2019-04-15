@@ -235,7 +235,6 @@ export const DEFAULT_LOGIC = {
     operatorType: "",
     right: "",
     declare: "",
-    assign: "",
 }
 
 /* @params logicItem.data

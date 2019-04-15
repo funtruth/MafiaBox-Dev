@@ -9,6 +9,7 @@ import {
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'
+import { DropScroll } from '../components/Common';
 
 export default class PickEventVar extends React.Component{
     _onSelect = (item) => {
@@ -62,26 +63,18 @@ export default class PickEventVar extends React.Component{
         const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
         return (
-            <div>
+            <>
                 {vars.true && <div>
                     <DropTitle>uids</DropTitle>
-                    <div className="drop-down-scrollable">
-                        {vars.true.map(this._renderItem)}
-                    </div>
+                    <DropScroll>{vars.true.map(this._renderItem)}</DropScroll>
                 </div>}
                 {vars.false && <div>
                     <DropTitle>variables</DropTitle>
-                    <div className="drop-down-scrollable">
-                        {vars.false.map(this._renderItem)}
-                    </div>
+                    <DropScroll>{vars.false.map(this._renderItem)}</DropScroll>
                 </div>}
-                {rssVars.length > 0 && <div>
-                    <DropTitle>game variables</DropTitle>
-                    <div className="drop-down-scrollable">
-                        {rssVars.map(this._renderItem)}
-                    </div>
-                </div>}
-            </div>
+                <DropTitle>game variables</DropTitle>
+                <DropScroll>{rssVars.map(this._renderItem)}</DropScroll>
+            </>
         )
     }
 }
