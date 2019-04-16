@@ -53,6 +53,8 @@ export const DEFAULT_ASSIGN = {
 }
 
 export function orderOfOp(assign) {
+    if (!assign) return ''
+    
     switch(assign.mathType) {
         case mathType.operation:
             return `(${orderOfOp(assign.left||{})} ${assign.mathOperatorType.char} ${orderOfOp(assign.right||{})})`

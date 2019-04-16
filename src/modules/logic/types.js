@@ -238,6 +238,26 @@ export const VAR_DEFAULTS = {
     variableTypes: "",
 }
 
+/* @params variable, this is different from VAR_DEFAULTS as it only pertains to the structure of the variable, not the descriptor for the state of a variable.
+    FIELD           DESCRIPTION              EXAMPLE         TYPE
+    key             entire variable name,    (var)(name)     string
+    subfield        last field of variable,  name            string
+    fields          list of fields,          [var, name]     array
+    fieldLength     length of fields         2               number
+    dropdown        connected dropdown menu  dropdownType    string
+    variableTypes   list of variableTypes    [string]        array
+    assign          if the variable is assigned at declaration
+*/
+export const DEFAULT_VAR_ID = {
+    key: '',
+    subfield: '',
+    fields: '',
+    fieldLength: '',
+    dropdown: '',
+    variableTypes: '',
+    assign: '',
+}
+
 export const variableType = {
     number: {
         key: 'number',
@@ -320,6 +340,74 @@ export const triggerNewVars = {
         variableTypes: [
             variableType.uid.key,
             variableType.string.key,
+        ],
+    },
+}
+
+export const choiceMap = {
+    "(choice)": {
+        key: '(choice)',
+        subfield: 'choice',
+        fields: [
+            'choice',
+        ],
+        fieldLength: 1,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.object.key,
+        ],
+    },
+    "(choice)(user)": {
+        key: '(choice)(user)',
+        subfield: 'user',
+        fields: [
+            'choice',
+            'user',
+        ],
+        fieldLength: 2,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.uid.key,
+        ],
+    },
+    "(choice)(target)": {
+        key: '(choice)(target)',
+        subfield: 'target',
+        fields: [
+            'choice',
+            'target',
+        ],
+        fieldLength: 2,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.uid.key,
+        ],
+    },
+    "(choice)(multitarget)": {
+        key: '(choice)(multitarget)',
+        subfield: 'multitarget',
+        fields: [
+            'choice',
+            'multitarget',
+        ],
+        fieldLength: 2,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.object.key,
+            variableType.uidObject.key,
+        ],
+    },
+    "(choice)(value)": {
+        key: '(choice)(value)',
+        subfield: 'value',
+        fields: [
+            'choice',
+            'value',
+        ],
+        fieldLength: 2,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.number.key,
         ],
     },
 }

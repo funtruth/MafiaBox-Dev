@@ -1,4 +1,7 @@
-import { variableType, DEFAULT_LOGIC } from '../logic/types'
+import {
+    DEFAULT_LOGIC,
+    choiceMap,
+} from '../logic/types'
 
 export const boardType = {
     library: {
@@ -159,20 +162,7 @@ export const defaultFieldRepo = {
         key: 'roleTargetMode',
         fieldType: fieldType.logic.key,
         title: 'Target Mode',
-        vars: {
-            "(choice)(user)": {
-                key: '(choice)(user)',
-                variableTypes: [
-                    variableType.uid.key,
-                ],
-            },
-            "(choice)(target)": {
-                key: '(choice)(target)',
-                variableTypes: [
-                    variableType.uid.key,
-                ],
-            },
-        },
+        vars: choiceMap,
         boardType: boardType.roles.key,
         default: DEFAULT_LOGIC,
     },
@@ -180,33 +170,7 @@ export const defaultFieldRepo = {
         key: 'roleAction',
         fieldType: fieldType.logic.key,
         title: 'Action',
-        vars: {
-            "(choice)(user)": {
-                key: '(choice)(user)',
-                variableTypes: [
-                    variableType.uid.key,
-                ],
-            },
-            "(choice)(target)": {
-                key: '(choice)(target)',
-                variableTypes: [
-                    variableType.uid.key,
-                ],
-            },
-            "(choice)(multitarget)": {
-                key: '(choice)(multitarget)',
-                variableTypes: [
-                    variableType.object.key,
-                    variableType.uidObject.key,
-                ],
-            },
-            "(choice)(value)": {
-                key: '(choice)(value)',
-                variableTypes: [
-                    variableType.string.key,
-                ],
-            },
-        },
+        vars: choiceMap,
         boardType: boardType.roles.key,
         default: DEFAULT_LOGIC,
     },

@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import { VAR_DEFAULTS } from '../../logic/types';
+import { VAR_DEFAULTS, DEFAULT_VAR_ID } from '../../logic/types';
 
 import * as helpers from '../../common/helpers'
 import {
-    START_CHAR,
-    END_CHAR,
     parseJS,
     concatField,
     getSubfields,
@@ -27,6 +25,7 @@ export default function DeclareOrAssignVar(props) {
     let [value, setValue] = useState('')
     let handleChange = e => setValue(e.target.value)
 
+    //declaring a new variable
     let handleSave = () => {
         const isAlpha = helpers.checkAlpha(value)
         if (!isAlpha) {
@@ -37,14 +36,16 @@ export default function DeclareOrAssignVar(props) {
             return
         }
 
-        const variableName = START_CHAR + value + END_CHAR
+        const variableName = concatField("", value)
         props.updatePage({
             [variableName]: {
-                ...VAR_DEFAULTS,
+                ...DEFAULT_VAR_ID,
                 key: variableName,
-                value: variableName,
-                display: parseJS(variableName),
-                variableTypes: "",
+                subfield: value,
+                fields: [
+                    value,
+                ],
+                fieldLength: 1,
             },
         }, ['declare'])
         props.showDropdown()
