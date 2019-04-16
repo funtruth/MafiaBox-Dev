@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { updateSourceType } from '../common/types';
 import { dropdownType } from './types'
 import { boardType } from '../fields/defaults'
+
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal, showModal } from '../modal/ModalReducer'
 import { updateRepo } from '../page/PageReducer'
@@ -87,11 +88,11 @@ function DropdownView(props) {
 
         switch(renderProps.updateSource) {
             case updateSourceType.repo:
-                renderProps.updatePage = (value) => {
+                renderProps.updatePage = (value, extraPath=[]) => {
                     if (renderProps.ignoreSubpath) {
-                        props.updateRepo(renderProps.path, value)
+                        props.updateRepo(renderProps.path, value, extraPath)
                     } else {
-                        props.updateRepo(renderProps.path, value, renderProps.subpath)
+                        props.updateRepo(renderProps.path, value, (renderProps.subpath||[]).concat(extraPath))
                     }
                 }
                 break

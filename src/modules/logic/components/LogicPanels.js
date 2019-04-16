@@ -72,7 +72,6 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="pick ..."
-                    path={[...path, 'data']}
                     includeSubpath
                     dropdown={dropdownType.declareOrAssignVar}
                 />

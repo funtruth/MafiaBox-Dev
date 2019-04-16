@@ -13,19 +13,20 @@ import {
     END_CHAR,
     parseJS,
     concatField,
+    getSubfields,
 } from '../../logic/proptool';
 
 import {
     DropEmpty,
     DropItem,
-    DropTitle,
+    DropParent,
     DropScroll,
     DropSubmit,
+    DropTitle,
 } from '../components/Common'
-import ShowSubfields from '../update/ShowSubfields'
 
 export default function DeclareOrAssignVar(props) {
-    const { currentValue, attachVar } = props
+    const { currentValue, attachVar, path } = props
 
     let [value, setValue] = useState('')
     let handleChange = e => setValue(e.target.value)
@@ -42,19 +43,13 @@ export default function DeclareOrAssignVar(props) {
 
         const variableName = START_CHAR + value + END_CHAR
         props.updatePage({
-            declare: {
-                [variableName]: {
-                    ...VAR_DEFAULTS,
-                    value: variableName,
-                    display: parseJS(variableName),
-                    variableTypes: "",
-                    assign: {
-                        ...DEFAULT_ASSIGN,
-                        mathType: mathType.NaN.key,
-                    },
-                },
+            [variableName]: {
+                ...VAR_DEFAULTS,
+                value: variableName,
+                display: parseJS(variableName),
+                variableTypes: "",
             },
-        })
+        }, ['declare'])
         props.showDropdown()
     }
 
@@ -67,6 +62,7 @@ export default function DeclareOrAssignVar(props) {
         }
     }
 
+    //TODO WIP
     let handleSelect = (item) => {
         props.updatePage({
             assign: {
@@ -83,6 +79,9 @@ export default function DeclareOrAssignVar(props) {
     }
 
     const assignable = _.filter(attachVar, i => !i.static)
+
+    const rssSubfieldKey = concatField('', 'rss')
+    const subfields = getSubfields(rssSubfieldKey)
 
     return (
         <>
@@ -104,8 +103,20 @@ export default function DeclareOrAssignVar(props) {
                     save
                 </DropSubmit>
             </div>
-            <ShowSubfields {...props} subfieldKey={concatField('', 'rss')}/>
             <DropTitle>assign</DropTitle>
+            {subfields.map(item => (
+                <DropParent
+                    {...props}
+                    key={item.subfield}
+                    dropdownType={item.dropdown}
+                    params={{
+                        path: [...path, 'data'],
+                        subfieldKey: concatField(rssSubfieldKey, item.subfield),
+                        subpath: [concatField(rssSubfieldKey, item.subfield)],
+                    }}
+                    text={item.subfield}
+                />
+            ))}
             <DropScroll>
                 {assignable.map(item => (
                     <DropItem

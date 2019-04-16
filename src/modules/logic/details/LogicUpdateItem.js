@@ -51,7 +51,7 @@ export default function LogicUpdateItem(props) {
                             })}
                             style={{
                                 color: '#999',
-                                borderLeft: '4px solid #18449b',
+                                borderLeft: '4px solid #a566b0',
                             }}
                         >
                             {field}

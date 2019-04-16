@@ -224,7 +224,6 @@ export const DEFAULT_LOGIC = {
 }
 
 /* @params logicItem.data
-    TODO: replacing adjust with assign?
     assign  => see modal/vars/ops for architecture
     display => what to show on the update button / FRONT-END
     static  => unable to be assigned / type cannot be changed

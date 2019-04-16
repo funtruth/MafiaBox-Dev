@@ -2,9 +2,9 @@ import React from 'react'
 
 import { logicType } from '../types'
 
-import LogicVarWrapper from '../vars/LogicVarWrapper'
-import LogicUpdateItem from '../details/LogicUpdateItem';
+import LogicDeclareItem from '../details/LogicDeclareItem';
 import LogicMutateItem from '../details/LogicMutateItem';
+import LogicUpdateItem from '../details/LogicUpdateItem';
 
 export default function LogicDetails(props) {
     const { value, path } = props
@@ -13,7 +13,7 @@ export default function LogicDetails(props) {
     return (
         <div className="column">
             {declare && Object.keys(declare).map(variable => (
-                <LogicVarWrapper
+                <LogicDeclareItem
                     {...props}
                     key={variable}
                     item={declare[variable]}

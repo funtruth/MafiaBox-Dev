@@ -3,35 +3,42 @@ import React from 'react'
 import { dropdownType } from '../../dropdown/types'
 import { variableType } from '../types';
 
-export default function LogicVarType(props) {
+import LogicDeclareValue from './LogicDeclareValue'
+
+export default function LogicDeclareItem(props) {
     const { item, path } = props
     const variableTypes = item.variableTypes || []
-
+    
     return (
-        <div className="row-nowrap">
+        <div className="row-nowrap" style={{ marginTop: 2 }}>
             <div
-                className="common-bubble --grey27"
+                className="row logic-button"
                 style={{
-                    borderRadius: '6px 0px 0px 6px',
+                    color: '#999',
+                    borderLeft: '4px solid #18449b',
+                    marginRight: 6,
                 }}
             >
-                types
+                variable
+                <div style={{color:'#ddd', marginLeft: 6}}>{item.display}</div>
             </div>
             <div
-                className="logic-pick-update app-onclick"
+                className="logic-button app-onclick"
                 menu-type={dropdownType.declareVarType}
                 app-onclick-props={JSON.stringify({
                     currentValue: variableTypes,
                     path: [...path, item.value],
                 })}
-                highlight="true"
                 style={{
-                    borderRadius: '0px 6px 6px 0px',
+                    color: '#ddd',
+                    borderLeft: '4px solid #18449b',
                 }}
             >
+                <div style={{color:'#999', marginRight: 6}}>types</div>
                 {variableTypes.map(type => <i key={type} className={`${variableType[type].icon} letter-s`}/>)}
                 {variableTypes.length === 0 && '...'}
             </div>
+            {false && <LogicDeclareValue {...props} item={item}/>}
         </div>
     )
 }

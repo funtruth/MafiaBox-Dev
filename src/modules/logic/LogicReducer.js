@@ -20,6 +20,7 @@ export function updateVariables(logicInfo) {
 
         let newVars = {}
 
+        //TODO
         switch(logicInfo.logicType) {
             case logicType.function.key:
                 newVars = logicInfo.data && logicInfo.data.var1 && logicInfo.data.var1.value &&
@@ -35,11 +36,7 @@ export function updateVariables(logicInfo) {
                 }
                 break
             case logicType.variable.key:
-                if (logicInfo.data && logicInfo.data.isBeingAssigned) {
-                    newVars = {}
-                } else {
-                    newVars = logicInfo.data
-                }
+                newVars = logicInfo.data
                 break
             default:
         }
@@ -129,9 +126,6 @@ function declareOrAssign(data) {
     let scope = 'let', string = '', assignTo = ''
     for (var key in data) {
         const varInfo = data[key]
-        if (varInfo.isBeingAssigned) {
-            scope = ''
-        }
         if (varInfo.assign) {
             assignTo = orderOfOp(varInfo.assign)
         }
