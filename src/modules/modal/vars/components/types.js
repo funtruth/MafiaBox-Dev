@@ -59,7 +59,7 @@ export function orderOfOp(assign) {
         case mathType.number:
             return assign.value
         case mathType.variable:
-            return parseJS(assign.value.key)
+            return parseJS(assign.value)
         default:
             return ''
     }
@@ -69,11 +69,18 @@ export function orderOfOp(assign) {
 export function compileMath(assign) {
     if (!assign) return true
 
-    if (assign.mathType === mathType.operation) {
-        if (compileMath(assign.right) || compileMath(assign.left)) return true
-    } else if (assign.mathType === mathType.value.key) {
-        if (assign.value === '') return true
-    } else return true
-    
+    switch(assign.mathType) {
+        case mathType.value:
+            if (assign.value === '') return true
+            break
+        case mathType.number:
+        case mathType.variable:
+            break
+        case mathType.operation:
+            if (compileMath(assign.right) || compileMath(assign.left)) return true
+            break
+        default:
+            return true
+    }
     return false
 }

@@ -2,13 +2,17 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    variableType,
     boolUpdateType,
 } from '../../logic/types'
-import { DEFAULT_ASSIGN } from '../../modal/vars/components/types';
+import {
+    mathType,
+    DEFAULT_ASSIGN,
+} from '../../modal/vars/components/types';
 
-import DropTitle from '../components/DropTitle';
-import DropItem from '../components/DropItem';
+import {
+    DropItem,
+    DropTitle,
+} from '../components/Common';
 
 export default function PickBooleanAssign(props) {
     const { item } = props
@@ -16,9 +20,9 @@ export default function PickBooleanAssign(props) {
 
     let handleSelect = (item) => {
         props.updatePage({
-            assign: DEFAULT_ASSIGN,
+            ...DEFAULT_ASSIGN,
+            mathType: mathType.value,
             value: item.key,
-            variableTypes: [variableType.boolean.key],
         })
         props.showDropdown()
     }
@@ -29,7 +33,7 @@ export default function PickBooleanAssign(props) {
         <>
             <DropTitle>boolean type</DropTitle>
             {items.map(item => {
-                const chosen = typeof selectedValue === 'string' && selectedValue === item.key
+                const chosen = selectedValue === item.key
                     
                 return (
                     <DropItem

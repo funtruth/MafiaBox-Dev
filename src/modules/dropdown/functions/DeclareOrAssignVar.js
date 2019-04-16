@@ -1,10 +1,6 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import {
-    mathType,
-    DEFAULT_ASSIGN,
-} from '../../modal/vars/components/types';
 import { VAR_DEFAULTS } from '../../logic/types';
 
 import * as helpers from '../../common/helpers'
@@ -45,6 +41,7 @@ export default function DeclareOrAssignVar(props) {
         props.updatePage({
             [variableName]: {
                 ...VAR_DEFAULTS,
+                key: variableName,
                 value: variableName,
                 display: parseJS(variableName),
                 variableTypes: "",
@@ -62,19 +59,15 @@ export default function DeclareOrAssignVar(props) {
         }
     }
 
-    //TODO WIP
     let handleSelect = (item) => {
         props.updatePage({
-            assign: {
-                [item.key]: {
-                    ...VAR_DEFAULTS,
-                    value: item.key,
-                    display: parseJS(item.key),
-                    variableTypes: item.variableTypes || "",
-                    assign: DEFAULT_ASSIGN,
-                },
+            [item.key]: {
+                ...VAR_DEFAULTS,
+                value: item.key,
+                display: parseJS(item.key),
+                variableTypes: item.variableTypes || "",
             },
-        })
+        }, ['data'])
         props.showDropdown()
     }
 

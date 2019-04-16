@@ -57,7 +57,7 @@ export default function AssignVarModal(props) {
             >
                 <div className="row">
                     <div className="dashboard-section-title">variable</div>
-                    <div className="assign-var-tag">{subfieldKey}</div>
+                    <ValueDrag text={subfieldKey} mathType={mathType.variable}/>
                 </div>
                 <div className="-sep-no-m"></div>
                 <PlaygroundDrop

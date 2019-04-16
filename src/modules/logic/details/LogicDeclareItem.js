@@ -32,13 +32,14 @@ export default function LogicDeclareItem(props) {
                 style={{
                     color: '#ddd',
                     borderLeft: '4px solid #18449b',
+                    marginRight: 6,
                 }}
             >
-                <div style={{color:'#999', marginRight: 6}}>types</div>
-                {variableTypes.map(type => <i key={type} className={`${variableType[type].icon} letter-s`}/>)}
+                <div style={{color:'#999', marginRight: 6}}>type</div>
+                {variableTypes.map(type => type && <i key={type} className={variableType[type].icon}/>)}
                 {variableTypes.length === 0 && '...'}
             </div>
-            {false && <LogicDeclareValue {...props} item={item}/>}
+            <LogicDeclareValue {...props} item={item}/>
         </div>
     )
 }

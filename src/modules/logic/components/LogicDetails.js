@@ -11,7 +11,7 @@ export default function LogicDetails(props) {
     const { data, declare } = value
 
     return (
-        <div className="column">
+        <div className="column" style={{marginBottom: 8}}>
             {declare && Object.keys(declare).map(variable => (
                 <LogicDeclareItem
                     {...props}

@@ -1,22 +1,29 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { variableType } from '../../logic/types'
-import { mathType, DEFAULT_ASSIGN } from '../../modal/vars/components/types';
+import { VARTYPE_IS_UID } from '../../common/arrows'
+import {
+    mathType,
+    DEFAULT_ASSIGN,
+} from '../../modal/vars/components/types';
 
-import DropTitle from '../components/DropTitle';
-import DropEmpty from '../components/DropEmpty';
+import {
+    DropEmpty,
+    DropItem,
+    DropTitle,
+} from '../components/Common';
 
 export default function PickUidForAssign(props) {
     const { item, attachVar } = props
-    const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-    const selectedKey = item.assign && item.assign.value && item.assign.value.key
+    const selectedKey = item.assign && item.assign.value
+
+    const uids = _.filter(attachVar, VARTYPE_IS_UID)
 
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            mathType: mathType.value.key,
-            value: item,
+            mathType: mathType.value,
+            value: item.key,
         })
         props.showDropdown()
     }
@@ -25,18 +32,17 @@ export default function PickUidForAssign(props) {
         <>
             <DropTitle>uids</DropTitle>
             {uids.map(item => {
-                const chosen = typeof selectedKey === 'string' && selectedKey === item.key
+                const chosen = selectedKey === item.key
             
                 return (
-                    <div
+                    <DropItem
                         key={item.key}
-                        className="drop-down-menu-option"
-                        chosen={chosen.toString()}
+                        chosen={chosen}
                         onClick={() => handleSelect(item)}
+                        rightIcon="mdi mdi-check"
                     >
                         {item.key}
-                        <i className="mdi mdi-check"/>
-                    </div>
+                    </DropItem>
                 )
             })}
             <DropEmpty>no UIDS found</DropEmpty>
