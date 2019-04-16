@@ -20,14 +20,14 @@ export default function LogicDeclareItem(props) {
                 }}
             >
                 variable
-                <div style={{color:'#ddd', marginLeft: 6}}>{item.display}</div>
+                <div style={{color:'#ddd', marginLeft: 6}}>{item.key}</div>
             </div>
             <div
                 className="logic-button app-onclick"
                 menu-type={dropdownType.declareVarType}
                 app-onclick-props={JSON.stringify({
                     currentValue: variableTypes,
-                    path: [...path, item.value],
+                    path: [...path, item.key],
                 })}
                 style={{
                     color: '#ddd',
