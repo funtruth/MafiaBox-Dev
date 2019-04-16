@@ -44,11 +44,7 @@ import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
 
-import PickOp from './calc/PickOp'
 import PickOpType from './calc/PickOpType'
-import ChangeOp from './calc/ChangeOp'
-import PickAssignableVar from './calc/PickAssignableVar'
-import SetOpValueTo from './calc/SetOpValueTo'
 
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
@@ -191,16 +187,8 @@ function DropdownView(props) {
             case dropdownType.declareVarType:
                 return <DeclareVarType {...renderProps}/>
 
-            case dropdownType.pickOp:
-                return <PickOp {...renderProps}/>
             case dropdownType.pickOpType:
                 return <PickOpType {...renderProps}/>
-            case dropdownType.changeOp:
-                return <ChangeOp {...renderProps}/>
-            case dropdownType.pickAssignableVar:
-                return <PickAssignableVar {...renderProps}/>
-            case dropdownType.setOpValueTo:
-                return <SetOpValueTo {...renderProps}/>
 
             case dropdownType.pickBoolean: 
                 return <PickBoolean {...renderProps}/>
