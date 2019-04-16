@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { LOGIC_TESTS } from '../../testhub/tests';
 
-import { getCode } from '../../logic/LogicReducer'
+import { getCode } from '../../logic/LogicEngine'
 import { showModal } from '../../modal/ModalReducer'
 
 import LogicBlock from '../../logic/LogicBlock'
@@ -13,7 +13,7 @@ function LogicBoard(props) {
     const { value, vars } = props
 
     let runCode = () => {
-        const code = props.getCode(value)
+        const code = getCode(value)
         let { rss, write } = LOGIC_TESTS[0]
         // eslint-disable-next-line
         Function(`return ${code}`)()(rss, write)
@@ -21,7 +21,7 @@ function LogicBoard(props) {
     }
 
     let showCode = () => {
-        const code = props.getCode(value)
+        const code = getCode(value)
         props.showModal(modalType.showCode, {
             code,
         })
@@ -58,6 +58,5 @@ export default connect(
     null,
     {
         showModal,
-        getCode,
     }
 )(LogicBoard)

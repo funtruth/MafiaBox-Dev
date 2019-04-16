@@ -25,7 +25,7 @@ export default function EditToast(props) {
 
         props.updatePage(path, {
             ...workspace,
-            key: 'toast', //TODO used in PickReturnType and LogicReducer
+            key: 'toast', //TODO used in PickReturnType and LogicEngine
         })
         props.popModalBy(1)
     }

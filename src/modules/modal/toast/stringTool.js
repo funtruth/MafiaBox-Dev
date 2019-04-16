@@ -2,7 +2,7 @@ import React from 'react'
 
 import { dropdownType } from '../../dropdown/types'
 
-import { convertString } from '../../logic/LogicReducer'
+import { convertString } from '../../logic/LogicEngine'
 
 export function braceToHtml(string='') {
     let parts = []

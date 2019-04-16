@@ -106,6 +106,8 @@ export function getUpdateConfig(prefix) {
 //input => (rss)(lobby)((choices)(user))(dead)
 //ouput => rss.lobby[choices.user].dead
 export function parseJS(string) {
+    if (!string) return ""
+
     const fields = separateField(string)
     let str = fields[0]
 

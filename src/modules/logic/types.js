@@ -68,7 +68,7 @@ export const operatorType = {
     forin: {
         key: 'forin',
         index: 3,
-        title: 'for ... in',
+        title: 'for',
         icon: 'mdi mdi-sync',
         color: '#f9812a',
         logicType: logicType.operator.key,

@@ -46,11 +46,21 @@ export default function LogicPanels(props) {
                     )
                 case operatorType.forin.key:
                     return (
-                        <LogicPanel
-                            {...props}
-                            placeholder="UID object ..."
-                            dropdown={dropdownType.pickUidObject}
-                        />
+                        <div className="row">
+                            <div
+                                className="logic-button"
+                                style={{
+                                    color: '#ddd',
+                                }}
+                            >
+                                in
+                            </div>
+                            <LogicPanel
+                                {...props}
+                                placeholder="UID object ..."
+                                dropdown={dropdownType.pickUidObject}
+                            />
+                        </div>
                     )
                 case operatorType.else.key:
                 default:
