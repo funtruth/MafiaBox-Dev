@@ -1,13 +1,10 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
 
-import { showModal } from '../../modal/ModalReducer'
-
 import { DropTitle } from '../components/Common';
 
-function PickEvent(props) {
+export default function PickEvent(props) {
     const { attach, subfieldKey } = props
 
     let handlePress = () => {
@@ -40,10 +37,3 @@ function PickEvent(props) {
         </>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(PickEvent)

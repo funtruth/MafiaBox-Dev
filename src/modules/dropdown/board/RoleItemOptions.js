@@ -1,11 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types'
 
-import { showModal } from '../../modal/ModalReducer'
-
-function RoleItemOptions(props) {
+export default function RoleItemOptions(props) {
     const { pageKey, attach } = props
 
     const handleDelete = () => {
@@ -13,7 +10,7 @@ function RoleItemOptions(props) {
         props.showModal(modalType.deletePage, {
             pageKey,
             attach,
-        })
+        });
     }
 
     return (
@@ -29,10 +26,3 @@ function RoleItemOptions(props) {
         </>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(RoleItemOptions)

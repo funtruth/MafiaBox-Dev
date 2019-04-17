@@ -1,14 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types'
-
-import { showModal } from '../../modal/ModalReducer'
 
 import DropItem from '../components/DropItem';
 import DropTitle from '../components/DropTitle';
 
-function PatchItemOptions(props) {
+export default function PatchItemOptions(props) {
     const { boardType, storyKey } = props
 
     const handleDelete = () => {
@@ -16,7 +13,7 @@ function PatchItemOptions(props) {
         props.showModal(modalType.deleteStory, {
             boardType,
             storyKey,
-        })
+        });
     }
 
     return (
@@ -30,10 +27,3 @@ function PatchItemOptions(props) {
         </>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(PatchItemOptions)

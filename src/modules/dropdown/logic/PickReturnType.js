@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import {
@@ -9,14 +8,13 @@ import {
 import { modalType } from '../../modal/types';
 
 import { codeReturnType } from '../../logic/codetool';
-import { showModal } from '../../modal/ModalReducer'
 
 import {
     DropItem,
     DropTitle,
  } from '../components/Common';
 
-function PickReturnType(props) {
+export default function PickReturnType(props) {
     const { attach } = props
     const toastChosen = attach.key === 'toast'
 
@@ -72,10 +70,3 @@ function PickReturnType(props) {
         </>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(PickReturnType)

@@ -1,17 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
 import { DEFAULT_LOGIC } from '../../logic/types'
-
-import { showModal } from '../../modal/ModalReducer'
 
 import {
     DropItem,
     DropTitle,
 } from '../components/Common'
 
-function PickTrigger(props) {
+export default function PickTrigger(props) {
     const { attach, subfieldKey } = props
 
     const handleClick = () => {
@@ -33,10 +30,3 @@ function PickTrigger(props) {
         </>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(PickTrigger)
