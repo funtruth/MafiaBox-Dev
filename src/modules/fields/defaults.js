@@ -160,7 +160,7 @@ export const DEFAULT_GAME_CHOICE = {
     index: '',
     title: '',
     prompt: '',
-    gameChoiceType: '',
+    gameChoice: '',
 }
 
 /* @params fieldInfo

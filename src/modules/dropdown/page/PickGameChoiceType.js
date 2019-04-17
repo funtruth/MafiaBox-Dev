@@ -18,9 +18,11 @@ export default connect(
         updateField,
     }
 )(function PickGameChoiceType(props) {
+    const { currentValue } = props
+
     const handleSelect = (item) => {
         props.updatePage({
-            gameChoiceType: item.key,
+            gameChoice: item.key,
         })
         props.showDropdown();
     }
@@ -29,6 +31,7 @@ export default connect(
         return (
             <DropItem
                 key={item.key}
+                chosen={item.key === currentValue}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
                 rightIcon="mdi mdi-check"

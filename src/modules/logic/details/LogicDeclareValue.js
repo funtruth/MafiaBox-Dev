@@ -55,7 +55,6 @@ export default connect(
                 onClick={handleNumber}
                 style={{
                     color: '#ddd',
-                    borderLeft: '4px solid ',
                 }}
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>

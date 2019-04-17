@@ -17,6 +17,7 @@ export const dropdownType = {
     pickGameChoiceType: 'dropdownType/pick-game-choice-type',
     pickFieldType: 'dropdownType/pick-field-type',
     templateTitleOptions: 'dropdownType/template-title-options',
+    writeGameChoice: 'dropdownType/write-game-choice',
 
     //account
     accountOptions: 'dropdownType/account-options',

@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     max-width: 200px;
+    flex-wrap: nowrap;
 }
 .--logic-button:hover {
     filter: brightness(120%);

@@ -27,7 +27,6 @@ export default function LogicType(props) {
         color = '#767676',
     } = item
 
-    //TODO add/color the keyword and icon to make UX more readable
     return (
         <DropClick
             dropdown={dropdownType.pickLogic}
@@ -39,7 +38,7 @@ export default function LogicType(props) {
             }}
         >
             <LogicButton highlight={color} style={{color}}>
-                <Icon className={`${icon || 'ion-md-create'}`}></Icon>
+                <Icon className={`${icon || 'mdi mdi-pencil'}`}></Icon>
                 {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
             </LogicButton>
         </DropClick>

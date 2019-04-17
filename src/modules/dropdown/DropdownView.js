@@ -37,6 +37,8 @@ import CreateUniqueTag from './page/CreateUniqueTag'
 import CreateGeneralTag from './page/CreateGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
+import WriteGameChoice from './page/WriteGameChoice'
+
 import PickFieldType from './template/PickFieldType'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
 
@@ -162,6 +164,8 @@ function DropdownView(props) {
                 return <CreateGameChoice {...renderProps}/>
             case dropdownType.pickGameChoiceType:
                 return <PickGameChoiceType {...renderProps}/>
+            case dropdownType.writeGameChoice:
+                return <WriteGameChoice {...renderProps}/>
             case dropdownType.pickFieldType:
                 return <PickFieldType {...renderProps}/>
             case dropdownType.templateTitleOptions:

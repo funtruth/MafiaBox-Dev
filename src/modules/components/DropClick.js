@@ -26,6 +26,7 @@ export default connect(
     ].join(' ')
 
     const handleClick = (e) => {
+        if (!dropdown) return console.warn('no dropdownType')
         showDropdown(dropdown, e, params, 0, place)
     }
 

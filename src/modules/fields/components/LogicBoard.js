@@ -40,17 +40,15 @@ function LogicBoard(props) {
                     view code
                 </div>
             </div>
-            <div style={{ margin: '0px 6px' }}>
-                <LogicBlock
-                    {...props}
-                    indent={false}
-                    showBorderLeft={true}
-                    value={value}
-                    parentValue=""
-                    sourceValue=""
-                    vars={vars}
-                />
-            </div>
+            <LogicBlock
+                {...props}
+                indent={false}
+                showBorderLeft={true}
+                value={value}
+                parentValue=""
+                sourceValue=""
+                vars={vars}
+            />
         </div>
     )
 }

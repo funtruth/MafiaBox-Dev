@@ -3,7 +3,7 @@ import './LogicButton.css'
 
 const getFont = (size) => {
     switch(size) {
-        default:            return '500 13px Segoe UI'
+        default:            return '500 14px Segoe UI'
     }
 }
 
