@@ -5,6 +5,7 @@ import {
     updateType,
     numUpdateType,
     VAR_DEFAULTS,
+    variableType,
 } from '../../logic/types'
 import {
     DEFAULT_ASSIGN,
@@ -18,11 +19,13 @@ import {
     DropParent,
     DropTitle,
 } from '../components/Common'
+import RelatedVars from '../vars/RelatedVars';
 
 export default function PickNumUpdate(props) {
     const { attach, subfieldKey } = props
     const currentValue = attach[subfieldKey] || {}
 
+    //handle basic setTo
     const setTo = (item, number) => {
         props.updatePage({
             ...VAR_DEFAULTS,
@@ -38,6 +41,7 @@ export default function PickNumUpdate(props) {
         props.showDropdown()
     }
 
+    //handle increments/decrements
     const selectDynamic = (item, number) => {
         props.updatePage({
             ...VAR_DEFAULTS,
@@ -63,6 +67,7 @@ export default function PickNumUpdate(props) {
         props.showDropdown()
     }
     
+    //show advanced math modal
     const handleAdvanced = () => {
         props.showModal(modalType.assignNum, {
             attach: currentValue,
@@ -102,6 +107,10 @@ export default function PickNumUpdate(props) {
             >
                 equation ...
             </DropItem>
+            <RelatedVars
+                {...props}
+                variableType={variableType.number.key}
+            />
         </>
     )
 }

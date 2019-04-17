@@ -1,13 +1,78 @@
 import React from 'react'
+import _ from 'lodash'
+
+import {
+    rssMap,
+    updateType,
+    VAR_DEFAULTS,
+} from '../../logic/types';
+
+import {
+    parseJS,
+    WILD_CHAR,
+} from '../../logic/proptool';
+import {
+    VARTYPE_FILTER,
+} from '../../common/arrows'
+
 import {
     DropItem,
     DropTitle,
 } from '../components/Common';
 
+/* @params
+    input => variableType, vars
+    ouput => matching vars
+*/
 export default function RelatedVars(props) {
+    const { variableType, attachVars } = props
+
+    const handleSelect = (item, isWild) => {
+        props.updatePage({
+            ...VAR_DEFAULTS,
+            value: item.key,
+            wildcardValue: isWild ? item.key : '',
+            display: parseJS(item.key),
+            updateType: updateType.variable,
+            variableTypes: item.variableTypes,
+        })
+        props.showDropdown();
+    }
+
+    const renderItem = (item) => {
+        return (
+            <DropItem
+                key={item.key}
+                onClick={() => handleSelect(item, false)}
+            >
+                {item.key}
+            </DropItem>
+        )
+    }
+
+    const renderWild = (item) => {
+        return (
+            <DropItem
+                key={item.key}
+                onClick={() => handleSelect(item, true)}
+            >
+                {item.key}
+            </DropItem>
+        )
+    }
+
+    const typeFilter = VARTYPE_FILTER(variableType)
+
+    const relatedVars = _.filter(attachVars, typeFilter)
+    const groupedRSSVars = _(rssMap).filter(typeFilter).groupBy(i => i.fields.includes(WILD_CHAR)).value()
+    
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
+            {relatedVars.map(renderItem)}
+            {groupedRSSVars.false.map(renderItem)}
+            <DropTitle>incomplete vars</DropTitle>
+            {groupedRSSVars.true.map(renderWild)}
         </>
     )
 }

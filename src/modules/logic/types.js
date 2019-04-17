@@ -46,7 +46,7 @@ export const operatorType = {
         index: 0,
         title: 'if',
         icon: 'mdi mdi-ray-start-arrow',
-        color: '#af8c40',
+        color: '#fed766',
         logicType: logicType.operator.key,
     },
     else: {
@@ -224,9 +224,16 @@ export const DEFAULT_LOGIC = {
 }
 
 /* @params logicItem.data
-    assign  => see modal/vars/ops for architecture
-    display => what to show on the update button / FRONT-END
-    static  => unable to be assigned / type cannot be changed
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    assign          see modal/vars/ops for architecture
+    display         what to show on the update button / FRONT-END
+    length
+    static          unable to be assigned / type cannot be changed
+    updateType
+    value           variable value in (foo)(bar) form
+    wildcardValue   original value if originally a wildcard var
+    variableTypes   list of variableTypes
 */
 export const VAR_DEFAULTS = {
     assign: "",
@@ -235,14 +242,16 @@ export const VAR_DEFAULTS = {
     static: false,
     updateType: "",
     value: "",
+    wildcardValue: "",
     variableTypes: "",
 }
 
-/* @params variable, this is different from VAR_DEFAULTS as it only pertains to the structure of the variable, not the descriptor for the state of a variable.
+/* @params variable, this is different from VAR_DEFAULTS as it only pertains to the structure of the variable, not the descriptor for the state of a variable. Examples are done with the object foo.bar
     FIELD           DESCRIPTION              EXAMPLE         TYPE
-    key             entire variable name,    (var)(name)     string
-    subfield        last field of variable,  name            string
-    fields          list of fields,          [var, name]     array
+    ---------------------------------------------------------------
+    key             entire variable name,    (foo)(bar)      string
+    subfield        last field of variable,  bar             string
+    fields          list of fields,          [foo, bar]      array
     fieldLength     length of fields         2               number
     dropdown        connected dropdown menu  dropdownType    string
     variableTypes   list of variableTypes    [string]        array

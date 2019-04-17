@@ -51,6 +51,7 @@ import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
+import ReplaceWildcard from './vars/ReplaceWildcard'
 
 import PickBooleanAssign from './assign/PickBooleanAssign'
 import PickUidAssign from './assign/PickUidAssign'
@@ -180,6 +181,8 @@ function DropdownView(props) {
                 return <PickComparison {...renderProps}/>
             case dropdownType.writeVarType:
                 return <WriteVarType {...renderProps}/>
+            case dropdownType.replaceWildcard:
+                return <ReplaceWildcard {...renderProps}/>
                 
             case dropdownType.pickBooleanAssign:
                 return <PickBooleanAssign {...renderProps}/>

@@ -8,6 +8,7 @@ import {
     DropTitle,
 } from '../components/Common';
 
+//source: LogicBlock > LogicDeclareItem
 export default function DeclareVarType(props) {
     const { currentValue } = props
     const currentValueIsArray = Array.isArray(currentValue)

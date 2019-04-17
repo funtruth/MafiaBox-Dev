@@ -6,15 +6,12 @@ import {
     combineFields,
 } from '../proptool'
 
-import {
-    Icon,
-} from '../../components/Common'
+import LogicDetailPanel from './LogicDetailPanel';
 
 export default function LogicMutateItem(props) {
     const { prefix, value, data, updateSource, vars, path } = props
-
+    
     if (!data) return null;
-    const { display } = data
 
     const attach = value.data || {}
 
@@ -27,41 +24,23 @@ export default function LogicMutateItem(props) {
                 const config = getUpdateConfig(shortPrefix)
 
                 return (
-                    <div
+                    <LogicDetailPanel
                         key={field}
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
+                        dropdown={config.dropdown}
+                        params={{
+                            subfieldKey: shortPrefix,
+                            attach,
+                            currentValue: attach[shortPrefix] || {},
+                            attachVar: vars,
+                            path,
+                            subpath: [shortPrefix],
+                            updateSource,
                         }}
-                    >
-                        {!!index && <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>}
-                        <div
-                            className="logic-button app-onclick"
-                            highlight="true"
-                            menu-type={config.dropdown}
-                            app-onclick-props={JSON.stringify({
-                                subfieldKey: shortPrefix,
-                                attach,
-                                currentValue: attach[shortPrefix] || {},
-                                attachVar: vars,
-                                path,
-                                subpath: [shortPrefix],
-                                updateSource,
-                            })}
-                            style={{
-                                color: '#999',
-                                borderLeft: '4px solid Mediumslateblue',
-                            }}
-                        >
-                            {field}
-                            {index + 1 === fields.length && 
-                                <div className="logic-display">
-                                    {display}
-                                </div>
-                            }
-                        </div>
-                    </div>
+                        field={field}
+                        color="Mediumslateblue"
+                        currentValue={data}
+                        isLastPanel={index + 1 === fields.length}
+                    />
                 )
             })}
         </div>

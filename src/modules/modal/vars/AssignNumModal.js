@@ -9,6 +9,8 @@ import {
     DEFAULT_ASSIGN,
 } from './components/types'
 
+import { VARTYPE_IS_NUM } from '../../common/arrows';
+
 import ModalOptions from '../components/ModalOptions'
 import PlaygroundDrop from './components/PlaygroundDrop';
 import BasicOpDrag from './components/BasicOpDrag';
@@ -20,7 +22,6 @@ export default function AssignVarModal(props) {
 
     const { attach, attachVar, path, subfieldKey } = props
     const assign = _.cloneDeep(attach.assign || DEFAULT_ASSIGN)
-    console.log("workspace and assign", {attach, assign})
 
     const workspace = attach
     const mainProps = {
@@ -43,7 +44,7 @@ export default function AssignVarModal(props) {
         props.popModalBy(1)
     }
     
-    const assignable = _.filter(attachVar, i => !i.static)
+    const assignable = _.filter(attachVar,VARTYPE_IS_NUM)
     return (
         <ModalCheckSave {...props} handleSave={handleSave}>
             <div

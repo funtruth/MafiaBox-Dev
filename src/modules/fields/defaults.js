@@ -86,14 +86,12 @@ export const fieldType = {
         index: 10,
         icon: 'ion-ios-pricetag',
         title: 'Player Tags',
-        readOnly: true,
     },
     priority: {
         key: 'priority',
         index: 11,
         icon: 'mdi mdi-priority-high',
         title: 'Priority',
-        readOnly: true,
     },
 }
 
