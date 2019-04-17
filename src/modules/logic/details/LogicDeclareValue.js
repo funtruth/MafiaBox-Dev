@@ -8,6 +8,8 @@ import { dropdownType } from '../../dropdown/types'
 
 import { showModal } from '../../modal/ModalReducer'
 
+import { DropClick } from '../../components/Common';
+
 
 export default connect(
     null,
@@ -63,15 +65,15 @@ export default connect(
         )
     } else if (isUid) {
         return (
-            <div
-                className="logic-button row app-onclick"
-                menu-type={dropdownType.pickUidAssign}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                className="logic-button row"
+                dropdown={dropdownType.pickUidAssign}
+                params={{
                     attachVar: vars,
                     item,
                     path,
                     subpath: [item.value, 'assign'],
-                })}
+                }}
                 style={{
                     color: '#ddd',
                     borderLeft: '4px solid #18449b',
@@ -79,18 +81,18 @@ export default connect(
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 {item.assign.value || '...'}
-            </div>
+            </DropClick>
         )
     } else if (isBoolean) {
         return (
-            <div
-                className="logic-button row app-onclick"
-                menu-type={dropdownType.pickBooleanAssign}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                className="logic-button row"
+                dropdown={dropdownType.pickBooleanAssign}
+                params={{
                     item,
                     path,
                     subpath: [item.value, 'assign'],
-                })}
+                }}
                 style={{
                     color: '#ddd',
                     borderLeft: '4px solid #18449b',
@@ -98,7 +100,7 @@ export default connect(
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 {item.assign.value || '...'}
-            </div>
+            </DropClick>
         )
     } else if (isString) {
         return (

@@ -7,6 +7,7 @@ import {
     mathType,
     DEFAULT_ASSIGN,
 } from './types'
+import { DropClick } from '../../../components/Common';
 
 const itemTarget = {
     drop(props, monitor) {
@@ -35,14 +36,16 @@ function ValueDrop(props) {
     
     if (assign.mathType === mathType.number) {
         return connectDropTarget(
-            <div
-                className="basic-op-bubble app-onclick"
-                style={{
-                    color: isOver && '#fff',
-                    backgroundColor: isOver && '#6279CA',
-                }}
-            >
-                {children}
+            <div>
+                <DropClick
+                    className="basic-op-bubble"
+                    style={{
+                        color: isOver && '#fff',
+                        backgroundColor: isOver && '#6279CA',
+                    }}
+                >
+                    {children}
+                </DropClick>
             </div>
         );
     }

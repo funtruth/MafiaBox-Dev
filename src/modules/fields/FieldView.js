@@ -10,8 +10,9 @@ import NumberField from './components/NumberField';
 import ImageField from './components/ImageField'
 import UniqueTagField from './components/UniqueTagField';
 import GeneralTagField from './components/GeneralTagField'
+import GameChoiceField from './components/GameChoiceField'
+
 import PriorityField from './components/PriorityField'
-import PropertyField from './components/PropertyField'
 import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
@@ -30,7 +31,6 @@ function FieldView(props) {
             value: pageInfo[key], //value related to the current page
             data, //data related to the field
             fieldInfo,
-            vars: fieldInfo.vars || {},
             path: [...path, key],
             subpath,
             updateSource,
@@ -48,15 +48,17 @@ function FieldView(props) {
                 return <PriorityField {...props}/>
             case fieldType.generalTag.key:
                 return <GeneralTagField {...props}/>
+            case fieldType.logic.key:
+                return <LogicBoard {...props}/>
+
+                //WIP
+            case fieldType.gameChoices.key:
+                return <GameChoiceField {...props}/>
 
             case fieldType.call.key:
                 return <CallField {...props}/>
             case fieldType.image.key:
                 return <ImageField {...props}/>
-            case fieldType.logic.key:
-                return <LogicBoard {...props}/>
-            case fieldType.property.key:
-                return <PropertyField {...props}/>
             case fieldType.vars.key:
                 return <VariableField {...props}/>
             default:

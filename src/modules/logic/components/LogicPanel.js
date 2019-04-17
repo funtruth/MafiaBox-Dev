@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { DropClick } from '../../components/Common';
+
 export default function LogicPanel(props) {
     const {
         pageKey, fieldKey, subfieldKey,
@@ -19,10 +21,10 @@ export default function LogicPanel(props) {
     const { display } = dataProp
 
     return (
-        <div
-            className="logic-button app-onclick"
-            menu-type={dropdown}
-            app-onclick-props={JSON.stringify({
+        <DropClick
+            className="logic-button"
+            dropdown={dropdown}
+            params={{
                 pageKey,
                 fieldKey,
                 subfieldKey,
@@ -31,12 +33,12 @@ export default function LogicPanel(props) {
                 attachVar: vars,
                 path,
                 ignoreSubpath: !includeSubpath,
-            })}
+            }}
             style={{
                 color: display ? '#fff' : '#868686',
             }}
         >
             <div className="text-ellipsis">{display || placeholder}</div> 
-        </div>
+        </DropClick>
     )
 }

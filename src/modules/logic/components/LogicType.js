@@ -4,6 +4,7 @@ import { dropdownType } from '../../dropdown/types'
 import { logicType, operatorType } from '../types'
 
 import {
+    DropClick,
     Icon,
     Text,
  } from '../../components/Common';
@@ -27,15 +28,15 @@ export default function LogicType(props) {
 
     //TODO add/color the keyword and icon to make UX more readable
     return (
-        <div
-            className="logic-label app-onclick"
-            menu-type={dropdownType.pickLogic}
-            app-onclick-props={JSON.stringify({
+        <DropClick
+            className="logic-label"
+            dropdown={dropdownType.pickLogic}
+            params={{
                 attach: value,
                 updateSource,
                 path,
                 subpath,
-            })}
+            }}
             style={{
                 color,
                 borderLeft: `4px solid ${color}`,
@@ -43,6 +44,6 @@ export default function LogicType(props) {
         >
             <Icon className={`${icon || 'ion-md-create'}`}></Icon>
             {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
-        </div>
+        </DropClick>
     )
 }

@@ -10,7 +10,8 @@ import LogicBlock from '../../logic/LogicBlock'
 import { modalType } from '../../modal/types';
 
 function LogicBoard(props) {
-    const { value, vars } = props
+    const { value, fieldInfo } = props
+    const { vars } = fieldInfo
 
     let runCode = () => {
         const code = getCode(value)

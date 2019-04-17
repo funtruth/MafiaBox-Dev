@@ -5,6 +5,7 @@ import { dropdownType } from '../../dropdown/types';
 
 import {
     Tag,
+    DropClick,
 } from '../../components/Common';
 
 export default function GeneralTagField(props) {
@@ -30,17 +31,16 @@ export default function GeneralTagField(props) {
     return (
         <div className="row">
             {tags.map(renderItem)}
-            <div
-                className="app-onclick"
-                menu-type={dropdownType.createGeneralTag}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                dropdown={dropdownType.createGeneralTag}
+                params={{
                     path: [fieldKey],
                     attach: data,
                     placeholder: "Tag name ...",
-                })}
+                }}
             >
                 <Tag theme="darkgrey">new tag</Tag>
-            </div>
+            </DropClick>
         </div>
     )
 }

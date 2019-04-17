@@ -5,6 +5,8 @@ import { variableType } from '../types';
 
 import LogicDeclareValue from './LogicDeclareValue'
 
+import { DropClick } from '../../components/Common';
+
 export default function LogicDeclareItem(props) {
     const { item, path } = props
     const variableTypes = item.variableTypes || []
@@ -22,13 +24,13 @@ export default function LogicDeclareItem(props) {
                 variable
                 <div style={{color:'#ddd', marginLeft: 6}}>{item.key}</div>
             </div>
-            <div
-                className="logic-button app-onclick"
-                menu-type={dropdownType.declareVarType}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                className="logic-button"
+                dropdown={dropdownType.declareVarType}
+                params={{
                     currentValue: variableTypes,
                     path: [...path, item.key],
-                })}
+                }}
                 style={{
                     color: '#ddd',
                     borderLeft: '4px solid #18449b',
@@ -38,7 +40,7 @@ export default function LogicDeclareItem(props) {
                 <div style={{color:'#999', marginRight: 6}}>type</div>
                 {variableTypes.map(type => type && <i key={type} className={variableType[type].icon}/>)}
                 {variableTypes.length === 0 && '...'}
-            </div>
+            </DropClick>
             <LogicDeclareValue {...props} item={item}/>
         </div>
     )

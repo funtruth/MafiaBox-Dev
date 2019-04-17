@@ -4,23 +4,28 @@ import firebase from 'firebase/app'
 import Modal from '../components/Modal'
 import ModalOptions from '../components/ModalOptions';
 
-function PickCharImage(props) {
-
-    const [images, setImages] = useState({})
+export default function PickCharImage(props) {
+    const [images, setImages] = useState([])
     useEffect(() => {
-        firebase.storage().ref('chars/Thug.jpg').getDownloadURL().then(url => {
-            setImages(url)
+        firebase.database().ref('images').once('value', snap => {
+            setImages(snap.val()||[])
         })
     }, [])
     
     return (
         <Modal>
-            <img className="pick-char-image" src={images} width="200" alt=""/>
+            {images.map(image => (
+                <img
+                    key={image}
+                    className="pick-char-image"
+                    src={image}
+                    width="200"
+                    alt=""
+                />
+            ))}
             <ModalOptions
                 onClose={props.close}
             />
         </Modal>
     )
 }
-
-export default PickCharImage

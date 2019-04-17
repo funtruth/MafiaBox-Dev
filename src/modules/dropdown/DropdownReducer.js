@@ -25,11 +25,11 @@ export function showDropdown(key, e, params={}, index=0, place="down") {
             
             const pageX = keysClone.length ?
                 e.pageX - e.nativeEvent.offsetX + e.target.offsetWidth
-                :e.pageX - e.offsetX - DROPDOWN_Y_MARGIN
+                :e.pageX - e.nativeEvent.offsetX - DROPDOWN_Y_MARGIN
 
             const pageY = keysClone.length ?
                 e.pageY - e.nativeEvent.offsetY - DROPDOWN_Y_MARGIN - DROP_TITLE_HEIGHT
-                :e.pageY - e.offsetY + e.target.offsetHeight
+                :e.pageY - e.nativeEvent.offsetY + e.target.offsetHeight
 
             keysClone.push({
                 ...modalKeys[modalKeys.length - 1],

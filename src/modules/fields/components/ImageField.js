@@ -5,6 +5,11 @@ import { modalType } from '../../modal/types';
 
 import { showModal } from '../../modal/ModalReducer'
 
+import {
+    Body,
+    Button,
+} from '../../components/Common'
+
 function ImageField(props) {
     const handleClick = () => {
         props.showModal(modalType.pickCharacterImage, {
@@ -13,11 +18,11 @@ function ImageField(props) {
     }
 
     return (
-        <div className="row -x-p">
-            <div className="field-tag" onClick={handleClick}>
+        <Body size="s">
+            <Button size="s" onClick={handleClick}>
                 TODO
-            </div>
-        </div>
+            </Button>
+        </Body>
     )
 }
 

@@ -1,15 +1,3 @@
-.field-title-input {
-    border: none;
-    background-color: transparent;
-    padding: 4px 7px;
-    font: 500 18px Segoe UI;
-    color: #d6d6d7;
-}
-
-.field-title-input:focus {
-    outline: none;
-}
-
 .field-icon {
     color: #ddd;
     padding: 0px 6px;
@@ -71,16 +59,6 @@
     box-shadow: rgba(15, 15, 15, 0.05) 0px 0px 0px 1px;
     cursor: text;
     text-align: center;
-}
-
-.field-tag {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font: 500 13px Segoe UI;
-    color: #fff;
-    background-color: #282b30;
-    cursor: pointer;
-    margin: 3px;
 }
 
 .field-number-inc {

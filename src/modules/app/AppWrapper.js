@@ -66,23 +66,10 @@ class AppWrapper extends React.Component{
             this.props.showDropdown()
             return
         }
-
-        const targetIsAppClick = e.target.matches('.app-onclick')
-
+        
         if (e.target.classList.contains('drop-down-pause')) {
             this.props.showDropdown()
             return;
-        }
-
-        if (targetIsAppClick) {
-            const menuClick = e.target.getAttribute('menu-type')
-            const place = e.target.getAttribute('place') || "down"
-
-            if (menuClick) {
-                this.props.showDropdown(menuClick, e, JSON.parse(
-                    e.target.getAttribute('app-onclick-props')
-                ), 0, place)
-            }
         }
     }
 

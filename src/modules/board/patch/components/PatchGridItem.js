@@ -5,6 +5,8 @@ import { SortableElement } from 'react-sortable-hoc';
 import { showModal } from '../../../modal/ModalReducer'
 import { dropdownType } from '../../../dropdown/types'
 
+import { DropClick } from '../../../components/Common';
+
 const PatchGridItem = SortableElement((props) => {
     const { storyKey, storyRepo } = props
     const storyInfo = storyRepo[storyKey] || {}
@@ -26,16 +28,16 @@ const PatchGridItem = SortableElement((props) => {
                 {title || 'Untitled'}
             </div>
             <div className="patch-item-footer">
-                <div
-                    className="patch-item-option app-onclick"
-                    menu-type={dropdownType.patchItemOptions}
-                    app-onclick-props={JSON.stringify({
+                <DropClick
+                    className="patch-item-options"
+                    dropdown={dropdownType.patchItemOptions}
+                    params={{
                         boardType,
                         storyKey,
-                    })}
+                    }}
                 >
                     <i className="mdi mdi-dots-horizontal"></i>
-                </div>
+                </DropClick>
             </div>
         </div>
     )

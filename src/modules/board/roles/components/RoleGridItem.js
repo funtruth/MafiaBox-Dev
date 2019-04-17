@@ -8,6 +8,8 @@ import { updateSourceType } from '../../../common/types'
 import { dropdownType } from '../../../dropdown/types'
 import { boardType } from '../../../fields/defaults'
 
+import { DropClick } from '../../../components/Common';
+
 const RoleGridItem = SortableElement((props) => {
     const { pageKey, pageRepo } = props
     const pageInfo = pageRepo[pageKey] || {}
@@ -33,16 +35,16 @@ const RoleGridItem = SortableElement((props) => {
                 {title || 'Untitled'}
             </div>
             <div className="patch-item-footer">
-                <div
-                    className="patch-item-option app-onclick"
-                    menu-type={dropdownType.roleItemOptions}
-                    app-onclick-props={JSON.stringify({
+                <DropClick
+                    className="patch-item-option"
+                    dropdown={dropdownType.roleItemOptions}
+                    params={{
                         attach: pageInfo,
                         pageKey,
-                    })}
+                    }}
                 >
                     <i className="mdi mdi-dots-horizontal"></i>
-                </div>
+                </DropClick>
             </div>
         </div>
     )

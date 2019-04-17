@@ -11,6 +11,7 @@ import {
 } from '../proptool';
 
 import {
+    DropClick,
     Icon,
 } from '../../components/Common'
 
@@ -31,13 +32,13 @@ export default function LogicDetailPanel(props) {
                 alignItems: 'center',
             }}
         >
-            <div
-                className="logic-button app-onclick"
-                menu-type={wasWildcard ? dropdownType.replaceWildcard : dropdown}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                className="logic-button"
+                dropdown={wasWildcard ? dropdownType.replaceWildcard : dropdown}
+                params={{
                     ...params,
                     otherDropdown: dropdown,
-                })}
+                }}
                 style={{
                     color: '#999',
                     borderLeft: `4px solid ${hasWildcard ? '#db4757' : color}`,
@@ -45,7 +46,7 @@ export default function LogicDetailPanel(props) {
             >
                 {field}
                 {isLastPanel && <div className="logic-display">{display}</div>}
-            </div>
+            </DropClick>
             {!isLastPanel && <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>}
         </div>
     )

@@ -11,6 +11,8 @@ import { receiveEvent, receiveDeleteEvent } from '../../page/PageReducer'
 import ProjectNewItem from './ProjectNewItem';
 import ProjectItem from './ProjectItem';
 
+import { DropClick } from '../../components/Common';
+
 function ProjectDetails(props) {
     const { activeProject, projects } = props
 
@@ -63,14 +65,12 @@ function ProjectDetails(props) {
     }, [activeProject])
 
     if (!!activeProject) return (
-        <div
-            className="app-onclick"
-            highlight="true"
-            menu-type={dropdownType.pickProject}
+        <DropClick
+            dropdown={dropdownType.pickProject}
             place="right"
         >
             <ProjectItem project={projects[activeProject]}/>
-        </div>
+        </DropClick>
     )
 
     return <ProjectNewItem/>

@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { dropdownType } from '../../dropdown/types';
 
 import {
+    DropClick,
     Tag,
 } from '../../components/Common';
 
@@ -30,17 +31,16 @@ export default function UniqueTagField(props) {
     return (
         <div className="row">
             {tags.map(renderItem)}
-            <div
-                className="app-onclick"
-                menu-type={dropdownType.createUniqueTag}
-                app-onclick-props={JSON.stringify({
+            <DropClick
+                dropdown={dropdownType.createUniqueTag}
+                params={{
                     path: [fieldKey],
                     attach: data,
                     placeholder: "Team name ...",
-                })}
+                }}
             >
                 <Tag theme="darkgrey">add team</Tag>
-            </div>
+            </DropClick>
         </div>
     )
 }

@@ -2,14 +2,16 @@ import React from 'react'
 
 import { dropdownType } from '../../dropdown/types'
 
+import { DropClick } from '../../components/Common';
+
 export default function SideBarView(props) {
     const { authUser } = props
     const { firstName, email } = authUser
 
     return (
-        <div
-            className="account-details app-onclick"
-            menu-type={dropdownType.accountOptions}
+        <DropClick
+            className="account-details"
+            dropdown={dropdownType.accountOptions}
             place="right"
         >
             <div>
@@ -25,6 +27,6 @@ export default function SideBarView(props) {
                     fontSize: 18,
                 }}
             ></i>
-        </div>
+        </DropClick>
     )
 }

@@ -2,6 +2,8 @@ import React from 'react'
 
 import { dropdownType } from '../../../dropdown/types'
 
+import { DropClick } from '../../../components/Common';
+
 export default function EventRecipients(props) {
     const { workspace, selectedEvent, eventIndex, updateSource, path, subpath } = props
     const { showTo, hideFrom } = selectedEvent
@@ -19,55 +21,61 @@ export default function EventRecipients(props) {
         >
             <div className="dashboard-section-title">Recipients</div>
             <div className="row">
-                {!exclusive && <div
-                    className="cute-button app-onclick"
-                    menu-type={dropdownType.pickRecipient}
-                    app-onclick-props={JSON.stringify({
-                        attach: workspace,
-                        selectionType: 'showTo',
-                        eventIndex,
-                        updateSource,
-                        path,
-                        subpath,
-                    })}
-                >
-                    everyone
-                </div>}
-                {exclusive && <div
-                    className="cute-button app-onclick"
-                    menu-type={dropdownType.pickRecipient}
-                    app-onclick-props={JSON.stringify({
-                        attach: workspace,
-                        selectionType: 'showTo',
-                        eventIndex,
-                        updateSource,
-                        path,
-                        subpath,
-                    })}
-                >
-                    {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
-                </div>}
-                {!exclusive && <div
-                    className="row cute-button app-onclick"
-                    empty="true"
-                    menu-type={dropdownType.pickRecipient}
-                    app-onclick-props={JSON.stringify({
-                        attach: workspace,
-                        selectionType: 'hideFrom',
-                        eventIndex,
-                        updateSource,
-                        path,
-                        subpath,
-                    })}
-                    style={{
-                        marginLeft: 6,
-                    }}
-                >
-                    except
-                    {inclusive && <div style={{ marginLeft: 6, color: '#a6a6a6',  }}>
-                        {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
-                    </div>}
-                </div>}
+                {!exclusive &&
+                    <DropClick
+                        className="cute-button"
+                        dropdown={dropdownType.pickRecipient}
+                        params={{
+                            attach: workspace,
+                            selectionType: 'showTo',
+                            eventIndex,
+                            updateSource,
+                            path,
+                            subpath,
+                        }}
+                    >
+                        everyone
+                    </DropClick>
+                }
+                {exclusive &&
+                    <DropClick
+                        className="cute-button"
+                        dropdown={dropdownType.pickRecipient}
+                        params={{
+                            attach: workspace,
+                            selectionType: 'showTo',
+                            eventIndex,
+                            updateSource,
+                            path,
+                            subpath,
+                        }}
+                    >
+                        {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
+                    </DropClick>
+                }
+                {!exclusive &&
+                    <DropClick
+                        className="row cute-button"
+                        empty="true"
+                        dropdown={dropdownType.pickRecipient}
+                        params={{
+                            attach: workspace,
+                            selectionType: 'hideFrom',
+                            eventIndex,
+                            updateSource,
+                            path,
+                            subpath,
+                        }}
+                        style={{
+                            marginLeft: 6,
+                        }}
+                    >
+                        except
+                        {inclusive && <div style={{ marginLeft: 6, color: '#a6a6a6',  }}>
+                            {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
+                        </div>}
+                    </DropClick>
+                }
             </div>
         </div>
     )

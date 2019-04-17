@@ -69,17 +69,11 @@ export const fieldType = {
         icon: 'ion-md-planet',
         title: 'Vars',
     },
-    property: {
-        key: 'property',
-        index: 6,
-        icon: 'ion-md-switch',
-        title: 'Property',
-    },
-    choices: {
-        key: 'choices',
+    gameChoices: {
+        key: 'gameChoices',
         index: 9,
-        icon: 'mdi mdi-source-branch',
-        title: 'Choices',
+        icon: 'mdi mdi-map-marker-path',
+        title: 'Game Choices',
     },
     generalTag: {
         key: 'generalTag',
@@ -108,9 +102,43 @@ export const defaultFieldMap = {
     ],
     [boardType.phases.key]: [
         'description2',
+        'phaseActionMode',
         'phaseChoices',
+        'phaseAction',
         'phaseListener',
     ],
+}
+
+export const phaseActionType = {
+    all: {
+        key: 'all',
+    },
+    king: {
+        key: 'king',
+    },
+    clown: {
+        key: 'clown',
+    },
+    none: {
+        key: 'none',
+    },
+}
+
+/* @params pageInfo.gameChoices
+    FIELD           DESCRIPTION              TYPE
+    -----------------------------------------------
+    key                                      string
+    title           main label               string
+    prompt          short description        string
+    icon            className of icon        string
+    logic           DEFAULT_LOGIC format     object
+*/
+export const DEFAULT_GAME_CHOICE = {
+    key: '',
+    title: '',
+    prompt: '',
+    icon: '',
+    logic: '',
 }
 
 export const defaultFieldRepo = {
@@ -119,12 +147,6 @@ export const defaultFieldRepo = {
         fieldType: fieldType.text.key,
         title: 'Description',
         boardType: boardType.roles.key,
-    },
-    description2: {
-        key: 'description2',
-        fieldType: fieldType.text.key,
-        title: 'Description',
-        boardType: boardType.phases.key,
     },
     roleTeam: {
         key: 'roleTeam',
@@ -172,11 +194,32 @@ export const defaultFieldRepo = {
         boardType: boardType.roles.key,
         default: DEFAULT_LOGIC,
     },
+    description2: {
+        key: 'description2',
+        fieldType: fieldType.text.key,
+        title: 'Description',
+        boardType: boardType.phases.key,
+    },
+    phaseActionMode: {
+        key: 'phaseActionMode',
+        fieldType: fieldType.uniqueTag.key,
+        title: 'Phase Action Mode',
+        boardType: boardType.phases.key,
+        data: phaseActionType,
+        default: phaseActionType.all.key,
+    },
     phaseChoices: {
         key: 'phaseChoices',
-        fieldType: fieldType.choices.key,
+        fieldType: fieldType.gameChoices.key,
         title: 'Phase Choices',
         boardType: boardType.phases.key,
+    },
+    phaseAction: {
+        key: 'phaseAction',
+        fieldType: fieldType.logic.key,
+        title: 'Phase Action',
+        boardType: boardType.phases.key,
+        default: DEFAULT_LOGIC,
     },
     phaseListener: {
         key: 'phaseListener',
