@@ -17,7 +17,7 @@ export default function DeleteLogic(props) {
 
     return (
         <Modal>
-            <Body>
+            <Body size="s">
                 <Text size="l" align="c">Delete logic?</Text>
                 <Separator size={8}></Separator>
                 <Text color="grey">all logic inside this operator will be deleted as well.</Text>

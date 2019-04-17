@@ -11,7 +11,7 @@ import {
 const KEYWORDS = []
 
 export default function CreateGameChoice(props) {
-    const { path, attach, placeholder } = props
+    const { attach, placeholder } = props
 
     //workaround, animating dropdown conflicts with autoFocus on mount
     const autofocus = useRef(null)

@@ -13,6 +13,7 @@ import {
 import {
     DropClick,
     Icon,
+    LogicButton,
 } from '../../components/Common'
 
 export default function LogicDetailPanel(props) {
@@ -33,19 +34,21 @@ export default function LogicDetailPanel(props) {
             }}
         >
             <DropClick
-                className="logic-button"
                 dropdown={wasWildcard ? dropdownType.replaceWildcard : dropdown}
                 params={{
                     ...params,
                     otherDropdown: dropdown,
                 }}
-                style={{
-                    color: '#999',
-                    borderLeft: `4px solid ${hasWildcard ? '#db4757' : color}`,
-                }}
             >
-                {field}
-                {isLastPanel && <div className="logic-display">{display}</div>}
+                <LogicButton
+                    highlight={hasWildcard ? '#db4757' : color}
+                    style={{
+                        color: '#999',
+                    }}
+                >
+                    {field}
+                    {isLastPanel && <div className="logic-display">{display}</div>}
+                </LogicButton>
             </DropClick>
             {!isLastPanel && <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>}
         </div>

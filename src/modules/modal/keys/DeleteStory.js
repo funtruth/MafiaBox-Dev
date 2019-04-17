@@ -27,7 +27,7 @@ function DeleteStory(props) {
     
     return (
         <Modal>
-            <Body>
+            <Body size="s">
                 <Text size="l" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
                 </Text>

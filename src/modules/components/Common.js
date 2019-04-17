@@ -6,6 +6,7 @@ import DropClick from './DropClick'
 import Footer from './Footer'
 import Header from './Header'
 import Icon from './Icon'
+import LogicButton from './LogicButton'
 import Separator from './Separator'
 import Tag from './Tag'
 import Text from './Text'
@@ -19,6 +20,7 @@ export {
     Footer,
     Header,
     Icon,
+    LogicButton,
     Separator,
     Tag,
     Text,

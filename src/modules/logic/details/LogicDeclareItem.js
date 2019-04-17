@@ -5,7 +5,7 @@ import { variableType } from '../types';
 
 import LogicDeclareValue from './LogicDeclareValue'
 
-import { DropClick } from '../../components/Common';
+import { DropClick, LogicButton } from '../../components/Common';
 
 export default function LogicDeclareItem(props) {
     const { item, path } = props
@@ -13,33 +13,34 @@ export default function LogicDeclareItem(props) {
     
     return (
         <div className="row-nowrap" style={{ marginTop: 2 }}>
-            <div
-                className="row logic-button"
+            <LogicButton
+                highlight="#18449b" 
                 style={{
                     color: '#999',
-                    borderLeft: '4px solid #18449b',
                     marginRight: 6,
                 }}
             >
                 variable
                 <div style={{color:'#ddd', marginLeft: 6}}>{item.key}</div>
-            </div>
+            </LogicButton>
             <DropClick
-                className="logic-button"
                 dropdown={dropdownType.declareVarType}
                 params={{
                     currentValue: variableTypes,
                     path: [...path, item.key],
                 }}
-                style={{
-                    color: '#ddd',
-                    borderLeft: '4px solid #18449b',
-                    marginRight: 6,
-                }}
             >
-                <div style={{color:'#999', marginRight: 6}}>type</div>
-                {variableTypes.map(type => type && <i key={type} className={variableType[type].icon}/>)}
-                {variableTypes.length === 0 && '...'}
+                <LogicButton
+                    highlight="#18449b" 
+                    style={{
+                        color: '#ddd',
+                        marginRight: 6,
+                    }}
+                >
+                    <div style={{color:'#999', marginRight: 6}}>type</div>
+                    {variableTypes.map(type => type && <i key={type} className={variableType[type].icon}/>)}
+                    {variableTypes.length === 0 && '...'}
+                </LogicButton>
             </DropClick>
             <LogicDeclareValue {...props} item={item}/>
         </div>

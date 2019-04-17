@@ -25,7 +25,7 @@ function DeletePage(props) {
     
     return (
         <Modal>
-            <Body>
+            <Body size="s">
                 <Text size="xl" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
                 </Text>

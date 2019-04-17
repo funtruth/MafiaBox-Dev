@@ -15,7 +15,7 @@ export default function DialogSave(props) {
 
     return (
         <Modal>
-            <Body>
+            <Body size="s">
                 <Text size="l" align="c">Save changes?</Text>
                 <Separator size={8}></Separator>
                 <Text color="grey">your changes will be lost if you do not save.</Text>

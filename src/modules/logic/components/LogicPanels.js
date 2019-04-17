@@ -6,6 +6,7 @@ import { dropdownType } from '../../dropdown/types'
 import { concatField } from '../proptool';
 
 import LogicPanel from './LogicPanel'
+import { LogicButton } from '../../components/Common';
 
 export default function LogicPanels(props) {
     const { value, path } = props
@@ -47,14 +48,7 @@ export default function LogicPanels(props) {
                 case operatorType.forin.key:
                     return (
                         <div className="row">
-                            <div
-                                className="logic-button"
-                                style={{
-                                    color: '#ddd',
-                                }}
-                            >
-                                in
-                            </div>
+                            <LogicButton>in</LogicButton>
                             <LogicPanel
                                 {...props}
                                 placeholder="UID object ..."

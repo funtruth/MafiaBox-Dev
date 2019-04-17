@@ -1,0 +1,28 @@
+.--logic-button {
+    cursor: pointer;
+    height: 1.4em;
+    display: flex;
+    align-items: center;
+    max-width: 200px;
+}
+.--logic-button:hover {
+    filter: brightness(120%);
+}
+.--logic-button-lightgrey {
+    background-color: #424650;
+}
+.--logic-button-grey {
+    background-color: #424650;
+}
+.--logic-button-darkgrey {
+    background-color: #424650;
+}
+.--logic-button-red {
+    background-color: #B34B50;
+}
+.--logic-button-clear {
+    background-color: transparent;
+}
+.--logic-button-black {
+    background-color: #282b30;
+}

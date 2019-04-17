@@ -8,7 +8,7 @@ import { dropdownType } from '../../dropdown/types'
 
 import { showModal } from '../../modal/ModalReducer'
 
-import { DropClick } from '../../components/Common';
+import { DropClick, LogicButton } from '../../components/Common';
 
 
 export default connect(
@@ -50,23 +50,21 @@ export default connect(
     
     if (isNumber) {
         return (
-            <div
-                className="logic-button row"
-                highlight="true"
+            <LogicButton
+                highlight="#18449b"
                 onClick={handleNumber}
                 style={{
                     color: '#ddd',
-                    borderLeft: '4px solid #18449b',
+                    borderLeft: '4px solid ',
                 }}
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 {orderOfOp(item.assign) || '...'}
-            </div>
+            </LogicButton>
         )
     } else if (isUid) {
         return (
             <DropClick
-                className="logic-button row"
                 dropdown={dropdownType.pickUidAssign}
                 params={{
                     attachVar: vars,
@@ -74,48 +72,51 @@ export default connect(
                     path,
                     subpath: [item.value, 'assign'],
                 }}
-                style={{
-                    color: '#ddd',
-                    borderLeft: '4px solid #18449b',
-                }}
             >
-                <div style={{color:'#999', marginRight: 6}}>assign</div>
-                {item.assign.value || '...'}
+                <LogicButton
+                    highlight="#18449b"
+                    style={{
+                        color: '#ddd',
+                    }}
+                >
+                    <div style={{color:'#999', marginRight: 6}}>assign</div>
+                    {item.assign.value || '...'}
+                </LogicButton>
             </DropClick>
         )
     } else if (isBoolean) {
         return (
             <DropClick
-                className="logic-button row"
                 dropdown={dropdownType.pickBooleanAssign}
                 params={{
                     item,
                     path,
                     subpath: [item.value, 'assign'],
                 }}
-                style={{
-                    color: '#ddd',
-                    borderLeft: '4px solid #18449b',
-                }}
             >
-                <div style={{color:'#999', marginRight: 6}}>assign</div>
-                {item.assign.value || '...'}
+                <LogicButton
+                    highlight="#18449b"
+                    style={{
+                        color: '#ddd',
+                    }}
+                >
+                    <div style={{color:'#999', marginRight: 6}}>assign</div>
+                    {item.assign.value || '...'}
+                </LogicButton>
             </DropClick>
         )
     } else if (isString) {
         return (
-            <div
-                className="logic-button row"
-                highlight="true"
+            <LogicButton
+                highlight="#18449b"
                 onClick={handleString}
                 style={{
                     color: '#ddd',
-                    borderLeft: '4px solid #18449b',
                 }}
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 ...
-            </div>
+            </LogicButton>
         )
     } else {
         console.warn('illegal declare type. LogicDeclareValue')

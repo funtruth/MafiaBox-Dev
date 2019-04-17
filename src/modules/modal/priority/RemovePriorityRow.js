@@ -17,7 +17,7 @@ export default function DialogSave(props) {
 
     return (
         <Modal>
-            <Body>
+            <Body size="s">
                 <Text size="l" align="c">Delete this row?</Text>
                 <Separator size={8}></Separator>
                 <Text color="grey">roles in this row will be moved to the bottom by default.</Text>

@@ -6,6 +6,7 @@ import { dropdownType } from '../../dropdown/types';
 import {
     Body,
     DropClick,
+    LogicButton,
     Tag,
 } from '../../components/Common'
 
@@ -22,18 +23,15 @@ export default function GameChoiceField(props) {
                     path: [...path, item.key],
                 }}
             >
-                <div
-                    className="logic-button"
-                >
-                </div>
-                <div className="logic-button">{item.title}</div> 
+                <LogicButton></LogicButton>
+                <LogicButton>{item.title}</LogicButton> 
             </DropClick>
         )
     }
 
     const items = _.toArray(value)
     return (
-        <Body size="s">
+        <Body>
             {items.map(renderItem)}
             <DropClick
                 dropdown={dropdownType.createGameChoice}

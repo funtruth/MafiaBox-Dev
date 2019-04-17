@@ -7,6 +7,7 @@ import {
     DropClick,
     Icon,
     Text,
+    LogicButton,
  } from '../../components/Common';
 
 export default function LogicType(props) {
@@ -29,7 +30,6 @@ export default function LogicType(props) {
     //TODO add/color the keyword and icon to make UX more readable
     return (
         <DropClick
-            className="logic-label"
             dropdown={dropdownType.pickLogic}
             params={{
                 attach: value,
@@ -37,13 +37,11 @@ export default function LogicType(props) {
                 path,
                 subpath,
             }}
-            style={{
-                color,
-                borderLeft: `4px solid ${color}`,
-            }}
         >
-            <Icon className={`${icon || 'ion-md-create'}`}></Icon>
-            {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
+            <LogicButton highlight={color} style={{color}}>
+                <Icon className={`${icon || 'ion-md-create'}`}></Icon>
+                {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
+            </LogicButton>
         </DropClick>
     )
 }

@@ -15,7 +15,7 @@ const getPadding = (size) => {
         case 'l':           return '12px 16px'
         case 'xl':          return '12px 16px'
         case 'xxl':         return '12px 16px'
-        default:            return '12px 16px'
+        default:            return '0px 0px'
     }
 }
 

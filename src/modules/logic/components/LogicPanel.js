@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DropClick } from '../../components/Common';
+import { DropClick, LogicButton } from '../../components/Common';
 
 export default function LogicPanel(props) {
     const {
@@ -22,7 +22,6 @@ export default function LogicPanel(props) {
 
     return (
         <DropClick
-            className="logic-button"
             dropdown={dropdown}
             params={{
                 pageKey,
@@ -34,11 +33,10 @@ export default function LogicPanel(props) {
                 path,
                 ignoreSubpath: !includeSubpath,
             }}
-            style={{
-                color: display ? '#fff' : '#868686',
-            }}
         >
-            <div className="text-ellipsis">{display || placeholder}</div> 
+            <LogicButton color={display ? 'white' : 'grey'}>
+                {display || placeholder}
+            </LogicButton>
         </DropClick>
     )
 }
