@@ -1,0 +1,48 @@
+import React from 'react'
+import _ from 'lodash'
+import { connect } from 'react-redux'
+
+import { gameChoiceType } from '../../fields/defaults';
+import {
+    updateField,
+} from '../../page/PageReducer'
+
+import {
+    DropItem,
+    DropTitle,
+} from '../components/Common'
+
+export default connect(
+    null,
+    {
+        updateField,
+    }
+)(function PickGameChoiceType(props) {
+    const handleSelect = (item) => {
+        props.updatePage({
+            gameChoiceType: item.key,
+        })
+        props.showDropdown();
+    }
+
+    const renderItem = (item) => {
+        return (
+            <DropItem
+                key={item.key}
+                onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightIcon="mdi mdi-check"
+            >
+                {item.title}
+            </DropItem>
+        )
+    }
+
+    const items = _.toArray(gameChoiceType)
+    return (
+        <>
+            <DropTitle>game choice types</DropTitle>
+            {items.map(renderItem)}
+        </>
+    )
+})

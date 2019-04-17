@@ -13,6 +13,8 @@ export const dropdownType = {
     editTag: 'dropdownType/edit-tag',
     createUniqueTag: 'dropdownType/create-unique-tag',
     createGeneralTag: 'dropdownType/create-general-tag',
+    createGameChoice: 'dropdownType/create-game-choice',
+    pickGameChoiceType: 'dropdownType/pick-game-choice-type',
     pickFieldType: 'dropdownType/pick-field-type',
     templateTitleOptions: 'dropdownType/template-title-options',
 

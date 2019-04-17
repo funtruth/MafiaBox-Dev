@@ -40,6 +40,7 @@
     align-items: center;
     border-left: 1px solid #444;
     max-width: 200px;
+    font: 500 13px Segoe UI;
 }
 
 .logic-button:hover {

@@ -112,15 +112,37 @@ export const defaultFieldMap = {
 export const phaseActionType = {
     all: {
         key: 'all',
+        title: 'All',
     },
     king: {
         key: 'king',
+        title: 'King',
     },
-    clown: {
-        key: 'clown',
+    jester: {
+        key: 'jester',
+        title: 'Jester',
     },
     none: {
         key: 'none',
+        title: 'None',
+    },
+}
+
+export const gameChoiceType = {
+    target: {
+        key: 'target',
+        title: 'Single Target',
+        icon: 'mdi mdi-account',
+    },
+    multitarget: {
+        key: 'multitarget',
+        title: 'Multiple Targets',
+        icon: 'mdi mdi-account-multiple',
+    },
+    value: {
+        key: 'value',
+        title: 'Value',
+        icon: 'mdi mdi-tag',
     },
 }
 
@@ -128,19 +150,32 @@ export const phaseActionType = {
     FIELD           DESCRIPTION              TYPE
     -----------------------------------------------
     key                                      string
+    index                                    number
     title           main label               string
     prompt          short description        string
-    icon            className of icon        string
-    logic           DEFAULT_LOGIC format     object
+    gameChoiceType  see gameChoiceType       string
 */
 export const DEFAULT_GAME_CHOICE = {
     key: '',
+    index: '',
     title: '',
     prompt: '',
-    icon: '',
-    logic: '',
+    gameChoiceType: '',
 }
 
+/* @params fieldInfo
+    FIELD           DESCRIPTION 
+    -----------------------------------------------
+    key           
+    title           
+    fieldType       see fieldType  
+    title           
+    boardType
+    readOnly        field data is not changeable
+    default         default value of the field
+    vars            any special vars available
+    data            data regarding the field
+*/
 export const defaultFieldRepo = {
     description1: {
         key: 'description1',
@@ -207,6 +242,7 @@ export const defaultFieldRepo = {
         boardType: boardType.phases.key,
         data: phaseActionType,
         default: phaseActionType.all.key,
+        readOnly: true,
     },
     phaseChoices: {
         key: 'phaseChoices',

@@ -1,33 +1,52 @@
 import React from 'react'
+import _ from 'lodash'
+
+import { dropdownType } from '../../dropdown/types';
 
 import {
     Body,
+    DropClick,
     Tag,
 } from '../../components/Common'
 
 export default function GameChoiceField(props) {
-    const { value } = props
-
-    const renderItem = (choiceKey) => {
+    const { value, path } = props
+    
+    const renderItem = (item) => {
         return (
-            <div>
-
-            </div>
+            <DropClick
+                key={item.key}
+                className="row"
+                dropdown={dropdownType.pickGameChoiceType}
+                params={{
+                    path: [...path, item.key],
+                }}
+            >
+                <div
+                    className="logic-button"
+                >
+                </div>
+                <div className="logic-button">{item.title}</div> 
+            </DropClick>
         )
     }
 
-    const handleClick = () => {
-
-    }
-    
+    const items = _.toArray(value)
     return (
-        <div className="logic-board">
-            {Object.keys(value||{}).map(renderItem)}
-            <Body size="s">
-                <Tag theme="darkgrey" onClick={handleClick}>
+        <Body size="s">
+            {items.map(renderItem)}
+            <DropClick
+                dropdown={dropdownType.createGameChoice}
+                params={{
+                    path,
+                    attach: value,
+                    placeholder: "Create choice ...",
+                }}
+            >
+                <Tag theme="darkgrey">
                     add choice
                 </Tag>
-            </Body>
-        </div>
+            </DropClick>
+        </Body>
     )
 }

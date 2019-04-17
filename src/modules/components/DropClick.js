@@ -11,6 +11,7 @@ export default connect(
 )(function DropClick(props) {
     const {
         dropdown,
+        rightDropdown,
         params,
         showDropdown,
         place,
@@ -28,8 +29,17 @@ export default connect(
         showDropdown(dropdown, e, params, 0, place)
     }
 
+    const handleRightClick = (e) => {
+        showDropdown(rightDropdown, e, params, 0, place)
+    }
+
     return (
-        <div className={classes} onClick={handleClick} style={style}>
+        <div
+            className={classes}
+            onClick={handleClick}
+            onContextMenu={handleRightClick}
+            style={style}
+        >
             {children}
         </div>
     )

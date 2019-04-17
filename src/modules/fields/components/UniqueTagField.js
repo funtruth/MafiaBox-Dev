@@ -9,8 +9,9 @@ import {
 } from '../../components/Common';
 
 export default function UniqueTagField(props) {
-    const { path, fieldKey, value, data } = props
-    
+    const { path, fieldKey, fieldInfo, value, data } = props
+    const { readOnly } = fieldInfo
+
     const handleClick = (item) => props.updatePage(path, item.key)
 
     const renderItem = (item) => {
@@ -31,16 +32,18 @@ export default function UniqueTagField(props) {
     return (
         <div className="row">
             {tags.map(renderItem)}
-            <DropClick
-                dropdown={dropdownType.createUniqueTag}
-                params={{
-                    path: [fieldKey],
-                    attach: data,
-                    placeholder: "Team name ...",
-                }}
-            >
-                <Tag theme="darkgrey">add team</Tag>
-            </DropClick>
+            {!readOnly && 
+                <DropClick
+                    dropdown={dropdownType.createUniqueTag}
+                    params={{
+                        path: [fieldKey],
+                        attach: data,
+                        placeholder: "Team name ...",
+                    }}
+                >
+                    <Tag theme="darkgrey">add team</Tag>
+                </DropClick>
+            }
         </div>
     )
 }
