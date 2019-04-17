@@ -18,6 +18,7 @@ export default function LogicDetailPanel(props) {
     const { params, field, dropdown, color, isLastPanel, currentValue } = props
     const { display } = currentValue
     
+    const wasWildcard = isLastPanel && currentValue.wildcardValue
     const hasWildcard = isLastPanel &&
         currentValue.updateType === updateType.variable &&
         separateField(currentValue.value).includes(WILD_CHAR)
@@ -32,7 +33,7 @@ export default function LogicDetailPanel(props) {
         >
             <div
                 className="logic-button app-onclick"
-                menu-type={hasWildcard ? dropdownType.replaceWildcard : dropdown}
+                menu-type={wasWildcard ? dropdownType.replaceWildcard : dropdown}
                 app-onclick-props={JSON.stringify({
                     ...params,
                     otherDropdown: dropdown,

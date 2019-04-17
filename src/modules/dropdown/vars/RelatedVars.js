@@ -25,9 +25,14 @@ import {
     ouput => matching vars
 */
 export default function RelatedVars(props) {
-    const { variableType, attachVars } = props
+    const { variableType, attachVar, onClick } = props
 
     const handleSelect = (item, isWild) => {
+        if (onClick) {
+            onClick(item, isWild)
+            return;
+        }
+
         props.updatePage({
             ...VAR_DEFAULTS,
             value: item.key,
@@ -62,17 +67,17 @@ export default function RelatedVars(props) {
     }
 
     const typeFilter = VARTYPE_FILTER(variableType)
-
-    const relatedVars = _.filter(attachVars, typeFilter)
+    
+    const relatedVars = _.filter(attachVar, typeFilter)
     const groupedRSSVars = _(rssMap).filter(typeFilter).groupBy(i => i.fields.includes(WILD_CHAR)).value()
     
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
             {relatedVars.map(renderItem)}
-            {groupedRSSVars.false.map(renderItem)}
+            {groupedRSSVars.false && groupedRSSVars.false.map(renderItem)}
             <DropTitle>incomplete vars</DropTitle>
-            {groupedRSSVars.true.map(renderWild)}
+            {groupedRSSVars.true && groupedRSSVars.true.map(renderWild)}
         </>
     )
 }

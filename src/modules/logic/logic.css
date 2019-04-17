@@ -39,6 +39,7 @@
     display: flex;
     align-items: center;
     border-left: 1px solid #444;
+    max-width: 200px;
 }
 
 .logic-button:hover {
@@ -117,10 +118,10 @@
 .logic-display {
     padding: 2px 4px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     color: #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .icon-pop {

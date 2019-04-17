@@ -1,38 +1,51 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import {
-    mathType,
-    DEFAULT_ASSIGN,
-} from '../../modal/vars/components/types';
+import { variableType } from '../../logic/types';
 
-import { VARTYPE_IS_UID } from '../../common/arrows'
 import {
     separateField,
+    combineFields,
+    parseJS,
     WILD_CHAR,
 } from '../../logic/proptool';
 
 import {
-    DropItem,
     DropParent,
     DropTitle,
 } from '../components/Common';
-import Tag from '../../components/Tag';
+import {
+    Tag,
+} from '../../components/Common';
+import RelatedVars from './RelatedVars'
+
+function Underline() {
+    return (
+        <div
+            style={{
+                position: 'absolute',
+                left: 0, right: 0,
+                bottom: 0,
+                height: 3,
+                backgroundColor: '#fed766',
+            }}
+        ></div>
+    )
+}
 
 export default function ReplaceWildcard(props) {
+    const { currentValue, otherDropdown } = props
+    const { value, wildcardValue } = currentValue
+
     const [target, setTarget] = useState('')
-    const [newFields, setNewFields] = useState(separateField(wildcardValue))
+    const [fields, setFields] = useState(separateField(value))
+    const [wildfields] = useState(separateField(wildcardValue))
 
-    const { currentValue, attachVar, otherDropdown } = props
-    const { wildcardValue } = currentValue
-
-    const fields = separateField(wildcardValue)
-    const uids = _.filter(attachVar, VARTYPE_IS_UID)
-    
     //TODO do some recursive thing here to deal with wildcards inside wildcards ...
-    const renderField = (item, index) => {
-        if (item === WILD_CHAR) {
-            const selected = target === index
+    const renderField = (field, index) => {
+        const selected = target === index
+
+        if (field === WILD_CHAR) {
             return (
                 <Tag
                     key={index}
@@ -48,52 +61,55 @@ export default function ReplaceWildcard(props) {
                             fontSize: 15,
                         }}
                     ></i>
-                    {selected && 
-                        <div
-                            style={{
-                                position: 'absolute',
-                                left: 0, right: 0,
-                                bottom: 0,
-                                height: 4,
-                                borderBottomLeftRadius: 2,
-                                borderBottomRightRadius: 2,
-                                backgroundColor: '#fed766',
-                            }}
-                        ></div>
-                    }
+                    {selected && <Underline/>}
+                </Tag>
+            )
+        }
+
+        if(wildfields[index] === WILD_CHAR) {
+            return (
+                <Tag
+                    key={index}
+                    theme="violet"
+                    onClick={() => setTarget(index)}
+                    style={{
+                        position: 'relative',
+                    }}
+                >
+                    {field}
+                    {selected && <Underline/>}
                 </Tag>
             )
         }
 
         return (
             <Tag key={index} theme="grey">
-                {item}
+                {field}
             </Tag>
         )
     }
 
-    const renderItem = (item) => {
-        const chosen = false
+    const handleSelect = (item) => {
+        //TODO add an error if no target selected
+        if (target === '') {
+            return;
+        }
 
-        return (
-            <DropItem
-                key={item.key}
-                chosen={chosen}
-                onClick={() => handleSelect(item)}
-                rightIcon="mdi mdi-check"
-            >
-                {item.key}
-            </DropItem>
-        )
-    }
+        //deep clone
+        const fieldsClone = _.cloneDeep(fields)
 
-    let handleSelect = (item) => {
+        //make change
+        fieldsClone[target] = item.key
+
+        //re-assemble the string & update
+        const combined = combineFields(fieldsClone)
         props.updatePage({
-            ...DEFAULT_ASSIGN,
-            mathType: mathType.value,
-            value: item.key,
+            value: combined,
+            display: parseJS(combined),
         })
-        props.showDropdown()
+
+        //refresh the front-end of dropdown
+        setFields(fieldsClone)
     }
 
     return (
@@ -102,8 +118,11 @@ export default function ReplaceWildcard(props) {
             <div className="row" style={{justifyContent: 'center', padding: '0px 15px'}}>
                 {fields.map(renderField)}
             </div>
-            <DropTitle>uids</DropTitle>
-            {uids.map(renderItem)}
+            <RelatedVars
+                {...props}
+                variableType={variableType.uid.key}
+                onClick={handleSelect}
+            />
             <DropTitle>other</DropTitle>
             <DropParent
                 {...props}
