@@ -11,7 +11,7 @@ const getJustify = (justify) => {
 const getAlign = (align) => {
     switch(align) {
         case 'c':           return 'center'
-        case 'r':           return 'flex-end'
+        case 'e':           return 'flex-end'
         default:            return 'flex-start'
     }
 }

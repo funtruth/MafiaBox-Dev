@@ -50,6 +50,7 @@ export default function LogicButton(props) {
         'text-ellipsis',
         'row',
         `--logic-button-${theme}`,
+        onClick ? '--logic-button-onclick' : '',
         className,
     ].join(" ")
 

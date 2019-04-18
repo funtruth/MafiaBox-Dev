@@ -1,12 +1,14 @@
 .--logic-button {
-    cursor: pointer;
     height: 1.4em;
     display: flex;
     align-items: center;
     max-width: 200px;
     flex-wrap: nowrap;
 }
-.--logic-button:hover {
+.--logic-button-onclick {
+    cursor: pointer;
+}
+.--logic-button-onclick:hover {
     filter: brightness(120%);
 }
 .--logic-button-lightgrey {

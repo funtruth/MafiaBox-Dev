@@ -22,7 +22,7 @@ export default function GameChoiceField(props) {
         const gameChoiceInfo = gameChoiceType[gameChoice] || {}
 
         return (
-            <div key={item.key} className="row" style={{marginBottom: 2}}>
+            <Row key={item.key} y="s" style={{marginBottom: 2}}>
                 <DropClick
                     dropdown={dropdownType.pickGameChoiceType}
                     params={{
@@ -64,7 +64,7 @@ export default function GameChoiceField(props) {
                     </div>
                     {renderDetail(item)}
                 </Body>
-            </div>
+            </Row>
         )
     }
 
@@ -72,28 +72,15 @@ export default function GameChoiceField(props) {
         switch(gameChoice) {
             case gameChoiceType.value.key:
                 return (
-                    <Row y="c">
-                        <DropClick
-                            dropdown={dropdownType.pickGlobalVar}
-                            params={{
-
-                            }}
-                            style={{
-                                marginTop: 2,
-                            }}
-                        >
-                            <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
-                                choice
-                            </LogicButton>
-                        </DropClick>
+                    <Row y="c" style={{marginTop: 2}}>
+                        <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
+                            choice
+                        </LogicButton>
                         <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
                         <DropClick
                             dropdown={dropdownType.pickGlobalVar}
                             params={{
-
-                            }}
-                            style={{
-                                marginTop: 2,
+                                updateBy: 'field',
                             }}
                         >
                             <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>

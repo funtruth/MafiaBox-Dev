@@ -5,6 +5,7 @@ import { genUID } from '../../common/helpers';
 import { updateGlobal } from '../../page/PageReducer'
 
 import {
+    DropTitle,
     DropSubmit,
 } from '../components/Common'
 
@@ -18,7 +19,7 @@ export default connect(
         updateGlobal,
     }
 )(function CreateGlobalVar(props) {
-    const { path, globalVars, placeholder } = props
+    const { globalVars } = props
 
     const autofocus = useRef(null)
     useEffect(() => {
@@ -44,30 +45,33 @@ export default connect(
         }
 
         const newKey = genUID('global', globalVars)
-        props.updateGlobal([...path, 'data', newKey], {
+        props.updateGlobal([newKey], {
             key: newKey,
             title: value,
         })
-        props.showDropdown()
+        props.showDropdown();
     }
 
     return (
-        <div className="row">
-            <input
-                ref={autofocus}
-                className="tag-input"
-                value={value}
-                onChange={handleChange}
-                onKeyDown={onKeyDown}
-                placeholder={placeholder}
-                type='text'
-            />
-            <DropSubmit
-                onClick={onSubmit}
-                icon="mdi mdi-checkbox-marked-outline"
-            >
-                create
-            </DropSubmit>
-        </div>
+        <>
+            <DropTitle>create value</DropTitle>
+            <div className="row">
+                <input
+                    ref={autofocus}
+                    className="tag-input"
+                    value={value}
+                    onChange={handleChange}
+                    onKeyDown={onKeyDown}
+                    placeholder="Name your value ..."
+                    type='text'
+                />
+                <DropSubmit
+                    onClick={onSubmit}
+                    icon="mdi mdi-checkbox-marked-outline"
+                >
+                    create
+                </DropSubmit>
+            </div>
+        </>
     )
 })
