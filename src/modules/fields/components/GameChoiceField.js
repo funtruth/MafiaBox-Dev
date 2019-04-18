@@ -9,8 +9,8 @@ import {
     DropClick,
     Icon,
     LogicButton,
-    Tag,
     Row,
+    Tag,
 } from '../../components/Common'
 
 export default function GameChoiceField(props) {
@@ -68,12 +68,14 @@ export default function GameChoiceField(props) {
         )
     }
 
-    const renderDetail = ({gameChoice, value}) => {
+    const renderDetail = (item) => {
+        const { key, gameChoice, value, display } = item
+
         switch(gameChoice) {
             case gameChoiceType.value.key:
                 return (
                     <Row y="c" style={{marginTop: 2}}>
-                        <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
+                        <LogicButton highlight="blue" color="grey">
                             choice
                         </LogicButton>
                         <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
@@ -81,11 +83,15 @@ export default function GameChoiceField(props) {
                             dropdown={dropdownType.pickGlobalVar}
                             params={{
                                 updateBy: 'field',
+                                path: [...path, key],
+                                currentValue: value,
                             }}
                         >
-                            <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
+                            <LogicButton highlight="blue" color="grey">
                                 value
-                                <div className="logic-display">{value || '...'}</div>
+                                <div className="logic-display" style={{color: value && "#ddd"}}>
+                                    {display || '...'}
+                                </div>
                             </LogicButton>
                         </DropClick>
                     </Row>

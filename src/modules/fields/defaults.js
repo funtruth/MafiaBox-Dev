@@ -154,6 +154,8 @@ export const gameChoiceType = {
     title           main label               string
     prompt          short description        string
     gameChoiceType  see gameChoiceType       string
+    value           item key                 string                                 
+    display         item title               string
 */
 export const DEFAULT_GAME_CHOICE = {
     key: '',
@@ -162,6 +164,7 @@ export const DEFAULT_GAME_CHOICE = {
     prompt: '',
     gameChoice: '',
     value: '',
+    display: '',
 }
 
 /* @params fieldInfo

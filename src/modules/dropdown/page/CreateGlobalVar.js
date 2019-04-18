@@ -49,7 +49,7 @@ export default connect(
             key: newKey,
             title: value,
         })
-        props.showDropdown();
+        props.popDropdown();
     }
 
     return (

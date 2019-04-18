@@ -91,6 +91,7 @@ function DropdownView(props) {
         //some APIs
         renderProps.showDropdown = (key, e, params) => props.showDropdown(key, e, params, index, 'right')
         renderProps.popDropdownTo = (forcedIndex) => props.popDropdownTo(forcedIndex || index)
+        renderProps.popDropdown = () => props.popDropdownTo(index - 1)
         renderProps.showModal = props.showModal
 
         switch(renderProps.updateSource) {

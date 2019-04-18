@@ -15,7 +15,6 @@ import {
 import {
     parseJS,
 } from '../../logic/proptool';
-import { updateField } from '../../page/PageReducer'
 
 import {
     DropEmpty,
@@ -29,11 +28,8 @@ export default connect(
     state => ({
         globalVars: state.page.globalVars,
     }),
-    {
-        updateField,
-    }
 )(function PickGlobalVar(props) {
-    const { globalVars, updateBy } = props
+    const { globalVars, updateBy, currentValue } = props
 
     const [text, setText] = useState("")
     const [fuse] = useState(new Fuse(_.filter(globalVars), fuseType.globalVar))
@@ -44,19 +40,19 @@ export default connect(
         } else {
             setResults(fuse.search(text))
         }
-    }, [text])
+    }, [text, globalVars])
     const handleType = (e) => setText(e.target.value)
     
-    const handleSelect = (item, isWild) => {
+    const handleSelect = (item) => {
         if (updateBy === 'field') {
-            props.updateField({
-
+            props.updatePage({
+                value: item.key,
+                display: item.title,
             })
         } else {
             props.updatePage({
                 ...VAR_DEFAULTS,
                 value: item.key,
-                wildcardValue: isWild ? item.key : '',
                 display: parseJS(item.key),
                 updateType: updateType.variable,
                 variableTypes: item.variableTypes,
@@ -69,7 +65,8 @@ export default connect(
         return (
             <DropItem
                 key={item.key}
-                onClick={() => handleSelect(item, false)}
+                chosen={currentValue === item.key}
+                onClick={() => handleSelect(item)}
                 text={item.title}
             />
         )
