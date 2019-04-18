@@ -49,9 +49,8 @@ export default function RelatedVars(props) {
             <DropItem
                 key={item.key}
                 onClick={() => handleSelect(item, false)}
-            >
-                {item.key}
-            </DropItem>
+                text={item.key}
+            />
         )
     }
 
@@ -60,9 +59,8 @@ export default function RelatedVars(props) {
             <DropItem
                 key={item.key}
                 onClick={() => handleSelect(item, true)}
-            >
-                {item.key}
-            </DropItem>
+                text={item.key}
+            />
         )
     }
 

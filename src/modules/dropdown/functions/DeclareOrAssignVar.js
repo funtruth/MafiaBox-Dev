@@ -116,11 +116,10 @@ export default function DeclareOrAssignVar(props) {
                     <DropItem
                         key={item.key}
                         onClick={() => handleSelect(item)}
-                    >
-                        {item.key}
-                    </DropItem>
+                        text={item.key}
+                    />
                 ))}
-                <DropEmpty>no assignable vars ...</DropEmpty>
+                <DropEmpty list={assignable.concat(subfields)} text="no assignable vars ..."/>
             </DropScroll>
         </>
     )

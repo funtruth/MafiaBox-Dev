@@ -104,9 +104,8 @@ export default function PickNumUpdate(props) {
             <DropItem
                 onClick={handleAdvanced}
                 leftIcon="mdi mdi-calculator"
-            >
-                equation ...
-            </DropItem>
+                text="equation ..."
+            />
             <RelatedVars
                 {...props}
                 variableType={variableType.number.key}

@@ -57,9 +57,8 @@ export default function PickLogic(props) {
                 style={{
                     backgroundColor: chosen && item.color,
                 }}
-            >
-                {item.title}
-            </DropItem>
+                text={item.title}
+            />
         )
     }
 

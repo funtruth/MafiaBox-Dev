@@ -40,9 +40,8 @@ export default connect(
             <DropItem
                 key={item.key}
                 onClick={() => handleSelect(item)}
-            >
-                {item.title}
-            </DropItem>
+                text={item.title}
+            />
         )
     }
     

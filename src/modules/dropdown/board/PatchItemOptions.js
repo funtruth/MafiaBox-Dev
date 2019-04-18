@@ -23,7 +23,7 @@ export default function PatchItemOptions(props) {
                 <i className="drop-down-menu-icon ion-ios-git-merge"></i>
                 Merge with ...
             </div>
-            <DropItem onClick={handleDelete} leftIcon="mdi mdi-trash-can">Delete</DropItem>
+            <DropItem onClick={handleDelete} leftIcon="mdi mdi-trash-can" text="Delete"/>
         </>
     )
 }

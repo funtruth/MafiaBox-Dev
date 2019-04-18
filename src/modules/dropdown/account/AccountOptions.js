@@ -12,7 +12,7 @@ export default function AccountOptions(props) {
     return (
         <>
             <DropTitle>options</DropTitle>
-            <DropItem onClick={handleLogout} leftIcon="mdi mdi-logout">Log out</DropItem>
+            <DropItem onClick={handleLogout} leftIcon="mdi mdi-logout" text="Log out"/>
         </>
     )
 }

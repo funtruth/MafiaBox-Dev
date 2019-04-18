@@ -18,9 +18,11 @@ import {
 import { updateField } from '../../page/PageReducer'
 
 import {
+    DropEmpty,
     DropItem,
     DropTitle,
     DropParent,
+    DropScroll,
 } from '../components/Common';
 
 export default connect(
@@ -37,7 +39,11 @@ export default connect(
     const [fuse] = useState(new Fuse(_.filter(globalVars), fuseType.globalVar))
     const [results, setResults] = useState([])
     useEffect(() => {
-        setResults(fuse.search(text))
+        if (!text) {
+            setResults(_.filter(globalVars))
+        } else {
+            setResults(fuse.search(text))
+        }
     }, [text])
     const handleType = (e) => setText(e.target.value)
     
@@ -64,13 +70,11 @@ export default connect(
             <DropItem
                 key={item.key}
                 onClick={() => handleSelect(item, false)}
-            >
-                {item.title}
-            </DropItem>
+                text={item.title}
+            />
         )
     }
     
-    const items = _.filter(globalVars, i => i)
     return (
         <>
             <DropTitle>search for</DropTitle>
@@ -82,10 +86,11 @@ export default connect(
                 type='text'
                 autoFocus
             />
-            <DropTitle>results</DropTitle>
-            {results.map(renderItem)}
-            <DropTitle>global vars</DropTitle>
-            {items.map(renderItem)}
+            <DropTitle>values</DropTitle>
+            <DropScroll>
+                {results.map(renderItem)}
+                <DropEmpty list={results} text="no results found"/>
+            </DropScroll>
             <DropTitle>options</DropTitle>
             <DropParent
                 {...props}

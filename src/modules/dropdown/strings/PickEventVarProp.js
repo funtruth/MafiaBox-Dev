@@ -71,16 +71,16 @@ export default class PickEventVarProp extends React.Component{
                         <>
                             <DropTitle>uids</DropTitle>
                             {uids.map(item => this._renderItem(`${item.key}`))}
-                            <DropEmpty>no results found</DropEmpty>
+                            <DropEmpty list={uids} text="no results found"/>
                         </>
                         :<>
                             <DropTitle>subfields</DropTitle>
                             {subfields.map(item => this._renderItem(item.subfield))}
-                            <DropEmpty>no results found</DropEmpty>
+                            <DropEmpty list={subfields} text="no results found"/>
                         </>
                     :<>
                         <DropTitle>results</DropTitle>
-                        <DropEmpty>no results found</DropEmpty>
+                        <DropEmpty list={[]} text="no results found"/>
                     </>
                 }
             </div>

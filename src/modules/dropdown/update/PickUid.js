@@ -75,7 +75,7 @@ export default function PickUid(props) {
         <>
             <DropTitle>uids</DropTitle>
             {uids.map(renderItem)}
-            <DropEmpty>no UIDS found</DropEmpty>
+            <DropEmpty list={uids} text="no UIDS found"/>
         </>
     )
 }

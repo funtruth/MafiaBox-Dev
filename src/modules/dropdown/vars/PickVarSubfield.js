@@ -78,9 +78,8 @@ export default function PickVarSubfield(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item, key)}
                 rightIcon="mdi mdi-check"
-            >
-                {key}
-            </DropItem>
+                text={key}
+            />
         )
     }
     
@@ -91,7 +90,7 @@ export default function PickVarSubfield(props) {
         return (
             <DropScroll>
                 <DropTitle>results</DropTitle>
-                <DropEmpty>no results found</DropEmpty>
+                <DropEmpty text="no results found"/>
             </DropScroll>
         )
     }
@@ -104,7 +103,7 @@ export default function PickVarSubfield(props) {
             <DropScroll>
                 <DropTitle>uids</DropTitle>
                 {uids.map(item => renderItem(item, item.key))}
-                <DropEmpty>no results found</DropEmpty>
+                <DropEmpty list={uids} text="no results found"/>
             </DropScroll>
         )
     }
@@ -113,7 +112,7 @@ export default function PickVarSubfield(props) {
         <DropScroll>
             <DropTitle>subfields</DropTitle>
             {subfields.map(item => renderItem(item, item.subfield))}
-            <DropEmpty>no results found</DropEmpty>
+            <DropEmpty list={subfields} text="no results found"/>
         </DropScroll>
     )
 }

@@ -66,9 +66,8 @@ export default function PickUidObject(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 rightIcon="mdi mdi-check"
-            >
-                {item.key}
-            </DropItem>
+                text={item.key}
+            />
         )
     }
 
@@ -80,7 +79,7 @@ export default function PickUidObject(props) {
             <DropTitle>UID Objects</DropTitle>
             <DropScroll>
                 {uidObjects.map(renderItem)}
-                <DropEmpty>no results found</DropEmpty>
+                <DropEmpty list={uidObjects} text="no results found"/>
             </DropScroll>
             <DropTitle>game values</DropTitle>
             <DropScroll>

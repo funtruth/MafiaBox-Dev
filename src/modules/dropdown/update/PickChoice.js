@@ -38,9 +38,8 @@ export default function PickChoice(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 rightIcon="mdi mdi-check"
-            >
-                {item.key}
-            </DropItem>
+                text={item.key}
+            />
         )
     }
 
@@ -50,19 +49,16 @@ export default function PickChoice(props) {
     return (
         <>
             <DropTitle>uids</DropTitle>
-            <div>
-                {uids.map(renderItem)}
-                <DropEmpty>no UIDS found</DropEmpty>
-            </div>
+            {uids.map(renderItem)}
+            <DropEmpty list={uids} text="no UIDS found"/>
             <DropTitle>options</DropTitle>
             <DropItem
                 chosen={chosen}
                 onClick={handleSelect}
                 leftIcon="mdi mdi-message-bulleted-off"
                 rightIcon="mdi mdi-check"
-            >
-                no choice
-            </DropItem>
+                text="no choice"
+            />
         </>
     )
 }

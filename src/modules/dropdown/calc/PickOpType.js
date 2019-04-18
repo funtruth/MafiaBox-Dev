@@ -29,9 +29,8 @@ export default function PickOpType(props) {
                     key={item.key}
                     leftIcon={item.icon}
                     onClick={() => handleSelect(item)}
-                >
-                    {item.key}
-                </DropItem>
+                    text={item.key}
+                />
             ))}
         </>
     )

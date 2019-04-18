@@ -42,24 +42,22 @@ export default function PickRecipient(props) {
     return (
         <div>
             <DropTitle>uids</DropTitle>
-            {<div>
-                {uids.map(item => {
-                    const chosen = info[item.key] || false
+            {uids.map(item => {
+                const chosen = info[item.key] || false
 
-                    return(
-                        <div
-                            key={item.key}
-                            className="drop-down-menu-option"
-                            chosen={chosen.toString()}
-                            onClick={() => pickUid(item, info)}
-                        >
-                            {item.key}
-                            <i className="mdi mdi-check"/>
-                        </div>
-                    )
-                })}
-                <DropEmpty>no UIDS found</DropEmpty>
-            </div>}
+                return(
+                    <div
+                        key={item.key}
+                        className="drop-down-menu-option"
+                        chosen={chosen.toString()}
+                        onClick={() => pickUid(item, info)}
+                    >
+                        {item.key}
+                        <i className="mdi mdi-check"/>
+                    </div>
+                )
+            })}
+            <DropEmpty list={uids} text="no UIDS found"/>
             {inclusive && <div>
                 <div className="-sep"/>
                 <div

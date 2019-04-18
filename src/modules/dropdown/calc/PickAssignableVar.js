@@ -31,9 +31,8 @@ export default function PickAssignableVar(props) {
                 <DropItem
                     key={item.key}
                     onClick={() => handleSelect(item)}
-                >
-                    {item.key}
-                </DropItem>
+                    text={item.key}
+                />
             ))}
         </>
     )

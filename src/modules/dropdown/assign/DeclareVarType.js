@@ -33,9 +33,8 @@ export default function DeclareVarType(props) {
                         onClick={() => handleSelect(item)}
                         leftIcon={item.icon}
                         rightIcon="mdi mdi-check"
-                    >
-                        {item.title}
-                    </DropItem>
+                        text={item.title}
+                    />
                 )
             })}
         </>

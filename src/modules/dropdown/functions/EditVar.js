@@ -51,11 +51,14 @@ export default function EditVar(props) {
                 icon="mdi mdi-language-typescript"
                 text="variable type"
             />
-            <DropItem onClick={handleSave} leftIcon="mdi mdi-ray-start-arrow" rightIcon="mdi mdi-dots-horizontal adjust-right">
-                initialize as
-            </DropItem>
+            <DropItem
+                onClick={handleSave}
+                leftIcon="mdi mdi-ray-start-arrow"
+                rightIcon="mdi mdi-dots-horizontal adjust-right"
+                text="initialize as"
+            />
             <DropTitle>options</DropTitle>
-            <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline">save variable</DropItem>
+            <DropItem onClick={handleSave} leftIcon="mdi mdi-checkbox-marked-outline" text="save variable"/>
         </>
     )
 }

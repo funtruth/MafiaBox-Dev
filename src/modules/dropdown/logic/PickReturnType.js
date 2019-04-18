@@ -28,9 +28,8 @@ export default function PickReturnType(props) {
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
                 rightIcon="mdi mdi-check"
-            >
-                {item.title}
-            </DropItem>
+                text={item.title}
+            />
         )
     }
 
@@ -64,9 +63,8 @@ export default function PickReturnType(props) {
                 onClick={onToast}
                 leftIcon="mdi mdi-comment-processing"
                 rightIcon="mdi mdi-check"
-            >
-                toaster
-            </DropItem>
+                text="toaster"
+            />
         </>
     )
 }

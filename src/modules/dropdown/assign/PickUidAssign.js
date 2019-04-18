@@ -40,12 +40,11 @@ export default function PickUidForAssign(props) {
                         chosen={chosen}
                         onClick={() => handleSelect(item)}
                         rightIcon="mdi mdi-check"
-                    >
-                        {item.key}
-                    </DropItem>
+                        text={item.key}
+                    />
                 )
             })}
-            <DropEmpty>no UIDS found</DropEmpty>
+            <DropEmpty list={uids} text="no UIDs found"/>
         </>
     )
 }

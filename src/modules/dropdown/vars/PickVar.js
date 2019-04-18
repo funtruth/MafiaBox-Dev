@@ -14,7 +14,6 @@ import { VARTYPE_IS_OBJ } from '../../common/arrows';
 import BoardLib from '../library/BoardLib';
 import {
     DropItem,
-    DropOption,
     DropParent,
     DropScroll,
     DropTitle,
@@ -57,9 +56,8 @@ export default function PickVar(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 rightIcon="mdi mdi-check"
-            >
-                {item.key}
-            </DropItem>
+                text={item.key}
+            />
         )
     }
 
@@ -138,14 +136,6 @@ export default function PickVar(props) {
                 icon="mdi mdi-numeric"
                 text="constant"
             />
-            <DropOption
-                show={false}
-                chosen={currentValue.length}
-                onClick={setLength}
-                icon="mdi mdi-code-braces"
-            >
-                length
-            </DropOption>
             <DropTitle>library</DropTitle>
             <BoardLib {...props}/>
         </>
