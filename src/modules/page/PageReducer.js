@@ -15,6 +15,7 @@ const initialState = {
     storyMap: {},
     fieldRepo: {},
     fieldMap: {},
+    globalVars: {},
 }
 
 const VALID_PROPS = [
@@ -24,6 +25,7 @@ const VALID_PROPS = [
     'storyMap',
     'fieldRepo',
     'fieldMap',
+    'globalVars',
 ]
 
 const ADD_STORY = 'story/add-story-to'
@@ -44,6 +46,7 @@ const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
 const RESET_REDUCER = 'page/reset-reducer'
 
 const UPDATE_FIELD = 'page/update-field'
+const UPDATE_GLOBAL = 'page/update-global'
 
 export function addStory(boardType) {
     return (dispatch, getState) => {
@@ -390,26 +393,6 @@ export function diffPriorities(attach) {
     }
 }
 
-//LogicBoard DELETE
-export function deleteProp(pageKey, fieldKey, indexKey, subfieldKey) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-        const repoClone = Object.assign({}, pageRepo)
-
-        if (!repoClone[pageKey]) return
-        if (!repoClone[pageKey][fieldKey]) return
-        if (!repoClone[pageKey][fieldKey][indexKey]) return
-        if (!repoClone[pageKey][fieldKey][indexKey].data) return
-        if (!repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]) return
-
-        delete repoClone[pageKey][fieldKey][indexKey].data[subfieldKey]
-        dispatch({
-            type: UPDATE_REPO,
-            payload: repoClone,
-        })
-    }
-}
-
 export function updateField(path, update) {
     return (dispatch, getState) => {
         const { fieldRepo } = getState().page
@@ -420,6 +403,21 @@ export function updateField(path, update) {
             type: UPDATE_FIELD,
             payload: {
                 fieldRepo: repoClone,
+            },
+        }))
+    }
+}
+
+export function updateGlobal(path, update) {
+    return (dispatch, getState) => {
+        const { globalVars } = getState().page
+
+        const repoClone = helpers.updateByPath(path, update, globalVars)
+
+        dispatch(receiveAction({
+            type: UPDATE_GLOBAL,
+            payload: {
+                globalVars: repoClone,
             },
         }))
     }
@@ -480,6 +478,7 @@ export default (state = initialState, action) => {
         case UPDATE_REPO:
         case RESET_REDUCER:
         case UPDATE_FIELD:
+        case UPDATE_GLOBAL:
             return { ...state, ...action.payload }
         default:
             return state;

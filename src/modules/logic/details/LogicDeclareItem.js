@@ -14,7 +14,7 @@ export default function LogicDeclareItem(props) {
     return (
         <div className="row-nowrap" style={{ marginTop: 2 }}>
             <LogicButton
-                highlight="#18449b" 
+                highlight="blue" 
                 style={{
                     color: '#999',
                     marginRight: 6,
@@ -31,7 +31,7 @@ export default function LogicDeclareItem(props) {
                 }}
             >
                 <LogicButton
-                    highlight="#18449b" 
+                    highlight="blue" 
                     style={{
                         color: '#ddd',
                         marginRight: 6,

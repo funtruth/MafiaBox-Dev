@@ -46,6 +46,7 @@ export const dropdownType = {
     pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',
     replaceWildcard: 'dropdownType/replace-wildcard',
+    createGlobalVar: 'dropdownType/create-global-var',
 
     pickBooleanAssign: 'dropdownType/pick-boolean-assign',
     pickUidAssign: 'dropdownType/pick-uid-for-assign',
@@ -66,6 +67,7 @@ export const dropdownType = {
     showUidSubfield: 'dropdownType/show-uid-subfield',
     showRoleSubfields: 'dropdownType/show-role-subfields',
     pickRoleTeam: 'dropdownType/pick-role-team',
+    pickGlobalVar: 'dropdownType/pick-global-var',
 
     pickEvent: 'dropdownType/pick-event',
     pickEventVar: 'dropdownType/pick-event-var',

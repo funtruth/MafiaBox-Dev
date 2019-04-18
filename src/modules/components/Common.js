@@ -7,11 +7,12 @@ import Footer from './Footer'
 import Header from './Header'
 import Icon from './Icon'
 import LogicButton from './LogicButton'
+import Row from './Row'
 import Separator from './Separator'
+import Switch from './Switch'
 import Tag from './Tag'
 import Text from './Text'
 import TextArea from './TextArea'
-import Switch from './Switch'
 
 export {
     Body,
@@ -21,9 +22,10 @@ export {
     Header,
     Icon,
     LogicButton,
+    Row,
     Separator,
+    Switch,
     Tag,
     Text,
     TextArea,
-    Switch,
 }

@@ -1,5 +1,13 @@
 import React from 'react';
 
+const getJustify = (justify) => {
+    switch(justify) {
+        case 'c':           return 'center'
+        case 'r':           return 'flex-end'
+        default:            return 'flex-start'
+    }
+}
+
 const getAlign = (align) => {
     switch(align) {
         case 'c':           return 'center'
@@ -19,24 +27,27 @@ const getPadding = (size) => {
     }
 }
 
-export default function Body(props) {
+export default function Row(props) {
     const {
         children,
         size                = '',
-        align               = '',
+        y                   = '',
+        x                   = '',
         className           = '',
         style,
     } = props
 
-    const alignItems        = getAlign(align)
+    const justifyContent    = getJustify(x)
+    const alignItems        = getAlign(y)
     const padding           = getPadding(size)
 
     const classes = [
-        '--body',
+        '--row',
         className,
     ].join(" ")
 
     const bodyStyle = {
+        justifyContent,
         alignItems,
         padding,
         ...style,

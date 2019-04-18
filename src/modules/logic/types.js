@@ -293,7 +293,7 @@ export const variableType = {
         key: 'uid',
         title: 'Unique ID',
         icon: 'mdi mdi-account',
-        supertype: '',
+        supertype: 'key',
         declarable: true,
     },
     object: {
@@ -317,6 +317,20 @@ export const variableType = {
         supertype: '',
         declarable: false,
     },
+    global: {
+        key: 'global',
+        title: 'Global',
+        icon: 'mdi mdi-earth',
+        supertype: '',
+        declarable: false,
+    },
+    key: {
+        key: 'key',
+        title: 'Key',
+        icon: 'mdi mdi-key-variant',
+        supertype: '',
+        declarable: false,
+    }
 }
 
 export const returnType = {
@@ -346,9 +360,13 @@ export const returnType = {
 export const triggerNewVars = {
     "(visitor)": {
         key: '(visitor)',
+        subfield: 'visitor',
+        fields: [
+            'visitor',
+        ],
+        fieldLength: 1,
         variableTypes: [
             variableType.uid.key,
-            variableType.string.key,
         ],
     },
 }
@@ -803,7 +821,7 @@ export const rssMap = {
         fieldLength: 4,
         dropdown: dropdownType.pickVar,
         variableTypes: [
-            variableType.number.key,
+            variableType.global.key,
         ],
     },
     '(rss)(events)': {

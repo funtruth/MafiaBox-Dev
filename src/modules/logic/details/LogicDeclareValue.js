@@ -51,11 +51,9 @@ export default connect(
     if (isNumber) {
         return (
             <LogicButton
-                highlight="#18449b"
+                highlight="blue"
                 onClick={handleNumber}
-                style={{
-                    color: '#ddd',
-                }}
+                color="whitish"
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 {orderOfOp(item.assign) || '...'}
@@ -73,10 +71,8 @@ export default connect(
                 }}
             >
                 <LogicButton
-                    highlight="#18449b"
-                    style={{
-                        color: '#ddd',
-                    }}
+                    highlight="blue"
+                    color="whitish"
                 >
                     <div style={{color:'#999', marginRight: 6}}>assign</div>
                     {item.assign.value || '...'}
@@ -94,10 +90,8 @@ export default connect(
                 }}
             >
                 <LogicButton
-                    highlight="#18449b"
-                    style={{
-                        color: '#ddd',
-                    }}
+                    highlight="blue"
+                    color="whitish"
                 >
                     <div style={{color:'#999', marginRight: 6}}>assign</div>
                     {item.assign.value || '...'}
@@ -107,11 +101,9 @@ export default connect(
     } else if (isString) {
         return (
             <LogicButton
-                highlight="#18449b"
+                highlight="blue"
                 onClick={handleString}
-                style={{
-                    color: '#ddd',
-                }}
+                color="whitish"
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
                 ...

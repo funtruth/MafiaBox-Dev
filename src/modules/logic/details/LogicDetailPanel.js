@@ -41,10 +41,8 @@ export default function LogicDetailPanel(props) {
                 }}
             >
                 <LogicButton
-                    highlight={hasWildcard ? '#db4757' : color}
-                    style={{
-                        color: '#999',
-                    }}
+                    highlight={hasWildcard ? 'red' : color}
+                    color="grey"
                 >
                     {field}
                     {isLastPanel && <div className="logic-display">{display}</div>}

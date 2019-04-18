@@ -38,6 +38,7 @@ import CreateGeneralTag from './page/CreateGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
 import WriteGameChoice from './page/WriteGameChoice'
+import CreateGlobalVar from './page/CreateGlobalVar'
 
 import PickFieldType from './template/PickFieldType'
 import TemplateTitleOptions from './template/TemplateTitleOptions'
@@ -56,6 +57,7 @@ import PickVarSubfield from './vars/PickVarSubfield'
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
+import PickGlobalVar from './vars/PickGlobalVar'
 
 import PickBooleanAssign from './assign/PickBooleanAssign'
 import PickUidAssign from './assign/PickUidAssign'
@@ -170,6 +172,8 @@ function DropdownView(props) {
                 return <PickFieldType {...renderProps}/>
             case dropdownType.templateTitleOptions:
                 return <TemplateTitleOptions {...renderProps}/>
+            case dropdownType.createGlobalVar:
+                return <CreateGlobalVar {...renderProps}/>
                 
             case dropdownType.addVar:
                 return <AddVar {...renderProps}/>
@@ -232,6 +236,8 @@ function DropdownView(props) {
                 return <ShowRoleSubfields {...renderProps}/>
             case dropdownType.pickRoleTeam:
                 return <PickRoleTeam {...renderProps}/>
+            case dropdownType.pickGlobalVar:    
+                return <PickGlobalVar {...renderProps}/>
 
             case dropdownType.pickEvent:
                 return <PickEvent {...renderProps}/>

@@ -13,6 +13,15 @@ const getPadding = (size) => {
     }
 }
 
+const getHighlight = (highlight) => {
+    switch(highlight) {
+        case 'whitish':     return '#ddd'
+        case 'blue':        return '#18449b'
+        case 'red':         return '#db4757'
+        default:            return highlight
+    }
+}
+
 const getColor = (color) => {
     switch(color) {
         case 'darkgrey':    return '#666'
@@ -48,7 +57,7 @@ export default function LogicButton(props) {
         padding: getPadding(size),
         font: getFont(size),
         color: getColor(color),
-        borderLeft: highlight ? `4px solid ${highlight}` : '1px solid #444',
+        borderLeft: highlight ? `4px solid ${getHighlight(highlight)}` : '1px solid #444',
         ...style,
     }
     

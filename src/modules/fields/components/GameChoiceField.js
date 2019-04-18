@@ -10,6 +10,7 @@ import {
     Icon,
     LogicButton,
     Tag,
+    Row,
 } from '../../components/Common'
 
 export default function GameChoiceField(props) {
@@ -30,36 +31,81 @@ export default function GameChoiceField(props) {
                     }}
                 >
                     <LogicButton
-                        highlight={gameChoice ? '#ddd' : '#767676'}
+                        highlight={gameChoice ? 'whitish' : '#767676'}
                         color={gameChoice ? 'whitish' : 'grey'}
                     >
                         <Icon className={`${gameChoiceInfo.icon || 'mdi mdi-pencil'}`}></Icon>
                     </LogicButton>
                 </DropClick>
-                <DropClick
-                    dropdown={dropdownType.writeGameChoice}
-                    params={{
-                        path: [...path, item.key, 'title'],
-                        currentValue: title,
-                        placeholder: 'Name your choice ...',
-                    }}
-                >
-                    <LogicButton>{title}</LogicButton> 
-                </DropClick>
-                <DropClick
-                    dropdown={dropdownType.writeGameChoice}
-                    params={{
-                        path: [...path, item.key, 'prompt'],
-                        currentValue: prompt,
-                        placeholder: 'write a short description ...',
-                    }}
-                >
-                    <LogicButton color={prompt ? 'whitish' : 'grey'}>
-                        {prompt || 'write a short description ...'}
-                    </LogicButton> 
-                </DropClick>
+                <Body>
+                    <div className="row">
+                        <DropClick
+                            dropdown={dropdownType.writeGameChoice}
+                            params={{
+                                path: [...path, item.key, 'title'],
+                                currentValue: title,
+                                placeholder: 'Name your choice ...',
+                            }}
+                        >
+                            <LogicButton>{title}</LogicButton> 
+                        </DropClick>
+                        <DropClick
+                            dropdown={dropdownType.writeGameChoice}
+                            params={{
+                                path: [...path, item.key, 'prompt'],
+                                currentValue: prompt,
+                                placeholder: 'write a short description ...',
+                            }}
+                        >
+                            <LogicButton color={prompt ? 'whitish' : 'grey'}>
+                                {prompt || 'write a short description ...'}
+                            </LogicButton> 
+                        </DropClick>
+                    </div>
+                    {renderDetail(item)}
+                </Body>
             </div>
         )
+    }
+
+    const renderDetail = ({gameChoice, value}) => {
+        switch(gameChoice) {
+            case gameChoiceType.value.key:
+                return (
+                    <Row y="c">
+                        <DropClick
+                            dropdown={dropdownType.pickGlobalVar}
+                            params={{
+
+                            }}
+                            style={{
+                                marginTop: 2,
+                            }}
+                        >
+                            <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
+                                choice
+                            </LogicButton>
+                        </DropClick>
+                        <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
+                        <DropClick
+                            dropdown={dropdownType.pickGlobalVar}
+                            params={{
+
+                            }}
+                            style={{
+                                marginTop: 2,
+                            }}
+                        >
+                            <LogicButton highlight="blue" color={value ? "whitish" : "grey"}>
+                                value
+                                <div className="logic-display">{value || '...'}</div>
+                            </LogicButton>
+                        </DropClick>
+                    </Row>
+                )
+            default:
+                return null;
+        }
     }
 
     const items = _.toArray(value)

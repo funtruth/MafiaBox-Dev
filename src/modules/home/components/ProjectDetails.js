@@ -52,6 +52,11 @@ function ProjectDetails(props) {
         fieldMapRef.on('child_changed', snap => props.receiveEvent(snap, 'fieldMap'))
         fieldMapRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'fieldMap'))
 
+        const globalVarsRef = firebase.database().ref(`dev/${activeProject}/globalVars`)
+        globalVarsRef.on('child_added', snap => props.receiveEvent(snap, 'globalVars'))
+        globalVarsRef.on('child_changed', snap => props.receiveEvent(snap, 'globalVars'))
+        globalVarsRef.on('child_removed', snap => props.receiveDeleteEvent(snap, 'globalVars'))
+
         return () => {
             console.log('Turning off listeners at', activeProject)
             if (projectRef)     projectRef.off();
@@ -61,6 +66,7 @@ function ProjectDetails(props) {
             if (storyMapRef)    storyMapRef.off();
             if (fieldRepoRef)   fieldRepoRef.off();
             if (fieldMapRef)    fieldMapRef.off();
+            if (globalVarsRef)  globalVarsRef.off();
         }
     }, [activeProject])
 

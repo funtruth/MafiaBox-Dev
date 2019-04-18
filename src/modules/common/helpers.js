@@ -48,21 +48,6 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
     }
 }
 
-//returns boolean if element is a dropdown
-export function isElementDropdown(target) {
-    let isDropdown = target.className === 'drop-down-menu'
-
-    while(target.parentElement && !isDropdown) {
-        if (target.parentElement.className === 'drop-down-menu') {
-            isDropdown = true
-        } else {
-            target = target.parentElement
-        }
-    }
-    
-    return isDropdown
-}
-
 export function isAppClickCancelled(target) {
     let isCancel = false
 
@@ -76,22 +61,6 @@ export function isAppClickCancelled(target) {
 
     return isCancel
 }
-
-export function getDropdownParentTarget(ele) {
-    let nextTarget = ele.parentElement
-
-    while (nextTarget) {
-        if (nextTarget.className === 'drop-down-menu') {
-            return nextTarget
-        } else {
-            nextTarget = nextTarget.parentElement
-        }
-    }
-
-    return null
-}
-
-export const remove$ = (string='') => string.charAt(0) === '@' ? string.substr(1) : string
 
 export function checkAlpha(string, cipher='A26') {
     for (var i=0; i<string.length; i++) {

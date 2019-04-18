@@ -161,6 +161,7 @@ export const DEFAULT_GAME_CHOICE = {
     title: '',
     prompt: '',
     gameChoice: '',
+    value: '',
 }
 
 /* @params fieldInfo
