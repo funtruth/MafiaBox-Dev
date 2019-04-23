@@ -168,8 +168,8 @@ export function addPageToMap(storyKey, boardType) {
         //set-up defaults
         let defaultInfo = {}
         fieldMap[boardType].forEach(field => {
-            if (fieldRepo[field] && fieldRepo[field].default) {
-                defaultInfo[field] = fieldRepo[field].default
+            if (fieldRepo[field] && fieldRepo[field].defaultValue) {
+                defaultInfo[field] = fieldRepo[field].defaultValue
             }
         })
         

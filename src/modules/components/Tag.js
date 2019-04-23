@@ -27,7 +27,7 @@ export default function Tag(props) {
         <div
             className={classes}
             style={buttonStyle}
-            onClick={event => onClick && onClick({ event })}
+            onClick={event => onClick && onClick({event})}
         >
             <Text size={size}>
                 {children}

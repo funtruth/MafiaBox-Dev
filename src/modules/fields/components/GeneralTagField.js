@@ -4,12 +4,13 @@ import _ from 'lodash'
 import { dropdownType } from '../../dropdown/types';
 
 import {
-    Tag,
     DropClick,
+    Tag,
 } from '../../components/Common';
 
 export default function GeneralTagField(props) {
-    const { path, fieldKey, value, data } = props
+    const { path, fieldKey, fieldInfo, value, data } = props
+    const { defaultValue } = fieldInfo
 
     let handleClick = (item, active) => props.updatePage(path, {[item.key]: !active})
 
@@ -17,17 +18,24 @@ export default function GeneralTagField(props) {
         const active = value && value[item.key]
                 
         return (
-            <Tag
+            <DropClick
                 key={item.key}
-                theme={active ? 'purple' : 'black'}
                 onClick={() => handleClick(item, active)}
+                rightDropdown={dropdownType.editGeneralTag}
+                params={{
+                    path: [fieldKey],
+                    subfieldKey: item.key,
+                    defaultValue,
+                }}
             >
-                {item.title}
-            </Tag>
+                <Tag theme={active ? 'purple' : 'black'}>
+                    {item.title}
+                </Tag>
+            </DropClick>
         )
     }
     
-    const tags = _.sortBy(data, i => i.index)
+    const tags = _(data).filter().sortBy(i => i.index).value()
     return (
         <div className="row">
             {tags.map(renderItem)}

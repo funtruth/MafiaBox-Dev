@@ -10,7 +10,7 @@ import {
 
 export default function UniqueTagField(props) {
     const { path, fieldKey, fieldInfo, value, data } = props
-    const { readOnly } = fieldInfo
+    const { readOnly, defaultValue } = fieldInfo
 
     const handleClick = (item) => props.updatePage(path, item.key)
 
@@ -18,17 +18,24 @@ export default function UniqueTagField(props) {
         const active = item.key === value
 
         return (
-            <Tag
+            <DropClick
                 key={item.key}
-                theme={active ? 'yellow' : 'black'}
                 onClick={() => handleClick(item)}
+                rightDropdown={dropdownType.editUniqueTag}
+                params={{
+                    path: [fieldKey],
+                    subfieldKey: item.key,
+                    defaultValue,
+                }}
             >
-                {item.title}
-            </Tag>
+                <Tag theme={active ? 'yellow' : 'black'}>
+                    {item.title}
+                </Tag>
+            </DropClick>
         )
     }
 
-    const tags = _.sortBy(data, i => i.index)
+    const tags = _(data).filter().sortBy(i => i.index).value()
     return (
         <div className="row">
             {tags.map(renderItem)}

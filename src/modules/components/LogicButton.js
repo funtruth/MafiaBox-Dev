@@ -18,6 +18,7 @@ const getHighlight = (highlight) => {
         case 'whitish':     return '#ddd'
         case 'blue':        return '#18449b'
         case 'red':         return '#db4757'
+        case 'pink':        return '#a566b0'
         default:            return highlight
     }
 }

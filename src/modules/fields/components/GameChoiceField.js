@@ -75,7 +75,7 @@ export default function GameChoiceField(props) {
             case gameChoiceType.value.key:
                 return (
                     <Row y="c" style={{marginTop: 2}}>
-                        <LogicButton highlight="blue" color="grey">
+                        <LogicButton highlight="pink" color="grey">
                             choice
                         </LogicButton>
                         <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
@@ -87,7 +87,7 @@ export default function GameChoiceField(props) {
                                 currentValue: value,
                             }}
                         >
-                            <LogicButton highlight="blue" color="grey">
+                            <LogicButton highlight="pink" color="grey">
                                 value
                                 <div className="logic-display" style={{color: value && "#ddd"}}>
                                     {display || '...'}

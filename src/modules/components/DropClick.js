@@ -10,6 +10,8 @@ export default connect(
     }
 )(function DropClick(props) {
     const {
+        onClick,
+        onRightClick,
         dropdown,
         rightDropdown,
         params,
@@ -26,11 +28,19 @@ export default connect(
     ].join(' ')
 
     const handleClick = (e) => {
+        if (onClick) {
+            onClick(e)
+            return;
+        }
         if (!dropdown) return console.warn('no dropdownType')
         showDropdown(dropdown, e, params, 0, place)
     }
 
     const handleRightClick = (e) => {
+        if (onRightClick) {
+            onRightClick(e)
+            return;
+        }
         showDropdown(rightDropdown, e, params, 0, place)
     }
 

@@ -80,13 +80,6 @@ export default function PickVar(props) {
         })
         props.showDropdown()
     }
-
-    const setLength = () => {
-        props.updatePage({
-            length: !currentValue.length,
-        })
-        props.showDropdown()
-    }
     
     const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
     const rssVars = _.filter(rssMap, i => i.fieldLength === 2)

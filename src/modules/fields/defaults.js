@@ -223,7 +223,7 @@ export const defaultFieldRepo = {
         title: 'Target Mode',
         vars: choiceMap,
         boardType: boardType.roles.key,
-        default: DEFAULT_LOGIC,
+        defaultValue: DEFAULT_LOGIC,
     },
     roleAction: {
         key: 'roleAction',
@@ -231,7 +231,7 @@ export const defaultFieldRepo = {
         title: 'Action',
         vars: choiceMap,
         boardType: boardType.roles.key,
-        default: DEFAULT_LOGIC,
+        defaultValue: DEFAULT_LOGIC,
     },
     description2: {
         key: 'description2',
@@ -245,7 +245,7 @@ export const defaultFieldRepo = {
         title: 'Phase Action Mode',
         boardType: boardType.phases.key,
         data: phaseActionType,
-        default: phaseActionType.all.key,
+        defaultValue: phaseActionType.all.key,
         readOnly: true,
     },
     phaseChoices: {
@@ -259,13 +259,13 @@ export const defaultFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Phase Action',
         boardType: boardType.phases.key,
-        default: DEFAULT_LOGIC,
+        defaultValue: DEFAULT_LOGIC,
     },
     phaseListener: {
         key: 'phaseListener',
         fieldType: fieldType.logic.key,
         title: 'Phase Listener',
         boardType: boardType.phases.key,
-        default: DEFAULT_LOGIC,
+        defaultValue: DEFAULT_LOGIC,
     },
 }

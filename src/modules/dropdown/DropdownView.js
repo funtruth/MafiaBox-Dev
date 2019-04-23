@@ -34,7 +34,9 @@ import PickReturnType from './logic/PickReturnType';
 
 import EditTag from './template/EditTag'
 import CreateUniqueTag from './page/CreateUniqueTag'
+import EditUniqueTag from './page/EditUniqueTag'
 import CreateGeneralTag from './page/CreateGeneralTag'
+import EditGeneralTag from './page/EditGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
 import WriteGameChoice from './page/WriteGameChoice'
@@ -161,8 +163,12 @@ function DropdownView(props) {
                 return <EditTag {...renderProps}/>
             case dropdownType.createUniqueTag:
                 return <CreateUniqueTag {...renderProps}/>
+            case dropdownType.editUniqueTag:
+                return <EditUniqueTag {...renderProps}/>
             case dropdownType.createGeneralTag:
                 return <CreateGeneralTag {...renderProps}/>
+            case dropdownType.editGeneralTag:
+                return <EditGeneralTag {...renderProps}/>
             case dropdownType.createGameChoice:
                 return <CreateGameChoice {...renderProps}/>
             case dropdownType.pickGameChoiceType:

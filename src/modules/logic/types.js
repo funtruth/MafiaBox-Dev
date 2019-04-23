@@ -330,6 +330,13 @@ export const variableType = {
         icon: 'mdi mdi-key-variant',
         supertype: '',
         declarable: false,
+    },
+    time: {
+        key: 'time',
+        title: 'Timer',
+        icon: 'mdi mdi-timer-sand',
+        supertype: '',
+        declarable: false,
     }
 }
 
@@ -518,7 +525,7 @@ export const rssMap = {
         fieldLength: 3,
         dropdown: dropdownType.pickTimer,
         variableTypes: [
-            variableType.number.key,
+            variableType.time.key,
         ],
     },
     '(rss)(lobby)': {

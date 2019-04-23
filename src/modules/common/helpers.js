@@ -25,7 +25,7 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
 
     //handling String, Number, and Array updates
     if (endOfPath) {
-        if (typeofUpdate === 'string' || typeofUpdate === 'number') {
+        if (typeofUpdate === 'string' || typeofUpdate === 'number' || typeofUpdate === 'boolean') {
             return update
         } else if (isArray(update)) {
             return update
