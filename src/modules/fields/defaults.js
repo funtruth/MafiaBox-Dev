@@ -72,18 +72,24 @@ export const fieldType = {
     gameChoices: {
         key: 'gameChoices',
         index: 9,
-        icon: 'mdi mdi-map-marker-path',
+        icon: 'mdi mdi-map-marker-distance',
         title: 'Game Choices',
+    },
+    gameChoiceOverride: {
+        key: 'gameChoiceOverride',
+        index: 10,
+        icon: 'mdi mdi-map-marker-distance',
+        title: 'Game Choice Override',
     },
     generalTag: {
         key: 'generalTag',
-        index: 10,
+        index: 11,
         icon: 'ion-ios-pricetag',
         title: 'Player Tags',
     },
     priority: {
         key: 'priority',
-        index: 11,
+        index: 12,
         icon: 'mdi mdi-priority-high',
         title: 'Priority',
     },
@@ -97,6 +103,7 @@ export const defaultFieldMap = {
         'playerTags',
         'roleCharges',
         'priority',
+        'roleGameChoice',
         'roleTargetMode',
         'roleAction',
     ],
@@ -215,6 +222,12 @@ export const defaultFieldRepo = {
         key: 'priority',
         fieldType: fieldType.priority.key,
         title: 'Priority',
+        boardType: boardType.roles.key,
+    },
+    roleGameChoice: {
+        key: 'roleGameChoice',
+        fieldType: fieldType.gameChoiceOverride.key,
+        title: 'Game Choice Override',
         boardType: boardType.roles.key,
     },
     roleTargetMode: {

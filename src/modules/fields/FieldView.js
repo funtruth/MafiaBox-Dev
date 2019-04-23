@@ -11,6 +11,7 @@ import ImageField from './components/ImageField'
 import UniqueTagField from './components/UniqueTagField';
 import GeneralTagField from './components/GeneralTagField'
 import GameChoiceField from './components/GameChoiceField'
+import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 
 import PriorityField from './components/PriorityField'
 import LogicBoard from './components/LogicBoard';
@@ -54,6 +55,8 @@ function FieldView(props) {
                 //WIP
             case fieldType.gameChoices.key:
                 return <GameChoiceField {...props}/>
+            case fieldType.gameChoiceOverride.key:
+                return <GameChoiceOverrideField {...props}/>
 
             case fieldType.call.key:
                 return <CallField {...props}/>

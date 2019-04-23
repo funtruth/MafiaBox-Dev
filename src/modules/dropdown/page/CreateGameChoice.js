@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 
 import { DEFAULT_GAME_CHOICE } from '../../fields/defaults';
 
 import { genUID } from '../../common/helpers';
+import {
+    useAutofocus,
+} from '../../hooks/Hooks'
 
 import {
     DropSubmit,
@@ -13,12 +16,7 @@ const KEYWORDS = []
 export default function CreateGameChoice(props) {
     const { attach, placeholder } = props
 
-    //workaround, animating dropdown conflicts with autoFocus on mount
-    const autofocus = useRef(null)
-    useEffect(() => {
-        const timer = setTimeout(() => {autofocus.current.focus()}, 100);
-        return () => clearTimeout(timer)
-    }, [autofocus])
+    const focusRef = useAutofocus()
 
     const [value, setValue] = useState("")
     const handleChange = e => setValue(e.target.value)
@@ -50,7 +48,7 @@ export default function CreateGameChoice(props) {
     return (
         <div className="row">
             <input
-                ref={autofocus}
+                ref={focusRef}
                 className="tag-input"
                 value={value}
                 onChange={handleChange}
