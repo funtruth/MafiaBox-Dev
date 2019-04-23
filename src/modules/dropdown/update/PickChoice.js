@@ -37,7 +37,7 @@ export default function PickChoice(props) {
                 key={item.key}
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text={item.key}
             />
         )
@@ -56,7 +56,7 @@ export default function PickChoice(props) {
                 chosen={chosen}
                 onClick={handleSelect}
                 leftIcon="mdi mdi-message-bulleted-off"
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text="no choice"
             />
         </>

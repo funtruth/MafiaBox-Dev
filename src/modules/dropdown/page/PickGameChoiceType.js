@@ -34,7 +34,7 @@ export default connect(
                 chosen={item.key === currentValue}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text={item.title}
             />
         )

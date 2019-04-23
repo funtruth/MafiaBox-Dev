@@ -53,7 +53,7 @@ export default function PickLogic(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
-                rightIcon="mdi mdi-check"
+                rightCheck
                 style={{
                     backgroundColor: chosen && item.color,
                 }}

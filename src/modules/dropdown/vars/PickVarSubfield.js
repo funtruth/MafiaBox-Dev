@@ -77,7 +77,7 @@ export default function PickVarSubfield(props) {
                 key={key}
                 chosen={chosen}
                 onClick={() => handleSelect(item, key)}
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text={key}
             />
         )

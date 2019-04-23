@@ -41,7 +41,7 @@ export default function PickBooleanAssign(props) {
                         chosen={chosen}
                         onClick={() => handleSelect(item)}
                         leftIcon={item.icon}
-                        rightIcon="mdi mdi-check"
+                        rightCheck
                         text={item.title}
                     />
                 )

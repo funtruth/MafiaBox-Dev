@@ -27,7 +27,7 @@ export default function PickReturnType(props) {
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text={item.title}
             />
         )
@@ -62,7 +62,7 @@ export default function PickReturnType(props) {
                 chosen={toastChosen}
                 onClick={onToast}
                 leftIcon="mdi mdi-comment-processing"
-                rightIcon="mdi mdi-check"
+                rightCheck
                 text="toaster"
             />
         </>

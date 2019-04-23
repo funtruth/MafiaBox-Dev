@@ -32,7 +32,7 @@ export default function DeclareVarType(props) {
                         chosen={chosen}
                         onClick={() => handleSelect(item)}
                         leftIcon={item.icon}
-                        rightIcon="mdi mdi-check"
+                        rightCheck
                         text={item.title}
                     />
                 )

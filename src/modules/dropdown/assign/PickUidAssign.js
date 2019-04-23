@@ -39,7 +39,7 @@ export default function PickUidForAssign(props) {
                         key={item.key}
                         chosen={chosen}
                         onClick={() => handleSelect(item)}
-                        rightIcon="mdi mdi-check"
+                        rightCheck
                         text={item.key}
                     />
                 )
