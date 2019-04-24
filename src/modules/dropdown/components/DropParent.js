@@ -10,6 +10,7 @@ export default connect(
 )(function DropParent(props) {
     //generate a unique serial number
     const [serialNo] = useState(generatePushID())
+
     const { icon, text, chosen, style, dropdownType, params,
         dropdownKeys, serialList } = props
 
@@ -38,8 +39,8 @@ export default connect(
             onMouseOver={onMouseOver}
             style={style}
         >
-            {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
-            {text || 'Parent'}
+            {icon && <i className={`drop-down-menu-icon ${icon}`} style={{marginRight: 5}}></i>}
+            {text}
             <i className="mdi mdi-play"/>
         </div>
     )

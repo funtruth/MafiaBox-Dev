@@ -1,4 +1,5 @@
 import React from 'react'
+import './DropClick.css'
 import { connect } from 'react-redux'
 
 import { showDropdown } from '../dropdown/DropdownReducer'
@@ -19,15 +20,17 @@ export default connect(
         place,
         children,
         className,
+        disabled,
         style,
     } = props
 
     const classes = [
-        'drop-click',
+        disabled ? 'drop-click-frozen' : 'drop-click',
         className,
     ].join(' ')
 
     const handleClick = (e) => {
+        if (disabled) return;
         if (onClick) {
             onClick(e)
             return;
@@ -37,6 +40,7 @@ export default connect(
     }
 
     const handleRightClick = (e) => {
+        if (disabled) return;
         if (onRightClick) {
             onRightClick(e)
             return;

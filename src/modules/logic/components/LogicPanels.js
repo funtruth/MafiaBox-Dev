@@ -6,7 +6,10 @@ import { dropdownType } from '../../dropdown/types'
 import { concatField } from '../proptool';
 
 import LogicPanel from './LogicPanel'
-import { LogicButton } from '../../components/Common';
+import {
+    LogicButton,
+    Row,
+} from '../../components/Common';
 
 export default function LogicPanels(props) {
     const { value, path } = props
@@ -21,7 +24,7 @@ export default function LogicPanels(props) {
                 case operatorType.if.key:
                 case operatorType.elseif.key:
                     return (
-                        <div className="row">
+                        <Row>
                             <LogicPanel
                                 {...props}
                                 subfieldKey="var1"
@@ -41,20 +44,20 @@ export default function LogicPanels(props) {
                                 subfieldKey="var2"
                                 placeholder="variable"
                                 path={[...path, 'data', 'var2']}
-                                dropdown={dropdownType.pickVar}
+                                dropdown={dropdownType.pickVarWithType}
                             />
-                        </div>
+                        </Row>
                     )
                 case operatorType.forin.key:
                     return (
-                        <div className="row">
+                        <Row>
                             <LogicButton>in</LogicButton>
                             <LogicPanel
                                 {...props}
                                 placeholder="UID object ..."
                                 dropdown={dropdownType.pickUidObject}
                             />
-                        </div>
+                        </Row>
                     )
                 case operatorType.else.key:
                 default:

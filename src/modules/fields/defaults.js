@@ -93,6 +93,12 @@ export const fieldType = {
         icon: 'mdi mdi-priority-high',
         title: 'Priority',
     },
+    timer: {
+        key: 'timer',
+        index: 13,
+        icon: 'mdi mdi-timer-sand',
+        title: 'Timer',
+    }
 }
 
 export const defaultFieldMap = {
@@ -110,6 +116,7 @@ export const defaultFieldMap = {
     [boardType.phases.key]: [
         'description2',
         'phaseActionMode',
+        'phaseTimer',
         'phaseChoices',
         'phaseAction',
         'phaseListener',
@@ -260,6 +267,12 @@ export const defaultFieldRepo = {
         data: phaseActionType,
         defaultValue: phaseActionType.all.key,
         readOnly: true,
+    },
+    phaseTimer: {
+        key: 'phaseTimer',
+        fieldType: fieldType.timer.key,
+        title: 'Phase Timer',
+        boardType: boardType.phases.key,
     },
     phaseChoices: {
         key: 'phaseChoices',

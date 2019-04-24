@@ -44,11 +44,13 @@ export const dropdownType = {
     editVar: 'dropdownType/edit-var',
     pickVar: 'dropdownType/pick-var',
     pickVarSubfield: 'dropdownType/pick-var-subfield',
+    pickVarWithType: 'dropdownType/pick-var-with-type',
     pickUidObject: 'dropdownType/pick-uid-object',
     pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',
     replaceWildcard: 'dropdownType/replace-wildcard',
     createGlobalVar: 'dropdownType/create-global-var',
+    pickGlobalValue: 'dropdownType/pick-global-value',
 
     pickBooleanAssign: 'dropdownType/pick-boolean-assign',
     pickUidAssign: 'dropdownType/pick-uid-for-assign',

@@ -826,7 +826,7 @@ export const rssMap = {
             'value',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickVar,
+        dropdown: dropdownType.pickGlobalValue,
         variableTypes: [
             variableType.global.key,
         ],

@@ -113,13 +113,3 @@
     padding: 4px 4px;
     text-transform: uppercase;
 }
-
-.drop-click {
-    cursor: pointer;
-}
-.drop-click:hover {
-    filter: brightness(120%);
-}
-.drop-click * {
-    pointer-events: none;
-}

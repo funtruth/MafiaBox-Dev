@@ -1,0 +1,15 @@
+.drop-click {
+    cursor: pointer;
+}
+.drop-click:hover {
+    filter: brightness(120%);
+}
+.drop-click * {
+    pointer-events: none;
+}
+.drop-click-frozen {
+    cursor: not-allowed;
+}
+.drop-click-frozen * {
+    pointer-events: none;
+}

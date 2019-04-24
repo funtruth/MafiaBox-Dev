@@ -56,6 +56,7 @@ import PickOpType from './calc/PickOpType'
 
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
+import PickVarWithType from './vars/PickVarWithType';
 import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
@@ -76,6 +77,7 @@ import ShowSubfields from './update/ShowSubfields';
 import ShowUidSubfield from './update/ShowUidSubfield';
 import ShowRoleSubfields from './update/ShowRoleSubfields'
 import PickRoleTeam from './update/PickRoleTeam';
+import PickGlobalValue from './update/PickGlobalValue';
 
 import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
@@ -194,6 +196,8 @@ function DropdownView(props) {
                 return <PickVar {...renderProps}/>
             case dropdownType.pickVarSubfield:
                 return <PickVarSubfield {...renderProps}/>
+            case dropdownType.pickVarWithType:
+                return <PickVarWithType {...renderProps}/>
             case dropdownType.pickUidObject:
                 return <PickUidObject {...renderProps}/>
             case dropdownType.pickVarType:
@@ -204,6 +208,8 @@ function DropdownView(props) {
                 return <WriteVarType {...renderProps}/>
             case dropdownType.replaceWildcard:
                 return <ReplaceWildcard {...renderProps}/>
+            case dropdownType.pickGlobalValue:
+                return <PickGlobalValue {...renderProps}/>
                 
             case dropdownType.pickBooleanAssign:
                 return <PickBooleanAssign {...renderProps}/>
