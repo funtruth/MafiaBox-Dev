@@ -9,7 +9,6 @@ import LandingView from './landing/LandingView'
 import DashboardView from './dashboard/DashboardView'
 import FunctionView from '../board/views/FunctionView'
 import PatchView from '../board/patch/PatchView';
-import RoleView from '../board/roles/RoleView';
 import PhaseModeView from '../board/patch/PhaseModeView';
 import PhaseFlowView from '../board/phases/PhaseFlowView';
 import TestHubView from '../testhub/TestHubView'
@@ -28,7 +27,6 @@ export default function HomeView(props) {
                     <Route exact path="/:projectKey/library" component={FunctionView}/>
                     <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
                     <Route exact path="/:projectKey/roles" component={PatchView}/>
-                    <Route exact path="/:projectKey/roles/:storyKey" component={RoleView}/>
                     <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/phases" component={PhaseModeView}/>
                     <Route exact path="/:projectKey/phases/:storyKey" component={PhaseFlowView}/>

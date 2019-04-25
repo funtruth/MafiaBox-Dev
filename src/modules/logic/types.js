@@ -310,6 +310,13 @@ export const variableType = {
         supertype: 'object',
         declarable: false,
     },
+    array: {
+        key: 'array',
+        title: 'Array',
+        icon: 'mdi mdi-code-brackets',
+        supertype: '',
+        declarable: false,
+    },
     function: {
         key: 'function',
         title: 'Function',
@@ -417,12 +424,26 @@ export const choiceMap = {
             variableType.uid.key,
         ],
     },
-    "(choice)(multitarget)": {
-        key: '(choice)(multitarget)',
-        subfield: 'multitarget',
+    "(choice)(multi)": {
+        key: '(choice)(multi)',
+        subfield: 'multi',
         fields: [
             'choice',
-            'multitarget',
+            'multi',
+        ],
+        fieldLength: 2,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.object.key,
+            variableType.uidObject.key,
+        ],
+    },
+    "(choice)(ordered)": {
+        key: '(choice)(ordered)',
+        subfield: 'ordered',
+        fields: [
+            'choice',
+            'ordered',
         ],
         fieldLength: 2,
         dropdown: dropdownType.showSubfields,
@@ -784,14 +805,14 @@ export const rssMap = {
             variableType.uid.key,
         ],
     },
-    '(rss)(choices)(@)(multitarget)': {
-        key: '(rss)(choices)(@)(multitarget)',
-        subfield: 'multitarget',
+    '(rss)(choices)(@)(multi)': {
+        key: '(rss)(choices)(@)(multi)',
+        subfield: 'multi',
         fields: [
             'rss',
             'choices',
             '@',
-            'multitarget',
+            'multi',
         ],
         fieldLength: 4,
         dropdown: dropdownType.pickUid,
@@ -800,20 +821,86 @@ export const rssMap = {
             variableType.uidObject.key,
         ],
     },
-    '(rss)(choices)(@)(multitarget)(@)': {
-        key: '(rss)(choices)(@)(multitarget)(@)',
+    '(rss)(choices)(@)(multi)(@)': {
+        key: '(rss)(choices)(@)(multi)(@)',
         subfield: '@',
         fields: [
             'rss',
             'choices',
             '@',
-            'multitarget',
+            'multi',
             '@',
+        ],
+        fieldLength: 5,
+        dropdown: dropdownType.pickBoolean,
+        variableTypes: [
+            variableType.boolean.key,
+        ],
+    },
+    '(rss)(choices)(@)(ordered)': {
+        key: '(rss)(choices)(@)(ordered)',
+        subfield: 'ordered',
+        fields: [
+            'rss',
+            'choices',
+            '@',
+            'ordered',
+        ],
+        fieldLength: 4,
+        dropdown: dropdownType.showSubfields,
+        variableTypes: [
+            variableType.array.key,
+        ],
+    },
+    '(rss)(choices)(@)(ordered)(0)': {
+        key: '(rss)(choices)(@)(ordered)(0)',
+        subfield: '0',
+        fields: [
+            'rss',
+            'choices',
+            '@',
+            'ordered',
+            '0',
         ],
         fieldLength: 5,
         dropdown: dropdownType.pickUid,
         variableTypes: [
-            variableType.number.key,
+            variableType.uid.key,
+            variableType.key.key,
+        ],
+    },
+    '(rss)(choices)(@)(ordered)(1)': {
+        key: '(rss)(choices)(@)(ordered)(1)',
+        subfield: '1',
+        fields: [
+            'rss',
+            'choices',
+            '@',
+            'ordered',
+            '1',
+        ],
+        fieldLength: 5,
+        dropdown: dropdownType.pickUid,
+        variableTypes: [
+            variableType.uid.key,
+            variableType.key.key,
+        ],
+    },
+    '(rss)(choices)(@)(ordered)(2)': {
+        key: '(rss)(choices)(@)(ordered)(2)',
+        subfield: '2',
+        fields: [
+            'rss',
+            'choices',
+            '@',
+            'ordered',
+            '2',
+        ],
+        fieldLength: 5,
+        dropdown: dropdownType.pickUid,
+        variableTypes: [
+            variableType.uid.key,
+            variableType.key.key,
         ],
     },
     '(rss)(choices)(@)(value)': {

@@ -1,50 +1,23 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { SortableContainer } from 'react-sortable-hoc';
 
-import { addStory } from '../../../page/PageReducer'
-import { navigate } from '../../../navigation/NavReducer'
+import RoleGrid from '../../roles/components/RoleGrid';
 
-import PatchGridItem from './PatchGridItem';
-import EmptyGridComponent from '../../components/EmptyGridComponent';
+export default SortableContainer((props) => {
+    const { items } = props
 
-const PatchGrid = SortableContainer((props) => {
-    const { items, boardType, location } = props
-
-    const handleClick = (storyKey) => {
-        if (!storyKey) return;
-        props.navigate(location.pathname + '/' + storyKey)
-    }
-
-    const handleAdd = () => {
-        props.addStory(boardType)
-    }
-    
     return (
-        <div className="patch-container">
-            {items.map((storyKey, index) => {
-                return (
-                    <PatchGridItem
-                        key={`item-${storyKey}`}
-                        storyKey={storyKey}
-                        index={index}
-                        onClick={handleClick}
-                    />
-                )
-            })}
-            <EmptyGridComponent
-                className="patch-item"
-                text="New Patch"
-                onClick={handleAdd}
-            />
+        <div>
+            {items.map((storyKey, index) => (
+                <RoleGrid
+                    key={`item-${storyKey}`}
+                    storyKey={storyKey}
+                    index={index}
+                    axis="xy"
+                    transitionDuration={500}
+                    distance={2}
+                />
+            ))}
         </div>
     )
 })
-
-export default connect(
-    null,
-    {
-        addStory,
-        navigate,
-    }
-)(PatchGrid)

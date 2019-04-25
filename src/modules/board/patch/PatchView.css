@@ -7,7 +7,6 @@
 .patch-item {
     display: flex;
     flex-direction: column;
-    float: left;
     width: 20vw;
     height: 18vw;
     border-radius: 6px;

@@ -1,5 +1,6 @@
 import React from 'react'
 import './PatchView.css'
+import '../roles/RoleView.css'
 import { connect } from 'react-redux'
 
 import { boardType } from '../../fields/defaults'
@@ -12,26 +13,19 @@ function PatchView(props) {
     const { storyMap } = props
     const stories = storyMap[boardType.roles.key]
 
-    const areStories = !!stories
-
     const onSortEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
         props.moveStory(boardType.roles.key, oldIndex, newIndex)
     }
 
     return (
-        <div className="story-view">
-            {areStories &&
-                <PatchGrid
-                    {...props}
-                    items={stories}
-                    boardType={boardType.roles.key}
-                    onSortEnd={onSortEnd}
-                    axis={'xy'}
-                    transitionDuration={500}
-                    distance={2}
-                />
-            }
+        <div className="story-view" style={{flexDirection: "column"}}>
+            <PatchGrid
+                items={stories}
+                onSortEnd={onSortEnd}
+                transitionDuration={500}
+                distance={2}
+            />
         </div>
     )
 }

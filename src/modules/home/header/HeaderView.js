@@ -1,5 +1,6 @@
 import React from 'react'
 import './Header.css'
+import '../../board/board.css'
 import { connect } from 'react-redux'
 
 import { develmathType } from '../../navigation/paths'

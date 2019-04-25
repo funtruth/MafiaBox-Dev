@@ -1,4 +1,5 @@
 import React from 'react';
+import { palette } from './Colors'
 
 const getJustify = (justify) => {
     switch(justify) {
@@ -35,11 +36,9 @@ export default function Row(props) {
         x                   = '',
         className           = '',
         style,
+        color,
+        bg,
     } = props
-
-    const justifyContent    = getJustify(x)
-    const alignItems        = getAlign(y)
-    const padding           = getPadding(size)
 
     const classes = [
         '--row',
@@ -47,9 +46,11 @@ export default function Row(props) {
     ].join(" ")
 
     const bodyStyle = {
-        justifyContent,
-        alignItems,
-        padding,
+        justifyContent: getJustify(x),
+        alignItems: getAlign(y),
+        padding: getPadding(size),
+        backgroundColor: bg && palette(bg),
+        color: palette(color || 'whitish'),
         ...style,
     }
 

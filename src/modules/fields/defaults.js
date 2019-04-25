@@ -148,10 +148,15 @@ export const gameChoiceType = {
         title: 'Single Target',
         icon: 'mdi mdi-account',
     },
-    multitarget: {
-        key: 'multitarget',
+    multi: {
+        key: 'multi',
         title: 'Multiple Targets',
         icon: 'mdi mdi-account-multiple',
+    },
+    ordered: {
+        key: 'ordered',
+        title: 'Ordered Targets',
+        icon: 'mdi mdi-sort-numeric',
     },
     value: {
         key: 'value',
