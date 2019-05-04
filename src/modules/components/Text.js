@@ -1,4 +1,5 @@
 import React from 'react';
+import { palette } from './Colors';
 
 const getAlign = (align) => {
     switch(align) {
@@ -30,16 +31,6 @@ const getMarginTop = (size) => {
     }
 }
 
-const getColor = (color) => {
-    switch(color) {
-        case 'darkgrey':    return '#666'
-        case 'grey':        return '#999'
-        case 'lightgrey':   return '#bbb'
-        case 'whitish':     return '#ddd'
-        default:            return '#fff'
-    }
-}
-
 export default function Text(props) {
     const {
         children,
@@ -47,8 +38,8 @@ export default function Text(props) {
         underline,
         align = "",
         className = "",
-        size = 'medium',
-        color = '#fff',
+        size = 'm',
+        color = 'whitish',
         style,
     } = props
 
@@ -59,7 +50,7 @@ export default function Text(props) {
         letterSpacing: -0.4,
         alignSelf: getAlign(align),
         marginTop: getMarginTop(size),
-        color: getColor(color),
+        color: palette(color),
         ...style,
     }
 

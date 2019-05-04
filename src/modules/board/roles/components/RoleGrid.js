@@ -6,22 +6,20 @@ import {
     Row,
 } from '../../../components/Common';
 
+import PatchHeader from '../../patch/components/PatchHeader'
 import RoleGridItem from './RoleGridItem';
 
 export default connect(
     state => ({
         pageMap: state.page.pageMap,
-        storyRepo: state.page.storyRepo,
     })
 )(SortableContainer((props) => {
-    const { storyKey, pageMap, storyRepo } = props
+    const { storyKey, pageMap } = props
     const items = pageMap[storyKey] || []
     
     return (
         <div>
-            <Row bg="blackish" color="whitish" size="s">
-                {storyRepo[storyKey].title || 'Untitled'}
-            </Row>
+            <PatchHeader storyKey={storyKey}/>
             <Row size="s">
                 {items.map((pageKey, index) => {
                     return (

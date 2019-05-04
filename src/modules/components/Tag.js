@@ -5,6 +5,7 @@ import Text from './Text'
 
 export default function Tag(props) {
     const {
+        icon,
         children,
         onClick,
         className           = '',
@@ -29,6 +30,15 @@ export default function Tag(props) {
             style={buttonStyle}
             onClick={event => onClick && onClick({event})}
         >
+            {icon &&
+                <i
+                    className={icon}
+                    style={{
+                        fontSize: 15,
+                        marginRight: 6,
+                    }}
+                ></i>
+            }
             <Text size={size}>
                 {children}
             </Text>

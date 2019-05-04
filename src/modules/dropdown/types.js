@@ -26,6 +26,7 @@ export const dropdownType = {
     pickProject: 'dropdownType/pick-project',
 
     //board
+    editPatchName: 'dropdownType/edit-patch-name',
     patchItemOptions: 'dropdownType/patch-item-options',
     roleItemOptions: 'dropdownType/role-item-options',
 

@@ -84,6 +84,7 @@ import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
 import PickOperator from './logic/PickOperator';
+import EditPatchName from './board/EditPatchName';
 
 function DropdownView(props) {
     const { dropdownKeys } = props
@@ -132,6 +133,8 @@ function DropdownView(props) {
             case dropdownType.pickProject:
                 return <PickProject {...renderProps}/>
 
+            case dropdownType.editPatchName:
+                return <EditPatchName {...renderProps}/>
             case dropdownType.patchItemOptions:
                 return <PatchItemOptions {...renderProps}/>
             case dropdownType.roleItemOptions:
