@@ -7,7 +7,7 @@ import { dropdownType } from '../../dropdown/types'
 import { droppableType, updateSourceType } from '../../common/types';
 
 import { showModal } from '../../modal/ModalReducer'
-import { addPageToMap, updateStory } from '../../page/PageReducer'
+import { addPageToMap } from '../../page/PageReducer'
 
 const getItemStyle = (isDragging, draggableStyle) => ({
     // some basic styles to make the items look a bit nicer
@@ -41,9 +41,6 @@ function StoryList(props) {
     }
     const handleTitleClick = () => setShowInput(true)
     const handleTextBlur = () => {
-        props.updateStory(column.key, {
-            title,
-        })
         setShowInput(false)
     }
     
@@ -157,6 +154,5 @@ export default connect(
     {
         showModal,
         addPageToMap,
-        updateStory,
     }
 )(StoryList)

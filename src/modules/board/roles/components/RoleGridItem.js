@@ -9,6 +9,7 @@ import { dropdownType } from '../../../dropdown/types'
 import { boardType } from '../../../fields/defaults'
 
 import { DropClick } from '../../../components/Common';
+import { STOP_DROP_PROP } from '../../../common/arrows';
 
 const RoleGridItem = SortableElement((props) => {
     const { pageKey, pageRepo } = props
@@ -16,14 +17,13 @@ const RoleGridItem = SortableElement((props) => {
     const { title } = pageInfo
     
     const handleClick = (e) => {
-        if (e.target.classList.contains('role-grid-item')) {
-            props.showModal(modalType.showPage, {
-                pageKey,
-                path: [pageKey],
-                updateSource: updateSourceType.repo,
-                boardType: boardType.roles.key,
-            })
-        }
+        if (STOP_DROP_PROP(e)) return;
+        props.showModal(modalType.showPage, {
+            pageKey,
+            path: [pageKey],
+            updateSource: updateSourceType.repo,
+            boardType: boardType.roles.key,
+        })
     }
 
     return (

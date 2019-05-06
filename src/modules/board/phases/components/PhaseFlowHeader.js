@@ -1,77 +1,60 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 
+import { dropdownType } from '../../../dropdown/types';
 import { boardType } from '../../../fields/defaults'
 
 import {
-    updateStory,
-    addPageToMap,
+    addPageToMode,
 } from '../../../page/PageReducer'
 
+import {
+    DropClick,
+    Row,
+    Tag,
+    Text,
+} from '../../../components/Common';
+
 function PhaseFlowHeader(props) {
-    const { storyKey, storyRepo } = props
-    const storyInfo = storyRepo[storyKey] || {}
-    
-    let [title, setTitle] = useState("")
-    useEffect(() => {
-        setTitle(storyInfo.title)
-    }, [storyInfo.title])
-
-    let [showInput, setShowInput] = useState(false)
-
-    const handleText = (e) => setTitle(e.target.value)
-    const handleKeyPress = (e) => {
-        if(e.key === 'Enter') {    
-            e.target.blur() 
-        }
-    }
-    const handleTitleClick = () => setShowInput(true)
-    const handleTextBlur = () => {
-        if (title) {
-            props.updateStory(storyKey, {
-                title,
-            })
-        }
-        setShowInput(false)
-    }
+    const { modeKey, modeRepo } = props
+    const modeInfo = modeRepo[modeKey] || {}
+    const { title } = modeInfo
 
     const handleAdd = () => {
-        props.addPageToMap(storyKey, boardType.phases.key)
+        props.addPageToMode(modeKey, boardType.phases.key)
     }
 
     return (
-        <div className="role-header">
-            {showInput ?
-                <input
-                    className="role-header-input"
-                    value={title}
-                    placeholder="Untitled"
-                    onChange={handleText}
-                    autoFocus={true}
-                    onBlur={handleTextBlur}
-                    onKeyPress={handleKeyPress}
-                />
-                :<div className="row" style={{ alignItems: 'center' }} onClick={handleTitleClick}>
-                    <div className="role-header-title">
-                        {title || "Untitled"}
-                    </div>
-                    <i className="mdi mdi-pencil"></i>
-                </div>
-            }
-            <div className="role-grid-button" onClick={handleAdd}>
-                <i className="mdi mdi-plus" style={{ fontSize: 20 }}></i>
+        <Row bg="blackish" color="whitish" size="s" y="c">
+            <DropClick
+                dropdown={dropdownType.editPatchName}
+                params={{
+                    path: ['modeRepo', modeKey],
+                    attach: modeInfo,
+                }}
+                style={{
+                    marginRight: 'auto',
+                }}
+            >
+                <Text color={title ? 'whitish' : 'grey'}>
+                    {title || 'Untitled'}
+                </Text>
+            </DropClick>
+            <Tag
+                icon="mdi mdi-table-plus"
+                onClick={handleAdd}
+            >
                 Add
-            </div>
-        </div>
+            </Tag>
+        </Row>
     )
 }
 
 export default connect(
     state => ({
-        storyRepo: state.page.storyRepo,
+        modeRepo: state.page.modeRepo,
     }),
     {
-        updateStory,
-        addPageToMap,
+        addPageToMode,
     }
 )(PhaseFlowHeader)

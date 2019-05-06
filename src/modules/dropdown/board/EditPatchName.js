@@ -4,19 +4,20 @@ import { connect } from 'react-redux'
 import {
     useAutofocus,
 } from '../../hooks/Hooks'
-import { updateStory } from '../../page/PageReducer'
+import { updateGeneral } from '../../page/PageReducer'
 
 import {
     DropSubmit,
 } from '../components/Common'
 
+//PatchHeader, PhaseFlowHeader
 export default connect(
     null,
     {
-        updateStory,
+        updateGeneral,
     }
 )(function EditPatchName(props) {
-    const { attach, storyKey } = props
+    const { attach, path } = props
 
     const focusRef = useAutofocus()
 
@@ -33,7 +34,7 @@ export default connect(
     }
 
     const onSubmit = () => {
-        props.updateStory(storyKey, {title: value})
+        props.updateGeneral(path, {title: value})
         props.showDropdown()
     }
 

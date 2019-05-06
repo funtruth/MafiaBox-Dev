@@ -2,24 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { boardType } from '../../../fields/defaults'
-import { dropdownType } from '../../../dropdown/types';
 
 import {
-    updateStory,
     addPageToMap,
 } from '../../../page/PageReducer'
 
 import {
-    DropClick,
     Row,
     Tag,
     Text,
 } from '../../../components/Common';
 
 function RoleHeader(props) {
-    const { storyKey, storyRepo } = props
-    const storyInfo = storyRepo[storyKey] || {}
-    const { title } = storyInfo
+    const { storyKey } = props
 
     const handleAdd = () => {
         props.addPageToMap(storyKey, boardType.roles.key)
@@ -27,20 +22,7 @@ function RoleHeader(props) {
 
     return (
         <Row bg="blackish" color="whitish" size="s" y="c">
-            <DropClick
-                dropdown={dropdownType.editPatchName}
-                params={{
-                    storyKey,
-                    attach: storyInfo,
-                }}
-                style={{
-                    marginRight: 'auto',
-                }}
-            >
-                <Text color={title ? 'whitish' : 'grey'}>
-                    {title || 'Untitled'}
-                </Text>
-            </DropClick>
+            <Text align="c" style={{marginRight: 'auto'}}>Roles</Text>
             <Tag
                 icon="mdi mdi-table-plus"
                 onClick={handleAdd}
@@ -52,11 +34,8 @@ function RoleHeader(props) {
 }
 
 export default connect(
-    state => ({
-        storyRepo: state.page.storyRepo,
-    }),
+    null,
     {
-        updateStory,
         addPageToMap,
     }
 )(RoleHeader)

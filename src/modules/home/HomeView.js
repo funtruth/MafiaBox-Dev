@@ -23,6 +23,8 @@ export default function HomeView(props) {
                 <Switch>
                     <Route exact path="/" component={LandingView}/>
                     <Route exact path="/:projectKey" component={PatchView}/>
+                    <Route exact path="/:projectKey/mode/:modeKey" component={PhaseFlowView}/>
+
                     <Route exact path="/:projectKey/library" component={FunctionView}/>
                     <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
                     <Route exact path="/:projectKey/roles" component={PatchView}/>

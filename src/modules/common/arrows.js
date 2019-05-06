@@ -8,3 +8,5 @@ export const VARTYPE_IS_BOOL = i => i && i.variableTypes && i.variableTypes.incl
 export const VARTYPE_IS_UID = i => i && i.variableTypes && i.variableTypes.includes(variableType.uid.key)
 export const VARTYPE_IS_OBJ = i => i && i.variableTypes && i.variableTypes.includes(variableType.object.key)
 export const VARTYPE_IS_UID_OBJ = i => i && i.variableTypes && i.variableTypes.includes(variableType.uidObject.key)
+
+export const STOP_DROP_PROP = e => e.target.classList.contains('drop-click')

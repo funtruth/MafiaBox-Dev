@@ -5,7 +5,7 @@ import { genUID } from '../../common/helpers';
 import {
     useAutofocus
 } from '../../hooks/Hooks';
-import { updateGlobal } from '../../page/PageReducer'
+import { updateGeneral } from '../../page/PageReducer'
 
 import {
     DropTitle,
@@ -14,12 +14,13 @@ import {
 
 const KEYWORDS = []
 
+//PickGlobalVar
 export default connect(
     state => ({
         globalVars: state.page.globalVars,
     }),
     {
-        updateGlobal,
+        updateGeneral,
     }
 )(function CreateGlobalVar(props) {
     const { globalVars } = props
@@ -44,7 +45,7 @@ export default connect(
         }
 
         const newKey = genUID('global', globalVars)
-        props.updateGlobal([newKey], {
+        props.updateGeneral(['globalVars', newKey], {
             key: newKey,
             title: value,
         })

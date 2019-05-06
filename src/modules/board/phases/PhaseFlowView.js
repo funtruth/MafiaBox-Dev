@@ -7,12 +7,12 @@ import PhaseFlowDiagram from './components/PhaseFlowDiagram';
 export default function PhaseFlowView(props) {
     const { match } = props
     const { params } = match
-    const { storyKey } = params
+    const { modeKey } = params
 
     return (
         <>
-            <PhaseFlowHeader {...props} storyKey={storyKey}/>
-            <PhaseFlowDiagram {...props} storyKey={storyKey}/>
+            <PhaseFlowHeader {...props} modeKey={modeKey}/>
+            <PhaseFlowDiagram {...props} modeKey={modeKey}/>
         </>
     )
 }

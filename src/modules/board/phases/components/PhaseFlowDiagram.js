@@ -17,9 +17,11 @@ import {
     updateRepo,
 } from '../../../page/PageReducer'
 
+const get = (page) => (page && page.phaseMap) || []
+
 export default connect(
     state => ({
-        pageMap: state.page.pageMap,
+        modeRepo: state.page.modeRepo,
         pageRepo: state.page.pageRepo,
     }),
     {
@@ -27,7 +29,7 @@ export default connect(
         updateRepo,
     }
 )((props) => {
-    const { pageMap, pageRepo, boardType, storyKey } = props
+    const { modeRepo, pageRepo, boardType, modeKey } = props
     
     //action follows BaseAction props from storm-react-diagrams
     const mouseDown = action => {
@@ -66,9 +68,9 @@ export default connect(
     }
     
     //fetch the list
-    const [list, setList] = useState((pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey]))
+    const [list, setList] = useState(get(modeRepo[modeKey]).map(pageKey => pageRepo[pageKey]))
     useEffect(() => {
-        setList((pageMap[storyKey]||[]).map(pageKey => pageRepo[pageKey]))
+        setList(get(modeRepo[modeKey]).map(pageKey => pageRepo[pageKey]))
     }, [pageRepo])
 
     //setup the diagram engine

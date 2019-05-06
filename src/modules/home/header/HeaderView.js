@@ -3,7 +3,7 @@ import './Header.css'
 import '../../board/board.css'
 import { connect } from 'react-redux'
 
-import { pageType } from '../../navigation/paths'
+import { boardType } from '../../fields/defaults';
 
 import { navigate } from '../../navigation/NavReducer'
 
@@ -17,8 +17,8 @@ function HeaderView(props) {
     const paths = pathname.split('/')
 
     const getPathTitle = (key) => {
-        if (pageType[key]) {
-            return pageType[key] && pageType[key].label
+        if (boardType[key]) {
+            return boardType[key] && boardType[key].label
         }
         else {
             return (pageRepo[key] && pageRepo[key].title) || 'Untitled'

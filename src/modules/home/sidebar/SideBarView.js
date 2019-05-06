@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { pageType } from '../../navigation/paths'
+import { boardType } from '../../fields/defaults';
 
 import { navigate } from '../../navigation/NavReducer'
 
@@ -52,7 +52,7 @@ function SideBarView(props) {
         )
     }
 
-    const items = _.sortBy(pageType, i => i.index)
+    const items = _.sortBy(boardType, i => i.index)
 
     return (
         <div className="side-bar-view">

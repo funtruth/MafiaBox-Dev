@@ -13,8 +13,8 @@ const initialState = {
     pageMap: {},
     storyRepo: {},
     storyMap: {},
-    phaseRepo: {},
-    phaseMap: {},
+    modeRepo: {},
+    modeMap: {},
     fieldRepo: {},
     fieldMap: {},
     globalVars: {},
@@ -25,8 +25,8 @@ export const VALID_PROPS = [
     'pageMap',
     'storyRepo',
     'storyMap',
-    'phaseRepo',
-    'phaseMap',
+    'modeRepo',
+    'modeMap',
     'fieldRepo',
     'fieldMap',
     'globalVars',
@@ -37,6 +37,8 @@ const UPDATE_STORY = 'story/update-story'
 const REMOVE_STORY = 'story/remove-story'
 const MOVE_STORY = 'story/move-story'
 const ADD_PAGE = 'page/add-page'
+const ADD_MODE = 'page/add-mode'
+const ADD_PAGE_TO_MODE = 'page/add-page-to-mode'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 
@@ -51,6 +53,7 @@ const RESET_REDUCER = 'page/reset-reducer'
 
 const UPDATE_FIELD = 'page/update-field'
 const UPDATE_GLOBAL = 'page/update-global'
+const UPDATE_GENERAL = 'page/update-general'
 
 export function addStory() {
     return (dispatch, getState) => {
@@ -120,23 +123,6 @@ export function removeStory(boardType, storyKey) {
     }
 }
 
-export function updateStory(storyKey, update) {
-    return(dispatch, getState) => {
-        const { storyRepo } = getState().page
-
-        let storyRepoClone = _.cloneDeep(storyRepo)
-
-        Object.assign(storyRepoClone[storyKey], update)
-
-        dispatch(receiveAction({
-            type: UPDATE_STORY,
-            payload: {
-                storyRepo: storyRepoClone,
-            },
-        }))
-    }
-}
-
 export function moveStory(boardType, startIndex, endIndex) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
@@ -195,6 +181,88 @@ export function addPageToMap(storyKey, boardType) {
             payload: {
                 pageRepo: pageRepoClone,
                 pageMap: pageMapClone,
+            }
+        }))
+        dispatch(showModal(modalType.showPage, {
+            pageKey,
+            path: [pageKey],
+            updateSource: updateSourceType.repo,
+        }))
+    }
+}
+
+//ModeHeader
+export function addModeToPatch(storyKey) {
+    return (dispatch, getState) => {
+        const { modeRepo, modeMap } = getState().page
+
+        let modeRepoClone   = _.cloneDeep(modeRepo)
+        let modeMapClone    = _.cloneDeep(modeMap)
+        
+        const modeKey = helpers.genUID('mode', modeRepo)
+        
+        //set page info
+        modeRepoClone[modeKey] = {
+            modeKey,
+            storyKey,
+        }
+
+        //set page location
+        if (!_.isArray(modeMapClone[storyKey])) {
+            modeMapClone[storyKey] = []
+        }
+        modeMapClone[storyKey].unshift(modeKey)
+
+        dispatch(receiveAction({
+            type: ADD_MODE,
+            payload: {
+                modeRepo: modeRepoClone,
+                modeMap: modeMapClone,
+            }
+        }))
+    }
+}
+
+//PhaseFlowHeader
+export function addPageToMode(modeKey, boardType) {
+    return (dispatch, getState) => {
+        const { modeRepo, pageRepo, fieldRepo, fieldMap } = getState().page
+        const { storyKey } = modeRepo[modeKey]
+
+        let modeRepoClone   = _.cloneDeep(modeRepo)
+        let pageRepoClone   = _.cloneDeep(pageRepo)
+        
+        const pageKey = helpers.genUID(boardType, pageRepo)
+
+        //set-up defaults
+        let defaultInfo = {}
+        fieldMap[boardType].forEach(field => {
+            if (fieldRepo[field] && fieldRepo[field].defaultValue) {
+                defaultInfo[field] = fieldRepo[field].defaultValue
+            }
+        })
+        
+        //set page info
+        pageRepoClone[pageKey] = {
+            pageKey,
+            boardType,
+            modeKey,
+            storyKey,
+            ...defaultInfo,
+        }
+
+        //set page location in modeRepo.phaseMap
+        let pointer = modeRepoClone[modeKey]
+        if (!_.isArray(pointer.phaseMap)) {
+            pointer.phaseMap = []
+        }
+        pointer.phaseMap.unshift(pageKey)
+
+        dispatch(receiveAction({
+            type: ADD_PAGE_TO_MODE,
+            payload: {
+                modeRepo: modeRepoClone,
+                pageRepo: pageRepoClone,
             }
         }))
         dispatch(showModal(modalType.showPage, {
@@ -403,17 +471,15 @@ export function updateField(path, update) {
     }
 }
 
-export function updateGlobal(path, update) {
+export function updateGeneral(path, update) {
     return (dispatch, getState) => {
-        const { globalVars } = getState().page
+        const { page } = getState()
 
-        const repoClone = helpers.updateByPath(path, update, globalVars)
+        const reducer = helpers.updateByPath(path, update, page)
 
         dispatch(receiveAction({
-            type: UPDATE_GLOBAL,
-            payload: {
-                globalVars: repoClone,
-            },
+            type: UPDATE_GENERAL,
+            payload: reducer,
         }))
     }
 }
@@ -467,6 +533,8 @@ export default (state = initialState, action) => {
         case UPDATE_STORY:
         case MOVE_STORY:
         case ADD_PAGE:
+        case ADD_MODE:
+        case ADD_PAGE_TO_MODE:
         case PUBLISH_PAGE:
         case DIFF_PRIORITIES:
         case MOVE_PAGE_WITHIN_MAP:
@@ -477,6 +545,7 @@ export default (state = initialState, action) => {
         case UPDATE_REPO:
         case UPDATE_FIELD:
         case UPDATE_GLOBAL:
+        case UPDATE_GENERAL:
             return { ...state, ...action.payload }
         case RESET_REDUCER:
             return initialState;
