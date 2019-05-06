@@ -1,7 +1,7 @@
 import React from 'react';
 import './LogicButton.css'
 
-import { palette } from './Colors';
+import { palette } from './Standards';
 
 const getFont = (size) => {
     switch(size) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { palette } from './Colors'
+import { palette, padding } from './Standards'
 
 const getAlign = (align) => {
     switch(align) {
@@ -25,6 +25,7 @@ export default function Body(props) {
     const {
         children,
         size                = '',
+        sizes               = '',
         align               = '',
         className           = '',
         style,
@@ -39,7 +40,7 @@ export default function Body(props) {
 
     const bodyStyle = {
         alignItems: getAlign(align),
-        padding: getPadding(size),
+        padding: size ? getPadding(size) : sizes && padding(sizes),
         color: palette(color),
         bg: bg && palette(bg),
         ...style,

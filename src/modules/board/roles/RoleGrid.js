@@ -14,7 +14,7 @@ export default connect(
     const items = pageMap[storyKey] || []
     
     return (
-        <div style={{padding: '10px 14px'}}>
+        <div>
             {items.map((pageKey, index) => {
                 return (
                     <RoleGridItem

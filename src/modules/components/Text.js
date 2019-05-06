@@ -1,11 +1,12 @@
 import React from 'react';
-import { palette } from './Colors';
+import { palette } from './Standards';
 
 const getAlign = (align) => {
     switch(align) {
         case 'c':   return 'center'
         case 'r':   return 'flex-end'
-        default:    return 'flex-start'
+        case 'l':   return 'flex-start'
+        default:    return 'stretch'
     }
 }
 

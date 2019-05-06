@@ -1,16 +1,24 @@
 import React from 'react';
+import { palette } from './Standards'
 
-export default function Footer(props) {
+export default function Separator(props) {
     const {
-        size = 0,
+        t      = 2,
+        axis   = 'x',
+        bg     = '#464646',
+        size   = 0,
     } = props
 
+    const hor = axis === 'x'
+
     const sepStyle = {
-        height: 2,
-        backgroundColor: '#464646',
-        marginTop: size,
-        marginBottom: size,
-        width: '100%',
+        height: hor ? t : '100%',
+        backgroundColor: bg && palette(bg),
+        marginTop: hor ? size : 0,
+        marginBottom: hor ? size : 0,
+        marginLeft: hor ? 0: size,
+        marginRight: hor ? 0 : size,
+        width: hor ? '100%' : t,
     }
 
     return (

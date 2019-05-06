@@ -14,16 +14,14 @@ export default connect(
     const items = modeMap[storyKey] || []
     
     return (
-        <div style={{padding: '10px 14px'}}>
-            {items.map((modeKey, index) => {
-                return (
-                    <ModeGridItem
-                        key={modeKey}
-                        modeKey={modeKey}
-                        index={index}
-                    />
-                )
-            })}
+        <div>
+            {items.map((modeKey, index) => (
+                <ModeGridItem
+                    key={modeKey}
+                    modeKey={modeKey}
+                    index={index}
+                />
+            ))}
         </div>
     )
 }))

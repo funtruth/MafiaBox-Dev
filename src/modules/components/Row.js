@@ -1,11 +1,12 @@
 import React from 'react';
-import { palette } from './Colors'
+import { palette, padding } from './Standards'
 
 const getJustify = (justify) => {
     switch(justify) {
         case 'c':           return 'center'
         case 'r':           return 'flex-end'
-        default:            return 'flex-start'
+        case 'l':           return 'flex-start'
+        default:            return 'stretch'
     }
 }
 
@@ -13,7 +14,8 @@ const getAlign = (align) => {
     switch(align) {
         case 'c':           return 'center'
         case 'e':           return 'flex-end'
-        default:            return 'flex-start'
+        case 's':           return 'flex-start'
+        default:            return 'stretch'
     }
 }
 
@@ -32,12 +34,14 @@ export default function Row(props) {
     const {
         children,
         size                = '',
+        sizes               = '',
         y                   = '',
         x                   = '',
         className           = '',
         style,
         color,
         bg,
+        onClick,
     } = props
 
     const classes = [
@@ -48,7 +52,7 @@ export default function Row(props) {
     const bodyStyle = {
         justifyContent: getJustify(x),
         alignItems: getAlign(y),
-        padding: getPadding(size),
+        padding: size ? getPadding(size) : sizes && padding(sizes),
         backgroundColor: bg && palette(bg),
         color: palette(color || 'whitish'),
         ...style,
@@ -58,6 +62,7 @@ export default function Row(props) {
         <div
             className={classes}
             style={bodyStyle}
+            onClick={event => onClick && onClick(event)}
         >
             {children}
         </div>

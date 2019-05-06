@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
+import _ from 'lodash'
 import {
 	DiagramEngine,
 	DiagramModel,
@@ -68,9 +69,10 @@ export default connect(
     }
     
     //fetch the list
-    const [list, setList] = useState(get(modeRepo[modeKey]).map(pageKey => pageRepo[pageKey]))
+    const phaseMap = get(modeRepo[modeKey])
+    const [list, setList] = useState(phaseMap.map(pageKey => pageRepo[pageKey]))
     useEffect(() => {
-        setList(get(modeRepo[modeKey]).map(pageKey => pageRepo[pageKey]))
+        setList(phaseMap.map(pageKey => pageRepo[pageKey]))
     }, [pageRepo])
 
     //setup the diagram engine
