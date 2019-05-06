@@ -2,6 +2,7 @@ import React from 'react'
 import './PatchView.css'
 import '../roles/RoleView.css'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import { boardType } from '../../fields/defaults'
 
@@ -11,17 +12,18 @@ import PatchGrid from './components/PatchGrid';
 
 function PatchView(props) {
     const { storyMap } = props
-    const stories = storyMap[boardType.roles.key]
 
     const onSortEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
         props.moveStory(boardType.roles.key, oldIndex, newIndex)
     }
 
+    const items = _.toArray(storyMap)
+
     return (
         <div className="story-view" style={{flexDirection: "column"}}>
             <PatchGrid
-                items={stories}
+                items={items}
                 onSortEnd={onSortEnd}
                 transitionDuration={500}
                 distance={2}

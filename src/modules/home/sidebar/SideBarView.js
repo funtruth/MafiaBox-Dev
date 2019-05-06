@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { develmathType } from '../../navigation/paths'
+import { pageType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
 
@@ -28,7 +28,9 @@ function SideBarView(props) {
         if (!activeProject) {
             return;
         }
-        props.navigate("/" + activeProject + "/" + item.key)
+
+        console.warn('this is incomplete.')
+        return;
     }
 
     let renderItem = (item) => {
@@ -50,7 +52,7 @@ function SideBarView(props) {
         )
     }
 
-    const items = _.sortBy(develmathType, i => i.index)
+    const items = _.sortBy(pageType, i => i.index)
 
     return (
         <div className="side-bar-view">

@@ -3,7 +3,7 @@ import './Header.css'
 import '../../board/board.css'
 import { connect } from 'react-redux'
 
-import { develmathType } from '../../navigation/paths'
+import { pageType } from '../../navigation/paths'
 
 import { navigate } from '../../navigation/NavReducer'
 
@@ -15,13 +15,10 @@ function HeaderView(props) {
     const { pathname } = location
     
     const paths = pathname.split('/')
-    const boardPath = paths[2] || ""
-
-    const { addStory } = develmathType[boardPath] || {}
 
     const getPathTitle = (key) => {
-        if (develmathType[key]) {
-            return develmathType[key] && develmathType[key].label
+        if (pageType[key]) {
+            return pageType[key] && pageType[key].label
         }
         else {
             return (pageRepo[key] && pageRepo[key].title) || 'Untitled'
@@ -58,7 +55,7 @@ function HeaderView(props) {
         <div className="header">
             {renderPath()}
             <HeaderSearch/>
-            {addStory && <HeaderAddStory boardType={boardPath}/>}
+            <HeaderAddStory/>
         </div>
     )
 }

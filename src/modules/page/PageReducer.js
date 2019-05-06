@@ -13,16 +13,20 @@ const initialState = {
     pageMap: {},
     storyRepo: {},
     storyMap: {},
+    phaseRepo: {},
+    phaseMap: {},
     fieldRepo: {},
     fieldMap: {},
     globalVars: {},
 }
 
-const VALID_PROPS = [
+export const VALID_PROPS = [
     'pageRepo',
     'pageMap',
     'storyRepo',
     'storyMap',
+    'phaseRepo',
+    'phaseMap',
     'fieldRepo',
     'fieldMap',
     'globalVars',
@@ -48,7 +52,7 @@ const RESET_REDUCER = 'page/reset-reducer'
 const UPDATE_FIELD = 'page/update-field'
 const UPDATE_GLOBAL = 'page/update-global'
 
-export function addStory(boardType) {
+export function addStory() {
     return (dispatch, getState) => {
         const { storyRepo, storyMap } = getState().page
 
@@ -57,17 +61,16 @@ export function addStory(boardType) {
 
         const storyKey = helpers.genUID('story', storyRepo)
 
-        if (!storyMapClone[boardType]) {
-            storyMapClone[boardType] = []
+        if (!storyMapClone) {
+            storyMapClone = {}
         }
 
         //add story
-        storyMapClone[boardType].push(storyKey)
+        storyMapClone[Object.keys(storyMapClone).length] = storyKey
         storyRepoClone[storyKey] = {
             key: storyKey,
             publishKey: storyKey + "-live",
             title: "",
-            boardType,
             default: false,
         }
 
@@ -313,15 +316,7 @@ export function removePage(pageKey, storyKey) {
 
 export function resetPageReducer() {
     return (dispatch) => {
-        dispatch({
-            type: RESET_REDUCER,
-            payload: {
-                pageRepo: {},
-                pageMap: {},
-                storyRepo: {},
-                storyMap: {},
-            },
-        })
+        dispatch({type: RESET_REDUCER})
     }
 }
 
@@ -434,6 +429,10 @@ export function receiveAction({type, payload}) {
             pathToRepo = `dev/${activeProject}/`;
 
         const handleDiff = (item) => {
+            if (!item.path) {
+                return batchUpdate[prop] = item.rhs || ""
+            }
+
             switch(item.kind) {
                 case "A":
                     batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || ""
@@ -476,10 +475,11 @@ export default (state = initialState, action) => {
         case RECEIVE_EVENT:
         case RECEIVE_CHILD_EVENT:
         case UPDATE_REPO:
-        case RESET_REDUCER:
         case UPDATE_FIELD:
         case UPDATE_GLOBAL:
             return { ...state, ...action.payload }
+        case RESET_REDUCER:
+            return initialState;
         default:
             return state;
     }

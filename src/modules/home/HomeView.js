@@ -6,7 +6,6 @@ import SideBarView from './sidebar/SideBarView';
 import HeaderView from './header/HeaderView';
 
 import LandingView from './landing/LandingView'
-import DashboardView from './dashboard/DashboardView'
 import FunctionView from '../board/views/FunctionView'
 import PatchView from '../board/patch/PatchView';
 import PhaseModeView from '../board/patch/PhaseModeView';
@@ -23,7 +22,7 @@ export default function HomeView(props) {
                 <HeaderView {...props}/>
                 <Switch>
                     <Route exact path="/" component={LandingView}/>
-                    <Route exact path="/:projectKey" component={DashboardView}/>
+                    <Route exact path="/:projectKey" component={PatchView}/>
                     <Route exact path="/:projectKey/library" component={FunctionView}/>
                     <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
                     <Route exact path="/:projectKey/roles" component={PatchView}/>

@@ -1,4 +1,4 @@
-export const develmathType = {
+export const pageType = {
     roles: {
         key: 'roles',
         index: 0,

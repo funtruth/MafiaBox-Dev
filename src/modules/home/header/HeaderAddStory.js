@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 import { addStory } from '../../page/PageReducer'
 
 function HeaderAddStory(props) {
-    const { boardType } = props
-    
-    const handleClick = () => {
-        props.addStory(boardType)
-    }
+    const handleClick = () => props.addStory()
 
     return (
         <div
