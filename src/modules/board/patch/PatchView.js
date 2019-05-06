@@ -1,6 +1,5 @@
 import React from 'react'
 import './PatchView.css'
-import '../roles/RoleView.css'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
