@@ -28,7 +28,7 @@ export default function GeneralTagField(props) {
                     defaultValue,
                 }}
             >
-                <Tag theme={active ? 'purple' : 'black'}>
+                <Tag bg={active ? 'purple' : 'black'}>
                     {item.title}
                 </Tag>
             </DropClick>
@@ -47,7 +47,7 @@ export default function GeneralTagField(props) {
                     placeholder: "Tag name ...",
                 }}
             >
-                <Tag theme="darkgrey">new tag</Tag>
+                <Tag bg="darkgrey">new tag</Tag>
             </DropClick>
         </div>
     )

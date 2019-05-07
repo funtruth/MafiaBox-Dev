@@ -49,7 +49,7 @@ export default function ReplaceWildcard(props) {
             return (
                 <Tag
                     key={index}
-                    theme="red"
+                    bg="maroon"
                     onClick={() => setTarget(index)}
                     style={{
                         position: 'relative',
@@ -70,7 +70,7 @@ export default function ReplaceWildcard(props) {
             return (
                 <Tag
                     key={index}
-                    theme="violet"
+                    bg="violet"
                     onClick={() => setTarget(index)}
                     style={{
                         position: 'relative',
@@ -83,7 +83,7 @@ export default function ReplaceWildcard(props) {
         }
 
         return (
-            <Tag key={index} theme="grey">
+            <Tag key={index} bg="grey">
                 {field}
             </Tag>
         )

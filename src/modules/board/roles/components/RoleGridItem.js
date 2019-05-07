@@ -33,8 +33,8 @@ const RoleGridItem = SortableElement((props) => {
     }
 
     return (
-        <Row sizes={['xs', 'xxl']} bg="charcoal" y="c" onClick={handleClick} style={{border: '1px solid #333'}}>
-            <Text color="lightgrey" size="m" align="c" style={{marginRight: 'auto'}}>{title || 'Untitled'}</Text>
+        <Row sizes={['xxs', 'xxl']} bg="charcoal" y="c" onClick={handleClick} style={{border: '1px solid #333'}}>
+            <Text color="lightgrey" size="s" align="c" style={{marginRight: 'auto'}}>{title || 'Untitled'}</Text>
             <DropClick
                 className="patch-item-option"
                 dropdown={dropdownType.roleItemOptions}

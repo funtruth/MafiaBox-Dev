@@ -118,7 +118,7 @@ export default function GameChoiceField(props) {
                     placeholder: "Name the choice ...",
                 }}
             >
-                <Tag theme="darkgrey">
+                <Tag bg="darkgrey">
                     add choice
                 </Tag>
             </DropClick>

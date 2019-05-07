@@ -11,7 +11,7 @@ import {
 } from '../../../components/Common';
 import { IS_PUBLISHED } from '../../../common/arrows';
 
-const PatchGrid = SortableContainer((props) => {
+const PatchItem = SortableContainer((props) => {
     const { items, pageMap, pageRepo, modeMap, modeRepo } = props
 
     const [tab, setTab] = useState(0)
@@ -70,4 +70,4 @@ export default connect(
         pageMap: state.page.pageMap,
         pageRepo: state.page.pageRepo,
     })
-)(PatchGrid)
+)(PatchItem)

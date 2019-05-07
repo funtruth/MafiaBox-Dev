@@ -9,4 +9,10 @@ export const VARTYPE_IS_UID = i => i && i.variableTypes && i.variableTypes.inclu
 export const VARTYPE_IS_OBJ = i => i && i.variableTypes && i.variableTypes.includes(variableType.object.key)
 export const VARTYPE_IS_UID_OBJ = i => i && i.variableTypes && i.variableTypes.includes(variableType.uidObject.key)
 
+//stop DropClick propagation
 export const STOP_DROP_PROP = e => e.target.classList.contains('drop-click')
+
+export const IS_PUBLISHED = (key, repo) => {
+    if (!key || !repo) return console.warn('invalid arguments.')
+    return !!(repo[key] && repo[key].publishInfo && repo[key].publishInfo.published)
+}

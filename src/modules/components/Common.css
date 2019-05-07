@@ -38,3 +38,14 @@
     flex-direction: row;
     min-height: 20px;
 }
+.--tag {
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 3px;
+    display: flex;
+    flex-direction: row;
+}
+.--tag:hover {
+    filter: brightness(120%);
+}

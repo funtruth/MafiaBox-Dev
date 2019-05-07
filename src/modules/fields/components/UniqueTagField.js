@@ -28,7 +28,7 @@ export default function UniqueTagField(props) {
                     defaultValue,
                 }}
             >
-                <Tag theme={active ? 'yellow' : 'black'}>
+                <Tag bg={active ? 'yellow' : 'black'}>
                     {item.title}
                 </Tag>
             </DropClick>
@@ -48,7 +48,7 @@ export default function UniqueTagField(props) {
                         placeholder: "Team name ...",
                     }}
                 >
-                    <Tag theme="darkgrey">add team</Tag>
+                    <Tag bg="darkgrey">add team</Tag>
                 </DropClick>
             }
         </div>

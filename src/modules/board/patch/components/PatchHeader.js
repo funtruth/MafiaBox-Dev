@@ -18,16 +18,40 @@ import {
 } from '../../../components/Common';
 
 function PatchHeader(props) {
-    const { storyKey, storyRepo, tab, setTab } = props
+    const { storyKey, storyRepo, tab, setTab, tabbedData } = props
     const storyInfo = storyRepo[storyKey] || {}
     const { title } = storyInfo
 
     const handleAdd = () => {
         if (tab === 0) {
             props.addPageToMap(storyKey, boardType.roles.key)
-        } else if (tab === 1) {
+        } else if (tab === 2) {
             props.addModeToPatch(storyKey)
         }
+    }
+
+    const renderTag = (tabIndex, text) => {
+        const active = tabIndex === tab
+        return (
+            <Tag bg={active && 'violet'} onClick={() => setTab(tabIndex)}>
+                {`${text} (${tabbedData[tabIndex].length})`}
+            </Tag>
+        )
+    }
+
+    const renderAdd = () => {
+        if (tab === 1 || tab === 3) return null;
+        return (
+            <Tag
+                icon="mdi mdi-table-plus"
+                onClick={handleAdd}
+                style={{
+                    marginLeft: 'auto',
+                }}
+            >
+                Add
+            </Tag>
+        )
     }
 
     return (
@@ -49,26 +73,18 @@ function PatchHeader(props) {
             <Body sizes={['z', 's']}>
                 <Text style={{marginLeft: 8}}>Roles</Text>
                 <Row>
-                    <Tag onClick={() => setTab(0)}>In Progress</Tag>
-                    <Tag onClick={() => setTab(0)}>Published</Tag>
+                    {renderTag(0, 'In Progress')}
+                    {renderTag(1, 'Published')}
                 </Row>
             </Body>
             <Body sizes={['z', 's']}>
                 <Text style={{marginLeft: 8}}>Game Modes</Text>
                 <Row>
-                    <Tag onClick={() => setTab(1)}>In Progress</Tag>
-                    <Tag onClick={() => setTab(1)}>Published</Tag>
+                    {renderTag(2, 'In Progress')}
+                    {renderTag(3, 'Published')}
                 </Row>
             </Body>
-            <Tag
-                icon="mdi mdi-table-plus"
-                onClick={handleAdd}
-                style={{
-                    marginLeft: 'auto',
-                }}
-            >
-                Add
-            </Tag>
+            {renderAdd()}
         </Row>
     )
 }

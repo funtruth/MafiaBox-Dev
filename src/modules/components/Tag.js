@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tag.css'
+import { palette } from './Standards';
 
 import Text from './Text'
 
@@ -10,17 +10,17 @@ export default function Tag(props) {
         onClick,
         className           = '',
         size                = 's',
-        theme               = 'black',
+        bg                  = 'charcoal',
         style,
     } = props
 
     const classes = [
         '--tag',
-        `--tag-${theme}`,
         className,
     ].join(" ")
 
     const buttonStyle = {
+        backgroundColor: palette(bg),
         ...style,
     }
     

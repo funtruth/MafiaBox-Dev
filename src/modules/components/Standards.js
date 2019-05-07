@@ -9,9 +9,14 @@ export function palette(color) {
         case 'whitish':     return '#ddd'
         case 'white':       return '#fff'
         case 'transparent': return 'transparent'
+
         case 'blue':        return '#18449b'
+        case 'purple':      return '#6279CA'
         case 'red':         return '#db4757'
+        case 'maroon':      return '#B34B50'
+        case 'yellow':      return '#fed766'
         case 'pink':        return '#a566b0'
+        case 'violet':      return 'mediumslateblue'
         default:            return color
     }
 }
