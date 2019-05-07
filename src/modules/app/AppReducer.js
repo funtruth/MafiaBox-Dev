@@ -14,6 +14,11 @@ const initialState = {
     prefs: {},
 }
 
+export const PREF_KEY = {
+    PATCH_HEADER_TAB: 'patch-header-tab',
+    EDIT_PRIO_SWITCH: 'edit-prio-switch',
+}
+
 const SET_PREF = 'app/set-preference'
 
 export function setPref(key, value) {

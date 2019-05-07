@@ -3,10 +3,11 @@ import './EditPriority.css'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
-import { prefType } from '../../app/PrefKeys'
-
 import { diffPriorities } from '../../page/PageReducer'
-import { setPref } from '../../app/AppReducer'
+import {
+    setPref,
+    PREF_KEY,
+} from '../../app/AppReducer'
 
 import {
     Header,
@@ -49,11 +50,11 @@ function EditPriority(props) {
         props.setWorkspace(workspaceClone)
     }
 
-    const prefValue = prefs[prefType.EDIT_PRIO_SWITCH]
+    const prefValue = prefs[PREF_KEY.EDIT_PRIO_SWITCH]
     const [switched, setSwitched] = useState(prefValue || false)
     const handleSwitch = () => {
         setSwitched(!switched)
-        props.setPref(prefType.EDIT_PRIO_SWITCH, !switched)
+        props.setPref(PREF_KEY.EDIT_PRIO_SWITCH, !switched)
     }
     
     return (

@@ -1,5 +1,4 @@
 import React from 'react'
-import './RoleGrid.css'
 import { SortableContainer } from 'react-sortable-hoc';
 
 import RoleGridItem from './components/RoleGridItem';

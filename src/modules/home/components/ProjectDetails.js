@@ -7,9 +7,12 @@ import { dropdownType } from '../../dropdown/types'
 
 import { projectListener } from '../../firebase/FirebaseReducer'
 import {
+    receiveValue,
     receiveEvent,
     receiveDeleteEvent,
     VALID_PROPS,
+    PROP_LISTENERS,
+    LISTENER_TYPE,
 } from '../../page/PageReducer'
 
 import ProjectNewItem from './ProjectNewItem';
@@ -26,9 +29,18 @@ function ProjectDetails(props) {
         let listeners = []
         VALID_PROPS.forEach(key => {
             const ref = firebase.database().ref(`dev/${activeProject}/${key}`)
-            ref.on('child_added', snap => props.receiveEvent(snap, key))
-            ref.on('child_changed', snap => props.receiveEvent(snap, key))
-            ref.on('child_removed', snap => props.receiveDeleteEvent(snap, key))
+            switch(PROP_LISTENERS[key]) {
+                case LISTENER_TYPE.value:
+                    ref.on('value', snap => props.receiveValue(snap, key))
+                    break
+                case LISTENER_TYPE.children:
+                    ref.on('child_added', snap => props.receiveEvent(snap, key))
+                    ref.on('child_changed', snap => props.receiveEvent(snap, key))
+                    ref.on('child_removed', snap => props.receiveDeleteEvent(snap, key))
+                    break
+                default:
+                    console.warn('invalid listener type.')
+            }
             listeners.push(ref)
         })
 
@@ -54,6 +66,7 @@ export default connect(
     null,
     {
         projectListener,
+        receiveValue,
         receiveEvent,
         receiveDeleteEvent,
     }

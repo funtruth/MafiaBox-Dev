@@ -32,6 +32,23 @@ export const VALID_PROPS = [
     'globalVars',
 ]
 
+export const PROP_LISTENERS = {
+    pageRepo: 'children',
+    pageMap: 'children',
+    storyRepo: 'children',
+    storyMap: 'value',
+    modeRepo: 'children',
+    modeMap: 'children',
+    fieldRepo: 'children',
+    fieldMap: 'children',
+    globalVars: 'children',
+}
+
+export const LISTENER_TYPE = {
+    children: 'children',
+    value: 'value',
+}
+
 const ADD_STORY = 'story/add-story-to'
 const UPDATE_STORY = 'story/update-story'
 const REMOVE_STORY = 'story/remove-story'
@@ -49,6 +66,7 @@ const DIFF_PRIORITIES = 'page/diff-priorities'
 
 const RECEIVE_EVENT = 'page/receive-event'
 const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
+const RECEIVE_VALUE = 'page/receive-value'
 const RESET_REDUCER = 'page/reset-reducer'
 
 const UPDATE_FIELD = 'page/update-field'
@@ -123,18 +141,20 @@ export function removeStory(boardType, storyKey) {
     }
 }
 
-export function moveStory(boardType, startIndex, endIndex) {
+export function moveStory(startIndex, endIndex) {
     return (dispatch, getState) => {
         const { storyMap } = getState().page
 
+        //convert []-like {} to []
         let storyMapClone = _.cloneDeep(storyMap)
-
-        //set pointer
-        let pointer = storyMapClone[boardType]
+        let storyMapArray = _.toArray(storyMapClone)
 
         //move item
-        const [removed] = pointer.splice(startIndex, 1)
-        pointer.splice(endIndex, 0, removed)
+        const [removed] = storyMapArray.splice(startIndex, 1)
+        storyMapArray.splice(endIndex, 0, removed)
+
+        //convert [] to []-like {}
+        storyMapClone = _.toPlainObject(storyMapArray)
         
         dispatch(receiveAction({
             type: MOVE_STORY,
@@ -273,14 +293,15 @@ export function addPageToMode(modeKey, boardType) {
     }
 }
 
-export function movePageWithinMap(storyKey, startIndex, endIndex) {
+//PatchItem
+export function movePageWithinMap(stateKey, storyKey, startIndex, endIndex) {
     return (dispatch, getState) => {
-        const { pageMap } = getState().page
+        const map = getState().page[stateKey]
         
-        let pageMapClone = _.cloneDeep(pageMap)
+        let mapClone = _.cloneDeep(map)
 
         //set pointer
-        let pointer = pageMapClone[storyKey]
+        let pointer = mapClone[storyKey]
         
         //move item
         const [removed] = pointer.splice(startIndex, 1)
@@ -289,7 +310,7 @@ export function movePageWithinMap(storyKey, startIndex, endIndex) {
         dispatch(receiveAction({
             type: MOVE_PAGE_WITHIN_MAP,
             payload: {
-                pageMap: pageMapClone,
+                [stateKey]: mapClone,
             },
         }))
     }
@@ -388,6 +409,20 @@ export function resetPageReducer() {
     }
 }
 
+export function receiveValue(snap, key) {
+    return (dispatch, getState) => {
+        const { page } = getState()
+
+        let stateClone = _.cloneDeep(page)
+        stateClone[key] = _.toPlainObject(snap.val())
+        
+        dispatch({
+            type: RECEIVE_VALUE,
+            payload: stateClone,
+        })
+    }
+}
+
 export function receiveEvent(snap, key) {
     return (dispatch, getState) => {
         const { page } = getState()
@@ -395,7 +430,7 @@ export function receiveEvent(snap, key) {
         let stateClone = _.cloneDeep(page)
         if (!stateClone[key]) stateClone[key] = {}
         stateClone[key][snap.key] = snap.val()
-
+        
         dispatch({
             type: RECEIVE_CHILD_EVENT,
             payload: stateClone,
@@ -507,7 +542,7 @@ export function receiveAction({type, payload}) {
                     batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || ""
             }
         }
-
+        
         for (var prop in payload) {
             if (!VALID_PROPS.includes(prop)) {
                 console.warn('This is not a valid prop', prop, 'error coming from action:', type)
@@ -542,6 +577,7 @@ export default (state = initialState, action) => {
         case REMOVE_PAGE:
         case RECEIVE_EVENT:
         case RECEIVE_CHILD_EVENT:
+        case RECEIVE_VALUE:
         case UPDATE_REPO:
         case UPDATE_FIELD:
         case UPDATE_GLOBAL:

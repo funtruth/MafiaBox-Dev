@@ -8,6 +8,7 @@ import {
     addPageToMap,
     addModeToPatch,
 } from '../../../page/PageReducer'
+import { setPref, PREF_KEY } from '../../../app/AppReducer'
 
 import {
     Body,
@@ -18,7 +19,7 @@ import {
 } from '../../../components/Common';
 
 function PatchHeader(props) {
-    const { storyKey, storyRepo, tab, setTab, tabbedData } = props
+    const { storyKey, storyRepo, tab, setTab, tabbedData, prefs } = props
     const storyInfo = storyRepo[storyKey] || {}
     const { title } = storyInfo
 
@@ -30,10 +31,19 @@ function PatchHeader(props) {
         }
     }
 
+    const handleTabClick = (index) => {
+        setTab(index)
+
+        //save preference for future mount
+        const newPref = prefs[PREF_KEY.PATCH_HEADER_TAB] || {}
+        newPref[storyKey] = index
+        props.setPref(PREF_KEY.PATCH_HEADER_TAB, newPref)   
+    }
+
     const renderTag = (tabIndex, text) => {
         const active = tabIndex === tab
         return (
-            <Tag bg={active && 'violet'} onClick={() => setTab(tabIndex)}>
+            <Tag bg={active ? 'violet' : 'charcoal'} onClick={() => handleTabClick(tabIndex)}>
                 {`${text} (${tabbedData[tabIndex].length})`}
             </Tag>
         )
@@ -70,14 +80,14 @@ function PatchHeader(props) {
                     {title || 'Untitled'}
                 </Text>
             </DropClick>
-            <Body sizes={['z', 's']}>
+            <Body>
                 <Text style={{marginLeft: 8}}>Roles</Text>
                 <Row>
                     {renderTag(0, 'In Progress')}
                     {renderTag(1, 'Published')}
                 </Row>
             </Body>
-            <Body sizes={['z', 's']}>
+            <Body>
                 <Text style={{marginLeft: 8}}>Game Modes</Text>
                 <Row>
                     {renderTag(2, 'In Progress')}
@@ -92,9 +102,11 @@ function PatchHeader(props) {
 export default connect(
     state => ({
         storyRepo: state.page.storyRepo,
+        prefs: state.app.prefs,
     }),
     {
         addPageToMap,
         addModeToPatch,
+        setPref,
     }
 )(PatchHeader)

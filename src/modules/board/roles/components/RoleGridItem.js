@@ -14,6 +14,7 @@ import { STOP_DROP_PROP } from '../../../common/arrows';
 import {
     DropClick,
     Row,
+    Tag,
     Text,
 } from '../../../components/Common';
 
@@ -36,7 +37,6 @@ const RoleGridItem = SortableElement((props) => {
         <Row sizes={['xxs', 'xxl']} bg="charcoal" y="c" onClick={handleClick} style={{border: '1px solid #333'}}>
             <Text color="lightgrey" size="s" align="c" style={{marginRight: 'auto'}}>{title || 'Untitled'}</Text>
             <DropClick
-                className="patch-item-option"
                 dropdown={dropdownType.roleItemOptions}
                 params={{
                     attach: pageInfo,
@@ -46,7 +46,7 @@ const RoleGridItem = SortableElement((props) => {
                     borderRadius: 8,    
                 }}
             >
-                <i className="mdi mdi-dots-horizontal"></i>
+                <Tag icon="mdi mdi-dots-horizontal"></Tag>
             </DropClick>
         </Row>
     )

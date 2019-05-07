@@ -1,20 +1,32 @@
 import React from 'react'
-import './PatchView.css'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-
-import { boardType } from '../../fields/defaults'
+import { SortableContainer } from 'react-sortable-hoc'
 
 import { moveStory } from '../../page/PageReducer'
 
-import PatchGrid from './components/PatchGrid';
+import PatchItem from './components/PatchItem';
+
+const PatchGrid = SortableContainer(({items}) => {
+    return (
+        <div>
+            {items.map((storyKey, index) => (
+                <PatchItem
+                    key={`patch-${storyKey}`}
+                    index={index}
+                    storyKey={storyKey}
+                />
+            ))}
+        </div>
+    )
+})
 
 function PatchView(props) {
     const { storyMap } = props
 
     const onSortEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
-        props.moveStory(boardType.roles.key, oldIndex, newIndex)
+        props.moveStory(oldIndex, newIndex)
     }
 
     const items = _.toArray(storyMap)

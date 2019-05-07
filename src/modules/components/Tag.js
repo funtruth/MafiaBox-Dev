@@ -35,7 +35,7 @@ export default function Tag(props) {
                     className={icon}
                     style={{
                         fontSize: 15,
-                        marginRight: 6,
+                        marginRight: children ? 6 : 0,
                     }}
                 ></i>
             }
