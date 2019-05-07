@@ -28,7 +28,7 @@ export default function UniqueTagField(props) {
                     defaultValue,
                 }}
             >
-                <Tag bg={active ? 'yellow' : 'black'}>
+                <Tag bg={active ? 'active' : 'black'}>
                     {item.title}
                 </Tag>
             </DropClick>

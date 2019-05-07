@@ -12,7 +12,7 @@ function HeaderAddStory(props) {
             onClick={handleClick}
         >
             <i className="mdi mdi-table-plus option-icon"></i>
-            <div style={{ marginLeft: 6 }}>Add Story</div>
+            <div style={{ marginLeft: 6 }}>New Patch</div>
         </div>
     )
 }

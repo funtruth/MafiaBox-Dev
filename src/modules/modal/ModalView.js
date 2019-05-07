@@ -24,6 +24,8 @@ import ModalCodeView from './components/ModalCodeView'
 import DialogSave from './dialogs/DialogSave';
 import DeleteLogic from './dialogs/DeleteLogic'
 
+import PublishWithSource from './page/PublishWithSource';
+
 import EditTrigger from './trigger/EditTrigger'
 import EditEvent from './event/EditEvent'
 import EditToast from './toast/EditToast'
@@ -63,6 +65,9 @@ class ModalView extends React.Component {
                 return <DialogSave {...props}/>
             case modalType.deleteLogic:
                 return <DeleteLogic {...props}/>
+
+            case modalType.publishWithSource:
+                return <PublishWithSource {...props}/>
 
             case modalType.editTrigger:
                 return <EditTrigger {...props}/>

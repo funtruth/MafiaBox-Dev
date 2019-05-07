@@ -3,6 +3,7 @@ export function palette(color) {
         case 'black':       return '#000'
         case 'blackish':    return '#202225'
         case 'charcoal':    return '#282b30'
+        case 'discord':     return '#363940'
         case 'darkgrey':    return '#666'
         case 'grey':        return '#999'
         case 'lightgrey':   return '#bbb'
@@ -10,6 +11,7 @@ export function palette(color) {
         case 'white':       return '#fff'
         case 'transparent': return 'transparent'
 
+        case 'active':      return '#705772'
         case 'blue':        return '#18449b'
         case 'purple':      return '#6279CA'
         case 'red':         return '#db4757'

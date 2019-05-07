@@ -5,19 +5,24 @@ import './page.css'
 import PageHeader from './header/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
+import { IS_PUBLISHED } from '../common/arrows';
 
 function PageView(props) {
     const { pageKey, pageRepo } = props
 
-    const pageInfo = pageRepo[pageKey] || {}
-    console.log("PageView console", pageInfo)
+    const propsExt = {
+        ...props,
+        pageInfo: pageRepo[pageKey]||{},
+        published: IS_PUBLISHED(pageKey, pageRepo),
+    }
+    console.log("PageView console", pageRepo[pageKey])
     
     return (
         <div className="page">
-            <PageHeader {...props} pageInfo={pageInfo}/>
+            <PageHeader {...propsExt}/>
             <div className="page-content">
-                <PageAbstract {...props} pageInfo={pageInfo}/>
-                <FieldView {...props} pageInfo={pageInfo}/>
+                <PageAbstract {...propsExt}/>
+                <FieldView {...propsExt}/>
             </div>
         </div>
     )

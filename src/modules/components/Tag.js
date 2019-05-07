@@ -10,6 +10,7 @@ export default function Tag(props) {
         onClick,
         className           = '',
         size                = 's',
+        color               = 'whitish',
         bg                  = 'charcoal',
         style,
     } = props
@@ -21,6 +22,7 @@ export default function Tag(props) {
 
     const buttonStyle = {
         backgroundColor: palette(bg),
+        color: palette(color),
         ...style,
     }
     

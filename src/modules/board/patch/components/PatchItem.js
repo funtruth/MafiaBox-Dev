@@ -23,8 +23,8 @@ const PatchItem = SortableElement((props) => {
     const [tabbedData, setTabbedData] = useState([[], [], [], []])
 
     useEffect(() => {
-        const pages = _.groupBy(pageMap[storyKey], key => IS_PUBLISHED(pageRepo, key))
-        const modes = _.groupBy(modeMap[storyKey], key => IS_PUBLISHED(modeRepo, key))
+        const pages = _.groupBy(pageMap[storyKey], key => IS_PUBLISHED(key, pageRepo))
+        const modes = _.groupBy(modeMap[storyKey], key => IS_PUBLISHED(key, modeRepo))
 
         setTabbedData([
             pages.false||[],
@@ -34,14 +34,32 @@ const PatchItem = SortableElement((props) => {
         ])
     }, [pageRepo, modeRepo])
 
+    /*maps are split into two arrays above, based on publishing
+      react-sortable-hoc will use indexes from the two arrays
+      as a result, the actual index in the original array may differ.
+      these functions get the real indexes
+    */
+    const pageIndex = (index) => pageMap[storyKey].indexOf(tabbedData[tab][index])
+    const modeIndex = (index) => modeMap[storyKey].indexOf(tabbedData[tab][index])
+
     const onSortPage = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
-        props.movePageWithinMap('pageMap', storyKey, oldIndex, newIndex)
+        props.movePageWithinMap(
+            'pageMap',
+            storyKey,
+            pageIndex(oldIndex),
+            pageIndex(newIndex),
+        )
     }
     
     const onSortMode = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
-        props.movePageWithinMap('modeMap', storyKey, oldIndex, newIndex)
+        props.movePageWithinMap(
+            'modeMap',
+            storyKey,
+            modeIndex(oldIndex),
+            modeIndex(newIndex),
+        )
     }
 
     const renderTab = (tabbedData) => {

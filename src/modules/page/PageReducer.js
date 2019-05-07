@@ -7,6 +7,7 @@ import { modalType } from '../modal/types'
 import { updateSourceType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer';
+import { DEFAULT_PUBLISH_INFO } from './defaults';
 
 const initialState = {
     pageRepo: {},
@@ -90,9 +91,7 @@ export function addStory() {
         storyMapClone[Object.keys(storyMapClone).length] = storyKey
         storyRepoClone[storyKey] = {
             key: storyKey,
-            publishKey: storyKey + "-live",
             title: "",
-            default: false,
         }
 
         dispatch(receiveAction({
@@ -187,6 +186,7 @@ export function addPageToMap(storyKey, boardType) {
             pageKey,
             boardType,
             storyType: storyKey,
+            publishInfo: DEFAULT_PUBLISH_INFO,
             ...defaultInfo,
         }
 
@@ -225,6 +225,7 @@ export function addModeToPatch(storyKey) {
         modeRepoClone[modeKey] = {
             modeKey,
             storyKey,
+            publishInfo: DEFAULT_PUBLISH_INFO,
         }
 
         //set page location
@@ -341,43 +342,6 @@ export function movePageToOtherMap(startKey, endKey, startIndex, endIndex) {
                 pageRepo: pageRepoClone,
                 pageMap: pageMapClone,
             },
-        }))
-    }
-}
-
-export function publishPage(pageKey) {
-    return (dispatch, getState) => {
-        const { pageRepo, pageMap, storyRepo } = getState().page
-
-        let pageRepoClone   = _.cloneDeep(pageRepo)
-        let pageMapClone    = _.cloneDeep(pageMap)
-
-        const pageInfo = pageRepoClone[pageKey] || {}
-        const { storyType } = pageInfo
-
-        const storyInfo = storyRepo[storyType] || {}
-        const { publishKey } = storyInfo
-
-        //check if published Map exists
-        if (!_.isArray(pageMapClone[publishKey])) {
-            pageMapClone[publishKey] = []
-        }
-
-        //push to new story, remove from old
-        pageMapClone[publishKey].unshift(pageKey)
-        _.pull(pageMapClone[storyType], pageKey)
-
-        //update some properties
-        pageInfo.storyType      = publishKey
-        pageInfo.published      = true
-        pageInfo.publishedAt    = Date.now()
-
-        dispatch(receiveAction({
-            type: PUBLISH_PAGE,
-            payload: {
-                pageRepo: pageRepoClone,
-                pageMap: pageMapClone,
-            }
         }))
     }
 }
@@ -516,6 +480,32 @@ export function updateGeneral(path, update) {
             type: UPDATE_GENERAL,
             payload: reducer,
         }))
+    }
+}
+
+//promise handler for writes
+const write = (path, value) => new Promise(resolve => {
+    //https://stackoverflow.com/questions/41533993/cleancode-try-catch-in-promise
+})
+
+//publishes an item from redux state
+export function publishFromState(stateKey, itemKey) {
+    return (dispatch, getState) => {
+        const { page } = getState()
+        const { activeProject } = getState().firebase 
+
+        if (!page[stateKey] || !page[stateKey][itemKey]) {
+            console.warn('invalid publish.')
+            return;
+        }
+
+        let pathToRepo = `games/${activeProject}/${stateKey}/${itemKey}`;
+
+        try {
+            firebase.database().ref(pathToRepo).update(page[stateKey][itemKey])
+        } catch {
+            console.log('there was an error updating to Firebase', {update: page[stateKey][itemKey]})
+        }
     }
 }
 

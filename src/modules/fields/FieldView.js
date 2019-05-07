@@ -20,7 +20,8 @@ import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
 function FieldView(props) {
-    const { pageKey, pageInfo, fieldMap, fieldRepo, path, subpath, updateSource, updatePage } = props
+    const { pageKey, pageInfo, fieldMap, fieldRepo,
+        published, path, subpath, updateSource, updatePage } = props
     const { boardType } = pageInfo
 
     const renderItem = (item) => {
@@ -34,6 +35,7 @@ function FieldView(props) {
             value: pageInfo[key], //value related to the current page
             data, //data related to the field
             fieldInfo,
+            disabled: published,
             path: [...path, key],
             subpath,
             updateSource,
