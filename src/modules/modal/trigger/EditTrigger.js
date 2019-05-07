@@ -1,8 +1,12 @@
 import React from 'react'
 import './EditTrigger.css'
 
-import { triggerNewVars, logicType, updateType } from '../../logic/types'
-import { updateSourceType } from '../../common/types';
+import {
+    logicType,
+    updateType,
+    updateSourceType,
+} from '../../common/types'
+import { triggerNewVars } from '../../common/defaults'
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
 import ModalOptions from '../components/ModalOptions';

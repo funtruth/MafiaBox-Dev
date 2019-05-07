@@ -2,9 +2,11 @@ import React from 'react'
 import './dropdown.css'
 import { connect } from 'react-redux'
 
-import { updateSourceType } from '../common/types';
-import { dropdownType } from './types'
-import { boardType } from '../fields/defaults'
+import {
+    boardType,
+    dropdownType,
+    updateSourceType,
+} from '../common/types';
 
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal, showModal } from '../modal/ModalReducer'

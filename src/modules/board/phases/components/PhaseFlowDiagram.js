@@ -7,8 +7,10 @@ import {
     DiagramWidget,
 } from "storm-react-diagrams";
 
-import { modalType } from '../../../modal/types';
-import { updateSourceType } from '../../../common/types';
+import {
+    modalType,
+    updateSourceType,
+} from '../../../common/types';
 
 import {
     showModal,

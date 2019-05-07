@@ -3,8 +3,10 @@ import _ from 'lodash'
 
 import {
     updateType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import {
     getUpdateConfig,

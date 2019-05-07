@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { DEFAULT_LOGIC } from '../types'
+import { DEFAULT_LOGIC } from '../../common/defaults'
 
 import {
     Icon,

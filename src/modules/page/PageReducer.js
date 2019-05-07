@@ -483,10 +483,10 @@ export function updateGeneral(path, update) {
     }
 }
 
-//promise handler for writes
+/*promise handler for writes
 const write = (path, value) => new Promise(resolve => {
     //https://stackoverflow.com/questions/41533993/cleancode-try-catch-in-promise
-})
+})*/
 
 //publishes an item from redux state
 export function publishFromState(stateKey, itemKey) {

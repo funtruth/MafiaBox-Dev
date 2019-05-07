@@ -4,8 +4,10 @@ import _ from 'lodash'
 import { VARTYPE_IS_UID } from '../../common/arrows'
 import {
     mathType,
+} from '../../common/types';
+import {
     DEFAULT_ASSIGN,
-} from '../../modal/vars/components/types';
+} from '../../common/defaults'
 
 import {
     DropEmpty,

@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { modalType } from '../../modal/types';
-import { orderOfOp } from '../../modal/vars/components/types'
-import { variableType } from '../types';
-import { dropdownType } from '../../dropdown/types'
+import {
+    dropdownType,
+    modalType,
+    variableType,
+} from '../../common/types';
+import { orderOfOp } from '../codetool'
 
 import { showModal } from '../../modal/ModalReducer'
 

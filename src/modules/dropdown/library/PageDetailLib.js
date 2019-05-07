@@ -2,8 +2,10 @@ import React from 'react'
 
 import {
     updateType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
 

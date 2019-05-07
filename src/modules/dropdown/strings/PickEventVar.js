@@ -1,11 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { dropdownType } from '../types'
 import {
+    dropdownType,
     variableType,
-    rssMap,
-} from '../../logic/types'
+} from '../../common/types'
+import { rssMap } from '../../common/defaults'
 
 import DropParent from '../components/DropParent'
 import DropTitle from '../components/DropTitle'

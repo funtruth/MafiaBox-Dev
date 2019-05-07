@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { boardType } from '../../fields/defaults';
+import { boardType } from '../../common/types';
 
 import { navigate } from '../../navigation/NavReducer'
 

@@ -5,8 +5,10 @@ import { connect } from 'react-redux'
 import {
     variableType,
     updateType,
+} from '../../common/types';
+import {
     VAR_DEFAULTS,
-} from '../../logic/types';
+} from '../../common/defaults'
 
 import {
     DropTitle,

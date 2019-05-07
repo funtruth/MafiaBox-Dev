@@ -3,8 +3,8 @@ import {
     returnType,
     updateType,
     operatorType,
-} from './types'
-import { orderOfOp } from '../modal/vars/components/types'
+} from '../common/types'
+import { orderOfOp } from './codetool'
 import { stringToCode } from '../modal/toast/stringTool';
 import {
     parseJS,

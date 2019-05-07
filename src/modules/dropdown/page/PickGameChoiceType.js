@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
 
-import { gameChoiceType } from '../../fields/defaults';
+import { gameChoiceType } from '../../common/types';
 import {
     updateField,
 } from '../../page/PageReducer'

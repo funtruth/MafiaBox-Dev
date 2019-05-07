@@ -2,17 +2,17 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateType,
+    dropdownType,
+    mathType,
+    modalType,
     numUpdateType,
-    VAR_DEFAULTS,
+    updateType,
     variableType,
-} from '../../logic/types'
+} from '../../common/types'
 import {
     DEFAULT_ASSIGN,
-    mathType,
-} from '../../modal/vars/components/types';
-import { dropdownType } from '../types'
-import { modalType } from '../../modal/types'
+    VAR_DEFAULTS,
+} from '../../common/defaults';
 
 import {
     DropItem,

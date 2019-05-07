@@ -1,16 +1,53 @@
-export const droppableType = {
-    board: 'droppableType/board',
-    functionBoard: 'droppableType/function-board',
-    logic: 'droppableType/logic',
-    template: 'droppableType/template',
-    tag: 'droppableType/tag',
-    page: 'droppableType/page',
-    priority: 'droppableType/priority',
-    priorityNew: 'droppableType/priority-new',
-}
+import {
+    updateSourceType,
+    droppableType,
+} from '../app/types'
+import {
+    dropdownType,
+    fuseType,
+} from '../dropdown/types'
+import {
+    boardType,
+    fieldType,
+    gameChoiceType,
+    phaseActionType,
+} from '../fields/types'
+import {
+    boolUpdateType,
+    comparisonType,
+    healthUpdateType,
+    logicType,
+    mathOperatorType,
+    mathType,
+    numUpdateType,
+    operatorType,
+    returnType,
+    updateType,
+    variableType,
+} from '../logic/types'
+import {
+    modalType,
+} from '../modal/types'
 
-export const updateSourceType = {
-    repo: 'updateSourceType/repo',
-    function: 'updateSourceType/function',
-    topModal: 'updateSourceType/top-modal',
+export {
+    boardType,
+    boolUpdateType,
+    comparisonType,
+    dropdownType,
+    droppableType,
+    fieldType,
+    fuseType,
+    gameChoiceType,
+    healthUpdateType,
+    logicType,
+    mathOperatorType,
+    mathType,
+    modalType,
+    numUpdateType,
+    operatorType,
+    phaseActionType,
+    returnType,
+    updateSourceType,
+    updateType,
+    variableType,
 }

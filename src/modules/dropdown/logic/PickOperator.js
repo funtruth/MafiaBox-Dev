@@ -3,8 +3,10 @@ import _ from 'lodash'
 
 import {
     operatorType,
+} from '../../common/types'
+import {
     DEFAULT_LOGIC,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
 

@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 
 import {
     updateType,
-    VAR_DEFAULTS,
 } from '../../logic/types'
+import {
+    VAR_DEFAULTS,
+} from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
 

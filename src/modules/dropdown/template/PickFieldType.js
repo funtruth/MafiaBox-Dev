@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { updateField } from '../../fields/FieldReducer'
 
-import { fieldType } from '../../fields/defaults'
+import { fieldType } from '../../common/types'
 
 class PickFieldType extends React.Component{
     _renderItem = (item) => {

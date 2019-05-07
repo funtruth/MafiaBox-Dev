@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { mathType } from './types';
+import { mathType } from '../../../common/types';
 
 import ValueDrop from './ValueDrop'
 import BasicOpDrop from './BasicOpDrop';

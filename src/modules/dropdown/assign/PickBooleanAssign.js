@@ -3,11 +3,11 @@ import _ from 'lodash'
 
 import {
     boolUpdateType,
-} from '../../logic/types'
-import {
     mathType,
+} from '../../common/types'
+import {
     DEFAULT_ASSIGN,
-} from '../../modal/vars/components/types';
+} from '../../common/defaults';
 
 import {
     DropItem,

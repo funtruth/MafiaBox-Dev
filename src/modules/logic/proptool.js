@@ -1,4 +1,4 @@
-import { rssMap } from './types'
+import { rssMap } from '../common/defaults'
 
 export const START_CHAR = '('
 export const END_CHAR = ')'

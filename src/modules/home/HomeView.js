@@ -6,7 +6,6 @@ import SideBarView from './sidebar/SideBarView';
 import HeaderView from './header/HeaderView';
 
 import LandingView from './landing/LandingView'
-import FunctionView from '../board/views/FunctionView'
 import PatchView from '../board/patch/PatchView';
 import PhaseFlowView from '../board/phases/PhaseFlowView';
 import TestHubView from '../testhub/TestHubView'
@@ -24,8 +23,6 @@ export default function HomeView(props) {
                     <Route exact path="/:projectKey" component={PatchView}/>
                     <Route exact path="/:projectKey/mode/:modeKey" component={PhaseFlowView}/>
 
-                    <Route exact path="/:projectKey/library" component={FunctionView}/>
-                    <Route exact path="/:projectKey/library/:pageKey" component={FunctionView}/>
                     <Route exact path="/:projectKey/roles" component={PatchView}/>
                     <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/phases/:storyKey" component={PhaseFlowView}/>

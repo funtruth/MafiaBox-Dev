@@ -1,8 +1,10 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { dropdownType } from '../../dropdown/types';
-import { gameChoiceType } from '../defaults';
+import {
+    dropdownType,
+    gameChoiceType,
+} from '../../common/types';
 
 import {
     Body,

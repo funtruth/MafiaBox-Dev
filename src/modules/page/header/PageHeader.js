@@ -13,7 +13,7 @@ import {
 } from '../../components/Common';
 
 function PageHeader(props) {
-    const { pageKey, pageInfo, published, location, match } = props
+    const { pageKey, published, location, match } = props
     if (match) return null
 
     const handleResize = () => {

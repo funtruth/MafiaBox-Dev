@@ -3,7 +3,7 @@ import './Header.css'
 import '../../board/board.css'
 import { connect } from 'react-redux'
 
-import { boardType } from '../../fields/defaults';
+import { boardType } from '../../common/types';
 
 import { navigate } from '../../navigation/NavReducer'
 

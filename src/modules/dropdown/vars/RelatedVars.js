@@ -2,10 +2,12 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    rssMap,
     updateType,
+} from '../../common/types';
+import {
+    rssMap,
     VAR_DEFAULTS,
-} from '../../logic/types';
+} from '../../common/defaults'
 
 import {
     parseJS,

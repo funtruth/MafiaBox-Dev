@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import _ from 'lodash'
 
-import { VAR_DEFAULTS, DEFAULT_VAR_ID } from '../../logic/types';
+import {
+    VAR_DEFAULTS,
+    DEFAULT_VAR_ID,
+} from '../../common/defaults';
 
 import * as helpers from '../../common/helpers'
 import {

@@ -2,7 +2,7 @@ import React from 'react'
 import './field.css'
 import { connect } from 'react-redux';
 
-import { fieldType } from './defaults'
+import { fieldType } from './types'
 
 import CallField from './components/CallField'
 import TextField from './components/TextField';

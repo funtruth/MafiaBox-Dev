@@ -3,9 +3,11 @@ import _ from 'lodash'
 
 import {
     updateType,
-    VAR_DEFAULTS,
     healthUpdateType,
-} from '../../logic/types'
+} from '../../common/types'
+import {
+    VAR_DEFAULTS,
+} from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
 

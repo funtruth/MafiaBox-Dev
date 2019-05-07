@@ -2,10 +2,12 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
+    modalType,
     returnType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
-} from '../../logic/types'
-import { modalType } from '../../modal/types';
+} from '../../common/defaults'
 
 import { codeReturnType } from '../../logic/codetool';
 

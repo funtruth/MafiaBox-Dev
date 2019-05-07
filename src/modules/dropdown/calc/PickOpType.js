@@ -4,7 +4,7 @@ import _ from 'lodash'
 import {
     mathOperatorType,
     mathType,
-} from '../../modal/vars/components/types'
+} from '../../common/types'
 
 import {
     DropTitle,

@@ -5,9 +5,9 @@ import './AssignNumModal.css'
 import {
     mathType,
     mathOperatorType,
-    compileMath,
-    DEFAULT_ASSIGN,
-} from './components/types'
+} from '../../common/types'
+import { DEFAULT_ASSIGN } from '../../common/defaults'
+import { compileMath } from '../../logic/codetool'
 
 import { VARTYPE_IS_NUM } from '../../common/arrows';
 

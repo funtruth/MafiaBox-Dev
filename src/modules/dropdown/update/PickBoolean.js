@@ -5,8 +5,10 @@ import {
     updateType,
     boolUpdateType,
     variableType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import {
     DropItem,

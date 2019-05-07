@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { modalType } from '../../modal/types';
-import { DEFAULT_LOGIC } from '../../logic/types'
+import { modalType } from '../../common/types';
+import { DEFAULT_LOGIC } from '../../common/defaults'
 
 import {
     DropItem,

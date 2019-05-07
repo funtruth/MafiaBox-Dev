@@ -4,13 +4,14 @@ import { connect } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import {
-    updateType,
-    VAR_DEFAULTS,
-} from '../../logic/types';
-import {
-    fuseType,
     dropdownType,
-} from '../types';
+    fuseType,
+    updateType,
+} from '../../common/types';
+import {
+
+    VAR_DEFAULTS,
+} from '../../common/defaults'
 
 import {
     parseJS,

@@ -1,11 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { dropdownType } from '../types'
 import {
+    dropdownType,
     updateType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import {
     WILD_CHAR,

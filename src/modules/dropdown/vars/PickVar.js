@@ -1,13 +1,15 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { dropdownType } from '../types'
 import {
+    dropdownType,
     variableType,
     updateType,
+} from '../../common/types'
+import {
     rssMap,
     VAR_DEFAULTS,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 

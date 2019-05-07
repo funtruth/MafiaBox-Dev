@@ -3,10 +3,15 @@ import { DropTarget } from 'react-dnd'
 import * as helpers from '../../../common/helpers'
 
 import {
-    ItemTypes,
     mathType,
-    DEFAULT_ASSIGN,
+} from '../../../common/types'
+import {
+    ItemTypes,
 } from './types'
+import {
+    DEFAULT_ASSIGN,
+} from '../../../common/defaults'
+
 import { DropClick } from '../../../components/Common';
 
 const itemTarget = {

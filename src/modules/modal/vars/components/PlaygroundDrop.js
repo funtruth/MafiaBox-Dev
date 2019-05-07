@@ -5,8 +5,10 @@ import { DropTarget } from 'react-dnd'
 
 import {
     ItemTypes,
-    DEFAULT_ASSIGN,
 } from './types'
+import {
+    DEFAULT_ASSIGN,
+} from '../../../common/defaults'
 
 import ActiveOp from './ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';

@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc';
 
 
-import { modalType } from '../../../modal/types';
-import { updateSourceType } from '../../../common/types'
-import { dropdownType } from '../../../dropdown/types'
-import { boardType } from '../../../fields/defaults'
+import {
+    boardType,
+    dropdownType,
+    modalType,
+    updateSourceType
+} from '../../../common/types';
 
 import { showModal } from '../../../modal/ModalReducer'
 import { STOP_DROP_PROP } from '../../../common/arrows';

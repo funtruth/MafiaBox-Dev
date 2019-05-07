@@ -3,9 +3,11 @@ import _ from 'lodash'
 
 import {
     variableType,
+} from '../../common/types'
+import {
     VAR_DEFAULTS,
     rssMap,
-} from '../../logic/types'
+} from '../../common/defaults'
 
 import {
     VARTYPE_IS_UID_OBJ,

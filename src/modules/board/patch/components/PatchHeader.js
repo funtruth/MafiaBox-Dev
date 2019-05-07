@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { dropdownType } from '../../../dropdown/types';
-import { boardType } from '../../../fields/defaults';
+import {
+    dropdownType,
+    boardType,
+} from '../../../common/types';
 
 import {
     addPageToMap,
