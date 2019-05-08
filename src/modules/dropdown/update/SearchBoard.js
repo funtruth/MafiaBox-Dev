@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
 import Fuse from 'fuse.js'
 import { connect } from 'react-redux'
@@ -10,23 +10,23 @@ import DropTitle from '../components/DropTitle';
 
 function SearchBoard(props) {
     const { pageRepo, boardType } = props
+    if (!boardType) return null;
 
     let [searchText, setSearchText] = useState('')
     let [results, setResults] = useState([])
+    useEffect(() => {
+        const fuse = new Fuse(_.filter(pageRepo, i => i && i.boardType === boardType), fuseType.searchBoard)
+        setResults(fuse.search(searchText))
+    }, [searchText, pageRepo])
 
-    let fuse = new Fuse(_.filter(pageRepo, i => i && i.boardType === boardType), fuseType.searchBoard)
-
-    let handleType = e => {
-        setSearchText(e.target.value)
-        setResults(fuse.search(e.target.value))
-    }
+    let handleType = e => setSearchText(e.target.value)
 
     let handleSelect = (item) => {
         console.log({props})
     }
     
     return (
-        <div>
+        <>
             <input
                 className="tag-input"
                 value={searchText}
@@ -64,7 +64,7 @@ function SearchBoard(props) {
                     hoverKey={boardType}
                 />
             }
-        </div>
+        </>
     )
 }
 

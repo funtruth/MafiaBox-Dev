@@ -74,6 +74,7 @@ import PickHealth from './update/PickHealth'
 import PickTimer from './update/PickTimer'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
+import PickPhase from './update/PickPhase'
 import PickNumUpdate from './update/PickNumUpdate'
 import ShowSubfields from './update/ShowSubfields';
 import ShowUidSubfield from './update/ShowUidSubfield';
@@ -241,7 +242,7 @@ function DropdownView(props) {
             case dropdownType.pickNumUpdate:
                 return <PickNumUpdate {...renderProps}/>
             case dropdownType.pickPhase:
-                return <SearchBoard {...renderProps} boardType={boardType.phases.key}/>
+                return <PickPhase {...renderProps}/>
             case dropdownType.pickRole:
                 return <SearchBoard {...renderProps} boardType={boardType.roles.key}/>
             case dropdownType.pickLibrary:

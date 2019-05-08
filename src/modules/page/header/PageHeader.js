@@ -31,7 +31,7 @@ function PageHeader(props) {
     }
 
     return (
-        <Row sizes={['xxs', 'xxs']} className="page-header" y="c" bg="transparent">
+        <Row sizes={['xxs', 'xxs']} className="page-header" y="c" bg="discord">
             <Tag bg="discord" icon="mdi mdi-arrow-expand" onClick={handleResize} style={{marginRight: 'auto'}}>
                 Open as Page
             </Tag>

@@ -17,7 +17,7 @@ import {
 } from '../../../components/Common';
 
 function PhaseDiagramItem(props) {
-    const { item, arrows, setArrows } = props
+    const { item, modeKey, setPointer } = props
     const { title, pageKey, diagramXY } = item
     const { x, y } = diagramXY || {}
 
@@ -52,6 +52,7 @@ function PhaseDiagramItem(props) {
             } else {
                 props.showModal(modalType.showPage, {
                     pageKey,
+                    modeKey,
                     path: [pageKey],
                     updateSource: updateSourceType.repo,
                 })
@@ -70,7 +71,7 @@ function PhaseDiagramItem(props) {
         window.addEventListener('mouseup', onMouseUp)
     }
 
-    //when the ring is selected, used to create arrows manually
+    //when the ring is selected, used to create pointer manually
     const onRing = (e) => {
         //save initial coordinates
         const { pageX, pageY, nativeEvent } = e
@@ -79,13 +80,13 @@ function PhaseDiagramItem(props) {
 
         //create listeners
         const onMouseMove = (e) => {
-            setArrows([...arrows, {
+            setPointer({
                 from: pageKey,
                 fromX: offsetX + PHASE_DIAGRAM_ITEM.outerDiameter/2,
                 fromY: offsetY + PHASE_DIAGRAM_ITEM.outerDiameter/2,
                 toX: e.pageX - diffX,
                 toY: e.pageY - diffY,
-            }])
+            })
         }
         const onMouseUp = (e) => {
             const result = isChildOf(e.target, 'diagram-container')
@@ -97,7 +98,7 @@ function PhaseDiagramItem(props) {
             }
             
             //return to initial state
-            setArrows(arrows)
+            setPointer({})
 
             window.removeEventListener('mousemove', onMouseMove)
             window.removeEventListener('mouseup', onMouseUp)
