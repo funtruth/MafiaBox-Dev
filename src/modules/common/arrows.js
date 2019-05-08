@@ -16,3 +16,9 @@ export const IS_PUBLISHED = (key, repo) => {
     if (!key || !repo) return console.warn('invalid arguments.')
     return !!(repo[key] && repo[key].publishInfo && repo[key].publishInfo.published)
 }
+
+export const isChildOf = (target, className) => {
+    if (!target) return false;
+    if (target.classList && target.classList.contains(className)) return target;
+    return isChildOf(target.parentElement, className)
+}

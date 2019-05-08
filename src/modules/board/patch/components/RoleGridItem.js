@@ -46,7 +46,9 @@ const RoleGridItem = SortableElement((props) => {
                 borderRadius: 4,
             }}
         >
-            <Text color="lightgrey" size="s" align="c" style={{marginRight: 'auto'}}>{title || 'Untitled'}</Text>
+            <Text color="lightgrey" size="s" align="c" style={{marginRight: 'auto'}}>
+                {title || 'Untitled'}
+            </Text>
             <DropClick
                 dropdown={dropdownType.roleItemOptions}
                 params={{

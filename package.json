@@ -31,7 +31,6 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-undo": "^0.6.1",
-    "storm-react-diagrams": "git+https://github.com/ouoru/react-diagrams.git",
     "wait-on": "^3.2.0"
   },
   "build": {

@@ -59,6 +59,7 @@ const ADD_MODE = 'page/add-mode'
 const ADD_PAGE_TO_MODE = 'page/add-page-to-mode'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
+const CONNECT_PHASES = 'page/connect-phases'
 
 const PUBLISH_PAGE = 'page/publish-page'
 const REMOVE_PAGE = 'page/remove-page'
@@ -367,6 +368,13 @@ export function removePage(pageKey, storyKey) {
     }
 }
 
+//connects two phases through "Phase Listener" field
+export function connectPhases(fromKey, toKey) {
+    return (dispatch, getState) => {
+
+    }
+}
+
 export function resetPageReducer() {
     return (dispatch) => {
         dispatch({type: RESET_REDUCER})
@@ -564,6 +572,7 @@ export default (state = initialState, action) => {
         case DIFF_PRIORITIES:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
+        case CONNECT_PHASES:
         case REMOVE_PAGE:
         case RECEIVE_EVENT:
         case RECEIVE_CHILD_EVENT:

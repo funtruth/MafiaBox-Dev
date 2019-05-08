@@ -5,6 +5,7 @@ import PhaseDiagramItem from './PhaseDiagramItem';
 import {
     Body,
 } from '../../../components/Common';
+import PhaseDiagramArrow from './PhaseDiagramArrow';
 
 const get = (page) => (page && page.phaseMap) || []
 
@@ -17,11 +18,23 @@ function PhaseDiagram(props) {
         setItems(phaseMap.map(pageKey => pageRepo[pageKey]))
     }, [pageRepo])
 
+    //TODO parse for arrows
+    const [arrows, setArrows] = useState([])
+    
     return (
-        <Body>
+        <Body style={{position: 'relative'}}>
             {items.map(item => (
                 <PhaseDiagramItem
+                    key={item.pageKey}
                     item={item}
+                    arrows={arrows}
+                    setArrows={setArrows}
+                />
+            ))}
+            {arrows.map((item, index) => (
+                <PhaseDiagramArrow
+                    key={index}
+                    {...item}
                 />
             ))}
         </Body>

@@ -1,38 +1,175 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
+
+import { PHASE_DIAGRAM_ITEM } from '../Constants'
+import {
+    modalType,
+    updateSourceType,
+} from '../../../common/types'
+
+import { isChildOf } from '../../../common/arrows'
+import { showModal } from '../../../modal/ModalReducer'
+import { updateRepo, connectPhases } from '../../../page/PageReducer'
+
+import {
+    Body,
+    Text,
+} from '../../../components/Common';
 
 function PhaseDiagramItem(props) {
-    const [offsetX, setOffsetX] = useState(0)
-    const [offsetY, setOffsetY] = useState(0)
+    const { item, arrows, setArrows } = props
+    const { title, pageKey, diagramXY } = item
+    const { x, y } = diagramXY || {}
 
-    const onMouseDown = (e) => {
+    const [offsetX, setOffsetX] = useState(x||0)
+    const [offsetY, setOffsetY] = useState(y||0)
+
+    const [selected, setSelected] = useState(false)
+
+    //when the body is selected (and possibly moved)
+    const onBody = (e) => {
+        //save initial coordinates
         const { pageX, pageY } = e
-        const onDrag = (e) => {
+
+        //show as selected
+        setSelected(true)
+
+        //create listeners
+        const onMouseMove = (e) => {
             setOffsetX(e.pageX - pageX + offsetX)
             setOffsetY(e.pageY - pageY + offsetY)
         }
+        const onMouseUp = (e) => {
+            //if item has moved, just send an update on XY
+            if (e.pageX !== pageX || e.pageY !== pageY) {
+                props.updateRepo([pageKey], {
+                    diagramXY: {
+                        x: e.pageX - pageX + offsetX,
+                        y: e.pageY - pageY + offsetY,
+                    }
+                })
+            //if item has not moved, count as user click
+            } else {
+                props.showModal(modalType.showPage, {
+                    pageKey,
+                    path: [pageKey],
+                    updateSource: updateSourceType.repo,
+                })
+            }
 
-        const onMouseUp = () => {
-            window.removeEventListener('mousemove', onDrag)
+            //reset
+            setSelected(false)
+
+            //remove listeners
+            window.removeEventListener('mousemove', onMouseMove)
             window.removeEventListener('mouseup', onMouseUp)
         }
 
-        window.addEventListener('mousemove', onDrag)
+        //add listeners
+        window.addEventListener('mousemove', onMouseMove)
+        window.addEventListener('mouseup', onMouseUp)
+    }
+
+    //when the ring is selected, used to create arrows manually
+    const onRing = (e) => {
+        //save initial coordinates
+        const { pageX, pageY, nativeEvent } = e
+        const diffX = pageX - offsetX - nativeEvent.offsetX - PHASE_DIAGRAM_ITEM.borderThickness,
+              diffY = pageY - offsetY - nativeEvent.offsetY - PHASE_DIAGRAM_ITEM.borderThickness;
+
+        //create listeners
+        const onMouseMove = (e) => {
+            setArrows([...arrows, {
+                from: pageKey,
+                fromX: offsetX + PHASE_DIAGRAM_ITEM.outerDiameter/2,
+                fromY: offsetY + PHASE_DIAGRAM_ITEM.outerDiameter/2,
+                toX: e.pageX - diffX,
+                toY: e.pageY - diffY,
+            }])
+        }
+        const onMouseUp = (e) => {
+            const result = isChildOf(e.target, 'diagram-container')
+            if (!!result) {
+                const resultKey = result.getAttribute('page-key')
+                if (resultKey !== pageKey) {
+                    props.connectPhases(pageKey, resultKey)
+                }
+            }
+            
+            //return to initial state
+            setArrows(arrows)
+
+            window.removeEventListener('mousemove', onMouseMove)
+            window.removeEventListener('mouseup', onMouseUp)
+        }
+
+        //add listeners
+        window.addEventListener('mousemove', onMouseMove)
         window.addEventListener('mouseup', onMouseUp)
     }
 
     return (
         <div
-            onMouseDown={onMouseDown}
+            className="diagram-container"
+            page-key={pageKey}
             style={{
-                height: 80,
-                width: 120,
-                backgroundColor: 'red',
+                zIndex: selected ? 2 : 1,
+                boxShadow: selected && 'rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px',
+                height: PHASE_DIAGRAM_ITEM.outerDiameter,
+                width: PHASE_DIAGRAM_ITEM.outerDiameter,
+                borderRadius: PHASE_DIAGRAM_ITEM.outerDiameter/2,
+                overflow: 'hidden',
                 transform: `translate(${offsetX}px, ${offsetY}px)`,
             }}
         >
-            hihihi
+            <Body
+                className="diagram-label" bg="charcoal" y="c"
+                style={{
+                    boxShadow: selected && 'rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 2px 4px 2px',
+                    height: PHASE_DIAGRAM_ITEM.itemHeight,
+                    width: PHASE_DIAGRAM_ITEM.itemWidth,
+                    top: PHASE_DIAGRAM_ITEM.outerDiameter/2 - PHASE_DIAGRAM_ITEM.itemHeight/2,
+                    left: PHASE_DIAGRAM_ITEM.outerDiameter/2 - PHASE_DIAGRAM_ITEM.itemWidth/2,
+                }}
+            >
+                <Text color={title ? "lightgrey" : "darkgrey"} size="l" align="c">
+                    {title || 'Untitled'}
+                </Text>
+            </Body>
+            <div
+                className="diagram-ring"
+                onMouseDown={onRing}
+                style={{
+                    position: 'absolute',
+                    height: PHASE_DIAGRAM_ITEM.outerDiameter,
+                    width: PHASE_DIAGRAM_ITEM.outerDiameter,
+                    borderRadius: PHASE_DIAGRAM_ITEM.outerDiameter/2,
+                    top: 0,
+                    left: 0,
+                    borderWidth: PHASE_DIAGRAM_ITEM.borderThickness,
+                    borderStyle: 'solid',
+                }}
+            />
+            <div
+                onMouseDown={onBody}
+                style={{
+                    position: 'absolute',
+                    height: PHASE_DIAGRAM_ITEM.innerDiameter,
+                    width: PHASE_DIAGRAM_ITEM.innerDiameter,
+                    borderRadius: PHASE_DIAGRAM_ITEM.innerDiameter/2,
+                    top: PHASE_DIAGRAM_ITEM.borderThickness,
+                    left: PHASE_DIAGRAM_ITEM.borderThickness,
+                }}
+            />
         </div>
     )
 }
 
-export default PhaseDiagramItem
+export default connect(
+    null,
+    {
+        showModal,
+        updateRepo,
+        connectPhases,
+    }
+)(PhaseDiagramItem)

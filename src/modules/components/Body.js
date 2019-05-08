@@ -1,12 +1,21 @@
 import React from 'react';
 import { palette, padding } from './Standards'
 
+const getJustify = (justify) => {
+    switch(justify) {
+        case 'c':           return 'center'
+        case 'r':           return 'flex-end'
+        case 'l':           return 'flex-start'
+        default:            return 'stretch'
+    }
+}
+
 const getAlign = (align) => {
     switch(align) {
         case 'c':           return 'center'
-        case 'r':           return 'flex-end'
-        case 's':           return 'stretch'
-        default:            return 'flex-start'
+        case 'e':           return 'flex-end'
+        case 's':           return 'flex-start'
+        default:            return 'stretch'
     }
 }
 
@@ -26,7 +35,8 @@ export default function Body(props) {
         children,
         size                = '',
         sizes               = '',
-        align               = '',
+        y                   = '',
+        x                   = '',
         className           = '',
         style,
         color,
@@ -39,10 +49,11 @@ export default function Body(props) {
     ].join(" ")
 
     const bodyStyle = {
-        alignItems: getAlign(align),
+        justifyContent: getJustify(y),
+        alignItems: getAlign(x),
         padding: size ? getPadding(size) : sizes && padding(sizes),
         color: palette(color),
-        bg: bg && palette(bg),
+        backgroundColor: bg && palette(bg),
         ...style,
     }
 
