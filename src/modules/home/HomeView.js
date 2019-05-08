@@ -7,7 +7,7 @@ import HeaderView from './header/HeaderView';
 
 import LandingView from './landing/LandingView'
 import PatchView from '../board/patch/PatchView';
-import PhaseFlowView from '../board/phases/PhaseFlowView';
+import ModeView from '../board/phases/ModeView';
 import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
 import EventView from '../board/views/EventView'
@@ -21,11 +21,10 @@ export default function HomeView(props) {
                 <Switch>
                     <Route exact path="/" component={LandingView}/>
                     <Route exact path="/:projectKey" component={PatchView}/>
-                    <Route exact path="/:projectKey/mode/:modeKey" component={PhaseFlowView}/>
+                    <Route exact path="/:projectKey/mode/:modeKey" component={ModeView}/>
 
                     <Route exact path="/:projectKey/roles" component={PatchView}/>
                     <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
-                    <Route exact path="/:projectKey/phases/:storyKey" component={PhaseFlowView}/>
                     <Route exact path="/:projectKey/phases/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/events" component={EventView}/>
                     <Route exact path="/:projectKey/testhub" component={TestHubView}/>

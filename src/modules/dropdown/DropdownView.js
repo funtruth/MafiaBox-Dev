@@ -10,7 +10,7 @@ import {
 
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal, showModal } from '../modal/ModalReducer'
-import { updateRepo } from '../page/PageReducer'
+import { updateRepo, updateGeneral } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
@@ -20,6 +20,8 @@ import DropInput from './components/DropInput'
 import AccountOptions from './account/AccountOptions'
 import PickProject from './account/PickProject'
 
+import EditPlayerNum from './board/EditPlayerNum'
+import EditPatchName from './board/EditPatchName';
 import PatchItemOptions from './board/PatchItemOptions'
 import RoleItemOptions from './board/RoleItemOptions'
 
@@ -33,6 +35,7 @@ import PageDetailLib from './library/PageDetailLib';
 
 import PickLogic from './logic/PickLogic';
 import PickReturnType from './logic/PickReturnType';
+import PickOperator from './logic/PickOperator';
 
 import EditTag from './template/EditTag'
 import CreateUniqueTag from './page/CreateUniqueTag'
@@ -86,8 +89,6 @@ import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
-import PickOperator from './logic/PickOperator';
-import EditPatchName from './board/EditPatchName';
 
 function DropdownView(props) {
     const { dropdownKeys } = props
@@ -101,6 +102,7 @@ function DropdownView(props) {
         renderProps.popDropdownTo = (forcedIndex) => props.popDropdownTo(forcedIndex || index)
         renderProps.popDropdown = () => props.popDropdownTo(index - 1)
         renderProps.showModal = props.showModal
+        renderProps.updateGeneral = props.updateGeneral
 
         switch(renderProps.updateSource) {
             case updateSourceType.repo:
@@ -136,6 +138,8 @@ function DropdownView(props) {
             case dropdownType.pickProject:
                 return <PickProject {...renderProps}/>
 
+            case dropdownType.editPlayerNum:
+                return <EditPlayerNum {...renderProps}/>
             case dropdownType.editPatchName:
                 return <EditPatchName {...renderProps}/>
             case dropdownType.patchItemOptions:
@@ -299,6 +303,7 @@ export default connect(
         popDropdownTo,
         showModal,
         updateRepo,
+        updateGeneral,
         updateTopModal,
         updateFunction,
     }

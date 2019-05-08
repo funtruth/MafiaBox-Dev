@@ -9,7 +9,7 @@ const getAlign = (align) => {
     }
 }
 
-export default function Footer(props) {
+export default function Header(props) {
     const {
         text        = '',
         children,
