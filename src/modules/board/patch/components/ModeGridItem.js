@@ -23,7 +23,16 @@ const RoleGridItem = SortableElement((props) => {
     }
 
     return (
-        <Row sizes={['xs', 'xxl']} bg="charcoal" y="c" onClick={handleClick} style={{border: '1px solid #333'}}>
+        <Row
+            sizes={['xxs', 'xxl']}
+            bg="charcoal"
+            y="c"
+            onClick={handleClick}
+            style={{
+                border: '1px solid #333',
+                borderRadius: 4,
+            }}
+        >
             <Text color="lightgrey" size="m" align="c" style={{marginRight: 'auto'}}>{title || 'Untitled'}</Text>
             <DropClick>
                 <Tag icon="mdi mdi-dots-horizontal"></Tag>

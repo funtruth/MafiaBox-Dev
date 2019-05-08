@@ -8,8 +8,8 @@ import { movePageWithinMap } from '../../../page/PageReducer'
 import { PREF_KEY } from '../../../app/AppReducer'
 
 import PatchHeader from './PatchHeader';
-import RoleGrid from '../../roles/RoleGrid';
-import ModeGrid from '../../modes/ModeGrid';
+import RoleGrid from './RoleGrid';
+import ModeGrid from './ModeGrid';
 import {
     Body,
 } from '../../../components/Common';

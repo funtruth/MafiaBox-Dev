@@ -26,7 +26,7 @@ export function palette(color) {
 export function value(size) {
     switch(size) {
         case 'z':           return '0px'
-        case 'xxs':         return '8px'
+        case 'xxs':         return '6px'
         case 'xs':          return '10px'
         case 's':           return '12px'
         case 'm':           return '14px'

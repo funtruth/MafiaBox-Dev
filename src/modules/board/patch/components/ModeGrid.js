@@ -1,7 +1,7 @@
 import React from 'react'
 import { SortableContainer } from 'react-sortable-hoc';
 
-import ModeGridItem from './components/ModeGridItem';
+import ModeGridItem from './ModeGridItem';
 
 export default SortableContainer(({items}) => (
     <div>
