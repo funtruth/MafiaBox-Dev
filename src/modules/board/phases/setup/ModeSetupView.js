@@ -15,7 +15,7 @@ import {
 } from '../../../components/Common';
 import ModeSetupRow from './ModeSetupRow';
 import ModeSetupLabel from './ModeSetupLabels';
-import ModeRolePicker from './ModeRolePicker'
+import RolePicker from './picker/RolePicker'
 
 function ModeSetupView(props) {
     const { modeKey, modeInfo } = props
@@ -24,9 +24,10 @@ function ModeSetupView(props) {
     const rows = minMaxArray(playerNum)
 
     const [draft, setDraft] = useState({})
+    const draftRow = roleSetup[draft] && roleSetup[draft].players
     const onDraft = (setupKey) => {
         if (!roleSetup[setupKey]) return;
-        setDraft(roleSetup[setupKey])
+        setDraft(setupKey)
     }
     const onNewDraft = (players, difficulty) => {
         const setupKey = genUID('setup', roleSetup)
@@ -71,13 +72,15 @@ function ModeSetupView(props) {
                         <ModeSetupRow
                             players={item}
                             items={items[item]}
-                            draft={draft}
                             onDraft={onDraft}
                             onNewDraft={onNewDraft}
                         />
                     </Row>
-                    {item === draft.players &&
-                        <ModeRolePicker draft={draft}/>
+                    {item === draftRow &&
+                        <RolePicker
+                            modeKey={modeKey}
+                            draftInfo={roleSetup[draft]}
+                        />
                     }
                 </Body>
             ))}

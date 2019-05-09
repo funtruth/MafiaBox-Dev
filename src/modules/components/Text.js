@@ -48,6 +48,7 @@ export default function Text(props) {
 
     const classes = [
         underline ? '--text-underline' : '',
+        'text-ellipsis',
         className,
     ].join(" ")
     

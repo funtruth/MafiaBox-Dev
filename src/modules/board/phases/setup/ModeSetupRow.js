@@ -5,6 +5,8 @@ import {
     difficultyType,
 } from '../../../common/types'
 
+import { useOverflow } from '../../../hooks/Hooks'
+
 import {
     Row,
     Body,
@@ -18,15 +20,24 @@ function ModeSetupRow(props) {
     const zones = _.toArray(difficultyType)
 
     const renderItem = (item) => {
+        const [overflowRef, overflowed] = useOverflow(null)
+        
         return (
-            <Bubble
+            <div
                 key={item.key}
-                bg="blue"
-                icon="mdi mdi-file-document-outline"
-                onClick={() => onDraft(item.key)}
+                ref={overflowRef}
             >
-                {item.title}
-            </Bubble>
+                <Bubble
+                    bg="blue"
+                    icon="mdi mdi-file-document-outline"
+                    onClick={() => onDraft(item.key)}
+                    style={{
+                        float: overflowed ? 'none' : 'left',
+                    }}
+                >
+                    {item.title}
+                </Bubble>
+            </div>
         )
     }
 
@@ -35,21 +46,29 @@ function ModeSetupRow(props) {
         const noItems = !matchedItems.length
 
         return (
-            <Body
+            <div
                 key={item.key}
-                style={{flex: 1}}
                 x="l"
+                style={{
+                    display: 'inline',
+                    flexBasis: '20%',
+                    minWidth: 0,
+                    float: 'left',
+                }}
             >
                 {matchedItems.map(renderItem)}
                 {noItems &&
                     <Bubble
                         bg="discord"
                         onClick={() => onNewDraft(players, item.key)}
+                        style={{
+                            float: 'left',
+                        }}
                     >
                         new ...
                     </Bubble>
                 }
-            </Body>
+            </div>
         )
     }
 

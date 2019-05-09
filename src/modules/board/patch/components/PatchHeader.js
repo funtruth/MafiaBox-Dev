@@ -69,7 +69,7 @@ function PatchHeader(props) {
     return (
         <Row bg="blackish" color="whitish" y="c" sizes={['s', 'xxl']}>
             <DropClick
-                dropdown={dropdownType.editPatchName}
+                dropdown={dropdownType.editTitle}
                 params={{
                     path: ['storyRepo', storyKey],
                     attach: storyInfo,

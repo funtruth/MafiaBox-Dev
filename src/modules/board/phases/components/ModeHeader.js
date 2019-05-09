@@ -31,7 +31,7 @@ function ModeHeader(props) {
     return (
         <Row bg="blackish" color="whitish" size="s" y="c">
             <DropClick
-                dropdown={dropdownType.editPatchName}
+                dropdown={dropdownType.editTitle}
                 params={{
                     path: ['modeRepo', modeKey],
                     attach: modeInfo,

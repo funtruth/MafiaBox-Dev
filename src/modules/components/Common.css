@@ -54,8 +54,6 @@
     border-radius: 8px;
     cursor: pointer;
     margin: 2px;
-    display: flex;
-    flex-direction: row;
 }
 .--bubble:hover {
     filter: brightness(120%);
