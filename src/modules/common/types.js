@@ -3,6 +3,9 @@ import {
     droppableType,
 } from '../app/types'
 import {
+    difficultyType,
+} from '../board/types'
+import {
     dropdownType,
     fuseType,
 } from '../dropdown/types'
@@ -33,6 +36,7 @@ export {
     boardType,
     boolUpdateType,
     comparisonType,
+    difficultyType,
     dropdownType,
     droppableType,
     fieldType,

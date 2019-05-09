@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import _ from 'lodash'
 
 import {
     DropTitle,
@@ -16,8 +15,8 @@ export default function EditPlayerNum(props) {
     const [min, setMin] = useState(attach.min || 0)
     const [max, setMax] = useState(attach.max || 0)
 
-    const handleMin = (e) => setMin(e.target.value)
-    const handleMax = (e) => setMax(e.target.value)
+    const handleMin = (e) => setMin(parseInt(e.target.value))
+    const handleMax = (e) => setMax(parseInt(e.target.value))
 
     const onKeyDown = e => {
         switch(e.nativeEvent.key) {

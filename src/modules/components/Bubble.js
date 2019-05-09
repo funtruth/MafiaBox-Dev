@@ -3,7 +3,7 @@ import { palette } from './Standards';
 
 import Text from './Text'
 
-export default function Tag(props) {
+export default function Bubble(props) {
     const {
         icon,
         children,
@@ -16,7 +16,7 @@ export default function Tag(props) {
     } = props
 
     const classes = [
-        '--tag',
+        '--bubble',
         className,
     ].join(" ")
 
@@ -38,7 +38,7 @@ export default function Tag(props) {
                         className={icon}
                         style={{
                             fontSize: 15,
-                            marginRight: children ? 6 : 0,
+                            marginRight: children ? 3 : 0,
                         }}
                     ></i>
                 }

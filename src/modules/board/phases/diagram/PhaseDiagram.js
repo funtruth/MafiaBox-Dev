@@ -13,9 +13,9 @@ import {
 const get = (page) => (page && page.phaseMap) || []
 
 function PhaseDiagram(props) {
-    const { modeRepo, pageRepo, modeKey } = props
+    const { modeInfo, pageRepo, modeKey } = props
 
-    const phaseMap = get(modeRepo[modeKey])
+    const phaseMap = get(modeInfo)
 
     const [items, setItems] = useState([])
     const [arrows, setArrows] = useState([])
@@ -50,7 +50,6 @@ function PhaseDiagram(props) {
 
 export default connect(
     state => ({
-        modeRepo: state.page.modeRepo,
         pageRepo: state.page.pageRepo,
     }),
 )(PhaseDiagram)

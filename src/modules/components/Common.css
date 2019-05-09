@@ -49,7 +49,17 @@
 .--tag:hover {
     filter: brightness(120%);
 }
-
+.--bubble {
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 2px;
+    display: flex;
+    flex-direction: row;
+}
+.--bubble:hover {
+    filter: brightness(120%);
+}
 .--input {
     border: none;
     border-radius: 2px;

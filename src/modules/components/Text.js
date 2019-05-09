@@ -1,14 +1,5 @@
 import React from 'react';
-import { palette } from './Standards';
-
-const getAlign = (align) => {
-    switch(align) {
-        case 'c':   return 'center'
-        case 'r':   return 'flex-end'
-        case 'l':   return 'flex-start'
-        default:    return 'stretch'
-    }
-}
+import { palette, alignX } from './Standards';
 
 const getFontSize = (size) => {
     switch(size) {
@@ -49,7 +40,7 @@ export default function Text(props) {
         fontSize: getFontSize(size),
         fontFamily: 'Segoe UI',
         letterSpacing: -0.4,
-        alignSelf: getAlign(align),
+        alignSelf: alignX(align),
         marginTop: getMarginTop(size),
         color: palette(color),
         ...style,

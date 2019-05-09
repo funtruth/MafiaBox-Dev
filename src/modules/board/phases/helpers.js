@@ -2,6 +2,7 @@ const PHASE_STRING  = '(rss)(gameState)(phase)'
 const START_STRING  = `"value":"`
 const END_STRING    = `"`
 
+//gets the phases of a mode & returns an array of all the phase transitions
 export function parsePhaseArrows(items, repo) {
     const arrows = []
     
@@ -26,4 +27,22 @@ export function parsePhaseArrows(items, repo) {
     }
     
     return arrows
+}
+
+export function minMaxArray({min, max}) {
+    if (typeof min !== 'number' || typeof max !== 'number') {
+        console.warn('invalid arguments.')
+        return [];
+    }
+
+    if (max <= min) {
+        console.warn('2nd argument should be greater than first argument')
+        return [];
+    }
+
+    const array = [];
+    for (var i=min; i<=max; i++) {
+        array.push(i)
+    }
+    return array;
 }

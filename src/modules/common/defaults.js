@@ -1,4 +1,7 @@
 import {
+    DEFAULT_ROLE_SETUP,
+} from '../board/defaults'
+import {
     defaultFieldMap,
     defaultFieldRepo,
     DEFAULT_GAME_CHOICE,
@@ -20,6 +23,7 @@ export {
     DEFAULT_ASSIGN,
     DEFAULT_GAME_CHOICE,
     DEFAULT_LOGIC,
+    DEFAULT_ROLE_SETUP,
     DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,

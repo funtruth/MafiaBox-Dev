@@ -44,3 +44,23 @@ export function padding(sizes) {
 
     return value(sizes[0]) + ' ' + value(sizes[1])
 }
+
+export function alignX(align) {
+    switch(align) {
+        case 'l':           return 'flex-start'
+        case 'r':           return 'flex-end'
+        case 'c':           return 'center'
+        case 's':           return 'stretch'
+        default:            return ''
+    }
+}
+
+export function justifyY(justify) {
+    switch(justify) {
+        case 't':           return 'flex-start'
+        case 'b':           return 'flex-end'
+        case 'c':           return 'center'
+        case 's':           return 'stretch'
+        default:            return ''
+    }
+}

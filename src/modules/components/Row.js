@@ -1,23 +1,5 @@
 import React from 'react';
-import { palette, padding } from './Standards'
-
-const getJustify = (justify) => {
-    switch(justify) {
-        case 'c':           return 'center'
-        case 'r':           return 'flex-end'
-        case 'l':           return 'flex-start'
-        default:            return 'stretch'
-    }
-}
-
-const getAlign = (align) => {
-    switch(align) {
-        case 'c':           return 'center'
-        case 'e':           return 'flex-end'
-        case 's':           return 'flex-start'
-        default:            return 'stretch'
-    }
-}
+import { palette, padding, alignX, justifyY } from './Standards'
 
 const getPadding = (size) => {
     switch(size) {
@@ -50,8 +32,8 @@ export default function Row(props) {
     ].join(" ")
 
     const bodyStyle = {
-        justifyContent: getJustify(x),
-        alignItems: getAlign(y),
+        justifyContent: alignX(x),
+        alignItems: justifyY(y),
         padding: size ? getPadding(size) : sizes && padding(sizes),
         backgroundColor: bg && palette(bg),
         color: palette(color || 'whitish'),

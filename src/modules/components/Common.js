@@ -1,6 +1,7 @@
 import './Common.css'
 
 import Body from './Body'
+import Bubble from './Bubble'
 import Button from './Button'
 import DropClick from './DropClick'
 import Footer from './Footer'
@@ -16,6 +17,7 @@ import TextArea from './TextArea'
 
 export {
     Body,
+    Bubble,
     Button,
     DropClick,
     Footer,
