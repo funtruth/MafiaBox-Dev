@@ -17,6 +17,7 @@ export default function Tag(props) {
 
     const classes = [
         '--tag',
+        onClick ? '--onclick' : '',
         className,
     ].join(" ")
 

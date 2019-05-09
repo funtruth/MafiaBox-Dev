@@ -1,5 +1,5 @@
 import React from 'react';
-import './Icon.css'
+import { palette } from './Standards';
 
 const getFontSize = (size) => {
     switch(size) {
@@ -14,25 +14,25 @@ const getFontSize = (size) => {
 
 export default function Icon(props) {
     const {
+        icon = "",
         className = "",
         title,
         size = 'medium',
-        color = '#fff',
+        color = 'whitish',
         style,
-        hover,
         onClick,
     } = props
 
     const textStyle = {
         fontSize: getFontSize(size),
+        color: palette(color),
         ...style,
     }
 
     const classes = [
-        '--icon',
-        '--icon-' + color,
-        hover ? '--icon-hover' : '',
         className,
+        icon,
+        onClick ? '--onclick' : '',
     ].join(" ")
     
     return (

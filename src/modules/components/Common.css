@@ -41,22 +41,20 @@
 .--tag {
     padding: 6px 12px;
     border-radius: 4px;
-    cursor: pointer;
     margin: 3px;
     display: flex;
     flex-direction: row;
 }
-.--tag:hover {
+.--onclick {
+    cursor: pointer;
+}
+.--onclick:hover {
     filter: brightness(120%);
 }
 .--bubble {
     padding: 4px 8px;
     border-radius: 8px;
-    cursor: pointer;
     margin: 2px;
-}
-.--bubble:hover {
-    filter: brightness(120%);
 }
 .--input {
     border: none;

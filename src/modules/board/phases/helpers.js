@@ -29,6 +29,7 @@ export function parsePhaseArrows(items, repo) {
     return arrows
 }
 
+//produce the array [min, min+1, ... max-1, max]
 export function minMaxArray({min, max}) {
     if (typeof min !== 'number' || typeof max !== 'number') {
         console.warn('invalid arguments.')
@@ -45,4 +46,12 @@ export function minMaxArray({min, max}) {
         array.push(i)
     }
     return array;
+}
+
+export function countRoles(roles) {
+    let count = 0;
+    for (var key in roles) {
+        count += roles[key]
+    }
+    return count;
 }

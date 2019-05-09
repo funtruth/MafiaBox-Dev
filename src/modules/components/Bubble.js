@@ -17,6 +17,7 @@ export default function Bubble(props) {
 
     const classes = [
         '--bubble',
+        onClick ? '--onclick' : '',
         className,
     ].join(" ")
 
