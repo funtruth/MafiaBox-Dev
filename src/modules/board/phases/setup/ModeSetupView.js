@@ -52,7 +52,7 @@ function ModeSetupView(props) {
             {rows.map(item => (
                 <Body key={item}>
                     <Row
-                        className="--basic-slide"
+                        className="--slide-bottom"
                         sizes={['xxs', 'xl']}
                         bg="charcoal"
                         y="c"

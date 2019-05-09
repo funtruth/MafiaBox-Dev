@@ -5,41 +5,17 @@ import {
     difficultyType,
 } from '../../../common/types'
 
-import { useOverflow } from '../../../hooks/Hooks'
-
 import {
     Row,
-    Body,
     Bubble,
 } from '../../../components/Common';
+import ModeSetupItem from './ModeSetupItem'
 
 function ModeSetupRow(props) {
     const { items, players, onDraft, onNewDraft } = props
 
     const sortedItems = _.groupBy(items, i => i.difficulty)
     const zones = _.toArray(difficultyType)
-
-    const renderItem = (item) => {
-        const [overflowRef, overflowed] = useOverflow(null)
-        
-        return (
-            <div
-                key={item.key}
-                ref={overflowRef}
-            >
-                <Bubble
-                    bg="blue"
-                    icon="mdi mdi-file-document-outline"
-                    onClick={() => onDraft(item.key)}
-                    style={{
-                        float: overflowed ? 'none' : 'left',
-                    }}
-                >
-                    {item.title}
-                </Bubble>
-            </div>
-        )
-    }
 
     const renderZone = (item) => {
         const matchedItems = sortedItems[item.key] || []
@@ -56,16 +32,23 @@ function ModeSetupRow(props) {
                     float: 'left',
                 }}
             >
-                {matchedItems.map(renderItem)}
+                {matchedItems.map(item => (
+                    <ModeSetupItem
+                        {...item}
+                        key={item.key}
+                        row={item.key}
+                        onDraft={onDraft}
+                    />
+                ))}
                 {noItems &&
                     <Bubble
                         bg="discord"
                         onClick={() => onNewDraft(players, item.key)}
+                        icon="mdi mdi-file-document-edit-outline"
                         style={{
                             float: 'left',
                         }}
                     >
-                        new ...
                     </Bubble>
                 }
             </div>

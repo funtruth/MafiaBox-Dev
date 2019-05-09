@@ -27,6 +27,7 @@ function ModeSetupLabel(props) {
             >
                 <Bubble
                     bg={item.color}
+                    icon={item.icon}
                 >
                     {item.key}
                 </Bubble>
@@ -35,7 +36,7 @@ function ModeSetupLabel(props) {
     }
 
     return (
-        <Row sizes={['xs', 'xl']} y="c">
+        <Row className="--slide-bottom" sizes={['xs', 'xl']} bg="blackish" y="c">
             <Text style={{flex: 0.4}}># of Players</Text>
             <Row style={{flex: 1}}>{zones.map(renderZone)}</Row>
         </Row>

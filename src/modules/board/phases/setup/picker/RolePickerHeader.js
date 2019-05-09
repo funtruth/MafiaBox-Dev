@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import Fuse from 'fuse.js'
 
 import {
+    fuseType,
     boardType,
     dropdownType,
 } from '../../../../common/types'
@@ -21,12 +23,46 @@ function RolePickerHeader(props) {
         tab, setTab, setResults } = props
     const { key: setupKey, title, players, roles } = draftInfo
 
+    const [searchText, setSearchText] = useState('')
+    const handleType = (e) => {
+        setSearchText(e.target.value)
+        setResults(
+            _(fuse.search(e.target.value))
+                .groupBy(i => i.storyType)
+                .map((item, key) => ({
+                    key,
+                    title: (storyRepo[key] && storyRepo[key].title) || key,
+                    data: item,
+                }))
+                .value()
+        )
+    }
+
+    const [fuse, setFuse] = useState(null)
+    const onSearchFocus = () => {
+        setTab(2)
+        setFuse(new Fuse(_.toArray(pageRepo), fuseType.searchBoard))
+    }
+
     useEffect(() => {
         refresh(tab)
-    }, [tab])
+    }, [tab, setupKey])
 
     const refresh = (tabIndex) => {
         switch(tabIndex) {
+            case 0:
+                setResults(
+                    _(roles)
+                        .map((i, k) => pageRepo[k])
+                        .groupBy(i => i.storyType)
+                        .map((item, key) => ({
+                            key,
+                            title: (storyRepo[key] && storyRepo[key].title) || key,
+                            data: item,
+                        }))
+                        .value()
+                )
+                break
             case 1:
                 setResults(
                     _(pageRepo)
@@ -45,8 +81,8 @@ function RolePickerHeader(props) {
     }
     
     const onTabClick = (index) => {
-        
         setTab(index)
+        setSearchText('')
     }
 
     return (
@@ -62,6 +98,7 @@ function RolePickerHeader(props) {
                 }}
                 style={{
                     paddingRight: 10,
+                    marginRight: 'auto',
                 }}
             >
                 <Text size="s" color={title ? 'whitish' : 'grey'}>
@@ -82,6 +119,17 @@ function RolePickerHeader(props) {
             >
                 View All
             </Tag>
+            <Row sizes={['z', 'xs']}>
+                <input
+                    className="header-input"
+                    value={searchText}
+                    placeholder="Search library ..."
+                    type="text"
+                    onChange={handleType}
+                    onFocus={onSearchFocus}
+                />
+                <i className="header-icon mdi mdi-magnify"></i>
+            </Row>
         </Row>
     )
 }

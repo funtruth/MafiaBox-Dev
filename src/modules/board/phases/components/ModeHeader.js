@@ -29,7 +29,7 @@ function ModeHeader(props) {
     }
 
     return (
-        <Row bg="blackish" color="whitish" size="s" y="c">
+        <Row className="--slide-bottom" bg="blackish" color="whitish" size="s" y="c">
             <DropClick
                 dropdown={dropdownType.editTitle}
                 params={{

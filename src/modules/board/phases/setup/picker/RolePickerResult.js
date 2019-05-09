@@ -18,6 +18,7 @@ function RolePickerResult(props) {
     const currentCount = (roles && roles[pageKey]) || 0
 
     const onRemove = () => {
+        if (currentCount === 0) return;
         props.updateGeneral(
             ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
             currentCount - 1,
@@ -31,7 +32,7 @@ function RolePickerResult(props) {
     }
 
     return (
-        <Bubble bg="blue" style={{margin: 4}}>
+        <Bubble className="--slide-right" bg={!!currentCount ? "blue" : "blackish"} style={{margin: 4}}>
             <Row y="c">
                 <Text size="s" style={{marginRight: 10}}>{title}</Text>
                 <Icon size="xl" icon="mdi mdi-minus-circle" onClick={onRemove}></Icon>

@@ -14,10 +14,16 @@ export function palette(color) {
         case 'active':      return '#705772'
         case 'blue':        return '#18449b'
         case 'purple':      return '#6279CA'
+        case 'darkpurple':  return '#240041'
         case 'red':         return '#db4757'
+        case 'darkred':     return '#900048'
         case 'maroon':      return '#B34B50'
-        case 'yellow':      return '#fed766'
+        case 'yellow':      return '#EA9A19'
         case 'pink':        return '#a566b0'
+        case 'orange':      return '#D64F31'
+        case 'rabbit':      return '#F1ECC8'
+        case 'green':       return '#4BAC88'
+        case 'turquoise':   return '#085f63'
         case 'violet':      return 'mediumslateblue'
         default:            return color
     }

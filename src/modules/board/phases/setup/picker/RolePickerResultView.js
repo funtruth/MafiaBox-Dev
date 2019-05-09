@@ -12,23 +12,16 @@ export default function RolePickerResultView(props) {
     const { data, title } = item
     
     return (
-        <Body
-            bg="charcoal"
-            sizes={['xs', 's']}
-        >
-            <Text>
-                {title}
-            </Text>
-            <Row>
-                {data.map(item => (
-                    <RolePickerResult
-                        key={item.pageKey}
-                        item={item}
-                        modeKey={modeKey}
-                        draftInfo={draftInfo}
-                    />
-                ))}
-            </Row>
-        </Body>
+        <Row y="c">
+            <Text size="s" style={{marginRight: 8}}>{title}</Text>
+            {data.map(item => (
+                <RolePickerResult
+                    key={item.pageKey}
+                    item={item}
+                    modeKey={modeKey}
+                    draftInfo={draftInfo}
+                />
+            ))}
+        </Row>
     )
 }

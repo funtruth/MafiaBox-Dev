@@ -47,7 +47,19 @@
     animation: fadein 1s;
     -webkit-animation: fadein 1s;
 }
-.--basic-slide {
+.--slide-bottom {
     animation: fadein 0.4s, slideinbottom 0.2s;
     -webkit-animation: fadein 0.4s, slideinbottom 0.2s;
+}
+.--slide-left {
+    animation: fadein 0.4s, slideinleft 0.2s;
+    -webkit-animation: fadein 0.4s, slideinleft 0.2s;
+}
+.--slide-right {
+    animation: fadein 0.4s, slideinright 0.2s;
+    -webkit-animation: fadein 0.4s, slideinright 0.2s;
+}
+.--slide-top {
+    animation: fadein 0.4s, slideintop 0.2s;
+    -webkit-animation: fadein 0.4s, slideintop 0.2s;
 }

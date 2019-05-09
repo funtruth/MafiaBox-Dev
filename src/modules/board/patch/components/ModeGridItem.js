@@ -24,7 +24,7 @@ const RoleGridItem = SortableElement((props) => {
 
     return (
         <Row
-            className="--basic-slide"
+            className="--slide-bottom"
             sizes={['xxs', 'xxl']}
             bg="charcoal"
             y="c"
