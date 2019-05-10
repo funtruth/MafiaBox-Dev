@@ -29,7 +29,7 @@ const RoleGridItem = SortableElement((props) => {
         if (STOP_DROP_PROP(e)) return;
         props.showModal(modalType.showPage, {
             pageKey,
-            path: [pageKey],
+            path: ['pageRepo', pageKey],
             updateSource: updateSourceType.repo,
             boardType: boardType.roles.key,
         })

@@ -9,7 +9,7 @@ import {
 
 import { isChildOf } from '../../../common/arrows'
 import { showModal } from '../../../modal/ModalReducer'
-import { updateRepo, connectPhases } from '../../../page/PageReducer'
+import { updateGeneral, connectPhases } from '../../../page/PageReducer'
 
 import {
     Body,
@@ -42,7 +42,7 @@ function PhaseDiagramItem(props) {
         const onMouseUp = (e) => {
             //if item has moved, just send an update on XY
             if (e.pageX !== pageX || e.pageY !== pageY) {
-                props.updateRepo([pageKey], {
+                props.updateGeneral(['pageRepo', pageKey], {
                     diagramXY: {
                         x: e.pageX - pageX + offsetX,
                         y: e.pageY - pageY + offsetY,
@@ -53,7 +53,7 @@ function PhaseDiagramItem(props) {
                 props.showModal(modalType.showPage, {
                     pageKey,
                     modeKey,
-                    path: [pageKey],
+                    path: ['pageRepo', pageKey],
                     updateSource: updateSourceType.repo,
                 })
             }
@@ -170,7 +170,7 @@ export default connect(
     null,
     {
         showModal,
-        updateRepo,
+        updateGeneral,
         connectPhases,
     }
 )(PhaseDiagramItem)

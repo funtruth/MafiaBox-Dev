@@ -206,7 +206,7 @@ export function addPageToMap(storyKey, boardType) {
         }))
         dispatch(showModal(modalType.showPage, {
             pageKey,
-            path: [pageKey],
+            path: ['pageRepo', pageKey],
             updateSource: updateSourceType.repo,
         }))
     }
@@ -289,7 +289,7 @@ export function addPageToMode(modeKey, boardType) {
         }))
         dispatch(showModal(modalType.showPage, {
             pageKey,
-            path: [pageKey],
+            path: ['pageRepo', pageKey],
             updateSource: updateSourceType.repo,
         }))
     }
@@ -426,22 +426,6 @@ export function receiveDeleteEvent(snap, key) {
     }
 }
 
-export function updateRepo(path, update, extraPath=[]) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        const totalPath = path.concat(extraPath)
-        const repoClone = helpers.updateByPath(totalPath, update, pageRepo)
-
-        dispatch(receiveAction({
-            type: UPDATE_REPO,
-            payload: {
-                pageRepo: repoClone,
-            },
-        }))
-    }
-}
-
 export function diffPriorities(attach) {
     return (dispatch, getState) => {
         const { pageRepo } = getState().page
@@ -463,26 +447,12 @@ export function diffPriorities(attach) {
     }
 }
 
-export function updateField(path, update) {
-    return (dispatch, getState) => {
-        const { fieldRepo } = getState().page
-
-        const repoClone = helpers.updateByPath(path, update, fieldRepo)
-
-        dispatch(receiveAction({
-            type: UPDATE_FIELD,
-            payload: {
-                fieldRepo: repoClone,
-            },
-        }))
-    }
-}
-
-export function updateGeneral(path, update) {
+export function updateGeneral(path, update, extraPath=[]) {
     return (dispatch, getState) => {
         const { page } = getState()
 
-        const reducer = helpers.updateByPath(path, update, page)
+        const totalPath = path.concat(extraPath)
+        const reducer = helpers.updateByPath(totalPath, update, page)
 
         dispatch(receiveAction({
             type: UPDATE_GENERAL,

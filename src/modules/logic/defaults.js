@@ -84,6 +84,20 @@ export const triggerNewVars = {
     },
 }
 
+export const eventPickerVars = {
+    "(player)": {
+        key: '(player)',
+        subfield: 'player',
+        fields: [
+            'player',
+        ],
+        fieldLength: 1,
+        variableTypes: [
+            variableType.uid.key,
+        ],
+    },
+}
+
 export const choiceMap = {
     "(choice)": {
         key: '(choice)',

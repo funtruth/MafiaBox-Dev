@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import ModeHeader from './components/ModeHeader';
+import { updateGeneral } from '../../page/PageReducer'
+
+import ModeHeader from './ModeHeader';
 import PhaseDiagram from './diagram/PhaseDiagram';
 import ModeSetupView from './setup/ModeSetupView';
+import EventView from './events/EventView';
 
 function ModeView(props) {
     const { match, modeRepo } = props
@@ -15,6 +18,7 @@ function ModeView(props) {
     const propsExt = {
         ...props,
         tab, setTab,
+        path: ['modeRepo', modeKey],
         modeKey,
         modeInfo: modeRepo[modeKey] || {},
     }
@@ -25,6 +29,7 @@ function ModeView(props) {
             <ModeHeader {...propsExt}/>
             {tab === 0 && <PhaseDiagram {...propsExt}/>}
             {tab === 1 && <ModeSetupView {...propsExt}/>}
+            {tab === 2 && <EventView {...propsExt}/>}
         </>
     )
 }
@@ -32,5 +37,8 @@ function ModeView(props) {
 export default connect(
     state => ({
         modeRepo: state.page.modeRepo,
-    })
+    }),
+    {
+        updateGeneral,
+    }
 )(ModeView)

@@ -3,7 +3,7 @@ import './modals.css'
 import { connect } from 'react-redux'
 
 import { showModal, popModalTo, updateTopModal } from './ModalReducer'
-import { updateRepo } from '../page/PageReducer'
+import { updateGeneral } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
@@ -103,7 +103,7 @@ class ModalView extends React.Component {
                 props.setWorkspace = (value, path) => this.props.updateTopModal(path || ['attach'], value)
                 switch(props.updateSource) {
                     case updateSourceType.repo:
-                        props.updatePage = (path, value) => this.props.updateRepo(path, value)
+                        props.updatePage = (path, value) => this.props.updateGeneral(path, value)
                         break
                     case updateSourceType.function:
                         props.updatePage = (path, value) => this.props.updateFunction(path, value)
@@ -127,7 +127,7 @@ export default connect(
     }),
     {
         showModal,
-        updateRepo,
+        updateGeneral,
         updateFunction,
         popModalTo,
         updateTopModal,

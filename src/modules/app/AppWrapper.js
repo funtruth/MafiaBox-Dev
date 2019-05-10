@@ -1,12 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { DragDropContext as BeautifulDND } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import * as helpers from '../common/helpers'
 
-import { handleDragEnd } from './AppReducer'
 import { showModal } from '../modal/ModalReducer'
 import { showDropdown } from '../dropdown/DropdownReducer'
 
@@ -73,29 +71,11 @@ class AppWrapper extends React.Component{
         }
     }
 
-    _onDragEnd = result => {
-        const { source, destination } = result;
-        
-        //dropped outside the list
-        if (!destination) {
-            return;
-        }
-
-        //if nothing happened
-        if (source.index === destination.index && source.droppableId === destination.droppableId) {
-            return;
-        }
-
-        this.props.handleDragEnd(source, destination)
-    }
-
     render() {
         return (
-            <BeautifulDND onDragEnd={this._onDragEnd}>
-                <AuthWrapper>
-                    {this.props.children}
-                </AuthWrapper>
-            </BeautifulDND>
+            <AuthWrapper>
+                {this.props.children}
+            </AuthWrapper>
         )
     }
 }
@@ -107,6 +87,5 @@ export default DragDropContext(HTML5Backend)(connect(
     {
         showDropdown,
         showModal,
-        handleDragEnd,
     }
 )(AppWrapper))

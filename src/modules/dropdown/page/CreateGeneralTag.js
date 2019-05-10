@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 
 import { genUID } from '../../common/helpers';
 import {
     useAutofocus
 } from '../../hooks/Hooks';
-import { updateField } from '../../page/PageReducer'
 
 import {
     DropSubmit,
@@ -18,12 +16,7 @@ const KEYWORDS = [
     'roleId',
 ]
 
-export default connect(
-    null,
-    {
-        updateField,
-    }
-)(function CreateGeneralTag(props) {
+export default function CreateGeneralTag(props) {
     const { path, attach, placeholder } = props
 
     const focusRef = useAutofocus()
@@ -46,7 +39,7 @@ export default connect(
         }
 
         const newKey = genUID('tag', attach)
-        props.updateField([...path, 'data', newKey], {
+        props.updateGeneral(['fieldRepo', ...path, 'data', newKey], {
             key: newKey,
             title: value,
             index: Object.keys(attach||{}).length,
@@ -73,4 +66,4 @@ export default connect(
             </DropSubmit>
         </div>
     )
-})
+}

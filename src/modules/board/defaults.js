@@ -7,3 +7,10 @@ export const DEFAULT_ROLE_SETUP = {
     difficulty: difficultyType.normal.key,
     roles: '',
 }
+
+export const DEFAULT_EVENT_LISTENER = {
+    key: '',
+    title: '',
+    data: '',
+    location: '',
+}

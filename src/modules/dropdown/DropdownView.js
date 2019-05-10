@@ -10,7 +10,7 @@ import {
 
 import { showDropdown, popDropdownTo } from './DropdownReducer'
 import { updateTopModal, showModal } from '../modal/ModalReducer'
-import { updateRepo, updateGeneral } from '../page/PageReducer'
+import { updateGeneral } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import Dropdown from './components/Dropdown';
@@ -37,7 +37,6 @@ import PickLogic from './logic/PickLogic';
 import PickReturnType from './logic/PickReturnType';
 import PickOperator from './logic/PickOperator';
 
-import EditTag from './template/EditTag'
 import CreateUniqueTag from './page/CreateUniqueTag'
 import EditUniqueTag from './page/EditUniqueTag'
 import CreateGeneralTag from './page/CreateGeneralTag'
@@ -46,9 +45,6 @@ import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
 import WriteGameChoice from './page/WriteGameChoice'
 import CreateGlobalVar from './page/CreateGlobalVar'
-
-import PickFieldType from './template/PickFieldType'
-import TemplateTitleOptions from './template/TemplateTitleOptions'
 
 import AddVar from './functions/AddVar'
 import DeclareOrAssignVar from './functions/DeclareOrAssignVar'
@@ -108,9 +104,9 @@ function DropdownView(props) {
             case updateSourceType.repo:
                 renderProps.updatePage = (value, extraPath=[]) => {
                     if (renderProps.ignoreSubpath) {
-                        props.updateRepo(renderProps.path, value, extraPath)
+                        props.updateGeneral(renderProps.path, value, extraPath)
                     } else {
-                        props.updateRepo(renderProps.path, value, (renderProps.subpath||[]).concat(extraPath))
+                        props.updateGeneral(renderProps.path, value, (renderProps.subpath||[]).concat(extraPath))
                     }
                 }
                 break
@@ -171,8 +167,6 @@ function DropdownView(props) {
             case dropdownType.pickReturnType:
                 return <PickReturnType {...renderProps}/>
 
-            case dropdownType.editTag:
-                return <EditTag {...renderProps}/>
             case dropdownType.createUniqueTag:
                 return <CreateUniqueTag {...renderProps}/>
             case dropdownType.editUniqueTag:
@@ -187,10 +181,6 @@ function DropdownView(props) {
                 return <PickGameChoiceType {...renderProps}/>
             case dropdownType.writeGameChoice:
                 return <WriteGameChoice {...renderProps}/>
-            case dropdownType.pickFieldType:
-                return <PickFieldType {...renderProps}/>
-            case dropdownType.templateTitleOptions:
-                return <TemplateTitleOptions {...renderProps}/>
             case dropdownType.createGlobalVar:
                 return <CreateGlobalVar {...renderProps}/>
                 
@@ -302,7 +292,6 @@ export default connect(
         showDropdown,
         popDropdownTo,
         showModal,
-        updateRepo,
         updateGeneral,
         updateTopModal,
         updateFunction,

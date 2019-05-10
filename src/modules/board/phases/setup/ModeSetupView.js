@@ -18,20 +18,20 @@ import ModeSetupLabel from './ModeSetupLabels';
 import RolePicker from './picker/RolePicker'
 
 function ModeSetupView(props) {
-    const { modeKey, modeInfo } = props
+    const { modeKey, modeInfo, path } = props
 
     const { playerNum, roleSetup } = modeInfo
-    const rows = minMaxArray(playerNum)
+    const rows = minMaxArray(playerNum||{})
 
-    const [draft, setDraft] = useState({})
-    const draftRow = roleSetup[draft] && roleSetup[draft].players
+    const [draft, setDraft] = useState("")
+    const draftRow = roleSetup && roleSetup[draft] && roleSetup[draft].players
     const onDraft = (setupKey) => {
         if (!roleSetup[setupKey]) return;
         setDraft(setupKey)
     }
     const onNewDraft = (players, difficulty) => {
         const setupKey = genUID('setup', roleSetup)
-        props.updateGeneral(['modeRepo', modeKey, 'roleSetup', setupKey], {
+        props.updateGeneral([...path, 'roleSetup', setupKey], {
             ...DEFAULT_ROLE_SETUP,
             key: setupKey,
             title: 'list',

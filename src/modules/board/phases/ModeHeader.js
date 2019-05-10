@@ -4,23 +4,23 @@ import { connect } from 'react-redux'
 import {
     dropdownType,
     boardType,
-} from '../../../common/types'
+} from '../../common/types'
 
 import {
     addPageToMode,
     publishFromState,
     updateGeneral,
-} from '../../../page/PageReducer'
+} from '../../page/PageReducer'
 
 import {
     DropClick,
     Row,
     Tag,
     Text,
-} from '../../../components/Common';
+} from '../../components/Common';
 
 function ModeHeader(props) {
-    const { modeKey, modeRepo, tab, setTab } = props
+    const { modeKey, modeRepo, path, tab, setTab } = props
 
     const modeInfo = modeRepo[modeKey] || {}
     const { title, playerNum } = modeInfo
@@ -32,18 +32,18 @@ function ModeHeader(props) {
 
     const handlePublish = () => {
         props.publishFromState('modeRepo', modeKey)
-        props.updateGeneral(['modeRepo', modeKey, 'publishInfo'], {
+        props.updateGeneral([...path, 'publishInfo'], {
             published: true,
             publishedAt: Date.now(),
         })
     }
 
     return (
-        <Row className="--slide-bottom" bg="blackish" color="whitish" size="s" y="c">
+        <Row className="--slide-bottom" bg="blackish" color="whitish" sizes={['xs', 'xl']} y="c">
             <DropClick
                 dropdown={dropdownType.editTitle}
                 params={{
-                    path: ['modeRepo', modeKey],
+                    path,
                     attach: modeInfo,
                 }}
                 style={{
@@ -64,7 +64,7 @@ function ModeHeader(props) {
             <DropClick
                 dropdown={dropdownType.editPlayerNum}
                 params={{
-                    path: ['modeRepo', modeKey, 'playerNum'],
+                    path: [...path, 'playerNum'],
                     attach: modeInfo.playerNum||{},
                 }}
             >

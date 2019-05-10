@@ -1,23 +1,14 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import { gameChoiceType } from '../../common/types';
-import {
-    updateField,
-} from '../../page/PageReducer'
 
 import {
     DropItem,
     DropTitle,
 } from '../components/Common'
 
-export default connect(
-    null,
-    {
-        updateField,
-    }
-)(function PickGameChoiceType(props) {
+export default function PickGameChoiceType(props) {
     const { currentValue } = props
 
     const handleSelect = (item) => {
@@ -47,4 +38,4 @@ export default connect(
             {items.map(renderItem)}
         </>
     )
-})
+}

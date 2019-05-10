@@ -1,28 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { updateField } from '../../page/PageReducer'
 
 import {
     DropItem,
     DropTitle,
 } from '../components/Common'
 
-export default connect(
-    null,
-    {
-        updateField,
-    }
-)(function EditUniqueTag(props) {
+export default function EditUniqueTag(props) {
     const { subfieldKey, defaultValue, path } = props
 
     const onDelete = () => {
-        props.updateField([...path, 'data', subfieldKey], '')
+        props.updateGeneral(['fieldRepo', ...path, 'data', subfieldKey], '')
         props.showDropdown();
     }
 
     const onDefault = () => {
-        props.updateField([...path, 'defaultValue'], subfieldKey)
+        props.updateGeneral(['fieldRepo', ...path, 'defaultValue'], subfieldKey)
         props.showDropdown();
     }
 
@@ -43,4 +35,4 @@ export default connect(
             />
         </>
     )
-})
+}

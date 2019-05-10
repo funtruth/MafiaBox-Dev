@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { updateRepo } from './PageReducer'
+import { updateGeneral } from './PageReducer'
 import { showModal, popModalTo } from '../modal/ModalReducer'
 
 import PageView from './PageView'
@@ -16,7 +16,7 @@ class WindowPageView extends React.Component {
             path: [pageKey],
             showModal: this.props.showModal,
             popModalBy: (pops) => this.props.popModalTo(-1 - pops),
-            updatePage: this.props.updateRepo,
+            updatePage: this.props.updateGeneral,
         }
 
         return (
@@ -30,7 +30,7 @@ class WindowPageView extends React.Component {
 export default connect(
     null,
     {
-        updateRepo,
+        updateGeneral,
         showModal,
         popModalTo,
     }

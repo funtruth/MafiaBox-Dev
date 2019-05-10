@@ -10,7 +10,6 @@ import PatchView from '../board/patch/PatchView';
 import ModeView from '../board/phases/ModeView';
 import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
-import EventView from '../board/views/EventView'
 
 export default function HomeView(props) {
     return (
@@ -26,7 +25,6 @@ export default function HomeView(props) {
                     <Route exact path="/:projectKey/roles" component={PatchView}/>
                     <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
                     <Route exact path="/:projectKey/phases/:storyKey/:pageKey" component={WindowPageView}/>
-                    <Route exact path="/:projectKey/events" component={EventView}/>
                     <Route exact path="/:projectKey/testhub" component={TestHubView}/>
                 </Switch>
             </div>

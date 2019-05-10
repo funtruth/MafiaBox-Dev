@@ -1,4 +1,5 @@
 import {
+    DEFAULT_EVENT_LISTENER,
     DEFAULT_ROLE_SETUP,
 } from '../board/defaults'
 import {
@@ -21,6 +22,7 @@ export {
     defaultFieldMap,
     defaultFieldRepo,
     DEFAULT_ASSIGN,
+    DEFAULT_EVENT_LISTENER,
     DEFAULT_GAME_CHOICE,
     DEFAULT_LOGIC,
     DEFAULT_ROLE_SETUP,

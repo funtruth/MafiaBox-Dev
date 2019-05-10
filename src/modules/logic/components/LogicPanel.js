@@ -5,7 +5,7 @@ import { DropClick, LogicButton } from '../../components/Common';
 export default function LogicPanel(props) {
     const {
         pageKey, fieldKey, subfieldKey,
-        value, //logic item
+        logicItem,
         vars,
         placeholder,
         dropdown,
@@ -14,7 +14,7 @@ export default function LogicPanel(props) {
     } = props
 
     //get data of the logic item
-    const data = value.data || {}
+    const data = logicItem.data || {}
     //get data of the logic panel
     const dataProp = (subfieldKey ? data[subfieldKey] : data) || {}
 

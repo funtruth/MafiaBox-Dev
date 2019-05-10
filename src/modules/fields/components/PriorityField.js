@@ -1,10 +1,13 @@
 import React from 'react'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 
-import { modalType } from '../../modal/types';
+import {
+    modalType,
+    boardType,
+} from '../../common/types';
 
 import { showModal } from '../../modal/ModalReducer'
-import { sortPriorities } from '../FieldReducer'
 
 import {
     Body,
@@ -25,9 +28,15 @@ function PriorityField(props) {
     const { fieldKey, value, pageRepo } = props
 
     let handleClick = () => {
+        const sortedPriorities = _(pageRepo)
+            .filter(i => i && i.boardType === boardType.roles.key)
+            .groupBy(i => i.priority)
+            .sortBy((i, k) => k)
+            .value()
+
         props.showModal(modalType.editPriority, {
             fieldKey,
-            attach: sortPriorities(pageRepo),
+            attach: sortedPriorities,
         })
     }
 

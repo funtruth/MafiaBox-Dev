@@ -67,7 +67,7 @@ function PatchHeader(props) {
     }
 
     return (
-        <Row bg="blackish" color="whitish" y="c" sizes={['s', 'xxl']}>
+        <Row bg="blackish" color="whitish" y="c" sizes={['xs', 'xl']}>
             <DropClick
                 dropdown={dropdownType.editTitle}
                 params={{
