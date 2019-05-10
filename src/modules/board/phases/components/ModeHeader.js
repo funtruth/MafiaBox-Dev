@@ -8,6 +8,8 @@ import {
 
 import {
     addPageToMode,
+    publishFromState,
+    updateGeneral,
 } from '../../../page/PageReducer'
 
 import {
@@ -26,6 +28,14 @@ function ModeHeader(props) {
 
     const handleAdd = () => {
         props.addPageToMode(modeKey, boardType.phases.key)
+    }
+
+    const handlePublish = () => {
+        props.publishFromState('modeRepo', modeKey)
+        props.updateGeneral(['modeRepo', modeKey, 'publishInfo'], {
+            published: true,
+            publishedAt: Date.now(),
+        })
     }
 
     return (
@@ -73,13 +83,29 @@ function ModeHeader(props) {
                 Role setup
             </Tag>
             <Tag
-                icon="mdi mdi-table-plus"
-                onClick={handleAdd}
+                bg={tab === 2 ? 'violet' : 'charcoal'}
+                onClick={() => setTab(2)}
+                icon="mdi mdi-calendar-star"
                 style={{
-                    marginLeft: 'auto',
+                    marginRight: 'auto',
                 }}
             >
-                Add
+                Game events
+            </Tag>
+            {tab === 0 &&
+                <Tag
+                    className="--slide-right"
+                    icon="mdi mdi-table-plus"
+                    onClick={handleAdd}
+                >
+                    Add
+                </Tag>
+            }
+            <Tag
+                icon="mdi mdi-publish"
+                onClick={handlePublish}
+            >
+                Publish
             </Tag>
         </Row>
     )
@@ -91,5 +117,7 @@ export default connect(
     }),
     {
         addPageToMode,
+        publishFromState,
+        updateGeneral,
     }
 )(ModeHeader)

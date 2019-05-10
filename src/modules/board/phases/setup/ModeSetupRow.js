@@ -35,7 +35,7 @@ function ModeSetupRow(props) {
                 {matchedItems.map(item => (
                     <ModeSetupItem
                         {...item}
-                        key={item.key}
+                        key={item.key + item.title}
                         row={item.key}
                         onDraft={onDraft}
                     />

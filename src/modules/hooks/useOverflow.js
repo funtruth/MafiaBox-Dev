@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from 'react'
 
-/*used to check if a text-ellipsis element is overflowed
+/*
+ISSUES: needs to be re-mounted if text changes.
+DESCRIPTION: used to check if a text-ellipsis element is overflowed
     function example() {
         const [overflowRef, overflowed] = useOverflow(null)
         ...
