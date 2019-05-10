@@ -11,11 +11,12 @@ import {
     Tag,
 } from '../components/Common';
 import LogicBlock from './LogicBlock'
+import LogicBlockDrop from './dnd/LogicBlockDrop'
 import LogicAddBelow from './components/LogicAddBelow'
 import LogicDetails from './components/LogicDetails'
 
 export default function LogicView(props) {
-    const { vars, value, logicKey, path, childKeys } = props
+    const { vars, index, value, logicKey, path, childKeys } = props
 
     const handleAdd = () => {
         const newLogicKey = genUID('logic', value)
@@ -28,7 +29,17 @@ export default function LogicView(props) {
     return (
         <Body style={{margin: 4}}>
             {!!logicKey &&
-                <Body>
+                <div style={{position: 'relative'}}>
+                    <LogicBlockDrop
+                        top
+                        index={index}
+                        logicKey={logicKey}
+                    />
+                    <LogicBlockDrop
+                        bottom
+                        index={index}
+                        logicKey={logicKey}
+                    />
                     <LogicBlock
                         {...props}
                         logicItem={value[logicKey] || {}}
@@ -42,7 +53,7 @@ export default function LogicView(props) {
                             path={[...path, logicKey]}
                         />
                     </Row>
-                </Body>
+                </div>
             }
             {childKeys &&
                 <Body
@@ -52,10 +63,11 @@ export default function LogicView(props) {
                         borderLeft: '1px dashed #666',
                     }}
                 >
-                    {childKeys.map(childKey => (
+                    {childKeys.map((childKey, index) => (
                         <LogicView
                             {...props}
                             key={childKey}
+                            index={index}
                             logicKey={childKey}
                             parentKey={logicKey}
                             childKeys={value[childKey] && value[childKey].childKeys}

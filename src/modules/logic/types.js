@@ -348,3 +348,7 @@ export const mathType = {
     variable: 'mathType/variable',
     operation: 'mathType/operation',
 }
+
+export const logicDNDType = {
+    item: 'item',
+}
