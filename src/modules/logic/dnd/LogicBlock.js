@@ -1,22 +1,22 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { logicDNDType } from '../common/types';
-import { COLLECT_DRAG } from '../modal/ModalDND'
+import { logicDNDType } from '../../common/types';
+import { COLLECT_DRAG } from '../../modal/ModalDND'
 
-import LogicType from './components/LogicType';
-import LogicOptions from './components/LogicOptions'
-import LogicPanels from './components/LogicPanels';
+import LogicType from '../components/LogicType';
+import LogicOptions from '../components/LogicOptions'
+import LogicPanels from '../components/LogicPanels';
 
 import {
     Row,
-} from '../components/Common';
+} from '../../components/Common';
 
 const itemSource = {
     beginDrag(props) {
-        const { logicKey, index } = props
+        const { parentKey, index } = props
         return {
-            logicKey, index,
+            parentKey, index,
         }
     }
 }

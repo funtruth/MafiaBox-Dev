@@ -10,11 +10,12 @@ const itemTarget = {
         if (didDrop) return;
 
         const dragItem = monitor.getItem()
+        const { parentKey, index } = dragItem
         const itemType = monitor.getItemType()
 
         switch(itemType) {
             case logicDNDType.item:
-                console.log('drag and drop not finished yet.', {dragItem})
+                props.moveLogic(parentKey, index)
                 break
             default:
         }

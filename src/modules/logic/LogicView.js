@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import './logic.css'
 
 import { DEFAULT_LOGIC } from '../common/defaults';
@@ -10,13 +11,13 @@ import {
     Row,
     Tag,
 } from '../components/Common';
-import LogicBlock from './LogicBlock'
+import LogicBlock from './dnd/LogicBlock'
 import LogicBlockDrop from './dnd/LogicBlockDrop'
 import LogicAddBelow from './components/LogicAddBelow'
 import LogicDetails from './components/LogicDetails'
 
 export default function LogicView(props) {
-    const { vars, index, value, logicKey, path, childKeys } = props
+    const { vars, index, value, logicKey, parentKey, path, childKeys } = props
 
     const handleAdd = () => {
         const newLogicKey = genUID('logic', value)
@@ -24,6 +25,18 @@ export default function LogicView(props) {
             [newLogicKey]: DEFAULT_LOGIC,
             childKeys: [newLogicKey],
         })
+    }
+
+    const moveLogic = (newLogicKey, newIndex) => (oldLogicKey, oldIndex) => {
+        const repoClone = _.cloneDeep(value)
+        
+        const oldPointer = (oldLogicKey ? repoClone[oldLogicKey] : repoClone).childKeys
+        const newPointer = (newLogicKey ? repoClone[newLogicKey] : repoClone).childKeys
+        
+        const [removed] = oldPointer.splice(oldIndex, 1)
+        newPointer.splice(newIndex, 0, removed)
+
+        props.updatePage(path, repoClone)
     }
     
     return (
@@ -34,11 +47,13 @@ export default function LogicView(props) {
                         top
                         index={index}
                         logicKey={logicKey}
+                        moveLogic={moveLogic(parentKey, index)}
                     />
                     <LogicBlockDrop
                         bottom
                         index={index}
                         logicKey={logicKey}
+                        moveLogic={moveLogic(parentKey, index + 1)}
                     />
                     <LogicBlock
                         {...props}
@@ -64,18 +79,19 @@ export default function LogicView(props) {
                     }}
                 >
                     {childKeys.map((childKey, index) => (
-                        <LogicView
-                            {...props}
-                            key={childKey}
-                            index={index}
-                            logicKey={childKey}
-                            parentKey={logicKey}
-                            childKeys={value[childKey] && value[childKey].childKeys}
-                            vars={{
-                                ...vars,
-                                ...value.declare,
-                            }}
-                        />
+                        childKey &&
+                            <LogicView
+                                {...props}
+                                key={childKey}
+                                index={index}
+                                logicKey={childKey}
+                                parentKey={logicKey}
+                                childKeys={value[childKey] && value[childKey].childKeys}
+                                vars={{
+                                    ...vars,
+                                    ...value.declare,
+                                }}
+                            />
                     ))}
                 </Body>
             }
