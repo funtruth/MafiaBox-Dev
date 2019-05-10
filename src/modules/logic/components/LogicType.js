@@ -11,11 +11,11 @@ import {
  } from '../../components/Common';
 
 export default function LogicType(props) {
-    const { value, path, subpath, updateSource } = props
+    const { value, logicItem, path, subpath, updateSource } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
-    } = value
+    } = logicItem
     
     const item = selectedOperator ?
         operatorType[selectedOperator]
@@ -31,7 +31,8 @@ export default function LogicType(props) {
         <DropClick
             dropdown={dropdownType.pickLogic}
             params={{
-                attach: value,
+                logicItem,
+                logicRepo: value,
                 updateSource,
                 path,
                 subpath,

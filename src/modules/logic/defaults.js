@@ -8,10 +8,9 @@ import {
 */
 export const DEFAULT_LOGIC = {
     data: "",
-    down: "",
     logicType: "",
     operatorType: "",
-    right: "",
+    childKeys: "",
     declare: "",
 }
 

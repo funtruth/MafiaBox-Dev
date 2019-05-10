@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-    Body,
     Row,
     Text,
 } from '../../../../components/Common';

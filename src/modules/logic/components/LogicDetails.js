@@ -7,8 +7,8 @@ import LogicMutateItem from '../details/LogicMutateItem';
 import LogicUpdateItem from '../details/LogicUpdateItem';
 
 export default function LogicDetails(props) {
-    const { value, path } = props
-    const { data, declare } = value
+    const { logicItem, path } = props
+    const { data, declare } = logicItem
 
     return (
         <div className="column" style={{marginBottom: 8}}>
@@ -20,7 +20,7 @@ export default function LogicDetails(props) {
                     path={[...path, 'declare']}
                 />
             ))}
-            {value.logicType === logicType.variable.key && 
+            {logicItem.logicType === logicType.variable.key && 
                 Object.keys(data).map(field => (
                     <LogicMutateItem
                         {...props}
@@ -31,7 +31,7 @@ export default function LogicDetails(props) {
                     />
                 ))
             }
-            {value.logicType === logicType.update.key &&
+            {logicItem.logicType === logicType.update.key &&
                 Object.keys(data).map(field => (
                     <LogicUpdateItem
                         {...props}

@@ -9,9 +9,11 @@ import {
 } from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
+import { genUID } from '../../common/helpers';
 
 export default function PickOperator(props) {
-    const { hoverKey, attach } = props
+    const { hoverKey, logicItem, logicRepo } = props
+    const { childKeys } = logicItem
 
     const data = _(operatorType)
         .filter(i => i.logicType === hoverKey)
@@ -20,18 +22,18 @@ export default function PickOperator(props) {
     
     //Operators have internal logic by default
     let handleSelect = (item) => {
+        const childKey = genUID('logic', logicRepo)
         props.updatePage({
             ...DEFAULT_LOGIC,
-            down: attach.down,
             logicType: hoverKey,
             operatorType: item.key,
-            right: attach.right || DEFAULT_LOGIC,
+            childKeys: childKeys || [childKey],
         })
         props.showDropdown()
     }
 
     let renderItem = (item) => {
-        const chosen = item.key === attach.operatorType
+        const chosen = item.key === logicItem.operatorType
 
         return (
             <div

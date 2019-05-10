@@ -1,12 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 
-import {
-    logicType,
-} from '../../common/types'
-import {
-    DEFAULT_LOGIC,
-} from '../../common/defaults'
+import { logicType } from '../../common/types'
+import { DEFAULT_LOGIC } from '../../common/defaults';
 
 import {
     DropItem,
@@ -15,20 +11,19 @@ import {
 } from '../components/Common'
 
 export default function PickLogic(props) {
-    const { attach } = props
+    const { logicItem } = props
 
-    //Normal logic cannot have Internal Logic apart from Operator Logic
+    //PickLogic does not support childKeys
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_LOGIC,
-            down: attach.down,
             logicType: item.key,
         })
         props.showDropdown()
     }
 
     let renderItem = (item) => {
-        const chosen = item.key === attach.logicType
+        const chosen = item.key === logicItem.logicType
 
         if (item.dropdown) {
             return (

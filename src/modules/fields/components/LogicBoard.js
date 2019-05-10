@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { LOGIC_TESTS } from '../../testhub/tests';
+import { modalType } from '../../common/types';
 
 import { getCode } from '../../logic/LogicEngine'
 import { showModal } from '../../modal/ModalReducer'
 
-import LogicBlock from '../../logic/LogicBlock'
-import { modalType } from '../../modal/types';
+import LogicView from '../../logic/LogicView';
 
 function LogicBoard(props) {
     const { value, fieldInfo } = props
@@ -40,13 +40,11 @@ function LogicBoard(props) {
                     view code
                 </div>
             </div>
-            <LogicBlock
+            <LogicView
                 {...props}
-                indent={false}
-                showBorderLeft={true}
-                value={value}
-                parentValue=""
-                sourceValue=""
+                logicKey=""
+                parentKey=""
+                childKeys={value.childKeys}
                 vars={vars}
             />
         </div>

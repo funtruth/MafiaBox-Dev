@@ -12,11 +12,11 @@ import {
 } from '../../components/Common';
 
 export default function LogicPanels(props) {
-    const { value, path } = props
+    const { logicItem, path } = props
     const {
         logicType: selectedLogic,
         operatorType: selectedOperator,
-    } = value
+    } = logicItem
     
     switch(selectedLogic) {
         case logicType.operator.key:
