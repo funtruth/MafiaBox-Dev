@@ -45,7 +45,7 @@ export const operatorType = {
         index: 0,
         title: 'if',
         icon: 'mdi mdi-ray-start-arrow',
-        color: '#fed766',
+        color: 'yellow',
         logicType: logicType.operator.key,
     },
     else: {

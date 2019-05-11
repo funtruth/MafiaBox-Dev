@@ -10,13 +10,13 @@ import NumberField from './components/NumberField';
 import ImageField from './components/ImageField'
 import UniqueTagField from './components/UniqueTagField';
 import GeneralTagField from './components/GeneralTagField'
+import LogicField from './components/LogicField';
 
 import GameChoiceField from './components/GameChoiceField'
 import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
 
 import PriorityField from './components/PriorityField'
-import LogicBoard from './components/LogicBoard';
 import VariableField from './components/VariableField'
 
 function FieldView(props) {
@@ -54,7 +54,7 @@ function FieldView(props) {
             case fieldType.generalTag.key:
                 return <GeneralTagField {...props}/>
             case fieldType.logic.key:
-                return <LogicBoard {...props}/>
+                return <LogicField {...props}/>
 
                 //WIP
             case fieldType.gameChoices.key:

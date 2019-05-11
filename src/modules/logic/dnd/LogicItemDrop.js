@@ -30,7 +30,7 @@ function collectDrop(connect, monitor) {
     }
 }
   
-function LogicBlockDrop(props) {
+function LogicItemDrop(props) {
     const { top, bottom, left, right,
         color,
         isOver, canDrop, connectDropTarget } = props
@@ -63,4 +63,4 @@ export default DropTarget(
     [logicDNDType.item],
     itemTarget,
     collectDrop,
-)(LogicBlockDrop)
+)(LogicItemDrop)

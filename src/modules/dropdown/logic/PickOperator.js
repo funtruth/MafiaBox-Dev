@@ -8,8 +8,10 @@ import {
     DEFAULT_LOGIC,
 } from '../../common/defaults'
 
-import DropTitle from '../components/DropTitle';
 import { genUID } from '../../common/helpers';
+import { palette } from '../../components/Standards';
+
+import DropTitle from '../components/DropTitle';
 
 export default function PickOperator(props) {
     const { hoverKey, logicItem, logicRepo } = props
@@ -42,7 +44,7 @@ export default function PickOperator(props) {
                 chosen={chosen.toString()}
                 onClick={() => handleSelect(item)}
                 style={{
-                    backgroundColor: chosen && item.color,
+                    backgroundColor: chosen && palette(item.color),
                 }}
             >
                 <i className={`${item.icon} drop-down-menu-icon`}/>

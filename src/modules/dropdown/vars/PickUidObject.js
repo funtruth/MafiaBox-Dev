@@ -27,7 +27,7 @@ import {
 } from '../components/Common'
 
 /*accessed from
-    LogicBlock -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
+    LogicItem -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
 */
 export default function PickUidObject(props) {
     const { attach, attachVar } = props

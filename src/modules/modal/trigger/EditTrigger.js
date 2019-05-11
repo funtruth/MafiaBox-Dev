@@ -8,9 +8,9 @@ import {
 import { triggerNewVars } from '../../common/defaults'
 
 import LogicNewVars from '../../logic/components/LogicNewVars'
+import LogicView from '../../logic/LogicView';
 import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
-import LogicBoard from '../../fields/components/LogicBoard';
 
 export default function EditTrigger(props) {
     const { path, subpath, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = props
@@ -67,7 +67,6 @@ export default function EditTrigger(props) {
                 </div>
                 <div className="-sep"/>
                 <div className="edit-trigger-board">
-                    <LogicBoard {...mainProps}/>
                 </div>
                 <ModalOptions
                     onSave={handleSave}

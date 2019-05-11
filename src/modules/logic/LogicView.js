@@ -1,11 +1,13 @@
 import React from 'react'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import './logic.css'
 
-import { DEFAULT_LOGIC } from '../common/defaults';
+import { LOGIC_TESTS } from '../testhub/tests';
+import { modalType } from '../common/types';
+import { stateByPath } from '../common/helpers';
 
-import { genUID } from '../common/helpers';
+import { getCode } from './LogicEngine'
+import { showModal } from '../modal/ModalReducer'
 import { updateGeneral } from '../page/PageReducer'
 
 import {
@@ -13,104 +15,58 @@ import {
     Row,
     Tag,
 } from '../components/Common';
-import LogicBlock from './dnd/LogicBlock'
-import LogicBlockDrop from './dnd/LogicBlockDrop'
-import LogicAddBelow from './components/LogicAddBelow'
-import LogicDetails from './components/LogicDetails'
+import LogicBlock from './dnd/LogicBlock';
 
 function LogicView(props) {
-    const { vars, index, logicRepo, logicKey, parentKey, path, childKeys } = props
+    const { page, path, vars } = props
+    const logicRepo = stateByPath(path, page)
 
-    const handleAdd = () => {
-        const newLogicKey = genUID('logic', logicRepo)
-        props.updatePage(path, {
-            [newLogicKey]: DEFAULT_LOGIC,
-            childKeys: [newLogicKey],
-        })
+    let runCode = () => {
+        const code = getCode(logicRepo)
+        let { rss, write } = LOGIC_TESTS[0]
+        // eslint-disable-next-line
+        Function(`return ${code}`)()(rss, write)
+        console.log('_runCode results', {rss, write})
     }
 
-    const moveLogic = (newLogicKey, newIndex) => (oldLogicKey, oldIndex) => {
-        const repoClone = _.cloneDeep(logicRepo)
-        
-        const oldPointer = (oldLogicKey ? repoClone[oldLogicKey] : repoClone).childKeys
-        const newPointer = (newLogicKey ? repoClone[newLogicKey] : repoClone).childKeys
-        
-        const [removed] = oldPointer.splice(oldIndex, 1)
-        newPointer.splice(newIndex, 0, removed)
-
-        props.updateGeneral(path, repoClone)
+    let showCode = () => {
+        const code = getCode(logicRepo)
+        props.showModal(modalType.showCode, {
+            code,
+        })
     }
     
     return (
-        <Body style={{margin: 4}}>
-            {!!logicKey &&
-                <div style={{position: 'relative'}}>
-                    <LogicBlockDrop
-                        top
-                        index={index}
-                        logicKey={logicKey}
-                        moveLogic={moveLogic(parentKey, index)}
-                    />
-                    <LogicBlockDrop
-                        bottom
-                        index={index}
-                        logicKey={logicKey}
-                        moveLogic={moveLogic(parentKey, index + 1)}
-                    />
-                    <LogicBlock
-                        {...props}
-                        logicItem={logicRepo[logicKey] || {}}
-                        path={[...path, logicKey]}
-                    />
-                    <Row>
-                        <LogicAddBelow {...props}/>
-                        <LogicDetails
-                            {...props}
-                            logicItem={logicRepo[logicKey] || {}}
-                            path={[...path, logicKey]}
-                        />
-                    </Row>
-                </div>
-            }
-            {childKeys &&
-                <Body
-                    style={{
-                        marginTop: 4,
-                        marginLeft: logicKey ? 40 : 0,
-                        borderLeft: '1px dashed #666',
-                    }}
-                >
-                    {childKeys.map((childKey, index) => (
-                        childKey &&
-                            <LogicView
-                                {...props}
-                                key={childKey}
-                                index={index}
-                                logicKey={childKey}
-                                parentKey={logicKey}
-                                childKeys={logicRepo[childKey] && logicRepo[childKey].childKeys}
-                                vars={{
-                                    ...vars,
-                                    ...logicRepo.declare,
-                                }}
-                            />
-                    ))}
-                </Body>
-            }
-            {!logicKey && !childKeys &&
+        <Body>
+            <Row x="r">
                 <Tag
-                    onClick={handleAdd}
+                    icon="mdi mdi-console-line"
+                    onClick={runCode}
                 >
-                    add logic
+                    run code in console
                 </Tag>
-            }
+                <Tag
+                    icon="mdi mdi-code-tags"
+                    onClick={showCode}
+                >
+                    view code
+                </Tag>
+            </Row>
+            <LogicBlock
+                {...props}
+                logicRepo={logicRepo}
+                vars={vars}
+            />
         </Body>
     )
 }
 
 export default connect(
-    null,
+    state => ({
+        page: state.page,
+    }),
     {
+        showModal,
         updateGeneral,
     }
 )(LogicView)

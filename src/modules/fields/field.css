@@ -14,13 +14,6 @@
     padding-bottom: 4px;
 }
 
-.field-view-code {
-    font: 500 13px Segoe UI;
-    color: #a6a6a6;
-    cursor: pointer;
-    margin-left: auto;
-}
-
 .field-call-input {
     border: none;
     background-color: rgba(54, 57, 64);

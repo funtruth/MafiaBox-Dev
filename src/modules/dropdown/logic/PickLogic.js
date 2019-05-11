@@ -3,6 +3,7 @@ import _ from 'lodash'
 
 import { logicType } from '../../common/types'
 import { DEFAULT_LOGIC } from '../../common/defaults';
+import { palette } from '../../components/Standards';
 
 import {
     DropItem,
@@ -38,7 +39,7 @@ export default function PickLogic(props) {
                     icon={item.icon}
                     text={item.key}
                     style={{
-                        backgroundColor: chosen && item.color,
+                        backgroundColor: chosen && palette(item.color),
                     }}
                 />
             )
@@ -52,7 +53,7 @@ export default function PickLogic(props) {
                 leftIcon={item.icon}
                 rightCheck
                 style={{
-                    backgroundColor: chosen && item.color,
+                    backgroundColor: chosen && palette(item.color),
                 }}
                 text={item.title}
             />
