@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { PHASE_DIAGRAM_ITEM } from '../Constants'
 import {
     modalType,
-    updateSourceType,
 } from '../../../common/types'
 
 import { isChildOf } from '../../../common/arrows'
@@ -54,7 +53,6 @@ function PhaseDiagramItem(props) {
                     pageKey,
                     modeKey,
                     path: ['pageRepo', pageKey],
-                    updateSource: updateSourceType.repo,
                 })
             }
 

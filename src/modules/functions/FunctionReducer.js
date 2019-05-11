@@ -1,8 +1,7 @@
 import _ from 'lodash'
 import * as helpers from '../common/helpers'
 
-import { modalType } from '../modal/types'
-import { updateSourceType } from '../common/types';
+import { modalType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer'
 
@@ -64,7 +63,6 @@ export function addFunction(mapKey, itemCount, boardType) {
         dispatch(showModal(modalType.showFunctionPage, {
             pageKey,
             path: [pageKey],
-            updateSource: updateSourceType.function,
         }))
     }
 }

@@ -1,16 +1,13 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { updateSourceType } from '../../common/types'
-import { variableType } from '../../logic/types'
-import { dropdownType } from '../../dropdown/types';
+import {
+    variableType, 
+    dropdownType,
+} from '../../common/types'
 
 export default function VariableField(props) {
-    const { value, path, updateSource } = props
-
-    if (updateSource !== updateSourceType.function) {
-        console.warn('VariableField should only be used for functionPages')
-    }
+    const { value, path } = props
 
     return (
         <div className="row -x-p">
@@ -65,7 +62,6 @@ export default function VariableField(props) {
                 app-onclick-props={JSON.stringify({
                     attachVar: value,
                     path,
-                    updateSource: updateSourceType.function,
                 })}
                 style={{
                     backgroundColor: 'hsla(0,0%,100%,.1)',

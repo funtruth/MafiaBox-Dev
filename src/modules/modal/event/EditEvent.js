@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import './EditEvent.css'
 
-import { updateType } from '../../logic/types'
+import { updateType } from '../../common/types';
 import { WS_EDIT_EVENT_VALUE, WS_EDIT_EVENT } from './components/EventConstants'
-import { updateSourceType } from '../../common/types';
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
@@ -31,7 +30,6 @@ export default function EditEvent(props) {
         selectedEvent,
         path: ['attach'],
         subpath: [],
-        updateSource: updateSourceType.topModal,
     }
 
     let handleSave = () => {

@@ -13,6 +13,7 @@ export const modalType = {
     showPage: 'modalType/show-page',
     showFunctionPage: 'modalType/show-function-page',
 
+    editLogic: 'modalType/edit-logic',
     publishWithSource: 'modalType/publish-with-source',
 
     saveChanges: 'modalType/save-changes',

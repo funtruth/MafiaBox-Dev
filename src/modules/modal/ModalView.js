@@ -7,7 +7,6 @@ import { updateGeneral } from '../page/PageReducer'
 import { updateFunction } from '../functions/FunctionReducer'
 
 import { modalType } from './types'
-import { updateSourceType } from '../common/types'
 
 import FunctionPageModal from './components/FunctionPageModal';
 
@@ -24,6 +23,7 @@ import ModalCodeView from './components/ModalCodeView'
 import DialogSave from './dialogs/DialogSave';
 import DeleteLogic from './dialogs/DeleteLogic'
 
+//import EditLogic from './page/EditLogic';
 import PublishWithSource from './page/PublishWithSource';
 
 import EditTrigger from './trigger/EditTrigger'
@@ -66,6 +66,8 @@ class ModalView extends React.Component {
             case modalType.deleteLogic:
                 return <DeleteLogic {...props}/>
 
+            //case modalType.editLogic:
+                //return <EditLogic {...props}/>
             case modalType.publishWithSource:
                 return <PublishWithSource {...props}/>
 
@@ -101,19 +103,7 @@ class ModalView extends React.Component {
                 props.close = () => this.props.popModalTo(index - 1)
 
                 props.setWorkspace = (value, path) => this.props.updateTopModal(path || ['attach'], value)
-                switch(props.updateSource) {
-                    case updateSourceType.repo:
-                        props.updatePage = (path, value) => this.props.updateGeneral(path, value)
-                        break
-                    case updateSourceType.function:
-                        props.updatePage = (path, value) => this.props.updateFunction(path, value)
-                        break
-                    case updateSourceType.topModal:
-                        props.updatePage = (path, value) => this.props.updateTopModal(path, value)
-                        break
-                    default:
-                        props.updatePage = () => console.warn('updatePage is not set up for this Modal.')
-                }
+                props.updatePage = (path, value) => this.props.updateGeneral(path, value)
 
                 return this._renderItem(props)
             })

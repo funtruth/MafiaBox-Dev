@@ -7,7 +7,6 @@ import {
     boardType,
     dropdownType,
     modalType,
-    updateSourceType
 } from '../../../common/types';
 
 import { showModal } from '../../../modal/ModalReducer'
@@ -30,7 +29,6 @@ const RoleGridItem = SortableElement((props) => {
         props.showModal(modalType.showPage, {
             pageKey,
             path: ['pageRepo', pageKey],
-            updateSource: updateSourceType.repo,
             boardType: boardType.roles.key,
         })
     }

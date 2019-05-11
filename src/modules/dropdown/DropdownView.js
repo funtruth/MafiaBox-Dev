@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import {
     boardType,
     dropdownType,
-    updateSourceType,
 } from '../common/types';
 
 import { showDropdown, popDropdownTo } from './DropdownReducer'
@@ -99,33 +98,12 @@ function DropdownView(props) {
         renderProps.popDropdown = () => props.popDropdownTo(index - 1)
         renderProps.showModal = props.showModal
         renderProps.updateGeneral = props.updateGeneral
-
-        switch(renderProps.updateSource) {
-            case updateSourceType.repo:
-                renderProps.updatePage = (value, extraPath=[]) => {
-                    if (renderProps.ignoreSubpath) {
-                        props.updateGeneral(renderProps.path, value, extraPath)
-                    } else {
-                        props.updateGeneral(renderProps.path, value, (renderProps.subpath||[]).concat(extraPath))
-                    }
-                }
-                break
-            case updateSourceType.function:
-                renderProps.updatePage = (value) => {
-                    if (renderProps.ignoreSubpath) {
-                        props.updateFunction(renderProps.path, value)
-                    } else {
-                        props.updateFunction(renderProps.path, value, renderProps.subpath)
-                    }
-                }
-                break
-            case updateSourceType.topModal:
-                renderProps.updatePage = (value) => {
-                    props.updateTopModal(renderProps.path, value, renderProps.subpath)
-                }
-                break
-            default:
-                renderProps.updatePage = () => console.warn('updatePage is not set up for this Dropdown.')
+        renderProps.updatePage = (value, extraPath=[]) => {
+            if (renderProps.ignoreSubpath) {
+                props.updateGeneral(renderProps.path, value, extraPath)
+            } else {
+                props.updateGeneral(renderProps.path, value, (renderProps.subpath||[]).concat(extraPath))
+            }
         }
         
         switch(renderProps.key) {

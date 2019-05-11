@@ -1,5 +1,4 @@
 import {
-    updateSourceType,
     droppableType,
 } from '../app/types'
 import {
@@ -53,7 +52,6 @@ export {
     operatorType,
     phaseActionType,
     returnType,
-    updateSourceType,
     updateType,
     variableType,
 }

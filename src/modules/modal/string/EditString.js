@@ -3,7 +3,6 @@ import './EditString.css'
 
 import { updateType } from '../../logic/types'
 import { WS_EDIT_EVENT_VALUE, WS_EDIT_EVENT } from './components/EventConstants'
-import { updateSourceType } from '../../common/types';
 
 import ModalOptions from '../components/ModalOptions'
 import ModalCheckSave from '../components/ModalCheckSave';
@@ -30,7 +29,6 @@ export default function EditString(props) {
         selectedEvent,
         path: ['attach'],
         subpath: [],
-        updateSource: updateSourceType.topModal,
     }
 
     let handleSave = () => {

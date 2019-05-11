@@ -48,6 +48,13 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
     }
 }
 
+//returns the state of PageReducer from array of paths
+export function stateByPath(path, state, index=0) {
+    if (!state[path[index]]) return {}
+    if (path.length - 1 === index) return state[path[index]]
+    return stateByPath(path, state[path[index]], index + 1)
+}
+
 export function isAppClickCancelled(target) {
     let isCancel = false
 

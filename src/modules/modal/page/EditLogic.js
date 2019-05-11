@@ -1,5 +1,5 @@
 import React from 'react'
-import './EditTrigger.css'
+import { connect } from 'react-redux'
 
 import {
     logicType,
@@ -7,13 +7,13 @@ import {
 } from '../../common/types'
 import { triggerNewVars } from '../../common/defaults'
 
+import LogicView from '../../logic/LogicView';
 import LogicNewVars from '../../logic/components/LogicNewVars'
 import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
-import LogicBoard from '../../fields/components/LogicBoard';
 
-export default function EditTrigger(props) {
-    const { path, subpath, pageKey, fieldKey, indexKey, subfieldKey, attachVar } = props
+function EditLogic(props) {
+    const { page, path } = props //hook up modal to reducer through path
 
     const workspace = props.attach
 
@@ -67,7 +67,14 @@ export default function EditTrigger(props) {
                 </div>
                 <div className="-sep"/>
                 <div className="edit-trigger-board">
-                    <LogicBoard {...mainProps}/>
+                    <LogicView
+                        {...props}
+                        logicRepo={value}
+                        logicKey=""
+                        parentKey=""
+                        childKeys={value.childKeys}
+                        vars={vars}
+                    />
                 </div>
                 <ModalOptions
                     onSave={handleSave}
@@ -77,3 +84,9 @@ export default function EditTrigger(props) {
         </ModalCheckSave>
     )
 }
+
+export default connect(
+    state => ({
+        page: state.page,
+    })
+)(EditLogic)

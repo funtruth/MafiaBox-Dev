@@ -11,7 +11,7 @@ import {
  } from '../../components/Common';
 
 export default function LogicType(props) {
-    const { value, logicItem, path, subpath, updateSource } = props
+    const { logicRepo, logicItem, path, subpath, updateSource } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
@@ -32,7 +32,7 @@ export default function LogicType(props) {
             dropdown={dropdownType.pickLogic}
             params={{
                 logicItem,
-                logicRepo: value,
+                logicRepo,
                 updateSource,
                 path,
                 subpath,

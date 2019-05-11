@@ -8,13 +8,14 @@ import { getCode } from '../../logic/LogicEngine'
 import { showModal } from '../../modal/ModalReducer'
 
 import LogicView from '../../logic/LogicView';
+import { stateByPath } from '../../common/helpers';
 
 function LogicBoard(props) {
-    const { value, fieldInfo } = props
-    const { vars } = fieldInfo
+    const { page, path } = props
+    const logicRepo = stateByPath(path, page)
 
     let runCode = () => {
-        const code = getCode(value)
+        const code = getCode(logicRepo)
         let { rss, write } = LOGIC_TESTS[0]
         // eslint-disable-next-line
         Function(`return ${code}`)()(rss, write)
@@ -22,7 +23,7 @@ function LogicBoard(props) {
     }
 
     let showCode = () => {
-        const code = getCode(value)
+        const code = getCode(logicRepo)
         props.showModal(modalType.showCode, {
             code,
         })
@@ -41,18 +42,18 @@ function LogicBoard(props) {
                 </div>
             </div>
             <LogicView
-                {...props}
-                logicKey=""
-                parentKey=""
-                childKeys={value.childKeys}
-                vars={vars}
+                path={path}
+                logicRepo={logicRepo}
+                childKeys={logicRepo.childKeys}
             />
         </div>
     )
 }
 
 export default connect(
-    null,
+    state => ({
+        page: state.page,
+    }),
     {
         showModal,
     }

@@ -4,7 +4,6 @@ import * as helpers from '../common/helpers'
 import firebase from 'firebase/app'
 
 import { modalType } from '../modal/types'
-import { updateSourceType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer';
 import { DEFAULT_PUBLISH_INFO } from './defaults';
@@ -207,7 +206,6 @@ export function addPageToMap(storyKey, boardType) {
         dispatch(showModal(modalType.showPage, {
             pageKey,
             path: ['pageRepo', pageKey],
-            updateSource: updateSourceType.repo,
         }))
     }
 }
@@ -290,7 +288,6 @@ export function addPageToMode(modeKey, boardType) {
         dispatch(showModal(modalType.showPage, {
             pageKey,
             path: ['pageRepo', pageKey],
-            updateSource: updateSourceType.repo,
         }))
     }
 }
