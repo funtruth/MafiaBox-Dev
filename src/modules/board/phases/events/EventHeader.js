@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 
 import { genUID } from '../../../common/helpers'
 import { DEFAULT_EVENT_LISTENER } from '../../../common/defaults'

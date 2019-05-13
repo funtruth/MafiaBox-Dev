@@ -1,7 +1,9 @@
 import React from 'react'
-import _ from 'lodash'
 
-import { dropdownType } from '../../../common/types'
+import {
+    dropdownType,
+    modalType,
+} from '../../../common/types'
 
 import {
     DropClick,
@@ -37,7 +39,19 @@ function EventRow(props) {
                     {title || 'Untitled'}
                 </Text>
             </DropClick>
-            <Text style={{flex: 0.8}}>Event location</Text>
+            <DropClick
+                modal={modalType.editLogic}
+                params={{
+                    path: [...path, 'events', eventKey],
+                }}
+                style={{
+                    flex: 0.4,
+                }}
+            >
+                <Text size="s" color={title ? 'whitish' : 'grey'}>
+                    {title || 'Untitled'}
+                </Text>
+            </DropClick>
         </Row>
     )
 }

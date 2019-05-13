@@ -1,6 +1,5 @@
 import React from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
 import { DEFAULT_LOGIC } from '../../common/defaults';
 
@@ -18,7 +17,7 @@ import LogicDetails from '../components/LogicDetails'
 
 export default function LogicBlock(props) {
     const { index, logicRepo, logicKey, parentKey, path } = props
-    console.log({props})
+    
     //looks at the map that the current LogicView belongs to
     const { childKeys: siblingKeys } = parentKey ? (logicRepo[parentKey]||{}) : logicRepo 
     //looks at the map that the current LogicView is nesting

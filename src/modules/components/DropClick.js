@@ -3,20 +3,24 @@ import './DropClick.css'
 import { connect } from 'react-redux'
 
 import { showDropdown } from '../dropdown/DropdownReducer'
+import { showModal } from '../modal/ModalReducer'
 
 export default connect(
     null,
     {
         showDropdown,
+        showModal,
     }
 )(function DropClick(props) {
     const {
         onClick,
         onRightClick,
         dropdown,
+        modal,
         rightDropdown,
         params,
         showDropdown,
+        showModal,
         place,
         children,
         className,
@@ -35,8 +39,15 @@ export default connect(
             onClick(e)
             return;
         }
-        if (!dropdown) return console.warn('no dropdownType')
-        showDropdown(dropdown, e, params, 0, place)
+        if (modal) {
+            showModal(modal, params)
+            return;
+        }
+        if (dropdown) {
+            showDropdown(dropdown, e, params, 0, place)
+            return;
+        }
+        console.warn('no modal or dropdownType requested.')
     }
 
     const handleRightClick = (e) => {

@@ -9,11 +9,11 @@ import {
 import LogicDetailPanel from './LogicDetailPanel';
 
 export default function LogicUpdateItem(props) {
-    const { prefix, value, data, updateSource, vars, path } = props
+    const { prefix, logicItem, data, updateSource, vars, path } = props
     
     if (!data) return null;
 
-    const attach = value.data || {}
+    const attach = logicItem.data || {}
 
     const fields = separateField(prefix)
     
