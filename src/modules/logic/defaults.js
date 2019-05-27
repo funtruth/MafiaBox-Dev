@@ -20,11 +20,12 @@ export const DEFAULT_LOGIC = {
     assign          see modal/vars/ops for architecture
     display         what to show on the update button / FRONT-END
     length
+    logic           TODO
     static          unable to be assigned / type cannot be changed
     updateType
     value           variable value in (foo)(bar) form
-    wildcardValue   original value if originally a wildcard var
     variableTypes   list of variableTypes
+    wildcardValue   original value if originally a wildcard var
 */
 export const VAR_DEFAULTS = {
     assign: "",
@@ -33,8 +34,8 @@ export const VAR_DEFAULTS = {
     static: false,
     updateType: "",
     value: "",
-    wildcardValue: "",
     variableTypes: "",
+    wildcardValue: "",
 }
 
 /* @params variable, this is different from VAR_DEFAULTS as it only pertains to the structure of the variable, not the descriptor for the state of a variable. Examples are done with the object foo.bar
@@ -629,19 +630,6 @@ export const rssMap = {
         dropdown: dropdownType.pickGlobalValue,
         variableTypes: [
             variableType.global.key,
-        ],
-    },
-    '(rss)(events)': {
-        key: '(rss)(events)',
-        subfield: 'events',
-        fields: [
-            'rss',
-            'events',
-        ],
-        fieldLength: 2,
-        dropdown: dropdownType.pickEvent,
-        variableTypes: [
-            variableType.object.key,
         ],
     },
 }

@@ -9,7 +9,7 @@ import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
 
 export default function EditTrigger(props) {
-    const { path, subpath } = props
+    const { path } = props
     
     return (
         <ModalCheckSave {...props}>
@@ -28,7 +28,7 @@ export default function EditTrigger(props) {
                 </div>
                 <div className="-sep"/>
                 <div className="edit-trigger-board">
-                    <LogicView path={path.concat(subpath)}/>
+                    <LogicView path={path}/>
                 </div>
                 <ModalOptions
                     onClose={props.onClose}

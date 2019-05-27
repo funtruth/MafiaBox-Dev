@@ -86,11 +86,18 @@ function ModeHeader(props) {
                 bg={tab === 2 ? 'violet' : 'charcoal'}
                 onClick={() => setTab(2)}
                 icon="mdi mdi-calendar-star"
+            >
+                Game events
+            </Tag>
+            <Tag
+                bg={tab === 3 ? 'violet' : 'charcoal'}
+                onClick={() => setTab(3)}
+                icon="mdi mdi-checkerboard"
                 style={{
                     marginRight: 'auto',
                 }}
             >
-                Game events
+                Interface
             </Tag>
             {tab === 0 &&
                 <Tag

@@ -23,8 +23,9 @@ export default function EventHeader(props) {
 
     return (
         <Row className="--slide-bottom" sizes={['xs', 'xl']} bg="blackish" y="c">
-            <Text style={{flex: 0.4}}>Event name</Text>
-            <Text style={{flex: 0.8}}>Event location</Text>
+            <Text style={{flex: 0.3}}>Event</Text>
+            <Text style={{flex: 0.5}}>Location</Text>
+            <Text style={{flex: 0.5}}>Change</Text>
             <Tag
                 onClick={handleCreate}
                 icon="mdi mdi-calendar-plus"

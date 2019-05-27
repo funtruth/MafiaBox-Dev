@@ -30,9 +30,16 @@ export const logicType = {
         icon: 'mdi mdi-code-braces',
         color: '#a566b0',
     },
+    event: {
+        key: 'event',
+        index: 4,
+        title: 'event',
+        icon: 'mdi mdi-calendar',
+        color: '#3864ab',
+    },
     return: {
         key: 'return',
-        index: 4,
+        index: 5,
         title: 'return',
         icon: 'mdi mdi-page-next',
         color: '#1e9939',

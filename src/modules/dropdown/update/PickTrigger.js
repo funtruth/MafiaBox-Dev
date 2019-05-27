@@ -12,8 +12,7 @@ export default function PickTrigger(props) {
 
     const handleClick = () => {
         props.showModal(modalType.editTrigger, {
-            path,
-            subpath,
+            path: [...path, subpath],
         })
         props.showDropdown()
     }

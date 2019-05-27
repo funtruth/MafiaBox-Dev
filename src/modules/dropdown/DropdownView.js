@@ -80,7 +80,6 @@ import ShowRoleSubfields from './update/ShowRoleSubfields'
 import PickRoleTeam from './update/PickRoleTeam';
 import PickGlobalValue from './update/PickGlobalValue';
 
-import PickEvent from './strings/PickEvent';
 import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
 import PickEventVarProp from './strings/PickEventVarProp';
@@ -230,8 +229,6 @@ function DropdownView(props) {
             case dropdownType.pickGlobalVar:    
                 return <PickGlobalVar {...renderProps}/>
 
-            case dropdownType.pickEvent:
-                return <PickEvent {...renderProps}/>
             case dropdownType.pickEventVar:
                 return <PickEventVar {...renderProps}/>
             case dropdownType.pickEventVarProp:

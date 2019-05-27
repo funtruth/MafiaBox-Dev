@@ -9,9 +9,11 @@ import {
 } from '../../common/defaults'
 
 import { genUID } from '../../common/helpers';
-import { palette } from '../../components/Standards';
 
-import DropTitle from '../components/DropTitle';
+import {
+    DropItem,
+    DropTitle,
+} from '../components/Common';
 
 export default function PickOperator(props) {
     const { hoverKey, logicItem, logicRepo } = props
@@ -38,19 +40,14 @@ export default function PickOperator(props) {
         const chosen = item.key === logicItem.operatorType
 
         return (
-            <div
+            <DropItem
                 key={item.key}
-                className="drop-down-menu-option"
-                chosen={chosen.toString()}
+                chosen={chosen}
                 onClick={() => handleSelect(item)}
-                style={{
-                    backgroundColor: chosen && palette(item.color),
-                }}
-            >
-                <i className={`${item.icon} drop-down-menu-icon`}/>
-                {item.title}
-                <i className="mdi mdi-check"/>
-            </div>
+                leftIcon={item.icon}
+                rightCheck
+                text={item.title}
+            />
         )
     }
     

@@ -10,6 +10,7 @@ import {
     LogicButton,
     Row,
 } from '../../components/Common';
+import { modalType } from '../../modal/types';
 
 export default function LogicPanels(props) {
     const { logicItem, path } = props
@@ -74,6 +75,14 @@ export default function LogicPanels(props) {
                     dropdown={dropdownType.showSubfields}
                 />
             )
+        case logicType.event.key:
+                return (
+                    <LogicPanel
+                        {...props}
+                        placeholder="new event ..."
+                        modal={modalType.editEvent}
+                    />
+                )
         case logicType.variable.key:
             return (
                 <LogicPanel

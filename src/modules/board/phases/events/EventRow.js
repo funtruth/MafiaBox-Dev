@@ -7,7 +7,9 @@ import {
 
 import {
     DropClick,
+    Icon,
     Row,
+    Tag,
     Text,
 } from '../../../components/Common';
 
@@ -32,25 +34,28 @@ function EventRow(props) {
                     attach: item,
                 }}
                 style={{
-                    flex: 0.4,
+                    flex: 0.3,
                 }}
             >
-                <Text size="s" color={title ? 'whitish' : 'grey'}>
-                    {title || 'Untitled'}
-                </Text>
+                <Row>
+                    <Text size="s" color={title ? 'whitish' : 'grey'}>
+                        {title || 'Untitled'}
+                    </Text>
+                    <Icon color="darkgrey" icon="mdi mdi-pencil" style={{marginLeft: 6}}></Icon>
+                </Row>
             </DropClick>
             <DropClick
                 modal={modalType.editLogic}
                 params={{
-                    path: [...path, 'events', eventKey],
+                    path: [...path, 'events', eventKey, 'data'],
                 }}
                 style={{
-                    flex: 0.4,
+                    marginLeft: 'auto',
                 }}
             >
-                <Text size="s" color={title ? 'whitish' : 'grey'}>
-                    {title || 'Untitled'}
-                </Text>
+                <Tag icon="mdi mdi-pencil" bg="discord">
+                    Edit logic
+                </Tag>
             </DropClick>
         </Row>
     )

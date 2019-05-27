@@ -9,6 +9,7 @@ export default function LogicPanel(props) {
         vars,
         placeholder,
         dropdown,
+        modal,
         path,
         includeSubpath,
     } = props
@@ -23,6 +24,7 @@ export default function LogicPanel(props) {
     return (
         <DropClick
             dropdown={dropdown}
+            modal={modal}
             params={{
                 pageKey,
                 fieldKey,

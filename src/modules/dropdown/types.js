@@ -72,7 +72,6 @@ export const dropdownType = {
     pickRoleTeam: 'dropdownType/pick-role-team',
     pickGlobalVar: 'dropdownType/pick-global-var',
 
-    pickEvent: 'dropdownType/pick-event',
     pickEventVar: 'dropdownType/pick-event-var',
     pickEventVarProp: 'dropdownType/pick-event-var-prop',
     pickRecipient: 'dropdownType/pick-recipient',
