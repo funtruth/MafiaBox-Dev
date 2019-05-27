@@ -1,59 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import './EditEvent.css'
 
-import { updateType } from '../../common/types';
-import { WS_EDIT_EVENT_VALUE, WS_EDIT_EVENT } from './components/EventConstants'
+import { stateByPath, genUID } from '../../common/helpers';
 
 import ModalOptions from '../components/ModalOptions'
-import ModalCheckSave from '../components/ModalCheckSave';
+import Modal from '../components/Modal'
+import StringView from '../../strings/StringView';
 
-import EventBarDrop from './components/EventBarDrop';
-import EventPlayground from './components/EventPlayground';
-import EventDetailer from './components/EventDetailer';
+function EditEvent(props) {
+    const { path } = props
 
-export default function EditEvent(props) {
-    let [text, setText] = useState('')
-    let [error, setError] = useState('')
-
-    const { attach, attachVar, path } = props
-    const workspace = Object.assign({}, WS_EDIT_EVENT, attach)
-    
-    const { eventIndex, stringIndex, eventArr } = workspace
-    const selectedEvent = (eventArr && eventArr[eventIndex]) || WS_EDIT_EVENT_VALUE
-
-    const mainProps = {
-        workspace,
-        setWorkspace: props.setWorkspace,
-        text, setText,
-        setError,
-        eventIndex, stringIndex,
-        selectedEvent,
-        path: ['attach'],
-        subpath: [],
-    }
-
-    let handleSave = () => {
-        props.updatePage(path, {
-            eventArr: workspace.eventArr,
-            updateType: updateType.events,
-        })
-        props.popModalBy(1)
-    }
-    
     return (
-        <ModalCheckSave {...props} handleSave={handleSave}>
-            <div className="event-modal" cancel-appclick="true">
-                <div className="row" style={{ height: '100%' }}>
-                    <EventBarDrop {...mainProps}/>
-                    <EventPlayground {...mainProps}/>
-                    <EventDetailer {...mainProps} vars={attachVar}/>
-                </div>
-                <ModalOptions
-                    error={error}
-                    onSave={handleSave}
-                    onClose={props.close}
-                />
-            </div>
-        </ModalCheckSave>
+        <Modal
+            style={{
+                minWidth: 600,
+                width: '75vw',
+                height: '60vh',
+            }}
+        >
+            <StringView path={path}/>
+            <ModalOptions
+                onClose={props.close}
+            />
+        </Modal>
     )
 }
+
+export default connect(
+    state => ({
+        page: state.page,
+    })
+)(EditEvent)

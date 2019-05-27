@@ -76,13 +76,15 @@ export default function LogicPanels(props) {
                 />
             )
         case logicType.event.key:
-                return (
-                    <LogicPanel
-                        {...props}
-                        placeholder="new event ..."
-                        modal={modalType.editEvent}
-                    />
-                )
+            return (
+                <LogicPanel
+                    {...props}
+                    placeholder="new event ..."
+                    subfieldKey=""
+                    path={[...path, 'data']}
+                    modal={modalType.editEvent}
+                />
+            )
         case logicType.variable.key:
             return (
                 <LogicPanel

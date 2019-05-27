@@ -1,11 +1,12 @@
 import React from 'react'
+import Body from '../../components/Body';
 
 export default function Modal(props) {
     return (
         <div className="modal modal-appclick">
-            <div className="modal-child" style={props.style}>
+            <Body className="modal-child" style={props.style}>
                 {props.children}
-            </div>
+            </Body>
         </div>
     )
 }

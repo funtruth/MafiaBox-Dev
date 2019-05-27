@@ -6,24 +6,6 @@
     width: 75vw;
     height: 60vh;
 }
-
-.event-bar {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    border-right: 1px solid #464646;
-    padding: 10px 10px;
-}
-
-.event-playground {
-    display: flex;
-    flex-direction: column;
-    width: 65%;
-    padding-top: 10px;
-    border-right: 1px solid #464646;
-}
-
 .event-playground-view {
     padding: 0px 10px;
     display: flex;
@@ -76,11 +58,7 @@
     flex-direction: row;
     align-items: center;
 }
-.event-detailer {
-    width: 5px;
-    flex-grow: 1;
-    padding: 10px 0px;
-}
+
 .event-color-picker {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;

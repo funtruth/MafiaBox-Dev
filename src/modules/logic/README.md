@@ -1,24 +1,9 @@
-# LogicBoard
-- Logic board is a convenient way to bring the Logic Component anywhere in the application
-- However, it has a lot of requirements that should be passed in at the parent level
-    - value
-    - ...
+# LogicView
+- LogicView is a convenient way to bring the Logic Component anywhere in the application
+- it's only requirement is an array of strings leading to it's location in redux
 
 # Standard Props of LogicItem
-- data is set as a string be default for firebase storage
-
-```javascript
-{
-    data: ""
-    down: ""
-    logicType: ""
-    operatorType: ""
-    right: ""
-}
-```
-
-## Needs to be added
-- collapsed: false
+- See DEFAULT_LOGIC in defaults.js
 
 # Functionality
 - this section describes the functionality which should be tested when making changes

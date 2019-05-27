@@ -71,13 +71,11 @@ export default function LogicBlock(props) {
                     <LogicItemDrop
                         top
                         index={index}
-                        logicKey={logicKey}
                         moveLogic={moveLogic(parentKey, index)}
                     />
                     <LogicItemDrop
                         bottom
                         index={index}
-                        logicKey={logicKey}
                         moveLogic={moveLogic(parentKey, index + 1)}
                     />
                     <LogicItem
