@@ -3,6 +3,7 @@ import { DragSource, DropTarget } from 'react-dnd'
 
 import { DRAGGABLE_TYPE } from '../types'
 import { COLLECT_DRAG } from '../../modal/ModalDND';
+import Tag from '../../components/Tag';
 
 const itemSource = {
     beginDrag(props) {
@@ -51,16 +52,11 @@ function collectDrop(connect, monitor) {
 }
   
 function StringDragDrop(props) {
-    const { item, index, stringIndex, workspace, setWorkspace, setText,
+    const { item, index, stringIndex, setText,
         connectDragSource, connectDropTarget, canDrop, isOver } = props
     const { string, color } = item
 
     let handleSelect = () => {
-        setWorkspace({
-            ...workspace,
-            stringIndex: index,
-            selectedColor: color,
-        })
         setText(string)
         document.getElementById('event-editor-textarea').focus()
     }
@@ -68,16 +64,16 @@ function StringDragDrop(props) {
     const selected = index === stringIndex
 
     return connectDragSource(connectDropTarget(
-        <div
-            className="event-playground-item"
-            onClick={handleSelect}
-            style={{
-                color: color || '#d6d6d6',
-                backgroundColor: selected ? 'rgba(14, 125, 180, 0.4)' : (canDrop && isOver && 'rgba(70, 73, 78, 1)'),
-                pointerEvents: 'all',
-            }}
-        >
-            {string}
+        <div>
+            <Tag
+                onClick={handleSelect}
+                style={{
+                    color: color || '#d6d6d6',
+                }}
+                bg={selected ? 'blue' : (canDrop && isOver && 'grey') || 'charcoal'}
+            >
+                {string}
+            </Tag>
         </div>
     ));
 }

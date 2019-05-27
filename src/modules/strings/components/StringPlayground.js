@@ -27,6 +27,16 @@ export default function StringPlayground(props) {
             case ITEM_TYPE.string:
                 return (
                     <div style={{position: 'relative'}} key={index}>
+                        <StringSideDrop
+                            left
+                            index={index}
+                            move={() => console.log("left'")}
+                        />
+                        <StringSideDrop
+                            right
+                            index={index}
+                            move={() => console.log("rit'")}
+                        />
                         <StringDragDrop
                             {...props}
                             item={item}
@@ -52,7 +62,7 @@ export default function StringPlayground(props) {
     return (
         <Body style={{flex: 0.65, borderRight: '1px solid #464646'}}>
             <div className="dashboard-section-title">Event Text</div>
-            <Row>
+            <Row sizes={['xxs', 's']}>
                 {stringMap.map(renderItem)}
             </Row>
             <StringInput {...props}/>
