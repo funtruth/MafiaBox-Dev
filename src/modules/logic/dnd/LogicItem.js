@@ -33,7 +33,6 @@ function LogicItem(props) {
             </Row>
         </div>
     );
-    //const rng = helpers.genUID('rng')
 }
 
 export default DragSource(

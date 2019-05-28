@@ -1,23 +1,20 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 
-import { updateGeneral } from '../page/PageReducer'
-import { stateByPath } from '../common/helpers';
+import { usePath } from '../hooks/Hooks';
 
 import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
 import { Row, Separator } from '../components/Common';
 
-function StringView(props) {
-    const { path, page, updateGeneral } = props
+export default function StringView({path}) {
     const {
         byId: stringRepo,
         byIndex: stringMap,
-    } = stateByPath(path, page) || {}
+    } = usePath(path)
 
     const [color, setColor] = useState('whitish')
     const [activeKey, setActiveKey] = useState('')
-
+    
     const mainProps = {
         stringRepo,
         stringMap,
@@ -26,7 +23,6 @@ function StringView(props) {
         activeKey,
         setActiveKey,
         path,
-        updateGeneral,
     }
     
     return (
@@ -37,12 +33,3 @@ function StringView(props) {
         </Row>
     )
 }
-
-export default connect(
-    state => ({
-        page: state.page,
-    }),
-    {
-        updateGeneral,
-    }
-)(StringView)

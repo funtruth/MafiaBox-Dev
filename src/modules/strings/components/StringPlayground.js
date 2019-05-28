@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
 import _ from 'lodash'
 
 import { VAR_DEFAULTS } from '../../logic/defaults';
@@ -6,6 +8,7 @@ import { updateType } from '../../logic/types';
 import { ITEM_TYPE } from '../types';
 import { DEFAULT_STRING } from '../defaults';
 
+import { updateGeneral } from '../../page/PageReducer'
 import { genUID } from '../../common/helpers';
 import { parseJS } from '../../logic/proptool';
 
@@ -15,7 +18,8 @@ import StringSideDrop from '../dnd/StringSideDrop'
 import { Body, Row, Separator, Text } from '../../components/Common';
 
 export default function StringPlayground(props) {
-    const { stringRepo, stringMap, path, updateGeneral, setActiveKey, color } = props
+    const dispatch = useDispatch()
+    const { stringRepo, stringMap, path, setActiveKey, color } = props
     
     let handleClick = (e) => {
         //if background is being clicked ...
@@ -30,7 +34,7 @@ export default function StringPlayground(props) {
         const [removed] = mapClone.splice(oldIndex, 1)
         mapClone.splice(newIndex > oldIndex ? newIndex - 1 : newIndex, 0, removed)
 
-        updateGeneral([...path, 'byIndex'], mapClone)
+        dispatch(updateGeneral([...path, 'byIndex'], mapClone))
     }
 
     const drop = (item, index) => {
@@ -56,10 +60,10 @@ export default function StringPlayground(props) {
         }
         mapClone.splice(index, 0, newKey)
 
-        updateGeneral(path, {
+        dispatch(updateGeneral(path, {
             byId: repoClone,
             byIndex: mapClone,
-        })
+        }))
     }
 
     const renderItem = (stringKey, index) => {

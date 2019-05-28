@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import _ from 'lodash'
 
 import { ITEM_TYPE } from '../types'
 import { DEFAULT_STRING } from '../defaults'
 
+import { updateGeneral } from '../../page/PageReducer'
 import { genUID } from '../../common/helpers';
 
 export default function StringInput(props) {
-    const { stringRepo, stringMap, path, updateGeneral, activeKey, color } = props
+    const dispatch = useDispatch()
+    const { stringRepo, stringMap, path, activeKey, color } = props
 
     const [text, setText] = useState('')
     const [disabled, setDisabled] = useState(false)
@@ -51,14 +54,14 @@ export default function StringInput(props) {
                 color,
             }
             
-            updateGeneral(path, {
+            dispatch(updateGeneral(path, {
                 byId: repoClone,
                 byIndex: mapClone,
-            })
+            }))
         } else {
-            updateGeneral([...path, 'byId', activeKey], {
+            dispatch(updateGeneral([...path, 'byId', activeKey], {
                 string: text,
-            })
+            }))
         }
 
         setText('')

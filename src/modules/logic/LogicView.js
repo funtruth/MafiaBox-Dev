@@ -4,8 +4,8 @@ import './logic.css'
 
 import { LOGIC_TESTS } from '../testhub/tests';
 import { modalType } from '../common/types';
-import { stateByPath } from '../common/helpers';
 
+import { usePath } from '../hooks/Hooks';
 import { getCode } from './LogicEngine'
 import { showModal } from '../modal/ModalReducer'
 import { updateGeneral } from '../page/PageReducer'
@@ -18,8 +18,8 @@ import {
 import LogicBlock from './dnd/LogicBlock';
 
 function LogicView(props) {
-    const { page, path, vars } = props
-    const logicRepo = stateByPath(path, page)
+    const { path, vars } = props
+    const logicRepo = usePath(path)
 
     let runCode = () => {
         const code = getCode(logicRepo)
@@ -62,9 +62,7 @@ function LogicView(props) {
 }
 
 export default connect(
-    state => ({
-        page: state.page,
-    }),
+    null,
     {
         showModal,
         updateGeneral,
