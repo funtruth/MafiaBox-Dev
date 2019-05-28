@@ -2,7 +2,7 @@ import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
 import { ItemTypes } from './EventConstants'
-import { COLLECT_DRAG } from '../../ModalDND';
+import { COLLECT_DRAG } from '../../modal/ModalDND';
 
 import EventFunctionDrop from './EventFunctionDrop';
 

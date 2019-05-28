@@ -33,7 +33,7 @@ export default function Tag(props) {
             style={buttonStyle}
             onClick={event => onClick && onClick({event})}
         >
-            <Text size={size}>
+            <Text size={size} color={color}>
                 {icon &&
                     <i
                         className={icon}

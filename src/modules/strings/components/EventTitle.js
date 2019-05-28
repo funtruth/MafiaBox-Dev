@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { dropdownType } from '../../../dropdown/types'
+import { dropdownType } from '../../dropdown/types'
 
-import { DropClick } from '../../../components/Common';
+import { DropClick } from '../../components/Common';
 
 export default function EventTitle(props) {
     return (

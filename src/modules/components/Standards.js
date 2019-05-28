@@ -1,32 +1,33 @@
-export function palette(color) {
-    switch(color) {
-        case 'black':       return '#000'
-        case 'blackish':    return '#202225'
-        case 'charcoal':    return '#282b30'
-        case 'discord':     return '#363940'
-        case 'darkgrey':    return '#666'
-        case 'grey':        return '#999'
-        case 'lightgrey':   return '#bbb'
-        case 'whitish':     return '#ddd'
-        case 'white':       return '#fff'
-        case 'transparent': return 'transparent'
+export const APP_PALETTE = {
+    transparent:'transparent',
+    black:      '#000',
+    blackish:   '#202225',
+    charcoal:   '#282b30',
+    discord:    '#363940',
+    darkgrey:   '#666',
+    grey:       '#999',
+    lightgrey:  '#bbb',
+    whitish:    '#ddd',
+    white:      '#fff',
+    active:     '#705772',
+    blue:       '#18449b',
+    purple:     '#6279CA',
+    darkpurple: '#240041',
+    red:        '#db4757',
+    darkred:    '#900048',
+    maroon:     '#B34B50',
+    yellow:     '#EA9A19',
+    pink:       '#a566b0',
+    orange:     '#D64F31',
+    rabbit:     '#F1ECC8',
+    green:      '#4BAC88',
+    turquoise:  '#085f63',
+    violet:     '#7b68ee',
 
-        case 'active':      return '#705772'
-        case 'blue':        return '#18449b'
-        case 'purple':      return '#6279CA'
-        case 'darkpurple':  return '#240041'
-        case 'red':         return '#db4757'
-        case 'darkred':     return '#900048'
-        case 'maroon':      return '#B34B50'
-        case 'yellow':      return '#EA9A19'
-        case 'pink':        return '#a566b0'
-        case 'orange':      return '#D64F31'
-        case 'rabbit':      return '#F1ECC8'
-        case 'green':       return '#4BAC88'
-        case 'turquoise':   return '#085f63'
-        case 'violet':      return 'mediumslateblue'
-        default:            return color
-    }
+}
+
+export function palette(color) {
+    return APP_PALETTE[color] || color
 }
 
 export function value(size) {

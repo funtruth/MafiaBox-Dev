@@ -3,6 +3,7 @@ import { DragSource, DropTarget } from 'react-dnd'
 
 import { DRAGGABLE_TYPE } from '../types'
 import { COLLECT_DRAG } from '../../modal/ModalDND';
+
 import Tag from '../../components/Tag';
 
 const itemSource = {
@@ -52,24 +53,22 @@ function collectDrop(connect, monitor) {
 }
   
 function StringDragDrop(props) {
-    const { item, index, stringIndex, setText,
+    const { item, activeKey, setActiveKey,
         connectDragSource, connectDropTarget, canDrop, isOver } = props
-    const { string, color } = item
+    const { key: stringKey, string, color } = item
 
     let handleSelect = () => {
-        setText(string)
+        setActiveKey(stringKey)
         document.getElementById('event-editor-textarea').focus()
     }
 
-    const selected = index === stringIndex
+    const selected = stringKey === activeKey
 
     return connectDragSource(connectDropTarget(
         <div>
             <Tag
                 onClick={handleSelect}
-                style={{
-                    color: color || '#d6d6d6',
-                }}
+                color={color || 'whitish'}
                 bg={selected ? 'blue' : (canDrop && isOver && 'grey') || 'charcoal'}
             >
                 {string}

@@ -10,12 +10,12 @@ const itemTarget = {
         if (didDrop) return;
 
         const dragItem = monitor.getItem()
-        const { parentKey, index } = dragItem
         const itemType = monitor.getItemType()
+        const { dragIndex } = dragItem
 
         switch(itemType) {
             case DRAGGABLE_TYPE.string:
-                props.move(parentKey, index)
+                props.move(dragIndex)
                 break
             default:
         }

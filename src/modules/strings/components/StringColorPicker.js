@@ -1,15 +1,19 @@
 import React from 'react'
+import _ from 'lodash'
 
-import { EventTextColors } from './EventConstants'
-import EventColorDrag from './EventColorDrag';
+import { APP_PALETTE } from '../../components/Standards'
 
-export default function EventColorPicker(props) {
+import StringColorDrag from '../dnd/StringColorDrag';
+
+export default function StringColorPicker(props) {
+    const colors = _.toArray(APP_PALETTE)
+
     return (
         <div className="event-color-picker">
             <div className="dashboard-section-title">Text Color</div>
             <div className="row"> 
-                {EventTextColors.map(item => (
-                    <EventColorDrag
+                {colors.map(item => (
+                    <StringColorDrag
                         {...props}
                         key={item}
                         item={item}

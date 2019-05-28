@@ -450,7 +450,7 @@ export function updateGeneral(path, update, extraPath=[]) {
 
         const totalPath = path.concat(extraPath)
         const reducer = helpers.updateByPath(totalPath, update, page)
-
+        
         dispatch(receiveAction({
             type: UPDATE_GENERAL,
             payload: reducer,

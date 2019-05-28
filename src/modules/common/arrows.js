@@ -22,3 +22,10 @@ export const isChildOf = (target, className) => {
     if (target.classList && target.classList.contains(className)) return target;
     return isChildOf(target.parentElement, className)
 }
+
+export function COLLECT_DRAG(connect, monitor) {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging(),
+    }
+}
