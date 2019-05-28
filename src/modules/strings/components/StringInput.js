@@ -10,14 +10,26 @@ export default function StringInput(props) {
     const { stringRepo, stringMap, path, updateGeneral, activeKey, color } = props
 
     const [text, setText] = useState('')
+    const [disabled, setDisabled] = useState(false)
     useEffect(() => {
         if (activeKey === '') {
             setText('')
+            setDisabled(false)
         } else {
             const selectedItem = stringRepo[activeKey] || {}
-            const { string } = selectedItem
+            const { string, type } = selectedItem
 
-            setText(string)
+            switch(type) {
+                case ITEM_TYPE.string:
+                    setText(string)
+                    setDisabled(false)
+                    break
+                case ITEM_TYPE.variable:
+                    setText('Variable selected.')
+                    setDisabled(true)
+                    break
+                default:
+            }
         }
     }, [activeKey])
 
@@ -67,6 +79,7 @@ export default function StringInput(props) {
             id="event-editor-textarea"
             className="dashboard-input"
             value={text}
+            readOnly={disabled}
             onChange={e => setText(e.target.value)}
             onKeyDown={handleKey}
             placeholder="Type a string and press enter ..."

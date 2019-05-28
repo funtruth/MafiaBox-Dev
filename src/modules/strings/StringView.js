@@ -6,13 +6,10 @@ import { stateByPath } from '../common/helpers';
 
 import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
-import {
-    Body,
-    Row,
-} from '../components/Common';
+import { Row, Separator } from '../components/Common';
 
 function StringView(props) {
-    const { path, page, attachVar, updateGeneral } = props
+    const { path, page, updateGeneral } = props
     const {
         byId: stringRepo,
         byIndex: stringMap,
@@ -34,10 +31,9 @@ function StringView(props) {
     
     return (
         <Row style={{flex: 1}}>
-            <Body style={{flex: 0.65}}>
-                <StringPlayground {...mainProps}/>
-            </Body>
-            <StringDetailer {...mainProps} vars={attachVar}/>
+            <StringPlayground {...mainProps}/>
+            <Separator axis="y"></Separator>
+            <StringDetailer {...mainProps}/>
         </Row>
     )
 }

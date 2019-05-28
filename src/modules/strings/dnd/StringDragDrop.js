@@ -82,7 +82,7 @@ export default DragSource(
     itemSource,
     COLLECT_DRAG,
 )(DropTarget(
-    [DRAGGABLE_TYPE.string, DRAGGABLE_TYPE.variable],
+    [DRAGGABLE_TYPE.string],
     itemTarget,
     collectDrop,
 )(StringDragDrop));

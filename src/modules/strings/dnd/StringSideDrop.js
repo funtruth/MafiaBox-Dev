@@ -17,6 +17,9 @@ const itemTarget = {
             case DRAGGABLE_TYPE.string:
                 props.move(dragIndex)
                 break
+            case DRAGGABLE_TYPE.variable:
+                props.drop(dragItem)
+                break
             default:
         }
     },
@@ -60,7 +63,7 @@ function StringSideDrop(props) {
 }
 
 export default DropTarget(
-    [DRAGGABLE_TYPE.string],
+    [DRAGGABLE_TYPE.string, DRAGGABLE_TYPE.variable],
     itemTarget,
     collectDrop,
 )(StringSideDrop)

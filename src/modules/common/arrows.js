@@ -1,6 +1,17 @@
-import { variableType } from '../logic/types'
+import { variableType } from './types'
 
-export const VARTYPE_FILTER = (type) => i =>  i && i.variableTypes && i.variableTypes.includes(type) 
+export const VARTYPE_FILTER = (type) => i => {
+    if (typeof type === 'object') {
+        for (var j=0; j<type.length; j++) {
+            if (i && i.variableTypes && i.variableTypes.includes(type[j])) {
+                return true
+            }
+        }
+        return false
+    } else {
+        return i && i.variableTypes && i.variableTypes.includes(type) 
+    }
+}
 
 export const VARTYPE_IS_NUM = i => i && i.variableTypes && i.variableTypes.includes(variableType.number.key)
 export const VARTYPE_IS_STR = i => i && i.variableTypes && i.variableTypes.includes(variableType.string.key)

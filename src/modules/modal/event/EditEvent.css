@@ -1,74 +1,3 @@
-
-.event-modal {
-    display: flex;
-    flex-direction: column;
-    min-width: 600;
-    width: 75vw;
-    height: 60vh;
-}
-.event-playground-view {
-    padding: 0px 10px;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    height: 70%;
-}
-
-.event-playground-item-case {
-    display: flex;
-    flex-direction: row;
-}
-.event-playground-item {
-    border-radius: 4px;
-    padding: 6px 10px;
-    font: 300 13px Segoe UI;
-    background-color: rgba(40, 43, 48,1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-}
-
-.event-var {
-    border-radius: 4px;
-    padding: 6px 10px;
-    font: 300 13px Segoe UI;
-    background-color: rgba(40, 43, 48,1);
-    margin-bottom: 6px;
-    cursor: pointer;
-    margin-right: 6px;
-    color: #ddd;
-}
-.event-function {
-    border-radius: 4px;
-    padding: 6px 10px;
-    font: 300 13px Segoe UI;
-    background-color: #992600;
-    margin-bottom: 6px;
-    cursor: pointer;
-    margin-right: 6px;
-    color: #fff;
-}
-.event-function-item {
-    border-radius: 4px;
-    padding: 6px 6px;
-    font: 300 13px Segoe UI;
-    background-color: rgba(40, 43, 48,1);
-    cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.event-color-picker {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 0px 10px;
-}
 .event-color-drag {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
@@ -86,29 +15,6 @@
 }
 .event-color-drag:hover {
     border: 2px solid #ddd;
-}
-.event-var-picker {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-.event-var-section {
-    padding: 0px 10px;
-}
-
-.event-function-bubble {
-    margin-left: 6px;
-    padding: 3px 6px 3px 6px;
-    border-radius: 4px;
-    font: 300 12px Segoe UI;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    position: relative;
 }
 
 .dashboard-edit {
@@ -140,11 +46,7 @@
 }
 
 .dashboard-input {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
     border: none;
-    border-radius: 2px;
     padding: 10px 10px;
     font: 450 14px Segoe UI;
     color: #c6c6c6;
@@ -152,7 +54,6 @@
     background-color: transparent;
     cursor: text;
     width: 100%;
-    border-top: 1px solid #464646;
     overflow-y: hidden;
     resize: none;
 }

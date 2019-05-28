@@ -1,21 +1,18 @@
 import React from 'react'
-import _ from 'lodash'
 
 import {
     updateType,
 } from '../../common/types';
 import {
-    rssMap,
     VAR_DEFAULTS,
 } from '../../common/defaults'
 
 import {
     parseJS,
-    WILD_CHAR,
 } from '../../logic/proptool';
 import {
-    VARTYPE_FILTER,
-} from '../../common/arrows'
+    useVarType,
+} from '../../hooks/Hooks'
 
 import {
     DropItem,
@@ -28,6 +25,8 @@ import {
 */
 export default function RelatedVars(props) {
     const { variableType, attachVar, onClick } = props
+
+    const [tameVars, wildVars] = useVarType(variableType, attachVar)
 
     const handleSelect = (item, isWild) => {
         if (onClick) {
@@ -46,38 +45,22 @@ export default function RelatedVars(props) {
         props.showDropdown();
     }
 
-    const renderItem = (item) => {
+    const renderItem = (isWild) => (item) => {
         return (
             <DropItem
                 key={item.key}
-                onClick={() => handleSelect(item, false)}
+                onClick={() => handleSelect(item, isWild)}
                 text={item.key}
             />
         )
     }
 
-    const renderWild = (item) => {
-        return (
-            <DropItem
-                key={item.key}
-                onClick={() => handleSelect(item, true)}
-                text={item.key}
-            />
-        )
-    }
-
-    const typeFilter = VARTYPE_FILTER(variableType)
-    
-    const relatedVars = _.filter(attachVar, typeFilter)
-    const groupedRSSVars = _(rssMap).filter(typeFilter).groupBy(i => i.fields.includes(WILD_CHAR)).value()
-    
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
-            {relatedVars.map(renderItem)}
-            {groupedRSSVars.false && groupedRSSVars.false.map(renderItem)}
+            {tameVars.map(renderItem(false))}
             <DropTitle>incomplete vars</DropTitle>
-            {groupedRSSVars.true && groupedRSSVars.true.map(renderWild)}
+            {wildVars.map(renderItem(true))}
         </>
     )
 }
