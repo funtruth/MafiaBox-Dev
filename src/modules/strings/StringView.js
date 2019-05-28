@@ -6,6 +6,11 @@ import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
 import { Row, Separator } from '../components/Common';
 
+/*
+    LOCATIONS where user can edit strings
+        EditEvent
+        EditToast
+*/
 export default function StringView({path}) {
     const {
         byId: stringRepo,

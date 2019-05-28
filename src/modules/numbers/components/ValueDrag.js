@@ -3,12 +3,12 @@ import { DragSource } from 'react-dnd'
 
 import {
     ItemTypes,
-} from './types' 
-import { COLLECT_DRAG } from '../../ModalDND';
+} from '../types' 
+import { COLLECT_DRAG } from '../../common/arrows';
 
 import {
     Tag,
-} from '../../../components/Common';
+} from '../../components/Common';
 
 const itemSource = {
     beginDrag(props) {

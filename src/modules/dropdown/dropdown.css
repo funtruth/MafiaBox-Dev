@@ -40,14 +40,6 @@
     border-radius: 2px;
 }
 
-.drop-down-empty {
-    padding: 6px 15px 6px 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: #969696;
-}
-
 .drop-down-icon-only {
     padding: 6px 0px;
     cursor: pointer;
@@ -102,7 +94,7 @@
 }
 
 .drop-down-scrollable {
-    max-height: 200px;
+    max-height: 400px;
     overflow: auto;
 }
 

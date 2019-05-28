@@ -1,8 +1,8 @@
 import React from 'react'
-import * as helpers from '../../../common/helpers'
+import * as helpers from '../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
-import { ItemTypes } from './types'
+import { ItemTypes } from '../types'
 
 const itemTarget = {
     drop(props, monitor) {

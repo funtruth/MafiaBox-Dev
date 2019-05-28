@@ -69,7 +69,7 @@ export default function PickNumUpdate(props) {
     
     //show advanced math modal
     const handleAdvanced = () => {
-        props.showModal(modalType.assignNum, {
+        props.showModal(modalType.editNumber, {
             attach: currentValue,
         });
         props.showDropdown();
@@ -108,7 +108,7 @@ export default function PickNumUpdate(props) {
             />
             <RelatedVars
                 {...props}
-                variableType={variableType.number.key}
+                variableTypes={variableType.number.key}
             />
         </>
     )

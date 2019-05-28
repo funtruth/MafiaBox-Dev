@@ -2,6 +2,7 @@ import React from 'react'
 
 import {
     updateType,
+    modalType,
 } from '../../common/types';
 import {
     VAR_DEFAULTS,
@@ -10,6 +11,10 @@ import {
 import {
     parseJS,
 } from '../../logic/proptool';
+import {
+    VARTYPE_IS_NUM,
+    VARTYPE_IS_STR,
+} from '../../common/arrows';
 import {
     useVarType,
 } from '../../hooks/Hooks'
@@ -20,13 +25,18 @@ import {
 } from '../components/Common';
 
 /* @params
-    input => variableType, vars
+    input => variableTypes, vars
     ouput => matching vars
+    
+    LOCATIONS:
+    PickNumUpdate
+    PickVarWithType
+    ReplaceWildcard
 */
 export default function RelatedVars(props) {
-    const { variableType, attachVar, onClick } = props
+    const { variableTypes, attachVar, onClick } = props
 
-    const [tameVars, wildVars] = useVarType(variableType, attachVar)
+    const [tameVars, wildVars] = useVarType(variableTypes, attachVar)
 
     const handleSelect = (item, isWild) => {
         if (onClick) {
@@ -55,12 +65,52 @@ export default function RelatedVars(props) {
         )
     }
 
+    //Advanced options
+    const handleCalculator = () => {
+        props.showModal(modalType.editNumber, {
+            //editNumber correlated to NumberView right now which is incorrect
+        })
+        props.showDropdown();
+    }
+
+    const renderNumber = () => {
+        if (!VARTYPE_IS_NUM(props)) return null;
+        return (
+            <DropItem
+                onClick={handleCalculator}
+                leftIcon="mdi mdi-calculator"
+                text="equation ..."
+            />
+        )
+    }
+    
+    const handleString = () => {
+        props.showModal(modalType.editNumber, {
+
+        })
+        props.showDropdown();
+    }
+
+    const renderString = () => {
+        if (!VARTYPE_IS_STR(props)) return null;
+        return (
+            <DropItem
+                onClick={handleString}
+                leftIcon="mdi mdi-pencil"
+                text="equation ..."
+            />
+        )
+    }
+
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
             {tameVars.map(renderItem(false))}
             <DropTitle>incomplete vars</DropTitle>
             {wildVars.map(renderItem(true))}
+            <DropTitle>other</DropTitle>
+            {renderNumber()}
+            {renderString()}
         </>
     )
 }

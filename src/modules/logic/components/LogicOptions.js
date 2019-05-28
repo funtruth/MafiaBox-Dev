@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { modalType } from '../../modal/types'
+//import { modalType } from '../../modal/types'
 
 import {
     Icon

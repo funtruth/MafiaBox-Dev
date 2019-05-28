@@ -3,10 +3,10 @@ import { DropTarget } from 'react-dnd'
 
 import {
     ItemTypes,
-} from './types'
+} from '../types'
 import {
     DEFAULT_ASSIGN,
-} from '../../../common/defaults'
+} from '../../common/defaults'
 
 const itemTarget = {
     drop(props, monitor) {

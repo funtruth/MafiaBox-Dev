@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import generatePushID from '../../common/generatePushID'
 
-export default connect(
-    state => ({
-        dropdownKeys: state.dropdown.dropdownKeys,
-    })
-)(function DropParent(props) {
+export default function DropParent(props) {
+    const dropdownKeys = useSelector(state => state.dropdown.dropdownKeys);
+
     //generate a unique serial number
     const [serialNo] = useState(generatePushID())
 
-    const { icon, text, chosen, style, dropdownType, params,
-        dropdownKeys, serialList } = props
+    const { icon, text, chosen, style, dropdownType, params, serialList } = props
 
     //if the top dropdown has current DropParent's serial number in it's serial list, highlight.
     const isOrigin = !!(dropdownKeys[dropdownKeys.length - 1]||[]).serialList
@@ -44,4 +41,4 @@ export default connect(
             <i className="mdi mdi-play"/>
         </div>
     )
-})
+}

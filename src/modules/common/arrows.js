@@ -40,3 +40,7 @@ export function COLLECT_DRAG(connect, monitor) {
         isDragging: monitor.isDragging(),
     }
 }
+
+export function getVarTypeIcon(types) {
+    return variableType[types[0]].icon;
+}

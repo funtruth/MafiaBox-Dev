@@ -3,7 +3,6 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    variableType,
     updateType,
 } from '../../common/types'
 import {
@@ -11,9 +10,9 @@ import {
     VAR_DEFAULTS,
 } from '../../common/defaults'
 
-import { VARTYPE_IS_OBJ } from '../../common/arrows';
+import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
+import { parseJS } from '../../logic/proptool';
 
-import BoardLib from '../library/BoardLib';
 import {
     DropItem,
     DropParent,
@@ -27,10 +26,10 @@ export default function PickVar(props) {
     const handleSelect = (item) => {
         props.updatePage({
             ...VAR_DEFAULTS,
-            updateType: updateType.uid,
             value: item.key,
-            display: item.key,
+            display: parseJS(item.key),
             variableTypes: item.variableTypes,
+            updateType: updateType.uid, //TODO wtf lol
         })
         props.showDropdown()
     }
@@ -57,33 +56,14 @@ export default function PickVar(props) {
                 key={item.key}
                 chosen={chosen}
                 onClick={() => handleSelect(item)}
+                leftIcon={getVarTypeIcon(item.variableTypes)}
                 rightCheck
                 text={item.key}
             />
         )
     }
-
-    const setConstant = (value) => {
-        props.updatePage({
-            ...VAR_DEFAULTS,
-            adjust: value,
-            display: value,
-            updateType: updateType.number,
-        })
-        props.showDropdown()
-    }
-
-    const setAdjustment = (value) => {
-        props.updatePage({
-            ...currentValue,
-            adjust: value,
-            display: currentValue.value + (value > 0 ? '+' : '') + value,
-            updateType: updateType.number,
-        })
-        props.showDropdown()
-    }
     
-    const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
+    const vars = _.sortBy(attachVar, VARTYPE_IS_OBJ)
     const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
     return (
@@ -92,47 +72,8 @@ export default function PickVar(props) {
                 <DropTitle>game values</DropTitle>
                 <DropScroll>{rssVars.map(renderItem)}</DropScroll>
             </div>}
-            {vars.true && <div>
-                <DropTitle>uids</DropTitle>
-                <DropScroll>{vars.true.map(renderItem)}</DropScroll>
-            </div>}
-            {vars.false && <div>
-                <DropTitle>variables</DropTitle>
-                <DropScroll>{vars.false.map(renderItem)}</DropScroll>
-            </div>}
-            <DropTitle>other options</DropTitle>
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.inputValue}
-                params={{
-                    inputText: 'Enter a number',
-                    type: 'number',
-                    showValue: true,
-                    onSubmit: setAdjustment,
-                }}
-                icon="mdi mdi-numeric"
-                text="adjust by"
-            />
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.pickBoolean}
-                icon="mdi mdi-code-tags-check"
-                text="boolean"
-            />
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.inputValue}
-                params={{
-                    inputText: 'Enter a number',
-                    type: 'number',
-                    showValue: true,
-                    onSubmit: setConstant,
-                }}
-                icon="mdi mdi-numeric"
-                text="constant"
-            />
-            <DropTitle>library</DropTitle>
-            <BoardLib {...props}/>
+            <DropTitle>variables</DropTitle>
+            <DropScroll>{vars.map(renderItem)}</DropScroll>
         </>
     )
 }

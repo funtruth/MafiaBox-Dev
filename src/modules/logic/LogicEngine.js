@@ -5,7 +5,7 @@ import {
     operatorType,
 } from '../common/types'
 import { orderOfOp } from './codetool'
-import { stringToCode } from '../modal/toast/stringTool';
+import { stringToCode } from '../modal/strings/stringTool';
 import {
     parseJS,
     separateField,
@@ -34,13 +34,13 @@ function recursive(library) {
         case logicType.operator.key:
             switch(subType) {
                 case operatorType.if.key:
-                    codeBody = `if(${parseJS(data.var1.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.var2.value)}){${codeRight}}`
+                    codeBody = `if(${parseJS(data.baseVar.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.var2.value)}){${codeRight}}`
                     break
                 case operatorType.else.key:
                     codeBody = `else{${codeRight}}`
                     break
                 case operatorType.elseif.key:
-                    codeBody = `else if(${parseJS(data.var1.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.var2.value)}){${codeRight}}`
+                    codeBody = `else if(${parseJS(data.baseVar.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.var2.value)}){${codeRight}}`
                     break
                 case operatorType.forin.key:
                     codeBody = `for(var ${parseJS(data.variableName)} in ${parseJS(data.source)}){${codeRight}}`

@@ -120,7 +120,7 @@ export default function ReplaceWildcard(props) {
             </div>
             <RelatedVars
                 {...props}
-                variableType={variableType.uid.key}
+                variableTypes={variableType.uid.key}
                 onClick={handleSelect}
             />
             <DropTitle>other</DropTitle>

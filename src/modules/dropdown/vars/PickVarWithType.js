@@ -3,26 +3,25 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    variableType,
     updateType,
 } from '../../common/types'
 import {
-    rssMap,
     VAR_DEFAULTS,
 } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 
-import BoardLib from '../library/BoardLib';
+import RelatedVars from './RelatedVars';
 import {
+    DropEmpty,
     DropItem,
     DropParent,
-    DropScroll,
     DropTitle,
 } from '../components/Common'
 
 export default function PickVarWithType(props) {
-    const { attachVar, currentValue } = props
+    const { attach, currentValue } = props
+    const { baseVar } = attach || {}
 
     const handleSelect = (item) => {
         props.updatePage({
@@ -82,57 +81,19 @@ export default function PickVarWithType(props) {
         })
         props.showDropdown()
     }
-    
-    const vars = _.groupBy(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-    const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
+    if (!baseVar || !baseVar.variableTypes) {
+        return (
+            <>
+                <DropTitle>error</DropTitle>
+                <DropEmpty text="select a variable first ..."/>
+            </>
+        )
+    }
+    
     return (
         <>
-            {rssVars.length > 0 && <div>
-                <DropTitle>game values</DropTitle>
-                <DropScroll>{rssVars.map(renderItem)}</DropScroll>
-            </div>}
-            {vars.true && <div>
-                <DropTitle>uids</DropTitle>
-                <DropScroll>{vars.true.map(renderItem)}</DropScroll>
-            </div>}
-            {vars.false && <div>
-                <DropTitle>variables</DropTitle>
-                <DropScroll>{vars.false.map(renderItem)}</DropScroll>
-            </div>}
-            <DropTitle>other options</DropTitle>
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.inputValue}
-                params={{
-                    inputText: 'Enter a number',
-                    type: 'number',
-                    showValue: true,
-                    onSubmit: setAdjustment,
-                }}
-                icon="mdi mdi-numeric"
-                text="adjust by"
-            />
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.pickBoolean}
-                icon="mdi mdi-code-tags-check"
-                text="boolean"
-            />
-            <DropParent
-                {...props}
-                dropdownType={dropdownType.inputValue}
-                params={{
-                    inputText: 'Enter a number',
-                    type: 'number',
-                    showValue: true,
-                    onSubmit: setConstant,
-                }}
-                icon="mdi mdi-numeric"
-                text="constant"
-            />
-            <DropTitle>library</DropTitle>
-            <BoardLib {...props}/>
+            <RelatedVars {...props} variableTypes={baseVar.variableTypes}/>
         </>
     )
 }

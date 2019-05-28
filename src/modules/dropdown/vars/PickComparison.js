@@ -3,12 +3,17 @@ import _ from 'lodash'
 
 import { comparisonType } from '../../logic/types'
 
-import DropTitle from '../components/DropTitle';
-import DropItem from '../components/DropItem';
+import { VARTYPE_FILTER } from '../../common/arrows';
+
+import { 
+    DropEmpty,
+    DropItem,
+    DropTitle,
+} from '../components/Common';
 
 export default function PickComparison(props) {
-    const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey] || {}
+    const { attach, currentValue } = props
+    const { baseVar } = attach || {}
 
     const handleSelect = (item) => {
         props.updatePage({
@@ -33,10 +38,23 @@ export default function PickComparison(props) {
         )
     }
 
+    //user must set 'baseVar' before continuing to ensure comparison is appropriate
+    if (!baseVar || !baseVar.variableTypes) {
+        return (
+            <>
+                <DropTitle>error</DropTitle>
+                <DropEmpty text="select a variable first ..."/>
+            </>
+        )
+    }
+
+    //hide comparisonType if it has variableTypes & they don't match baseVar
+    const items = _.filter(comparisonType, i => !i.variableTypes || VARTYPE_FILTER(i.variableTypes)(baseVar))
+
     return (
         <>
             <DropTitle>pick comparison</DropTitle>
-            {_.toArray(comparisonType).map(renderItem)}
+            {items.map(renderItem)}
         </>
     )
 }

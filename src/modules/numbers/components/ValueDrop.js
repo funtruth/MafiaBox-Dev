@@ -1,18 +1,18 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
-import * as helpers from '../../../common/helpers'
+import * as helpers from '../../common/helpers'
 
 import {
     mathType,
-} from '../../../common/types'
+} from '../../common/types'
 import {
     ItemTypes,
-} from './types'
+} from '../types'
 import {
     DEFAULT_ASSIGN,
-} from '../../../common/defaults'
+} from '../../common/defaults'
 
-import { DropClick } from '../../../components/Common';
+import { DropClick } from '../../components/Common';
 
 const itemTarget = {
     drop(props, monitor) {

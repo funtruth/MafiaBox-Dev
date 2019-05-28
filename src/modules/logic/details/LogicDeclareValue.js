@@ -34,7 +34,7 @@ export default connect(
     const isString = item.variableTypes.includes(variableType.string.key)
 
     let handleNumber = () => {
-        props.showModal(modalType.assignNum, {
+        props.showModal(modalType.assignNumber, {
             attachVar: vars,
             attach: item,
             path: newPath,
@@ -43,11 +43,8 @@ export default connect(
     }
 
     let handleString = () => {
-        props.showModal(modalType.editString, {
-            attachVar: vars,
-            attach: item,
-            path: newPath,
-        })
+        console.warn('this needs to be removed.')
+        return;
     }
     
     if (isNumber) {

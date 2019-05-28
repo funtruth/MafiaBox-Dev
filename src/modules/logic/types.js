@@ -109,45 +109,6 @@ export const mathOperatorType = {
     },
 }
 
-export const comparisonType = {
-    equal: {
-        key: 'equal',
-        code: '===',
-        title: 'equal',
-        icon: 'mdi mdi-equal',
-    },
-    notEqual: {
-        key: 'notEqual',
-        code: '!==',
-        title: 'not equal',
-        icon: 'mdi mdi-not-equal',
-    },
-    greaterThan: {
-        key: 'greaterThan',
-        code: '>',
-        title: 'greater than',
-        icon: 'mdi mdi-greater-than',
-    },
-    greaterThanOrEqualTo: {
-        key: 'greaterThanOrEqualTo',
-        code: '>=',
-        title: 'greater than / equal',
-        icon: 'mdi mdi-greater-than-or-equal',
-    },
-    lessThan: {
-        key: 'lessThan',
-        code: '<',
-        title: 'less than',
-        icon: 'mdi mdi-less-than',
-    },
-    lessThanOrEqualTo: {
-        key: 'lessThanOrEqualTo',
-        code: '<=',
-        title: 'less than / equal',
-        icon: 'mdi mdi-less-than-or-equal',
-    },
-}
-
 export const updateType = {
     number: 'updateType/number',
     boolean: 'updateType/boolean',
@@ -323,6 +284,57 @@ export const variableType = {
         supertype: '',
         declarable: false,
     }
+}
+
+export const comparisonType = {
+    equal: {
+        key: 'equal',
+        code: '===',
+        title: 'equal',
+        icon: 'mdi mdi-equal',
+    },
+    notEqual: {
+        key: 'notEqual',
+        code: '!==',
+        title: 'not equal',
+        icon: 'mdi mdi-not-equal',
+    },
+    greaterThan: {
+        key: 'greaterThan',
+        code: '>',
+        title: 'greater than',
+        icon: 'mdi mdi-greater-than',
+        variableTypes: [
+            variableType.number.key,
+        ],
+    },
+    greaterThanOrEqualTo: {
+        key: 'greaterThanOrEqualTo',
+        code: '>=',
+        title: 'greater than / equal',
+        icon: 'mdi mdi-greater-than-or-equal',
+        variableTypes: [
+            variableType.number.key,
+        ],
+    },
+    lessThan: {
+        key: 'lessThan',
+        code: '<',
+        title: 'less than',
+        icon: 'mdi mdi-less-than',
+        variableTypes: [
+            variableType.number.key,
+        ],
+    },
+    lessThanOrEqualTo: {
+        key: 'lessThanOrEqualTo',
+        code: '<=',
+        title: 'less than / equal',
+        icon: 'mdi mdi-less-than-or-equal',
+        variableTypes: [
+            variableType.number.key,
+        ],
+    },
 }
 
 export const returnType = {

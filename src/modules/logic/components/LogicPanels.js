@@ -28,9 +28,9 @@ export default function LogicPanels(props) {
                         <Row>
                             <LogicPanel
                                 {...props}
-                                subfieldKey="var1"
+                                subfieldKey="baseVar"
                                 placeholder="variable"
-                                path={[...path, 'data', 'var1']}
+                                path={[...path, 'data', 'baseVar']}
                                 dropdown={dropdownType.pickVar}
                             />
                             <LogicPanel
@@ -98,9 +98,9 @@ export default function LogicPanels(props) {
             return (
                 <LogicPanel
                     {...props}
-                    subfieldKey="var1"
+                    subfieldKey="baseVar"
                     placeholder="Pick a function ..."
-                    path={[...path, 'data', 'var1']}
+                    path={[...path, 'data', 'baseVar']}
                     dropdown={dropdownType.pickLibrary}
                 />
             )

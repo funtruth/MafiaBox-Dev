@@ -27,12 +27,11 @@ import EditLogic from './page/EditLogic';
 import PublishWithSource from './page/PublishWithSource';
 
 import EditTrigger from './trigger/EditTrigger'
-import EditEvent from './event/EditEvent'
-import EditToast from './toast/EditToast'
+import EditEvent from './strings/EditEvent'
+import EditToast from './strings/EditToast'
 import EditPriority from './priority/EditPriority'
 import RemovePriorityRow from './priority/RemovePriorityRow'
-import AssignNumModal from './vars/AssignNumModal'
-import EditString from './string/EditString'
+import EditNumber from './vars/EditNumber'
 import PickCharImage from './image/PickCharImage'
 
 class ModalView extends React.Component {
@@ -81,10 +80,8 @@ class ModalView extends React.Component {
                 return <EditPriority {...props}/>
             case modalType.removePriorityRow:
                 return <RemovePriorityRow {...props}/>
-            case modalType.assignNum:
-                return <AssignNumModal {...props}/>
-            case modalType.editString:
-                return <EditString {...props}/>
+            case modalType.editNumber:
+                return <EditNumber {...props}/>
             case modalType.pickCharacterImage:
                 return <PickCharImage {...props}/>
             default:

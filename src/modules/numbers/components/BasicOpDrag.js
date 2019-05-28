@@ -1,9 +1,9 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { mathType } from '../../../common/types'
-import { ItemTypes } from './types' 
-import { COLLECT_DRAG } from '../../ModalDND';
+import { mathType } from '../../common/types'
+import { ItemTypes } from '../types' 
+import { COLLECT_DRAG } from '../../common/arrows';
 
 const itemSource = {
     beginDrag(props) {

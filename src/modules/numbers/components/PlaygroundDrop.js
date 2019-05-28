@@ -1,14 +1,13 @@
 import React from 'react'
-import './Playground.css'
-import * as helpers from '../../../common/helpers'
+import * as helpers from '../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
 import {
     ItemTypes,
-} from './types'
+} from '../types'
 import {
     DEFAULT_ASSIGN,
-} from '../../../common/defaults'
+} from '../../common/defaults'
 
 import ActiveOp from './ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
