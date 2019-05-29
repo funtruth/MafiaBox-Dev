@@ -68,8 +68,4 @@ TODO
 
 ## RETURN Logic
 ## Picking the Return Type
-- user clicks on the LogicPanel to show PickReturnType
-- user selects a toast type from the list
-- preset options generate key
-- toaster generates string TODO
-- logic item -> data -> key, string
+- user clicks on the LogicPanel to show EditToast

@@ -1,75 +1,65 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { variableType } from '../../logic/types'
-import DropTitle from '../components/DropTitle';
-import DropEmpty from '../components/DropEmpty';
+import { VARTYPE_IS_UID } from '../../common/arrows';
 
-export default function PickRecipient(props) {
-    const { selectionType, attach, attachVar, eventIndex } = props
-    let wsClone = _.cloneDeep(attach)
+import { DropEmpty, DropItem, DropTitle } from '../components/Common';
 
-    let pickUid = (item, info) => {
+export default function PickRecipient({
+    attachVar,
+    slate,
+    selectionType,
+    update,
+    showDropdown,
+}){
+    const pickUid = (item, info) => {
         const otherType = selectionType === 'showTo' ? 'hideFrom' : 'showTo'
-        Object.assign(wsClone.eventArr[eventIndex], {
+        update({
             [selectionType]: {
                 ...info,
                 [item.key]: !info[item.key],
             },
             [otherType]: {},
         })
-        props.updatePage(wsClone)
-        props.showDropdown()
+        showDropdown()
     }
 
-    let pickEveryone = () => {
-        Object.assign(wsClone.eventArr[eventIndex], {
+    const pickEveryone = () => {
+        update({
             showTo: {},
             hideFrom: {},
         })
-        props.updatePage(wsClone)
-        props.showDropdown()
+        showDropdown()
     }
 
-    const uids = _.filter(attachVar, i => i.variableTypes && i.variableTypes.includes(variableType.uid.key))
-
-    const inclusive = selectionType === 'showTo'
-    
-    const selectedItem = (wsClone.eventArr && wsClone.eventArr[eventIndex]) || {}
-    const info = selectedItem[selectionType] || {}
-    const everyone = Object.keys(selectedItem.showTo || {}).length === 0
+    const uids = _.filter(attachVar, VARTYPE_IS_UID)
+    const info = slate[selectionType] || {}
     
     return (
-        <div>
+        <>
             <DropTitle>uids</DropTitle>
-            {uids.map(item => {
-                const chosen = info[item.key] || false
-
-                return(
-                    <div
-                        key={item.key}
-                        className="drop-down-menu-option"
-                        chosen={chosen.toString()}
-                        onClick={() => pickUid(item, info)}
-                    >
-                        {item.key}
-                        <i className="mdi mdi-check"/>
-                    </div>
-                )
-            })}
+            {uids.map(item => (
+                <DropItem
+                    key={item.key}
+                    chosen={info[item.key]}
+                    onClick={() => pickUid(item, info)}
+                    text={item.key}
+                    rightCheck
+                />
+            ))}
             <DropEmpty list={uids} text="no UIDS found"/>
-            {inclusive && <div>
-                <div className="-sep"/>
-                <div
-                    className="drop-down-menu-option"
-                    chosen={everyone.toString()}
-                    onClick={pickEveryone}
-                >
-                    <i className="mdi mdi-earth drop-down-menu-icon"/>
-                    everyone
-                    <i className="mdi mdi-check"/>
+            {selectionType === 'showTo' &&
+                <div>
+                    <DropTitle>other</DropTitle>
+                    <DropItem
+                        chosen={_.filter(info).length === 0}
+                        onClick={pickEveryone}
+                        leftIcon="mdi mdi-earth"
+                        text="everyone"
+                        rightCheck
+                    />
                 </div>
-            </div>}
-        </div>
+            }
+        </>
     )
 }

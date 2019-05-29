@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { popDropdownTo } from '../DropdownReducer'
 
 const THRESHOLD = 20
 
 export default function Dropdown(props) {
-    const { children, index, position, onClick } = props
+    const dispatch = useDispatch();
+
+    const { children, index, position } = props
     const { place, pageX, pageY, sourceHeight, sourceWidth } = position
 
     //hide dropdown before calculating whether or not it needs to be re-positioned
@@ -74,13 +79,17 @@ export default function Dropdown(props) {
         }
             
     }, [dropdownRef.current])
+
+    const handleClick = () => {
+        dispatch(popDropdownTo(index))
+    }
     
     return (
         <div
             ref={dropdownRef}
             className="drop-down-menu" 
             style={styles}
-            onClick={() => onClick && onClick()}
+            onClick={handleClick}
         >
             {children}
         </div>

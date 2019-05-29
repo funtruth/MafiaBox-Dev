@@ -80,7 +80,6 @@ export default function LogicPanels(props) {
                 <LogicPanel
                     {...props}
                     placeholder="new event ..."
-                    subfieldKey=""
                     path={[...path, 'data']}
                     modal={modalType.editEvent}
                 />
@@ -110,7 +109,7 @@ export default function LogicPanels(props) {
                     {...props}
                     placeholder="return type ..."
                     path={[...path, 'data']}
-                    dropdown={dropdownType.pickReturnType}
+                    modal={modalType.editToast}
                 />
             )
         default:

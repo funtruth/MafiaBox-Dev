@@ -1,9 +1,13 @@
 import React from 'react'
+import _ from 'lodash'
 
 import { dropdownType } from '../../../dropdown/types'
 
-import { DropClick, Row, Text, Tag } from '../../../components/Common';
 import { usePath } from '../../../hooks/Hooks';
+
+import { DropClick, Row, Tag, Text } from '../../../components/Common';
+
+const glue = (obj) => Object.keys(obj).filter(i => obj[i]).join(', ')
 
 export default function EditEventHeader(props) {
     const { path } = props
@@ -12,64 +16,60 @@ export default function EditEventHeader(props) {
     const { display, showTo, hideFrom } = slate
 
     //showing only to selected uid's
-    const exclusive = Object.keys(showTo || {}).length > 0
-    const inclusive = Object.keys(hideFrom || {}).length > 0
+    const exclusive = _.filter(showTo).length > 0
+    const inclusive = _.filter(hideFrom).length > 0
     
     return (
         <Row>
-            <Text>Title</Text>
-            <DropClick
-                dropdown={dropdownType.dropString}
-                params={{
-                    path: [...path, 'display'],
-                }}
-            >
-                <Tag>
-                    {display || 'Untitled'}
-                </Tag>
-            </DropClick>
-            <Text>Recipients</Text>
-            <Row>
+            <Row style={{flex: 0.3}} y="c">
+                <Text>Title</Text>
+                <DropClick
+                    dropdown={dropdownType.dropString}
+                    params={{
+                        path: [...path, 'display'],
+                    }}
+                >
+                    <Tag>
+                        {display || 'Untitled'}
+                    </Tag>
+                </DropClick>
+            </Row>
+            <Row style={{flex: 0.7}} y="c">
+                <Text>Recipients</Text>
                 {!exclusive &&
                     <DropClick
-                        className="cute-button"
                         dropdown={dropdownType.pickRecipient}
                         params={{
-                            path: [...path, 'showTo'],
+                            selectionType: 'showTo',
                         }}
                     >
-                        everyone
+                        <Tag>
+                            everyone
+                        </Tag>
                     </DropClick>
                 }
                 {exclusive &&
                     <DropClick
-                        className="cute-button"
                         dropdown={dropdownType.pickRecipient}
                         params={{
-                            path: [...path, 'showTo'],
+                            selectionType: 'showTo',
                         }}
                     >
-                        {Object.keys(showTo).filter(i => showTo[i]).join(', ')}
+                        <Tag>
+                            {glue(showTo)}
+                        </Tag>
                     </DropClick>
                 }
                 {!exclusive &&
                     <DropClick
-                        className="row cute-button"
-                        empty="true"
                         dropdown={dropdownType.pickRecipient}
                         params={{
-                            path: [...path, 'hideFrom'],
-                        }}
-                        style={{
-                            marginLeft: 6,
+                            selectionType: 'hideFrom',
                         }}
                     >
-                        except
-                        {inclusive &&
-                            <div style={{ marginLeft: 6, color: '#a6a6a6',  }}>
-                                {Object.keys(hideFrom).filter(i => hideFrom[i]).join(', ')}
-                            </div>
-                        }
+                        <Tag>
+                            {`except ${inclusive ? (' ' + glue(hideFrom)) : ''}`}
+                        </Tag>
                     </DropClick>
                 }
             </Row>

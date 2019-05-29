@@ -11,7 +11,6 @@ export const dropdownType = {
 
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
-    pickReturnType: 'dropdownType/pick-return-type',
 
     createUniqueTag: 'dropdownType/create-unique-tag',
     editUniqueTag: 'dropdownType/edit-unique-tag',

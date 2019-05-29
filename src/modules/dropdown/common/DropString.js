@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 import {
-    useAutofocus, usePath,
+    useAutofocus,
 } from '../../hooks/Hooks'
-import { updateGeneral } from '../../page/PageReducer'
-import { showDropdown } from '../DropdownReducer'
 
 import {
     DropSubmit,
@@ -17,19 +14,14 @@ accessed from:
 required params:
     path -> update path of PageReducer
 */
-export default function DropString({path}) {
-    const dispatch = useDispatch();
-
-    if (!path) {
-        console.warn('missing a required param.')
-        return null
-    }
-
-    const slate = usePath(path, "")
-
+export default function DropString({
+    slate,
+    update,
+    showDropdown,
+}){
     const focusRef = useAutofocus()
 
-    const [value, setValue] = useState(slate || "")
+    const [value, setValue] = useState(slate)
     const handleChange = e => setValue(e.target.value)
 
     const onKeyDown = e => {
@@ -42,8 +34,8 @@ export default function DropString({path}) {
     }
 
     const onSubmit = () => {
-        dispatch(updateGeneral(path, value))
-        dispatch(showDropdown());
+        update(value)
+        showDropdown();
     }
 
     return (

@@ -95,7 +95,7 @@ export default function StringPlayground(props) {
 
     return (
         <Body style={{flex: 0.65}}>
-            <Text>Event text</Text>
+            <Text>Text</Text>
             <div className="string-playground-click" style={{flex: 1}} onClick={handleClick}>
                 <Row sizes={['xxs', 's']} style={{marginBottom: 'auto'}}>
                     {(stringMap||[]).map(renderItem)}

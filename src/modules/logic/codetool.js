@@ -1,6 +1,5 @@
 import {
     mathType,
-    returnType,
 } from '../common/types'
 import { parseJS } from './proptool'
 

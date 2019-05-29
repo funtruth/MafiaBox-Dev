@@ -3,6 +3,7 @@ import React from 'react'
 import ModalOptions from '../components/ModalOptions'
 import Modal from '../components/Modal'
 import StringView from '../../strings/StringView';
+import EditToastHeader from './components/EditToastHeader';
 
 export default function EditToast(props) {
     const { path, close } = props
@@ -15,7 +16,8 @@ export default function EditToast(props) {
                 height: '60vh',
             }}
         >
-            <StringView path={path}/>
+            <EditToastHeader {...props}/>
+            <StringView path={[...path, 'string']}/>
             <ModalOptions onClose={close}/>
         </Modal>
     )
