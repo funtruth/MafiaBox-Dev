@@ -63,11 +63,12 @@ export const DEFAULT_VAR_ID = {
 
 /* @params logicItem.data.assign
     mathType => is this a value (value)? or an operation (value)(operator)(value)
-    mathOperatorType => just the mathematical operator (+-/*%)
+    mathOperator => just the mathematical operator (+-/*%)
 */
 export const DEFAULT_ASSIGN = {
-    mathType: "",
-    mathOperatorType: "",
+    key: "",
+    math: "",
+    mathOperator: "",
     value: "",
     left: "",
     right: "",

@@ -1,15 +1,9 @@
 import React from 'react'
-import * as helpers from '../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
-import {
-    ItemTypes,
-} from '../types'
-import {
-    DEFAULT_ASSIGN,
-} from '../../common/defaults'
+import { mathType } from '../../common/types';
 
-import ActiveOp from './ActiveOp';
+import ActiveOp from '../components/ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
 
 const itemTarget = {
@@ -19,20 +13,13 @@ const itemTarget = {
 
         const item = monitor.getItem()
 
-        props.setWorkspace(helpers.updateByPath(
-            props.subpath,
-            {
-                ...DEFAULT_ASSIGN,
-                ...item,
-            },
-            props.workspace,
-        ))
+        props.initValue(item)
     },
 
-    //can only drop if there is no declared mathType.
+    //can only drop if empty.
     canDrop(props) {
-        const { assign } = props
-        return !assign.mathType
+        const { source } = props
+        return !source
     }
 }
 
@@ -40,12 +27,13 @@ function collect(connect, monitor) {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver({ shallow: true }),
+        canDrop: monitor.canDrop(),
     }
 }
   
 function PlaygroundDrop(props) {
-    const { connectDropTarget, isOver, assign } = props
-    const highlight = isOver && !assign.mathType
+    const { source, connectDropTarget, isOver, canDrop } = props
+    const highlight = isOver && canDrop
 
     return connectDropTarget(
         <div className="playground" style={{ backgroundColor: highlight && 'rgba(70, 73, 78, 1)' }}>
@@ -62,13 +50,13 @@ function PlaygroundDrop(props) {
                     clear
                 </div>
             </div>
-            <div style={{ margin: '26px 16px' }}><ActiveOp {...props}/></div>
+            <ActiveOp {...props} mathKey={source}/>
         </div>
     );
 }
 
 export default DropTarget(
-    [ItemTypes.OPERATION, ItemTypes.VALUE],
+    [mathType.operation, mathType.value],
     itemTarget,
     collect
 )(PlaygroundDrop);

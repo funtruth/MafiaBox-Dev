@@ -1,20 +1,17 @@
 import React from 'react'
-import * as helpers from '../../common/helpers'
 import { DropTarget } from 'react-dnd'
 
-import { ItemTypes } from '../types'
+import { mathType } from '../../common/types';
 
 const itemTarget = {
     drop(props, monitor) {
+        const { mathKey } = props
+        
         const didDrop = monitor.didDrop()
         if (didDrop) return;
 
         const item = monitor.getItem()
-        props.setWorkspace(helpers.updateByPath(
-            props.subpath,
-            item,
-            props.workspace,
-        ))
+        props.changeValue(mathKey, item)
     }
 }
 
@@ -35,7 +32,7 @@ function BasicOpDrop(props) {
 }
 
 export default DropTarget(
-    ItemTypes.OPERATION,
+    mathType.operation,
     itemTarget,
     collect
 )(BasicOpDrop);

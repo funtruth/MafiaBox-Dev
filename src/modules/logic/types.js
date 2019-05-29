@@ -354,8 +354,6 @@ export const returnType = {
 
 export const mathType = {
     value: 'mathType/value',
-    number: 'mathType/number',
-    variable: 'mathType/variable',
     operation: 'mathType/operation',
 }
 

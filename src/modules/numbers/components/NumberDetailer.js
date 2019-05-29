@@ -9,6 +9,7 @@ import {
 import { useVarType } from '../../hooks/Hooks';
 
 import BasicOpDrag from '../dnd/BasicOpDrag';
+import ValueDrag from '../dnd/ValueDrag'
 import {
     Body,
     Row,
@@ -24,11 +25,13 @@ export default function NumberDetailer(props) {
         attachVar,
     )
 
+    const operators = _.toArray(mathOperatorType)
+
     return (
         <Body style={{flex: 0.35}}>
             <Text>Operators</Text>
             <Row>
-                {_.toArray(mathOperatorType).map(item => (
+                {operators.map(item => (
                     <BasicOpDrag
                         key={item.key}
                         item={item}
@@ -36,10 +39,10 @@ export default function NumberDetailer(props) {
                 ))}
             </Row>
             <Separator></Separator>
-            {/*<Text>Complete</Text>
+            <Text>Complete</Text>
             <Row>
                 {tameVars.map(item => (
-                    <StringVarDrag
+                    <ValueDrag
                         key={item.key}
                         item={item}
                     />
@@ -49,13 +52,13 @@ export default function NumberDetailer(props) {
             <Text>Incomplete</Text>
             <Row>
                 {wildVars.map(item => (
-                    <StringVarDrag
+                    <ValueDrag
                         key={item.key}
                         isWild
                         item={item}
                     />
                 ))}
-            </Row>*/}
+            </Row>
         </Body>
     )
 }

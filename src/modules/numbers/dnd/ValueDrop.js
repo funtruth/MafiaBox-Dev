@@ -1,31 +1,18 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
-import * as helpers from '../../common/helpers'
 
 import {
     mathType,
 } from '../../common/types'
-import {
-    ItemTypes,
-} from '../types'
-import {
-    DEFAULT_ASSIGN,
-} from '../../common/defaults'
 
-import { DropClick } from '../../components/Common';
+import { DropClick, Tag } from '../../components/Common';
 
 const itemTarget = {
     drop(props, monitor) {
+        const { mathKey } = props
         const item = monitor.getItem()
         
-        props.setWorkspace(helpers.updateByPath(
-            props.subpath,
-            {
-                ...DEFAULT_ASSIGN,
-                ...item,
-            },
-            props.workspace,
-        ))
+        props.changeValue(mathKey, item)
     }
 }
 
@@ -37,39 +24,26 @@ function collect(connect, monitor) {
 }
 
 function ValueDrop(props) {
-    const { connectDropTarget, isOver, children, assign } = props
-    
-    if (assign.mathType === mathType.number) {
-        return connectDropTarget(
-            <div>
-                <DropClick
-                    className="basic-op-bubble"
-                    style={{
-                        color: isOver && '#fff',
-                        backgroundColor: isOver && '#6279CA',
-                    }}
-                >
-                    {children}
-                </DropClick>
-            </div>
-        );
-    }
+    const { connectDropTarget, isOver, children } = props
     
     return connectDropTarget(
-        <div
-            className="basic-op-bubble"
-            style={{
-                color: isOver && '#fff',
-                backgroundColor: isOver && '#6279CA',
-            }}
-        >
-            {children}
+        <div>
+            <DropClick
+                style={{
+                    color: isOver && '#fff',
+                    backgroundColor: isOver && '#6279CA',
+                }}
+            >
+                <Tag>
+                    {children}
+                </Tag>
+            </DropClick>
         </div>
     );
 }
 
 export default DropTarget(
-    [ItemTypes.OPERATION, ItemTypes.VALUE],
+    [mathType.operation, mathType.value],
     itemTarget,
     collect
 )(ValueDrop);

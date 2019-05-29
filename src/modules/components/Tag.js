@@ -2,6 +2,7 @@ import React from 'react';
 import { palette } from './Standards';
 
 import Text from './Text'
+import Row from './Row';
 
 export default function Tag(props) {
     const {
@@ -34,16 +35,18 @@ export default function Tag(props) {
             onClick={event => onClick && onClick({event})}
         >
             <Text size={size} color={color}>
-                {icon &&
-                    <i
-                        className={icon}
-                        style={{
-                            fontSize: 15,
-                            marginRight: children ? 6 : 0,
-                        }}
-                    ></i>
-                }
-                {children}
+                <Row y="c">
+                    {icon &&
+                        <i
+                            className={icon}
+                            style={{
+                                fontSize: 15,
+                                marginRight: children ? 6 : 0,
+                            }}
+                        ></i>
+                    }
+                    {children}
+                </Row>
             </Text>
         </div>
     )

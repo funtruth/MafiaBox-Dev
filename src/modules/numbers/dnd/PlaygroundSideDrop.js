@@ -1,9 +1,7 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
-import {
-    ItemTypes,
-} from '../types'
+import { mathType } from '../../common/types';
 import {
     DEFAULT_ASSIGN,
 } from '../../common/defaults'
@@ -52,7 +50,7 @@ function PlaygroundSideDrop(props) {
 }
 
 export default DropTarget(
-    ItemTypes.OPERATION,
+    mathType.operation,
     itemTarget,
     collect
 )(PlaygroundSideDrop);

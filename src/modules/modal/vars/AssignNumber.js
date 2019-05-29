@@ -7,7 +7,7 @@ import ModalOptions from '../components/ModalOptions'
 import NumberView from '../../numbers/NumberView';
 
 export default function AssignNumber(props) {
-    const { close } = props
+    const { path, close } = props
     
     return (
         <Modal
@@ -16,7 +16,7 @@ export default function AssignNumber(props) {
                 maxWidth: '90vw',
             }}
         >
-            <NumberView {...props}/>
+            <NumberView path={[...path, 'assign']}/>
             <ModalOptions onClose={close}/>
         </Modal>
     )

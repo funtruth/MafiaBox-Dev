@@ -2,31 +2,38 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { mathType } from '../../common/types'
-import { ItemTypes } from '../types' 
+
 import { COLLECT_DRAG } from '../../common/arrows';
+
+import { Row, Tag, Text } from '../../components/Common';
 
 const itemSource = {
     beginDrag(props) {
+        const { item } = props
+
         return {
-            mathType: mathType.operation,
-            mathOperatorType: props.item,
+            math: mathType.operation,
+            mathOperator: item.key,
         }
     }
 }
   
 function BasicOpDrag(props) {
     const { item, connectDragSource } = props
+    
     return connectDragSource(
-        <div className="basic-op" style={{ marginRight: 8, cursor: 'pointer' }}>
-            <div className="basic-op-bubble">x</div>
-            <div className="basic-op-op">{item.char}</div>
-            <div className="basic-op-bubble">y</div>
+        <div style={{margin: 4}}>
+            <Row bg="charcoal" y="c">
+                <Tag bg="discord">x</Tag>
+                <Text>{item.char}</Text>
+                <Tag bg="discord">y</Tag>
+            </Row>
         </div>
     );
 }
 
 export default DragSource(
-    ItemTypes.OPERATION,
+    mathType.operation,
     itemSource,
     COLLECT_DRAG,
 )(BasicOpDrag);

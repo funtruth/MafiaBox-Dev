@@ -49,7 +49,7 @@ export default function PickNumUpdate(props) {
             assign: {
                 ...DEFAULT_ASSIGN,
                 mathType: mathType.operation,
-                mathOperatorType: item.mathOperatorType,
+                mathOperator: item.mathOperator,
                 left: {
                     ...DEFAULT_ASSIGN,
                     mathType: mathType.variable,
@@ -87,7 +87,7 @@ export default function PickNumUpdate(props) {
                     inputText: 'Enter a number',
                     type: 'number',
                     currentValue: chosen ? currentValue.adjust : "",
-                    onSubmit: item.mathOperatorType ? (n) => selectDynamic(item, n) : (n) => setTo(item, n),
+                    onSubmit: item.mathOperator ? (n) => selectDynamic(item, n) : (n) => setTo(item, n),
                 }}
                 icon={item.icon}
                 text={item.title}

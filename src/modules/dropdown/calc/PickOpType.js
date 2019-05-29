@@ -15,8 +15,8 @@ export default function PickOpType(props) {
     //does not use DEFAULT_ASSIGN to keep left/right, value is assumed to be "" already
     const handleSelect = (item) => {
         props.updatePage({
-            mathType: mathType.operation,
-            mathOperatorType: item,
+            math: mathType.operation,
+            mathOperator: item,
         })
         props.showDropdown()
     }
