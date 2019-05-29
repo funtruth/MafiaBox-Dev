@@ -8,12 +8,15 @@ import {
 import { DEFAULT_ASSIGN } from '../common/defaults'
 
 import { VARTYPE_IS_NUM } from '../common/arrows';
+import { usePath } from '../hooks/Hooks'
 
 import PlaygroundDrop from './components/PlaygroundDrop';
 import BasicOpDrag from './components/BasicOpDrag';
 import ValueDrag from './components/ValueDrag';
 
 export default function NumberView(props) {
+    const varInfo = usePath(path)
+    
     let [error, setError] = useState('')
 
     const { attach, attachVar, path, subfieldKey } = props

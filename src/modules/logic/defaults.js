@@ -22,6 +22,7 @@ export const DEFAULT_LOGIC = {
     length
     logic           TODO
     static          unable to be assigned / type cannot be changed
+    string          string object {byId, byIndex}
     updateType
     value           variable value in (foo)(bar) form
     variableTypes   list of variableTypes
@@ -32,6 +33,7 @@ export const VAR_DEFAULTS = {
     display: "",
     length: false,
     static: false,
+    string: "",
     updateType: "",
     value: "",
     variableTypes: "",

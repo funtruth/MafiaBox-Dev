@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
 
 /*useSelector based on path instead of actual selector
+    this is pretty much a dynamic selector.
+
     function example() {
         const state = usePath(path = [])
         ...
@@ -8,12 +10,15 @@ import { useSelector } from 'react-redux'
 */
 
 //recursive pointer function
-function stateByPath(path, state, index=0) {
-    if (!state[path[index]]) return {}
+function stateByPath(path, state, index, defaultReturn) {
+    if (!state[path[index]]) return defaultReturn
     if (path.length - 1 === index) return state[path[index]]
-    return stateByPath(path, state[path[index]], index + 1)
+    return stateByPath(path, state[path[index]], index + 1, defaultReturn)
 }
-
-export default (path) => {
-    return useSelector(state => stateByPath(path, state.page))
+/* @params
+    path => path to state in redux, "slate"
+    defaultReturn => return if nothing is found at path
+*/
+export default (path, defaultReturn = {}) => {
+    return useSelector(state => stateByPath(path, state.page, 0, defaultReturn))
 }

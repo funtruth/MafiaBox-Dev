@@ -342,23 +342,14 @@ export const returnType = {
         key: 'true',
         index: 0,
         title: 'true',
-        icon: 'mdi mdi-code-tags-check',
-        code: 'true',
+        icon: 'mdi mdi-checkbox-marked-circle',
     },
     false: {
         key: 'false',
         index: 1,
         title: 'false',
-        icon: 'mdi mdi-close-box-outline',
-        code: 'false',
+        icon: 'mdi mdi-close-circle',
     },
-    push: {
-        key: 'push',
-        index: 2,
-        title: 'push updates',
-        icon: 'mdi mdi-firebase',
-        code: 'database.update(updates)',
-    }
 }
 
 export const mathType = {

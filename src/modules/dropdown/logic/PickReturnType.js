@@ -4,12 +4,13 @@ import _ from 'lodash'
 import {
     modalType,
     returnType,
+    variableType,
 } from '../../common/types'
 import {
     VAR_DEFAULTS,
 } from '../../common/defaults'
 
-import { codeReturnType } from '../../logic/codetool';
+import { usePath } from '../../hooks/Hooks';
 
 import {
     DropItem,
@@ -17,11 +18,16 @@ import {
  } from '../components/Common';
 
 export default function PickReturnType(props) {
-    const { attach } = props
-    const toastChosen = attach.key === 'toast'
+    const { path } = props
+    const slate = usePath(path)
+
+    const {
+        key:    currentKey,
+        string: toastString,
+    } = slate
 
     const renderItem = (item) => {
-        const chosen = item.key === attach.key
+        const chosen = item.key === currentKey
 
         return (
             <DropItem
@@ -40,17 +46,16 @@ export default function PickReturnType(props) {
             ...VAR_DEFAULTS,
             key: item.key,
             display: item.key,
-            code: codeReturnType(item.key),
-            string: '',
-        })
-        props.showDropdown()
+            string: toastString,
+            variableTypes: [variableType.boolean.key],
+        });
     }
 
     const onToast = () => {
         props.showModal(modalType.editToast, {
-            attach: attach || {},
+            path: [...path, 'string'],
         })
-        props.showDropdown()
+        props.showDropdown();
     }
 
     const data = _.orderBy(returnType, i => i.index)
@@ -59,13 +64,13 @@ export default function PickReturnType(props) {
         <>
             <DropTitle>return types</DropTitle>
             {data.map(renderItem)}
-            <DropTitle>other</DropTitle>
+            <DropTitle>advanced</DropTitle>
             <DropItem
-                chosen={toastChosen}
+                chosen={!!toastString}
                 onClick={onToast}
                 leftIcon="mdi mdi-comment-processing"
                 rightCheck
-                text="toaster"
+                text="show message"
             />
         </>
     )

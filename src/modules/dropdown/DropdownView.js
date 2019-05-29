@@ -16,6 +16,7 @@ import Dropdown from './components/Dropdown';
 import SearchBoard from './update/SearchBoard';
 import DropInput from './components/DropInput'
 
+import DropString from './common/DropString';
 import AccountOptions from './account/AccountOptions'
 import PickProject from './account/PickProject'
 
@@ -79,10 +80,7 @@ import ShowUidSubfield from './update/ShowUidSubfield';
 import ShowRoleSubfields from './update/ShowRoleSubfields'
 import PickRoleTeam from './update/PickRoleTeam';
 import PickGlobalValue from './update/PickGlobalValue';
-
-import PickEventVar from './strings/PickEventVar'
 import PickRecipient from './strings/PickRecipient'
-import PickEventVarProp from './strings/PickEventVarProp';
 
 function DropdownView(props) {
     const { dropdownKeys } = props
@@ -106,6 +104,8 @@ function DropdownView(props) {
         }
         
         switch(renderProps.key) {
+            case dropdownType.dropString:
+                return <DropString {...renderProps}/>
             case dropdownType.accountOptions:
                 return <AccountOptions {...renderProps}/>
             case dropdownType.pickProject:
@@ -228,11 +228,6 @@ function DropdownView(props) {
                 return <PickRoleTeam {...renderProps}/>
             case dropdownType.pickGlobalVar:    
                 return <PickGlobalVar {...renderProps}/>
-
-            case dropdownType.pickEventVar:
-                return <PickEventVar {...renderProps}/>
-            case dropdownType.pickEventVarProp:
-                return <PickEventVarProp {...renderProps}/>
             case dropdownType.pickRecipient:
                 return <PickRecipient {...renderProps}/>
             default:

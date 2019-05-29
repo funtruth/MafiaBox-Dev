@@ -17,11 +17,15 @@ export function genUID(key, repo, suffix='-xxxx') {
     });
 }
 
-//updates a property deep inside an object and returns the entire object
-//WARNING: cannot delete properties (THIS IS A FEATURE)
+/*updates a property deep inside an object and returns the entire object
+    WARNING: cannot delete properties (THIS IS A FEATURE)
+*/
+export const WILD_PATH = "*"
 export function updateByPath(path=[], update, repo, pathIndex=0) {
     const typeofUpdate = typeof update
     const endOfPath = path.length <= pathIndex
+
+    const pathKey = path[pathIndex];
 
     //handling String, Number, and Array updates
     if (endOfPath) {
@@ -37,10 +41,10 @@ export function updateByPath(path=[], update, repo, pathIndex=0) {
         ...(endOfPath ?
             update
             :{
-                [path[pathIndex]]: updateByPath(
+                [pathKey]: updateByPath(
                     path,
                     update,
-                    repo[path[pathIndex]]||{},
+                    repo[pathKey]||{},
                     pathIndex + 1,
                 ),
             }

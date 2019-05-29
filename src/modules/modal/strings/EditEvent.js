@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import './EditEvent.css'
-
-import { stateByPath, genUID } from '../../common/helpers';
 
 import ModalOptions from '../components/ModalOptions'
 import Modal from '../components/Modal'
 import StringView from '../../strings/StringView';
+import EditEventHeader from './components/EditEventHeader';
+import { Separator } from '../../components/Common';
 
-function EditEvent(props) {
-    const { path } = props
+export default function EditEvent(props) {
+    const { path, close } = props
 
     return (
         <Modal
@@ -19,16 +18,10 @@ function EditEvent(props) {
                 height: '60vh',
             }}
         >
-            <StringView path={path}/>
-            <ModalOptions
-                onClose={props.close}
-            />
+            <EditEventHeader path={path}/>
+            <Separator></Separator>
+            <StringView path={[...path, 'string']}/>
+            <ModalOptions onClose={close}/>
         </Modal>
     )
 }
-
-export default connect(
-    state => ({
-        page: state.page,
-    })
-)(EditEvent)

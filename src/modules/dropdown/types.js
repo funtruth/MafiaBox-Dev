@@ -1,4 +1,7 @@
 export const dropdownType = {
+    //common
+    dropString: 'dropdownType/drop-string',
+
     inputValue: 'dropdownType/input-value',
     storyMapLib: 'dropdownType/story-map-lib',
     pageLib: 'dropdownType/page-lib',
@@ -71,9 +74,6 @@ export const dropdownType = {
     showRoleSubfields: 'dropdownType/show-role-subfields',
     pickRoleTeam: 'dropdownType/pick-role-team',
     pickGlobalVar: 'dropdownType/pick-global-var',
-
-    pickEventVar: 'dropdownType/pick-event-var',
-    pickEventVarProp: 'dropdownType/pick-event-var-prop',
     pickRecipient: 'dropdownType/pick-recipient',
 }
 
