@@ -27,7 +27,6 @@ export const dropdownType = {
 
     //board
     editPlayerNum: 'dropdownType/edit-player-num',
-    editTitle: 'dropdownType/edit-patch-name',
     patchItemOptions: 'dropdownType/patch-item-options',
     roleItemOptions: 'dropdownType/role-item-options',
 

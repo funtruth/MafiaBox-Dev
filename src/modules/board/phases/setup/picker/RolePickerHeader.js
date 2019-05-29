@@ -91,10 +91,9 @@ function RolePickerHeader(props) {
             sizes={['xxs', 'xl']} y="c"
         >
             <DropClick
-                dropdown={dropdownType.editTitle}
+                dropdown={dropdownType.dropString}
                 params={{
-                    path: ['modeRepo', modeKey, 'roleSetup', setupKey],
-                    attach: draftInfo,
+                    path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'title'],
                 }}
                 style={{
                     paddingRight: 10,

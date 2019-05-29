@@ -41,10 +41,9 @@ function ModeHeader(props) {
     return (
         <Row className="--slide-bottom" bg="blackish" color="whitish" sizes={['xs', 'xl']} y="c">
             <DropClick
-                dropdown={dropdownType.editTitle}
+                dropdown={dropdownType.dropString}
                 params={{
-                    path,
-                    attach: modeInfo,
+                    path: [...path, 'title'],
                 }}
                 style={{
                     paddingRight: 10,

@@ -28,10 +28,9 @@ function EventRow(props) {
             }}
         >
             <DropClick
-                dropdown={dropdownType.editTitle}
+                dropdown={dropdownType.dropString}
                 params={{
-                    path: [...path, 'events', eventKey],
-                    attach: item,
+                    path: [...path, 'events', eventKey, 'title'],
                 }}
                 style={{
                     flex: 0.3,

@@ -30,10 +30,9 @@ function ModeSetupHeader(props) {
     return (
         <Row bg="blackish" color="whitish" size="s" y="c">
             <DropClick
-                dropdown={dropdownType.editTitle}
+                dropdown={dropdownType.dropString}
                 params={{
-                    path: ['modeRepo', modeKey],
-                    attach: modeInfo,
+                    path: ['modeRepo', modeKey, 'title'],
                 }}
                 style={{
                     paddingRight: 10,

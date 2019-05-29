@@ -21,7 +21,6 @@ import AccountOptions from './account/AccountOptions'
 import PickProject from './account/PickProject'
 
 import EditPlayerNum from './board/EditPlayerNum'
-import EditTitle from './board/EditTitle';
 import PatchItemOptions from './board/PatchItemOptions'
 import RoleItemOptions from './board/RoleItemOptions'
 
@@ -113,8 +112,6 @@ function DropdownView(props) {
 
             case dropdownType.editPlayerNum:
                 return <EditPlayerNum {...renderProps}/>
-            case dropdownType.editTitle:
-                return <EditTitle {...renderProps}/>
             case dropdownType.patchItemOptions:
                 return <PatchItemOptions {...renderProps}/>
             case dropdownType.roleItemOptions:

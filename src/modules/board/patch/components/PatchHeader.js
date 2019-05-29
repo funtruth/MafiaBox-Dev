@@ -69,10 +69,9 @@ function PatchHeader(props) {
     return (
         <Row bg="blackish" color="whitish" y="c" sizes={['xs', 'xl']}>
             <DropClick
-                dropdown={dropdownType.editTitle}
+                dropdown={dropdownType.dropString}
                 params={{
-                    path: ['storyRepo', storyKey],
-                    attach: storyInfo,
+                    path: ['storyRepo', storyKey, 'title'],
                 }}
                 style={{
                     paddingRight: 10,
