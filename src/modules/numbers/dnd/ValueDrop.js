@@ -9,10 +9,10 @@ import { DropClick, Tag } from '../../components/Common';
 
 const itemTarget = {
     drop(props, monitor) {
-        const { mathKey } = props
+        const { mathItem, position } = props
         const item = monitor.getItem()
-        
-        props.changeValue(mathKey, item)
+
+        props.nestValue(mathItem, item, position)
     }
 }
 
@@ -28,13 +28,11 @@ function ValueDrop(props) {
     
     return connectDropTarget(
         <div>
-            <DropClick
-                style={{
-                    color: isOver && '#fff',
-                    backgroundColor: isOver && '#6279CA',
-                }}
-            >
-                <Tag>
+            <DropClick>
+                <Tag
+                    color={isOver ? 'white' : 'whitish'}
+                    bg={isOver ? 'purple' : 'charcoal'}
+                >
                     {children}
                 </Tag>
             </DropClick>

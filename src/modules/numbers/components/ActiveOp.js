@@ -8,8 +8,8 @@ import { Text } from '../../components/Common'
 
 export default function ActiveOp(props) {
     let { source, mathKey, mathRepo } = props
-
-    if (!source) {
+    
+    if (!source || !mathRepo) {
         return (
             <div className="empty-text">
                 Drag Operation or Value Here
@@ -17,9 +17,16 @@ export default function ActiveOp(props) {
         )
     }
     
-    if (!mathRepo || !mathKey || !mathRepo[mathKey]) {
+    /*
+        |[ ] () [ ]|
+          ^
+        @params of empty ValueDrag
+            props.mathItem, of the parent BasicOp
+            props.position
+    */
+    if (!mathKey) {
         return (
-            <ValueDrop {...props} position="none">
+            <ValueDrop {...props}>
                 ...
             </ValueDrop>
         )
@@ -31,18 +38,34 @@ export default function ActiveOp(props) {
     switch(math) {
         case mathType.value:
             return (
-                <ValueDrop {...props} mathKey={mathKey}>
-                    {value}
+                <ValueDrop
+                    {...props}
+                    mathItem={mathItem}
+                >
+                    {value.display}
                 </ValueDrop>
             )
         case mathType.operation:
             return (
-                <BasicOpDrop {...props} mathKey={mathKey}>
-                    <ActiveOp {...props} mathKey={left} position="left"/>
+                <BasicOpDrop
+                    {...props}
+                    mathItem={mathItem}
+                >
+                    <ActiveOp
+                        {...props}
+                        mathItem={mathItem}
+                        mathKey={left}
+                        position="left"
+                    />
                     <Text>
                         {mathOperatorType[mathOperator].char}
                     </Text>
-                    <ActiveOp {...props} mathKey={right} position="right"/>
+                    <ActiveOp
+                        {...props}
+                        mathItem={mathItem}
+                        mathKey={right}
+                        position="right"
+                    />
                 </BasicOpDrop>
             )
         default:

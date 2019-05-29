@@ -35,11 +35,11 @@ function collect(connect, monitor) {
 }
   
 function PlaygroundSideDrop(props) {
-    const { connectDropTarget, isOver, side, assign } = props
+    const { connectDropTarget, isOver, side, source } = props
     
     //if no math has been added, return null
     //this is because we want to show the entire PlaygroundDrop instead of sides
-    if (!assign || !assign.mathType) return null
+    if (!source) return null
 
     return connectDropTarget(
         <div

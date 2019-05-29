@@ -5,6 +5,11 @@ import { mathType } from '../../common/types';
 
 import ActiveOp from '../components/ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
+import {
+    Row,
+    Tag,
+    Text,
+} from '../../components/Common';
 
 const itemTarget = {
     drop(props, monitor) {
@@ -36,20 +41,32 @@ function PlaygroundDrop(props) {
     const highlight = isOver && canDrop
 
     return connectDropTarget(
-        <div className="playground" style={{ backgroundColor: highlight && 'rgba(70, 73, 78, 1)' }}>
-            <PlaygroundSideDrop side="left" {...props}/>
-            <PlaygroundSideDrop side="right" {...props}/>
-            <div className="playground-title" style={{ color: highlight && '#fff' }}>set variable to</div>
-            <div className="playground-erase">
-                <div onClick={props.resetWorkspace} style={{ marginRight: 8, cursor: 'pointer' }}>
-                    <i className="mdi mdi-reload" style={{ marginRight: 2 }}></i>
-                    reset
-                </div>
-                <div onClick={props.clearWorkspace} style={{ cursor: 'pointer' }}>
-                    <i className="mdi mdi-eraser" style={{ marginRight: 2 }}></i>
-                    clear
-                </div>
-            </div>
+        <div
+            className="playground"
+            style={{backgroundColor: highlight && 'rgba(70, 73, 78, 1)'}}
+        >
+            <PlaygroundSideDrop {...props} side="left"/>
+            <PlaygroundSideDrop {...props} side="right"/>
+            <Text
+                className="playground-title"
+                color={highlight ? 'white' : 'whitish'}
+            >
+                Value
+            </Text>
+            <Row className="playground-erase">
+                <Tag
+                    onClick={props.resetWorkspace}
+                    icon="mdi mdi-reload"
+                >
+                    Reset
+                </Tag>
+                <Tag
+                    onClick={props.clearWorkspace}
+                    icon="mdi mdi-eraser"
+                >
+                    Clear
+                </Tag>
+            </Row>
             <ActiveOp {...props} mathKey={source}/>
         </div>
     );

@@ -5,13 +5,13 @@ import { mathType } from '../../common/types';
 
 const itemTarget = {
     drop(props, monitor) {
-        const { mathKey } = props
+        const { mathItem } = props
         
         const didDrop = monitor.didDrop()
         if (didDrop) return;
 
         const item = monitor.getItem()
-        props.changeValue(mathKey, item)
+        props.changeValue(mathItem, item)
     }
 }
 
@@ -24,6 +24,7 @@ function collect(connect, monitor) {
   
 function BasicOpDrop(props) {
     const { connectDropTarget, isOver, children } = props
+
     return connectDropTarget(
         <div className="basic-op" style={{ backgroundColor: isOver && '#6279CA' }}>
             {children}

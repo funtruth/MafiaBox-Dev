@@ -14,7 +14,7 @@ export default function EditNumber(props) {
                 maxWidth: '90vw',
             }}
         >
-            <NumberView {...props}/>
+            <NumberView path={path}/>
             <ModalOptions onClose={close}/>
         </Modal>
     )

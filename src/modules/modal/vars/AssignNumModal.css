@@ -48,25 +48,14 @@
     align-items: center;
 }
 .playground-title {
-    font: 600 11px Segoe UI;
-    color: #aaa;
-    letter-spacing: 0.6px;
-    padding: 0px 14px 6px 14px;
-    text-transform: uppercase;
     position: absolute;
     top: 8px;
     left: 0px;
 }
 .playground-erase {
-    font: 600 11px Segoe UI;
-    color: #aaa;
-    padding: 0px 14px 6px 14px;
-    text-transform: uppercase;
     position: absolute;
     top: 8px;
     right: 0px;
-    display: flex;
-    flex-direction: row;
 }
 .playground-children {
     position: absolute;

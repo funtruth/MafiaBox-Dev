@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 import { useDispatch } from 'react-redux'
 
 import { DEFAULT_ASSIGN } from '../logic/defaults';
@@ -34,6 +33,7 @@ export default function NumberView({path}){
     const clearWorkspace = () => console.log('clear')
     const resetWorkspace = () => console.log('reset')
 
+    //dropping something into PlaygroundDrop
     const initValue = (item) => {
         const newKey = genUID('math', mathRepo)
 
@@ -54,9 +54,10 @@ export default function NumberView({path}){
             ...item,
         }))
     }
+    //dropping BasicOp into ValueDrop inside a BasicOp
     const nestValue = (restItem, dragItem, position) => {
         const newKey = genUID('math', mathRepo)
-
+        console.log({restItem, dragItem, position})
         dispatch(updateGeneral([...path, 'byId'], {
             [restItem.key]: {
                 ...restItem,

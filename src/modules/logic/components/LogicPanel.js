@@ -23,7 +23,6 @@ export default function LogicPanel(props) {
 
     if (pageKey ) console.warn('pageKey is being used here.', logicItem)
     if (fieldKey) console.warn('fieldKey is being used here.', logicItem)
-    if (subfieldKey) console.warn('subfieldKey is being used here.', logicItem)
 
     return (
         <DropClick

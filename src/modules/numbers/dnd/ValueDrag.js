@@ -1,19 +1,29 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { mathType } from '../../common/types';
+import { mathType, variableType } from '../../common/types';
+import { VAR_DEFAULTS } from '../../logic/defaults';
 
 import { COLLECT_DRAG } from '../../common/arrows';
 
 import {
     Tag,
 } from '../../components/Common';
+import { parseJS } from '../../logic/proptool';
 
 const itemSource = {
     beginDrag(props) {
+        const { item, isWild } = props
+
         return {
-            mathType: props.mathType,
-            item: props.item,
+            math: mathType.value,
+            value: {
+                ...VAR_DEFAULTS,
+                display: parseJS(item.key),
+                value: item.key,
+                variableTypes: [variableType.number.key],
+                wildcardValue: isWild ? item.key : "",
+            },
         }
     }
 }
