@@ -7,6 +7,7 @@ import LogicNewVars from '../../logic/components/LogicNewVars'
 import LogicView from '../../logic/LogicView';
 import ModalOptions from '../components/ModalOptions';
 import ModalCheckSave from '../components/ModalCheckSave';
+import { Text } from '../../components/Common';
 
 export default function EditTrigger(props) {
     const { path } = props
@@ -21,7 +22,7 @@ export default function EditTrigger(props) {
                 }}
             >
                 <div className="border-right -t-m">
-                    <div className="dashboard-section-title">NEW VARIABLES</div>
+                    <Text>NEW VARIABLES</Text>
                     <div className="-x-p">
                         <LogicNewVars newVars={triggerNewVars}/>
                     </div>

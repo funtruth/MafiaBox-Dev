@@ -21,12 +21,18 @@ import EditLogic from './page/EditLogic';
 import PublishWithSource from './page/PublishWithSource';
 
 import EditTrigger from './trigger/EditTrigger'
-import EditEvent from './strings/EditEvent'
-import EditToast from './strings/EditToast'
 import EditPriority from './priority/EditPriority'
 import RemovePriorityRow from './priority/RemovePriorityRow'
-import EditNumber from './vars/EditNumber'
 import PickCharImage from './image/PickCharImage'
+
+//StringViews
+import EditEvent from './strings/EditEvent'
+import EditToast from './strings/EditToast'
+
+//NumberViews
+import AssignNumber from './vars/AssignNumber'
+import EditNumber from './vars/EditNumber'
+
 
 export default function ModalKeys(props) {
     switch(props.key) {
@@ -63,18 +69,25 @@ export default function ModalKeys(props) {
 
         case modalType.editTrigger:
             return <EditTrigger {...props}/>
-        case modalType.editEvent:
-            return <EditEvent {...props}/>
-        case modalType.editToast:
-            return <EditToast {...props}/>
         case modalType.editPriority:    
             return <EditPriority {...props}/>
         case modalType.removePriorityRow:
             return <RemovePriorityRow {...props}/>
-        case modalType.editNumber:
-            return <EditNumber {...props}/>
         case modalType.pickCharacterImage:
             return <PickCharImage {...props}/>
+        
+        //StringViews
+        case modalType.editEvent:
+            return <EditEvent {...props}/>
+        case modalType.editToast:
+            return <EditToast {...props}/>
+        
+        //NumberViews
+        case modalType.assignNumber:
+            return <AssignNumber {...props}/>
+        case modalType.editNumber:
+            return <EditNumber {...props}/>
+
         default:
             return null
     }

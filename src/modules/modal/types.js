@@ -18,11 +18,15 @@ export const modalType = {
 
     saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
-    editEvent: 'modalType/edit-event',
-    editToast: 'modalType/edit-toast',
     editPriority: 'modalType/edit-priority',
     removePriorityRow: 'modalType/remove-priority-row',
+    pickCharacterImage: 'modalType/pick-character-image',
+    
+    //StringViews
+    editEvent: 'modalType/edit-event',
+    editToast: 'modalType/edit-toast',
+
+    //NumberViews
     assignNumber: 'modalType/assign-number',
     editNumber: 'modalType/edit-number',
-    pickCharacterImage: 'modalType/pick-character-image',
 }

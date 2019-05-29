@@ -17,34 +17,6 @@
     border: 2px solid #ddd;
 }
 
-.dashboard-edit {
-    display: flex;
-    flex-direction: column;
-}
-
-.dashboard-item {
-    border-radius: 4px;
-    background-color: rgba(47, 49, 54, 1);
-    color: #bbb;
-    font: 600 23px Segoe UI;
-    margin-bottom: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 1.7em;
-    width: 1.7em;
-}
-
-.dashboard-item:hover {
-    background-color: rgba(75, 75, 80, 1);
-}
-
-.dashboard-item-title {
-    color: #d6d6d6;
-    font: 600 13px Segoe UI;
-}
-
 .dashboard-input {
     border: none;
     padding: 10px 10px;
@@ -57,51 +29,13 @@
     overflow-y: hidden;
     resize: none;
 }
+
 .dashboard-input:focus {
     outline: none;
-}
-
-.text-box {
-  border-radius: 2px;
-  padding: 10px 10px;
-  font: 450 14px Segoe UI;
-  color: #c6c6c6;
-  align-content: flex-start;
-}
-
-.text-box > pre {
-    font: 450 14px Segoe UI;
-    color: #c6c6c6;
-    margin: 0px;
-}
-
-.string-edit-box {
-    min-height: 6vh;
-    max-height: 10vh;
-    overflow-y: scroll;
-    margin: 0px 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-.dashboard-section-title {
-    font: 600 13px Segoe UI;
-    color: #d6d6d6;
-    padding: 0px 0px 6px 0px;
 }
 
 .empty-text {
     padding: 4px 15px;
     color: #666666;
     font: 500 13px Segoe UI;
-}
-
-.string-var {
-    color: #eee;
-    border-radius: 4px;
-    padding: 0px 6px;
-    font: 300 13px Segoe UI;
-    align-self: flex-start;
-    background-color: rgba(40, 43, 48,1);
 }
