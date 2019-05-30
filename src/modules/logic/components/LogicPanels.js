@@ -42,9 +42,9 @@ export default function LogicPanels(props) {
                             />
                             <LogicPanel
                                 {...props}
-                                subfieldKey="var2"
+                                subfieldKey="compareVar"
                                 placeholder="variable"
-                                path={[...path, 'data', 'var2']}
+                                path={[...path, 'data', 'compareVar']}
                                 dropdown={dropdownType.pickVarWithType}
                             />
                         </Row>

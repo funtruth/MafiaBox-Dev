@@ -72,6 +72,9 @@ import PickRoleTeam from './update/PickRoleTeam';
 import PickGlobalValue from './update/PickGlobalValue';
 import PickRecipient from './strings/PickRecipient'
 
+//NumberViews
+import PickNumValue from './vars/PickNumValue';
+
 export default function DropdownKeys(props) {
     switch(props.key) {
         case dropdownType.dropString:
@@ -196,6 +199,10 @@ export default function DropdownKeys(props) {
             return <PickGlobalVar {...props}/>
         case dropdownType.pickRecipient:
             return <PickRecipient {...props}/>
+        
+        //NumberViews
+        case dropdownType.pickNumValue:
+            return <PickNumValue {...props}/>
         default:
             return null
     }

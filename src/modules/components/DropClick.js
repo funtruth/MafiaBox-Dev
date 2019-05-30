@@ -4,6 +4,11 @@ import './DropClick.css'
 
 import { showDropdown } from '../dropdown/DropdownReducer'
 import { showModal } from '../modal/ModalReducer'
+import { checkForKeys } from '../common/arrows';
+
+const RESERVED_PARAMS = {
+    position: "",
+}
 
 export default function DropClick(props) {
     const dispatch = useDispatch()
@@ -26,8 +31,17 @@ export default function DropClick(props) {
         className,
     ].join(' ')
 
+    const check = () => {
+        const keys = checkForKeys(params, RESERVED_PARAMS)
+        if (keys) {
+            console.warn(keys.join(","), "are reserved keys.")
+        }
+    }
+
     const handleClick = (e) => {
         if (disabled) return;
+        check();
+
         if (onClick) {
             onClick(e)
             return;
@@ -40,15 +54,19 @@ export default function DropClick(props) {
             dispatch(showDropdown(dropdown, e, params, 0, place))
             return;
         }
+        
         console.warn('no modal or dropdownType requested.')
     }
 
     const handleRightClick = (e) => {
         if (disabled) return;
+        check();
+
         if (onRightClick) {
             onRightClick(e)
             return;
         }
+
         dispatch(showDropdown(rightDropdown, e, params, 0, place))
     }
 

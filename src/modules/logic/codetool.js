@@ -3,6 +3,7 @@ import {
 } from '../common/types'
 import { parseJS } from './proptool'
 
+//TODO this whole file is garbage now :)
 export function orderOfOp(assign) {
     if (!assign) return ''
     

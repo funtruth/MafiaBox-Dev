@@ -17,7 +17,7 @@ export default function PickAssignableVar(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            mathType: mathType.value.key,
+            math: mathType.value.key,
             value: item,
         })
         props.showDropdown()

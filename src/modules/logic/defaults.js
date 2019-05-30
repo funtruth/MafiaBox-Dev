@@ -61,7 +61,12 @@ export const DEFAULT_VAR_ID = {
     assign: '',
 }
 
-/* @params logicItem.data.assign
+/* @params logicItem.data.assign.byId.mathKey
+    logicItem.data.assign = {
+        byId: "",
+        source: "",
+    }
+
     mathType => is this a value (value)? or an operation (value)(operator)(value)
     mathOperator => just the mathematical operator (+-/*%)
 */

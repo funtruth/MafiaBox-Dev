@@ -34,7 +34,7 @@ import {
     ReplaceWildcard
 */
 export default function RelatedVars(props) {
-    const { variableTypes, attachVar, onClick } = props
+    const { variableTypes, attachVar, path, onClick } = props
 
     const [tameVars, wildVars] = useVarType(variableTypes, attachVar)
 
@@ -68,6 +68,7 @@ export default function RelatedVars(props) {
     //Advanced options
     const handleCalculator = () => {
         props.showModal(modalType.editNumber, {
+            path: [...path, 'assign'],
             //editNumber correlated to NumberView right now which is incorrect
         })
         props.showDropdown();
@@ -86,7 +87,6 @@ export default function RelatedVars(props) {
     
     const handleString = () => {
         props.showModal(modalType.editNumber, {
-
         })
         props.showDropdown();
     }

@@ -1,5 +1,4 @@
 import React from 'react'
-import './AssignNumModal.css'
 
 import Modal from '../components/Modal'
 import ModalOptions from '../components/ModalOptions'

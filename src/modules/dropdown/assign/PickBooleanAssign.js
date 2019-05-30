@@ -21,7 +21,7 @@ export default function PickBooleanAssign(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_ASSIGN,
-            mathType: mathType.value,
+            math: mathType.value,
             value: item.key,
         })
         props.showDropdown()

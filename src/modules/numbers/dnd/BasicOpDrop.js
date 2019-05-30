@@ -11,7 +11,7 @@ const itemTarget = {
         if (didDrop) return;
 
         const item = monitor.getItem()
-        props.changeValue(mathItem, item)
+        props.changeValue(mathItem.key, item)
     }
 }
 
@@ -33,7 +33,7 @@ function BasicOpDrop(props) {
 }
 
 export default DropTarget(
-    mathType.operation,
+    [mathType.operation, mathType.value],
     itemTarget,
     collect
 )(BasicOpDrop);

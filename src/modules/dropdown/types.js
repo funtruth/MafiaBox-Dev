@@ -73,6 +73,9 @@ export const dropdownType = {
     pickRoleTeam: 'dropdownType/pick-role-team',
     pickGlobalVar: 'dropdownType/pick-global-var',
     pickRecipient: 'dropdownType/pick-recipient',
+
+    //NumberViews
+    pickNumValue: 'dropdownType/pick-num-value',
 }
 
 export const fuseType = {

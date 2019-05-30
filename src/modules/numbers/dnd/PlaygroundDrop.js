@@ -41,33 +41,34 @@ function PlaygroundDrop(props) {
     const highlight = isOver && canDrop
 
     return connectDropTarget(
-        <div
-            className="playground"
-            style={{backgroundColor: highlight && 'rgba(70, 73, 78, 1)'}}
-        >
-            <PlaygroundSideDrop {...props} side="left"/>
-            <PlaygroundSideDrop {...props} side="right"/>
-            <Text
-                className="playground-title"
-                color={highlight ? 'white' : 'whitish'}
-            >
-                Value
-            </Text>
-            <Row className="playground-erase">
-                <Tag
-                    onClick={props.resetWorkspace}
-                    icon="mdi mdi-reload"
+        <div>
+            <Row>
+                <Text
+                    color={highlight ? 'white' : 'whitish'}
+                    style={{
+                        marginRight: 'auto',
+                    }}
                 >
-                    Reset
-                </Tag>
+                    Value
+                </Text>
                 <Tag
-                    onClick={props.clearWorkspace}
+                    onClick={props.clearSlate}
                     icon="mdi mdi-eraser"
                 >
                     Clear
                 </Tag>
             </Row>
-            <ActiveOp {...props} mathKey={source}/>
+            <div
+                className="playground"
+                style={{
+                    backgroundColor: highlight && 'rgba(70, 73, 78, 1)',
+                    padding: '20px 0px',
+                }}
+            >
+                <PlaygroundSideDrop {...props} side="left"/>
+                <PlaygroundSideDrop {...props} side="right"/>
+                <ActiveOp {...props} mathKey={source}/>
+            </div>
         </div>
     );
 }

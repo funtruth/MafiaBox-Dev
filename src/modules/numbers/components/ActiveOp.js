@@ -37,6 +37,7 @@ export default function ActiveOp(props) {
 
     switch(math) {
         case mathType.value:
+        case mathType.constant:
             return (
                 <ValueDrop
                     {...props}

@@ -1,4 +1,5 @@
 import React from 'react'
+import './NumberView.css'
 import { useDispatch } from 'react-redux'
 
 import { DEFAULT_ASSIGN } from '../logic/defaults';
@@ -30,8 +31,13 @@ export default function NumberView({path}){
         source,
     } = usePath(path)
 
-    const clearWorkspace = () => console.log('clear')
-    const resetWorkspace = () => console.log('reset')
+    //clear all math
+    const clearSlate = () => {
+        dispatch(updateGeneral(path, {
+            byId: "",
+            source: "",
+        }))
+    }
 
     //dropping something into PlaygroundDrop
     const initValue = (item) => {
@@ -48,16 +54,38 @@ export default function NumberView({path}){
             source: newKey,
         }))
     }
+
+    //dropping BasicOp onto BasicOp
     const changeValue = (mathKey, item) => {
         dispatch(updateGeneral([...path, 'byId', mathKey], {
             ...DEFAULT_ASSIGN,
+            key: mathKey,
             ...item,
         }))
     }
-    //dropping BasicOp into ValueDrop inside a BasicOp
+
+    //wrapping (everything) with a BasicOp
+    const wrapValue = (item, position) => {
+        const newKey = genUID('math', mathRepo)
+
+        dispatch(updateGeneral(path, {
+            source: newKey,
+            byId: {
+                ...mathRepo,
+                [newKey]: {
+                    ...DEFAULT_ASSIGN,
+                    ...item,
+                    key: newKey,
+                    [position]: source,
+                },
+            },
+        }))
+    }
+
+    //dropping something into ValueDrop inside a BasicOp
     const nestValue = (restItem, dragItem, position) => {
         const newKey = genUID('math', mathRepo)
-        console.log({restItem, dragItem, position})
+        
         dispatch(updateGeneral([...path, 'byId'], {
             [restItem.key]: {
                 ...restItem,
@@ -75,22 +103,18 @@ export default function NumberView({path}){
         mathRepo,
         source,
         path,
+        clearSlate,
         initValue,
         changeValue,
         nestValue,
+        wrapValue,
     }
 
     return (
-        <div>
-            <PlaygroundDrop
-                {...mainProps}
-                clearWorkspace={clearWorkspace}
-                resetWorkspace={resetWorkspace}
-            />
+        <>
+            <PlaygroundDrop {...mainProps}/>
             <Separator></Separator>
-            <NumberDetailer
-                {...mainProps}
-            />
-        </div>
+            <NumberDetailer {...mainProps}/>
+        </>
     )
 }

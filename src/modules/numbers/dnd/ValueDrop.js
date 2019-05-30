@@ -2,7 +2,7 @@ import React from 'react'
 import { DropTarget } from 'react-dnd'
 
 import {
-    mathType,
+    mathType, dropdownType,
 } from '../../common/types'
 
 import { DropClick, Tag } from '../../components/Common';
@@ -24,18 +24,66 @@ function collect(connect, monitor) {
 }
 
 function ValueDrop(props) {
-    const { connectDropTarget, isOver, children } = props
-    
-    return connectDropTarget(
-        <div>
-            <DropClick>
-                <Tag
-                    color={isOver ? 'white' : 'whitish'}
-                    bg={isOver ? 'purple' : 'charcoal'}
+    const { connectDropTarget, isOver, children,
+        path, mathKey, mathItem, position } = props
+
+    const renderItem = () => {
+        //empty
+        if (!mathKey) {
+            return (
+                <DropClick
+                    dropdown={dropdownType.pickNumValue}
+                    params={{
+                        path: [...path, 'byId'],
+                        mathKey: '',
+                        item: mathItem,
+                        side: position,
+                    }}
                 >
-                    {children}
-                </Tag>
-            </DropClick>
+                    <Tag
+                        color={isOver ? 'white' : 'whitish'}
+                        bg={isOver ? 'purple' : 'charcoal'}
+                    >
+                        {children}
+                    </Tag>
+                </DropClick>
+            )
+        }
+
+        if (mathItem.math === mathType.constant) {
+            return (
+                <DropClick
+                    dropdown={dropdownType.pickNumValue}
+                    params={{
+                        path: [...path, 'byId', mathKey, 'value'],
+                        mathKey,
+                        item: mathItem,
+                        side: position,
+                    }}
+                >
+                    <Tag
+                        color={isOver ? 'white' : 'whitish'}
+                        bg={isOver ? 'purple' : 'charcoal'}
+                    >
+                        {children}
+                    </Tag>
+                </DropClick>
+            )
+        }
+
+        return (
+            <Tag
+                color={isOver ? 'white' : 'whitish'}
+                bg={isOver ? 'purple' : 'charcoal'}
+            >
+                {children}
+            </Tag>
+        );
+    }
+
+    return connectDropTarget(
+        <div style={{position: 'relative'}}>
+            {renderItem()}
         </div>
     );
 }

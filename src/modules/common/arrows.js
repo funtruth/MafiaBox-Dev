@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { variableType } from './types'
 
 export const VARTYPE_FILTER = (type) => i => {
@@ -43,4 +44,11 @@ export function COLLECT_DRAG(connect, monitor) {
 
 export function getVarTypeIcon(types) {
     return variableType[types[0]].icon;
+}
+
+export function checkForKeys(a, b) {
+    var aKeys = Object.keys(a);
+    var bKeys = Object.keys(b);
+    var xKeys = _.intersection(aKeys, bKeys)
+    return xKeys.length > 0 ? xKeys : '';
 }
