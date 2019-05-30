@@ -1,16 +1,19 @@
 import React from 'react'
+import _ from 'lodash'
 
 import { DropClick, LogicButton } from '../../components/Common';
 
 export default function LogicPanel(props) {
     const {
-        pageKey, fieldKey, subfieldKey,
-        logicItem,
+        pageKey, fieldKey,
+        subfieldKey,
         vars,
+        logicItem,
         placeholder,
         dropdown,
         modal,
         path,
+        scope,
         includeSubpath,
     } = props
 
@@ -21,20 +24,20 @@ export default function LogicPanel(props) {
 
     const { display } = dataProp
 
-    if (pageKey ) console.warn('pageKey is being used here.', logicItem)
+    if (pageKey)  console.warn('pageKey is being used here.', logicItem)
     if (fieldKey) console.warn('fieldKey is being used here.', logicItem)
 
+    const scopedVars = _.filter(vars, i => !i.scope || scope.includes(i.scope))
+    
     return (
         <DropClick
             dropdown={dropdown}
             modal={modal}
             params={{
-                pageKey,
-                fieldKey,
                 subfieldKey,
                 currentValue: dataProp,
                 attach: data,
-                attachVar: vars,
+                scopedVars,
                 logicItem,
                 path,
                 ignoreSubpath: !includeSubpath,

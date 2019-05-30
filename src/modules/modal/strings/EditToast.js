@@ -6,7 +6,7 @@ import StringView from '../../strings/StringView';
 import EditToastHeader from './components/EditToastHeader';
 
 export default function EditToast(props) {
-    const { path, close } = props
+    const { path, close, scopedVars } = props
 
     return (
         <Modal
@@ -17,7 +17,10 @@ export default function EditToast(props) {
             }}
         >
             <EditToastHeader {...props}/>
-            <StringView path={[...path, 'string']}/>
+            <StringView
+                path={[...path, 'string']}
+                scopedVars={scopedVars}
+            />
             <ModalOptions onClose={close}/>
         </Modal>
     )

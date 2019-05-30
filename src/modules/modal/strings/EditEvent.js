@@ -8,7 +8,7 @@ import EditEventHeader from './components/EditEventHeader';
 import { Separator } from '../../components/Common';
 
 export default function EditEvent(props) {
-    const { path, close } = props
+    const { path, close, scopedVars } = props
 
     return (
         <Modal
@@ -20,7 +20,10 @@ export default function EditEvent(props) {
         >
             <EditEventHeader path={path}/>
             <Separator></Separator>
-            <StringView path={[...path, 'string']}/>
+            <StringView
+                path={[...path, 'string']}
+                scopedVars={scopedVars}
+            />
             <ModalOptions onClose={close}/>
         </Modal>
     )

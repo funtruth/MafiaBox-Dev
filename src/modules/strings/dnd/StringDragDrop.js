@@ -26,6 +26,7 @@ const itemTarget = {
         let wsClone = Object.assign({}, workspace)
         let wsString = wsClone.eventArr[eventIndex].stringArr
 
+        //this is outdated garbo
         switch(itemType) {
             case DRAGGABLE_TYPE.color:
                 wsString[index].color = item.hexcode

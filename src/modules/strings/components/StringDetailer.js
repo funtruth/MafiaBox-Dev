@@ -11,13 +11,13 @@ import StringVarDrag from '../dnd/StringVarDrag';
 import { Body, Row, Separator, Text } from '../../components/Common';
 
 export default function EventDetailer(props) {
-    const { attachVar } = props
+    const { scopedVars } = props
 
     const colors = _.toArray(APP_PALETTE)
 
     const [tameVars, wildVars] = useVarType(
         [variableType.number.key, variableType.string.key],
-        attachVar,
+        scopedVars,
     )
 
     return (

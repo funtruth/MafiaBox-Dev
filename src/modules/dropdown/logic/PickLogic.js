@@ -18,6 +18,7 @@ export default function PickLogic(props) {
     let handleSelect = (item) => {
         props.updatePage({
             ...DEFAULT_LOGIC,
+            key: logicItem.key,
             logicType: item.key,
         })
         props.showDropdown()

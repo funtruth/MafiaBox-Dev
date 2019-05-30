@@ -11,7 +11,7 @@ import LogicAddBelow from '../components/LogicAddBelow'
 import LogicDetails from '../components/LogicDetails'
 
 export default function LogicBlock(props) {
-    const { index, logicRepo, logicMap, logicKey, parentKey, path } = props
+    const { index, logicRepo, logicMap, logicKey, parentKey, path, scope } = props
 
     if (!logicKey && !logicMap) {
         return (
@@ -73,6 +73,7 @@ export default function LogicBlock(props) {
                                 index={index}
                                 logicKey={childKey}
                                 parentKey={logicKey}
+                                scope={[...scope, childKey]}
                             />
                     ))}
                 </Body>

@@ -7,6 +7,7 @@ import {
     declare => any new variables
 */
 export const DEFAULT_LOGIC = {
+    key: "",
     byIndex: "",
     data: "",
     logicType: "",
@@ -85,20 +86,6 @@ export const triggerNewVars = {
         subfield: 'visitor',
         fields: [
             'visitor',
-        ],
-        fieldLength: 1,
-        variableTypes: [
-            variableType.uid.key,
-        ],
-    },
-}
-
-export const eventPickerVars = {
-    "(player)": {
-        key: '(player)',
-        subfield: 'player',
-        fields: [
-            'player',
         ],
         fieldLength: 1,
         variableTypes: [

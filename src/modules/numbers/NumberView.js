@@ -24,7 +24,7 @@ VISUALS
     mathType=operator
         |[value] (operator) [value]|
 */
-export default function NumberView({path}){
+export default function NumberView({path, scopedVars}){
     const dispatch = useDispatch();
     const {
         byId: mathRepo,
@@ -118,6 +118,7 @@ export default function NumberView({path}){
         mathRepo,
         source,
         path,
+        scopedVars,
         clearSlate,
         initValue,
         changeValue,

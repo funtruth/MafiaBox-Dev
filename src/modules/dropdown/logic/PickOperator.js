@@ -29,6 +29,7 @@ export default function PickOperator(props) {
         const childKey = genUID('logic', logicRepo)
         props.updatePage({
             ...DEFAULT_LOGIC,
+            key: logicItem.key,
             logicType: hoverKey,
             operatorType: item.key,
             byIndex: byIndex || [childKey],

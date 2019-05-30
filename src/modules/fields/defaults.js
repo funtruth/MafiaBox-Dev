@@ -60,8 +60,7 @@ export const DEFAULT_GAME_CHOICE = {
     title           
     boardType
     readOnly        field data is not changeable
-    default         default value of the field
-    vars            any special vars available
+    defaultValue    default value of the field
     data            data regarding the field
 */
 export const defaultFieldRepo = {
@@ -111,15 +110,15 @@ export const defaultFieldRepo = {
         key: 'roleTargetMode',
         fieldType: fieldType.logic.key,
         title: 'Target Mode',
-        vars: choiceMap,
         boardType: boardType.roles.key,
+        defaultValue: { vars: choiceMap },
     },
     roleAction: {
         key: 'roleAction',
         fieldType: fieldType.logic.key,
         title: 'Action',
-        vars: choiceMap,
         boardType: boardType.roles.key,
+        defaultValue: { vars: choiceMap },
     },
     description2: {
         key: 'description2',

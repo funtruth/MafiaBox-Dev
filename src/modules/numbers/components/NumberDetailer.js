@@ -18,11 +18,11 @@ import {
 } from '../../components/Common';
 
 export default function NumberDetailer(props) {
-    const { attachVar } = props
+    const { scopedVars } = props
 
     const [tameVars, wildVars] = useVarType(
         variableType.number.key,
-        attachVar,
+        scopedVars,
     )
 
     const operators = _.toArray(mathOperatorType)

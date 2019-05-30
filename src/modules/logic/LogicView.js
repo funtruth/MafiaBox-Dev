@@ -20,14 +20,12 @@ import {
 } from '../components/Common';
 import LogicBlock from './dnd/LogicBlock';
 
-export default function LogicView({
-  path,
-  vars,  
-}){
+export default function LogicView({ path }) {
     const dispatch = useDispatch()
     const {
         byId: logicRepo,
         byIndex: logicMap,
+        vars,
     } = usePath(path)
 
     let runCode = () => {
@@ -51,7 +49,10 @@ export default function LogicView({
             path,
             update: {
                 byId: {
-                    [newLogicKey]: DEFAULT_LOGIC,
+                    [newLogicKey]: {
+                        ...DEFAULT_LOGIC,
+                        key: newLogicKey,
+                    },
                 },
                 byIndex: [newLogicKey],
             },
@@ -68,7 +69,10 @@ export default function LogicView({
             dispatch(updateGeneral({
                 path: [...path, 'byId'],
                 update: {
-                    [newLogicKey]: DEFAULT_LOGIC,
+                    [newLogicKey]: {
+                        ...DEFAULT_LOGIC,
+                        key: newLogicKey,
+                    },
                 },
             }, {
                 path: [...path, 'byId', parentKey],
@@ -80,7 +84,10 @@ export default function LogicView({
             dispatch(updateGeneral({
                 path,
                 update: {
-                    [newLogicKey]: DEFAULT_LOGIC,
+                    [newLogicKey]: {
+                        ...DEFAULT_LOGIC,
+                        key: newLogicKey,
+                    },
                     byIndex: currentClone,
                 },
             }))
@@ -109,11 +116,12 @@ export default function LogicView({
     const mainProps = {
         logicRepo,
         logicMap,
+        vars,
         handleAdd,
         handleAddBelow,
         moveLogic,
         path,
-        vars,
+        scope: [],
     }
     
     return (

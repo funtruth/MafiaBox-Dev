@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { choiceMap } from '../../logic/defaults';
-
 import {
     Body,
 } from '../../components/Common';
@@ -12,10 +10,7 @@ export default function LogicField(props) {
     
     return (
         <Body>
-            <LogicView
-                path={path}
-                vars={choiceMap}
-            />
+            <LogicView path={path}/>
         </Body>
     )
 }

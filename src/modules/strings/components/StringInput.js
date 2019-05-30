@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import _ from 'lodash'
 
 import { ITEM_TYPE } from '../types'
-import { DEFAULT_STRING } from '../defaults'
-
-import { updateGeneral } from '../../page/PageReducer'
-import { genUID } from '../../common/helpers';
 
 export default function StringInput(props) {
-    const dispatch = useDispatch()
-    const { stringRepo, stringMap, path, activeKey, color } = props
+    const { stringRepo, activeKey } = props
 
     const [text, setText] = useState('')
     const [disabled, setDisabled] = useState(false)
@@ -39,38 +33,8 @@ export default function StringInput(props) {
     let handleSubmit = () => {
         if (!text) return;
 
-        if (activeKey === '') {
-            let repoClone = _.cloneDeep(stringRepo || {})
-            let mapClone = _.cloneDeep(stringMap || [])
-    
-            const newKey = genUID('string', stringRepo)
-    
-            mapClone.push(newKey)
-            repoClone[newKey] = {
-                ...DEFAULT_STRING,
-                key: newKey,
-                string: text,
-                type: ITEM_TYPE.string,
-                color,
-            }
-            
-            dispatch(updateGeneral({
-                path,
-                update: {
-                    byId: repoClone,
-                    byIndex: mapClone,
-                },
-            }))
-        } else {
-            dispatch(updateGeneral({
-                path: [...path, 'byId', activeKey],
-                update: {
-                    string: text,
-                }
-            }))
-        }
-
-        setText('')
+        props.addString(text)
+        setText('');
     }
 
     let handleKey = (e) => {
