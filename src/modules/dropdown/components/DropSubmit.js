@@ -1,12 +1,13 @@
 import React from 'react'
 
+import { Icon, Tag } from '../../components/Common'
+
 export default function DropSubmit(props) {
-    const { icon, onClick, children } = props
+    const { onClick } = props
     
     return (
-        <div className="drop-down-menu-submit" onClick={onClick}>
-            {icon && <i className={`drop-down-menu-icon ${icon}`}></i>}
-            {children}
-        </div>
+        <Tag onClick={onClick} style={{marginLeft: 9}}>
+            <Icon icon="mdi mdi-check-underline"/>
+        </Tag>
     )
 }

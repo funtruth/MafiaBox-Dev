@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import _ from 'lodash'
 
 import {
-    variableType, mathType,
+    mathType,
+    variableType,
 } from '../../common/types'
 import {
     DEFAULT_ASSIGN,
     VAR_DEFAULTS,
 } from '../../common/defaults';
 
-import {
-    useAutofocus,
-} from '../../hooks/Hooks'
+import { useAutofocus } from '../../hooks/Hooks'
 import { genUID } from '../../common/helpers';
 
 import {
@@ -97,7 +95,7 @@ export default function PickNumValue({
     return (
         <>
             <DropTitle>set to number</DropTitle>
-            <Row>
+            <Row sizes={['z', 'xs']}>
                 <input
                     ref={focusRef}
                     className="tag-input"
@@ -107,12 +105,7 @@ export default function PickNumValue({
                     placeholder="enter a value ..."
                     type='number'
                 />
-                <DropSubmit
-                    onClick={onSubmit}
-                    icon="mdi mdi-checkbox-marked-outline"
-                >
-                    save
-                </DropSubmit>
+                <DropSubmit onClick={onSubmit}/>
             </Row>
         </>
     )

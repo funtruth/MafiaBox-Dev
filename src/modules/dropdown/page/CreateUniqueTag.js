@@ -8,6 +8,7 @@ import {
 import {
     DropSubmit,
 } from '../components/Common'
+import { Row } from '../../components/Common';
 
 export default function CreateUniqueTag(props) {
     const { path, attach, placeholder } = props
@@ -37,7 +38,7 @@ export default function CreateUniqueTag(props) {
     }
 
     return (
-        <div className="row">
+        <Row sizes={['z', 'xs']}>
             <input
                 ref={focusRef}
                 className="tag-input"
@@ -47,12 +48,7 @@ export default function CreateUniqueTag(props) {
                 placeholder={placeholder}
                 type='text'
             />
-            <DropSubmit
-                onClick={onSubmit}
-                icon="mdi mdi-checkbox-marked-outline"
-            >
-                create
-            </DropSubmit>
-        </div>
+            <DropSubmit onClick={onSubmit}/>
+        </Row>
     )
 }

@@ -8,6 +8,7 @@ import {
 import {
     DropSubmit,
 } from '../components/Common'
+import { Row } from '../../components/Common'
 
 const KEYWORDS = [
     'roleTeam',
@@ -48,7 +49,7 @@ export default function CreateGeneralTag(props) {
     }
 
     return (
-        <div className="row">
+        <Row sizes={['z', 'xs']}>
             <input
                 ref={focusRef}
                 className="tag-input"
@@ -58,12 +59,7 @@ export default function CreateGeneralTag(props) {
                 placeholder={placeholder}
                 type='text'
             />
-            <DropSubmit
-                onClick={onSubmit}
-                icon="mdi mdi-checkbox-marked-outline"
-            >
-                create
-            </DropSubmit>
-        </div>
+            <DropSubmit onClick={onSubmit}/>
+        </Row>
     )
 }

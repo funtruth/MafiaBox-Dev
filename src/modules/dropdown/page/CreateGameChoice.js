@@ -10,6 +10,7 @@ import {
 import {
     DropSubmit,
 } from '../components/Common'
+import { Row } from '../../components/Common';
 
 const KEYWORDS = []
 
@@ -46,7 +47,7 @@ export default function CreateGameChoice(props) {
     }
 
     return (
-        <div className="row">
+        <Row sizes={['z', 'xs']}>
             <input
                 ref={focusRef}
                 className="tag-input"
@@ -56,12 +57,7 @@ export default function CreateGameChoice(props) {
                 placeholder={placeholder}
                 type='text'
             />
-            <DropSubmit
-                onClick={onSubmit}
-                icon="mdi mdi-checkbox-marked-outline"
-            >
-                create
-            </DropSubmit>
-        </div>
+            <DropSubmit onClick={onSubmit}/>
+        </Row>
     )
 }

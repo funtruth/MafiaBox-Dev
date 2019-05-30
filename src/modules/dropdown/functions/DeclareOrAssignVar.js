@@ -21,6 +21,7 @@ import {
     DropSubmit,
     DropTitle,
 } from '../components/Common'
+import Row from '../../components/Row';
 
 export default function DeclareOrAssignVar(props) {
     const { currentValue, attachVar, path } = props
@@ -83,7 +84,7 @@ export default function DeclareOrAssignVar(props) {
     return (
         <>
             <DropTitle>declare</DropTitle>
-            <div className="row" style={{marginBottom: 6}}>
+            <Row sizes={['xxs', 'xs']}>
                 <input
                     className="tag-input"
                     value={value}
@@ -93,13 +94,8 @@ export default function DeclareOrAssignVar(props) {
                     type='text'
                     autoFocus
                 />
-                <DropSubmit
-                    onClick={handleSave}
-                    icon="mdi mdi-checkbox-marked-outline"
-                >
-                    save
-                </DropSubmit>
-            </div>
+                <DropSubmit onClick={handleSave}/>
+            </Row>
             <DropTitle>assign</DropTitle>
             {subfields.map(item => (
                 <DropParent

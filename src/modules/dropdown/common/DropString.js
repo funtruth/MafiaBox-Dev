@@ -4,9 +4,8 @@ import {
     useAutofocus,
 } from '../../hooks/Hooks'
 
-import {
-    DropSubmit,
-} from '../components/Common'
+import { DropSubmit } from '../components/Common'
+import { Row } from '../../components/Common';
 
 /*
 accessed from:
@@ -39,7 +38,7 @@ export default function DropString({
     }
 
     return (
-        <div className="row">
+        <Row sizes={['z', 'xs']}>
             <input
                 ref={focusRef}
                 className="tag-input"
@@ -49,12 +48,7 @@ export default function DropString({
                 placeholder="name of patch ..."
                 type='text'
             />
-            <DropSubmit
-                onClick={onSubmit}
-                icon="mdi mdi-checkbox-marked-outline"
-            >
-                save
-            </DropSubmit>
-        </div>
+            <DropSubmit onClick={onSubmit}/>
+        </Row>
     )
 }

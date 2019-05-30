@@ -11,6 +11,7 @@ import {
     DropTitle,
     DropSubmit,
 } from '../components/Common'
+import { Row } from '../../components/Common';
 
 const KEYWORDS = []
 
@@ -55,7 +56,7 @@ export default connect(
     return (
         <>
             <DropTitle>create value</DropTitle>
-            <div className="row">
+            <Row sizes={['z', 'xs']}>
                 <input
                     ref={focusRef}
                     className="tag-input"
@@ -65,13 +66,8 @@ export default connect(
                     placeholder="Name your value ..."
                     type='text'
                 />
-                <DropSubmit
-                    onClick={onSubmit}
-                    icon="mdi mdi-checkbox-marked-outline"
-                >
-                    create
-                </DropSubmit>
-            </div>
+                <DropSubmit onClick={onSubmit}/>
+            </Row>
         </>
     )
 })
