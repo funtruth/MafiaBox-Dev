@@ -17,7 +17,7 @@ import {
 
 export default function PickOperator(props) {
     const { hoverKey, logicItem, logicRepo } = props
-    const { childKeys } = logicItem
+    const { byIndex } = logicItem
 
     const data = _(operatorType)
         .filter(i => i.logicType === hoverKey)
@@ -31,7 +31,7 @@ export default function PickOperator(props) {
             ...DEFAULT_LOGIC,
             logicType: hoverKey,
             operatorType: item.key,
-            childKeys: childKeys || [childKey],
+            byIndex: byIndex || [childKey],
         })
         props.showDropdown()
     }

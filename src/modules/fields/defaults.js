@@ -5,7 +5,6 @@ import {
 } from '../common/types'
 import {
     choiceMap,
-    DEFAULT_LOGIC,
 } from '../common/defaults'
 
 export const defaultFieldMap = {
@@ -114,7 +113,6 @@ export const defaultFieldRepo = {
         title: 'Target Mode',
         vars: choiceMap,
         boardType: boardType.roles.key,
-        defaultValue: DEFAULT_LOGIC,
     },
     roleAction: {
         key: 'roleAction',
@@ -122,7 +120,6 @@ export const defaultFieldRepo = {
         title: 'Action',
         vars: choiceMap,
         boardType: boardType.roles.key,
-        defaultValue: DEFAULT_LOGIC,
     },
     description2: {
         key: 'description2',
@@ -156,13 +153,11 @@ export const defaultFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Phase Action',
         boardType: boardType.phases.key,
-        defaultValue: DEFAULT_LOGIC,
     },
     phaseListener: {
         key: 'phaseListener',
         fieldType: fieldType.logic.key,
         title: 'Phase Listener',
         boardType: boardType.phases.key,
-        defaultValue: DEFAULT_LOGIC,
     },
 }

@@ -1,11 +1,14 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import _ from 'lodash'
+import { useDispatch } from 'react-redux'
 import './logic.css'
 
+import { DEFAULT_LOGIC } from '../common/defaults';
 import { LOGIC_TESTS } from '../testhub/tests';
 import { modalType } from '../common/types';
 
 import { usePath } from '../hooks/Hooks';
+import { genUID } from '../common/helpers';
 import { getCode } from './LogicEngine'
 import { showModal } from '../modal/ModalReducer'
 import { updateGeneral } from '../page/PageReducer'
@@ -17,9 +20,15 @@ import {
 } from '../components/Common';
 import LogicBlock from './dnd/LogicBlock';
 
-function LogicView(props) {
-    const { path, vars } = props
-    const logicRepo = usePath(path)
+export default function LogicView({
+  path,
+  vars,  
+}){
+    const dispatch = useDispatch()
+    const {
+        byId: logicRepo,
+        byIndex: logicMap,
+    } = usePath(path)
 
     let runCode = () => {
         const code = getCode(logicRepo)
@@ -31,9 +40,66 @@ function LogicView(props) {
 
     let showCode = () => {
         const code = getCode(logicRepo)
-        props.showModal(modalType.showCode, {
+        dispatch(showModal(modalType.showCode, {
             code,
-        })
+        }))
+    }
+
+    const handleAdd = () => {
+        const newLogicKey = genUID('logic', logicRepo)
+        dispatch(updateGeneral(path, {
+            byId: {
+                [newLogicKey]: DEFAULT_LOGIC,
+            },
+            byIndex: [newLogicKey],
+        }))
+    }
+
+    const handleAddBelow = (parentKey, logicKey, siblingKeys) => {
+        const newLogicKey = genUID('logic', logicRepo)
+        
+        const currentClone = _.cloneDeep(siblingKeys)
+        currentClone.splice(siblingKeys.indexOf(logicKey) + 1, 0, newLogicKey)
+
+        if (parentKey) {
+            dispatch(updateGeneral([...path, 'byId'], {
+                [newLogicKey]: DEFAULT_LOGIC,
+            }))
+            dispatch(updateGeneral([...path, 'byId', parentKey], {
+                byIndex: currentClone,
+            }))
+        } else {
+            dispatch(updateGeneral(path, {
+                [newLogicKey]: DEFAULT_LOGIC,
+                byIndex: currentClone,
+            }))
+        }
+    }
+
+    const moveLogic = (newLogicKey, newIndex) => (oldLogicKey, oldIndex) => {
+        const repoClone = _.cloneDeep(logicRepo)
+        const mapClone = _.cloneDeep(logicMap)
+        
+        const oldPointer = oldLogicKey ? repoClone[oldLogicKey].byIndex : mapClone
+        const newPointer = newLogicKey ? repoClone[newLogicKey].byIndex : mapClone
+        
+        const [removed] = oldPointer.splice(oldIndex, 1)
+        newPointer.splice(newIndex, 0, removed)
+
+        dispatch(updateGeneral(path, {
+            byId: repoClone,
+            byIndex: mapClone,
+        }))
+    }
+
+    const mainProps = {
+        logicRepo,
+        logicMap,
+        handleAdd,
+        handleAddBelow,
+        moveLogic,
+        path,
+        vars,
     }
     
     return (
@@ -52,19 +118,7 @@ function LogicView(props) {
                     view code
                 </Tag>
             </Row>
-            <LogicBlock
-                {...props}
-                logicRepo={logicRepo}
-                vars={vars}
-            />
+            <LogicBlock {...mainProps}/>
         </Body>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-        updateGeneral,
-    }
-)(LogicView)

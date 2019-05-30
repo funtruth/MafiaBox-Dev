@@ -1,9 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
-
-import { DEFAULT_LOGIC } from '../../common/defaults';
-
-import { genUID } from '../../common/helpers';
 
 import {
     Body,
@@ -16,53 +11,22 @@ import LogicAddBelow from '../components/LogicAddBelow'
 import LogicDetails from '../components/LogicDetails'
 
 export default function LogicBlock(props) {
-    const { index, logicRepo, logicKey, parentKey, path } = props
-    
+    const { index, logicRepo, logicMap, logicKey, parentKey, path } = props
+
+    if (!logicKey && !logicMap) {
+        return (
+            <Tag onClick={props.handleAdd}>
+                add logic
+            </Tag>
+        )
+    }
+
     //looks at the map that the current LogicView belongs to
-    const { childKeys: siblingKeys } = parentKey ? (logicRepo[parentKey]||{}) : logicRepo 
+    const siblingKeys = parentKey ? (logicRepo[parentKey]||{}).byIndex : logicMap 
     //looks at the map that the current LogicView is nesting
-    const { childKeys } = logicKey ? (logicRepo[logicKey]||{}) : logicRepo
+    const byIndex = logicKey ? (logicRepo[logicKey]||{}).byIndex : logicMap
 
-    const handleAdd = () => {
-        const newLogicKey = genUID('logic', logicRepo)
-        props.updateGeneral(path, {
-            [newLogicKey]: DEFAULT_LOGIC,
-            childKeys: [newLogicKey],
-        })
-    }
-
-    const handleAddBelow = () => {
-        const newLogicKey = genUID('logic', logicRepo)
-        
-        const currentClone = _.cloneDeep(siblingKeys)
-        currentClone.splice(siblingKeys.indexOf(logicKey) + 1, 0, newLogicKey)
-
-        if (parentKey) {
-            props.updateGeneral(path, {
-                [newLogicKey]: DEFAULT_LOGIC,
-            })
-            props.updateGeneral([...path, parentKey], {
-                childKeys: currentClone,
-            })
-        } else {
-            props.updateGeneral(path, {
-                [newLogicKey]: DEFAULT_LOGIC,
-                childKeys: currentClone,
-            })
-        }
-    }
-
-    const moveLogic = (newLogicKey, newIndex) => (oldLogicKey, oldIndex) => {
-        const repoClone = _.cloneDeep(logicRepo)
-        
-        const oldPointer = (oldLogicKey ? repoClone[oldLogicKey] : repoClone).childKeys
-        const newPointer = (newLogicKey ? repoClone[newLogicKey] : repoClone).childKeys
-        
-        const [removed] = oldPointer.splice(oldIndex, 1)
-        newPointer.splice(newIndex, 0, removed)
-
-        props.updateGeneral(path, repoClone)
-    }
+    const handleAddBelow = () => props.handleAddBelow(parentKey, logicKey, siblingKeys)
     
     return (
         <Body style={{margin: 4}}>
@@ -71,29 +35,29 @@ export default function LogicBlock(props) {
                     <LogicItemDrop
                         top
                         index={index}
-                        moveLogic={moveLogic(parentKey, index)}
+                        moveLogic={props.moveLogic(parentKey, index)}
                     />
                     <LogicItemDrop
                         bottom
                         index={index}
-                        moveLogic={moveLogic(parentKey, index + 1)}
+                        moveLogic={props.moveLogic(parentKey, index + 1)}
                     />
                     <LogicItem
                         {...props}
                         logicItem={logicRepo[logicKey] || {}}
-                        path={[...path, logicKey]}
+                        path={[...path, 'byId', logicKey]}
                     />
                     <Row>
                         <LogicAddBelow onClick={handleAddBelow}/>
                         <LogicDetails
                             {...props}
                             logicItem={logicRepo[logicKey] || {}}
-                            path={[...path, logicKey]}
+                            path={[...path, 'byId', logicKey]}
                         />
                     </Row>
                 </div>
             }
-            {childKeys &&
+            {byIndex &&
                 <Body
                     style={{
                         marginTop: 4,
@@ -101,7 +65,7 @@ export default function LogicBlock(props) {
                         borderLeft: '1px dashed #666',
                     }}
                 >
-                    {childKeys.map((childKey, index) => (
+                    {byIndex.map((childKey, index) => (
                         childKey &&
                             <LogicBlock
                                 {...props}
@@ -112,13 +76,6 @@ export default function LogicBlock(props) {
                             />
                     ))}
                 </Body>
-            }
-            {!logicKey && !childKeys &&
-                <Tag
-                    onClick={handleAdd}
-                >
-                    add logic
-                </Tag>
             }
         </Body>
     )

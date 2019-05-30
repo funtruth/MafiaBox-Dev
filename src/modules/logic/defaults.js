@@ -10,7 +10,7 @@ export const DEFAULT_LOGIC = {
     data: "",
     logicType: "",
     operatorType: "",
-    childKeys: "",
+    byIndex: "",
     declare: "",
 }
 
