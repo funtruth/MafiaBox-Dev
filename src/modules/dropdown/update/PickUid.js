@@ -59,9 +59,8 @@ export default function PickUid(props) {
     
         return (
             <DropParent
-                {...props}
                 key={item.key}
-                dropdownType={config.dropdown}
+                dropdown={config.dropdown}
                 params={{
                     subfieldKey: newKey,
                     subpath: [newKey],

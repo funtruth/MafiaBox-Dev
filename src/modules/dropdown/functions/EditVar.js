@@ -46,8 +46,7 @@ export default function EditVar(props) {
             />
             <div className="-sep"/>
             <DropParent
-                {...props}
-                dropdownType={dropdownType.pickVarType}
+                dropdown={dropdownType.pickVarType}
                 icon="mdi mdi-language-typescript"
                 text="variable type"
             />

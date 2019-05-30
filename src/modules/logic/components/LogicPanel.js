@@ -13,6 +13,7 @@ export default function LogicPanel(props) {
         dropdown,
         modal,
         path,
+        rootPath,
         scope,
         includeSubpath,
     } = props
@@ -40,6 +41,7 @@ export default function LogicPanel(props) {
                 scopedVars,
                 logicItem,
                 path,
+                rootPath,
                 ignoreSubpath: !includeSubpath,
             }}
         >

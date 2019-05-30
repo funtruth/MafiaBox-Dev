@@ -16,9 +16,8 @@ function StoryMapLib(props) {
             <DropTitle>patches</DropTitle>
             {stories.map((item) => (
                 <DropParent
-                    {...props}
                     key={item}
-                    dropdownType={dropdownType.pageLib}
+                    dropdown={dropdownType.pageLib}
                     params={{
                         storyKey: item,
                     }}

@@ -30,6 +30,14 @@ export function showDropdown(key, e, params={}, index=0, place="down") {
             const pageY = keysClone.length ?
                 e.pageY - e.nativeEvent.offsetY - DROPDOWN_Y_MARGIN - DROP_TITLE_HEIGHT
                 :e.pageY - e.nativeEvent.offsetY + e.target.offsetHeight
+            
+            if (params.serialParent) {
+                if (prev.serialList) {
+                    params.serialList.push(params.serialParent)
+                } else {
+                    params.serialList = [params.serialParent]
+                }
+            }
 
             keysClone.push({
                 ...modalKeys[modalKeys.length - 1],

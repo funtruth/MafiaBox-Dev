@@ -1,28 +1,37 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import generatePushID from '../../common/generatePushID'
+import { showDropdown } from '../DropdownReducer'
 
-export default function DropParent(props) {
+export default function DropParent({
+    chosen,
+    dropdown,
+    icon,
+    params,
+    style,
+    text,
+}){
+    const dispatch = useDispatch();
     const dropdownKeys = useSelector(state => state.dropdown.dropdownKeys);
-
+    
     //generate a unique serial number
     const [serialNo] = useState(generatePushID())
 
-    const { icon, text, chosen, style, dropdownType, params, serialList } = props
+    //check if current DropParent serialNo is located in top dropdown serialList
+    const indexedAt = ((dropdownKeys[dropdownKeys.length - 1]||[]).serialList||[]).indexOf(serialNo)
 
-    //if the top dropdown has current DropParent's serial number in it's serial list, highlight.
-    const isOrigin = !!(dropdownKeys[dropdownKeys.length - 1]||[]).serialList
-        && dropdownKeys[dropdownKeys.length - 1].serialList.includes(serialNo)
+    //if current DropParent is in top serialList, highlight
+    const isOrigin = indexedAt !== -1
 
     //push serial number inside list
     const onMouseOver = e => {
         //if current DropParent is the origin, don't re-render the Dropdown
-        if (!dropdownType || isOrigin) return;
-        props.showDropdown(dropdownType, e, {
+        if (!dropdown || isOrigin) return;
+        dispatch(showDropdown(dropdown, e, {
             ...params,
-            serialList: (serialList||[]).concat(serialNo),
-        })
+            serialParent: serialNo,
+        }))
     }
 
     const handleClick = (e) => e.stopPropagation();

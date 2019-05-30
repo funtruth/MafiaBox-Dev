@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 
 import { logicType } from '../types'
 
@@ -7,17 +8,20 @@ import LogicMutateItem from '../details/LogicMutateItem';
 import LogicUpdateItem from '../details/LogicUpdateItem';
 
 export default function LogicDetails(props) {
-    const { logicItem, path } = props
-    const { data, declare } = logicItem
+    const { logicItem, path, vars } = props
+    const { key, data } = logicItem
+
+    const declaredVars = _.filter(vars, i => i.scope === key)
+    console.log({declaredVars})
 
     return (
         <div className="column" style={{marginBottom: 8}}>
-            {declare && Object.keys(declare).map(variable => (
+            {declaredVars.map(item => (
                 <LogicDeclareItem
                     {...props}
-                    key={variable}
-                    item={declare[variable]}
-                    path={[...path, 'declare']}
+                    key={item.key}
+                    item={item}
+                    path={[...path, 'declaredVars']}
                 />
             ))}
             {logicItem.logicType === logicType.variable.key && 

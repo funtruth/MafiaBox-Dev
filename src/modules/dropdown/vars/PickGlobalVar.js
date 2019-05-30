@@ -91,8 +91,7 @@ export default connect(
             </DropScroll>
             <DropTitle>options</DropTitle>
             <DropParent
-                {...props}
-                dropdownType={dropdownType.createGlobalVar}
+                dropdown={dropdownType.createGlobalVar}
                 leftIcon="mdi mdi-pencil"
                 text="create ..."
             />

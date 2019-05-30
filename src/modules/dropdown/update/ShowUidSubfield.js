@@ -26,9 +26,8 @@ export default function ShowUidSubfield(props) {
             <DropTitle>subfields</DropTitle>
             {uids.map(item => (
                 <DropParent
-                    {...props}
                     key={item.key}
-                    dropdownType={config.dropdown}
+                    dropdown={config.dropdown}
                     params={{
                         subfieldKey: concatField(subfieldKey, item.key),
                         subpath: [concatField(subfieldKey, item.key)],

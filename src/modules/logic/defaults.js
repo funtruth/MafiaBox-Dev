@@ -4,7 +4,7 @@ import {
 } from '../common/types'
 
 /* @params logicItem
-    declare => any new variables
+    byIndex         if logicItem has children
 */
 export const DEFAULT_LOGIC = {
     key: "",
@@ -12,7 +12,6 @@ export const DEFAULT_LOGIC = {
     data: "",
     logicType: "",
     operatorType: "",
-    declare: "",
 }
 
 /* @params logicItem.data
@@ -20,9 +19,8 @@ export const DEFAULT_LOGIC = {
     ---------------------------------------------------------------
     assign          see modal/vars/ops for architecture
     display         what to show on the update button / FRONT-END
-    length
     logic           TODO
-    static          unable to be assigned / type cannot be changed
+    parse           parseType, how the LogicEngine should read the data
     string          string object {byId, byIndex}
     updateType
     value           variable value in (foo)(bar) form
@@ -32,8 +30,7 @@ export const DEFAULT_LOGIC = {
 export const VAR_DEFAULTS = {
     assign: "",
     display: "",
-    length: false,
-    static: false,
+    parse: "",
     string: "",
     updateType: "",
     value: "",

@@ -80,9 +80,8 @@ export default function PickNumUpdate(props) {
         
         return (
             <DropParent
-                {...props}
                 key={item.key}
-                dropdownType={dropdownType.inputValue}
+                dropdown={dropdownType.inputValue}
                 params={{
                     inputText: 'Enter a number',
                     type: 'number',

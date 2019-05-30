@@ -125,8 +125,7 @@ export default function ReplaceWildcard(props) {
             />
             <DropTitle>other</DropTitle>
             <DropParent
-                {...props}
-                dropdownType={otherDropdown}
+                dropdown={otherDropdown}
                 text="values ..."
             />
         </>

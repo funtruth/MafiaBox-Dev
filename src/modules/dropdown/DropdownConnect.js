@@ -19,7 +19,7 @@ export default function DropdownConnect({item, index}) {
     renderProps.popDropdownTo = (forcedIndex) => dispatch(popDropdownTo(forcedIndex || index))
     renderProps.popDropdown = () => dispatch(popDropdownTo(index - 1))
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
-    renderProps.updateGeneral = (...u) => dispatch(updateGeneral(u))
+    renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
     renderProps.updatePage = (value, extraPath=[]) => {
         if (ignoreSubpath) {
             dispatch(updateGeneral({

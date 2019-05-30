@@ -23,9 +23,15 @@ import {
 } from '../components/Common'
 import Row from '../../components/Row';
 
-export default function DeclareOrAssignVar(props) {
-    const { currentValue, attachVar, path } = props
-
+//TODO this is invalid
+export default function DeclareOrAssignVar({
+    logicItem,
+    path,
+    rootPath,
+    scopedVars,
+    showDropdown,
+    updateGeneral,
+}){
     let [value, setValue] = useState('')
     let handleChange = e => setValue(e.target.value)
 
@@ -36,47 +42,54 @@ export default function DeclareOrAssignVar(props) {
             return
         }
 
-        if (currentValue[value]) {
+        if (scopedVars[value]) {
             return
         }
 
         const variableName = concatField("", value)
-        props.updatePage({
-            [variableName]: {
-                ...DEFAULT_VAR_ID,
-                key: variableName,
-                subfield: value,
-                fields: [
-                    value,
-                ],
-                fieldLength: 1,
-            },
-        }, ['declare'])
-        props.showDropdown()
+        updateGeneral({
+            path: [...rootPath, 'vars'],
+            update: {
+                [variableName]: {
+                    ...DEFAULT_VAR_ID,
+                    key: variableName,
+                    subfield: value,
+                    fields: [
+                        value,
+                    ],
+                    fieldLength: 1,
+                    scope: logicItem.key,
+                },
+            }
+        })
+        showDropdown();
     }
 
     let handleKeyPress = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                handleSave()
+                handleSave();
                 break
             default:
         }
     }
 
     let handleSelect = (item) => {
-        props.updatePage({
-            [item.key]: {
-                ...VAR_DEFAULTS,
-                value: item.key,
-                display: parseJS(item.key),
-                variableTypes: item.variableTypes || "",
-            },
-        }, ['data'])
-        props.showDropdown()
+        updateGeneral({
+            path: [...path, 'data'],
+            update: {
+                [item.key]: {
+                    ...VAR_DEFAULTS,
+                    value: item.key,
+                    display: parseJS(item.key),
+                    variableTypes: item.variableTypes || "",
+                },
+            }
+        })
+        showDropdown();
     }
 
-    const assignable = _.filter(attachVar, i => !i.static)
+    const assignable = _.filter(scopedVars, i => !i.static)
 
     const rssSubfieldKey = concatField('', 'rss')
     const subfields = getSubfields(rssSubfieldKey)
@@ -99,9 +112,8 @@ export default function DeclareOrAssignVar(props) {
             <DropTitle>assign</DropTitle>
             {subfields.map(item => (
                 <DropParent
-                    {...props}
                     key={item.subfield}
-                    dropdownType={item.dropdown}
+                    dropdown={item.dropdown}
                     params={{
                         path: [...path, 'data'],
                         subfieldKey: concatField(rssSubfieldKey, item.subfield),

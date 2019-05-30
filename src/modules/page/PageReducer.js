@@ -447,7 +447,7 @@ export function diffPriorities(attach) {
 export function updateGeneral(...updates) {
     return (dispatch, getState) => {
         const { page } = getState()
-
+        console.log({updates})
         let reducer;
         updates.forEach(({path, update}) => {
             reducer = helpers.updateByPath(path, update, reducer || page)

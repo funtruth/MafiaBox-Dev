@@ -30,10 +30,9 @@ export default function PickLogic(props) {
         if (item.dropdown) {
             return (
                 <DropParent
-                    {...props}
                     key={item.key}
                     chosen={chosen.toString()}
-                    dropdownType={item.dropdown}
+                    dropdown={item.dropdown}
                     params={{
                         hoverKey: item.key,
                     }}

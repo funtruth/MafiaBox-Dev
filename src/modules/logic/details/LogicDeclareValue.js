@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
     dropdownType,
@@ -12,14 +12,11 @@ import { showModal } from '../../modal/ModalReducer'
 
 import { DropClick, LogicButton } from '../../components/Common';
 
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(function LogicDeclareValue(props) {
+//TODO this is invalid
+export default function LogicDeclareValue(props) {
+    const dispatch = useDispatch();
     const { item, vars, path } = props
+    console.log({item})
 
     if (item.static) return null;
 
@@ -31,22 +28,16 @@ export default connect(
     const isNumber = item.variableTypes.includes(variableType.number.key)
     const isUid = item.variableTypes.includes(variableType.uid.key)
     const isBoolean = item.variableTypes.includes(variableType.boolean.key)
-    const isString = item.variableTypes.includes(variableType.string.key)
 
     let handleNumber = () => {
-        props.showModal(modalType.assignNumber, {
+        dispatch(showModal(modalType.assignNumber, {
             attachVar: vars,
             attach: item,
             path: newPath,
             subfieldKey: item.value,
-        })
+        }))
     }
 
-    let handleString = () => {
-        console.warn('this needs to be removed.')
-        return;
-    }
-    
     if (isNumber) {
         return (
             <LogicButton
@@ -97,19 +88,6 @@ export default connect(
                 </LogicButton>
             </DropClick>
         )
-    } else if (isString) {
-        return (
-            <LogicButton
-                highlight="blue"
-                onClick={handleString}
-                color="whitish"
-            >
-                <div style={{color:'#999', marginRight: 6}}>assign</div>
-                ...
-            </LogicButton>
-        )
-    } else {
-        console.warn('illegal declare type. LogicDeclareValue')
-        return null;
     }
-})
+    return null;
+}

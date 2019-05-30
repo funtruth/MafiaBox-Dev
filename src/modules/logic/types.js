@@ -109,6 +109,12 @@ export const mathOperatorType = {
     },
 }
 
+export const parseType = {
+    normal: 'parseType/normal',
+    variable: 'parseType/variable',
+    operation: 'parseType/operation',
+}
+
 export const updateType = {
     number: 'updateType/number',
     boolean: 'updateType/boolean',
@@ -219,7 +225,7 @@ export const variableType = {
         title: 'String',
         icon: 'mdi mdi-alpha-s-circle-outline',
         supertype: '',
-        declarable: true,
+        declarable: false,
     },
     boolean: {
         key: 'boolean',
@@ -230,7 +236,7 @@ export const variableType = {
     },
     uid: {
         key: 'uid',
-        title: 'Unique ID',
+        title: 'Player ID',
         icon: 'mdi mdi-account',
         supertype: 'key',
         declarable: true,

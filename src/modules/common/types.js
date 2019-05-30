@@ -1,7 +1,4 @@
 import {
-    droppableType,
-} from '../app/types'
-import {
     difficultyType,
 } from '../board/types'
 import {
@@ -24,6 +21,7 @@ import {
     mathType,
     numUpdateType,
     operatorType,
+    parseType,
     returnType,
     updateType,
     variableType,
@@ -38,7 +36,6 @@ export {
     comparisonType,
     difficultyType,
     dropdownType,
-    droppableType,
     fieldType,
     fuseType,
     gameChoiceType,
@@ -50,6 +47,7 @@ export {
     modalType,
     numUpdateType,
     operatorType,
+    parseType,
     phaseActionType,
     returnType,
     updateType,

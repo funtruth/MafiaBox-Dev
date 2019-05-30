@@ -11,6 +11,7 @@ import {
     DropTitle,
 } from '../components/Common'
 
+//TODO this is invalid
 export default function PickAssignableVar(props) {
     const { attachVar } = props
 

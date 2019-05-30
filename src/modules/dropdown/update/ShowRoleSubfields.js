@@ -31,9 +31,8 @@ export default connect(
             <DropTitle>subfields</DropTitle>
             {subfields.map(item => (
                 <DropParent
-                    {...props}
                     key={item.subfield}
-                    dropdownType={item.dropdown}
+                    dropdown={item.dropdown}
                     params={{
                         subfieldKey: concatField(subfieldKey, item.subfield),
                         subpath: [concatField(subfieldKey, item.subfield)],
@@ -44,9 +43,8 @@ export default connect(
             <DropTitle>tags</DropTitle>
             {tags.map(item => (
                 <DropParent
-                    {...props}
                     key={item.key}
-                    dropdownType={dropdownType.pickBoolean}
+                    dropdown={dropdownType.pickBoolean}
                     params={{
                         subfieldKey: concatField(subfieldKey, item.title),
                         subpath: [concatField(subfieldKey, item.title)],

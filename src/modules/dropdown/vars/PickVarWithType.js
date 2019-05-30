@@ -40,9 +40,8 @@ export default function PickVarWithType(props) {
         if (VARTYPE_IS_OBJ(item)) {
             return (
                 <DropParent
-                    {...props}
                     key={item.key}
-                    dropdownType={dropdownType.pickVarSubfield}
+                    dropdown={dropdownType.pickVarSubfield}
                     params={{
                         prefix: item.key,
                     }}

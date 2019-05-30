@@ -1,14 +1,19 @@
 import React from 'react'
 
-import { dropdownType } from '../../dropdown/types'
-import { variableType } from '../types';
+import {
+    dropdownType,
+    variableType,
+} from '../../common/types'
 
 import LogicDeclareValue from './LogicDeclareValue'
 
-import { DropClick, LogicButton } from '../../components/Common';
+import {
+    DropClick,
+    LogicButton,
+} from '../../components/Common';
 
 export default function LogicDeclareItem(props) {
-    const { item, path } = props
+    const { item, rootPath } = props
     const variableTypes = item.variableTypes || []
     
     return (
@@ -27,7 +32,7 @@ export default function LogicDeclareItem(props) {
                 dropdown={dropdownType.declareVarType}
                 params={{
                     currentValue: variableTypes,
-                    path: [...path, item.key],
+                    path: [...rootPath, item.key],
                 }}
             >
                 <LogicButton
@@ -42,7 +47,7 @@ export default function LogicDeclareItem(props) {
                     {variableTypes.length === 0 && '...'}
                 </LogicButton>
             </DropClick>
-            <LogicDeclareValue {...props} item={item}/>
+            {/*<LogicDeclareValue {...props} item={item}/>*/}
         </div>
     )
 }

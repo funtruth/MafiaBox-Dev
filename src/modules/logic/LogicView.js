@@ -121,6 +121,7 @@ export default function LogicView({ path }) {
         handleAddBelow,
         moveLogic,
         path,
+        rootPath: path,
         scope: [],
     }
     

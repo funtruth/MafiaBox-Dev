@@ -60,9 +60,8 @@ export default function PickVarSubfield(props) {
         if (isUidObject || hasObject) {
             return (
                 <DropParent
-                    {...props}
                     key={key}
-                    dropdownType={dropdownType.pickVarSubfield}
+                    dropdown={dropdownType.pickVarSubfield}
                     params={{
                         prefix: combinedField,
                         subpath: [combinedField],

@@ -73,9 +73,8 @@ class BoardLib extends React.Component{
                     :Object.keys(boards).map((item, index) => {
                         return (
                             <DropParent
-                                {...this.props}
                                 key={item}
-                                dropdownType={dropdownType.storyMapLib}
+                                dropdown={dropdownType.storyMapLib}
                                 params={{
                                     hoverKey: item,
                                 }}

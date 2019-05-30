@@ -55,8 +55,7 @@ function FieldView(props) {
                 return <GeneralTagField {...props}/>
             case fieldType.logic.key:
                 return <LogicField {...props}/>
-
-                //WIP
+            //TODO
             case fieldType.gameChoices.key:
                 return <GameChoiceField {...props}/>
             case fieldType.gameChoiceOverride.key:
