@@ -34,7 +34,10 @@ export default function StringPlayground(props) {
         const [removed] = mapClone.splice(oldIndex, 1)
         mapClone.splice(newIndex > oldIndex ? newIndex - 1 : newIndex, 0, removed)
 
-        dispatch(updateGeneral([...path, 'byIndex'], mapClone))
+        dispatch(updateGeneral({
+            path: [...path, 'byIndex'],
+            update: mapClone,
+        }))
     }
 
     const drop = (item, index) => {
@@ -60,9 +63,12 @@ export default function StringPlayground(props) {
         }
         mapClone.splice(index, 0, newKey)
 
-        dispatch(updateGeneral(path, {
-            byId: repoClone,
-            byIndex: mapClone,
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: repoClone,
+                byIndex: mapClone,
+            }
         }))
     }
 

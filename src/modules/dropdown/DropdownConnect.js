@@ -19,18 +19,24 @@ export default function DropdownConnect({item, index}) {
     renderProps.popDropdownTo = (forcedIndex) => dispatch(popDropdownTo(forcedIndex || index))
     renderProps.popDropdown = () => dispatch(popDropdownTo(index - 1))
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
-    renderProps.updateGeneral = (p, u, eP) => dispatch(updateGeneral(p, u, eP))
+    renderProps.updateGeneral = (...u) => dispatch(updateGeneral(u))
     renderProps.updatePage = (value, extraPath=[]) => {
         if (ignoreSubpath) {
-            dispatch(updateGeneral(path, value, extraPath))
+            dispatch(updateGeneral({
+                path: [...path, ...extraPath],
+                update: value,
+            }))
         } else {
-            dispatch(updateGeneral(path, value, (subpath||[]).concat(extraPath)))
+            dispatch(updateGeneral({
+                path: [...path, ...(subpath||[]), ...extraPath],
+                update: value,
+            }))
         }
     }
 
     if (!path) console.warn('this dropdown has no path.')
     renderProps.slate   = usePath(path);
-    renderProps.update  = (value) => dispatch(updateGeneral(path, value))
+    renderProps.update  = (...u) => dispatch(updateGeneral(u))
 
     return DropdownKeys({...item, ...renderProps})
 }

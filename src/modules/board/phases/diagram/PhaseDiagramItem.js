@@ -41,11 +41,14 @@ function PhaseDiagramItem(props) {
         const onMouseUp = (e) => {
             //if item has moved, just send an update on XY
             if (e.pageX !== pageX || e.pageY !== pageY) {
-                props.updateGeneral(['pageRepo', pageKey], {
-                    diagramXY: {
-                        x: e.pageX - pageX + offsetX,
-                        y: e.pageY - pageY + offsetY,
-                    }
+                props.updateGeneral({
+                    path: ['pageRepo', pageKey],
+                    update: {
+                        diagramXY: {
+                            x: e.pageX - pageX + offsetX,
+                            y: e.pageY - pageY + offsetY,
+                        }
+                    },
                 })
             //if item has not moved, count as user click
             } else {

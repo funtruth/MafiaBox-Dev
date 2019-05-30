@@ -15,9 +15,12 @@ export default function EventHeader(props) {
 
     const handleCreate = () => {
         const eventKey = genUID('event', events)
-        props.updateGeneral([...path, 'events', eventKey], {
-            ...DEFAULT_EVENT_LISTENER,
-            key: eventKey,
+        props.updateGeneral({
+            path: [...path, 'events', eventKey],
+                update: {
+                ...DEFAULT_EVENT_LISTENER,
+                key: eventKey,
+            }
         })
     }
 

@@ -23,8 +23,11 @@ function StringColorDrag(props) {
 
     let handleSelect = (color) => {
         if (activeKey !== '') {
-            dispatch(updateGeneral([...path, 'byId', activeKey], {
-                color: item,
+            dispatch(updateGeneral({
+                path: [...path, 'byId', activeKey],
+                update: {
+                    color: item,
+                }
             }))
         }
         setColor(color)

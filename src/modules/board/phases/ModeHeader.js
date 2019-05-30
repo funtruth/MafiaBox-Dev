@@ -32,9 +32,12 @@ function ModeHeader(props) {
 
     const handlePublish = () => {
         props.publishFromState('modeRepo', modeKey)
-        props.updateGeneral([...path, 'publishInfo'], {
-            published: true,
-            publishedAt: Date.now(),
+        props.updateGeneral({
+            path: [...path, 'publishInfo'],
+                update: {
+                published: true,
+                publishedAt: Date.now(),
+            }
         })
     }
 

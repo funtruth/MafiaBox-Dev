@@ -19,16 +19,16 @@ function RolePickerResult(props) {
 
     const onRemove = () => {
         if (currentCount === 0) return;
-        props.updateGeneral(
-            ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
-            currentCount - 1,
-        )
+        props.updateGeneral({
+            path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
+            update: currentCount - 1,
+        })
     }
     const onAdd = () => {
-        props.updateGeneral(
-            ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
-            currentCount + 1,
-        )
+        props.updateGeneral({
+            path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
+            update: currentCount + 1,
+        })
     }
 
     return (

@@ -31,12 +31,15 @@ function ModeSetupView(props) {
     }
     const onNewDraft = (players, difficulty) => {
         const setupKey = genUID('setup', roleSetup)
-        props.updateGeneral([...path, 'roleSetup', setupKey], {
-            ...DEFAULT_ROLE_SETUP,
-            key: setupKey,
-            title: 'list',
-            players,
-            difficulty,
+        props.updateGeneral({
+            path: [...path, 'roleSetup', setupKey],
+                update: {
+                ...DEFAULT_ROLE_SETUP,
+                key: setupKey,
+                title: 'list',
+                players,
+                difficulty,
+            }
         })
         setDraft(setupKey)
     }

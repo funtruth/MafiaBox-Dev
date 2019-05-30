@@ -40,10 +40,13 @@ export default function CreateGeneralTag(props) {
         }
 
         const newKey = genUID('tag', attach)
-        props.updateGeneral(['fieldRepo', ...path, 'data', newKey], {
-            key: newKey,
-            title: value,
-            index: Object.keys(attach||{}).length,
+        props.updateGeneral({
+            path: ['fieldRepo', ...path, 'data', newKey],
+            update: {
+                key: newKey,
+                title: value,
+                index: Object.keys(attach||{}).length,
+            }
         })
         props.showDropdown()
     }

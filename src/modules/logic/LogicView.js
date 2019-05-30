@@ -47,11 +47,14 @@ export default function LogicView({
 
     const handleAdd = () => {
         const newLogicKey = genUID('logic', logicRepo)
-        dispatch(updateGeneral(path, {
-            byId: {
-                [newLogicKey]: DEFAULT_LOGIC,
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: {
+                    [newLogicKey]: DEFAULT_LOGIC,
+                },
+                byIndex: [newLogicKey],
             },
-            byIndex: [newLogicKey],
         }))
     }
 
@@ -62,16 +65,24 @@ export default function LogicView({
         currentClone.splice(siblingKeys.indexOf(logicKey) + 1, 0, newLogicKey)
 
         if (parentKey) {
-            dispatch(updateGeneral([...path, 'byId'], {
-                [newLogicKey]: DEFAULT_LOGIC,
-            }))
-            dispatch(updateGeneral([...path, 'byId', parentKey], {
-                byIndex: currentClone,
+            dispatch(updateGeneral({
+                path: [...path, 'byId'],
+                update: {
+                    [newLogicKey]: DEFAULT_LOGIC,
+                },
+            }, {
+                path: [...path, 'byId', parentKey],
+                update: {
+                    byIndex: currentClone,
+                },
             }))
         } else {
-            dispatch(updateGeneral(path, {
-                [newLogicKey]: DEFAULT_LOGIC,
-                byIndex: currentClone,
+            dispatch(updateGeneral({
+                path,
+                update: {
+                    [newLogicKey]: DEFAULT_LOGIC,
+                    byIndex: currentClone,
+                },
             }))
         }
     }
@@ -86,9 +97,12 @@ export default function LogicView({
         const [removed] = oldPointer.splice(oldIndex, 1)
         newPointer.splice(newIndex, 0, removed)
 
-        dispatch(updateGeneral(path, {
-            byId: repoClone,
-            byIndex: mapClone,
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: repoClone,
+                byIndex: mapClone,
+            },
         }))
     }
 

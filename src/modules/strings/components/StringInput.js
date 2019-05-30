@@ -54,13 +54,19 @@ export default function StringInput(props) {
                 color,
             }
             
-            dispatch(updateGeneral(path, {
-                byId: repoClone,
-                byIndex: mapClone,
+            dispatch(updateGeneral({
+                path,
+                update: {
+                    byId: repoClone,
+                    byIndex: mapClone,
+                },
             }))
         } else {
-            dispatch(updateGeneral([...path, 'byId', activeKey], {
-                string: text,
+            dispatch(updateGeneral({
+                path: [...path, 'byId', activeKey],
+                update: {
+                    string: text,
+                }
             }))
         }
 

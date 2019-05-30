@@ -30,7 +30,7 @@ export default function EditPlayerNum(props) {
     const onFocus = (e) => e.target.select();
 
     const submit = () => {
-        props.updateGeneral(path, {min, max})
+        props.updateGeneral({path, update: {min, max}})
         props.showDropdown()
     }
     

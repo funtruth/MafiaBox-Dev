@@ -9,12 +9,18 @@ export default function EditUniqueTag(props) {
     const { subfieldKey, defaultValue, path } = props
 
     const onDelete = () => {
-        props.updateGeneral(['fieldRepo', ...path, 'data', subfieldKey], '')
+        props.updateGeneral({
+            path: ['fieldRepo', ...path, 'data', subfieldKey],
+            update: '',
+        })
         props.showDropdown();
     }
 
     const onDefault = () => {
-        props.updateGeneral(['fieldRepo', ...path, 'defaultValue'], subfieldKey)
+        props.updateGeneral({
+            path: ['fieldRepo', ...path, 'defaultValue'],
+            update: subfieldKey,
+        })
         props.showDropdown();
     }
 

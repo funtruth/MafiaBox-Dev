@@ -24,9 +24,12 @@ function PageHeader(props) {
     const handlePublish = () => {
         if (published) return;
         props.publishFromState('pageRepo', pageKey)
-        props.updateGeneral(['pageRepo', pageKey, 'publishInfo'], {
-            published: true,
-            publishedAt: Date.now(),
+        props.updateGeneral({
+            path: ['pageRepo', pageKey, 'publishInfo'],
+            update: {
+                published: true,
+                publishedAt: Date.now(),
+            }
         })
     }
 

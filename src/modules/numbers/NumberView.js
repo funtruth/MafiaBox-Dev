@@ -33,9 +33,12 @@ export default function NumberView({path}){
 
     //clear all math
     const clearSlate = () => {
-        dispatch(updateGeneral(path, {
-            byId: "",
-            source: "",
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: "",
+                source: "",
+            }
         }))
     }
 
@@ -43,24 +46,30 @@ export default function NumberView({path}){
     const initValue = (item) => {
         const newKey = genUID('math', mathRepo)
 
-        dispatch(updateGeneral(path, {
-            byId: {
-                [newKey]: {
-                    ...DEFAULT_ASSIGN,
-                    key: newKey,
-                    ...item,
-                }
-            },
-            source: newKey,
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: {
+                    [newKey]: {
+                        ...DEFAULT_ASSIGN,
+                        key: newKey,
+                        ...item,
+                    }
+                },
+                source: newKey,
+            }
         }))
     }
 
     //dropping BasicOp onto BasicOp
     const changeValue = (mathKey, item) => {
-        dispatch(updateGeneral([...path, 'byId', mathKey], {
-            ...DEFAULT_ASSIGN,
-            key: mathKey,
-            ...item,
+        dispatch(updateGeneral({
+            path: [...path, 'byId', mathKey],
+            update: {
+                ...DEFAULT_ASSIGN,
+                key: mathKey,
+                ...item,
+            }
         }))
     }
 
@@ -68,16 +77,18 @@ export default function NumberView({path}){
     const wrapValue = (item, position) => {
         const newKey = genUID('math', mathRepo)
 
-        dispatch(updateGeneral(path, {
-            source: newKey,
-            byId: {
-                ...mathRepo,
-                [newKey]: {
-                    ...DEFAULT_ASSIGN,
-                    ...item,
-                    key: newKey,
-                    [position]: source,
-                },
+        dispatch(updateGeneral({
+            path,
+            update: {
+                source: newKey,
+            },
+        }, {
+            path: [...path, 'byId', newKey],
+            update: {
+                ...DEFAULT_ASSIGN,
+                ...item,
+                key: newKey,
+                [position]: source,
             },
         }))
     }
@@ -86,16 +97,20 @@ export default function NumberView({path}){
     const nestValue = (restItem, dragItem, position) => {
         const newKey = genUID('math', mathRepo)
         
-        dispatch(updateGeneral([...path, 'byId'], {
-            [restItem.key]: {
-                ...restItem,
+        dispatch(updateGeneral({
+            path: [...path, 'byId', restItem.key],
+            update: {
                 [position]: newKey,
             },
-            [newKey]: {
-                ...DEFAULT_ASSIGN,
-                key: newKey,
-                ...dragItem,
-            },
+        }, {
+            path: [...path, 'byId'],
+            update: {
+                [newKey]: {
+                    ...DEFAULT_ASSIGN,
+                    key: newKey,
+                    ...dragItem,
+                },
+            }
         }))
     }
 

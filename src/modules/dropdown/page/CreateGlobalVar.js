@@ -46,9 +46,12 @@ export default connect(
         }
 
         const newKey = genUID('global', globalVars)
-        props.updateGeneral(['globalVars', newKey], {
-            key: newKey,
-            title: value,
+        props.updateGeneral({
+            path: ['globalVars', newKey],
+            update: {
+                key: newKey,
+                title: value,
+            }
         })
         props.popDropdown();
     }

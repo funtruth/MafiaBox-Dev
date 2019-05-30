@@ -444,12 +444,14 @@ export function diffPriorities(attach) {
     }
 }
 
-export function updateGeneral(path, update, extraPath=[]) {
+export function updateGeneral(...updates) {
     return (dispatch, getState) => {
         const { page } = getState()
 
-        const totalPath = path.concat(extraPath)
-        const reducer = helpers.updateByPath(totalPath, update, page)
+        let reducer;
+        updates.forEach(({path, update}) => {
+            reducer = helpers.updateByPath(path, update, reducer || page)
+        })
         
         dispatch(receiveAction({
             type: UPDATE_GENERAL,

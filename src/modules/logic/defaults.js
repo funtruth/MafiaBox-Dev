@@ -7,10 +7,10 @@ import {
     declare => any new variables
 */
 export const DEFAULT_LOGIC = {
+    byIndex: "",
     data: "",
     logicType: "",
     operatorType: "",
-    byIndex: "",
     declare: "",
 }
 
