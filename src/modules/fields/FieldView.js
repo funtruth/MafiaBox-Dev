@@ -21,7 +21,7 @@ import VariableField from './components/VariableField'
 
 function FieldView(props) {
     const { pageKey, pageInfo, fieldMap, fieldRepo,
-        published, path, subpath, updateSource, updatePage } = props
+        published, path, subpath, updatePage } = props
     const { boardType } = pageInfo
 
     const renderItem = (item) => {
@@ -38,7 +38,6 @@ function FieldView(props) {
             disabled: published,
             path: [...path, key],
             subpath,
-            updateSource,
             updatePage,
         }
         

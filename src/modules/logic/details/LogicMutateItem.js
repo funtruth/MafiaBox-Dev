@@ -9,7 +9,7 @@ import {
 import LogicDetailPanel from './LogicDetailPanel';
 
 export default function LogicMutateItem(props) {
-    const { prefix, logicItem, data, updateSource, vars, path } = props
+    const { prefix, logicItem, data, vars, path } = props
     
     if (!data) return null;
 
@@ -34,7 +34,6 @@ export default function LogicMutateItem(props) {
                             attachVar: vars,
                             path,
                             subpath: [shortPrefix],
-                            updateSource,
                         }}
                         field={field}
                         color="Mediumslateblue"

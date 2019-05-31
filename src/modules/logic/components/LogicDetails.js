@@ -9,11 +9,11 @@ import LogicDeclare from './LogicDeclare';
 
 export default function LogicDetails(props) {
     const { logicItem, path } = props
-    const { key, data } = logicItem
+    const { data } = logicItem
 
     return (
         <div className="column" style={{marginBottom: 8}}>
-            <LogicDeclare {...props} currentScope={key}/>
+            <LogicDeclare {...props}/>
             {logicItem.logicType === logicType.variable.key && 
                 Object.keys(data).map(field => (
                     <LogicMutateItem

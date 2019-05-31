@@ -31,34 +31,32 @@ export const LOGIC_ITEM_DATA = {
     byId: "",
 }
 
-export const LOGIC_ITEM_DATA_SOURCE = "start"
+export const LOGIC_ITEM_DATA_SOURCE = "source"
 
 /* logicItem.data.byId.[logicKey]
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     key
     display         what to show on the update button / FRONT-END
-    library         TODO payload for parseType.collection
-    operation       TODO payload for parseType.operation
     parseBy         parseType, how the LogicEngine should read the data
-    string          payload for parseType.string string object {byId, byIndex}
-    value           payload for parseType.variable, value in (foo)(bar) form
+    value           payload for parseType.string, {byId, byIndex}
+                    payload for parseType.variable, value in (foo)(bar) form
+                    payload for parseType.collection, see LOGIC_ITEM_VAR_COLLECTION
+                    payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
+                    payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
     variableTypes   list of variableTypes
     wildcardValue   original value if originally a wildcard var
 */
 export const LOGIC_ITEM_VAR = {
     key: "",
     display: "",
-    library: "",
-    operation: "",
     parseBy: "",
-    string: "",
     value: "",
     variableTypes: "",
     wildcardValue: "",
 }
 
-/* logicItem.data.byId.[logicKey].operation
+/* logicItem.data.byId.[logicKey].value
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     display         what to show for operator FRONT-END
@@ -73,15 +71,28 @@ export const LOGIC_ITEM_VAR_OPERATION = {
     right: "",
 }
 
-/* logicItem.data.byId.[logicKey].library
+/* logicItem.data.byId.[logicKey].value
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     byId            keyed repo
     byIndex         array
 */
-export const LOGIC_ITEM_VAR_LIBRARY = {
+export const LOGIC_ITEM_VAR_COLLECTION = {
     byId: "",
     byIndex: "",
+}
+
+/* logicItem.data.byId.[logicKey].value
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    middle          logicKey for content
+    left            keyed repo
+    right           array
+*/
+export const LOGIC_ITEM_VAR_WRAPPER = {
+    left: "",
+    middle: "",
+    right: "",
 }
 
 /* DEPRECATED @params logicItem.data

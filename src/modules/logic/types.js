@@ -51,6 +51,10 @@ export const operatorType = {
         key: 'if',
         index: 0,
         title: 'if',
+        value: {
+            left: "if(",
+            right: ")",
+        },
         icon: 'mdi mdi-ray-start-arrow',
         color: 'yellow',
         logicType: logicType.operator.key,
@@ -59,6 +63,10 @@ export const operatorType = {
         key: 'else',
         index: 1,
         title: 'else',
+        value: {
+            left: "else",
+            right: "",
+        },
         icon: 'mdi mdi-redo-variant',
         color: 'red',
         logicType: logicType.operator.key,
@@ -67,6 +75,10 @@ export const operatorType = {
         key: 'elseif',
         index: 2,
         title: 'else if',
+        value: {
+            left: "else if(",
+            right: ")",
+        },
         icon: 'mdi mdi-swap-horizontal-variant',
         color: 'fb',
         logicType: logicType.operator.key,
@@ -75,6 +87,10 @@ export const operatorType = {
         key: 'forin',
         index: 3,
         title: 'for',
+        value: {
+            left: "for(var",
+            right: ")",
+        },
         icon: 'mdi mdi-sync',
         color: 'orange',
         logicType: logicType.operator.key,

@@ -17,7 +17,7 @@ import {
 
 export default function LogicDeclare({
     vars,
-    currentScope,
+    logicKey,
     readOnly,
     rootPath,
 }){
@@ -65,7 +65,7 @@ export default function LogicDeclare({
         )
     }
 
-    const declaredVars = _.filter(vars, i => i.scope === currentScope)
+    const declaredVars = _.filter(vars, i => i.scope === logicKey)
 
     return (
         <Body>

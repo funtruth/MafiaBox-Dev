@@ -85,11 +85,15 @@ export default function LogicView({ path }) {
             dispatch(updateGeneral({
                 path,
                 update: {
+                    byIndex: currentClone,
+                },
+            }, {
+                path: [...path, 'byId'],
+                update: {
                     [newLogicKey]: {
                         ...DEFAULT_LOGIC,
                         key: newLogicKey,
                     },
-                    byIndex: currentClone,
                 },
             }))
         }

@@ -1,51 +1,29 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { logicType, parseType } from '../../common/types'
+import { logicType } from '../../common/types'
 import { DEFAULT_LOGIC } from '../../common/defaults';
+
+import { generateLogic } from '../../logic/codetool';
 
 import {
     DropItem,
     DropParent,
     DropTitle,
 } from '../components/Common'
-import { LOGIC_ITEM_DATA_SOURCE, LOGIC_ITEM_VAR, LOGIC_ITEM_VAR_LIBRARY } from '../../logic/defaults';
 
 export default function PickLogic({
     slate,
+    logicKey,
     update,
     showDropdown,
 }){
-    const createDefault = (type) => {
-        switch(type) {
-            case logicType.variable.key:
-            case logicType.update.key:
-                return {
-                    source: LOGIC_ITEM_DATA_SOURCE,
-                    byId: {
-                        [LOGIC_ITEM_DATA_SOURCE]: {
-                            ...LOGIC_ITEM_VAR,
-                            key: LOGIC_ITEM_DATA_SOURCE,
-                            library: LOGIC_ITEM_VAR_LIBRARY,
-                            parseBy: parseType.collection,
-                        },
-                    },
-                }
-            case logicType.event.key:
-            case logicType.return.key:
-            case logicType.function.key:
-            default:
-                console.warn('not supported yet.')
-                return "";
-        }
-    }
-
     const handleSelect = (item) => {
         update({
             ...DEFAULT_LOGIC,
-            key: slate.key,
+            key: logicKey,
             logicType: item.key,
-            data: createDefault(),
+            data: generateLogic(item.key),
         })
         showDropdown();
     }

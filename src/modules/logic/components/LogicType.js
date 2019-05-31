@@ -11,36 +11,32 @@ import {
  } from '../../components/Common';
 
 export default function LogicType(props) {
-    const { logicRepo, logicItem, path, subpath, updateSource } = props
+    const { logicKey, logicItem, path, subpath } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
     } = logicItem
     
-    const item = selectedOperator ?
-        operatorType[selectedOperator]
-        :(selectedLogic ? logicType[selectedLogic] : {})
+    const item = selectedOperator ? operatorType[selectedOperator] : (selectedLogic ? logicType[selectedLogic] : {})
 
-    const {
-        title,
-        icon,
-        color = '#767676',
-    } = item
+    const { title, icon, color = 'darkgrey' } = item
 
     return (
         <DropClick
             dropdown={dropdownType.pickLogic}
             params={{
-                logicItem,
-                logicRepo,
-                updateSource,
+                logicKey,
                 path,
                 subpath,
             }}
         >
-            <LogicButton highlight={color} style={{color}}>
+            <LogicButton highlight={color} color={color}>
                 <Icon className={`${icon || 'mdi mdi-pencil'}`}></Icon>
-                {title && <Text size="s" color="whitish" style={{marginLeft: 4}}>{title}</Text>}
+                {title &&
+                    <Text size="s" color="whitish" before="xxs">
+                        {title}
+                    </Text>
+                }
             </LogicButton>
         </DropClick>
     )
