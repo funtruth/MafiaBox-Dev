@@ -7,7 +7,6 @@ import {
 import {
     LOGIC_ITEM_DATA_SOURCE,
     LOGIC_ITEM_VAR,
-    LOGIC_ITEM_VAR_COLLECTION,
 } from './defaults';
 
 import { parseJS } from './proptool'
@@ -50,17 +49,6 @@ export function generateLogic(type) {
     switch(type) {
         case logicType.variable.key:
         case logicType.update.key:
-            return {
-                source,
-                byId: {
-                    [source]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: source,
-                        parseBy: parseType.collection,
-                        value: LOGIC_ITEM_VAR_COLLECTION,
-                    },
-                },
-            }
         case logicType.event.key:
             return {
                 source,
@@ -68,7 +56,7 @@ export function generateLogic(type) {
                     [source]: {
                         ...LOGIC_ITEM_VAR,
                         key: source,
-                        parseBy: parseType.string,
+                        parseBy: parseType.collection,
                     },
                 },
             }

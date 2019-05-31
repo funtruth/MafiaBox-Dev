@@ -23,7 +23,7 @@ export default function PickLogic({
             ...DEFAULT_LOGIC,
             key: logicKey,
             logicType: item.key,
-            data: generateLogic(item.key),
+            ...generateLogic(item.key),
         })
         showDropdown();
     }

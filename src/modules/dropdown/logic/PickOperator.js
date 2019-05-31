@@ -31,7 +31,7 @@ export default function PickOperator({
             ...DEFAULT_LOGIC,
             key: logicKey,
             byIndex: byIndex || [generatePushID('logic')],
-            data: generateLogic(item.key),
+            ...generateLogic(item.key),
             logicType,
             operatorType: item.key,
         })

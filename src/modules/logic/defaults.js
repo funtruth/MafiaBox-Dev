@@ -7,33 +7,24 @@ import {
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     key
-    byIndex         if logicItem has children
-    data
+    byId            keyed repo of all logic of CURRENT logicItem, NOT related to byIndex
+    byIndex         list of children under the logicItem, NOT related to byId
     logicType
     operatorType
+    source          where the parser should start for CURRENT logicItem
 */
 export const DEFAULT_LOGIC = {
     key: "",
+    byId: "",
     byIndex: "",
-    data: "",
     logicType: "",
     operatorType: "",
-}
-
-/* logicItem.data
-    FIELD           DESCRIPTION
-    ---------------------------------------------------------------
-    source          where the parser should start
-    byId            keyed repo of all logic
-*/
-export const LOGIC_ITEM_DATA = {
     source: "",
-    byId: "",
 }
 
 export const LOGIC_ITEM_DATA_SOURCE = "source"
 
-/* logicItem.data.byId.[logicKey]
+/* logicItem.byId.[logicKey]
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     key
@@ -41,7 +32,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
                     payload for parseType.variable, value in (foo)(bar) form
-                    payload for parseType.collection, see LOGIC_ITEM_VAR_COLLECTION
+                    payload for parseType.collection, value is []
                     payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
                     payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
     variableTypes   list of variableTypes
@@ -56,7 +47,7 @@ export const LOGIC_ITEM_VAR = {
     wildcardValue: "",
 }
 
-/* logicItem.data.byId.[logicKey].value
+/* logicItem.byId.[logicKey].value
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     display         what to show for operator FRONT-END
@@ -71,18 +62,7 @@ export const LOGIC_ITEM_VAR_OPERATION = {
     right: "",
 }
 
-/* logicItem.data.byId.[logicKey].value
-    FIELD           DESCRIPTION
-    ---------------------------------------------------------------
-    byId            keyed repo
-    byIndex         array
-*/
-export const LOGIC_ITEM_VAR_COLLECTION = {
-    byId: "",
-    byIndex: "",
-}
-
-/* logicItem.data.byId.[logicKey].value
+/* logicItem.byId.[logicKey].value
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
     middle          logicKey for content

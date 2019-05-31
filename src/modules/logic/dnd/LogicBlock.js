@@ -21,10 +21,13 @@ export default function LogicBlock(props) {
         )
     }
 
+    //grab current logicItem
+    const logicItem = logicRepo[logicKey] || {}
+
     //looks at the map that the current LogicView belongs to
     const siblingKeys = parentKey ? (logicRepo[parentKey]||{}).byIndex : logicMap 
     //looks at the map that the current LogicView is nesting
-    const byIndex = logicKey ? (logicRepo[logicKey]||{}).byIndex : logicMap
+    const byIndex = logicKey ? logicItem.byIndex : logicMap
 
     const handleAddBelow = () => props.handleAddBelow(parentKey, logicKey, siblingKeys)
     
@@ -44,14 +47,14 @@ export default function LogicBlock(props) {
                     />
                     <LogicItem
                         {...props}
-                        logicItem={logicRepo[logicKey] || {}}
+                        logicItem={logicItem}
                         path={[...path, 'byId', logicKey]}
                     />
                     <Row>
                         <LogicAddBelow onClick={handleAddBelow}/>
                         <LogicDetails
                             {...props}
-                            logicItem={logicRepo[logicKey] || {}}
+                            logicItem={logicItem}
                             path={[...path, 'byId', logicKey]}
                         />
                     </Row>

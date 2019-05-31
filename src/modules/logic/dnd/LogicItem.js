@@ -7,6 +7,7 @@ import { COLLECT_DRAG } from '../../modal/ModalDND'
 import LogicType from '../components/LogicType';
 import LogicOptions from '../components/LogicOptions'
 import LogicPanels from '../components/LogicPanels';
+import LogicParsedPanels from '../components/LogicParsedPanels';
 
 import {
     Row,
@@ -28,7 +29,7 @@ function LogicItem(props) {
         <div>
             <Row>
                 <LogicType {...props}/>
-                <LogicPanels {...props}/>
+                <LogicParsedPanels {...props}/>
                 <LogicOptions {...props}/>
             </Row>
         </div>
