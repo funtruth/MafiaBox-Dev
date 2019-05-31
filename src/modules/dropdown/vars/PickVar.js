@@ -20,29 +20,32 @@ import {
     DropTitle,
 } from '../components/Common'
 
-export default function PickVar(props) {
-    const { attachVar, currentValue } = props
-
+export default function PickVar({
+    slate,
+    scopedVars,
+    showDropdown,
+    update,
+}) {
     const handleSelect = (item) => {
-        props.updatePage({
+        update({
             ...VAR_DEFAULTS,
             value: item.key,
             display: parseJS(item.key),
             variableTypes: item.variableTypes,
             updateType: updateType.uid, //TODO wtf lol
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     const renderItem = (item) => {
-        const chosen = currentValue.value === item.key
+        const chosen = slate.value === item.key
 
         if (VARTYPE_IS_OBJ(item)) {
             return (
                 <DropParent
                     key={item.key}
                     dropdown={dropdownType.pickVarSubfield}
-                    showDropdown={props.showDropdown}
+                    showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
                     }}
@@ -63,7 +66,7 @@ export default function PickVar(props) {
         )
     }
     
-    const vars = _.sortBy(attachVar, VARTYPE_IS_OBJ)
+    const vars = _.sortBy(scopedVars, VARTYPE_IS_OBJ)
     const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
 
     return (

@@ -46,19 +46,18 @@ export function compileMath(assign) {
 }
 
 export function generateLogic(type) {
-    const source = generatePushID(LOGIC_ITEM_DATA_SOURCE)
-    const middle = generatePushID('middle')
+    const [a,b,c,d] = ['a','b','c','d'].map(generatePushID)
 
     switch(type) {
         case logicType.variable.key:
         case logicType.update.key:
         case logicType.event.key:
             return {
-                source,
+                a,
                 byId: {
-                    [source]: {
+                    [a]: {
                         ...LOGIC_ITEM_VAR,
-                        key: source,
+                        key: a,
                         parseBy: parseType.collection,
                     },
                 },
@@ -70,31 +69,36 @@ export function generateLogic(type) {
         case operatorType.if.key:
         case operatorType.elseif.key:
             return {
-                source,
+                source: a,
                 byId: {
-                    [source]: {
+                    [a]: {
                         ...LOGIC_ITEM_VAR,
-                        key: source,
+                        key: a,
                         parseBy: parseType.wrapper,
                         value: {
                             ...operatorType[type].value,
-                            middle,
+                            middle: b,
                         },
                     },
-                    [middle]: {
+                    [b]: {
                         ...LOGIC_ITEM_VAR,
-                        key: middle,
+                        key: b,
                         parseBy: parseType.operation,
-                    }
+                        value: {
+                            ...LOGIC_ITEM_VAR_OPERATION,
+                            left: c,
+                            right: d,
+                        }
+                    },
                 }
             }
         case operatorType.else.key:
             return {
-                source,
+                source: a,
                 byId: {
-                    [source]: {
+                    [a]: {
                         ...LOGIC_ITEM_VAR,
-                        key: source,
+                        key: a,
                         parseBy: parseType.wrapper,
                         value: operatorType[type].value,
                     },
@@ -102,25 +106,27 @@ export function generateLogic(type) {
             }
         case operatorType.forin.key:
             return {
-                source,
+                source: a,
                 byId: {
-                    [source]: {
+                    [a]: {
                         ...LOGIC_ITEM_VAR,
-                        key: source,
+                        key: a,
                         parseBy: parseType.wrapper,
                         value: {
                             ...operatorType[type].value,
-                            middle,
+                            middle: b,
                         },
                     },
-                    [middle]: {
+                    [b]: {
                         ...LOGIC_ITEM_VAR,
-                        key: middle,
+                        key: b,
                         parseBy: parseType.operation,
                         value: {
                             ...LOGIC_ITEM_VAR_OPERATION,
-                            operator: comparisonType.assign.key,
+                            operator: comparisonType.in.key,
                             display: comparisonType.in.code,
+                            left: c,
+                            right: d,
                         }
                     }
                 }

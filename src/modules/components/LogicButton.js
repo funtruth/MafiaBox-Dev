@@ -48,7 +48,7 @@ export default function LogicButton(props) {
         <div
             className={classes}
             style={buttonStyle}
-            onClick={event => onClick && onClick({ event })}
+            onClick={event => onClick && onClick(event)}
         >
             {children}
         </div>

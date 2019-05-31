@@ -28,7 +28,7 @@ const itemSource = {
 
 function LogicItem(props) {
     const { connectDragSource, logicItem, path } = props
-    const { logicType, source, byId, byIndex } = logicItem
+    const { logicType, operatorType, source, byId } = logicItem
 
     const renderBody = () => { 
         if (!logicType) {
@@ -50,6 +50,8 @@ function LogicItem(props) {
             <LogicParsed
                 varKey={source}
                 varRepo={byId}
+                path={path}
+                type={operatorType || logicType}
             />
         )        
     }

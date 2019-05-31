@@ -30,7 +30,7 @@ export default function LogicType(props) {
             }}
         >
             <LogicButton highlight={color} color={color}>
-                <Icon className={`${icon || 'mdi mdi-pencil'}`}></Icon>
+                <Icon className={icon || 'mdi mdi-pencil'}></Icon>
                 {title &&
                     <Text size="s" color="whitish" before="xxs">
                         {title}
