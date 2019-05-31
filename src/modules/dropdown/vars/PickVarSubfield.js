@@ -62,6 +62,7 @@ export default function PickVarSubfield(props) {
                 <DropParent
                     key={key}
                     dropdown={dropdownType.pickVarSubfield}
+                    showDropdown={props.showDropdown}
                     params={{
                         prefix: combinedField,
                         subpath: [combinedField],

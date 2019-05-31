@@ -19,6 +19,7 @@ import {
     Tag,
 } from '../components/Common';
 import LogicBlock from './dnd/LogicBlock';
+import LogicDeclare from './components/LogicDeclare';
 
 export default function LogicView({ path }) {
     const dispatch = useDispatch()
@@ -141,6 +142,7 @@ export default function LogicView({ path }) {
                     view code
                 </Tag>
             </Row>
+            <LogicDeclare {...mainProps} readOnly/>
             <LogicBlock {...mainProps}/>
         </Body>
     )

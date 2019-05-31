@@ -82,6 +82,7 @@ export default function PickNumUpdate(props) {
             <DropParent
                 key={item.key}
                 dropdown={dropdownType.inputValue}
+                showDropdown={props.showDropdown}
                 params={{
                     inputText: 'Enter a number',
                     type: 'number',

@@ -33,6 +33,7 @@ export default connect(
                 <DropParent
                     key={item.subfield}
                     dropdown={item.dropdown}
+                    showDropdown={props.showDropdown}
                     params={{
                         subfieldKey: concatField(subfieldKey, item.subfield),
                         subpath: [concatField(subfieldKey, item.subfield)],
@@ -45,6 +46,7 @@ export default connect(
                 <DropParent
                     key={item.key}
                     dropdown={dropdownType.pickBoolean}
+                    showDropdown={props.showDropdown}
                     params={{
                         subfieldKey: concatField(subfieldKey, item.title),
                         subpath: [concatField(subfieldKey, item.title)],

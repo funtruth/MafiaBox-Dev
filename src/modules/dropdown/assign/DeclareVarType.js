@@ -8,35 +8,42 @@ import {
     DropTitle,
 } from '../components/Common';
 
-//source: LogicItem > LogicDeclareItem
-export default function DeclareVarType(props) {
-    const { currentValue } = props
-    const currentValueIsArray = Array.isArray(currentValue)
+//source: LogicItem > LogicDeclare
+export default function DeclareVarType({
+    slate,
+    update,
+    showDropdown,
+}) {
+    const { variableTypes } = slate
+    const currentValueIsArray = Array.isArray(variableTypes)
 
     const handleSelect = item => {
-        props.updatePage({
+        update({
             variableTypes: [item.key],
         })
-        props.showDropdown();
+        showDropdown();
+    }
+
+    const renderItem = (item) => {
+        const chosen = currentValueIsArray && variableTypes.includes(item.key)
+
+        return (
+            <DropItem
+                key={item.key}
+                chosen={chosen}
+                onClick={() => handleSelect(item)}
+                leftIcon={item.icon}
+                rightCheck
+                text={item.title}
+            />
+        )
     }
 
     const declarable = _.filter(variableType, i => i.declarable)
     return (
         <>
             <DropTitle>variable types</DropTitle>
-            {declarable.map(item => {
-                const chosen = currentValueIsArray && currentValue.includes(item.key)
-                return (
-                    <DropItem
-                        key={item.key}
-                        chosen={chosen}
-                        onClick={() => handleSelect(item)}
-                        leftIcon={item.icon}
-                        rightCheck
-                        text={item.title}
-                    />
-                )
-            })}
+            {declarable.map(renderItem)}
         </>
     )
 }

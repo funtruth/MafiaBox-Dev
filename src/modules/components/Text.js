@@ -1,5 +1,5 @@
 import React from 'react';
-import { palette, alignX } from './Standards';
+import { palette, alignX, value } from './Standards';
 
 const getFontSize = (size) => {
     switch(size) {
@@ -28,10 +28,12 @@ export default function Text(props) {
         children,
         bold,
         underline,
-        align = "",
-        className = "",
-        size = 'm',
-        color = 'whitish',
+        align       = "",
+        className   = "",
+        size        = 'm',
+        after       = "z",
+        before      = "z",
+        color       = 'whitish',
         style,
     } = props
 
@@ -42,6 +44,8 @@ export default function Text(props) {
         letterSpacing: -0.4,
         alignSelf: alignX(align),
         marginTop: getMarginTop(size),
+        marginLeft: value(before),
+        marginRight: value(after),
         color: palette(color),
         ...style,
     }

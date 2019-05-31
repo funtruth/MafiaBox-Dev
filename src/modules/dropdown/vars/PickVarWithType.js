@@ -42,6 +42,7 @@ export default function PickVarWithType(props) {
                 <DropParent
                     key={item.key}
                     dropdown={dropdownType.pickVarSubfield}
+                    showDropdown={props.showDropdown}
                     params={{
                         prefix: item.key,
                     }}

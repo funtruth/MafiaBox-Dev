@@ -21,15 +21,11 @@ export default function Row(props) {
         x                   = '',
         className           = '',
         style,
+        wrap                = 'wrap',
         color,
         bg,
         onClick,
     } = props
-
-    const classes = [
-        '--row',
-        className,
-    ].join(" ")
 
     const bodyStyle = {
         justifyContent: alignX(x),
@@ -37,12 +33,16 @@ export default function Row(props) {
         padding: size ? getPadding(size) : sizes && padding(sizes),
         backgroundColor: bg && palette(bg),
         color: palette(color || 'whitish'),
+        flexWrap: wrap,
+        display: 'flex',
+        flexDirection: 'row',
+        minHeight: 20,
         ...style,
     }
 
     return (
         <div
-            className={classes}
+            className={className}
             style={bodyStyle}
             onClick={event => onClick && onClick(event)}
         >

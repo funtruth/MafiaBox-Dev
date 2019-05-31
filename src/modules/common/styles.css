@@ -9,24 +9,12 @@
     flex-wrap: wrap;
 }
 
-.row-nowrap {
-    display: flex;
-    flex-direction: row;
-}
-
 .row-centered {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
-
-.add-role-icon {
-    font-size: 18px;
-    color: #fff;
-    align-self: center;
-    margin-right: 8px;
 }
 
 .text-ellipsis {
@@ -60,14 +48,6 @@
     color: #d6d6d6;
     font-size: 13px;
     pointer-events: none;
-}
-div[chosen=true] > .mdi-check {
-    opacity: 1;
-}
-.mdi-check {
-    opacity: 0;
-    padding-left: 10px;
-    text-align: center;
 }
 .mdi-play {
     margin-left: auto;

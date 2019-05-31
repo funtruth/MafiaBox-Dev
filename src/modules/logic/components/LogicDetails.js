@@ -3,27 +3,17 @@ import _ from 'lodash'
 
 import { logicType } from '../types'
 
-import LogicDeclareItem from '../details/LogicDeclareItem';
 import LogicMutateItem from '../details/LogicMutateItem';
 import LogicUpdateItem from '../details/LogicUpdateItem';
+import LogicDeclare from './LogicDeclare';
 
 export default function LogicDetails(props) {
-    const { logicItem, path, vars } = props
+    const { logicItem, path } = props
     const { key, data } = logicItem
-
-    const declaredVars = _.filter(vars, i => i.scope === key)
-    console.log({declaredVars})
 
     return (
         <div className="column" style={{marginBottom: 8}}>
-            {declaredVars.map(item => (
-                <LogicDeclareItem
-                    {...props}
-                    key={item.key}
-                    item={item}
-                    path={[...path, 'declaredVars']}
-                />
-            ))}
+            <LogicDeclare {...props} currentScope={key}/>
             {logicItem.logicType === logicType.variable.key && 
                 Object.keys(data).map(field => (
                     <LogicMutateItem

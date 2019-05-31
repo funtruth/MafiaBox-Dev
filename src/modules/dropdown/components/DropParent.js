@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import generatePushID from '../../common/generatePushID'
-import { showDropdown } from '../DropdownReducer'
 
 export default function DropParent({
     chosen,
@@ -11,8 +10,8 @@ export default function DropParent({
     params,
     style,
     text,
+    showDropdown, //special indexed version
 }){
-    const dispatch = useDispatch();
     const dropdownKeys = useSelector(state => state.dropdown.dropdownKeys);
     
     //generate a unique serial number
@@ -28,10 +27,10 @@ export default function DropParent({
     const onMouseOver = e => {
         //if current DropParent is the origin, don't re-render the Dropdown
         if (!dropdown || isOrigin) return;
-        dispatch(showDropdown(dropdown, e, {
+        showDropdown(dropdown, e, {
             ...params,
             serialParent: serialNo,
-        }))
+        })
     }
 
     const handleClick = (e) => e.stopPropagation();

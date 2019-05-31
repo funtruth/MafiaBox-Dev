@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
 
 import { ITEM_TYPE } from '../types'
 

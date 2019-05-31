@@ -18,6 +18,7 @@ function StoryMapLib(props) {
                 <DropParent
                     key={item}
                     dropdown={dropdownType.pageLib}
+                    showDropdown={props.showDropdown}
                     params={{
                         storyKey: item,
                     }}

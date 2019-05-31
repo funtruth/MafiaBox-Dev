@@ -33,6 +33,7 @@ export default function PickLogic(props) {
                     key={item.key}
                     chosen={chosen.toString()}
                     dropdown={item.dropdown}
+                    showDropdown={props.showDropdown}
                     params={{
                         hoverKey: item.key,
                     }}

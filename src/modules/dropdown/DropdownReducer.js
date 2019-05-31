@@ -33,7 +33,7 @@ export function showDropdown(key, e, params={}, index=0, place="down") {
             
             if (params.serialParent) {
                 if (prev.serialList) {
-                    params.serialList.push(params.serialParent)
+                    params.serialList = [...prev.serialList, params.serialParent]
                 } else {
                     params.serialList = [params.serialParent]
                 }

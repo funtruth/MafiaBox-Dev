@@ -114,6 +114,7 @@ export default function DeclareOrAssignVar({
                 <DropParent
                     key={item.subfield}
                     dropdown={item.dropdown}
+                    showDropdown={showDropdown}
                     params={{
                         path: [...path, 'data'],
                         subfieldKey: concatField(rssSubfieldKey, item.subfield),

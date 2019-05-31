@@ -33,12 +33,6 @@
     flex-direction: column;
     min-width: 20px;
 }
-.--row {
-    display: flex;
-    flex-direction: row;
-    min-height: 20px;
-    flex-wrap: wrap;
-}
 .--tag {
     padding: 6px 12px;
     border-radius: 4px;
