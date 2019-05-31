@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { genUID } from '../../../common/helpers'
 import { DEFAULT_EVENT_LISTENER } from '../../../common/defaults'
+
+import generatePushID from '../../../common/generatePushID';
 
 import {
     Row,
@@ -10,11 +11,10 @@ import {
 } from '../../../components/Common';
 
 export default function EventHeader(props) {
-    const { modeInfo, path } = props
-    const { events } = modeInfo || {}
+    const { path } = props
 
     const handleCreate = () => {
-        const eventKey = genUID('event', events)
+        const eventKey = generatePushID('event')
         props.updateGeneral({
             path: [...path, 'events', eventKey],
                 update: {

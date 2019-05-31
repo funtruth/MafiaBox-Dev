@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import * as helpers from '../../common/helpers'
+import generatePushID from '../../common/generatePushID';
 
 export default function AddVar(props) {
     let [value, setValue] = useState('')
@@ -7,9 +7,7 @@ export default function AddVar(props) {
     let handleChange = e => setValue(e.target.value)
     
     let handleConfirm = () => {
-        const { attachVar } = props
-        
-        const tagKey = helpers.genUID('var', attachVar)
+        const tagKey = generatePushID('var')
         
         props.updatePage({
             [tagKey]: {

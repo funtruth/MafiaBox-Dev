@@ -8,7 +8,7 @@
  *    latter ones will sort after the former ones.  We do this by using the previous random bits
  *    but "incrementing" them by 1 (only in the case of a timestamp collision).
  */
-export default function generatePushID() {
+export default function generatePushID(prefix = "", suffix = "") {
   // Modeled after base64 web-safe chars, but ordered by ASCII.
   var PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
@@ -37,21 +37,21 @@ export default function generatePushID() {
     var id = timeStampChars.join('');
 
     if (!duplicateTime) {
-      for (i = 0; i < 12; i++) {
+      for (i = 0; i < 6; i++) {
         lastRandChars[i] = Math.floor(Math.random() * 64);
       }
     } else {
       // If the timestamp hasn't changed since last push, use the same random number, except incremented by 1.
-      for (i = 11; i >= 0 && lastRandChars[i] === 63; i--) {
+      for (i = 5; i >= 0 && lastRandChars[i] === 63; i--) {
         lastRandChars[i] = 0;
       }
       lastRandChars[i]++;
     }
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < 6; i++) {
       id += PUSH_CHARS.charAt(lastRandChars[i]);
     }
-    if(id.length !== 20) throw new Error('Length should be 20.');
+    if(id.length !== 14) throw new Error('Length should be 20.');
 
-    return id;
+    return prefix + id + suffix;
   };
 }

@@ -12,11 +12,12 @@ import {
     defaultFieldRepo,
 } from '../../fields/defaults';
 
-import * as helpers from '../../common/helpers'
 import {
     getMyInfo,
     switchToProject,
 } from '../../firebase/FirebaseReducer'
+import { checkAlpha } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
 
 import FormInput from '../../components/FormInput'
 import ModalOptions from '../components/ModalOptions'
@@ -55,17 +56,17 @@ function CreateProject(props) {
             })
             return;
         }
-        if (!helpers.checkAlpha(gameKey, 'A26wSPACE')) {
+        if (!checkAlpha(gameKey, 'A26wSPACE')) {
             setErrors({gameKey: '*Only Alphabetic characters are allowed.'})
             return;
         }
-        if (!description || !helpers.checkAlpha(description, 'A26N10wDESC')) {
+        if (!description || !checkAlpha(description, 'A26N10wDESC')) {
             setErrors({description: '*Only Alphabetic characters are allowed.'})
             return;
         }
         
         //initialize a new project
-        const projectKey = helpers.genUID(gameKey, projects, '-xxxx')
+        const projectKey = generatePushID(gameKey)
 
         let multiUpdate = {}
         

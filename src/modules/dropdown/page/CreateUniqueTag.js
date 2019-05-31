@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { genUID } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
 import {
     useAutofocus
 } from '../../hooks/Hooks';
@@ -28,7 +28,7 @@ export default function CreateUniqueTag(props) {
     }
 
     const onSubmit = () => {
-        const newKey = genUID('team', attach)
+        const newKey = generatePushID('team')
         props.updateGeneral({
             path: ['fieldRepo', ...path, 'data', newKey],
             update: {

@@ -1,12 +1,13 @@
 import _ from 'lodash'
 import { diff } from 'deep-diff'
-import * as helpers from '../common/helpers'
 import firebase from 'firebase/app'
 
 import { modalType } from '../modal/types'
 
 import { showModal } from '../modal/ModalReducer';
 import { DEFAULT_PUBLISH_INFO } from './defaults';
+import generatePushID from '../common/generatePushID';
+import { updateByPath } from '../common/helpers';
 
 const initialState = {
     pageRepo: {},
@@ -81,7 +82,7 @@ export function addStory() {
         let storyRepoClone  = _.cloneDeep(storyRepo)
         let storyMapClone   = _.cloneDeep(storyMap)
 
-        const storyKey = helpers.genUID('story', storyRepo)
+        const storyKey = generatePushID('story')
 
         if (!storyMapClone) {
             storyMapClone = {}
@@ -171,7 +172,7 @@ export function addPageToMap(storyKey, boardType) {
         let pageRepoClone   = _.cloneDeep(pageRepo)
         let pageMapClone    = _.cloneDeep(pageMap)
         
-        const pageKey = helpers.genUID(boardType, pageRepo)
+        const pageKey = generatePushID(boardType)
 
         //set-up defaults
         let defaultInfo = {}
@@ -218,7 +219,7 @@ export function addModeToPatch(storyKey) {
         let modeRepoClone   = _.cloneDeep(modeRepo)
         let modeMapClone    = _.cloneDeep(modeMap)
         
-        const modeKey = helpers.genUID('mode', modeRepo)
+        const modeKey = generatePushID('mode')
         
         //set page info
         modeRepoClone[modeKey] = {
@@ -252,7 +253,7 @@ export function addPageToMode(modeKey, boardType) {
         let modeRepoClone   = _.cloneDeep(modeRepo)
         let pageRepoClone   = _.cloneDeep(pageRepo)
         
-        const pageKey = helpers.genUID(boardType, pageRepo)
+        const pageKey = generatePushID(boardType)
 
         //set-up defaults
         let defaultInfo = {}
@@ -450,7 +451,7 @@ export function updateGeneral(...updates) {
         
         let reducer;
         updates.forEach(({path, update}) => {
-            reducer = helpers.updateByPath(path, update, reducer || page)
+            reducer = updateByPath(path, update, reducer || page)
         })
         
         dispatch(receiveAction({

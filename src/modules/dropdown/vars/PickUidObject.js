@@ -17,7 +17,7 @@ import {
     START_CHAR,
     END_CHAR,
 } from '../../logic/proptool'
-import * as helpers from '../../common/helpers'
+import generatePushID from '../../common/generatePushID';
 
 import {
     DropEmpty,
@@ -35,7 +35,7 @@ export default function PickUidObject(props) {
         
     let handleSelect = (item) => {
         //if variable has already been set, keep the same variable
-        const newName = variableName || helpers.genUID(START_CHAR + 'uid_', attachVar, 'x' + END_CHAR)
+        const newName = variableName || generatePushID(START_CHAR + 'uid', END_CHAR)
 
         props.updatePage({
             declare: {

@@ -10,7 +10,7 @@ import {
 } from '../../common/defaults';
 
 import { useAutofocus } from '../../hooks/Hooks'
-import { genUID } from '../../common/helpers';
+ import generatePushID from '../../common/generatePushID';
 
 import {
     DropSubmit,
@@ -52,7 +52,7 @@ export default function PickNumValue({
 
     //setting value to an empty ValueDrop @ byId
     const setSlate = () => {
-        const newKey = genUID('math', slate)
+        const newKey = generatePushID('math')
         
         update({
             [item.key]: {

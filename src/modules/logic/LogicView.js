@@ -8,7 +8,7 @@ import { LOGIC_TESTS } from '../testhub/tests';
 import { modalType } from '../common/types';
 
 import { usePath } from '../hooks/Hooks';
-import { genUID } from '../common/helpers';
+ import generatePushID from '../common/generatePushID';
 import { getCode } from './LogicEngine'
 import { showModal } from '../modal/ModalReducer'
 import { updateGeneral } from '../page/PageReducer'
@@ -45,7 +45,7 @@ export default function LogicView({ path }) {
     }
 
     const handleAdd = () => {
-        const newLogicKey = genUID('logic', logicRepo)
+        const newLogicKey = generatePushID('logic')
         dispatch(updateGeneral({
             path,
             update: {
@@ -61,7 +61,7 @@ export default function LogicView({ path }) {
     }
 
     const handleAddBelow = (parentKey, logicKey, siblingKeys) => {
-        const newLogicKey = genUID('logic', logicRepo)
+        const newLogicKey = generatePushID('logic')
         
         const currentClone = _.cloneDeep(siblingKeys)
         currentClone.splice(siblingKeys.indexOf(logicKey) + 1, 0, newLogicKey)

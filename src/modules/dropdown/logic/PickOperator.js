@@ -8,7 +8,7 @@ import {
     DEFAULT_LOGIC,
 } from '../../common/defaults'
 
-import { genUID } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
 
 import {
     DropItem,
@@ -16,7 +16,7 @@ import {
 } from '../components/Common';
 
 export default function PickOperator(props) {
-    const { hoverKey, logicItem, logicRepo } = props
+    const { hoverKey, logicItem } = props
     const { byIndex } = logicItem
 
     const data = _(operatorType)
@@ -26,7 +26,7 @@ export default function PickOperator(props) {
     
     //Operators have internal logic by default
     let handleSelect = (item) => {
-        const childKey = genUID('logic', logicRepo)
+        const childKey = generatePushID('logic')
         props.updatePage({
             ...DEFAULT_LOGIC,
             key: logicItem.key,

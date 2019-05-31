@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-import { genUID } from '../../common/helpers';
+ import generatePushID from '../../common/generatePushID';
 import {
     useAutofocus
 } from '../../hooks/Hooks';
@@ -24,8 +24,6 @@ export default connect(
         updateGeneral,
     }
 )(function CreateGlobalVar(props) {
-    const { globalVars } = props
-
     const focusRef = useAutofocus()
 
     const [value, setValue] = useState("")
@@ -45,7 +43,7 @@ export default connect(
             return;
         }
 
-        const newKey = genUID('global', globalVars)
+        const newKey = generatePushID('global')
         props.updateGeneral({
             path: ['globalVars', newKey],
             update: {

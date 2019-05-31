@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux'
 import _ from 'lodash'
 
 import { ITEM_TYPE } from './types';
+import { DEFAULT_STRING } from './defaults';
+import { VAR_DEFAULTS } from '../logic/defaults';
 
 import { usePath } from '../hooks/Hooks';
 import { updateGeneral } from '../page/PageReducer'
 import { parseJS } from '../logic/proptool';
-import { genUID } from '../common/helpers';
-import { DEFAULT_STRING } from './defaults';
-import { VAR_DEFAULTS } from '../logic/defaults';
+ import generatePushID from '../common/generatePushID';
 
 import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
@@ -38,7 +38,7 @@ export default function StringView({path, scopedVars}) {
         if (activeKey === '') {
             let mapClone = _.cloneDeep(stringMap || [])
     
-            const newKey = genUID('string', stringRepo)
+            const newKey = generatePushID('string')
     
             mapClone.push(newKey)
             
@@ -86,7 +86,7 @@ export default function StringView({path, scopedVars}) {
     const dropString = (item, index) => {
         const mapClone = _.cloneDeep(stringMap)
 
-        const newKey = genUID('variable', stringRepo)
+        const newKey = generatePushID('variable')
 
         mapClone.splice(index, 0, newKey)
 

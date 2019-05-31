@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { genUID } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
 import {
     useAutofocus
 } from '../../hooks/Hooks';
@@ -39,7 +39,7 @@ export default function CreateGeneralTag(props) {
             return;
         }
 
-        const newKey = genUID('tag', attach)
+        const newKey = generatePushID('tag')
         props.updateGeneral({
             path: ['fieldRepo', ...path, 'data', newKey],
             update: {

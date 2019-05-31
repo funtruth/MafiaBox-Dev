@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { DEFAULT_ROLE_SETUP } from '../../defaults'
 
 import { minMaxArray } from '../helpers';
-import { genUID } from '../../../common/helpers';
+import generatePushID from '../../../common/generatePushID';
 import { updateGeneral } from '../../../page/PageReducer'
 
 import {
@@ -30,7 +30,7 @@ function ModeSetupView(props) {
         setDraft(setupKey)
     }
     const onNewDraft = (players, difficulty) => {
-        const setupKey = genUID('setup', roleSetup)
+        const setupKey = generatePushID('setup')
         props.updateGeneral({
             path: [...path, 'roleSetup', setupKey],
                 update: {

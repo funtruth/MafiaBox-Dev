@@ -1,9 +1,9 @@
 import _ from 'lodash'
-import * as helpers from '../common/helpers'
 
 import { modalType } from '../common/types';
 
 import { showModal } from '../modal/ModalReducer'
+import { updateByPath } from '../common/helpers';
 
 const initialState = {
     functionRepo: {},
@@ -41,7 +41,7 @@ export function addFunction(mapKey, itemCount, boardType) {
         const { fieldRepo } = getState().page
 
         let repoClone = Object.assign({}, functionRepo)
-        const pageKey = helpers.genUID(boardType, functionRepo)
+        const pageKey = 'TODO'
 
         //set-up defaults
         let defaultInfo = {}
@@ -71,7 +71,7 @@ export function updateFunction(path, update) {
     return (dispatch, getState) => {
         const { functionRepo } = getState().functions
         
-        const repoClone = helpers.updateByPath(path, update, functionRepo)
+        const repoClone = updateByPath(path, update, functionRepo)
 
         dispatch({
             type: UPDATE_REPO,

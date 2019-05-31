@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 
 import { DEFAULT_GAME_CHOICE } from '../../fields/defaults';
 
-import { genUID } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
+
 import {
     useAutofocus,
 } from '../../hooks/Hooks'
@@ -36,7 +37,7 @@ export default function CreateGameChoice(props) {
             return;
         }
 
-        const newKey = genUID('choice', attach)
+        const newKey = generatePushID('choice')
         props.updatePage({
             ...DEFAULT_GAME_CHOICE,
             key: newKey,

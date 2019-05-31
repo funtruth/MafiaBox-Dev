@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { DEFAULT_ASSIGN } from '../logic/defaults';
 
 import { usePath } from '../hooks/Hooks';
-import { genUID } from '../common/helpers';
+ import generatePushID from '../common/generatePushID';
 import { updateGeneral } from '../page/PageReducer'
 
 import PlaygroundDrop from './dnd/PlaygroundDrop';
@@ -44,7 +44,7 @@ export default function NumberView({path, scopedVars}){
 
     //dropping something into PlaygroundDrop
     const initValue = (item) => {
-        const newKey = genUID('math', mathRepo)
+        const newKey = generatePushID('math')
 
         dispatch(updateGeneral({
             path,
@@ -75,7 +75,7 @@ export default function NumberView({path, scopedVars}){
 
     //wrapping (everything) with a BasicOp
     const wrapValue = (item, position) => {
-        const newKey = genUID('math', mathRepo)
+        const newKey = generatePushID('math')
 
         dispatch(updateGeneral({
             path,
@@ -95,7 +95,7 @@ export default function NumberView({path, scopedVars}){
 
     //dropping something into ValueDrop inside a BasicOp
     const nestValue = (restItem, dragItem, position) => {
-        const newKey = genUID('math', mathRepo)
+        const newKey = generatePushID('math')
         
         dispatch(updateGeneral({
             path: [...path, 'byId', restItem.key],
