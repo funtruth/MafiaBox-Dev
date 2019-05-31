@@ -3,8 +3,14 @@ import {
     variableType,
 } from '../common/types'
 
-/* @params logicItem
+/* logicItem
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    key
     byIndex         if logicItem has children
+    data
+    logicType
+    operatorType
 */
 export const DEFAULT_LOGIC = {
     key: "",
@@ -14,15 +20,79 @@ export const DEFAULT_LOGIC = {
     operatorType: "",
 }
 
-/* @params logicItem.data
+/* logicItem.data
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
-    assign          see modal/vars/ops for architecture
+    source          where the parser should start
+    byId            keyed repo of all logic
+*/
+export const LOGIC_ITEM_DATA = {
+    source: "",
+    byId: "",
+}
+
+export const LOGIC_ITEM_DATA_SOURCE = "start"
+
+/* logicItem.data.byId.[logicKey]
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    key
     display         what to show on the update button / FRONT-END
-    logic           TODO
-    parse           parseType, how the LogicEngine should read the data
+    library         TODO payload for parseType.collection
+    operation       TODO payload for parseType.operation
+    parseBy         parseType, how the LogicEngine should read the data
+    string          payload for parseType.string string object {byId, byIndex}
+    value           payload for parseType.variable, value in (foo)(bar) form
+    variableTypes   list of variableTypes
+    wildcardValue   original value if originally a wildcard var
+*/
+export const LOGIC_ITEM_VAR = {
+    key: "",
+    display: "",
+    library: "",
+    operation: "",
+    parseBy: "",
+    string: "",
+    value: "",
+    variableTypes: "",
+    wildcardValue: "",
+}
+
+/* logicItem.data.byId.[logicKey].operation
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    display         what to show for operator FRONT-END
+    left            logicKey for left-side
+    operator        operator
+    right           logicKey for right-side
+*/
+export const LOGIC_ITEM_VAR_OPERATION = {
+    display: "",
+    left: "",
+    operator: "",
+    right: "",
+}
+
+/* logicItem.data.byId.[logicKey].library
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    byId            keyed repo
+    byIndex         array
+*/
+export const LOGIC_ITEM_VAR_LIBRARY = {
+    byId: "",
+    byIndex: "",
+}
+
+/* DEPRECATED @params logicItem.data
+    FIELD           DESCRIPTION
+    ---------------------------------------------------------------
+    assign          DEPRECATED, moving to operation
+    display         what to show on the update button / FRONT-END
+    operation       TODO
+    parseBy         parseType, how the LogicEngine should read the data
     string          string object {byId, byIndex}
-    updateType
+    updateType      DEPRECATED, moving to parse
     value           variable value in (foo)(bar) form
     variableTypes   list of variableTypes
     wildcardValue   original value if originally a wildcard var
@@ -59,7 +129,7 @@ export const DEFAULT_VAR_ID = {
     assign: '',
 }
 
-/* @params logicItem.data.assign.byId.mathKey
+/* DEPRECATED @params logicItem.data.assign.byId.mathKey
     logicItem.data.assign = {
         byId: "",
         source: "",

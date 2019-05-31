@@ -3,11 +3,11 @@
 
 ## 05/31/2019
 ### Major
+- [ ] parseType implementation
 
 ### Minor
-- [ ] Showing declared variables. May have to revert the removal of the "static" property of VAR_DEFAULT. Created a new component for this (LogicDeclare) which accepts the overall vars, but filters them with "currentScope". This allows users to see the initial variables for the specific LogicView as well.
+- [x] Showing declared variables. ~~May have to revert the removal of the "static" property of VAR_DEFAULT~~. Created a new component for this (LogicDeclare) which accepts the overall vars, but filters them with "currentScope". This allows users to see the initial variables for the specific LogicView as well.
 - [ ] comparisons can probably be done using the same architecture as math operations are using. This would allow for updateType.operation instead of the messy equation that currently exists for if/elseif logic
-- [ ] spend some time looking at parseType implementation (along with the above comparison suggestion).
 
 ## 05/30/2019
 ### Major

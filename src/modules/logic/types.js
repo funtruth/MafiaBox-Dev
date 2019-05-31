@@ -6,7 +6,7 @@ export const logicType = {
         index: 0,
         title: 'operator',
         icon: 'ion-md-code-working',
-        color: 'Mediumslateblue',
+        color: 'violet',
         dropdown: dropdownType.pickOperator,
     },
     variable: {
@@ -14,35 +14,35 @@ export const logicType = {
         index: 1,
         title: 'variable',
         icon: 'mdi mdi-pen',
-        color: 'Mediumslateblue',
+        color: 'violet',
     },
     function: {
         key: 'function',
         index: 2,
         title: 'function',
         icon: 'mdi mdi-function-variant',
-        color: '#3864ab',
+        color: 'fb',
     },
     update: {
         key: 'update',
         index: 3,
         title: 'update',
         icon: 'mdi mdi-code-braces',
-        color: '#a566b0',
+        color: 'pink',
     },
     event: {
         key: 'event',
         index: 4,
         title: 'event',
         icon: 'mdi mdi-calendar',
-        color: '#3864ab',
+        color: 'fb',
     },
     return: {
         key: 'return',
         index: 5,
         title: 'return',
         icon: 'mdi mdi-page-next',
-        color: '#1e9939',
+        color: 'green',
     },
 }
 
@@ -60,7 +60,7 @@ export const operatorType = {
         index: 1,
         title: 'else',
         icon: 'mdi mdi-redo-variant',
-        color: '#db4757',
+        color: 'red',
         logicType: logicType.operator.key,
     },
     elseif: {
@@ -68,7 +68,7 @@ export const operatorType = {
         index: 2,
         title: 'else if',
         icon: 'mdi mdi-swap-horizontal-variant',
-        color: '#2e6db4',
+        color: 'fb',
         logicType: logicType.operator.key,
     },
     forin: {
@@ -76,7 +76,7 @@ export const operatorType = {
         index: 3,
         title: 'for',
         icon: 'mdi mdi-sync',
-        color: '#f9812a',
+        color: 'orange',
         logicType: logicType.operator.key,
     },
 }
@@ -110,9 +110,11 @@ export const mathOperatorType = {
 }
 
 export const parseType = {
-    normal: 'parseType/normal',
-    variable: 'parseType/variable',
+    collection: 'parseType/collection',
     operation: 'parseType/operation',
+    string: 'parseType/string',
+    variable: 'parseType/variable',
+    wrapper: 'parseType/wrapper',
 }
 
 export const updateType = {

@@ -10,9 +10,7 @@ export function orderOfOp(assign) {
     switch(assign.mathType) {
         case mathType.operation:
             return `(${orderOfOp(assign.left||{})} ${assign.mathOperatorType.char} ${orderOfOp(assign.right||{})})`
-        case mathType.number:
-            return assign.value
-        case mathType.variable:
+        case mathType.value:
             return parseJS(assign.value)
         default:
             return ''
@@ -26,9 +24,6 @@ export function compileMath(assign) {
     switch(assign.mathType) {
         case mathType.value:
             if (assign.value === '') return true
-            break
-        case mathType.number:
-        case mathType.variable:
             break
         case mathType.operation:
             if (compileMath(assign.right) || compileMath(assign.left)) return true

@@ -11,6 +11,7 @@ export const APP_PALETTE = {
     white:      '#fff',
     active:     '#705772',
     blue:       '#18449b',
+    fb:         '#3864ab',
     purple:     '#6279CA',
     darkpurple: '#240041',
     red:        '#db4757',

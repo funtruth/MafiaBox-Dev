@@ -32,7 +32,7 @@ export default function PickNumUpdate(props) {
             value: item.key,
             assign: {
                 ...DEFAULT_ASSIGN,
-                math: mathType.number,
+                math: mathType.constant,
                 value: number,
             },
             display: item.title + ' ' + number,
@@ -52,12 +52,12 @@ export default function PickNumUpdate(props) {
                 mathOperator: item.mathOperator,
                 left: {
                     ...DEFAULT_ASSIGN,
-                    math: mathType.variable,
+                    math: mathType.value,
                     value: subfieldKey,
                 },
                 right: {
                     ...DEFAULT_ASSIGN,
-                    math: mathType.number,
+                    math: mathType.constant,
                     value: number,
                 },
             },

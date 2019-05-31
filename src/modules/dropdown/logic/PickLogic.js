@@ -3,7 +3,6 @@ import _ from 'lodash'
 
 import { logicType } from '../../common/types'
 import { DEFAULT_LOGIC } from '../../common/defaults';
-import { palette } from '../../components/Standards';
 
 import {
     DropItem,
@@ -11,21 +10,22 @@ import {
     DropTitle,
 } from '../components/Common'
 
-export default function PickLogic(props) {
-    const { logicItem } = props
-
-    //PickLogic does not support childKeys
+export default function PickLogic({
+    slate,
+    update,
+    showDropdown,
+}){
     let handleSelect = (item) => {
-        props.updatePage({
+        update({
             ...DEFAULT_LOGIC,
-            key: logicItem.key,
+            key: slate.key,
             logicType: item.key,
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     let renderItem = (item) => {
-        const chosen = item.key === logicItem.logicType
+        const chosen = item.key === slate.logicType
 
         if (item.dropdown) {
             return (
@@ -33,15 +33,12 @@ export default function PickLogic(props) {
                     key={item.key}
                     chosen={chosen.toString()}
                     dropdown={item.dropdown}
-                    showDropdown={props.showDropdown}
+                    showDropdown={showDropdown}
                     params={{
                         hoverKey: item.key,
                     }}
                     icon={item.icon}
                     text={item.key}
-                    style={{
-                        backgroundColor: chosen && palette(item.color),
-                    }}
                 />
             )
         }
@@ -53,9 +50,6 @@ export default function PickLogic(props) {
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
                 rightCheck
-                style={{
-                    backgroundColor: chosen && palette(item.color),
-                }}
                 text={item.title}
             />
         )
