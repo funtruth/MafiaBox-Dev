@@ -14,7 +14,7 @@ export default function LogicDetails(props) {
     return (
         <div className="column" style={{marginBottom: 8}}>
             <LogicDeclare {...props}/>
-            {logicItem.logicType === logicType.variable.key && 
+            {/*logicItem.logicType === logicType.variable.key && 
                 Object.keys(data).map(field => (
                     <LogicMutateItem
                         {...props}
@@ -24,8 +24,8 @@ export default function LogicDetails(props) {
                         path={[...path, 'data']}
                     />
                 ))
-            }
-            {logicItem.logicType === logicType.update.key &&
+            */}
+            {/*logicItem.logicType === logicType.update.key &&
                 Object.keys(data).map(field => (
                     <LogicUpdateItem
                         {...props}
@@ -35,7 +35,7 @@ export default function LogicDetails(props) {
                         path={[...path, 'data']}
                     />
                 ))
-            }
+            */}
         </div>
     )
 }

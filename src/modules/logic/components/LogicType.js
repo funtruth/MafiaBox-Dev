@@ -11,7 +11,7 @@ import {
  } from '../../components/Common';
 
 export default function LogicType(props) {
-    const { logicKey, logicItem, path, subpath } = props
+    const { logicKey, logicItem, path } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
@@ -27,7 +27,6 @@ export default function LogicType(props) {
             params={{
                 logicKey,
                 path,
-                subpath,
             }}
         >
             <LogicButton highlight={color} color={color}>

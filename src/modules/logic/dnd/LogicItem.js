@@ -1,15 +1,19 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { logicDNDType } from '../../common/types';
+import {
+    logicDNDType,
+    dropdownType,
+} from '../../common/types';
 import { COLLECT_DRAG } from '../../modal/ModalDND'
 
 import LogicType from '../components/LogicType';
 import LogicOptions from '../components/LogicOptions'
-import LogicPanels from '../components/LogicPanels';
-import LogicParsedPanels from '../components/LogicParsedPanels';
+import LogicParsed from '../components/LogicParsed';
 
 import {
+    DropClick,
+    LogicButton,
     Row,
 } from '../../components/Common';
 
@@ -23,13 +27,38 @@ const itemSource = {
 }
 
 function LogicItem(props) {
-    const { connectDragSource } = props
+    const { connectDragSource, logicItem, path } = props
+    const { logicType, source, byId, byIndex } = logicItem
+
+    const renderBody = () => { 
+        if (!logicType) {
+            return (
+                <DropClick
+                    dropdown={dropdownType.pickLogic}
+                    params={{
+                        path,
+                    }}
+                >
+                    <LogicButton color="grey">
+                        select logic ...
+                    </LogicButton>
+                </DropClick>
+            )
+        }
+
+        return (
+            <LogicParsed
+                varKey={source}
+                varRepo={byId}
+            />
+        )        
+    }
 
     return connectDragSource(
         <div>
             <Row>
                 <LogicType {...props}/>
-                <LogicParsedPanels {...props}/>
+                {renderBody()}
                 <LogicOptions {...props}/>
             </Row>
         </div>

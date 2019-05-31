@@ -359,6 +359,18 @@ export const comparisonType = {
             variableType.number.key,
         ],
     },
+    assign: {
+        key: 'assign',
+        code: '=',
+        title: 'assign value',
+        icon: 'mdi mdi-equal',
+    },
+    in: {
+        key: 'in',
+        code: 'in',
+        title: 'for loop',
+        icon: 'mdi mdi-sync',
+    },
 }
 
 export const returnType = {

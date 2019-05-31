@@ -9,8 +9,9 @@
 - [x] Showing declared variables. ~~May have to revert the removal of the "static" property of VAR_DEFAULT~~. Created a new component for this (LogicDeclare) which accepts the overall vars, but filters them with "~~currentScope~~logicKey". This allows users to see the initial variables for the specific LogicView as well.
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems.
 - [x] replaced all genUID functions with generatePushID which guarantee's uniqueness without using the repo. This has been expected for a while, but is pretty necessary for parsing architecture (creating more complex defaults)
-- [ ] comparisons can probably be done using the same architecture as math operations are using. This would allow for updateType.operation instead of the messy equation that currently exists for if/elseif logic
+- [x] comparisons can probably be done using the same architecture as math operations are using. This would allow for updateType.operation instead of the messy equation that currently exists for if/elseif logic
 - [ ] Figuring out how to show dropdown/modal based on the LogicPanel
+- [ ] defaults need to be fully developed at creation.
 
 ## 05/30/2019
 ### Major

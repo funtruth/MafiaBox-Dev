@@ -47,8 +47,8 @@ export function getVarTypeIcon(types) {
 }
 
 export function checkForKeys(a, b) {
-    var aKeys = Object.keys(a);
-    var bKeys = Object.keys(b);
+    var aKeys = Object.keys(a||{});
+    var bKeys = Object.keys(b||{});
     var xKeys = _.intersection(aKeys, bKeys)
     return xKeys.length > 0 ? xKeys : '';
 }

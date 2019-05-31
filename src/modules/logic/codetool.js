@@ -3,10 +3,12 @@ import {
     mathType,
     operatorType,
     parseType,
+    comparisonType,
 } from '../common/types'
 import {
     LOGIC_ITEM_DATA_SOURCE,
     LOGIC_ITEM_VAR,
+    LOGIC_ITEM_VAR_OPERATION,
 } from './defaults';
 
 import { parseJS } from './proptool'
@@ -45,6 +47,7 @@ export function compileMath(assign) {
 
 export function generateLogic(type) {
     const source = generatePushID(LOGIC_ITEM_DATA_SOURCE)
+    const middle = generatePushID('middle')
 
     switch(type) {
         case logicType.variable.key:
@@ -66,8 +69,6 @@ export function generateLogic(type) {
             return "";
         case operatorType.if.key:
         case operatorType.elseif.key:
-            const middle = generatePushID('middle')
-
             return {
                 source,
                 byId: {
@@ -100,6 +101,30 @@ export function generateLogic(type) {
                 }
             }
         case operatorType.forin.key:
+            return {
+                source,
+                byId: {
+                    [source]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: source,
+                        parseBy: parseType.wrapper,
+                        value: {
+                            ...operatorType[type].value,
+                            middle,
+                        },
+                    },
+                    [middle]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: middle,
+                        parseBy: parseType.operation,
+                        value: {
+                            ...LOGIC_ITEM_VAR_OPERATION,
+                            operator: comparisonType.assign.key,
+                            display: comparisonType.in.code,
+                        }
+                    }
+                }
+            }
         default:
             console.warn('not supported yet.')
             return "";
