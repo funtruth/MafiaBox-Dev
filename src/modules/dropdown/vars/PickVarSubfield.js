@@ -3,16 +3,17 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    updateType,
+    parseType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
     WILD_CHAR,
     concatField,
     getSubfields,
+    parseJS,
 } from '../../logic/proptool'
 import {
     VARTYPE_IS_UID,
@@ -32,10 +33,16 @@ import {
     PickVarSubfield should used to find the subfields of a field, AND THEN select
     This follows a different path than ShowSubfields because we want to be able to refer to game values
         example: gameState(phase)
+Used from:
+    PickVar
 */
-export default function PickVarSubfield(props) {
-    const { prefix, currentValue, attachVar } = props
-
+export default function PickVarSubfield({
+    prefix,
+    slate,
+    scopedVars,
+    update,
+    showDropdown,
+}){
     //get subfields to show
     const subfields = getSubfields(prefix)
 
@@ -43,14 +50,17 @@ export default function PickVarSubfield(props) {
     const isUidObject = subfields.length === 1 && subfields[0].subfield === WILD_CHAR
 
     const handleSelect = (item, key) => {
-        props.updatePage({
-            ...VAR_DEFAULTS,
-            updateType: updateType.variable,
-            value: concatField(prefix, key),
-            display: concatField(prefix, key),
+        const value = concatField(prefix, key)
+
+        update({
+            ...LOGIC_ITEM_VAR,
+            display: parseJS(value),
+            nativeValue: value,
+            parseBy: parseType.variable,
+            value,
             variableTypes: item.variableTypes,
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     const renderItem = (item, key) => {
@@ -62,7 +72,7 @@ export default function PickVarSubfield(props) {
                 <DropParent
                     key={key}
                     dropdown={dropdownType.pickVarSubfield}
-                    showDropdown={props.showDropdown}
+                    showDropdown={showDropdown}
                     params={{
                         prefix: combinedField,
                         subpath: [combinedField],
@@ -73,7 +83,7 @@ export default function PickVarSubfield(props) {
         }
         
         //if item not nested, check if item is currently selected
-        const chosen = currentValue.value === combinedField
+        const chosen = slate.value === combinedField
         return (
             <DropItem
                 key={key}
@@ -99,7 +109,7 @@ export default function PickVarSubfield(props) {
 
     if (subfields[0].subfield === WILD_CHAR) {
         //get all uids from attached variables
-        const uids = _.filter(attachVar, VARTYPE_IS_UID)
+        const uids = _.filter(scopedVars, VARTYPE_IS_UID)
 
         return (
             <DropScroll>

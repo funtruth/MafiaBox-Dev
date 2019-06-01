@@ -9,10 +9,7 @@ import { Tag } from '../../components/Common';
 
 const itemSource = {
     beginDrag(props) {
-        return {
-            ...props.item,
-            isWild: props.isWild,
-        }
+        return props.item
     }
 }
   

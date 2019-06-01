@@ -35,11 +35,11 @@ function Underline() {
 
 export default function ReplaceWildcard(props) {
     const { currentValue, otherDropdown } = props
-    const { value, wildcardValue } = currentValue
+    const { value, nativeValue } = currentValue
 
     const [target, setTarget] = useState('')
     const [fields, setFields] = useState(separateField(value))
-    const [wildfields] = useState(separateField(wildcardValue))
+    const [wildfields] = useState(separateField(nativeValue))
 
     //TODO do some recursive thing here to deal with wildcards inside wildcards ...
     const renderField = (field, index) => {

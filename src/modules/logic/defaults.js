@@ -29,6 +29,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     ---------------------------------------------------------------
     key
     display         what to show on the update button / FRONT-END
+    nativeValue     original value (can contain wildcard chars)
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
                     payload for parseType.variable, value in (foo)(bar) form
@@ -36,15 +37,13 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
                     payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
                     payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
     variableTypes   list of variableTypes
-    wildcardValue   original value if originally a wildcard var
 */
 export const LOGIC_ITEM_VAR = {
-    key: "",
     display: "",
+    nativeValue: "",
     parseBy: "",
     value: "",
     variableTypes: "",
-    wildcardValue: "",
 }
 
 /* logicItem.byId.[logicKey].value
@@ -75,31 +74,7 @@ export const LOGIC_ITEM_VAR_WRAPPER = {
     right: "",
 }
 
-/* DEPRECATED @params logicItem.data
-    FIELD           DESCRIPTION
-    ---------------------------------------------------------------
-    assign          DEPRECATED, moving to operation
-    display         what to show on the update button / FRONT-END
-    operation       TODO
-    parseBy         parseType, how the LogicEngine should read the data
-    string          string object {byId, byIndex}
-    updateType      DEPRECATED, moving to parse
-    value           variable value in (foo)(bar) form
-    variableTypes   list of variableTypes
-    wildcardValue   original value if originally a wildcard var
-*/
-export const VAR_DEFAULTS = {
-    assign: "",
-    display: "",
-    parse: "",
-    string: "",
-    updateType: "",
-    value: "",
-    variableTypes: "",
-    wildcardValue: "",
-}
-
-/* @params variable, this is different from VAR_DEFAULTS as it only pertains to the structure of the variable, not the descriptor for the state of a variable. Examples are done with the object foo.bar
+/* @params variable, this is different from LOGIC_ITEM_VAR as it only pertains to the structure of the variable, not the descriptor for the state of a variable. Examples are done with the object foo.bar
     FIELD           DESCRIPTION              EXAMPLE         TYPE
     ---------------------------------------------------------------
     key             entire variable name,    (foo)(bar)      string

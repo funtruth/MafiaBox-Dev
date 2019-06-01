@@ -4,10 +4,11 @@ import _ from 'lodash'
 import {
     dropdownType,
     updateType,
+    parseType,
 } from '../../common/types'
 import {
     rssMap,
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
@@ -20,6 +21,7 @@ import {
     DropTitle,
 } from '../components/Common'
 
+//Used from: LogicParsed
 export default function PickVar({
     slate,
     scopedVars,
@@ -28,11 +30,12 @@ export default function PickVar({
 }) {
     const handleSelect = (item) => {
         update({
-            ...VAR_DEFAULTS,
-            value: item.key,
+            ...LOGIC_ITEM_VAR,
             display: parseJS(item.key),
+            value: item.key,
+            nativeValue: item.key,
+            parseBy: parseType.variable,
             variableTypes: item.variableTypes,
-            updateType: updateType.uid, //TODO wtf lol
         })
         showDropdown();
     }

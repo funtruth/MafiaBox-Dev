@@ -10,11 +10,14 @@ import {
 import {
     choiceMap,
     DEFAULT_ASSIGN,
-    DEFAULT_LOGIC,
     DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,
-    VAR_DEFAULTS,
+    DEFAULT_LOGIC,
+    LOGIC_ITEM_DATA_SOURCE,
+    LOGIC_ITEM_VAR,
+    LOGIC_ITEM_VAR_OPERATION,
+    LOGIC_ITEM_VAR_WRAPPER,
 } from '../logic/defaults'
 
 export {
@@ -25,9 +28,12 @@ export {
     DEFAULT_EVENT_LISTENER,
     DEFAULT_GAME_CHOICE,
     DEFAULT_LOGIC,
+    LOGIC_ITEM_DATA_SOURCE,
+    LOGIC_ITEM_VAR,
+    LOGIC_ITEM_VAR_OPERATION,
+    LOGIC_ITEM_VAR_WRAPPER,
     DEFAULT_ROLE_SETUP,
     DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,
-    VAR_DEFAULTS,
 }

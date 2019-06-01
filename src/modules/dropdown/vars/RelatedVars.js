@@ -5,7 +5,7 @@ import {
     modalType,
 } from '../../common/types';
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
@@ -38,28 +38,28 @@ export default function RelatedVars(props) {
 
     const [tameVars, wildVars] = useVarType(variableTypes, attachVar)
 
-    const handleSelect = (item, isWild) => {
+    const handleSelect = (item) => {
         if (onClick) {
-            onClick(item, isWild)
+            onClick(item)
             return;
         }
 
         props.updatePage({
-            ...VAR_DEFAULTS,
-            value: item.key,
-            wildcardValue: isWild ? item.key : '',
+            ...LOGIC_ITEM_VAR,
             display: parseJS(item.key),
+            nativeValue: item.key,
+            value: item.key,
             updateType: updateType.variable,
             variableTypes: item.variableTypes,
         })
         props.showDropdown();
     }
 
-    const renderItem = (isWild) => (item) => {
+    const renderItem = (item) => {
         return (
             <DropItem
                 key={item.key}
-                onClick={() => handleSelect(item, isWild)}
+                onClick={() => handleSelect(item)}
                 text={item.key}
             />
         )
@@ -105,9 +105,9 @@ export default function RelatedVars(props) {
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
-            {tameVars.map(renderItem(false))}
+            {tameVars.map(renderItem)}
             <DropTitle>incomplete vars</DropTitle>
-            {wildVars.map(renderItem(true))}
+            {wildVars.map(renderItem)}
             <DropTitle>other</DropTitle>
             {renderNumber()}
             {renderString()}

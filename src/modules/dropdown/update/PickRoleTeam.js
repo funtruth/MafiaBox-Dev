@@ -7,7 +7,7 @@ import {
     updateType,
 } from '../../common/types';
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
@@ -26,7 +26,7 @@ export default connect(
 
     const handleSelect = (item) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key,
             display: item.title,
             variableTypes: [

@@ -11,7 +11,7 @@ import {
 } from '../../common/types'
 import {
     DEFAULT_ASSIGN,
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults';
 
 import {
@@ -28,7 +28,7 @@ export default function PickNumUpdate(props) {
     //handle basic setTo
     const setTo = (item, number) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key,
             assign: {
                 ...DEFAULT_ASSIGN,
@@ -44,7 +44,7 @@ export default function PickNumUpdate(props) {
     //handle increments/decrements
     const selectDynamic = (item, number) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key,
             assign: {
                 ...DEFAULT_ASSIGN,

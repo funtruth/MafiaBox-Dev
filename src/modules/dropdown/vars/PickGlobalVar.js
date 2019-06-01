@@ -10,7 +10,7 @@ import {
 } from '../../common/types';
 import {
 
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
@@ -52,7 +52,7 @@ export default connect(
             })
         } else {
             props.updatePage({
-                ...VAR_DEFAULTS,
+                ...LOGIC_ITEM_VAR,
                 value: item.key,
                 display: parseJS(item.key),
                 updateType: updateType.variable,

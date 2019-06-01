@@ -48,7 +48,6 @@ export default function EventDetailer(props) {
                 {wildVars.map(item => (
                     <StringVarDrag
                         key={item.key}
-                        isWild
                         item={item}
                     />
                 ))}

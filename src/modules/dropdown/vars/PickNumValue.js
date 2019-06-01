@@ -6,7 +6,7 @@ import {
 } from '../../common/types'
 import {
     DEFAULT_ASSIGN,
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults';
 
 import { useAutofocus } from '../../hooks/Hooks'
@@ -42,7 +42,7 @@ export default function PickNumValue({
     //changing value @ byId.[mathKey].value
     const updateSlate = () => {
         update({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             display: value,
             value,
             variableTypes: [variableType.number.key],
@@ -64,7 +64,7 @@ export default function PickNumValue({
                 key: newKey,
                 math: mathType.constant,
                 value: {
-                    ...VAR_DEFAULTS,
+                    ...LOGIC_ITEM_VAR,
                     display: value,
                     value,
                     variableTypes: [variableType.number.key],

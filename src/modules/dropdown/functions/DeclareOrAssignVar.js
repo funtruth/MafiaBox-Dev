@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import _ from 'lodash'
 
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
     DEFAULT_VAR_ID,
 } from '../../common/defaults';
 
@@ -22,6 +22,7 @@ import {
     DropTitle,
 } from '../components/Common'
 import Row from '../../components/Row';
+import { parseType } from '../../logic/types';
 
 //TODO this is invalid
 export default function DeclareOrAssignVar({
@@ -79,9 +80,11 @@ export default function DeclareOrAssignVar({
             path: [...path, 'data'],
             update: {
                 [item.key]: {
-                    ...VAR_DEFAULTS,
+                    ...LOGIC_ITEM_VAR,
                     value: item.key,
+                    nativeValue: item.key,
                     display: parseJS(item.key),
+                    parseBy: parseType.variable,
                     variableTypes: item.variableTypes || "",
                 },
             }

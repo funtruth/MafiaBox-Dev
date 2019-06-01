@@ -6,7 +6,7 @@ import {
     healthUpdateType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
@@ -17,7 +17,7 @@ export default function PickHealth(props) {
 
     const handleSelect = (item) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key,
             display: item.title,
             updateType: updateType.health,

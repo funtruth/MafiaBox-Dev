@@ -4,7 +4,7 @@ import {
     updateType,
 } from '../../logic/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
@@ -32,7 +32,7 @@ export default function PickTimer(props) {
         const timer = (60 * parseInt(min) + parseInt(sec)) * 1000
         
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: timer,
             display: min + 'm' + sec + 's',
             updateType: updateType.timer,

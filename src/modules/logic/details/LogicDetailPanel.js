@@ -20,10 +20,8 @@ export default function LogicDetailPanel(props) {
     const { params, field, dropdown, color, isLastPanel, currentValue } = props
     const { display } = currentValue
     
-    const wasWildcard = isLastPanel && currentValue.wildcardValue
-    const hasWildcard = isLastPanel &&
-        currentValue.updateType === updateType.variable &&
-        separateField(currentValue.value).includes(WILD_CHAR)
+    const wasWildcard = isLastPanel && separateField(currentValue.nativeValue).includes(WILD_CHAR)
+    const hasWildcard = isLastPanel && separateField(currentValue.value).includes(WILD_CHAR)
 
     return (
         <div

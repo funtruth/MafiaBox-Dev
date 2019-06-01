@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux'
 import {
     dropdownType,
     logicType,
+    modalType,
     operatorType,
     parseType,
 } from '../../common/types'
+import { LOGIC_ITEM_VAR } from '../defaults';
 
-import { concatField } from '../proptool';
+import generatePushID from '../../common/generatePushID';
 import { showModal } from '../../modal/ModalReducer'
 import { showDropdown } from '../../dropdown/DropdownReducer'
 import { updateGeneral } from '../../page/PageReducer'
@@ -19,27 +21,26 @@ import {
     Row,
     Body,
 } from '../../components/Common';
-import { modalType } from '../../modal/types';
-import generatePushID from '../../common/generatePushID';
-import { LOGIC_ITEM_VAR } from '../defaults';
 
 export default function LogicParsed(props) {
     const dispatch = useDispatch();
     const { type, varRepo, varKey, path, index } = props
-    const varItem = varRepo[varKey] || {}
-    const { value, parseBy } = varItem || {}
-    const { byIndex } = value || {}
 
     if (!varKey) {
         return null;
     }
+
+    const varItem = varRepo[varKey] || {}
+    const varPath = [...path, varKey]
+    const { display, value, parseBy } = varItem || {}
+    const { byIndex } = value || {}
 
     //add a new item to a collection
     const addItem = () => {
         const newKey = generatePushID('event')
 
         dispatch(updateGeneral({
-            path: [...path, 'byId', varKey],
+            path: varPath,
             update: {
                 value: byIndex ? [...byIndex, newKey] : [newKey]
             },
@@ -55,19 +56,13 @@ export default function LogicParsed(props) {
         }))
     }
 
-    const dropdown = (key, e) => {
-        dispatch(showDropdown(key, e, {
-
-        }))
-    }
-
     const panelClick = (e) => {
         switch(type) {
             case logicType.variable.key:
-                dropdown(dropdownType.declareOrAssignVar, e)
+                dispatch(showDropdown(dropdownType.declareOrAssignVar, e))
                 break;
             case logicType.update.key:
-                dropdown(dropdownType.showSubfields, e)
+                dispatch(showDropdown(dropdownType.showSubfields, e))
                 break;
             case logicType.event.key:
                 addItem();
@@ -78,16 +73,16 @@ export default function LogicParsed(props) {
             case operatorType.if.key:
             case operatorType.elseif.key:
                 if (index === 0) {
-                    dropdown(dropdownType.pickVar, e)
+                    dispatch(showDropdown(dropdownType.pickVar, e, {path: varPath}))
                 } else if (index === 1) {
-                    dropdown(dropdownType.pickVarWithType, e)
+                    dispatch(showDropdown(dropdownType.pickVarWithType, e))
                 }
                 break;
             case operatorType.forin.key:
                 if (index === 0) {
                     ;
                 } else if (index === 1) {
-                    dropdown(dropdownType.pickUidObject, e)
+                    dispatch(showDropdown(dropdownType.pickUidObject, e))
                 }
                 break;
             case logicType.function.key:
@@ -102,7 +97,12 @@ export default function LogicParsed(props) {
             return (
                 <Row>
                     <LogicParsed {...props} index={0} varKey={varItem.value.left}/>
-                    <DropClick dropdown={dropdownType.pickComparison}>
+                    <DropClick
+                        dropdown={dropdownType.pickComparison}
+                        params={{
+                            path: varPath,
+                        }}
+                    >
                         <LogicButton>
                             {varItem.value.display || 'operator'}
                         </LogicButton>
@@ -111,9 +111,7 @@ export default function LogicParsed(props) {
                 </Row>
             )
         case parseType.wrapper:
-            return (
-                <LogicParsed {...props} varKey={varItem.value.middle}/>
-            )
+            return <LogicParsed {...props} varKey={varItem.value.middle}/>
         case parseType.collection:
             return (
                 <Body>
@@ -125,8 +123,8 @@ export default function LogicParsed(props) {
         case parseType.variable:
         default:
             return (
-                <LogicButton onClick={panelClick}>
-                    Untitled
+                <LogicButton color={display ? 'white' : 'grey'} onClick={panelClick}>
+                    {display || 'variable'}
                 </LogicButton>
             )
     }

@@ -35,7 +35,7 @@
 ### Picking a Variable
 - user clicks on the left or right LogicPanel in the group of 3 LogicPanels to show PickVar
 - user finds their variable
-- variable is stored using VAR_DEFAULTS format in dropdown/types
+- variable is stored using LOGIC_ITEM_VAR format in dropdown/types
 
 ## ELSE Operator
 - not much going on here, user cannot apply logic to an else operator

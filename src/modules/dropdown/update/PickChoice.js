@@ -5,7 +5,7 @@ import {
     updateType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
@@ -24,7 +24,7 @@ export default function PickChoice(props) {
 
     const handleSelect = (item) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key || "$\"\"", //HACK
             updateType: updateType.uid,
         })

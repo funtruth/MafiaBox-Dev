@@ -5,7 +5,7 @@ import {
     variableType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
     rssMap,
 } from '../../common/defaults'
 
@@ -40,7 +40,7 @@ export default function PickUidObject(props) {
         props.updatePage({
             declare: {
                 [newName]: {
-                    ...VAR_DEFAULTS,
+                    ...LOGIC_ITEM_VAR,
                     value: newName,
                     display: parseJS(newName),
                     variableTypes: [

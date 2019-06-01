@@ -6,7 +6,7 @@ import {
     updateType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
@@ -25,7 +25,7 @@ export default function PickVarWithType(props) {
 
     const handleSelect = (item) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             updateType: updateType.uid,
             value: item.key,
             display: item.key,
@@ -64,7 +64,7 @@ export default function PickVarWithType(props) {
 
     const setConstant = (value) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             adjust: value,
             display: value,
             updateType: updateType.number,

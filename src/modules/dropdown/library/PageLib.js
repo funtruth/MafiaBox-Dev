@@ -5,7 +5,7 @@ import {
     updateType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import DropTitle from '../components/DropTitle';
@@ -17,7 +17,7 @@ function PageLib(props) {
 
     const handleClick = (pageKey) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: pageKey,
             display: pageRepo[pageKey].title,
             updateType: updateType.page,

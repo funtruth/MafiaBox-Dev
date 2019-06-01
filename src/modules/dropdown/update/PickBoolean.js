@@ -7,7 +7,7 @@ import {
     variableType,
 } from '../../common/types'
 import {
-    VAR_DEFAULTS,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
 import {
@@ -21,7 +21,7 @@ export default function PickBoolean(props) {
 
     const handleSelect = (item) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: item.key,
             display: item.key,
             updateType: updateType.boolean,

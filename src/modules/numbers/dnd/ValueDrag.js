@@ -2,7 +2,7 @@ import React from 'react'
 import { DragSource } from 'react-dnd'
 
 import { mathType, variableType } from '../../common/types';
-import { VAR_DEFAULTS } from '../../logic/defaults';
+import { LOGIC_ITEM_VAR } from '../../logic/defaults';
 
 import { COLLECT_DRAG } from '../../common/arrows';
 
@@ -13,16 +13,16 @@ import { parseJS } from '../../logic/proptool';
 
 const itemSource = {
     beginDrag(props) {
-        const { item, isWild } = props
+        const { item } = props
 
         return {
             math: mathType.value,
             value: {
-                ...VAR_DEFAULTS,
+                ...LOGIC_ITEM_VAR,
                 display: parseJS(item.key),
+                nativeValue: item.key,
                 value: item.key,
                 variableTypes: [variableType.number.key],
-                wildcardValue: isWild ? item.key : "",
             },
         }
     }

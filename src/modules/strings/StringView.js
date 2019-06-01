@@ -4,7 +4,7 @@ import _ from 'lodash'
 
 import { ITEM_TYPE } from './types';
 import { DEFAULT_STRING } from './defaults';
-import { VAR_DEFAULTS } from '../logic/defaults';
+import { LOGIC_ITEM_VAR } from '../logic/defaults';
 
 import { usePath } from '../hooks/Hooks';
 import { updateGeneral } from '../page/PageReducer'
@@ -103,11 +103,11 @@ export default function StringView({path, scopedVars}) {
                     key: newKey,
                     string: item.key,
                     variable: {
-                        ...VAR_DEFAULTS,
+                        ...LOGIC_ITEM_VAR,
                         display: parseJS(item.key),
+                        nativeValue: item.key,
                         value: item.key,
                         variableTypes: item.variableTypes,
-                        wildcardValue: item.isWild ? item.key : '',
                     },
                     color,
                     type: ITEM_TYPE.variable,

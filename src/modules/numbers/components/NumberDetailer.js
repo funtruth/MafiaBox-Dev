@@ -54,7 +54,6 @@ export default function NumberDetailer(props) {
                 {wildVars.map(item => (
                     <ValueDrag
                         key={item.key}
-                        isWild
                         item={item}
                     />
                 ))}

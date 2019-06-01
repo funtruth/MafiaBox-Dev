@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { updateType } from '../../common/types'
-import { VAR_DEFAULTS } from '../../common/defaults'
+import { LOGIC_ITEM_VAR } from '../../common/defaults'
 
 import {
     DropItem,
@@ -23,7 +23,7 @@ function PickPhase(props) {
     
     const handleClick = (pageKey) => {
         props.updatePage({
-            ...VAR_DEFAULTS,
+            ...LOGIC_ITEM_VAR,
             value: pageKey,
             display: pageRepo[pageKey].title,
             updateType: updateType.page,
