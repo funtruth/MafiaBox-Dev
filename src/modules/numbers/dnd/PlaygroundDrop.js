@@ -1,7 +1,8 @@
 import React from 'react'
+import './Playground.css'
 import { DropTarget } from 'react-dnd'
 
-import { mathType } from '../../common/types';
+import { parseType } from '../../common/types';
 
 import ActiveOp from '../components/ActiveOp';
 import PlaygroundSideDrop from './PlaygroundSideDrop';
@@ -74,7 +75,7 @@ function PlaygroundDrop(props) {
 }
 
 export default DropTarget(
-    [mathType.operation, mathType.value],
+    [parseType.operation, parseType.variable],
     itemTarget,
     collect
 )(PlaygroundDrop);

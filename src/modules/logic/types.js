@@ -97,31 +97,36 @@ export const operatorType = {
     },
 }
 
-export const mathOperatorType = {
+export const parseOperatorType = {
     add: {
         key: 'add',
-        char: '+',
+        display: '+',
         icon: 'mdi mdi-plus',
+        color: 'green',
     },
     subtract: {
         key: 'subtract',
-        char: '-',
+        display: '-',
         icon: 'mdi mdi-minus',
+        color: 'red',
     },
     multiply: {
         key: 'multiply',
-        char: '*',
+        display: '*',
         icon: 'mdi mdi-close',
+        color: 'blue',
     },
     divide: {
         key: 'divide',
-        char: '/',
+        display: '/',
         icon: 'mdi mdi-division',
+        color: 'orange',
     },
     mod: {
         key: 'mod',
-        char: '%',
+        display: '%',
         icon: 'mdi mdi-percent',
+        color: 'yellow',
     },
 }
 
@@ -129,6 +134,7 @@ export const parseType = {
     collection: 'parseType/collection',
     operation: 'parseType/operation',
     string: 'parseType/string',
+    number: 'parseType/number',
     variable: 'parseType/variable',
     wrapper: 'parseType/wrapper',
 }
@@ -145,14 +151,14 @@ export const numUpdateType = {
         index: 1,
         title: 'increment by',
         icon: 'mdi mdi-alpha-n-box',
-        mathOperatorType: mathOperatorType.add,
+        parseOperatorType: parseOperatorType.add,
     },
     decrBy: {
         key: 'decrBy',
         index: 2,
         title: 'decrement by',
         icon: 'ion-md-download',
-        mathOperatorType: mathOperatorType.subtract,
+        parseOperatorType: parseOperatorType.subtract,
     },
 }
 
@@ -378,12 +384,6 @@ export const returnType = {
         title: 'false',
         icon: 'mdi mdi-close-circle',
     },
-}
-
-export const mathType = {
-    value: 'mathType/value',
-    constant: 'mathType/constant',
-    operation: 'mathType/operation',
 }
 
 export const logicDNDType = {

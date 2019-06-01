@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { mathType, mathOperatorType } from '../../common/types'
+import { parseType } from '../../common/types'
 
 import ValueDrop from '../dnd/ValueDrop'
 import BasicOpDrop from '../dnd/BasicOpDrop';
@@ -33,20 +33,20 @@ export default function ActiveOp(props) {
     }
 
     const mathItem = mathRepo[mathKey]
-    const { math, mathOperator, value, left, right } = mathItem
-
-    switch(math) {
-        case mathType.value:
-        case mathType.constant:
+    const { parseBy, value, display } = mathItem
+    const { left, right } = value
+    
+    switch(parseBy) {
+        case parseType.variable:
             return (
                 <ValueDrop
                     {...props}
                     mathItem={mathItem}
                 >
-                    {value.display}
+                    {display}
                 </ValueDrop>
             )
-        case mathType.operation:
+        case parseType.operation:
             return (
                 <BasicOpDrop
                     {...props}
@@ -58,8 +58,8 @@ export default function ActiveOp(props) {
                         mathKey={left}
                         position="left"
                     />
-                    <Text>
-                        {mathOperatorType[mathOperator].char}
+                    <Text before="xxs" after="xxs">
+                        {display}
                     </Text>
                     <ActiveOp
                         {...props}

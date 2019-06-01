@@ -522,6 +522,7 @@ export function receiveAction({type, payload}) {
         }
         
         try {
+            console.log('receiveAction', {batchUpdate})
             firebase.database().ref(pathToRepo).update(batchUpdate)
         } catch {
             console.log('there was an error updating to Firebase', {batchUpdate})

@@ -68,8 +68,7 @@ export default function RelatedVars(props) {
     //Advanced options
     const handleCalculator = () => {
         props.showModal(modalType.editNumber, {
-            path: [...path, 'assign'],
-            //editNumber correlated to NumberView right now which is incorrect
+            path,
         })
         props.showDropdown();
     }
@@ -87,6 +86,7 @@ export default function RelatedVars(props) {
     
     const handleString = () => {
         props.showModal(modalType.editNumber, {
+            path,
         })
         props.showDropdown();
     }

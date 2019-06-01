@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import { 
-    mathOperatorType,
+    parseOperatorType,
     variableType,
 } from '../../common/types';
 
@@ -25,7 +25,7 @@ export default function NumberDetailer(props) {
         scopedVars,
     )
 
-    const operators = _.toArray(mathOperatorType)
+    const operators = _.toArray(parseOperatorType)
 
     return (
         <Body style={{flex: 0.35}}>

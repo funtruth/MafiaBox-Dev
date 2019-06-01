@@ -43,8 +43,6 @@ import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
 
-import PickOpType from './calc/PickOpType'
-
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
 import PickVarWithType from './vars/PickVarWithType';
@@ -163,9 +161,6 @@ export default function DropdownKeys(props) {
             return <PickUidAssign {...props}/>
         case dropdownType.declareVarType:
             return <DeclareVarType {...props}/>
-
-        case dropdownType.pickOpType:
-            return <PickOpType {...props}/>
 
         case dropdownType.pickBoolean: 
             return <PickBoolean {...props}/>

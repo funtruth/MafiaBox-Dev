@@ -14,7 +14,9 @@ function createWindow() {
     minWidth: 700,
   });
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  mainWindow.webContents.openDevTools()
+  if (process.env.NODE_ENV === `development`) {
+    mainWindow.webContents.openDevTools()
+  }
   mainWindow.on('closed', () => mainWindow = null);
 }
 

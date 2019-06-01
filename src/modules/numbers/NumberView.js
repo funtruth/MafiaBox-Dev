@@ -1,9 +1,10 @@
-import React from 'react'
-import './NumberView.css'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { DEFAULT_ASSIGN } from '../logic/defaults';
+import { LOGIC_ITEM_VAR } from '../logic/defaults';
+import { parseType, variableType } from '../logic/types';
 
+import { orderOfOp } from '../logic/codetool';
 import { usePath } from '../hooks/Hooks';
  import generatePushID from '../common/generatePushID';
 import { updateGeneral } from '../page/PageReducer'
@@ -19,22 +20,39 @@ import {
     EditNumber
     
 VISUALS
-    mathType=value
+    parseType=value
         |[value]|
-    mathType=operator
+    parseType=operator
         |[value] (operator) [value]|
 */
 export default function NumberView({path, scopedVars}){
     const dispatch = useDispatch();
+    
+    const { value, display } = usePath(path)
     const {
         byId: mathRepo,
         source,
-    } = usePath(path)
+    } = value || {}
+
+    useEffect(() => {
+        if (!mathRepo || !source) return;
+        const newDisplay = orderOfOp(mathRepo, source)
+        if (newDisplay !== display) {
+            dispatch(updateGeneral({
+                path,
+                update: {
+                    display: orderOfOp(mathRepo, source),
+                    parseBy: parseType.number,
+                    variableTypes: [variableType.number.key],
+                }
+            }))
+        }
+    }, [mathRepo, source])
 
     //clear all math
     const clearSlate = () => {
         dispatch(updateGeneral({
-            path,
+            path: [...path, 'value'],
             update: {
                 byId: "",
                 source: "",
@@ -47,11 +65,11 @@ export default function NumberView({path, scopedVars}){
         const newKey = generatePushID('math')
 
         dispatch(updateGeneral({
-            path,
+            path: [...path, 'value'],
             update: {
                 byId: {
                     [newKey]: {
-                        ...DEFAULT_ASSIGN,
+                        ...LOGIC_ITEM_VAR,
                         key: newKey,
                         ...item,
                     }
@@ -64,12 +82,11 @@ export default function NumberView({path, scopedVars}){
     //dropping BasicOp onto BasicOp
     const changeValue = (mathKey, item) => {
         dispatch(updateGeneral({
-            path: [...path, 'byId', mathKey],
-            update: {
-                ...DEFAULT_ASSIGN,
-                key: mathKey,
-                ...item,
-            }
+            path: [...path, 'value', 'byId', mathKey, 'display'],
+            update: item.display,
+        }, {
+            path: [...path, 'value', 'byId', mathKey, 'value', 'operator'],
+            update: item.value.operator,
         }))
     }
 
@@ -78,17 +95,18 @@ export default function NumberView({path, scopedVars}){
         const newKey = generatePushID('math')
 
         dispatch(updateGeneral({
-            path,
-            update: {
-                source: newKey,
-            },
+            path: [...path, 'value', 'source'],
+            update: newKey
         }, {
-            path: [...path, 'byId', newKey],
+            path: [...path, 'value', 'byId', newKey],
             update: {
-                ...DEFAULT_ASSIGN,
+                ...LOGIC_ITEM_VAR,
                 ...item,
                 key: newKey,
-                [position]: source,
+                value: {
+                    ...item.value,
+                    [position]: source,
+                },
             },
         }))
     }
@@ -98,15 +116,13 @@ export default function NumberView({path, scopedVars}){
         const newKey = generatePushID('math')
         
         dispatch(updateGeneral({
-            path: [...path, 'byId', restItem.key],
-            update: {
-                [position]: newKey,
-            },
+            path: [...path, 'value', 'byId', restItem.key, 'value', position],
+            update: newKey,
         }, {
-            path: [...path, 'byId'],
+            path: [...path, 'value', 'byId'],
             update: {
                 [newKey]: {
-                    ...DEFAULT_ASSIGN,
+                    ...LOGIC_ITEM_VAR,
                     key: newKey,
                     ...dragItem,
                 },
@@ -117,7 +133,7 @@ export default function NumberView({path, scopedVars}){
     const mainProps = {
         mathRepo,
         source,
-        path,
+        path: [...path, 'value'],
         scopedVars,
         clearSlate,
         initValue,

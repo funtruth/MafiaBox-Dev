@@ -1,12 +1,11 @@
 import {
     logicType,
-    mathType,
+    parseOperatorType,
     operatorType,
     parseType,
     comparisonType,
 } from '../common/types'
 import {
-    LOGIC_ITEM_DATA_SOURCE,
     LOGIC_ITEM_VAR,
     LOGIC_ITEM_VAR_OPERATION,
 } from './defaults';
@@ -14,35 +13,20 @@ import {
 import { parseJS } from './proptool'
 import generatePushID from '../common/generatePushID';
 
-//TODO this whole file is garbage now :)
-export function orderOfOp(assign) {
-    if (!assign) return ''
+export function orderOfOp(repo, key) {
+    if (!repo) return ""
+
+    const item = repo[key]
+    if (!item) return ""
     
-    switch(assign.mathType) {
-        case mathType.operation:
-            return `(${orderOfOp(assign.left||{})} ${assign.mathOperatorType.char} ${orderOfOp(assign.right||{})})`
-        case mathType.value:
-            return parseJS(assign.value)
+    switch(item.parseBy) {
+        case parseType.operation:
+            return `(${orderOfOp(repo, item.value.left)} ${item.display} ${orderOfOp(repo, item.value.right)})`
+        case parseType.variable:
+            return parseJS(item.value)
         default:
             return ''
     }
-}
-
-//return true if there is error
-export function compileMath(assign) {
-    if (!assign) return true
-
-    switch(assign.mathType) {
-        case mathType.value:
-            if (assign.value === '') return true
-            break
-        case mathType.operation:
-            if (compileMath(assign.right) || compileMath(assign.left)) return true
-            break
-        default:
-            return true
-    }
-    return false
 }
 
 export function generateLogic(type) {

@@ -1,7 +1,8 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
-import { mathType } from '../../common/types';
+import { parseType, parseOperatorType } from '../../common/types';
+import BasicOp from '../components/BasicOp';
 
 const itemTarget = {
     drop(props, monitor) {
@@ -23,17 +24,26 @@ function collect(connect, monitor) {
 }
   
 function BasicOpDrop(props) {
-    const { connectDropTarget, isOver, children } = props
+    const { connectDropTarget, isOver, children, mathItem } = props
+    const { value } = mathItem
+    const { operator } = value
 
+    const mathColor = parseOperatorType[operator].color
+    
     return connectDropTarget(
-        <div className="basic-op" style={{ backgroundColor: isOver && '#6279CA' }}>
-            {children}
+        <div>
+            <BasicOp
+                bg={isOver ? 'purple' : 'charcoal'}
+                color={mathColor}
+            >
+                {children}
+            </BasicOp>
         </div>
     );
 }
 
 export default DropTarget(
-    [mathType.operation, mathType.value],
+    [parseType.operation, parseType.variable],
     itemTarget,
     collect
 )(BasicOpDrop);

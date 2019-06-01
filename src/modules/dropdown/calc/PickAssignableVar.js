@@ -1,9 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
 
+import { parseType } from '../../common/types';
 import {
-    mathType,
-    DEFAULT_ASSIGN,
+    LOGIC_ITEM_VAR,
 } from '../../modal/vars/components/types';
 
 import {
@@ -17,8 +17,8 @@ export default function PickAssignableVar(props) {
 
     let handleSelect = (item) => {
         props.updatePage({
-            ...DEFAULT_ASSIGN,
-            math: mathType.value.key,
+            ...LOGIC_ITEM_VAR,
+            parseBy: parseType.variable,
             value: item,
         })
         props.showDropdown()

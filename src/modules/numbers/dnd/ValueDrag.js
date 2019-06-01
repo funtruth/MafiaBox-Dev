@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { mathType, variableType } from '../../common/types';
+import { parseType, variableType } from '../../common/types';
 import { LOGIC_ITEM_VAR } from '../../logic/defaults';
 
 import { COLLECT_DRAG } from '../../common/arrows';
@@ -16,14 +16,12 @@ const itemSource = {
         const { item } = props
 
         return {
-            math: mathType.value,
-            value: {
-                ...LOGIC_ITEM_VAR,
-                display: parseJS(item.key),
-                nativeValue: item.key,
-                value: item.key,
-                variableTypes: [variableType.number.key],
-            },
+            ...LOGIC_ITEM_VAR,
+            display: parseJS(item.key),
+            parseBy: parseType.variable,
+            variableTypes: [variableType.number.key],
+            nativeValue: item.key,
+            value: item.key,
         }
     }
 }
@@ -37,7 +35,7 @@ function ValueDrag(props) {
 }
 
 export default DragSource(
-    mathType.value,
+    parseType.variable,
     itemSource,
     COLLECT_DRAG,
 )(ValueDrag);

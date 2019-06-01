@@ -3,14 +3,12 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    mathType,
     modalType,
     numUpdateType,
     variableType,
     parseType,
 } from '../../common/types'
 import {
-    DEFAULT_ASSIGN,
     LOGIC_ITEM_VAR,
 } from '../../common/defaults';
 
@@ -31,8 +29,8 @@ export default function PickNumUpdate(props) {
             ...LOGIC_ITEM_VAR,
             value: item.key,
             assign: {
-                ...DEFAULT_ASSIGN,
-                math: mathType.constant,
+                ...LOGIC_ITEM_VAR,
+                parseBy: parseType.variable,
                 value: number,
             },
             display: item.title + ' ' + number,
@@ -46,21 +44,6 @@ export default function PickNumUpdate(props) {
         props.updatePage({
             ...LOGIC_ITEM_VAR,
             value: item.key,
-            assign: {
-                ...DEFAULT_ASSIGN,
-                math: mathType.operation,
-                mathOperator: item.mathOperator,
-                left: {
-                    ...DEFAULT_ASSIGN,
-                    math: mathType.value,
-                    value: subfieldKey,
-                },
-                right: {
-                    ...DEFAULT_ASSIGN,
-                    math: mathType.constant,
-                    value: number,
-                },
-            },
             display: item.title + ' ' + number,
             parseBy: parseType.variable,
         })

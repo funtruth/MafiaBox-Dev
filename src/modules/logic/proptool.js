@@ -16,7 +16,7 @@ export function separateField(prefix="") {
           fields = [];
           
     if (a !== b) {
-        console.warn('String should have the same amount of ( and ), proptool.js')
+        console.warn('String should have the same amount of ( and )')
         return fields;
     }
 
@@ -109,6 +109,11 @@ export function parseJS(string) {
     if (!string) return ""
 
     const fields = separateField(string)
+
+    if (!fields.length) {
+        return string;
+    }
+    
     let str = fields[0]
 
     for (var i=1; i<fields.length; i++) {

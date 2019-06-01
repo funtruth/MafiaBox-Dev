@@ -3,10 +3,10 @@ import _ from 'lodash'
 
 import {
     boolUpdateType,
-    mathType,
+    parseType,
 } from '../../common/types'
 import {
-    DEFAULT_ASSIGN,
+    LOGIC_ITEM_VAR,
 } from '../../common/defaults';
 
 import {
@@ -20,8 +20,8 @@ export default function PickBooleanAssign(props) {
 
     let handleSelect = (item) => {
         props.updatePage({
-            ...DEFAULT_ASSIGN,
-            math: mathType.value,
+            ...LOGIC_ITEM_VAR,
+            parseBy: parseType.variable,
             value: item.key,
         })
         props.showDropdown()

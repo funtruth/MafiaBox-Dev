@@ -14,7 +14,6 @@ import {
     source          where the parser should start for CURRENT logicItem
 */
 export const DEFAULT_LOGIC = {
-    key: "",
     byId: "",
     byIndex: "",
     logicType: "",
@@ -49,13 +48,12 @@ export const LOGIC_ITEM_VAR = {
 /* logicItem.byId.[logicKey].value
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
-    display         what to show for operator FRONT-END
+    display         REMOVED, included in LOGIC_ITEM_VAR.display
     left            logicKey for left-side
     operator        operator
     right           logicKey for right-side
 */
 export const LOGIC_ITEM_VAR_OPERATION = {
-    display: "",
     left: "",
     operator: "",
     right: "",
@@ -93,24 +91,6 @@ export const DEFAULT_VAR_ID = {
     dropdown: '',
     variableTypes: '',
     assign: '',
-}
-
-/* DEPRECATED @params logicItem.data.assign.byId.mathKey
-    logicItem.data.assign = {
-        byId: "",
-        source: "",
-    }
-
-    mathType => is this a value (value)? or an operation (value)(operator)(value)
-    mathOperator => just the mathematical operator (+-/*%)
-*/
-export const DEFAULT_ASSIGN = {
-    key: "",
-    math: "",
-    mathOperator: "",
-    value: "",
-    left: "",
-    right: "",
 }
 
 export const triggerNewVars = {

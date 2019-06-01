@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 
 import {
-    mathType,
+    parseType,
     variableType,
 } from '../../common/types'
 import {
-    DEFAULT_ASSIGN,
     LOGIC_ITEM_VAR,
 } from '../../common/defaults';
 
@@ -36,7 +35,7 @@ export default function PickNumValue({
 }){
     const focusRef = useAutofocus()
 
-    const [value, setValue] = useState(mathKey ? slate.value : "")//TODO
+    const [value, setValue] = useState(mathKey ? slate : "")//TODO
     const handleChange = e => setValue(e.target.value)
 
     //changing value @ byId.[mathKey].value
@@ -44,6 +43,7 @@ export default function PickNumValue({
         update({
             ...LOGIC_ITEM_VAR,
             display: value,
+            parseBy: parseType.variable,
             value,
             variableTypes: [variableType.number.key],
         })
@@ -57,18 +57,19 @@ export default function PickNumValue({
         update({
             [item.key]: {
                 ...item,
-                [side]: newKey,
+                value: {
+                    ...item.value,
+                    [side]: newKey,
+                },
             },
             [newKey]: {
-                ...DEFAULT_ASSIGN,
+                ...LOGIC_ITEM_VAR,
                 key: newKey,
-                math: mathType.constant,
-                value: {
-                    ...LOGIC_ITEM_VAR,
-                    display: value,
-                    value,
-                    variableTypes: [variableType.number.key],
-                },
+                display: value,
+                value,
+                nativeValue: value,
+                parseBy: parseType.variable,
+                variableTypes: [variableType.number.key],
             },
         })
         showDropdown();

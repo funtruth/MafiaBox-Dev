@@ -1,7 +1,7 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
-import { mathType } from '../../common/types';
+import { parseType } from '../../common/types';
 
 const itemTarget = {
     drop(props, monitor) {
@@ -41,7 +41,7 @@ function PlaygroundSideDrop(props) {
 }
 
 export default DropTarget(
-    mathType.operation,
+    parseType.operation,
     itemTarget,
     collect
 )(PlaygroundSideDrop);

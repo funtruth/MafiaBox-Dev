@@ -2,7 +2,7 @@ import React from 'react'
 import { DropTarget } from 'react-dnd'
 
 import {
-    mathType, dropdownType,
+    dropdownType, parseType,
 } from '../../common/types'
 
 import { DropClick, Tag } from '../../components/Common';
@@ -26,7 +26,7 @@ function collect(connect, monitor) {
 function ValueDrop(props) {
     const { connectDropTarget, isOver, children,
         path, mathKey, mathItem, position } = props
-
+        
     const renderItem = () => {
         //empty
         if (!mathKey) {
@@ -42,7 +42,7 @@ function ValueDrop(props) {
                 >
                     <Tag
                         color={isOver ? 'white' : 'whitish'}
-                        bg={isOver ? 'purple' : 'charcoal'}
+                        bg={isOver ? 'purple' : 'discord'}
                     >
                         {children}
                     </Tag>
@@ -50,7 +50,7 @@ function ValueDrop(props) {
             )
         }
 
-        if (mathItem.math === mathType.constant) {
+        if (mathItem.parseBy === parseType.variable) {
             return (
                 <DropClick
                     dropdown={dropdownType.pickNumValue}
@@ -63,7 +63,7 @@ function ValueDrop(props) {
                 >
                     <Tag
                         color={isOver ? 'white' : 'whitish'}
-                        bg={isOver ? 'purple' : 'charcoal'}
+                        bg={isOver ? 'purple' : 'discord'}
                     >
                         {children}
                     </Tag>
@@ -74,7 +74,7 @@ function ValueDrop(props) {
         return (
             <Tag
                 color={isOver ? 'white' : 'whitish'}
-                bg={isOver ? 'purple' : 'charcoal'}
+                bg={isOver ? 'purple' : 'discord'}
             >
                 {children}
             </Tag>
@@ -89,7 +89,7 @@ function ValueDrop(props) {
 }
 
 export default DropTarget(
-    [mathType.operation, mathType.value],
+    [parseType.operation, parseType.variable],
     itemTarget,
     collect
 )(ValueDrop);

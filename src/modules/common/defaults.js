@@ -9,7 +9,6 @@ import {
 } from '../fields/defaults'
 import {
     choiceMap,
-    DEFAULT_ASSIGN,
     DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,
@@ -24,7 +23,6 @@ export {
     choiceMap,
     defaultFieldMap,
     defaultFieldRepo,
-    DEFAULT_ASSIGN,
     DEFAULT_EVENT_LISTENER,
     DEFAULT_GAME_CHOICE,
     DEFAULT_LOGIC,

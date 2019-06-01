@@ -1,7 +1,7 @@
 import React from 'react';
-import './LogicButton.css'
 
 import { palette } from './Standards';
+import Row from './Row';
 
 const getFont = (size) => {
     switch(size) {
@@ -11,7 +11,7 @@ const getFont = (size) => {
 
 const getPadding = (size) => {
     switch(size) {
-        default:            return '4px 12px'
+        default:            return '4px 8px'
     }
 }
 
@@ -19,38 +19,40 @@ export default function LogicButton(props) {
     const {
         children,
         onClick,
-        className           = '',
-        size                = 'm',
-        theme               = 'black',
+        className   = '',
+        size        = 'm',
+        bg          = 'charcoal',
         style,
         highlight,
-        color,
+        color       = 'whitish',
     } = props
 
     const classes = [
-        '--logic-button',
         'text-ellipsis',
-        'row',
-        `--logic-button-${theme}`,
-        onClick ? '--logic-button-onclick' : '',
+        onClick ? '--onclick' : '',
         className,
     ].join(" ")
 
     const buttonStyle = {
         padding: getPadding(size),
         font: getFont(size),
-        color: palette(color || 'whitish'),
-        borderLeft: highlight ? `4px solid ${palette(highlight)}` : '1px solid #444',
+        color: palette(color),
+        backgroundColor: palette(bg),
+        borderLeft: highlight ? `4px solid ${palette(highlight || 'darkgrey')}` : '1px solid #444',
+        minHeight: '1.4em',
+        maxWidth: 200,
         ...style,
     }
     
     return (
-        <div
+        <Row
             className={classes}
             style={buttonStyle}
+            wrap="nowrap"
+            y="c"
             onClick={event => onClick && onClick(event)}
         >
             {children}
-        </div>
+        </Row>
     )
 }
