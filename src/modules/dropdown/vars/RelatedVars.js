@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {
-    updateType,
     modalType,
+    parseType,
 } from '../../common/types';
 import {
     LOGIC_ITEM_VAR,
@@ -34,9 +34,9 @@ import {
     ReplaceWildcard
 */
 export default function RelatedVars(props) {
-    const { variableTypes, attachVar, path, onClick } = props
+    const { variableTypes, scopedVars, path, onClick } = props
 
-    const [tameVars, wildVars] = useVarType(variableTypes, attachVar)
+    const [tameVars, wildVars] = useVarType(variableTypes, scopedVars)
 
     const handleSelect = (item) => {
         if (onClick) {
@@ -49,7 +49,7 @@ export default function RelatedVars(props) {
             display: parseJS(item.key),
             nativeValue: item.key,
             value: item.key,
-            updateType: updateType.variable,
+            parseBy: parseType.variable,
             variableTypes: item.variableTypes,
         })
         props.showDropdown();

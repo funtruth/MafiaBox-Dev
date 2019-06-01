@@ -6,8 +6,8 @@ import {
     mathType,
     modalType,
     numUpdateType,
-    updateType,
     variableType,
+    parseType,
 } from '../../common/types'
 import {
     DEFAULT_ASSIGN,
@@ -36,7 +36,7 @@ export default function PickNumUpdate(props) {
                 value: number,
             },
             display: item.title + ' ' + number,
-            updateType: updateType.number,
+            parseBy: parseType.variable,
         })
         props.showDropdown()
     }
@@ -62,7 +62,7 @@ export default function PickNumUpdate(props) {
                 },
             },
             display: item.title + ' ' + number,
-            updateType: updateType.number,
+            parseBy: parseType.variable,
         })
         props.showDropdown()
     }

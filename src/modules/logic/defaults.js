@@ -32,10 +32,10 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     nativeValue     original value (can contain wildcard chars)
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
-                    payload for parseType.variable, value in (foo)(bar) form
-                    payload for parseType.collection, value is []
-                    payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
-                    payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
+    "               payload for parseType.variable, value in (foo)(bar) form
+    "               payload for parseType.collection, value is [varKey, varKey...]
+    "               payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
+    "               payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
     variableTypes   list of variableTypes
 */
 export const LOGIC_ITEM_VAR = {

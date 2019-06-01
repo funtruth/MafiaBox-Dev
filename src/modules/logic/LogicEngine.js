@@ -1,7 +1,6 @@
 import {
     logicType,
     returnType,
-    updateType,
     operatorType,
 } from '../common/types'
 import { orderOfOp } from './codetool'
@@ -144,13 +143,6 @@ function convertValue(data, field) {
     switch(typeof data[field].value) {
         case 'string':
             switch(data[field].updateType) {
-                case updateType.number:
-                case updateType.variable:
-                    return `\`${convertString(data[field].value)}\``
-                case updateType.health:
-                    return `'${data[field].value}'`
-                case updateType.uid:
-                    return data[field].value.substr(1)
                 default:
                     return data[field].value
             }

@@ -2,7 +2,6 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateType,
     healthUpdateType,
 } from '../../common/types'
 import {
@@ -20,7 +19,6 @@ export default function PickHealth(props) {
             ...LOGIC_ITEM_VAR,
             value: item.key,
             display: item.title,
-            updateType: updateType.health,
         })
         props.showDropdown()
     }

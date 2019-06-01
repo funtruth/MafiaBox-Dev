@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    updateType,
+    parseType,
 } from '../../common/types'
 import {
     LOGIC_ITEM_VAR,
@@ -19,30 +19,30 @@ import {
     DropTitle,
 } from '../components/Common'
 
-export default function PickVarWithType(props) {
-    const { attach, currentValue } = props
-    const { baseVar } = attach || {}
+export default function PickVarWithType(props){
+    const { slate, baseVar, update, showDropdown } = props
 
     const handleSelect = (item) => {
-        props.updatePage({
+        update({
             ...LOGIC_ITEM_VAR,
-            updateType: updateType.uid,
             value: item.key,
+            nativeValue: item.key,
+            parseBy: parseType.variable,
             display: item.key,
             variableTypes: item.variableTypes,
         })
-        props.showDropdown()
+        showDropdown()
     }
 
     const renderItem = (item) => {
-        const chosen = currentValue.value === item.key
+        const chosen = slate.value === item.key
 
         if (VARTYPE_IS_OBJ(item)) {
             return (
                 <DropParent
                     key={item.key}
                     dropdown={dropdownType.pickVarSubfield}
-                    showDropdown={props.showDropdown}
+                    showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
                     }}
@@ -60,26 +60,6 @@ export default function PickVarWithType(props) {
                 text={item.key}
             />
         )
-    }
-
-    const setConstant = (value) => {
-        props.updatePage({
-            ...LOGIC_ITEM_VAR,
-            adjust: value,
-            display: value,
-            updateType: updateType.number,
-        })
-        props.showDropdown()
-    }
-
-    const setAdjustment = (value) => {
-        props.updatePage({
-            ...currentValue,
-            adjust: value,
-            display: currentValue.value + (value > 0 ? '+' : '') + value,
-            updateType: updateType.number,
-        })
-        props.showDropdown()
     }
 
     if (!baseVar || !baseVar.variableTypes) {

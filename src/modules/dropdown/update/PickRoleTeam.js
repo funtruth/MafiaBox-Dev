@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import {
     variableType,
-    updateType,
+    parseType,
 } from '../../common/types';
 import {
     LOGIC_ITEM_VAR,
@@ -32,7 +32,7 @@ export default connect(
             variableTypes: [
                 variableType.string.key,
             ],
-            updateType: updateType.string,
+            parseBy: parseType.string,
         })
         props.showDropdown();
     }

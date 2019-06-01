@@ -1,9 +1,6 @@
 import React from 'react'
 
 import {
-    updateType,
-} from '../../common/types'
-import {
     LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
@@ -19,7 +16,6 @@ export default function PageDetailLib(props) {
             ...LOGIC_ITEM_VAR,
             value: pageKey,
             display: pageRepo[pageKey].title,
-            updateType: updateType.page,
         })
         props.showDropdown()
     }

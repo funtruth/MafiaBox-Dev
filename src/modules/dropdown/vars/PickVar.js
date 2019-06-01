@@ -3,7 +3,6 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    updateType,
     parseType,
 } from '../../common/types'
 import {

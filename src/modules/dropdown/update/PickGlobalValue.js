@@ -5,7 +5,7 @@ import Fuse from 'fuse.js'
 
 import {
     fuseType,
-    updateType,
+    parseType,
 } from '../../common/types';
 import {
     LOGIC_ITEM_VAR,
@@ -52,7 +52,7 @@ export default connect(
                 ...LOGIC_ITEM_VAR,
                 value: item.key,
                 display: parseJS(item.key),
-                updateType: updateType.variable,
+                parseBy: parseType.variable,
                 variableTypes: item.variableTypes,
             })
         }

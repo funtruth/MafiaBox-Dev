@@ -3,7 +3,7 @@
 
 ## 05/31/2019
 ### Major
-- [ ] parseType implementation
+- [x] parseType initial implementation
 
 ### Minor
 - [x] Showing declared variables. ~~May have to revert the removal of the "static" property of LOGIC_ITEM_VAR~~. Created a new component for this (LogicDeclare) which accepts the overall vars, but filters them with "~~currentScope~~logicKey". This allows users to see the initial variables for the specific LogicView as well.
@@ -13,6 +13,8 @@
 - [x] Figuring out how to show dropdown/modal based on the LogicPanel => just done through logicItem.logicType/operatorType and a switch statement. Nothing fancy right now, but it works
 - [x] ~~defaults need to be fully developed at creation.~~ worked around this by allowing null objects to still show panels. They are still assigned a varKey, but are not fully created until the user performs an action. This is easier to do, & easier for firebase/listening.
 - [x] VAR_DEFAULTS completely removed, key prop removed from LOGIC_ITEM_VAR as it will never be changed, and is always known at initialization. Wildchars changed to nativeValue, & set by default when selecting a variable. This ensures we are not checking "isWild", which is excessive.
+- [x] deleted updateType
+- [ ] figuring out how to pass props properly through LogicParse
 
 ## 05/30/2019
 ### Major

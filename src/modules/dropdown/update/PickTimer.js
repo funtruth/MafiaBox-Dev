@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 
 import {
-    updateType,
-} from '../../logic/types'
-import {
     LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
@@ -35,7 +32,6 @@ export default function PickTimer(props) {
             ...LOGIC_ITEM_VAR,
             value: timer,
             display: min + 'm' + sec + 's',
-            updateType: updateType.timer,
         })
         props.showDropdown()
     }

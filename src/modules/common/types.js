@@ -23,7 +23,6 @@ import {
     operatorType,
     parseType,
     returnType,
-    updateType,
     variableType,
 } from '../logic/types'
 import {
@@ -50,6 +49,5 @@ export {
     parseType,
     phaseActionType,
     returnType,
-    updateType,
     variableType,
 }

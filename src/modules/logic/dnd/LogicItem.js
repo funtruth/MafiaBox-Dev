@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { DragSource } from 'react-dnd'
 
 import {
@@ -27,8 +28,10 @@ const itemSource = {
 }
 
 function LogicItem(props) {
-    const { connectDragSource, logicItem, path } = props
-    const { logicType, operatorType, source, byId } = logicItem
+    const { connectDragSource, logicItem, scope, logicKey, path } = props
+    const { logicType, operatorType, source, byId, vars } = logicItem
+    
+    const scopedVars = _.filter(vars, i => !i.scope || scope.includes(logicKey))
 
     const renderBody = () => { 
         if (!logicType) {
@@ -50,6 +53,7 @@ function LogicItem(props) {
             <LogicParsed
                 varKey={source}
                 varRepo={byId}
+                scopedVars={scopedVars}
                 path={path}
                 type={operatorType || logicType}
             />

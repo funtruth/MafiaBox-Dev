@@ -2,9 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import {
-    updateType,
-} from '../../common/types'
-import {
     LOGIC_ITEM_VAR,
 } from '../../common/defaults'
 
@@ -20,7 +17,6 @@ function PageLib(props) {
             ...LOGIC_ITEM_VAR,
             value: pageKey,
             display: pageRepo[pageKey].title,
-            updateType: updateType.page,
         })
         props.showDropdown()
     }

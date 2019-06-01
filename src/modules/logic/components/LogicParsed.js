@@ -24,14 +24,15 @@ import {
 
 export default function LogicParsed(props) {
     const dispatch = useDispatch();
-    const { type, varRepo, varKey, path, index } = props
+    const { type, varRepo, varKey, params, path, index } = props
 
     if (!varKey) {
         return null;
     }
 
     const varItem = varRepo[varKey] || {}
-    const varPath = [...path, varKey]
+    const varPath = [...path, 'byId', varKey]
+
     const { display, value, parseBy } = varItem || {}
     const { byIndex } = value || {}
 
@@ -75,7 +76,10 @@ export default function LogicParsed(props) {
                 if (index === 0) {
                     dispatch(showDropdown(dropdownType.pickVar, e, {path: varPath}))
                 } else if (index === 1) {
-                    dispatch(showDropdown(dropdownType.pickVarWithType, e))
+                    dispatch(showDropdown(dropdownType.pickVarWithType, e, {
+                        ...params,
+                        path: varPath,
+                    }))
                 }
                 break;
             case operatorType.forin.key:
@@ -100,14 +104,22 @@ export default function LogicParsed(props) {
                     <DropClick
                         dropdown={dropdownType.pickComparison}
                         params={{
-                            path: varPath,
+                            path: [...varPath, 'value'],
+                            baseVar: varRepo[varItem.value.left],
                         }}
                     >
                         <LogicButton>
                             {varItem.value.display || 'operator'}
                         </LogicButton>
                     </DropClick>
-                    <LogicParsed {...props} index={1} varKey={varItem.value.right}/>
+                    <LogicParsed
+                        {...props}
+                        index={1}
+                        varKey={varItem.value.right}
+                        params={{
+                            baseVar: varRepo[varItem.value.left],
+                        }}
+                    />
                 </Row>
             )
         case parseType.wrapper:

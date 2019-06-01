@@ -1,9 +1,6 @@
 import React from 'react'
 
-import {
-    updateType,
-} from '../types';
-import { dropdownType } from '../../dropdown/types';
+import { dropdownType } from '../../common/types';
 
 import {
     separateField,

@@ -2,7 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateType,
+    parseType,
 } from '../../common/types'
 import {
     LOGIC_ITEM_VAR,
@@ -32,7 +32,7 @@ export default function PickUid(props) {
         props.updatePage({
             ...LOGIC_ITEM_VAR,
             value: item.key,
-            updateType: updateType.uid,
+            parseBy: parseType.variable
         })
         props.showDropdown()
     }

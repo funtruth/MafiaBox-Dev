@@ -11,20 +11,22 @@ import {
     DropTitle,
 } from '../components/Common';
 
-export default function PickComparison(props) {
-    const { attach, currentValue } = props
-    const { baseVar } = attach || {}
-
+export default function PickComparison({
+    slate,
+    baseVar,
+    update,
+    showDropdown,
+}){
     const handleSelect = (item) => {
-        props.updatePage({
-            ...item,
+        update({
             display: item.title,
+            operator: item.key,
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     const renderItem = (item) => {
-        const chosen = currentValue.key === item.key
+        const chosen = slate.operator === item.key
 
         return (
             <DropItem

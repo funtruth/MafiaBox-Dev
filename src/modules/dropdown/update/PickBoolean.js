@@ -2,8 +2,8 @@ import React from 'react'
 import _ from 'lodash'
 
 import {
-    updateType,
     boolUpdateType,
+    parseType,
     variableType,
 } from '../../common/types'
 import {
@@ -24,7 +24,7 @@ export default function PickBoolean(props) {
             ...LOGIC_ITEM_VAR,
             value: item.key,
             display: item.key,
-            updateType: updateType.boolean,
+            parseBy: parseType.variable,
             variableTypes: [variableType.boolean.key],
         })
         props.showDropdown()

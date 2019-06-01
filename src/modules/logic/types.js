@@ -133,20 +133,6 @@ export const parseType = {
     wrapper: 'parseType/wrapper',
 }
 
-export const updateType = {
-    number: 'updateType/number',
-    boolean: 'updateType/boolean',
-    health: 'updateType/health',
-    timer: 'updateType/timer',
-    string: 'updateType/string',
-
-    variable: 'updateType/variable',
-    page: 'updateType/page',
-    uid: 'updateType/uid',
-    trigger: 'updateType/trigger',
-    events: 'updateType/events',
-}
-
 export const numUpdateType = {
     setTo: {
         key: 'setTo',
@@ -364,12 +350,18 @@ export const comparisonType = {
         code: '=',
         title: 'assign value',
         icon: 'mdi mdi-equal',
+        variableTypes: [
+            variableType.function.key,
+        ]
     },
     in: {
         key: 'in',
         code: 'in',
         title: 'for loop',
         icon: 'mdi mdi-sync',
+        variableTypes: [
+            variableType.uidObject.key,
+        ]
     },
 }
 
