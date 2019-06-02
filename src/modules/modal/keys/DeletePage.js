@@ -24,7 +24,7 @@ function DeletePage(props) {
     }
     
     return (
-        <Modal>
+        <>
             <Body size="s">
                 <Text size="xl" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
@@ -36,7 +36,7 @@ function DeletePage(props) {
                 <Button theme="grey" onClick={handleCancel}>Cancel</Button>
                 <Button theme="red" onClick={handleDelete} style={{ marginLeft: 12 }}>Delete</Button>
             </Footer>
-        </Modal>
+        </>
     )
 }
 

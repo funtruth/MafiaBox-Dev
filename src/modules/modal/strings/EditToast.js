@@ -1,7 +1,6 @@
 import React from 'react'
 
 import ModalOptions from '../components/ModalOptions'
-import Modal from '../components/Modal'
 import StringView from '../../strings/StringView';
 import EditToastHeader from './components/EditToastHeader';
 
@@ -9,7 +8,7 @@ export default function EditToast(props) {
     const { path, close, scopedVars } = props
 
     return (
-        <Modal
+        <div
             style={{
                 minWidth: 600,
                 width: '75vw',
@@ -22,6 +21,6 @@ export default function EditToast(props) {
                 scopedVars={scopedVars}
             />
             <ModalOptions onClose={close}/>
-        </Modal>
+        </div>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from '../components/Modal';
+
 import {
     Body,
     Button,
@@ -16,7 +16,7 @@ export default function DialogSave(props) {
     const onCancel = () => props.popModalBy(1)
 
     return (
-        <Modal>
+        <>
             <Body size="s">
                 <Text size="l" align="c">Delete this row?</Text>
                 <Separator size={8}></Separator>
@@ -26,6 +26,6 @@ export default function DialogSave(props) {
                 <Button theme="red" size="s" onClick={onQuit}>Delete</Button>
                 <Button theme="clear" size="s" onClick={onCancel} style={{marginLeft: 12}}>Cancel</Button>
             </Footer>
-        </Modal>
+        </>
     )
 }

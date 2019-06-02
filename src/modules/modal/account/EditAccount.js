@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import ModalOptions from '../components/ModalOptions'
-import ModalCheckSave from '../components/ModalCheckSave';
 
 //TODO this is copy pasted, ignore
 export default function EditAccount(props) {
@@ -26,22 +25,19 @@ export default function EditAccount(props) {
     }
     
     return (
-        <ModalCheckSave {...props} handleSave={handleSave}>
-            <div
-                cancel-appclick="true"
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    minWidth: 600,
-                    width: '45vw',
-                }}
-            >
-                <ModalOptions
-                    error={error}
-                    onSave={handleSave}
-                    onClose={props.onClose}
-                />
-            </div>
-        </ModalCheckSave>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                minWidth: 600,
+                width: '45vw',
+            }}
+        >
+            <ModalOptions
+                error={error}
+                onSave={handleSave}
+                onClose={props.onClose}
+            />
+        </div>
     )
 }

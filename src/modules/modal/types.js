@@ -1,6 +1,4 @@
 export const modalType = {
-    addNewStory: 'modalType/add-new-story',
-    addNewField: 'modalType/add-new-field',
     deletePage: 'modalType/delete-page',
     deleteStory: 'modalType/delete-story',
     deleteLogic: 'modalType/delete-logic',

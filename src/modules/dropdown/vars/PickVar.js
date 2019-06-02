@@ -20,7 +20,7 @@ import {
     DropTitle,
 } from '../components/Common'
 
-//Used from: LogicParsed
+//Used from: LogicPanels
 export default function PickVar({
     slate,
     scopedVars,

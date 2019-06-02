@@ -1,5 +1,5 @@
 import React from 'react'
-import Modal from '../components/Modal';
+
 import {
     Body,
     Button,
@@ -16,7 +16,7 @@ export default function DeleteLogic(props) {
     }
 
     return (
-        <Modal>
+        <>
             <Body size="s">
                 <Text size="l" align="c">Delete logic?</Text>
                 <Separator size={8}></Separator>
@@ -26,6 +26,6 @@ export default function DeleteLogic(props) {
                 <Button theme="clear" size="s" onClick={onCancel}>Cancel</Button>
                 <Button theme="red" size="s" onClick={onDelete} style={{marginLeft: 12}}>Delete</Button>
             </Footer>
-        </Modal>
+        </>
     )
 }

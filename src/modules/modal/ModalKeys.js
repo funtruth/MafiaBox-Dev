@@ -7,8 +7,6 @@ import FunctionPageModal from './components/FunctionPageModal';
 import EditAccount from './account/EditAccount'
 import CreateProject from './account/CreateProject';
 
-import AddNewStory from './keys/AddNewStory'
-import AddNewField from './keys/AddNewField'
 import DeletePage from './keys/DeletePage';
 import DeleteStory from './keys/DeleteStory';
 import PageModal from './keys/PageModal';
@@ -36,10 +34,6 @@ import EditNumber from './vars/EditNumber'
 
 export default function ModalKeys(props) {
     switch(props.key) {
-        case modalType.addNewStory:
-            return <AddNewStory {...props}/>
-        case modalType.addNewField:
-            return <AddNewField {...props}/>
         case modalType.deletePage:
             return <DeletePage {...props}/>
         case modalType.deleteStory:

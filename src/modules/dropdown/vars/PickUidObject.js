@@ -29,15 +29,19 @@ import {
 /*accessed from
     LogicItem -> logicType: 'operator', operatorType: 'forin' -> LogicPanel onClick
 */
-export default function PickUidObject(props) {
-    const { attach, attachVar } = props
-    const { source, variableName } = attach
+export default function PickUidObject({
+    slate,
+    scopedVars,
+    updateGeneral,
+    showDropdown,
+}) {
+    const { source, variableName } = slate
         
     let handleSelect = (item) => {
         //if variable has already been set, keep the same variable
         const newName = variableName || generatePushID(START_CHAR + 'uid', END_CHAR)
 
-        props.updatePage({
+        updateGeneral({
             declare: {
                 [newName]: {
                     ...LOGIC_ITEM_VAR,
@@ -56,7 +60,7 @@ export default function PickUidObject(props) {
                 display: parseJS(item.key),
             },
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     const renderItem = (item) => {
@@ -73,7 +77,7 @@ export default function PickUidObject(props) {
         )
     }
 
-    const uidObjects = _.filter(attachVar, VARTYPE_IS_UID_OBJ)
+    const uidObjects = _.filter(scopedVars, VARTYPE_IS_UID_OBJ)
     const rssUidObjects = _(rssMap).filter(i => i.fieldLength === 2).filter(VARTYPE_IS_UID_OBJ).value()
 
     return (

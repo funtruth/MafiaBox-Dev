@@ -19,7 +19,6 @@ export default function EditHealth(props) {
     
     return (
         <div
-            cancel-appclick="true"
             style={{
                 display: 'flex',
                 flexDirection: 'column',

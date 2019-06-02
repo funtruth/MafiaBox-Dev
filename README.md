@@ -10,6 +10,8 @@
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems.
 - [x] parseType.number implementation
 - [x] update order of operations for logic engine
+- [x] getting rid of stuff in AppWrapper, got rid of cancel-appclick
+- [x] all (important) React.Components removed
 
 ## 05/31/2019
 ### Major

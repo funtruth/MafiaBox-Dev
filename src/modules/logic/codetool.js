@@ -1,6 +1,5 @@
 import {
     logicType,
-    parseOperatorType,
     operatorType,
     parseType,
     comparisonType,

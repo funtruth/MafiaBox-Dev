@@ -16,7 +16,6 @@ import {
 } from '../../components/Common'
 
 import ModalOptions from '../components/ModalOptions'
-import ModalCheckSave from '../components/ModalCheckSave';
 import PriorityList from './components/PriorityList'
 
 function EditPriority(props) {
@@ -58,32 +57,29 @@ function EditPriority(props) {
     }
     
     return (
-        <ModalCheckSave {...props} handleSave={handleSave}>
-            <div
-                cancel-appclick="true"
-                style={{
-                    minWidth: 600,
-                    width: '75vw',
-                }}
-            >
-                <Header text="Edit Priority" onClose={props.close}>
-                </Header>
-                <PriorityList
-                    {...mainProps}
-                    switched={switched}
-                    onSortEnd={onSortEnd}
-                    transitionDuration={300}
-                    distance={2}
-                    useDragHandle={true}
-                />
-                <ModalOptions onSave={handleSave} onClose={props.close}>
-                    <Switch switched={switched} onChange={handleSwitch}/>
-                    <Text size="m" color="grey" align="c" style={{marginLeft: 12, marginRight: 'auto'}}>
-                        Show roles from all patches
-                    </Text>
-                </ModalOptions>
-            </div>
-        </ModalCheckSave>
+        <div
+            style={{
+                minWidth: 600,
+                width: '75vw',
+            }}
+        >
+            <Header text="Edit Priority" onClose={props.close}>
+            </Header>
+            <PriorityList
+                {...mainProps}
+                switched={switched}
+                onSortEnd={onSortEnd}
+                transitionDuration={300}
+                distance={2}
+                useDragHandle={true}
+            />
+            <ModalOptions onSave={handleSave} onClose={props.close}>
+                <Switch switched={switched} onChange={handleSwitch}/>
+                <Text size="m" color="grey" align="c" style={{marginLeft: 12, marginRight: 'auto'}}>
+                    Show roles from all patches
+                </Text>
+            </ModalOptions>
+        </div>
     )
 }
 

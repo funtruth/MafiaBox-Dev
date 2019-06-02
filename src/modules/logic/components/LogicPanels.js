@@ -1,124 +1,143 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
-import { logicType, operatorType } from '../types'
-import { dropdownType } from '../../dropdown/types'
-
-import { concatField } from '../proptool';
-
-import LogicPanel from './LogicPanel'
 import {
+    dropdownType,
+    logicType,
+    modalType,
+    operatorType,
+    parseType,
+} from '../../common/types'
+import { LOGIC_ITEM_VAR } from '../defaults';
+
+import generatePushID from '../../common/generatePushID';
+import { showModal } from '../../modal/ModalReducer'
+import { showDropdown } from '../../dropdown/DropdownReducer'
+import { updateGeneral } from '../../page/PageReducer'
+
+import {
+    DropClick,
     LogicButton,
     Row,
+    Body,
 } from '../../components/Common';
-import { modalType } from '../../modal/types';
 
 export default function LogicPanels(props) {
-    const { logicItem, path } = props
-    const {
-        logicType: selectedLogic,
-        operatorType: selectedOperator,
-    } = logicItem
-    
-    switch(selectedLogic) {
-        case logicType.operator.key:
-            switch(selectedOperator) {
-                case operatorType.if.key:
-                case operatorType.elseif.key:
-                    return (
-                        <Row>
-                            <LogicPanel
-                                {...props}
-                                subfieldKey="baseVar"
-                                placeholder="variable"
-                                path={[...path, 'data', 'baseVar']}
-                                dropdown={dropdownType.pickVar}
-                            />
-                            <LogicPanel
-                                {...props}
-                                subfieldKey="comparison"
-                                placeholder="operator"
-                                path={[...path, 'data', 'comparison']}
-                                dropdown={dropdownType.pickComparison}
-                            />
-                            <LogicPanel
-                                {...props}
-                                subfieldKey="compareVar"
-                                placeholder="variable"
-                                path={[...path, 'data', 'compareVar']}
-                                dropdown={dropdownType.pickVarWithType}
-                            />
-                        </Row>
-                    )
-                case operatorType.forin.key:
-                    return (
-                        <Row>
-                            <LogicButton>in</LogicButton>
-                            <LogicPanel
-                                {...props}
-                                placeholder="UID object ..."
-                                dropdown={dropdownType.pickUidObject}
-                            />
-                        </Row>
-                    )
-                case operatorType.else.key:
-                default:
-                    return null
+    const dispatch = useDispatch();
+    const { type, varRepo, varKey, params, path, index } = props
+
+    if (!varKey) {
+        return null;
+    }
+
+    const varItem = varRepo[varKey] || {}
+    const varPath = [...path, 'byId', varKey]
+
+    const { display, value, parseBy } = varItem || {}
+    const { byIndex } = value || {}
+
+    //add a new item to a collection
+    const addItem = () => {
+        const newKey = generatePushID('event')
+
+        dispatch(updateGeneral({
+            path: varPath,
+            update: {
+                value: byIndex ? [...byIndex, newKey] : [newKey]
+            },
+        }, {
+            path: [...path, 'byId', newKey],
+            update: {
+                ...LOGIC_ITEM_VAR,
             }
-        case logicType.update.key:
+        }))
+
+        dispatch(showModal(modalType.editEvent, {
+            path: [...path, 'byId', newKey]
+        }))
+    }
+
+    const panelClick = (e) => {
+        switch(type) {
+            case logicType.variable.key:
+                dispatch(showDropdown(dropdownType.declareOrAssignVar, e))
+                break;
+            case logicType.update.key:
+                dispatch(showDropdown(dropdownType.showSubfields, e))
+                break;
+            case logicType.event.key:
+                addItem();
+                break;
+            case logicType.return.key:
+                dispatch(showModal(modalType.editToast))
+                break;
+            case operatorType.if.key:
+            case operatorType.elseif.key:
+                if (index === 0) {
+                    dispatch(showDropdown(dropdownType.pickVar, e, {path: varPath}))
+                } else if (index === 1) {
+                    dispatch(showDropdown(dropdownType.pickVarWithType, e, {
+                        ...params,
+                        path: varPath,
+                    }))
+                }
+                break;
+            case operatorType.forin.key:
+                if (index === 0) {
+                    ;
+                } else if (index === 1) {
+                    dispatch(showDropdown(dropdownType.pickUidObject, e))
+                }
+                break;
+            case logicType.function.key:
+            case operatorType.else.key:
+            default:
+                console.warn('not supported yet.')
+        }
+    }
+
+    switch(parseBy) {
+        case parseType.operation:
             return (
-                <LogicPanel
-                    {...props}
-                    placeholder="select logic ..."
-                    subfieldKey={concatField('', 'rss')}
-                    path={[...path, 'data']}
-                    includeSubpath
-                    dropdown={dropdownType.showSubfields}
-                />
+                <Row>
+                    <LogicPanels {...props} index={0} varKey={varItem.value.left}/>
+                    <DropClick
+                        dropdown={dropdownType.pickComparison}
+                        params={{
+                            path: [...varPath, 'value'],
+                            baseVar: varRepo[varItem.value.left],
+                        }}
+                    >
+                        <LogicButton>
+                            {varItem.value.display || 'operator'}
+                        </LogicButton>
+                    </DropClick>
+                    <LogicPanels
+                        {...props}
+                        index={1}
+                        varKey={varItem.value.right}
+                        params={{
+                            baseVar: varRepo[varItem.value.left],
+                        }}
+                    />
+                </Row>
             )
-        case logicType.event.key:
+        case parseType.wrapper:
+            return <LogicPanels {...props} varKey={varItem.value.middle}/>
+        case parseType.collection:
             return (
-                <LogicPanel
-                    {...props}
-                    placeholder="new event ..."
-                    path={[...path, 'data']}
-                    modal={modalType.editEvent}
-                />
+                <Body>
+                    <LogicButton onClick={panelClick}>
+                        add new
+                    </LogicButton>
+                </Body>
             )
-        case logicType.variable.key:
-            return (
-                <LogicPanel
-                    {...props}
-                    placeholder="pick ..."
-                    includeSubpath
-                    dropdown={dropdownType.declareOrAssignVar}
-                />
-            )
-        case logicType.function.key:
-            return (
-                <LogicPanel
-                    {...props}
-                    subfieldKey="baseVar"
-                    placeholder="Pick a function ..."
-                    path={[...path, 'data', 'baseVar']}
-                    dropdown={dropdownType.pickLibrary}
-                />
-            )
-        case logicType.return.key:
-            return (
-                <LogicPanel
-                    {...props}
-                    placeholder="return type ..."
-                    path={[...path, 'data']}
-                    modal={modalType.editToast}
-                />
-            )
+        case parseType.variable:
         default:
             return (
-                <LogicPanel
-                    {...props}
-                    placeholder="select logic ..."
-                    dropdown={dropdownType.pickLogic}
-                />
+                <LogicButton color={display ? 'white' : 'grey'} onClick={panelClick}>
+                    {display || 'variable'}
+                </LogicButton>
             )
     }
 }

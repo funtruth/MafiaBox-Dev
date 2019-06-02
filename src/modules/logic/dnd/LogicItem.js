@@ -10,7 +10,7 @@ import { COLLECT_DRAG } from '../../modal/ModalDND'
 
 import LogicType from '../components/LogicType';
 import LogicOptions from '../components/LogicOptions'
-import LogicParsed from '../components/LogicParsed';
+import LogicPanels from '../components/LogicPanels';
 
 import {
     DropClick,
@@ -50,7 +50,7 @@ function LogicItem(props) {
         }
 
         return (
-            <LogicParsed
+            <LogicPanels
                 varKey={source}
                 varRepo={byId}
                 scopedVars={scopedVars}

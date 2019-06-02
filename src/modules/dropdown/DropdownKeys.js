@@ -20,9 +20,7 @@ import PageHistory from './page/PageHistory'
 import PageOptions from './page/PageOptions'
 
 import InputValue from './components/InputValue'
-import StoryMapLib from './library/StoryMapLib';
 import PageLib from './library/PageLib';
-import PageDetailLib from './library/PageDetailLib';
 
 import PickLogic from './logic/PickLogic';
 import PickOperator from './logic/PickOperator';
@@ -96,12 +94,8 @@ export default function DropdownKeys(props) {
 
         case dropdownType.inputValue:
             return <InputValue {...props}/>
-        case dropdownType.storyMapLib:
-            return <StoryMapLib {...props}/>
         case dropdownType.pageLib:
             return <PageLib {...props}/>
-        case dropdownType.pageDetailLib:
-            return <PageDetailLib {...props}/>
 
         case dropdownType.dropInput:
             return <DropInput {...props}/>

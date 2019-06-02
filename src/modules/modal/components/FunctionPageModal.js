@@ -1,10 +1,9 @@
 import React from 'react'
 import FunctionPageView from '../../functions/FunctionPageView'
-import Modal from './Modal'
 
 export default function FunctionPageModal(props) {
     return (
-        <Modal
+        <div
             style={{
                 minHeight: 400,
                 minWidth: 600,
@@ -14,6 +13,6 @@ export default function FunctionPageModal(props) {
             }}
         >
             <FunctionPageView {...props}/>
-        </Modal>
+        </div>
     )
 }

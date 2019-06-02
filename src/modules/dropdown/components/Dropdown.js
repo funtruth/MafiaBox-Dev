@@ -8,7 +8,7 @@ const THRESHOLD = 20
 export default function Dropdown(props) {
     const dispatch = useDispatch();
 
-    const { children, index, position } = props
+    const { children, index, lastIndex, position } = props
     const { place, pageX, pageY, sourceHeight, sourceWidth } = position
 
     //hide dropdown before calculating whether or not it needs to be re-positioned
@@ -81,7 +81,9 @@ export default function Dropdown(props) {
     }, [dropdownRef.current])
 
     const handleClick = () => {
-        dispatch(popDropdownTo(index))
+        if (index !== lastIndex - 1) {
+            dispatch(popDropdownTo(index))
+        }
     }
     
     return (

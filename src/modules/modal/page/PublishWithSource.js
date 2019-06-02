@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { removeStory } from '../../page/PageReducer'
 
-import Modal from '../components/Modal'
 import Text from '../../components/Text'
 import Button from '../../components/Button'
 import Body from '../../components/Body'
@@ -26,7 +25,7 @@ function PublishWithSource(props) {
     }
     
     return (
-        <Modal>
+        <>
             <Body size="s">
                 <Text size="l" bold align="c">
                     {`Delete '${title || "Untitled"}'?`}
@@ -40,7 +39,7 @@ function PublishWithSource(props) {
                 <Button theme="grey" onClick={handleCancel}>Cancel</Button>
                 <Button theme="red" onClick={handleDelete} style={{marginLeft: 12}}>Delete</Button>
             </Footer>
-        </Modal>
+        </>
     )
 }
 

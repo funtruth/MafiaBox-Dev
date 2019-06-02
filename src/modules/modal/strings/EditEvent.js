@@ -2,7 +2,6 @@ import React from 'react'
 import './EditEvent.css'
 
 import ModalOptions from '../components/ModalOptions'
-import Modal from '../components/Modal'
 import StringView from '../../strings/StringView';
 import EditEventHeader from './components/EditEventHeader';
 import { Separator } from '../../components/Common';
@@ -11,7 +10,7 @@ export default function EditEvent(props) {
     const { path, close, scopedVars } = props
 
     return (
-        <Modal
+        <div
             style={{
                 minWidth: 600,
                 width: '75vw',
@@ -25,6 +24,6 @@ export default function EditEvent(props) {
                 scopedVars={scopedVars}
             />
             <ModalOptions onClose={close}/>
-        </Modal>
+        </div>
     )
 }

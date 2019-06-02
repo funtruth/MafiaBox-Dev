@@ -6,7 +6,7 @@ import Dropdown from './components/Dropdown';
 import DropdownConnect from './DropdownConnect';
 
 export default function DropdownView(props) {
-    const dropdownKeys = useSelector(state => state.dropdown.dropdownKeys)
+    const dropdownKeys = useSelector(state => state.dropdown.dropdownKeys);
 
     if (dropdownKeys.length === 0) return null
 
@@ -18,6 +18,7 @@ export default function DropdownView(props) {
                     {...item}
                     key={item.key + index + JSON.stringify(item.serialList)}
                     index={index}
+                    lastIndex={dropdownKeys.length}
                 >
                     <DropdownConnect
                         item={item}

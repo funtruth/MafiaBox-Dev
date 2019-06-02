@@ -50,20 +50,6 @@ export function stateByPath(path, state, index=0) {
     return stateByPath(path, state[path[index]], index + 1)
 }
 
-export function isAppClickCancelled(target) {
-    let isCancel = false
-
-    while(target.parentElement && !isCancel) {
-        if (target.parentElement.getAttribute('cancel-appclick')) {
-            isCancel = true
-        } else {
-            target = target.parentElement
-        }
-    }
-
-    return isCancel
-}
-
 export function checkAlpha(string, cipher='A26') {
     for (var i=0; i<string.length; i++) {
         if (CIPHER[cipher].indexOf(string.charAt(i)) === -1) {

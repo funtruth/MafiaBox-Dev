@@ -21,7 +21,6 @@ import generatePushID from '../../common/generatePushID';
 
 import FormInput from '../../components/FormInput'
 import ModalOptions from '../components/ModalOptions'
-import Modal from '../components/Modal';
 
 function CreateProject(props) {
     const { uid } = props
@@ -89,27 +88,25 @@ function CreateProject(props) {
     const handleDescription = (e) => setDescription(e.target.value)
     
     return (
-        <Modal>
-            <div className="create-modal" cancel-appclick="true">
-                <FormInput
-                    title="Game Title"
-                    error={errors.gameKey}
-                    value={gameKey}
-                    setValue={handleGameKey}
-                />
-                <FormInput
-                    title="Game Description"
-                    error={errors.description}
-                    value={description}
-                    setValue={handleDescription}
-                />
-                <ModalOptions
-                    error={errors.modal}
-                    onSave={handleSave}
-                    onClose={props.onClose}
-                />
-            </div>
-        </Modal>
+        <div className="create-modal">
+            <FormInput
+                title="Game Title"
+                error={errors.gameKey}
+                value={gameKey}
+                setValue={handleGameKey}
+            />
+            <FormInput
+                title="Game Description"
+                error={errors.description}
+                value={description}
+                setValue={handleDescription}
+            />
+            <ModalOptions
+                error={errors.modal}
+                onSave={handleSave}
+                onClose={props.onClose}
+            />
+        </div>
     )
 }
 

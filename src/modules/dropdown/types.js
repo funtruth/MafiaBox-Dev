@@ -3,9 +3,7 @@ export const dropdownType = {
     dropString: 'dropdownType/drop-string',
 
     inputValue: 'dropdownType/input-value',
-    storyMapLib: 'dropdownType/story-map-lib',
     pageLib: 'dropdownType/page-lib',
-    pageDetailLib: 'dropdownType/page-detail-lib',
 
     dropInput: 'dropdownType/drop-input',
 

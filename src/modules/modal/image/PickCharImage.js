@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import firebase from 'firebase/app'
 
-import Modal from '../components/Modal'
 import ModalOptions from '../components/ModalOptions';
 
 export default function PickCharImage(props) {
@@ -13,7 +12,7 @@ export default function PickCharImage(props) {
     }, [])
     
     return (
-        <Modal>
+        <>
             {images.map(image => (
                 <img
                     key={image}
@@ -26,6 +25,6 @@ export default function PickCharImage(props) {
             <ModalOptions
                 onClose={props.close}
             />
-        </Modal>
+        </>
     )
 }
