@@ -3,7 +3,7 @@ import './Header.css'
 import '../../board/board.css'
 import { connect } from 'react-redux'
 
-import { navigate } from '../../navigation/NavReducer'
+import { navigate } from '../../app/NavReducer'
 
 import HeaderSearch from './HeaderSearch';
 import HeaderAddStory from './HeaderAddStory';

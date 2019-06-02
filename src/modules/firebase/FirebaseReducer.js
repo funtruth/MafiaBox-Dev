@@ -1,6 +1,6 @@
 import './firebase'
 
-import { navigate } from '../navigation/NavReducer'
+import { navigate } from '../app/NavReducer'
 import { resetPageReducer } from '../page/PageReducer';
 
 const initialState = {

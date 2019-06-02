@@ -2,7 +2,7 @@ import React from 'react'
 import './PageHeader.css'
 import { connect } from 'react-redux'
 
-import { navigate } from '../../navigation/NavReducer'
+import { navigate } from '../../app/NavReducer'
 import { publishFromState } from '../PageReducer'
 import { showModal } from '../../modal/ModalReducer'
 

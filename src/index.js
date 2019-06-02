@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppNavigator from './modules/navigation/AppNavigator';
+import AppNavigator from './modules/app/AppNavigator';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<AppNavigator />, document.getElementById('root'));

@@ -9,7 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import { store, persistor } from '../../redux/store'
 import Shell from './Shell'
-import AppWrapper from '../app/AppWrapper'
+import AppWrapper from './AppWrapper'
 import HomeView from '../home/HomeView'
 import DropdownView from '../dropdown/DropdownView'
 import ModalView from '../modal/ModalView'

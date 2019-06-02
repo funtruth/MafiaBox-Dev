@@ -5,7 +5,7 @@ import DropdownReducer from '../modules/dropdown/DropdownReducer'
 import FirebaseReducer from '../modules/firebase/FirebaseReducer'
 import FunctionReducer from '../modules/functions/FunctionReducer'
 import ModalReducer from '../modules/modal/ModalReducer'
-import NavReducer from '../modules/navigation/NavReducer'
+import NavReducer from '../modules/app/NavReducer'
 import PageReducer from '../modules/page/PageReducer'
 
 const reducers = {

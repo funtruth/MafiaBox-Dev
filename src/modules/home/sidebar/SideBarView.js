@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import { boardType } from '../../common/types';
 
-import { navigate } from '../../navigation/NavReducer'
+import { navigate } from '../../app/NavReducer'
 
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
