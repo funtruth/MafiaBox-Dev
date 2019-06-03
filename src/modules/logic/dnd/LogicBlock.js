@@ -8,11 +8,11 @@ import {
 import LogicItem from './LogicItem'
 import LogicItemDrop from './LogicItemDrop'
 import LogicAddBelow from '../components/LogicAddBelow'
-import LogicDetails from '../components/LogicDetails'
+import LogicDeclare from '../components/LogicDeclare';
 
 export default function LogicBlock(props) {
     const { index, logicRepo, logicMap, logicKey, parentKey, path, scope } = props
-
+    
     if (!logicKey && !logicMap) {
         return (
             <Tag onClick={props.handleAdd}>
@@ -52,11 +52,7 @@ export default function LogicBlock(props) {
                     />
                     <Row>
                         <LogicAddBelow onClick={handleAddBelow}/>
-                        <LogicDetails
-                            {...props}
-                            logicItem={logicItem}
-                            path={[...path, 'byId', logicKey]}
-                        />
+                        <LogicDeclare {...props}/>
                     </Row>
                 </div>
             }
@@ -75,7 +71,7 @@ export default function LogicBlock(props) {
                                 index={index}
                                 logicKey={childKey}
                                 parentKey={logicKey}
-                                scope={[...scope, childKey]}
+                                scope={[...scope, ...byIndex.slice(0, index)]}
                             />
                     ))}
                 </Body>

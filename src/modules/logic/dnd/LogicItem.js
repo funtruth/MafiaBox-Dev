@@ -28,10 +28,10 @@ const itemSource = {
 }
 
 function LogicItem(props) {
-    const { connectDragSource, logicItem, scope, logicKey, rootPath, path } = props
-    const { logicType, source, byId, vars } = logicItem
+    const { connectDragSource, logicItem, scope, vars, rootPath, path } = props
+    const { logicType, source, byId } = logicItem
     
-    const scopedVars = _.filter(vars, i => !i.scope || scope.includes(logicKey))
+    const scopedVars = _.filter(vars, i => !i.scope || scope.includes(i.scope))
 
     const renderBody = () => { 
         if (!logicType) {

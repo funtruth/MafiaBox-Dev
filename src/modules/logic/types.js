@@ -230,6 +230,7 @@ export const variableType = {
         icon: 'mdi mdi-numeric',
         supertype: '',
         declarable: true,
+        parseBy: parseType.number,
     },
     string: {
         key: 'string',
@@ -244,6 +245,7 @@ export const variableType = {
         icon: 'mdi mdi-toggle-switch',
         supertype: '',
         declarable: true,
+        parseBy: parseType.variable,
     },
     uid: {
         key: 'uid',
@@ -251,6 +253,7 @@ export const variableType = {
         icon: 'mdi mdi-account',
         supertype: 'key',
         declarable: true,
+        parseBy: parseType.variable,
     },
     object: {
         key: 'object',

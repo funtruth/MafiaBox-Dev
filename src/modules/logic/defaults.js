@@ -81,7 +81,7 @@ export const LOGIC_ITEM_VAR_WRAPPER = {
     fieldLength     length of fields         2               number
     dropdown        connected dropdown menu  dropdownType    string
     variableTypes   list of variableTypes    [string]        array
-    assign          if the variable is assigned at declaration
+    declare         if the variable is assigned a value at declaration
 */
 export const DEFAULT_VAR_ID = {
     key: '',
@@ -90,7 +90,7 @@ export const DEFAULT_VAR_ID = {
     fieldLength: '',
     dropdown: '',
     variableTypes: '',
-    assign: '',
+    declare: '',
 }
 
 export const triggerNewVars = {

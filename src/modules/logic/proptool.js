@@ -9,7 +9,7 @@ export const END_REGEX = /\)/g
 
 //input => "(rss)(players)((choices)(user))"
 //ouput => ["rss", "players", "(choices)(user)"]
-export function separateField(prefix="") {
+export function separateVar(prefix="") {
     //make sure string is valid
     const a = (prefix.match(START_REGEX)||[]).length,
           b = (prefix.match(END_REGEX)||[]).length,
@@ -47,7 +47,7 @@ export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CH
 
 //returns properties of prefix existing in rssMap
 export function getSubfields(prefix) {
-    const parts = separateField(prefix),
+    const parts = separateVar(prefix),
           fields = [];
           
     for (var key in rssMap) {
@@ -76,7 +76,7 @@ export function getSubfields(prefix) {
 
 //returns the proper update config to LogicExpandable using prefix
 export function getUpdateConfig(prefix) {
-    const parts = separateField(prefix)
+    const parts = separateVar(prefix)
 
     for (var ref in rssMap) {
         let match = true;
@@ -108,7 +108,7 @@ export function getUpdateConfig(prefix) {
 export function parseJS(string) {
     if (!string) return ""
 
-    const fields = separateField(string)
+    const fields = separateVar(string)
 
     if (!fields.length) {
         return string;

@@ -13,10 +13,11 @@ import { showModal } from '../../modal/ModalReducer'
 import { showDropdown } from '../../dropdown/DropdownReducer'
 
 import {
+    Body,
     DropClick,
     LogicButton,
     Row,
-    Body,
+    Text,
 } from '../../components/Common';
 
 export default function LogicPanels(props) {
@@ -116,8 +117,10 @@ export default function LogicPanels(props) {
         case parseType.variable:
         default:
             return (
-                <LogicButton color={display ? 'white' : 'grey'} onClick={variableClick}>
-                    {display || 'variable'}
+                <LogicButton onClick={variableClick}>
+                    <Text size="s" color={display ? 'white' : 'grey'}>
+                        {display || 'variable'}
+                    </Text>
                 </LogicButton>
             )
     }

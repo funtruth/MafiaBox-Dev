@@ -6,7 +6,7 @@ import {
     variableType,
 } from '../../common/types'
 
-import LogicDeclareValue from '../details/LogicDeclareValue'
+import LogicDeclareValue from './LogicDeclareValue'
 import {
     Body,
     DropClick,
@@ -19,21 +19,19 @@ export default function LogicDeclare({
     vars,
     logicKey,
     readOnly,
-    rootPath,
+    path,
 }){
     const renderItem = (item) => {
         const variableTypes = item.variableTypes || []
+        const varPath = [...path, 'vars', item.key]
 
         return (
             <Row key={item.key} style={{margin: 2}}>
                 <LogicButton
-                    highlight="blue" 
-                    style={{
-                        color: '#999',
-                        marginRight: 6,
-                    }}
+                    highlight="blue"
+                    color="grey"
                 >
-                    variable
+                    new variable
                     <Text size="s" before="xxs">
                         {item.key}
                     </Text>
@@ -42,16 +40,12 @@ export default function LogicDeclare({
                     dropdown={dropdownType.declareVarType}
                     disabled={readOnly}
                     params={{
-                        currentValue: variableTypes,
-                        path: [...rootPath, 'vars', item.key],
+                        path: varPath,
                     }}
                 >
                     <LogicButton
                         highlight="blue" 
-                        style={{
-                            color: '#ddd',
-                            marginRight: 6,
-                        }}
+                        color="whitish"
                     >
                         <Text size="s" color="grey" after="xxs">
                             type
@@ -60,7 +54,7 @@ export default function LogicDeclare({
                         {variableTypes.length === 0 && '...'}
                     </LogicButton>
                 </DropClick>
-                {/*<LogicDeclareValue {...props} item={item}/>*/}
+                <LogicDeclareValue item={item} path={varPath}/>
             </Row>
         )
     }

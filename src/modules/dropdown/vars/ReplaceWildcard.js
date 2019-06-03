@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { variableType } from '../../logic/types';
 
 import {
-    separateField,
+    separateVar,
     combineFields,
     parseJS,
     WILD_CHAR,
@@ -38,8 +38,8 @@ export default function ReplaceWildcard(props) {
     const { value, nativeValue } = currentValue
 
     const [target, setTarget] = useState('')
-    const [fields, setFields] = useState(separateField(value))
-    const [wildfields] = useState(separateField(nativeValue))
+    const [fields, setFields] = useState(separateVar(value))
+    const [wildfields] = useState(separateVar(nativeValue))
 
     //TODO do some recursive thing here to deal with wildcards inside wildcards ...
     const renderField = (field, index) => {

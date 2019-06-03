@@ -35,7 +35,6 @@ import WriteGameChoice from './page/WriteGameChoice'
 import CreateGlobalVar from './page/CreateGlobalVar'
 
 import AddVar from './functions/AddVar'
-import DeclareOrAssignVar from './functions/DeclareOrAssignVar'
 import EditVar from './functions/EditVar'
 import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
@@ -124,8 +123,6 @@ export default function DropdownKeys(props) {
             
         case dropdownType.addVar:
             return <AddVar {...props}/>
-        case dropdownType.declareOrAssignVar:
-            return <DeclareOrAssignVar {...props}/>
         case dropdownType.editVar:
             return <EditVar {...props}/>
         case dropdownType.editVarName:

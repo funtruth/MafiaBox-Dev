@@ -119,7 +119,7 @@ export default function PickVar({
     const handleChange = e => setText(e.target.value)
 
     //declaring a new variable
-    const handleSave = () => {
+    const declareVar = () => {
         const isAlpha = checkAlpha(text)
         if (!isAlpha) {
             return
@@ -151,7 +151,7 @@ export default function PickVar({
     const handleKeyPress = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                handleSave();
+                declareVar();
                 break
             default:
         }
@@ -174,7 +174,7 @@ export default function PickVar({
                                 type='text'
                                 autoFocus
                             />
-                            <DropSubmit onClick={handleSave}/>
+                            <DropSubmit onClick={declareVar}/>
                         </Row>
                     </>
                 )

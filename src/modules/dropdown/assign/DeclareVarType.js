@@ -7,19 +7,32 @@ import {
     DropItem,
     DropTitle,
 } from '../components/Common';
+import { LOGIC_ITEM_VAR } from '../../logic/defaults';
 
 //source: LogicItem > LogicDeclare
 export default function DeclareVarType({
     slate,
-    update,
+    path,
+    updateGeneral,
     showDropdown,
-}) {
+}){
     const { variableTypes } = slate
     const currentValueIsArray = Array.isArray(variableTypes)
 
+    //set basic variable type, then set a parse-able variable @ item.declare
     const handleSelect = item => {
-        update({
-            variableTypes: [item.key],
+        updateGeneral({
+            path,
+            update: {
+                variableTypes: [item.key],
+            },
+        }, {
+            path: [...path, 'declare'],
+            update: {
+                ...LOGIC_ITEM_VAR,
+                parseBy: item.parseBy,
+                variableTypes: [item.key],
+            }
         })
         showDropdown();
     }

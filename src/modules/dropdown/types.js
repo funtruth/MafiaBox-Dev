@@ -32,7 +32,6 @@ export const dropdownType = {
     pageOptions: 'dropdownType/page-options',
 
     //functions
-    declareOrAssignVar: 'dropdownType/declare-var',
     editVarName: 'dropdownType/edit-var-name',
     writeVarType: 'dropdownType/write-var-type',
 

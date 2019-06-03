@@ -91,7 +91,7 @@ export function getMyInfo() {
 export default (state = initialState, action) => {
     switch(action.type){
         case USER_LISTENER:
-            return { ...state, authUser: Object.assign({}, state.authUser, action.payload) }
+            return { ...state, authUser: {...state.authUser, ...action.payload} }
         case USER_PROJECTS_LISTENER:
             return { ...state, userProjects: action.payload }
         case PROJECT_LISTENER:
