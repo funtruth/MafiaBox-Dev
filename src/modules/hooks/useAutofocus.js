@@ -15,6 +15,7 @@ export default () => {
     const autofocus = useRef(null)
 
     useEffect(() => {
+        if (!autofocus.current) return;
         const timer = setTimeout(() => {autofocus.current.focus()}, 100);
         return () => clearTimeout(timer)
     }, [autofocus])

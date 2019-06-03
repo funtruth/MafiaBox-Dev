@@ -8,12 +8,9 @@ import {
     operatorType,
     parseType,
 } from '../../common/types'
-import { LOGIC_ITEM_VAR } from '../defaults';
 
-import generatePushID from '../../common/generatePushID';
 import { showModal } from '../../modal/ModalReducer'
 import { showDropdown } from '../../dropdown/DropdownReducer'
-import { updateGeneral } from '../../page/PageReducer'
 
 import {
     DropClick,
@@ -24,7 +21,8 @@ import {
 
 export default function LogicPanels(props) {
     const dispatch = useDispatch();
-    const { type, varRepo, varKey, params, path, index } = props
+    const { logicItem, varRepo, varKey, path, index } = props
+    const type = logicItem.operatorType || logicItem.logicType
 
     if (!varKey) {
         return null;
@@ -33,54 +31,21 @@ export default function LogicPanels(props) {
     const varItem = varRepo[varKey] || {}
     const varPath = [...path, 'byId', varKey]
 
-    const { display, value, parseBy } = varItem || {}
-    const { byIndex } = value || {}
-
-    //add a new item to a collection
-    const addItem = () => {
-        const newKey = generatePushID('event')
-
-        dispatch(updateGeneral({
-            path: varPath,
-            update: {
-                value: byIndex ? [...byIndex, newKey] : [newKey]
-            },
-        }, {
-            path: [...path, 'byId', newKey],
-            update: {
-                ...LOGIC_ITEM_VAR,
-            }
-        }))
-
-        dispatch(showModal(modalType.editEvent, {
-            path: [...path, 'byId', newKey]
-        }))
-    }
+    const { display, parseBy } = varItem || {}
 
     const panelClick = (e) => {
         switch(type) {
             case logicType.variable.key:
-                dispatch(showDropdown(dropdownType.declareOrAssignVar, e))
-                break;
             case logicType.update.key:
-                dispatch(showDropdown(dropdownType.showSubfields, e))
-                break;
-            case logicType.event.key:
-                addItem();
+                dispatch(showDropdown(dropdownType.pickVar, e, {
+                    ...props,
+                    path: [...path, 'byId'],
+                    parseBy,
+                    varItem,
+                }))
                 break;
             case logicType.return.key:
                 dispatch(showModal(modalType.editToast))
-                break;
-            case operatorType.if.key:
-            case operatorType.elseif.key:
-                if (index === 0) {
-                    dispatch(showDropdown(dropdownType.pickVar, e, {path: varPath}))
-                } else if (index === 1) {
-                    dispatch(showDropdown(dropdownType.pickVarWithType, e, {
-                        ...params,
-                        path: varPath,
-                    }))
-                }
                 break;
             case operatorType.forin.key:
                 if (index === 0) {
@@ -93,6 +58,21 @@ export default function LogicPanels(props) {
             case operatorType.else.key:
             default:
                 console.warn('not supported yet.')
+        }
+    }
+
+    const variableClick = (e) => {
+        if (index === 0) {
+            dispatch(showDropdown(dropdownType.pickVar, e, {
+                ...props,
+                path: varPath,
+                parseBy: parseType.variable,
+            }))
+        } else if (index === 1) {
+            dispatch(showDropdown(dropdownType.pickVarWithType, e, {
+                ...props,
+                path: varPath,
+            }))
         }
     }
 
@@ -109,16 +89,14 @@ export default function LogicPanels(props) {
                         }}
                     >
                         <LogicButton>
-                            {varItem.value.display || 'operator'}
+                            {varItem.display || 'operator'}
                         </LogicButton>
                     </DropClick>
                     <LogicPanels
                         {...props}
                         index={1}
                         varKey={varItem.value.right}
-                        params={{
-                            baseVar: varRepo[varItem.value.left],
-                        }}
+                        baseVar={varRepo[varItem.value.left]}
                     />
                 </Row>
             )
@@ -126,16 +104,19 @@ export default function LogicPanels(props) {
             return <LogicPanels {...props} varKey={varItem.value.middle}/>
         case parseType.collection:
             return (
-                <Body>
+                <Body x="l">
                     <LogicButton onClick={panelClick}>
                         add new
                     </LogicButton>
+                    {varItem.value && varItem.value.map(vK => (
+                        <LogicPanels key={vK} {...props} varKey={vK}/>
+                    ))}
                 </Body>
             )
         case parseType.variable:
         default:
             return (
-                <LogicButton color={display ? 'white' : 'grey'} onClick={panelClick}>
+                <LogicButton color={display ? 'white' : 'grey'} onClick={variableClick}>
                     {display || 'variable'}
                 </LogicButton>
             )

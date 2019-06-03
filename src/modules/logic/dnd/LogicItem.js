@@ -28,8 +28,8 @@ const itemSource = {
 }
 
 function LogicItem(props) {
-    const { connectDragSource, logicItem, scope, logicKey, path } = props
-    const { logicType, operatorType, source, byId, vars } = logicItem
+    const { connectDragSource, logicItem, scope, logicKey, rootPath, path } = props
+    const { logicType, source, byId, vars } = logicItem
     
     const scopedVars = _.filter(vars, i => !i.scope || scope.includes(logicKey))
 
@@ -54,17 +54,20 @@ function LogicItem(props) {
                 varKey={source}
                 varRepo={byId}
                 scopedVars={scopedVars}
+                rootPath={rootPath}
                 path={path}
-                type={operatorType || logicType}
+                logicItem={logicItem}
             />
         )        
     }
 
     return connectDragSource(
         <div>
-            <Row>
+            <Row y="t">
                 <LogicType {...props}/>
-                {renderBody()}
+                <Row y="c">
+                    {renderBody()}
+                </Row>
                 <LogicOptions {...props}/>
             </Row>
         </div>

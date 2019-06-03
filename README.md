@@ -1,6 +1,19 @@
 # Activity log
 - Unchecked items are moved over to day of completion
 
+## WIP
+- [ ] declare scope properly in .map of LogicBlock
+
+## 06/02/2019
+### Major
+- [x] Apply parse method to LogicEngine
+- [ ] PickVar, Unify updates & assigns to parse method
+
+### Minor
+- [x] subpath has been DEPRECATED
+- [ ] figuring out how to pass props properly through LogicParse
+- [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems.
+
 ## 06/02/2019
 ### Major
 - [ ] PWA Prototyping for MVP
@@ -8,10 +21,6 @@
 ## 06/01/2019
 ### Major
 - [x] remove mathType & DEFAULT_ASSIGN, fully replace with parse implementation
-
-### Minor
-- [ ] figuring out how to pass props properly through LogicParse
-- [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems.
 
 ### Minor
 - [x] parseType.number implementation

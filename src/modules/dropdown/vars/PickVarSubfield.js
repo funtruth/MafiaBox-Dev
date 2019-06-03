@@ -1,19 +1,12 @@
 import React from 'react'
 import _ from 'lodash'
 
-import {
-    dropdownType,
-    parseType,
-} from '../../common/types'
-import {
-    LOGIC_ITEM_VAR,
-} from '../../common/defaults'
+import { dropdownType } from '../../common/types'
 
 import {
     WILD_CHAR,
     concatField,
     getSubfields,
-    parseJS,
 } from '../../logic/proptool'
 import {
     VARTYPE_IS_UID,
@@ -40,28 +33,14 @@ export default function PickVarSubfield({
     prefix,
     slate,
     scopedVars,
-    update,
+    updateByPickVar,
     showDropdown,
 }){
     //get subfields to show
     const subfields = getSubfields(prefix)
-
+    
     //field is a UidObject if there is only 1 subfield and the subfield is WILD_CHAR
     const isUidObject = subfields.length === 1 && subfields[0].subfield === WILD_CHAR
-
-    const handleSelect = (item, key) => {
-        const value = concatField(prefix, key)
-
-        update({
-            ...LOGIC_ITEM_VAR,
-            display: parseJS(value),
-            nativeValue: value,
-            parseBy: parseType.variable,
-            value,
-            variableTypes: item.variableTypes,
-        })
-        showDropdown();
-    }
 
     const renderItem = (item, key) => {
         const hasObject = VARTYPE_IS_OBJ(item)
@@ -75,7 +54,6 @@ export default function PickVarSubfield({
                     showDropdown={showDropdown}
                     params={{
                         prefix: combinedField,
-                        subpath: [combinedField],
                     }}
                     text={key}
                 />
@@ -88,7 +66,7 @@ export default function PickVarSubfield({
             <DropItem
                 key={key}
                 chosen={chosen}
-                onClick={() => handleSelect(item, key)}
+                onClick={() => updateByPickVar(item)}
                 rightCheck
                 text={key}
             />

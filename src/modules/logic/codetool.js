@@ -19,7 +19,7 @@ export function generateLogic(type) {
         case logicType.update.key:
         case logicType.event.key:
             return {
-                a,
+                source: a,
                 byId: {
                     [a]: {
                         ...LOGIC_ITEM_VAR,

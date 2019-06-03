@@ -10,22 +10,6 @@ export function getCode(data) {
     return beautify_js(`(rss, write, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
 }
 
-export function parseNumber(repo, key) {
-    if (!repo) return ""
-
-    const item = repo[key]
-    if (!item) return ""
-    
-    switch(item.parseBy) {
-        case parseType.operation:
-            return `(${parseNumber(repo, item.value.left)} ${item.display} ${parseNumber(repo, item.value.right)})`
-        case parseType.variable:
-            return parseJS(item.value)
-        default:
-            return ''
-    }
-}
-
 //lK logicKey
 function parseLogic(byLK, lK) {
     if (!lK) return ""
@@ -41,7 +25,7 @@ function parseLogic(byLK, lK) {
     } = item
     
     let codeBody = parseVar(varRepo, source);
-    let codeRight = byIndex ? byIndex.map(lK => parseLogic(byLK, lK)).join(";") : ""
+    let codeRight = byIndex ? "{" + byIndex.map(lK => parseLogic(byLK, lK)).join(";") + "}" : ""
 
     return codeBody + codeRight
 }
@@ -70,10 +54,26 @@ function parseVar(byVK, vK) {
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right
         case parseType.collection:
-            return value.byIndex.map(cK => parseVar(value.byId, cK)).join(";")
+            return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
         case parseType.string:
         case parseType.update:
         default:
             return '';
+    }
+}
+
+export function parseNumber(repo, key) {
+    if (!repo) return ""
+
+    const item = repo[key]
+    if (!item) return ""
+    
+    switch(item.parseBy) {
+        case parseType.operation:
+            return `(${parseNumber(repo, item.value.left)} ${item.display} ${parseNumber(repo, item.value.right)})`
+        case parseType.variable:
+            return parseJS(item.value)
+        default:
+            return ''
     }
 }

@@ -12,7 +12,7 @@ export default function DropdownConnect({item, index}) {
     
     //create temporary props that are not stored in redux
     let renderProps = {}
-    const { path, subpath, ignoreSubpath } = item
+    const { path } = item
     
     //some APIs
     renderProps.showDropdown = (key, e, params) => dispatch(showDropdown(key, e, params, index, 'right'))
@@ -21,17 +21,10 @@ export default function DropdownConnect({item, index}) {
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
     renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
     renderProps.updatePage = (value, extraPath=[]) => {
-        if (ignoreSubpath) {
-            dispatch(updateGeneral({
-                path: [...path, ...extraPath],
-                update: value,
-            }))
-        } else {
-            dispatch(updateGeneral({
-                path: [...path, ...(subpath||[]), ...extraPath],
-                update: value,
-            }))
-        }
+        dispatch(updateGeneral({
+            path: [...path, ...extraPath],
+            update: value,
+        }))
     }
 
     if (!path) console.warn('this dropdown has no path.')

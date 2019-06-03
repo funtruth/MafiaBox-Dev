@@ -226,7 +226,7 @@ export const rssMap = {
         fieldLength: 3,
         dropdown: dropdownType.pickPhase,
         variableTypes: [
-            variableType.string.key,
+            variableType.key.key,
         ],
     },
     '(rss)(gameState)(counter)': {

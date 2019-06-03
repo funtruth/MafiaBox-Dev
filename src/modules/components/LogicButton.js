@@ -41,6 +41,8 @@ export default function LogicButton(props) {
         borderLeft: highlight ? `4px solid ${palette(highlight || 'darkgrey')}` : '1px solid #444',
         minHeight: '1.4em',
         maxWidth: 200,
+        margin: 2,
+        borderRadius: 2,
         ...style,
     }
     

@@ -32,7 +32,7 @@ export default function LogicBlock(props) {
     const handleAddBelow = () => props.handleAddBelow(parentKey, logicKey, siblingKeys)
     
     return (
-        <Body style={{margin: 4}}>
+        <Body>
             {!!logicKey &&
                 <div style={{position: 'relative'}}>
                     <LogicItemDrop
@@ -63,7 +63,6 @@ export default function LogicBlock(props) {
             {byIndex &&
                 <Body
                     style={{
-                        marginTop: 4,
                         marginLeft: logicKey ? 40 : 0,
                         borderLeft: '1px dashed #666',
                     }}
