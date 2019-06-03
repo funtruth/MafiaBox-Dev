@@ -4,18 +4,19 @@
 ## WIP
 - [ ] parse string
 - [ ] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
+- [ ] removed current/repeat variable from results
+- [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 
 ## 06/03/2019
 ### Major
 - [x] Apply parse method to LogicEngine
 - [x] PickVar, Unify updates & assigns to parse method
-- [ ] PickVarWithType, Unify updates
+- [x] PickVarWithType, Unify updates
 
 ### Minor
 - [x] subpath has been DEPRECATED
 - [x] declare scope properly in .map of LogicBlock
 - [x] figuring out how to pass props properly through LogicParse
-- [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 
 ## 06/02/2019
 ### Major

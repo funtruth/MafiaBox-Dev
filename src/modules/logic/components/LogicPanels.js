@@ -22,7 +22,7 @@ import {
 
 export default function LogicPanels(props) {
     const dispatch = useDispatch();
-    const { logicItem, varRepo, varKey, path, index } = props
+    const { logicItem, varRepo, varKey, operatorReadOnly, path, index } = props
     const type = logicItem.operatorType || logicItem.logicType
 
     if (!varKey) {
@@ -84,6 +84,7 @@ export default function LogicPanels(props) {
                     <LogicPanels {...props} index={0} varKey={varItem.value.left}/>
                     <DropClick
                         dropdown={dropdownType.pickComparison}
+                        disabled={operatorReadOnly}
                         params={{
                             path: varPath,
                             baseVar: varRepo[varItem.value.left],
@@ -110,7 +111,12 @@ export default function LogicPanels(props) {
                         add new
                     </LogicButton>
                     {varItem.value && varItem.value.map(vK => (
-                        <LogicPanels key={vK} {...props} varKey={vK}/>
+                        <LogicPanels
+                            key={vK}
+                            {...props}
+                            varKey={vK}
+                            operatorReadOnly
+                        />
                     ))}
                 </Body>
             )
