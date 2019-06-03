@@ -57,5 +57,5 @@ library
 rooms
     [roomKey]
         config
-        lobby
+        players
 ```

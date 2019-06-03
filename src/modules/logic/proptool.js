@@ -7,8 +7,8 @@ export const WILD_CHAR = '@'
 export const START_REGEX = /\(/g
 export const END_REGEX = /\)/g
 
-//input => "(rss)(lobby)((choices)(user))"
-//ouput => ["rss", "lobby", "(choices)(user)"]
+//input => "(rss)(players)((choices)(user))"
+//ouput => ["rss", "players", "(choices)(user)"]
 export function separateField(prefix="") {
     //make sure string is valid
     const a = (prefix.match(START_REGEX)||[]).length,
@@ -103,8 +103,8 @@ export function getUpdateConfig(prefix) {
 }
 
 //display the variable in proper javascript
-//input => (rss)(lobby)((choices)(user))(dead)
-//ouput => rss.lobby[choices.user].dead
+//input => (rss)(players)((choices)(user))(dead)
+//ouput => rss.players[choices.user].dead
 export function parseJS(string) {
     if (!string) return ""
 

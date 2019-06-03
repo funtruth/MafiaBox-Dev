@@ -14,13 +14,13 @@ export default function EventHeader(props) {
     const { path } = props
 
     const handleCreate = () => {
-        const eventKey = generatePushID()('event')
+        const eventKey = generatePushID('event')
         props.updateGeneral({
             path: [...path, 'events', eventKey],
-                update: {
+            update: {
                 ...DEFAULT_EVENT_LISTENER,
                 key: eventKey,
-            }
+            },
         })
     }
 

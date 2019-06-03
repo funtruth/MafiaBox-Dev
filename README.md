@@ -1,6 +1,10 @@
 # Activity log
 - Unchecked items are moved over to day of completion
 
+## 06/02/2019
+### Major
+- [ ] PWA Prototyping for MVP
+
 ## 06/01/2019
 ### Major
 - [x] remove mathType & DEFAULT_ASSIGN, fully replace with parse implementation
@@ -8,6 +12,8 @@
 ### Minor
 - [ ] figuring out how to pass props properly through LogicParse
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems.
+
+### Minor
 - [x] parseType.number implementation
 - [x] update order of operations for logic engine
 - [x] getting rid of stuff in AppWrapper, got rid of cancel-appclick

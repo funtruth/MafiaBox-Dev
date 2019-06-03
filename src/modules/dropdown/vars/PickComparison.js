@@ -13,20 +13,29 @@ import {
 
 export default function PickComparison({
     slate,
+    path,
     baseVar,
-    update,
+    updateGeneral,
     showDropdown,
 }){
     const handleSelect = (item) => {
-        update({
-            display: item.title,
-            operator: item.key,
+        updateGeneral({
+            path,
+            update: {
+                display: item.code,
+            },
+        }, {
+            path: [...path, 'value'],
+            update: {
+                display: item.title,
+                operator: item.key,
+            }
         })
         showDropdown();
     }
 
     const renderItem = (item) => {
-        const chosen = slate.operator === item.key
+        const chosen = slate.value && (slate.value.operator === item.key)
 
         return (
             <DropItem

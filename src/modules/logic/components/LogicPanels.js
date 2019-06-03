@@ -104,7 +104,7 @@ export default function LogicPanels(props) {
                     <DropClick
                         dropdown={dropdownType.pickComparison}
                         params={{
-                            path: [...varPath, 'value'],
+                            path: varPath,
                             baseVar: varRepo[varItem.value.left],
                         }}
                     >

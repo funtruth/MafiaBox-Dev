@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { LOGIC_ITEM_VAR } from '../logic/defaults';
 import { parseType, variableType } from '../logic/types';
 
-import { orderOfOp } from '../logic/codetool';
+import { parseNumber } from '../logic/LogicEngine';
 import { usePath } from '../hooks/Hooks';
  import generatePushID from '../common/generatePushID';
 import { updateGeneral } from '../page/PageReducer'
@@ -36,12 +36,12 @@ export default function NumberView({path, scopedVars}){
 
     useEffect(() => {
         if (!mathRepo || !source) return;
-        const newDisplay = orderOfOp(mathRepo, source)
+        const newDisplay = parseNumber(mathRepo, source)
         if (newDisplay !== display) {
             dispatch(updateGeneral({
                 path,
                 update: {
-                    display: orderOfOp(mathRepo, source),
+                    display: parseNumber(mathRepo, source),
                     parseBy: parseType.number,
                     variableTypes: [variableType.number.key],
                 }

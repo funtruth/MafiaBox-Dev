@@ -56,13 +56,9 @@ export default function ModalKeys(props) {
         case modalType.deleteLogic:
             return <DeleteLogic {...props}/>
 
-        case modalType.editLogic:
-            return <EditLogic {...props}/>
         case modalType.publishWithSource:
             return <PublishWithSource {...props}/>
 
-        case modalType.editTrigger:
-            return <EditTrigger {...props}/>
         case modalType.editPriority:    
             return <EditPriority {...props}/>
         case modalType.removePriorityRow:
@@ -70,6 +66,12 @@ export default function ModalKeys(props) {
         case modalType.pickCharacterImage:
             return <PickCharImage {...props}/>
         
+        //LogicViews
+        case modalType.editLogic:
+            return <EditLogic {...props}/>
+        case modalType.editTrigger:
+            return <EditTrigger {...props}/>
+
         //StringViews
         case modalType.editEvent:
             return <EditEvent {...props}/>

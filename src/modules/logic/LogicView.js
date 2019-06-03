@@ -30,7 +30,7 @@ export default function LogicView({ path }) {
     } = usePath(path)
 
     let runCode = () => {
-        const code = getCode(logicRepo)
+        const code = getCode({byId: logicRepo, byIndex: logicMap})
         let { rss, write } = LOGIC_TESTS[0]
         // eslint-disable-next-line
         Function(`return ${code}`)()(rss, write)
@@ -38,7 +38,7 @@ export default function LogicView({ path }) {
     }
 
     let showCode = () => {
-        const code = getCode(logicRepo)
+        const code = getCode({byId: logicRepo, byIndex: logicMap})
         dispatch(showModal(modalType.showCode, {
             code,
         }))

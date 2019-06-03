@@ -9,24 +9,7 @@ import {
     LOGIC_ITEM_VAR_OPERATION,
 } from './defaults';
 
-import { parseJS } from './proptool'
 import generatePushID from '../common/generatePushID';
-
-export function orderOfOp(repo, key) {
-    if (!repo) return ""
-
-    const item = repo[key]
-    if (!item) return ""
-    
-    switch(item.parseBy) {
-        case parseType.operation:
-            return `(${orderOfOp(repo, item.value.left)} ${item.display} ${orderOfOp(repo, item.value.right)})`
-        case parseType.variable:
-            return parseJS(item.value)
-        default:
-            return ''
-    }
-}
 
 export function generateLogic(type) {
     const [a,b,c,d] = ['a','b','c','d'].map(generatePushID)

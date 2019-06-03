@@ -6,7 +6,7 @@ import {
     modalType,
     variableType,
 } from '../../common/types';
-import { orderOfOp } from '../codetool'
+import { parseNumber } from '../LogicEngine'
 
 import { showModal } from '../../modal/ModalReducer'
 
@@ -46,7 +46,7 @@ export default function LogicDeclareValue(props) {
                 color="whitish"
             >
                 <div style={{color:'#999', marginRight: 6}}>assign</div>
-                {orderOfOp(item.assign) || '...'}
+                {parseNumber(item.assign) || '...'}
             </LogicButton>
         )
     } else if (isUid) {

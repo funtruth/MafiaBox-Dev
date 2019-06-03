@@ -1,157 +1,79 @@
-import {
-    logicType,
-    returnType,
-    operatorType,
-} from '../common/types'
-import { orderOfOp } from './codetool'
-import { stringToCode } from '../modal/strings/stringTool';
-import {
-    parseJS,
-    separateField,
-    START_CHAR,
-} from './proptool'
+import { parseType } from '../common/types'
+import { parseJS } from './proptool'
 
 var beautify_js = require('js-beautify');
 
-export function getCode(library) {
-    return beautify_js(`(rss, write, choice)=>{${recursive(library)}}`, {brace_style: 'end-expand'})
+export function getCode(data) {
+    if (!data) return '';
+    const { byIndex, byId } = data
+    console.log('logicEngine start', {data})
+    return beautify_js(`(rss, write, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
 }
 
-function recursive(library) {
-    if (!library || !library.logicType) return ""
+export function parseNumber(repo, key) {
+    if (!repo) return ""
+
+    const item = repo[key]
+    if (!item) return ""
+    
+    switch(item.parseBy) {
+        case parseType.operation:
+            return `(${parseNumber(repo, item.value.left)} ${item.display} ${parseNumber(repo, item.value.right)})`
+        case parseType.variable:
+            return parseJS(item.value)
+        default:
+            return ''
+    }
+}
+
+//lK logicKey
+function parseLogic(byLK, lK) {
+    if (!lK) return ""
+
+    const item = byLK[lK]
+    if (!item) return ""
+    console.log('parseLogic item', {item})
 
     const {
-        logicType: type,
-        operatorType: subType,
-        data,
-    } = library
+        byId: varRepo,
+        byIndex,
+        source,
+    } = item
     
-    let codeBody = ''
-    let codeRight = recursive(library.right) || ''
+    let codeBody = parseVar(varRepo, source);
+    let codeRight = byIndex ? byIndex.map(lK => parseLogic(byLK, lK)).join(";") : ""
 
-    switch(type) {
-        case logicType.operator.key:
-            switch(subType) {
-                case operatorType.if.key:
-                    codeBody = `if(${parseJS(data.baseVar.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.compareVar.value)}){${codeRight}}`
-                    break
-                case operatorType.else.key:
-                    codeBody = `else{${codeRight}}`
-                    break
-                case operatorType.elseif.key:
-                    codeBody = `else if(${parseJS(data.baseVar.value)}${(data.comparison && data.comparison.code)||''}${parseJS(data.compareVar.value)}){${codeRight}}`
-                    break
-                case operatorType.forin.key:
-                    codeBody = `for(var ${parseJS(data.variableName)} in ${parseJS(data.source)}){${codeRight}}`
-                    break
-                default:
-            }
-            break
-        case logicType.return.key:
-            switch(data.key) {
-                case 'toast':
-                    codeBody = `return {${eventText(data)}}`
-                    break
-                default:
-                    codeBody = `return ${returnType[data.key] ? returnType[data.key].code : ''}`
-            }
-            break
-        case logicType.variable.key:
-            codeBody = declareVars(library.declare) + assignVars(data)
-            break
-        case logicType.update.key:
-            codeBody = updateVars(data)
-            break
-        case logicType.function.key:
+    return codeBody + codeRight
+}
+
+//vK varKey
+function parseVar(byVK, vK) {
+    if (!vK) return ""
+
+    const item = byVK[vK]
+    if (!item) return ""
+    console.log('parseVar item', {item})
+
+    const {
+        parseBy,
+        display,
+        value,
+    } = item
+
+    switch(parseBy) {
+        case parseType.operation:
+            return parseVar(byVK, value.left) + display + parseVar(byVK, value.right)
+        case parseType.number:
+            return display
+        case parseType.variable:
+            return parseJS(value)
+        case parseType.wrapper:
+            return value.left + parseVar(byVK, value.middle) + value.right
+        case parseType.collection:
+            return value.byIndex.map(cK => parseVar(value.byId, cK)).join(";")
+        case parseType.string:
+        case parseType.update:
         default:
-            codeBody = ''
-    }
-    
-    let codeDown = recursive(library.down)
-
-    return `${codeBody}${codeDown}`
-}
-
-function declareVars(declare) {
-    let string = '',
-        assignTo = '';
-
-    for (var key in declare) {
-        const varInfo = declare[key]
-        if (varInfo.assign) {
-            assignTo = orderOfOp(varInfo.assign)
-        }
-        string = string.concat(`let ${parseJS(key)} = ${assignTo};`)
-    }
-
-    return string
-}
-
-function assignVars(data) {
-    let string = ''
-    for (var field in data) {
-        string = string.concat(`${parseJS(field)}=${convertValue(data, field)};`)
-    }
-    return string
-}
-
-function updateVars(data) {
-    let string = ''
-    for (var field in data) {
-        string = string.concat(
-            `write.updates[\`${separateField(field).map(i => i.charAt(0) === START_CHAR ? `\${${parseJS(i)}}`: i).join('/')}\`]=${convertValue(data, field)};`
-        )
-    }
-    return string
-}
-
-//replace variable properties from foo.$bar to foo[bar] REMOVE
-export function convertPropertyFields(string) {
-    let parts = string.split('_')
-
-    for (var i=0; i<parts.length; i++) {
-        if (parts[i].charAt(0) === '@') {
-            parts[i] = `${parts[i]}]`
-        }
-    }
-
-    parts = parts.join('_').replace(/\$/g, '[').replace(/\.\[/g, '[')
-
-    return parts
-}
-
-//$user to ${user} without []'s REMOVE
-export function convertString(string) {
-    return string.split(' ').map(c => c.charAt(0) === '@' ? `$\{${c.substr(1)}}` : c).join(' ')
-}
-
-//converts the variables in event text properly
-function eventText(object) {
-    const eventKeys = ['string', 'showTo', 'hideFrom']
-    return eventKeys.map(k => {
-        return k in object ?
-            `${k}:${typeof object[k] === 'string' ?
-                `\`${stringToCode(object[k])}\``
-                :`{${Object.keys(object[k]).map(u => `${convertPropertyFields(u)}:true,`)}}`
-            },`
-            :''
-    }).join('')
-}
-
-//handles data value formatting on the right side of the =
-function convertValue(data, field) {
-    switch(typeof data[field].value) {
-        case 'string':
-            switch(data[field].updateType) {
-                default:
-                    return data[field].value
-            }
-        case 'object':
-        default:
-            console.log('logic reducer warning for future Michael', {
-                value: data[field].value,
-                type: typeof data[field].value,
-            })
-            return `${data[field].value}`
+            return '';
     }
 }

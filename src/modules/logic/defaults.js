@@ -271,12 +271,12 @@ export const rssMap = {
             variableType.time.key,
         ],
     },
-    '(rss)(lobby)': {
-        key: '(rss)(lobby)',
-        subfield: 'lobby',
+    '(rss)(players)': {
+        key: '(rss)(players)',
+        subfield: 'players',
         fields: [
             'rss',
-            'lobby',
+            'players',
         ],
         fieldLength: 2,
         dropdown: dropdownType.showUidSubfield,
@@ -285,12 +285,12 @@ export const rssMap = {
             variableType.uidObject.key,
         ],
     },
-    '(rss)(lobby)(@)': {
-        key: '(rss)(lobby)(@)',
+    '(rss)(players)(@)': {
+        key: '(rss)(players)(@)',
         subfield: '@',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
         ],
         fieldLength: 3,
@@ -299,12 +299,12 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
-    '(rss)(lobby)(@)(role)': {
-        key: '(rss)(lobby)(@)(role)',
+    '(rss)(players)(@)(role)': {
+        key: '(rss)(players)(@)(role)',
         subfield: 'role',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'role',
         ],
@@ -314,12 +314,12 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
-    '(rss)(lobby)(@)(role)(roleId)': {
-        key: '(rss)(lobby)(@)(role)(roleId)',
+    '(rss)(players)(@)(role)(roleId)': {
+        key: '(rss)(players)(@)(role)(roleId)',
         subfield: 'roleId',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'role',
             'roleId',
@@ -330,12 +330,12 @@ export const rssMap = {
             variableType.string.key,
         ],
     },
-    '(rss)(lobby)(@)(role)(roleTeam)': {
-        key: '(rss)(lobby)(@)(role)(roleTeam)',
+    '(rss)(players)(@)(role)(roleTeam)': {
+        key: '(rss)(players)(@)(role)(roleTeam)',
         subfield: 'roleTeam',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'role',
             'roleTeam',
@@ -346,12 +346,12 @@ export const rssMap = {
             variableType.string.key,
         ],
     },
-    '(rss)(lobby)(@)(role)(action)': {
-        key: '(rss)(lobby)(@)(role)(action)',
+    '(rss)(players)(@)(role)(action)': {
+        key: '(rss)(players)(@)(role)(action)',
         subfield: 'action',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'role',
             'action',
@@ -362,12 +362,12 @@ export const rssMap = {
             variableType.function.key,
         ],
     },
-    '(rss)(lobby)(@)(role)(charges)': {
-        key: '(rss)(lobby)(@)(role)(charges)',
+    '(rss)(players)(@)(role)(charges)': {
+        key: '(rss)(players)(@)(role)(charges)',
         subfield: 'charges',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'role',
             'team',
@@ -378,12 +378,12 @@ export const rssMap = {
             variableType.number.key,
         ],
     },
-    '(rss)(lobby)(@)(health)': {
-        key: '(rss)(lobby)(@)(health)',
+    '(rss)(players)(@)(health)': {
+        key: '(rss)(players)(@)(health)',
         subfield: 'health',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'health',
         ],
@@ -393,12 +393,12 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
-    '(rss)(lobby)(@)(dead)': {
-        key: '(rss)(lobby)(@)(dead)',
+    '(rss)(players)(@)(dead)': {
+        key: '(rss)(players)(@)(dead)',
         subfield: 'dead',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'dead',
         ],
@@ -408,12 +408,12 @@ export const rssMap = {
             variableType.boolean.key,
         ],
     },
-    '(rss)(lobby)(@)(king)': {
-        key: '(rss)(lobby)(@)(king)',
+    '(rss)(players)(@)(king)': {
+        key: '(rss)(players)(@)(king)',
         subfield: 'king',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'king',
         ],
@@ -423,12 +423,12 @@ export const rssMap = {
             variableType.boolean.key,
         ],
     },
-    '(rss)(lobby)(@)(clown)': {
-        key: '(rss)(lobby)(@)(clown)',
+    '(rss)(players)(@)(clown)': {
+        key: '(rss)(players)(@)(clown)',
         subfield: 'clown',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'clown',
         ],
@@ -438,12 +438,12 @@ export const rssMap = {
             variableType.boolean.key,
         ],
     },
-    '(rss)(lobby)(@)(trigger)': {
-        key: '(rss)(lobby)(@)(trigger)',
+    '(rss)(players)(@)(trigger)': {
+        key: '(rss)(players)(@)(trigger)',
         subfield: 'trigger',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'trigger',
         ],
@@ -453,12 +453,12 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
-    '(rss)(lobby)(@)(trigger)(@)': {
-        key: '(rss)(lobby)(@)(trigger)(@)',
+    '(rss)(players)(@)(trigger)(@)': {
+        key: '(rss)(players)(@)(trigger)(@)',
         subfield: '@',
         fields: [
             'rss',
-            'lobby',
+            'players',
             '@',
             'trigger',
             '@',

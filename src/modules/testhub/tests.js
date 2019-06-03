@@ -1,7 +1,7 @@
 export const LOGIC_TESTS = [
     {
         rss: {
-            lobby: {
+            players: {
                 '123': {
                     dead: false,
                 },

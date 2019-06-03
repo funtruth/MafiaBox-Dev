@@ -137,6 +137,7 @@ export const parseType = {
     number: 'parseType/number',
     variable: 'parseType/variable',
     wrapper: 'parseType/wrapper',
+    update: 'parseType/update',
 }
 
 export const numUpdateType = {
