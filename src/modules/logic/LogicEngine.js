@@ -1,5 +1,5 @@
 import { parseType } from '../common/types'
-import { parseJS } from './proptool'
+import { parseJS, separateVar } from './proptool'
 
 var beautify_js = require('js-beautify');
 
@@ -7,7 +7,7 @@ export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId } = data
     console.log('logicEngine start', {data})
-    return beautify_js(`(rss, write, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
+    return beautify_js(`(rss, updates, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
 }
 
 //lK logicKey
@@ -54,9 +54,11 @@ function parseVar(byVK, vK) {
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right
         case parseType.collection:
-            return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
+            return value ? value.map(cK => parseVar(byVK, cK)).join(",") + ";" : ""
         case parseType.string:
+            return parseString(value)
         case parseType.update:
+            return parseUpdate(value)
         default:
             return '';
     }
@@ -76,4 +78,15 @@ export function parseNumber(repo, key) {
         default:
             return ''
     }
+}
+
+export function parseUpdate(value) {
+    const parts = separateVar(value)
+
+    return 'updates[\'' + parts.slice(1).join("/") + '\']'
+}
+
+export function parseString({byId, byIndex}) {
+    //WIp
+    return ''
 }

@@ -40,7 +40,7 @@ function CreateProject(props) {
     })
 
     //get existing project keys
-    let [projects, setProjects] = useState({})
+    let [setProjects] = useState({})
     const projectsRef = firebase.database().ref(`projects`)
     useEffect(() => {
         projectsRef.once('value', snap => setProjects(snap.val()))

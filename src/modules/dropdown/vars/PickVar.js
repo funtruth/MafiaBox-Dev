@@ -47,9 +47,9 @@ export default function PickVar({
     //
     const getLeftParser = () => {
         switch(type) {
-            case logicType.update:
+            case logicType.update.key:
                 return parseType.update;
-            case logicType.variable:
+            case logicType.variable.key:
                 return parseType.variable;
             default:
                 return ""
@@ -72,6 +72,7 @@ export default function PickVar({
                             ...LOGIC_ITEM_VAR,
                             key: a,
                             display: comparisonType.assign.code,
+                            disabled: true,
                             parseBy: parseType.operation,
                             value: {
                                 operator: comparisonType.assign.key,
@@ -178,9 +179,9 @@ export default function PickVar({
                         </Row>
                     </>
                 )
+            default:
+                return null;
         }
-
-        return null;
     }
 
     const renderAllVars = () => {
@@ -197,9 +198,9 @@ export default function PickVar({
                         <DropEmpty list={vars} text="no variables found"></DropEmpty>
                     </>
                 )
+            default:
+                return null;
         }
-
-        return null;
     }
 
     const renderItem = (item) => {

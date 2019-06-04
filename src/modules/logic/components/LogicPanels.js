@@ -19,10 +19,11 @@ import {
     Row,
     Text,
 } from '../../components/Common';
+import { VARTYPE_IS_STR } from '../../common/arrows';
 
 export default function LogicPanels(props) {
     const dispatch = useDispatch();
-    const { logicItem, varRepo, varKey, operatorReadOnly, path, index } = props
+    const { logicItem, varRepo, varKey, path, index } = props
     const type = logicItem.operatorType || logicItem.logicType
 
     if (!varKey) {
@@ -63,7 +64,11 @@ export default function LogicPanels(props) {
     }
 
     const variableClick = (e) => {
-        if (index === 0) {
+        if (VARTYPE_IS_STR(varItem)) {
+            dispatch(showModal(modalType.editString, {
+                path: [...varPath, 'value'],
+            }))
+        } else if (index === 0) {
             dispatch(showDropdown(dropdownType.pickVar, e, {
                 ...props,
                 path: varPath,
@@ -84,7 +89,7 @@ export default function LogicPanels(props) {
                     <LogicPanels {...props} index={0} varKey={varItem.value.left}/>
                     <DropClick
                         dropdown={dropdownType.pickComparison}
-                        disabled={operatorReadOnly}
+                        disabled={varItem.disabled}
                         params={{
                             path: varPath,
                             baseVar: varRepo[varItem.value.left],
@@ -115,7 +120,6 @@ export default function LogicPanels(props) {
                             key={vK}
                             {...props}
                             varKey={vK}
-                            operatorReadOnly
                         />
                     ))}
                 </Body>
@@ -123,7 +127,7 @@ export default function LogicPanels(props) {
         case parseType.variable:
         default:
             return (
-                <LogicButton onClick={variableClick}>
+                <LogicButton disabled={varItem.disabled} onClick={variableClick}>
                     <Text size="s" color={display ? 'white' : 'grey'}>
                         {display || 'variable'}
                     </Text>

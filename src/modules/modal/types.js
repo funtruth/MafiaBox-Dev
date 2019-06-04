@@ -21,6 +21,7 @@ export const modalType = {
     pickCharacterImage: 'modalType/pick-character-image',
     
     //StringViews
+    editString: 'modalType/edit-string',
     editEvent: 'modalType/edit-event',
     editToast: 'modalType/edit-toast',
 

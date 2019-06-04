@@ -1,5 +1,4 @@
 import React from 'react'
-import _ from 'lodash'
 
 import {
     dropdownType,
@@ -99,7 +98,6 @@ export default function PickVarWithType(props){
             case variableType.global.key:
             case variableType.key.key:
             case variableType.time.key:
-                
             case variableType.uid.key:
             case variableType.string.key:
             default:

@@ -6,6 +6,9 @@
 - [ ] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
 - [ ] removed current/repeat variable from results
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
+- [ ] Save wildcards while going through PickVar/PickVarSubfields
+- [ ] wildcard direct handling in components with parseType.variable, this should be done through a dropdown + picking a uid
+- [ ] logicType.return / logicType.event - is 8 variable objects too much?
 
 ## 06/03/2019
 ### Major

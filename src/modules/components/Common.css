@@ -46,6 +46,12 @@
 .--onclick:hover {
     filter: brightness(120%);
 }
+.--disabled {
+    cursor: not-allowed;
+}
+.--disabled * {
+    pointer-events: none;
+}
 .--bubble {
     padding: 4px 8px;
     border-radius: 8px;

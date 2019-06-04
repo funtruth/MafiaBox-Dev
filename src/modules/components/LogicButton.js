@@ -19,6 +19,7 @@ export default function LogicButton(props) {
     const {
         children,
         onClick,
+        disabled,
         className   = '',
         size        = 'm',
         bg          = 'charcoal',
@@ -29,7 +30,7 @@ export default function LogicButton(props) {
 
     const classes = [
         'text-ellipsis',
-        onClick ? '--onclick' : '',
+        onClick && !disabled ? '--onclick' : '--disabled',
         className,
     ].join(" ")
 
@@ -52,7 +53,7 @@ export default function LogicButton(props) {
             style={buttonStyle}
             wrap="nowrap"
             y="c"
-            onClick={event => onClick && onClick(event)}
+            onClick={event => !disabled && onClick && onClick(event)}
         >
             {children}
         </Row>

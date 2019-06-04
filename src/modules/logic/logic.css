@@ -4,31 +4,6 @@
     align-items: center;
     width: 40px;
 }
-
-.logic-panel-disabled {
-    padding: 4px 12px;
-    background-color: rgba(40, 43, 48,1);
-    height: 1.4em;
-    display: flex;
-    align-items: center;
-    color: #868686;
-    border-radius: 0px 4px 4px 0px;
-}
-
-.logic-option {
-    padding: 4px 4px;
-    height: 1.4em;
-    pointer-events: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #aaa;
-}
-.logic-option:hover {
-    color: #fff;
-}
-
 .logic-alert {
     padding: 2px 0px;
     border-radius: 2px;
@@ -46,39 +21,6 @@
     opacity: 1;
     transform: scale(1.1);
 }
-
-.logic-new-var {
-    color: #d6d6d6;
-    border-radius: 4px;
-    padding: 2px 6px;
-    font: 300 12px Segoe UI;
-    margin-left: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.logic-pick-update {
-    color: #d6d6d6;
-    background-color: rgba(60, 63, 68,1);
-    padding: 3px 6px 3px 6px;
-    font: 300 12px Segoe UI;
-}
-
-.logic-updates {
-    display: flex;
-    flex-direction: row;
-    border-radius: 6px;
-    overflow: hidden;
-    margin-left: 6px;
-}
-.logic-update {
-    padding: 4px 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1em;
-}
 .logic-display {
     padding: 2px 4px;
     cursor: pointer;
@@ -86,13 +28,4 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.icon-pop {
-    color: #999;
-    cursor: pointer;
-    font-size: 12px;
-}
-.icon-pop:hover {
-    color: #d6d6d6;
 }

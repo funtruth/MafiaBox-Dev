@@ -24,6 +24,7 @@ import RemovePriorityRow from './priority/RemovePriorityRow'
 import PickCharImage from './image/PickCharImage'
 
 //StringViews
+import EditString from './strings/EditString'
 import EditEvent from './strings/EditEvent'
 import EditToast from './strings/EditToast'
 
@@ -73,6 +74,8 @@ export default function ModalKeys(props) {
             return <EditTrigger {...props}/>
 
         //StringViews
+        case modalType.editString:
+            return <EditString {...props}/>
         case modalType.editEvent:
             return <EditEvent {...props}/>
         case modalType.editToast:

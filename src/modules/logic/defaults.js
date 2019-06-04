@@ -28,6 +28,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     ---------------------------------------------------------------
     key
     display         what to show on the update button / FRONT-END
+    disabled        does not allow user to change variable value
     nativeValue     original value (can contain wildcard chars)
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
@@ -39,6 +40,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
 */
 export const LOGIC_ITEM_VAR = {
     display: "",
+    disabled: "",
     nativeValue: "",
     parseBy: "",
     value: "",

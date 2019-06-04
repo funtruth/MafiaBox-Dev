@@ -43,7 +43,8 @@
     border-radius: 4px;
     background-color: #363940;
     overflow: auto;
-	box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
+    box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
+    max-height: 80vh;
 }
 
 .error-text {

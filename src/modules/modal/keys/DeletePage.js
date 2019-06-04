@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 import { removePage } from '../../page/PageReducer' 
 
-import Modal from '../components/Modal';
 import Text from '../../components/Text'
 import Button from '../../components/Button'
 import Body from '../../components/Body'
