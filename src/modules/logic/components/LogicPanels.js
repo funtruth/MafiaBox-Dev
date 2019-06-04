@@ -200,7 +200,7 @@ export default function LogicPanels(props) {
                 <DropClick
                     disabled={disabled}
                     dropdown={dropdown}
-                    context={dropdownType.checkVar}
+                    context={dropdownType.replaceWildcard}
                     modal={modal}
                     params={{
                         path: varPath,

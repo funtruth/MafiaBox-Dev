@@ -2,132 +2,92 @@ import React, { useState } from 'react'
 import _ from 'lodash'
 
 import { variableType } from '../../logic/types';
+import { APP_SHADES } from '../../components/Standards';
 
 import {
-    separateVar,
-    combineFields,
     parseJS,
+    replaceVarWithMap,
+    START_CHAR,
     WILD_CHAR,
+    separateVar,
 } from '../../logic/proptool';
 
+import { DropTitle } from '../components/Common';
 import {
-    DropParent,
-    DropTitle,
-} from '../components/Common';
-import {
-    Tag,
+    Tag, Row,
 } from '../../components/Common';
-import RelatedVars from './RelatedVars'
+import PickVarWithType from './PickVarWithType';
 
-function Underline() {
-    return (
-        <div
-            style={{
-                position: 'absolute',
-                left: 0, right: 0,
-                bottom: 0,
-                height: 3,
-                backgroundColor: '#fed766',
-            }}
-        ></div>
-    )
-}
+export default function ReplaceWildcard(props){
+    const {
+        path,
+        slate,
+        updateGeneral,
+    } = props
 
-export default function ReplaceWildcard(props) {
-    const { currentValue, otherDropdown } = props
-    const { value, nativeValue } = currentValue
+    const [focusMap, setFocusMap] = useState([])
 
-    const [target, setTarget] = useState('')
-    const [fields, setFields] = useState(separateVar(value))
-    const [wildfields] = useState(separateVar(nativeValue))
+    const handleFocus = (e, map) => {
+        e.stopPropagation();
+        setFocusMap(map);
+    }
 
-    //TODO do some recursive thing here to deal with wildcards inside wildcards ...
-    const renderField = (field, index) => {
-        const selected = target === index
-
-        if (field === WILD_CHAR) {
-            return (
-                <Tag
-                    key={index}
-                    bg="maroon"
-                    onClick={() => setTarget(index)}
-                    style={{
-                        position: 'relative',
-                    }}
-                >
-                    <i
-                        className="mdi mdi-alert"
-                        style={{
-                            fontSize: 15,
-                        }}
-                    ></i>
-                    {selected && <Underline/>}
-                </Tag>
-            )
-        }
-
-        if(wildfields[index] === WILD_CHAR) {
-            return (
-                <Tag
-                    key={index}
-                    bg="violet"
-                    onClick={() => setTarget(index)}
-                    style={{
-                        position: 'relative',
-                    }}
-                >
-                    {field}
-                    {selected && <Underline/>}
-                </Tag>
-            )
-        }
+    const renderField = (field, map = [], shade = 'discord') => {
+        const fields = separateVar(field)
 
         return (
-            <Tag key={index} bg="grey">
-                {field}
-            </Tag>
+            fields.map((field, index) => {
+                const thisMap = [...map, index]
+                const chosen = _.isEqual(thisMap, focusMap)
+
+                if (field.charAt(0) === START_CHAR) {
+                    return (
+                        <Tag 
+                            key={field + index}
+                            bg={chosen ? "purple" : APP_SHADES[shade]['f']}
+                            onClick={(e) => handleFocus(e, thisMap)}
+                        >
+                            {renderField(field, thisMap, APP_SHADES[shade]['f'])}
+                        </Tag>
+                    )
+                }
+
+                const isWild = field === WILD_CHAR
+                return (
+                    <Tag
+                        key={field + index}
+                        bg={chosen ? "purple" : "charcoal"}
+                        disabled={!isWild}
+                        onClick={(e) => isWild && handleFocus(e, thisMap)}
+                    >
+                        {field}
+                    </Tag>
+                )
+            })
         )
     }
 
     const handleSelect = (item) => {
-        //TODO add an error if no target selected
-        if (target === '') {
-            return;
-        }
-
-        //deep clone
-        const fieldsClone = _.cloneDeep(fields)
-
-        //make change
-        fieldsClone[target] = item.key
-
-        //re-assemble the string & update
-        const combined = combineFields(fieldsClone)
-        props.updatePage({
-            value: combined,
-            display: parseJS(combined),
-        })
-
-        //refresh the front-end of dropdown
-        setFields(fieldsClone)
+        const newValue = replaceVarWithMap(item.key, slate.value, focusMap)
+        updateGeneral({
+            path,
+            update: {
+                value: newValue,
+                display: parseJS(newValue),
+            }
+        });
     }
 
     return (
         <>
-            <DropTitle>replace field</DropTitle>
-            <div className="row" style={{justifyContent: 'center', padding: '0px 15px'}}>
-                {fields.map(renderField)}
-            </div>
-            <RelatedVars
+            <DropTitle>variable field</DropTitle>
+            <Row y="c">
+                {renderField(slate.value)}
+            </Row>
+            <PickVarWithType
                 {...props}
-                variableTypes={variableType.uid.key}
-                onClick={handleSelect}
-            />
-            <DropTitle>other</DropTitle>
-            <DropParent
-                dropdown={otherDropdown}
-                showDropdown={props.showDropdown}
-                text="values ..."
+                pickVarClick={handleSelect}
+                variableTypes={[variableType.uid.key]}
             />
         </>
     )

@@ -40,7 +40,6 @@ import EditVarName from './functions/EditVarName'
 import PickVarType from './functions/PickVarType';
 import WriteVarType from './functions/WriteVarType'
 
-import CheckVar from './vars/CheckVar'
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
 import PickVarWithType from './vars/PickVarWithType';
@@ -120,9 +119,7 @@ export default function DropdownKeys(props) {
             return <WriteGameChoice {...props}/>
         case dropdownType.createGlobalVar:
             return <CreateGlobalVar {...props}/>
-            
-        case dropdownType.checkVar:
-            return <CheckVar {...props}/>
+        
         case dropdownType.addVar:
             return <AddVar {...props}/>
         case dropdownType.editVar:

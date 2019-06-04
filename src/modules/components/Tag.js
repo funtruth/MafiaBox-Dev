@@ -9,6 +9,7 @@ export default function Tag(props) {
         icon,
         children,
         onClick,
+        disabled,
         className           = '',
         size                = 's',
         color               = 'whitish',
@@ -18,7 +19,8 @@ export default function Tag(props) {
 
     const classes = [
         '--tag',
-        onClick ? '--onclick' : '',
+        onClick && !disabled ? '--onclick' : '',
+        disabled ? 'drop-click-frozen' : '',
         className,
     ].join(" ")
 
@@ -32,7 +34,7 @@ export default function Tag(props) {
         <div
             className={classes}
             style={buttonStyle}
-            onClick={event => onClick && onClick({event})}
+            onClick={event => onClick && onClick(event)}
         >
             <Text size={size} color={color}>
                 <Row y="c">

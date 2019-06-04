@@ -24,7 +24,18 @@ export const APP_PALETTE = {
     green:      '#4BAC88',
     turquoise:  '#085f63',
     violet:     '#7b68ee',
+}
 
+export const APP_SHADES = {
+    black:      { "0": 'black', "f": 'blackish' },
+    blackish:   { "0": 'black', "f": 'charcoal' },
+    charcoal:   { "0": 'blackish', "f": 'discord' },
+    discord:    { "0": 'charcoal', "f": 'darkgrey' },
+    darkgrey:   { "0": 'discord', "f": 'grey' },
+    grey:       { "0": 'darkgrey', "f": 'lightgrey' },
+    lightgrey:  { "0": 'grey', "f": 'whitish' },
+    whitish:    { "0": 'lightgrey', "f": 'white' },
+    white:      { "0": 'whitish', "f": 'white' },
 }
 
 export function palette(color) {

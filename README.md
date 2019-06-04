@@ -11,7 +11,7 @@
 ## 06/04/2019
 ### Major
 - [x] control handleSelect in LogicPanel instead of PickVar/PickVarWithType
-- [ ] wildcard direct handling in components with parseType.variable, this should be done through a dropdown + picking a uid
+- [x] wildcard direct handling in components with parseType.variable, this should be done through a dropdown + picking a uid
 
 ### Minor
 - [x] parse string, boolean

@@ -9,7 +9,7 @@ export const END_REGEX = /\)/g
 
 //input => "(rss)(players)((choices)(user))"
 //ouput => ["rss", "players", "(choices)(user)"]
-export function separateVar(prefix="") {
+export function separateVar(prefix = "") {
     //make sure string is valid
     const a = (prefix.match(START_REGEX)||[]).length,
           b = (prefix.match(END_REGEX)||[]).length,
@@ -46,7 +46,29 @@ export function separateVar(prefix="") {
     return fields;
 }
 
-export function concatField(a="", b="") {return a + START_CHAR + b + END_CHAR}
+export function searchVarWithMap(value, map = []) {
+    const fields = separateVar(value)
+
+    //
+    if (map.length === 0) {
+        return fields
+    }
+
+    //recursive starting at next number in map
+    return searchVarWithMap(fields[map[0]], map.slice(1))
+}
+
+export function replaceVarWithMap(newValue, oldValue, map = []) {
+    const fields = separateVar(oldValue)
+    const [removed] = fields.splice(map[0], 1)
+
+    //use splice to insert the new value into the old fields array, replacing "@"
+    fields.splice(map[0], 0, map.length === 1 ? newValue : replaceVarWithMap(newValue, removed, map.slice(1)))
+
+    return combineFields(fields)
+}
+
+export function concatField(a = "", b = "") {return a + START_CHAR + b + END_CHAR}
 export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CHAR + START_CHAR) + END_CHAR}
 
 //returns properties of prefix existing in rssMap
@@ -78,7 +100,7 @@ export function getSubfields(prefix) {
     return fields;
 }
 
-//returns the proper update config to LogicExpandable using prefix
+//DEPRECATED returns the proper update config to LogicExpandable using prefix
 export function getUpdateConfig(prefix) {
     const parts = separateVar(prefix)
 
@@ -109,9 +131,7 @@ export function getUpdateConfig(prefix) {
 //display the variable in proper javascript
 //input => (rss)(players)((choices)(user))(dead)
 //ouput => rss.players[choices.user].dead
-export function parseJS(string) {
-    if (!string) return ""
-
+export function parseJS(string = "") {
     const fields = separateVar(string)
 
     if (!fields.length) {
