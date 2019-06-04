@@ -36,6 +36,7 @@ export const dropdownType = {
     writeVarType: 'dropdownType/write-var-type',
 
     addVar: 'dropdownType/add-var',
+    checkVar: 'dropdownType/check-var',
     editVar: 'dropdownType/edit-var',
     pickVar: 'dropdownType/pick-var',
     pickVarSubfield: 'dropdownType/pick-var-subfield',

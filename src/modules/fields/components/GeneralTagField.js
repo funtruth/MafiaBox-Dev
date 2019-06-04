@@ -21,7 +21,7 @@ export default function GeneralTagField(props) {
             <DropClick
                 key={item.key}
                 onClick={() => handleClick(item, active)}
-                rightDropdown={dropdownType.editGeneralTag}
+                context={dropdownType.editGeneralTag}
                 params={{
                     path: [fieldKey],
                     subfieldKey: item.key,

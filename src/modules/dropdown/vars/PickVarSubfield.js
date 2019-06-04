@@ -32,8 +32,8 @@ Used from:
 export default function PickVarSubfield({
     prefix,
     slate,
-    scopedVars,
-    pickVarClick,
+    scopedVars,//passed
+    pickVarClick,//passed
     showDropdown,
 }){
     //get subfields to show

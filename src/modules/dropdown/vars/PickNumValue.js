@@ -67,7 +67,6 @@ export default function PickNumValue({
                 key: newKey,
                 display: value,
                 value,
-                nativeValue: value,
                 parseBy: parseType.variable,
                 variableTypes: [variableType.number.key],
             },

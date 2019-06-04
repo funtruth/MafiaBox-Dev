@@ -18,6 +18,7 @@
 - [x] parse object
 - [x] merge comparisonType with other types
 - [x] logicType.return / logicType.event - is 8 variable objects too much? GOOD FOR NOW
+- [x] remove .nativeValue (can figure out from value itself)
 - [ ] Save wildcards while going through PickVar/PickVarSubfields
 
 ## 06/03/2019

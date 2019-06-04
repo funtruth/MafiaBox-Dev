@@ -118,7 +118,6 @@ export default function StringView({path, scopedVars}) {
                     key: newKey,
                     value: item.key,
                     display: item.key,
-                    nativeValue: item.key,
                     parseBy: parseType.variable,
                 },
             },

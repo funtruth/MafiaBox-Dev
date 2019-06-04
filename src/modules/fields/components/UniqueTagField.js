@@ -21,7 +21,7 @@ export default function UniqueTagField(props) {
             <DropClick
                 key={item.key}
                 onClick={() => handleClick(item)}
-                rightDropdown={dropdownType.editUniqueTag}
+                context={dropdownType.editUniqueTag}
                 params={{
                     path: [fieldKey],
                     subfieldKey: item.key,

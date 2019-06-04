@@ -13,11 +13,6 @@ div {
   outline-style: none;
 }
 
-div[highlight]:hover {
-    background-color: hsla(0,0%,100%,.1);
-    cursor: pointer;
-}
-
 div[empty] {
   color: #666666
 }

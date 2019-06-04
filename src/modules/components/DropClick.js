@@ -17,7 +17,7 @@ export default function DropClick(props) {
         onRightClick,
         dropdown,
         modal,
-        rightDropdown,
+        context,
         params,
         place,
         children,
@@ -67,7 +67,7 @@ export default function DropClick(props) {
             return;
         }
 
-        dispatch(showDropdown(rightDropdown, e, params, 0, place))
+        dispatch(showDropdown(context, e, params, 0, place))
     }
 
     return (

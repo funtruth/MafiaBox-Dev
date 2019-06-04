@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import {
-    dropdownType,
     comparisonType,
+    dropdownType,
     modalType,
     parseType,
 } from '../../common/types'
@@ -12,7 +12,6 @@ import { LOGIC_ITEM_VAR } from '../../common/defaults';
 import { VARTYPE_IS_STR } from '../../common/arrows';
 import generateIDs from '../../common/generateIDs';
 import { parseJS } from '../proptool';
-import { showModal } from '../../modal/ModalReducer'
 import { showDropdown } from '../../dropdown/DropdownReducer'
 import { updateGeneral } from '../../page/PageReducer'
 
@@ -21,12 +20,11 @@ import {
     DropClick,
     LogicButton,
     Row,
-    Text,
 } from '../../components/Common';
 
 export default function LogicPanels(props) {
     const dispatch = useDispatch();
-    const { varRepo, varKey, baseVar, path, index } = props
+    const { varRepo, varKey, baseVar, path, rootPath, index, scopedVars, logicItem } = props
 
     if (!varKey) {
         return null;
@@ -43,7 +41,7 @@ export default function LogicPanels(props) {
         let i;
         switch(parseBy) {
             case parseType.object:
-                i = generateIDs(3)
+                i = generateIDs(3);
 
                 dispatch(updateGeneral({
                     path: [...varPath, 'value'],
@@ -68,7 +66,6 @@ export default function LogicPanels(props) {
                             key: i[1],
                             display: parseJS(item.key),
                             value: item.key,
-                            nativeValue: item.key,
                             parseBy: parseType.variable, //can be update, WIP
                             variableTypes: item.variableTypes,
                         },
@@ -81,7 +78,7 @@ export default function LogicPanels(props) {
                 }))
                 break;
             case parseType.collection:
-                i = generateIDs(3)
+                i = generateIDs(3);
 
                 dispatch(updateGeneral({
                     path: [...varPath, 'value'],
@@ -106,7 +103,6 @@ export default function LogicPanels(props) {
                             key: i[1],
                             display: parseJS(item.key),
                             value: item.key,
-                            nativeValue: item.key,
                             parseBy: parseType.variable, //can be update, WIP
                             variableTypes: item.variableTypes,
                         },
@@ -126,7 +122,6 @@ export default function LogicPanels(props) {
                         ...LOGIC_ITEM_VAR,
                         display: parseJS(item.key),
                         value: item.key,
-                        nativeValue: item.key,
                         parseBy: parseType.variable,
                         variableTypes: item.variableTypes,
                     }
@@ -136,46 +131,7 @@ export default function LogicPanels(props) {
         dispatch(showDropdown());
     }
 
-    const panelClick = (e) => {
-        if (variableTypes) {
-            dispatch(showDropdown(dropdownType.pickVarWithType, e, {
-                ...props,
-                path: repoPath,
-                varItem,
-                variableTypes,
-                pickVarClick,
-            }))
-        } else {
-            dispatch(showDropdown(dropdownType.pickVar, e, {
-                ...props,
-                path: repoPath,
-                varItem,
-                pickVarClick,
-            }))
-        }
-    }
-
-    const variableClick = (e) => {
-        if (VARTYPE_IS_STR(varItem)) {
-            dispatch(showModal(modalType.editString, {
-                path: varPath,
-            }))
-        } else if (index === 0) {
-            dispatch(showDropdown(dropdownType.pickVar, e, {
-                ...props,
-                path: varPath,
-                pickVarClick,
-            }))
-        } else if (index === 1) {
-            dispatch(showDropdown(dropdownType.pickVarWithType, e, {
-                ...props,
-                path: varPath,
-                variableTypes: baseVar && baseVar.variableTypes,
-                pickVarClick,
-            }))
-        }
-    }
-
+    let dropdown, modal;
     switch(parseBy) {
         case parseType.operation:
             return (
@@ -205,12 +161,23 @@ export default function LogicPanels(props) {
             return <LogicPanels {...props} varKey={value.middle}/>
         case parseType.collection:
         case parseType.object:
+            dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
             return (
                 <Body x="l">
                     {display &&
-                        <LogicButton onClick={panelClick}>
-                            add new
-                        </LogicButton>
+                        <DropClick
+                            dropdown={dropdown}
+                            params={{
+                                ...props,
+                                path: repoPath,
+                                varItem,
+                                pickVarClick,
+                            }}
+                        >
+                            <LogicButton>
+                                add new
+                            </LogicButton>
+                        </DropClick>
                     }
                     {value && value.map(vK => (
                         <LogicPanels
@@ -225,12 +192,30 @@ export default function LogicPanels(props) {
         case parseType.string:
         case parseType.variable:
         default:
+            if (VARTYPE_IS_STR(varItem)) modal = modalType.editString
+            else if (index === 0) dropdown = dropdownType.pickVar
+            else if (index === 1) dropdown = dropdownType.pickVarWithType
+
             return (
-                <LogicButton disabled={disabled} onClick={variableClick}>
-                    <Text size="s" color={display ? 'white' : 'grey'}>
-                        {display || 'select ...'}
-                    </Text>
-                </LogicButton>
+                <DropClick
+                    disabled={disabled}
+                    dropdown={dropdown}
+                    context={dropdownType.checkVar}
+                    modal={modal}
+                    params={{
+                        path: varPath,
+                        rootPath,
+                        pickVarClick,
+                        scopedVars,
+                        variableTypes: variableTypes || (baseVar && baseVar.variableTypes),
+                        logicItem,
+                    }}
+                >
+                    <LogicButton
+                        text={display}
+                        placeholder="select ..."
+                    />
+                </DropClick>
             )
     }
 }

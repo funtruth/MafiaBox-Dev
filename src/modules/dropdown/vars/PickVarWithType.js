@@ -21,9 +21,9 @@ import Types from '../types/index';
 export default function PickVarWithType(props){
     const {
         slate,
-        variableTypes,
-        scopedVars,
-        pickVarClick,
+        variableTypes,//passed
+        scopedVars,//passed
+        pickVarClick,//passed
         showDropdown,
     } = props
 

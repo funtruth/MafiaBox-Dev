@@ -31,7 +31,6 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     "               config for parseType.collection, boolean => display "add new" panel
     "               config for parseType.object, boolean => display "add new" panel
     disabled        does not allow user to change variable value
-    nativeValue     original value (can contain wildcard chars)
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
     "               payload for parseType.variable, value in (foo)(bar) form
@@ -44,7 +43,6 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
 export const LOGIC_ITEM_VAR = {
     display: "",
     disabled: "",
-    nativeValue: "",
     parseBy: "",
     value: "",
     variableTypes: "",
@@ -579,15 +577,15 @@ export const rssMap = {
             variableType.array.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(0)': {
-        key: '(rss)(choices)(@)(ordered)(0)',
-        subfield: '0',
+    '(rss)(choices)(@)(ordered)(first)': {
+        key: '(rss)(choices)(@)(ordered)(first)',
+        subfield: 'first',
         fields: [
             'rss',
             'choices',
             '@',
             'ordered',
-            '0',
+            'first',
         ],
         fieldLength: 5,
         dropdown: dropdownType.pickUid,
@@ -596,15 +594,15 @@ export const rssMap = {
             variableType.key.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(1)': {
-        key: '(rss)(choices)(@)(ordered)(1)',
-        subfield: '1',
+    '(rss)(choices)(@)(ordered)(second)': {
+        key: '(rss)(choices)(@)(ordered)(second)',
+        subfield: 'second',
         fields: [
             'rss',
             'choices',
             '@',
             'ordered',
-            '1',
+            'second',
         ],
         fieldLength: 5,
         dropdown: dropdownType.pickUid,
@@ -613,15 +611,15 @@ export const rssMap = {
             variableType.key.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(2)': {
-        key: '(rss)(choices)(@)(ordered)(2)',
-        subfield: '2',
+    '(rss)(choices)(@)(ordered)(third)': {
+        key: '(rss)(choices)(@)(ordered)(third)',
+        subfield: 'third',
         fields: [
             'rss',
             'choices',
             '@',
             'ordered',
-            '2',
+            'third',
         ],
         fieldLength: 5,
         dropdown: dropdownType.pickUid,

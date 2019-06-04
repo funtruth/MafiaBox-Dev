@@ -68,12 +68,6 @@ export const fieldType = {
         icon: 'ion-ios-pricetag',
         title: 'Tag',
     },
-    vars: {
-        key: 'vars',
-        index: 5,
-        icon: 'ion-md-planet',
-        title: 'Vars',
-    },
     gameChoices: {
         key: 'gameChoices',
         index: 9,

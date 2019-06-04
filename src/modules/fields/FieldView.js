@@ -15,9 +15,7 @@ import LogicField from './components/LogicField';
 import GameChoiceField from './components/GameChoiceField'
 import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
-
 import PriorityField from './components/PriorityField'
-import VariableField from './components/VariableField'
 
 function FieldView(props) {
     const { pageKey, pageInfo, fieldMap, fieldRepo,
@@ -66,8 +64,6 @@ function FieldView(props) {
                 return <CallField {...props}/>
             case fieldType.image.key:
                 return <ImageField {...props}/>
-            case fieldType.vars.key:
-                return <VariableField {...props}/>
             default:
                 return null
         }

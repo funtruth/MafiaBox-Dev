@@ -20,7 +20,6 @@ const itemSource = {
             display: parseJS(item.key),
             parseBy: parseType.variable,
             variableTypes: [variableType.number.key],
-            nativeValue: item.key,
             value: item.key,
         }
     }

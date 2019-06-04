@@ -5,8 +5,6 @@ import { logicType, operatorType } from '../types'
 
 import {
     DropClick,
-    Icon,
-    Text,
     LogicButton,
  } from '../../components/Common';
 
@@ -29,14 +27,12 @@ export default function LogicType(props) {
                 path,
             }}
         >
-            <LogicButton highlight={color} color={color}>
-                <Icon className={icon || 'mdi mdi-pencil'}></Icon>
-                {title &&
-                    <Text size="s" color="whitish" before="xxs">
-                        {title}
-                    </Text>
-                }
-            </LogicButton>
+            <LogicButton
+                highlight={color}
+                color={color}
+                icon={icon || 'mdi mdi-pencil'}
+                label={title}
+            />
         </DropClick>
     )
 }

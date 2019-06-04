@@ -46,7 +46,6 @@ export default function RelatedVars(props) {
         props.updatePage({
             ...LOGIC_ITEM_VAR,
             display: parseJS(item.key),
-            nativeValue: item.key,
             value: item.key,
             parseBy: parseType.variable,
             variableTypes: item.variableTypes,

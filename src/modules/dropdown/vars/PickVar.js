@@ -29,10 +29,10 @@ import { Row } from '../../components/Common'
 //Used from: LogicPanels
 export default function PickVar({
     slate,
-    rootPath,
-    logicItem,
-    scopedVars,
-    pickVarClick,
+    rootPath,//passed
+    logicItem,//passed
+    scopedVars,//passed
+    pickVarClick,//passed
     showDropdown,
     updateGeneral,
 }){

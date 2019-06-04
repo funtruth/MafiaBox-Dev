@@ -20,6 +20,10 @@ export function separateVar(prefix="") {
         return fields;
     }
 
+    if (a === 0) {
+        return [prefix]
+    }
+
     let counter = 0,
         pointer = 0;
 
