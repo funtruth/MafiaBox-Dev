@@ -1,9 +1,9 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { 
-    parseOperatorType,
+import {
     variableType,
+    comparisonType,
 } from '../../common/types';
 
 import { useVarType } from '../../hooks/Hooks';
@@ -25,7 +25,7 @@ export default function NumberDetailer(props) {
         scopedVars,
     )
 
-    const operators = _.toArray(parseOperatorType)
+    const operators = _.filter(comparisonType, i => i.showInStringView)
 
     return (
         <Body style={{flex: 0.35}}>

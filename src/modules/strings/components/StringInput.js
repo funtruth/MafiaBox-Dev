@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { ITEM_TYPE } from '../types'
+import { parseType } from '../../common/types';
 
 export default function StringInput(props) {
     const { stringRepo, activeKey } = props
@@ -12,15 +12,14 @@ export default function StringInput(props) {
             setText('')
             setDisabled(false)
         } else {
-            const selectedItem = stringRepo[activeKey] || {}
-            const { string, type } = selectedItem
+            const { value, parseBy } = stringRepo[activeKey] || {}
 
-            switch(type) {
-                case ITEM_TYPE.string:
-                    setText(string)
+            switch(parseBy) {
+                case parseType.constant:
+                    setText(value)
                     setDisabled(false)
                     break
-                case ITEM_TYPE.variable:
+                case parseType.variable:
                     setText('Variable selected.')
                     setDisabled(true)
                     break

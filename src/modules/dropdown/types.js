@@ -57,7 +57,6 @@ export const dropdownType = {
     pickPhase: 'dropdownType/pick-phase',
     pickTimer: 'dropdownType/pick-timer',
     pickTrigger: 'dropdownType/pick-trigger',
-    pickNumUpdate: 'dropdownType/pick-update',
     pickUid: 'dropdownType/pick-uid',
     pickHealth: 'dropdownType/pick-health',
     pickRole: 'dropdownType/pick-role',

@@ -1,7 +1,7 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
-import { DRAGGABLE_TYPE } from '../types';
+import { parseType } from '../../logic/types';
 import { palette } from '../../components/Standards';
 
 const itemTarget = {
@@ -14,10 +14,10 @@ const itemTarget = {
         const { dragIndex } = dragItem
 
         switch(itemType) {
-            case DRAGGABLE_TYPE.string:
+            case parseType.constant:
                 props.move(dragIndex)
                 break
-            case DRAGGABLE_TYPE.variable:
+            case parseType.variable:
                 props.drop(dragItem)
                 break
             default:
@@ -63,7 +63,7 @@ function StringSideDrop(props) {
 }
 
 export default DropTarget(
-    [DRAGGABLE_TYPE.string, DRAGGABLE_TYPE.variable],
+    [parseType.constant, parseType.variable],
     itemTarget,
     collectDrop,
 )(StringSideDrop)

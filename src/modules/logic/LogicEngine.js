@@ -6,7 +6,7 @@ var beautify_js = require('js-beautify');
 export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId } = data
-    console.log('logicEngine start', {data})
+    
     return beautify_js(`(rss, updates, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
 }
 
@@ -16,7 +16,6 @@ function parseLogic(byLK, lK) {
 
     const item = byLK[lK]
     if (!item) return ""
-    console.log('parseLogic item', {item})
 
     const {
         byId: varRepo,
@@ -36,7 +35,6 @@ function parseVar(byVK, vK) {
 
     const item = byVK[vK]
     if (!item) return ""
-    console.log('parseVar item', {item})
 
     const {
         parseBy,
@@ -59,6 +57,8 @@ function parseVar(byVK, vK) {
             return parseString(value)
         case parseType.update:
             return parseUpdate(value)
+        case parseType.constant:
+            return value
         default:
             return '';
     }
@@ -87,6 +87,18 @@ export function parseUpdate(value) {
 }
 
 export function parseString({byId, byIndex}) {
-    //WIp
-    return ''
+    if (!byIndex) return ""
+
+    const parts = byIndex.map(sK => {
+        switch(byId[sK].parseBy) {
+            case parseType.variable:
+                return `\${${parseJS(byId[sK].value)}}`
+            case parseType.constant:
+                return byId[sK].value
+            default:
+                return ""
+        }
+    })
+
+    return '`' + parts.join(" ") + '`'
 }

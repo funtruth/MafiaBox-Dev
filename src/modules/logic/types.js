@@ -97,40 +97,8 @@ export const operatorType = {
     },
 }
 
-export const parseOperatorType = {
-    add: {
-        key: 'add',
-        display: '+',
-        icon: 'mdi mdi-plus',
-        color: 'green',
-    },
-    subtract: {
-        key: 'subtract',
-        display: '-',
-        icon: 'mdi mdi-minus',
-        color: 'red',
-    },
-    multiply: {
-        key: 'multiply',
-        display: '*',
-        icon: 'mdi mdi-close',
-        color: 'blue',
-    },
-    divide: {
-        key: 'divide',
-        display: '/',
-        icon: 'mdi mdi-division',
-        color: 'orange',
-    },
-    mod: {
-        key: 'mod',
-        display: '%',
-        icon: 'mdi mdi-percent',
-        color: 'yellow',
-    },
-}
-
 export const parseType = {
+    constant: 'parseType/constant',
     collection: 'parseType/collection',
     operation: 'parseType/operation',
     string: 'parseType/string',
@@ -138,29 +106,6 @@ export const parseType = {
     variable: 'parseType/variable',
     wrapper: 'parseType/wrapper',
     update: 'parseType/update',
-}
-
-export const numUpdateType = {
-    setTo: {
-        key: 'setTo',
-        index: 0,
-        title: 'set to',
-        icon: 'mdi mdi-numeric',
-    },
-    incrBy: {
-        key: 'incrBy',
-        index: 1,
-        title: 'increment by',
-        icon: 'mdi mdi-alpha-n-box',
-        parseOperatorType: parseOperatorType.add,
-    },
-    decrBy: {
-        key: 'decrBy',
-        index: 2,
-        title: 'decrement by',
-        icon: 'ion-md-download',
-        parseOperatorType: parseOperatorType.subtract,
-    },
 }
 
 export const boolUpdateType = {
@@ -312,18 +257,21 @@ export const comparisonType = {
         code: '===',
         title: 'equal',
         icon: 'mdi mdi-equal',
+        showInPickComparison: true,
     },
     notEqual: {
         key: 'notEqual',
         code: '!==',
         title: 'not equal',
         icon: 'mdi mdi-not-equal',
+        showInPickComparison: true,
     },
     greaterThan: {
         key: 'greaterThan',
         code: '>',
         title: 'greater than',
         icon: 'mdi mdi-greater-than',
+        showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
         ],
@@ -333,6 +281,7 @@ export const comparisonType = {
         code: '>=',
         title: 'greater than / equal',
         icon: 'mdi mdi-greater-than-or-equal',
+        showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
         ],
@@ -342,6 +291,7 @@ export const comparisonType = {
         code: '<',
         title: 'less than',
         icon: 'mdi mdi-less-than',
+        showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
         ],
@@ -351,6 +301,7 @@ export const comparisonType = {
         code: '<=',
         title: 'less than / equal',
         icon: 'mdi mdi-less-than-or-equal',
+        showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
         ],
@@ -372,6 +323,41 @@ export const comparisonType = {
         variableTypes: [
             variableType.uidObject.key,
         ]
+    },
+    add: {
+        key: 'add',
+        display: '+',
+        icon: 'mdi mdi-plus',
+        color: 'green',
+        showInStringView: true,
+    },
+    subtract: {
+        key: 'subtract',
+        display: '-',
+        icon: 'mdi mdi-minus',
+        color: 'red',
+        showInStringView: true,
+    },
+    multiply: {
+        key: 'multiply',
+        display: '*',
+        icon: 'mdi mdi-close',
+        color: 'blue',
+        showInStringView: true,
+    },
+    divide: {
+        key: 'divide',
+        display: '/',
+        icon: 'mdi mdi-division',
+        color: 'orange',
+        showInStringView: true,
+    },
+    mod: {
+        key: 'mod',
+        display: '%',
+        icon: 'mdi mdi-percent',
+        color: 'yellow',
+        showInStringView: true,
     },
 }
 

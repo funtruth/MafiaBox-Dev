@@ -1,10 +1,10 @@
 import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
-import { DRAGGABLE_TYPE } from '../types'
 import { COLLECT_DRAG } from '../../modal/ModalDND';
 
 import Tag from '../../components/Tag';
+import { parseType } from '../../logic/types';
 
 const itemSource = {
     beginDrag(props) {
@@ -22,21 +22,8 @@ const itemTarget = {
         const item = monitor.getItem()
         const itemType = monitor.getItemType()
 
-        const { eventIndex, workspace, index } = props
-        let wsClone = Object.assign({}, workspace)
-        let wsString = wsClone.eventArr[eventIndex].stringArr
-
+        console.log({item, itemType})
         //this is outdated garbo
-        switch(itemType) {
-            case DRAGGABLE_TYPE.color:
-                wsString[index].color = item.hexcode
-                props.setWorkspace(wsClone)
-                break
-            case DRAGGABLE_TYPE.string:
-                console.log("thats a string!")
-                break
-            default:
-        }
     },
     canDrop(props, monitor) {
         const item = monitor.getItem()
@@ -56,7 +43,7 @@ function collectDrop(connect, monitor) {
 function StringDragDrop(props) {
     const { item, activeKey, setActiveKey,
         connectDragSource, connectDropTarget, canDrop, isOver } = props
-    const { key: stringKey, string, color } = item
+    const { key: stringKey, value } = item
 
     let handleSelect = () => {
         setActiveKey(stringKey)
@@ -69,21 +56,20 @@ function StringDragDrop(props) {
         <div>
             <Tag
                 onClick={handleSelect}
-                color={color || 'whitish'}
                 bg={selected ? 'blue' : (canDrop && isOver && 'grey') || 'charcoal'}
             >
-                {string}
+                {value}
             </Tag>
         </div>
     ));
 }
 
 export default DragSource(
-    DRAGGABLE_TYPE.string,
+    parseType.string,
     itemSource,
     COLLECT_DRAG,
 )(DropTarget(
-    [DRAGGABLE_TYPE.string],
+    [parseType.string],
     itemTarget,
     collectDrop,
 )(StringDragDrop));

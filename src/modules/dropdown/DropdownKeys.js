@@ -59,7 +59,6 @@ import PickTimer from './update/PickTimer'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
 import PickPhase from './update/PickPhase'
-import PickNumUpdate from './update/PickNumUpdate'
 import ShowSubfields from './update/ShowSubfields';
 import ShowUidSubfield from './update/ShowUidSubfield';
 import ShowRoleSubfields from './update/ShowRoleSubfields'
@@ -165,8 +164,6 @@ export default function DropdownKeys(props) {
             return <PickTrigger {...props}/>
         case dropdownType.pickUid:
             return <PickUid {...props}/>
-        case dropdownType.pickNumUpdate:
-            return <PickNumUpdate {...props}/>
         case dropdownType.pickPhase:
             return <PickPhase {...props}/>
         case dropdownType.pickRole:

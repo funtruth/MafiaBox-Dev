@@ -1,7 +1,7 @@
 import React from 'react'
 import { DragSource } from 'react-dnd'
 
-import { DRAGGABLE_TYPE } from '../types';
+import { parseType } from '../../logic/types';
 
 import { COLLECT_DRAG } from '../../common/arrows';
 
@@ -26,7 +26,7 @@ function EventVarDrag(props) {
 }
 
 export default DragSource(
-    DRAGGABLE_TYPE.variable,
+    parseType.variable,
     itemSource,
     COLLECT_DRAG,
 )(EventVarDrag);

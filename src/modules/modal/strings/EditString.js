@@ -2,12 +2,13 @@ import React from 'react'
 
 import ModalOptions from '../components/ModalOptions'
 import StringView from '../../strings/StringView';
+import { Body } from '../../components/Common'
 
 export default function EditToast(props) {
     const { path, scopedVars } = props
 
     return (
-        <div
+        <Body
             style={{
                 minWidth: 600,
                 width: '75vw',
@@ -19,6 +20,6 @@ export default function EditToast(props) {
                 scopedVars={scopedVars}
             />
             <ModalOptions/>
-        </div>
+        </Body>
     )
 }

@@ -29,7 +29,6 @@ import {
     ouput => matching vars
     
     LOCATIONS:
-    PickNumUpdate
     PickVarWithType
     ReplaceWildcard
 */

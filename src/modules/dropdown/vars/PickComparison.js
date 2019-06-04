@@ -60,7 +60,8 @@ export default function PickComparison({
     }
 
     //hide comparisonType if it has variableTypes & they don't match baseVar
-    const items = _.filter(comparisonType, i => !i.variableTypes || VARTYPE_FILTER(i.variableTypes)(baseVar))
+    const items = _.filter(comparisonType,
+        i => i.showInPickComparison && (!i.variableTypes || VARTYPE_FILTER(i.variableTypes)(baseVar)))
 
     return (
         <>

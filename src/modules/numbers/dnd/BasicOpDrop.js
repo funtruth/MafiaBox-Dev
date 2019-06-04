@@ -1,7 +1,7 @@
 import React from 'react'
 import { DropTarget } from 'react-dnd'
 
-import { parseType, parseOperatorType } from '../../common/types';
+import { parseType, comparisonType } from '../../common/types';
 import BasicOp from '../components/BasicOp';
 
 const itemTarget = {
@@ -28,7 +28,7 @@ function BasicOpDrop(props) {
     const { value } = mathItem
     const { operator } = value
 
-    const mathColor = parseOperatorType[operator].color
+    const mathColor = comparisonType[operator].color
     
     return connectDropTarget(
         <div>

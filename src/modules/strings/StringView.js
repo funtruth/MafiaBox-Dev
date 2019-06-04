@@ -2,18 +2,16 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import _ from 'lodash'
 
-import { ITEM_TYPE } from './types';
-import { DEFAULT_STRING } from './defaults';
 import { LOGIC_ITEM_VAR } from '../logic/defaults';
 
 import { usePath } from '../hooks/Hooks';
 import { updateGeneral } from '../page/PageReducer'
-import { parseJS } from '../logic/proptool';
  import generatePushID from '../common/generatePushID';
 
 import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
 import { Row, Separator } from '../components/Common';
+import { parseType } from '../logic/types';
 
 /* LOCATIONS where user can edit strings
     EditEvent
@@ -28,7 +26,6 @@ export default function StringView({path, scopedVars}) {
         byIndex: stringMap,
     } = usePath(path)
 
-    const [color, setColor] = useState('whitish')
     const [activeKey, setActiveKey] = useState('')
 
     //add new string from text input
@@ -51,11 +48,11 @@ export default function StringView({path, scopedVars}) {
                 path: [...path, 'byId'],
                 update: {
                     [newKey]: {
-                        ...DEFAULT_STRING,
+                        ...LOGIC_ITEM_VAR,
                         key: newKey,
-                        string: text,
-                        type: ITEM_TYPE.string,
-                        color,
+                        value: text,
+                        display: text,
+                        parseBy: parseType.constant,
                     }
                 }
             }))
@@ -63,7 +60,8 @@ export default function StringView({path, scopedVars}) {
             dispatch(updateGeneral({
                 path: [...path, 'byId', activeKey],
                 update: {
-                    string: text,
+                    value: text,
+                    display: text,
                 }
             }))
         }
@@ -99,41 +97,20 @@ export default function StringView({path, scopedVars}) {
             path: [...path, 'byId'],
             update: {
                 [newKey]: {
-                    ...DEFAULT_STRING,
+                    ...LOGIC_ITEM_VAR,
                     key: newKey,
-                    string: item.key,
-                    variable: {
-                        ...LOGIC_ITEM_VAR,
-                        display: parseJS(item.key),
-                        nativeValue: item.key,
-                        value: item.key,
-                        variableTypes: item.variableTypes,
-                    },
-                    color,
-                    type: ITEM_TYPE.variable,
+                    value: item.key,
+                    display: item.key,
+                    nativeValue: item.key,
+                    parseBy: parseType.variable,
                 },
             },
         }))
-    }
-
-    //change color
-    const pickColor = (color) => {
-        if (activeKey !== '') {
-            dispatch(updateGeneral({
-                path: [...path, 'byId', activeKey],
-                update: {
-                    color,
-                }
-            }))
-        }
-        setColor(color);
     }
     
     const mainProps = {
         stringRepo,
         stringMap,
-        color,
-        setColor,
         activeKey,
         setActiveKey,
         path,
@@ -141,7 +118,6 @@ export default function StringView({path, scopedVars}) {
         addString,
         moveString,
         dropString,
-        pickColor,
     }
     
     return (
