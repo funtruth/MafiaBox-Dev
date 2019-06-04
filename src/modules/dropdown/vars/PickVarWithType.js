@@ -2,20 +2,13 @@ import React from 'react'
 
 import {
     dropdownType,
-    parseType,
     variableType,
 } from '../../common/types'
-import {
-    LOGIC_ITEM_VAR,
-} from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 import {
     useVarType,
 } from '../../hooks/Hooks'
-import {
-    parseJS,
-} from '../../logic/proptool';
 
 import {
     DropEmpty,
@@ -28,32 +21,20 @@ import Types from '../types/index';
 export default function PickVarWithType(props){
     const {
         slate,
-        baseVar,
+        variableTypes,
         scopedVars,
-        update,
+        pickVarClick,
         showDropdown,
     } = props
 
     //must have a reference variable
-    if (!baseVar || !baseVar.variableTypes) {
+    if (!variableTypes) {
         return (
             <>
                 <DropTitle>error</DropTitle>
                 <DropEmpty text="select a variable first ..."/>
             </>
         )
-    }
-
-    const handleSelect = (item) => {
-        update({
-            ...LOGIC_ITEM_VAR,
-            value: item.key,
-            nativeValue: item.key,
-            parseBy: parseType.variable,
-            display: parseJS(item.key),
-            variableTypes: item.variableTypes,
-        })
-        showDropdown();
     }
 
     const renderItem = (item) => {
@@ -67,7 +48,7 @@ export default function PickVarWithType(props){
                     showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
-                        updateByPickVar: handleSelect,
+                        pickVarClick,
                     }}
                     text={item.key}
                 />
@@ -78,7 +59,7 @@ export default function PickVarWithType(props){
             <DropItem
                 key={item.key}
                 chosen={chosen}
-                onClick={() => handleSelect(item)}
+                onClick={() => pickVarClick(item)}
                 rightCheck
                 text={item.key}
             />
@@ -105,7 +86,7 @@ export default function PickVarWithType(props){
         }
     }
     
-    const [tameVars, wildVars] = useVarType(baseVar.variableTypes, scopedVars)
+    const [tameVars, wildVars] = useVarType(variableTypes, scopedVars)
     return (
         <>
             <DropTitle>vars with same type</DropTitle>
@@ -114,7 +95,7 @@ export default function PickVarWithType(props){
             <DropTitle>incomplete vars</DropTitle>
             {wildVars.map(renderItem)}
             <DropEmpty list={wildVars} text="no variables found"></DropEmpty>
-            {baseVar.variableTypes.map(renderType)}
+            {variableTypes.map(renderType)}
         </>
     )
 }

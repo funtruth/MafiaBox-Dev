@@ -28,6 +28,8 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     ---------------------------------------------------------------
     key
     display         what to show on the update button / FRONT-END
+    "               config for parseType.collection, boolean => display "add new" panel
+    "               config for parseType.object, boolean => display "add new" panel
     disabled        does not allow user to change variable value
     nativeValue     original value (can contain wildcard chars)
     parseBy         parseType, how the LogicEngine should read the data
@@ -36,6 +38,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     "               payload for parseType.collection, value is [varKey, varKey...]
     "               payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
     "               payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
+    "               payload fro parseType.object, value is [varKey, varKey...]
     variableTypes   list of variableTypes
 */
 export const LOGIC_ITEM_VAR = {

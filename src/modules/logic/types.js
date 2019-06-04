@@ -98,8 +98,10 @@ export const operatorType = {
 }
 
 export const parseType = {
+    boolean: 'parseType/boolean',
     constant: 'parseType/constant',
     collection: 'parseType/collection',
+    object: 'parseType/object',
     operation: 'parseType/operation',
     string: 'parseType/string',
     number: 'parseType/number',

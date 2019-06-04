@@ -3,21 +3,17 @@ import _ from 'lodash'
 
 import {
     dropdownType,
-    parseType,
-    comparisonType,
     logicType,
     operatorType,
 } from '../../common/types'
 import {
     rssMap,
-    LOGIC_ITEM_VAR,
     DEFAULT_VAR_ID,
 } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
-import { parseJS, concatField } from '../../logic/proptool';
+import { concatField } from '../../logic/proptool';
 import { useAutofocus } from '../../hooks/Hooks'
-import generatePushID from '../../common/generatePushID';
 import { checkAlpha } from '../../common/helpers';
 
 import {
@@ -34,86 +30,13 @@ import { Row } from '../../components/Common'
 export default function PickVar({
     slate,
     rootPath,
-    path,
-    parseBy,
     logicItem,
-    varItem,
     scopedVars,
+    pickVarClick,
     showDropdown,
     updateGeneral,
 }){
     const type = logicItem.operatorType || logicItem.logicType
-
-    //
-    const getLeftParser = () => {
-        switch(type) {
-            case logicType.update.key:
-                return parseType.update;
-            case logicType.variable.key:
-                return parseType.variable;
-            default:
-                return ""
-        }
-    }
-
-    const handleSelect = (item) => {
-        switch(parseBy) {
-            case parseType.collection:
-                const [a,b,c] = ['a','b','c'].map(generatePushID);
-                const parseVarBy = getLeftParser();
-
-                updateGeneral({
-                    path: [...path, varItem.key, 'value'],
-                    update: [...(varItem.value || []), a],
-                }, {
-                    path,
-                    update: {
-                        [a]: {
-                            ...LOGIC_ITEM_VAR,
-                            key: a,
-                            display: comparisonType.assign.code,
-                            disabled: true,
-                            parseBy: parseType.operation,
-                            value: {
-                                operator: comparisonType.assign.key,
-                                left: b,
-                                right: c,
-                            },
-                        },
-                        [b]: {
-                            ...LOGIC_ITEM_VAR,
-                            key: b,
-                            display: parseJS(item.key),
-                            value: item.key,
-                            nativeValue: item.key,
-                            parseBy: parseVarBy,
-                            variableTypes: item.variableTypes,
-                        },
-                        [c]: {
-                            ...LOGIC_ITEM_VAR,
-                            key: c,
-                            parseBy: parseType.variable,
-                        },
-                    }
-                })
-                break;
-            case parseType.variable:
-                updateGeneral({
-                    path,
-                    update: {
-                        ...LOGIC_ITEM_VAR,
-                        display: parseJS(item.key),
-                        value: item.key,
-                        nativeValue: item.key,
-                        parseBy: parseType.variable,
-                        variableTypes: item.variableTypes,
-                    }
-                })
-                break;
-            default:
-        }
-        showDropdown();
-    }
 
     const focusRef = useAutofocus();
     const [text, setText] = useState('')
@@ -214,7 +137,7 @@ export default function PickVar({
                     showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
-                        updateByPickVar: handleSelect,
+                        pickVarClick,
                     }}
                     text={item.key}
                 />
@@ -225,7 +148,7 @@ export default function PickVar({
             <DropItem
                 key={item.key}
                 chosen={chosen}
-                onClick={() => handleSelect(item)}
+                onClick={() => pickVarClick(item)}
                 leftIcon={getVarTypeIcon(item.variableTypes)}
                 rightCheck
                 text={item.key}

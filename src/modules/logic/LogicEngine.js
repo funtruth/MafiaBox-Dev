@@ -46,18 +46,21 @@ function parseVar(byVK, vK) {
         case parseType.operation:
             return parseVar(byVK, value.left) + display + parseVar(byVK, value.right)
         case parseType.number:
-            return display
+            return parseNumber(value)
         case parseType.variable:
             return parseJS(value)
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right
         case parseType.collection:
-            return value ? value.map(cK => parseVar(byVK, cK)).join(",") + ";" : ""
+            return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
+        case parseType.object:
+            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(",") + '}' : "{}"
         case parseType.string:
             return parseString(value)
         case parseType.update:
             return parseUpdate(value)
         case parseType.constant:
+        case parseType.boolean:
             return value
         default:
             return '';

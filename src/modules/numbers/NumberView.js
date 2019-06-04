@@ -41,13 +41,13 @@ export default function NumberView({path, scopedVars}){
             dispatch(updateGeneral({
                 path,
                 update: {
-                    display: parseNumber(mathRepo, source),
+                    display: newDisplay,
                     parseBy: parseType.number,
                     variableTypes: [variableType.number.key],
                 }
             }))
         }
-    }, [mathRepo, source])
+    }, [mathRepo, source, dispatch])
 
     //clear all math
     const clearSlate = () => {

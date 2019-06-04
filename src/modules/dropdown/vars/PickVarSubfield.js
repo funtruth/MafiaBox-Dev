@@ -33,7 +33,7 @@ export default function PickVarSubfield({
     prefix,
     slate,
     scopedVars,
-    updateByPickVar,
+    pickVarClick,
     showDropdown,
 }){
     //get subfields to show
@@ -66,7 +66,7 @@ export default function PickVarSubfield({
             <DropItem
                 key={key}
                 chosen={chosen}
-                onClick={() => updateByPickVar(item)}
+                onClick={() => pickVarClick(item)}
                 rightCheck
                 text={key}
             />

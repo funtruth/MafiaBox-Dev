@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import _ from 'lodash'
 
+import { parseType, variableType } from '../logic/types';
 import { LOGIC_ITEM_VAR } from '../logic/defaults';
 
 import { usePath } from '../hooks/Hooks';
+import { parseString } from '../logic/LogicEngine';
 import { updateGeneral } from '../page/PageReducer'
  import generatePushID from '../common/generatePushID';
 
 import StringPlayground from './components/StringPlayground';
 import StringDetailer from './components/StringDetailer';
 import { Row, Separator } from '../components/Common';
-import { parseType } from '../logic/types';
 
 /* LOCATIONS where user can edit strings
     EditEvent
@@ -21,12 +22,28 @@ Strings should not be an assignable variable. In cases where strings are used, s
 */
 export default function StringView({path, scopedVars}) {
     const dispatch = useDispatch();
+
+    const [activeKey, setActiveKey] = useState('')
+    const { value, display } = usePath(path)
     const {
         byId: stringRepo,
         byIndex: stringMap,
-    } = usePath(path)
+    } = value || {}
 
-    const [activeKey, setActiveKey] = useState('')
+    useEffect(() => {
+        if (!stringRepo || !stringMap) return;
+        const newDisplay = parseString(value || {})
+        if (newDisplay !== display) {
+            dispatch(updateGeneral({
+                path,
+                update: {
+                    display: newDisplay,
+                    parseBy: parseType.string,
+                    variableTypes: [variableType.string.key],
+                }
+            }))
+        }
+    }, [stringRepo, stringMap, dispatch])
 
     //add new string from text input
     const addString = (text) => {
@@ -40,12 +57,12 @@ export default function StringView({path, scopedVars}) {
             mapClone.push(newKey)
             
             dispatch(updateGeneral({
-                path,
+                path: [...path, 'value'],
                 update: {
                     byIndex: mapClone,
                 },
             }, {
-                path: [...path, 'byId'],
+                path: [...path, 'value', 'byId'],
                 update: {
                     [newKey]: {
                         ...LOGIC_ITEM_VAR,
@@ -58,7 +75,7 @@ export default function StringView({path, scopedVars}) {
             }))
         } else {
             dispatch(updateGeneral({
-                path: [...path, 'byId', activeKey],
+                path: [...path, 'value', 'byId', activeKey],
                 update: {
                     value: text,
                     display: text,
@@ -75,7 +92,7 @@ export default function StringView({path, scopedVars}) {
         mapClone.splice(newIndex > oldIndex ? newIndex - 1 : newIndex, 0, removed)
 
         dispatch(updateGeneral({
-            path: [...path, 'byIndex'],
+            path: [...path, 'value', 'byIndex'],
             update: mapClone,
         }))
     }
@@ -89,12 +106,12 @@ export default function StringView({path, scopedVars}) {
         mapClone.splice(index, 0, newKey)
 
         dispatch(updateGeneral({
-            path,
+            path: [...path, 'value'],
             update: {
                 byIndex: mapClone,
             }
         }, {
-            path: [...path, 'byId'],
+            path: [...path, 'value', 'byId'],
             update: {
                 [newKey]: {
                     ...LOGIC_ITEM_VAR,
@@ -113,7 +130,6 @@ export default function StringView({path, scopedVars}) {
         stringMap,
         activeKey,
         setActiveKey,
-        path,
         scopedVars,
         addString,
         moveString,
