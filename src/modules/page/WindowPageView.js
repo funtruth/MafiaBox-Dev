@@ -1,37 +1,20 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
-import { updateGeneral } from './PageReducer'
-import { showModal, popModalTo } from '../modal/ModalReducer'
+import ModalConnect from '../modal/ModalConnect'
+import { modalType } from '../modal/types';
 
-import PageView from './PageView'
+export default function WindowPageView({match}) {
+    const { pageKey } = match.params
 
-class WindowPageView extends React.Component {
-    render() {
-        const { match } = this.props
-        const { pageKey } = match.params
-
-        const pageProps = {
-            pageKey,
-            path: [pageKey],
-            showModal: this.props.showModal,
-            popModalBy: (pops) => this.props.popModalTo(-1 - pops),
-            updatePage: this.props.updateGeneral,
-        }
-
-        return (
-            <div className="story-view">
-                <PageView {...pageProps}/>
-            </div>
-        )
-    }
+    return (
+        <div className="story-view">
+            {ModalConnect({
+                item: {
+                    key: modalType.showPage,
+                    path: ['pageRepo', pageKey],
+                },
+                index: 0,
+            })}
+        </div>
+    )
 }
-
-export default connect(
-    null,
-    {
-        updateGeneral,
-        showModal,
-        popModalTo,
-    }
-)(WindowPageView)

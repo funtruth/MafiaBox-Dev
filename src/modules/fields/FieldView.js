@@ -1,6 +1,6 @@
 import React from 'react'
 import './field.css'
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { fieldType } from './types'
 
@@ -16,11 +16,12 @@ import GameChoiceField from './components/GameChoiceField'
 import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
 import PriorityField from './components/PriorityField'
+import { IS_PUBLISHED } from '../common/arrows';
+import Icon from '../components/Icon';
 
-function FieldView(props) {
-    const { pageKey, pageInfo, fieldMap, fieldRepo,
-        published, path, subpath, updatePage } = props
-    const { boardType } = pageInfo
+export default function FieldView(props) {
+    const { path, slate, updatePage } = props
+    const { fieldMap, fieldRepo } = useSelector(state => state.page)
 
     const renderItem = (item) => {
         const fieldInfo = fieldRepo[item.key]
@@ -28,14 +29,13 @@ function FieldView(props) {
         
         const props = {
             key,
-            pageKey,
+            pageKey: slate.key,
             fieldKey: key,
-            value: pageInfo[key], //value related to the current page
+            value: slate[key], //value related to the current page
             data, //data related to the field
             fieldInfo,
-            disabled: published,
+            disabled: IS_PUBLISHED(slate),
             path: [...path, key],
-            subpath,
             updatePage,
         }
         
@@ -69,7 +69,7 @@ function FieldView(props) {
         }
     }
     
-    const fields = fieldMap[boardType] || []
+    const fields = fieldMap[slate.board] || []
     return (
         <>
             {fields.map((field, index) => {
@@ -80,7 +80,7 @@ function FieldView(props) {
                     <React.Fragment key={index}>
                         <div className="-sep"/>
                         <div className="field-label">
-                            <i className={`field-icon ${icon}`} style={{ width: 16 }}></i>
+                            <Icon icon={icon}/>
                             {item.title}
                         </div>
                         {renderItem(item)}
@@ -91,10 +91,3 @@ function FieldView(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        fieldRepo: state.page.fieldRepo,
-        fieldMap: state.page.fieldMap,
-    }),
-)(FieldView)

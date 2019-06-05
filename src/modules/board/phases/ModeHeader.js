@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
     dropdownType,
@@ -19,26 +19,25 @@ import {
     Text,
 } from '../../components/Common';
 
-function ModeHeader(props) {
-    const { modeKey, modeRepo, path, tab, setTab } = props
+export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
+    const dispatch = useDispatch();
 
-    const modeInfo = modeRepo[modeKey] || {}
-    const { title, playerNum } = modeInfo
+    const { title, playerNum } = slate
     const { min, max } = playerNum || {}
 
     const handleAdd = () => {
-        props.addPageToMode(modeKey, boardType.phases.key)
+        dispatch(addPageToMode(modeKey, boardType.phases.key))
     }
 
     const handlePublish = () => {
-        props.publishFromState('modeRepo', modeKey)
-        props.updateGeneral({
+        dispatch(publishFromState('modeRepo', modeKey))
+        dispatch(updateGeneral({
             path: [...path, 'publishInfo'],
                 update: {
                 published: true,
                 publishedAt: Date.now(),
             }
-        })
+        }))
     }
 
     return (
@@ -67,7 +66,6 @@ function ModeHeader(props) {
                 dropdown={dropdownType.editPlayerNum}
                 params={{
                     path: [...path, 'playerNum'],
-                    attach: modeInfo.playerNum||{},
                 }}
             >
                 <Tag
@@ -119,14 +117,3 @@ function ModeHeader(props) {
         </Row>
     )
 }
-
-export default connect(
-    state => ({
-        modeRepo: state.page.modeRepo,
-    }),
-    {
-        addPageToMode,
-        publishFromState,
-        updateGeneral,
-    }
-)(ModeHeader)

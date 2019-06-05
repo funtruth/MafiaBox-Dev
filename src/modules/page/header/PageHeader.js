@@ -1,9 +1,9 @@
 import React from 'react'
 import './PageHeader.css'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { navigate } from '../../app/NavReducer'
-import { publishFromState } from '../PageReducer'
+import { publishFromState, updateGeneral } from '../PageReducer'
 import { showModal } from '../../modal/ModalReducer'
 
 import PageOptions from './PageOptions'
@@ -12,25 +12,28 @@ import {
     Tag,
 } from '../../components/Common';
 
-function PageHeader(props) {
-    const { pageKey, published, location, match } = props
+export default function PageHeader(props) {
+    const dispatch = useDispatch();
+    const path = useSelector(state => state.nav.path)
+    
+    const { pageKey, published, match } = props
     if (match) return null
 
     const handleResize = () => {
-        props.navigate(`${location.pathname}/${pageKey}`)
-        props.showModal()
+        dispatch(navigate(`${path}/${pageKey}`))
+        dispatch(showModal());
     }
 
     const handlePublish = () => {
         if (published) return;
-        props.publishFromState('pageRepo', pageKey)
-        props.updateGeneral({
+        dispatch(publishFromState('pageRepo', pageKey))
+        dispatch(updateGeneral({
             path: ['pageRepo', pageKey, 'publishInfo'],
             update: {
                 published: true,
                 publishedAt: Date.now(),
             }
-        })
+        }))
     }
 
     return (
@@ -52,12 +55,3 @@ function PageHeader(props) {
         </Row>
     )
 }
-
-export default connect(
-    null,
-    {
-        navigate,
-        publishFromState,
-        showModal,
-    }
-)(PageHeader)

@@ -5,9 +5,11 @@ import firebase from 'firebase/app'
 import { modalType } from '../modal/types'
 
 import { showModal } from '../modal/ModalReducer';
+import { navigateStack } from '../app/NavReducer'
 import { DEFAULT_PUBLISH_INFO } from './defaults';
 import generatePushID from '../common/generatePushID';
 import { updateByPath } from '../common/helpers';
+import { boardType } from '../fields/types';
 
 const initialState = {
     pageRepo: {},
@@ -105,7 +107,7 @@ export function addStory() {
     }
 }
 
-export function removeStory(boardType, storyKey) {
+export function removeStory(board, storyKey) {
     return (dispatch, getState) => {
         const { pageRepo, pageMap, storyRepo, storyMap } = getState().page
 
@@ -115,7 +117,7 @@ export function removeStory(boardType, storyKey) {
         let storyMapClone   = _.cloneDeep(storyMap)
 
         //remove story
-        _.pull(storyMapClone[boardType], storyKey)
+        _.pull(storyMapClone[board], storyKey)
         storyRepoClone[storyKey] = null
 
         //null checks
@@ -141,52 +143,30 @@ export function removeStory(boardType, storyKey) {
     }
 }
 
-export function moveStory(startIndex, endIndex) {
-    return (dispatch, getState) => {
-        const { storyMap } = getState().page
-
-        //convert []-like {} to []
-        let storyMapClone = _.cloneDeep(storyMap)
-        let storyMapArray = _.toArray(storyMapClone)
-
-        //move item
-        const [removed] = storyMapArray.splice(startIndex, 1)
-        storyMapArray.splice(endIndex, 0, removed)
-
-        //convert [] to []-like {}
-        storyMapClone = _.toPlainObject(storyMapArray)
-        
-        dispatch(receiveAction({
-            type: MOVE_STORY,
-            payload: {
-                storyMap: storyMapClone,
-            },
-        }))
-    }
-}
-
-export function addPageToMap(storyKey, boardType) {
+export function addPageToMap(storyKey, board) {
     return (dispatch, getState) => {
         const { pageRepo, pageMap, fieldRepo, fieldMap } = getState().page
 
         let pageRepoClone   = _.cloneDeep(pageRepo)
         let pageMapClone    = _.cloneDeep(pageMap)
         
-        const pageKey = generatePushID(boardType)
+        const pageKey = generatePushID(board)
 
         //set-up defaults
         let defaultInfo = {}
-        fieldMap[boardType].forEach(field => {
-            if (fieldRepo[field] && fieldRepo[field].defaultValue) {
-                defaultInfo[field] = fieldRepo[field].defaultValue
-            }
-        })
+        if (fieldMap[board]) {
+            fieldMap[board].forEach(field => {
+                if (fieldRepo[field] && fieldRepo[field].defaultValue) {
+                    defaultInfo[field] = fieldRepo[field].defaultValue
+                }
+            })
+        }
         
         //set page info
         pageRepoClone[pageKey] = {
-            pageKey,
-            boardType,
-            storyType: storyKey,
+            key: pageKey,
+            board: board,
+            story: storyKey,
             publishInfo: DEFAULT_PUBLISH_INFO,
             ...defaultInfo,
         }
@@ -204,48 +184,24 @@ export function addPageToMap(storyKey, boardType) {
                 pageMap: pageMapClone,
             }
         }))
-        dispatch(showModal(modalType.showPage, {
-            pageKey,
-            path: ['pageRepo', pageKey],
-        }))
-    }
-}
 
-//ModeHeader
-export function addModeToPatch(storyKey) {
-    return (dispatch, getState) => {
-        const { modeRepo, modeMap } = getState().page
-
-        let modeRepoClone   = _.cloneDeep(modeRepo)
-        let modeMapClone    = _.cloneDeep(modeMap)
-        
-        const modeKey = generatePushID('mode')
-        
-        //set page info
-        modeRepoClone[modeKey] = {
-            modeKey,
-            storyKey,
-            publishInfo: DEFAULT_PUBLISH_INFO,
+        switch(board) {
+            case boardType.modes.key:
+                dispatch(navigateStack(pageKey))
+                break
+            case boardType.phases.key:
+            case boardType.roles.key:
+            default:
+                dispatch(showModal(modalType.showPage, {
+                    pageKey,
+                    path: ['pageRepo', pageKey],
+                }))
         }
-
-        //set page location
-        if (!_.isArray(modeMapClone[storyKey])) {
-            modeMapClone[storyKey] = []
-        }
-        modeMapClone[storyKey].unshift(modeKey)
-
-        dispatch(receiveAction({
-            type: ADD_MODE,
-            payload: {
-                modeRepo: modeRepoClone,
-                modeMap: modeMapClone,
-            }
-        }))
     }
 }
 
 //PhaseFlowHeader
-export function addPageToMode(modeKey, boardType) {
+export function addPageToMode(modeKey, board) {
     return (dispatch, getState) => {
         const { modeRepo, pageRepo, fieldRepo, fieldMap } = getState().page
         const { storyKey } = modeRepo[modeKey]
@@ -253,11 +209,11 @@ export function addPageToMode(modeKey, boardType) {
         let modeRepoClone   = _.cloneDeep(modeRepo)
         let pageRepoClone   = _.cloneDeep(pageRepo)
         
-        const pageKey = generatePushID(boardType)
+        const pageKey = generatePushID(board)
 
         //set-up defaults
         let defaultInfo = {}
-        fieldMap[boardType].forEach(field => {
+        fieldMap[board].forEach(field => {
             if (fieldRepo[field] && fieldRepo[field].defaultValue) {
                 defaultInfo[field] = fieldRepo[field].defaultValue
             }
@@ -266,7 +222,7 @@ export function addPageToMode(modeKey, boardType) {
         //set page info
         pageRepoClone[pageKey] = {
             pageKey,
-            boardType,
+            board,
             modeKey,
             storyKey,
             ...defaultInfo,

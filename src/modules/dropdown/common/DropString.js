@@ -20,7 +20,7 @@ export default function DropString({
 }){
     const focusRef = useAutofocus()
 
-    const [value, setValue] = useState(slate)
+    const [value, setValue] = useState(typeof slate === 'string' ? slate : "")
     const handleChange = e => setValue(e.target.value)
 
     const onKeyDown = e => {

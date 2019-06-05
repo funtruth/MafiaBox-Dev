@@ -8,8 +8,8 @@ import EventHeader from './EventHeader';
 import EventRow from './EventRow'
 
 export default function EventView(props) {
-    const { modeInfo } = props
-    const { events } = modeInfo || {}
+    const { slate } = props
+    const { events } = slate || {}
 
     const items = _.toArray(events)
 

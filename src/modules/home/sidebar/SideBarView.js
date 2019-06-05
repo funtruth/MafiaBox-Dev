@@ -1,7 +1,6 @@
 import React from 'react'
-import './SideBarView.css'
 import _ from 'lodash'
-import { connect } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { boardType } from '../../common/types';
@@ -11,8 +10,11 @@ import { navigate } from '../../app/NavReducer'
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
 import SideBarTitle from '../components/SideBarTitle'
+import { Icon, Text, Row, Body } from '../../components/Common';
 
 function SideBarView(props) {
+    const dispatch = useDispatch();
+
     const { location, path, activeProject } = props
     const { pathname } = location
 
@@ -29,7 +31,7 @@ function SideBarView(props) {
             return;
         }
 
-        console.warn('this is incomplete.')
+        dispatch(navigate("/" + activeProject + "/" + item.key))
         return;
     }
 
@@ -38,43 +40,37 @@ function SideBarView(props) {
         let selected = item.key === paths[2]
 
         return (
-            <div
+            <Row
                 key={item.key}
-                className="side-bar-item"
+                y="c"
+                sizes={['xxs', 'm']}
                 onClick={() => handleClick(item)}
-                style={{
-                    color: selected && '#fff',
-                }}
             >
-                <i className={`${item.icon} side-bar-icon`}></i>
-                <div className="side-bar-title">{item.label}</div>
-            </div>
+                <Icon size="l" icon={item.icon} color={selected ? 'whitish' : 'grey'}></Icon>
+                <Text before="xs" color={selected ? 'whitish' : 'grey'}>{item.title}</Text>
+            </Row>
         )
     }
 
     const items = _.sortBy(boardType, i => i.index)
 
     return (
-        <div className="side-bar-view">
-            <AccountDetails {...props}/>
-            <SideBarTitle>Project</SideBarTitle>
+        <Body bg="charcoal">
+            <AccountDetails/>
+            <SideBarTitle text="Project"/>
             <ProjectDetails {...props}/>
-            <SideBarTitle>Develop</SideBarTitle>
+            <SideBarTitle text="Develop"/>
             {items.map(renderItem)}
             {renderRedirect()}
-        </div>
+        </Body>
     )
 }
 
 export default connect(
     state => ({
         path: state.nav.path,
-        authUser: state.firebase.authUser,
         activeProject: state.firebase.activeProject,
         projects: state.firebase.projects,
         userProjects: state.firebase.userProjects,
     }),
-    {
-        navigate,
-    }
 )(SideBarView)

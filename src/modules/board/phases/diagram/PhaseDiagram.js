@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { parsePhaseArrows } from '../helpers'
 
@@ -12,10 +12,10 @@ import {
 
 const get = (page) => (page && page.phaseMap) || []
 
-function PhaseDiagram(props) {
-    const { modeInfo, pageRepo, modeKey } = props
+export default function PhaseDiagram({slate}) {
+    const pageRepo = useSelector(state => state.page.pageRepo)
 
-    const phaseMap = get(modeInfo)
+    const phaseMap = get(slate)
 
     const [items, setItems] = useState([])
     const [arrows, setArrows] = useState([])
@@ -31,7 +31,7 @@ function PhaseDiagram(props) {
             {items.map(item => (
                 <PhaseDiagramItem
                     key={item.pageKey}
-                    modeKey={modeKey}
+                    modeKey={slate.key}
                     item={item}
                     pointer={pointer}
                     setPointer={setPointer}
@@ -47,9 +47,3 @@ function PhaseDiagram(props) {
         </Body>
     )
 }
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
-)(PhaseDiagram)

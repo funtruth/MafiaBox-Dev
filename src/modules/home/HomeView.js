@@ -8,7 +8,6 @@ import HeaderView from './header/HeaderView';
 import LandingView from './landing/LandingView'
 import PatchView from '../board/patch/PatchView';
 import ModeView from '../board/phases/ModeView';
-import TestHubView from '../testhub/TestHubView'
 import WindowPageView from '../page/WindowPageView'
 
 export default function HomeView(props) {
@@ -19,13 +18,10 @@ export default function HomeView(props) {
                 <HeaderView {...props}/>
                 <Switch>
                     <Route exact path="/" component={LandingView}/>
-                    <Route exact path="/:projectKey" component={PatchView}/>
-                    <Route exact path="/:projectKey/mode/:modeKey" component={ModeView}/>
-
-                    <Route exact path="/:projectKey/roles" component={PatchView}/>
-                    <Route exact path="/:projectKey/roles/:storyKey/:pageKey" component={WindowPageView}/>
-                    <Route exact path="/:projectKey/phases/:storyKey/:pageKey" component={WindowPageView}/>
-                    <Route exact path="/:projectKey/testhub" component={TestHubView}/>
+                    <Route exact path="/:projectKey/:board" component={PatchView}/>
+                    <Route exact path="/:projectKey/modes/:pageKey" component={ModeView}/>
+                    <Route exact path="/:projectKey/roles/:pageKey" component={WindowPageView}/>
+                    <Route exact path="/:projectKey/phases/:pageKey" component={WindowPageView}/>
                 </Switch>
             </div>
         </div>

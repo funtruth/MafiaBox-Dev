@@ -1,33 +1,23 @@
 export const boardType = {
-    library: {
-        key: 'library',
-        title: 'Library',
-        label: 'Library',
-        icon: 'mdi mdi-library-books',
-    },
-    functions: {
-        key: 'functions',
-        title: 'Functions',
-        label: 'Functions',
-        icon: 'mdi mdi-function-variant',
+    roles: {
+        key: 'roles',
+        title: 'Roles',
+        icon: 'mdi mdi-folder-account',
     },
     phases: {
         key: 'phases',
         title: 'Phases',
-        label: 'Phases',
         icon: 'mdi mdi-book-open-page-variant',
-    },
-    roles: {
-        key: 'roles',
-        title: 'Roles',
-        label: 'Roles',
-        icon: 'mdi mdi-folder-account',
     },
     events: {
         key: 'events',
         title: 'Events',
-        label: 'Events',
         icon: 'mdi mdi-calendar-text',
+    },
+    modes: {
+        key: 'modes',
+        title: 'Game modes',
+        icon: 'mdi mdi-gamepad',
     },
 }
 

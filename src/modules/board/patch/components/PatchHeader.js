@@ -1,36 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {
-    dropdownType,
-    boardType,
-} from '../../../common/types';
+import { dropdownType } from '../../../common/types';
 
-import {
-    addPageToMap,
-    addModeToPatch,
-} from '../../../page/PageReducer'
+import { addPageToMap } from '../../../page/PageReducer'
 import { setPref, PREF_KEY } from '../../../app/AppReducer'
 
 import {
-    Body,
     DropClick,
     Row,
     Text,
     Tag,
 } from '../../../components/Common';
 
-function PatchHeader(props) {
-    const { storyKey, storyRepo, tab, setTab, tabbedData, prefs } = props
+export default function PatchHeader(props) {
+    const dispatch = useDispatch();
+    const storyRepo = useSelector(state => state.page.storyRepo);
+    const prefs = useSelector(state => state.app.prefs)
+
+    const { board, storyKey, tab, setTab, tabbedData } = props
+    
     const storyInfo = storyRepo[storyKey] || {}
     const { title } = storyInfo
 
     const handleAdd = () => {
-        if (tab === 0) {
-            props.addPageToMap(storyKey, boardType.roles.key)
-        } else if (tab === 2) {
-            props.addModeToPatch(storyKey)
-        }
+        dispatch(addPageToMap(storyKey, board))
     }
 
     const handleTabClick = (index) => {
@@ -39,7 +33,7 @@ function PatchHeader(props) {
         //save preference for future mount
         const newPref = prefs[PREF_KEY.PATCH_HEADER_TAB] || {}
         newPref[storyKey] = index
-        props.setPref(PREF_KEY.PATCH_HEADER_TAB, newPref)   
+        dispatch(setPref(PREF_KEY.PATCH_HEADER_TAB, newPref))
     }
 
     const renderTag = (tabIndex, text) => {
@@ -81,33 +75,11 @@ function PatchHeader(props) {
                     {title || 'Untitled'}
                 </Text>
             </DropClick>
-            <Body>
-                <Text style={{marginLeft: 8}}>Roles</Text>
-                <Row>
-                    {renderTag(0, 'In Progress')}
-                    {renderTag(1, 'Published')}
-                </Row>
-            </Body>
-            <Body>
-                <Text style={{marginLeft: 8}}>Game Modes</Text>
-                <Row>
-                    {renderTag(2, 'In Progress')}
-                    {renderTag(3, 'Published')}
-                </Row>
-            </Body>
+            <Row>
+                {renderTag(0, 'In Progress')}
+                {renderTag(1, 'Published')}
+            </Row>
             {renderAdd()}
         </Row>
     )
 }
-
-export default connect(
-    state => ({
-        storyRepo: state.page.storyRepo,
-        prefs: state.app.prefs,
-    }),
-    {
-        addPageToMap,
-        addModeToPatch,
-        setPref,
-    }
-)(PatchHeader)

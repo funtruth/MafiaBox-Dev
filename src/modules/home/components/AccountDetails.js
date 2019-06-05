@@ -1,32 +1,26 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import { dropdownType } from '../../dropdown/types'
 
-import { DropClick } from '../../components/Common';
+import { DropClick, Row, Icon, Text, Body } from '../../components/Common';
 
-export default function SideBarView(props) {
-    const { authUser } = props
+export default function SideBarView() {
+    const authUser = useSelector(state => state.firebase.authUser)
     const { firstName, email } = authUser
 
     return (
         <DropClick
-            className="account-details"
             dropdown={dropdownType.accountOptions}
             place="right"
         >
-            <div>
-                {firstName}
-                <div className="project-subtitle">
-                    {email}
-                </div>
-            </div>
-            <i
-                className="mdi mdi-dots-vertical"
-                style={{
-                    marginLeft: 'auto',
-                    fontSize: 18,
-                }}
-            ></i>
+            <Row y="c" sizes={["s", "s"]}>
+                <Body>
+                    <Text>{firstName}</Text>
+                    <Text color="grey" size="xs">{email}</Text>
+                </Body>
+                <Icon size="l" icon="mdi mdi-dots-vertical" style={{marginLeft: 'auto'}}></Icon>
+            </Row>
         </DropClick>
     )
 }

@@ -18,9 +18,9 @@ import ModeSetupLabel from './ModeSetupLabels';
 import RolePicker from './picker/RolePicker'
 
 function ModeSetupView(props) {
-    const { modeKey, modeInfo, path } = props
-
-    const { playerNum, roleSetup } = modeInfo
+    const { slate, path } = props
+    const { playerNum, roleSetup } = slate
+    
     const rows = minMaxArray(playerNum||{})
 
     const [draft, setDraft] = useState("")
@@ -81,7 +81,7 @@ function ModeSetupView(props) {
                     </Row>
                     {item === draftRow &&
                         <RolePicker
-                            modeKey={modeKey}
+                            modeKey={slate.key}
                             draftInfo={roleSetup[draft]}
                         />
                     }

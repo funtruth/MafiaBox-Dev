@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-export default function PageAbstract(props) {
-    const { path, pageInfo } = props
-
-    const [title, setTitle] = useState(pageInfo.title)
+export default function PageAbstract({
+    slate,
+    update,
+}){
+    const [title, setTitle] = useState(slate.title)
     useEffect(() => {
-        setTitle(pageInfo.title)
-    }, [pageInfo.title])
+        setTitle(slate.title)
+    }, [slate.title])
 
     const handleChange = e => {
         setTitle(e.target.value)
@@ -19,7 +20,7 @@ export default function PageAbstract(props) {
     }
 
     const handleTextBlur = () => {
-        props.updatePage([...path, 'title'], title)
+        update({title})
     }
 
     return (

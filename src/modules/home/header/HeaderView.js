@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 import '../../board/board.css'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { navigate } from '../../app/NavReducer'
 
@@ -9,7 +9,9 @@ import HeaderSearch from './HeaderSearch';
 import HeaderAddStory from './HeaderAddStory';
 import { Row } from '../../components/Common'
 
-function HeaderView(props) {
+export default function HeaderView(props) {
+    const dispatch = useDispatch();
+
     const { location } = props
     const { pathname } = location
     
@@ -17,7 +19,7 @@ function HeaderView(props) {
 
     const onPathClick = (index) => {
         let newPath = paths.slice(0, index + 1).join('/')
-        props.navigate(newPath)
+        dispatch(navigate(newPath))
     }
 
     return (
@@ -44,10 +46,3 @@ function HeaderView(props) {
         </div>
     )
 }
-
-export default connect(
-    null,
-    {
-        navigate,
-    }
-)(HeaderView)

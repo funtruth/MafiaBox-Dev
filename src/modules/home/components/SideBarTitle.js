@@ -1,15 +1,17 @@
 import React from 'react'
 
-export default function SideBarTitle(props) {
+import { Row, Text } from '../../components/Common';
+
+export default function SideBarTitle({text}) {
     return (
-        <div className="side-bar-section-title">
+        <Row y="c">
             <div style={{
                 height: 2,
                 width: 10,
                 backgroundColor: '#464646',
                 marginRight: 2,
             }}/>
-            {props.children}
+            <Text>{text}</Text>
             <div style={{
                 height: 2,
                 flexGrow: 1,
@@ -17,6 +19,6 @@ export default function SideBarTitle(props) {
                 minWidth: 10,
                 marginLeft: 2,
             }}/>
-        </div>
+        </Row>
     )
 }

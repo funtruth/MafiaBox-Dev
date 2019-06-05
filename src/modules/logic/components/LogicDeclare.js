@@ -54,7 +54,7 @@ export default function LogicDeclare({
                         {variableTypes.length === 0 && '...'}
                     </LogicButton>
                 </DropClick>
-                <LogicDeclareValue item={item} path={varPath}/>
+                {!readOnly && <LogicDeclareValue item={item} path={varPath}/>}
             </Row>
         )
     }

@@ -9,6 +9,7 @@
 
 ## 06/05/2019
 ### Major
+- [x] front-end revamp, getting rid of "Patches" & splitting up "Roles/Phases/GameModes/Events"
 
 ### Minor
 - [x] Save wildcards while going through PickVar/PickVarSubfields

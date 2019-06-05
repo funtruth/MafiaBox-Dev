@@ -9,11 +9,13 @@ import {
     Text,
 } from '../../components/Common';
 
-export default function EditPlayerNum(props) {
-    const { attach, path } = props
-
-    const [min, setMin] = useState(attach.min || 0)
-    const [max, setMax] = useState(attach.max || 0)
+export default function EditPlayerNum({
+    slate,
+    update,
+    showDropdown,
+}){
+    const [min, setMin] = useState(slate.min || 0)
+    const [max, setMax] = useState(slate.max || 0)
 
     const handleMin = (e) => setMin(parseInt(e.target.value))
     const handleMax = (e) => setMax(parseInt(e.target.value))
@@ -30,8 +32,8 @@ export default function EditPlayerNum(props) {
     const onFocus = (e) => e.target.select();
 
     const submit = () => {
-        props.updateGeneral({path, update: {min, max}})
-        props.showDropdown()
+        update({min, max})
+        showDropdown();
     }
     
     return (

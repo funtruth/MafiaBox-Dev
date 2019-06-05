@@ -1,28 +1,24 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
 
-import { updateGeneral } from '../../page/PageReducer'
+import { usePath } from '../../hooks/Hooks';
 
 import ModeHeader from './ModeHeader';
 import PhaseDiagram from './diagram/PhaseDiagram';
 import ModeSetupView from './setup/ModeSetupView';
 import EventView from './events/EventView';
 
-function ModeView(props) {
-    const { match, modeRepo } = props
-    const { params } = match
-    const { modeKey } = params
+export default function ModeView({match}) {
+    const { pageKey } = match.params
 
     const [tab, setTab] = useState(0)
+    const slate = usePath(['pageRepo', pageKey])
 
     const propsExt = {
-        ...props,
         tab, setTab,
-        path: ['modeRepo', modeKey],
-        modeKey,
-        modeInfo: modeRepo[modeKey] || {},
+        slate,
+        path: ['pageRepo', pageKey],
     }
-    console.log('ModeView console', modeRepo[modeKey])
+    console.log('ModeView console', slate)
 
     return (
         <>
@@ -33,12 +29,3 @@ function ModeView(props) {
         </>
     )
 }
-
-export default connect(
-    state => ({
-        modeRepo: state.page.modeRepo,
-    }),
-    {
-        updateGeneral,
-    }
-)(ModeView)

@@ -1,7 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { SortableElement } from 'react-sortable-hoc';
-
 
 import {
     boardType,
@@ -18,19 +17,35 @@ import {
     Tag,
     Text,
 } from '../../../components/Common';
+import { navigateStack } from '../../../app/NavReducer';
 
-const RoleGridItem = SortableElement((props) => {
-    const { pageKey, pageRepo } = props
+export default SortableElement(({pageKey, board}) => {
+    const dispatch = useDispatch();
+    const pageRepo = useSelector(state => state.page.pageRepo);
+
     const pageInfo = pageRepo[pageKey] || {}
     const { title } = pageInfo
     
     const handleClick = (e) => {
         if (STOP_DROP_PROP(e)) return;
-        props.showModal(modalType.showPage, {
-            pageKey,
-            path: ['pageRepo', pageKey],
-            boardType: boardType.roles.key,
-        })
+
+        switch(board) {
+            case boardType.modes.key:
+                dispatch(navigateStack(pageKey))
+                break;
+            case boardType.events.key:
+                dispatch(showModal(modalType.editLogic, {
+                    path: ['pageRepo', pageKey, 'data']
+                }))
+                break;
+            case boardType.phases.key:
+            case boardType.roles.key:
+            default:
+                dispatch(showModal(modalType.showPage, {
+                    pageKey,
+                    path: ['pageRepo', pageKey],
+                }))
+        }
     }
 
     return (
@@ -63,12 +78,3 @@ const RoleGridItem = SortableElement((props) => {
         </Row>
     )
 })
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
-    {
-        showModal,
-    }
-)(RoleGridItem)
