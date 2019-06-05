@@ -46,7 +46,7 @@ function parseVar(byVK, vK) {
         case parseType.operation:
             return parseVar(byVK, value.left) + display + parseVar(byVK, value.right)
         case parseType.number:
-            return parseNumber(value)
+            return parseNumber(value.byId, value.source)
         case parseType.variable:
             return parseJS(value)
         case parseType.wrapper:
@@ -78,6 +78,8 @@ export function parseNumber(repo, key) {
             return `(${parseNumber(repo, item.value.left)} ${item.display} ${parseNumber(repo, item.value.right)})`
         case parseType.variable:
             return parseJS(item.value)
+        case parseType.constant:
+            return item.value
         default:
             return ''
     }

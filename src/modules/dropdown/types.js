@@ -46,6 +46,7 @@ export const dropdownType = {
     replaceWildcard: 'dropdownType/replace-wildcard',
     createGlobalVar: 'dropdownType/create-global-var',
     pickGlobalValue: 'dropdownType/pick-global-value',
+    varItemConstant: 'dropdownType/var-item-constant',
 
     pickBooleanAssign: 'dropdownType/pick-boolean-assign',
     pickUidAssign: 'dropdownType/pick-uid-for-assign',

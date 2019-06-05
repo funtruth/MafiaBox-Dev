@@ -9,7 +9,6 @@ import {
 } from '../../common/defaults';
 
 import { useAutofocus } from '../../hooks/Hooks'
- import generatePushID from '../../common/generatePushID';
 
 import {
     DropSubmit,
@@ -18,28 +17,21 @@ import {
 import { Row } from '../../components/Common'
 
 /*
-LOCATION
-    NumberView.ActiveOp.ValueDrop
-PURPOSE
-    shown when the user clicks an empty ValueDrop
-    Content:
-        Input for <number>
+    PickTypeNumber
+    edits a LOGIC_ITEM_VAR directly by path,
+    sets as parseType.constant because parseType.number reads through value.byId / value.source
 */
-export default function PickNumValue({
-    mathKey,
-    item,
-    side,
+export default function VarItemConstant({
     slate,
     update,
     showDropdown,
 }){
     const focusRef = useAutofocus()
 
-    const [value, setValue] = useState(mathKey ? slate : "")//TODO
+    const [value, setValue] = useState(slate.value)
     const handleChange = e => setValue(e.target.value)
 
-    //changing value @ byId.[mathKey].value
-    const updateSlate = () => {
+    const submit = () => {
         update({
             ...LOGIC_ITEM_VAR,
             display: value,
@@ -50,43 +42,10 @@ export default function PickNumValue({
         showDropdown();
     }
 
-    //setting value to an empty ValueDrop @ byId
-    const setSlate = () => {
-        const newKey = generatePushID('math')
-        
-        update({
-            [item.key]: {
-                ...item,
-                value: {
-                    ...item.value,
-                    [side]: newKey,
-                },
-            },
-            [newKey]: {
-                ...LOGIC_ITEM_VAR,
-                key: newKey,
-                display: value,
-                value,
-                parseBy: parseType.constant,
-                variableTypes: [variableType.number.key],
-            },
-        })
-        showDropdown();
-    }
-
-    const onSubmit = () => {
-        if (!mathKey) {
-            setSlate();
-        } else {
-            updateSlate();
-        }
-        showDropdown();
-    }
-
     const onKeyDown = e => {
         switch(e.nativeEvent.key) {
             case 'Enter':
-                onSubmit()
+                submit()
                 break
             default:
         }
@@ -105,7 +64,7 @@ export default function PickNumValue({
                     placeholder="enter a value ..."
                     type='number'
                 />
-                <DropSubmit onClick={onSubmit}/>
+                <DropSubmit onClick={submit}/>
             </Row>
         </>
     )

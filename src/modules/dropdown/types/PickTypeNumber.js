@@ -1,26 +1,33 @@
 import React from 'react'
 
-import { modalType } from '../../common/types'
+import { modalType, dropdownType } from '../../common/types'
 
-import { DropItem, DropTitle } from '../components/Common'
+import { DropItem, DropTitle, DropParent } from '../components/Common'
 
 export default function PickTypeNumber({
     path,
     showModal,
     showDropdown,
 }) {
-    const onClick = () => {
-        showModal(modalType.editNumber, {
-            path,
-        })
+    const onEquation = () => {
+        showModal(modalType.editNumber, {path})
         showDropdown();
     }
 
     return (
         <>
             <DropTitle>advanced</DropTitle>
+            <DropParent
+                dropdown={dropdownType.varItemConstant}
+                params={{
+                    path,
+                }}
+                icon="mdi mdi-alpha-c-circle"
+                text="set to ..."
+                showDropdown={showDropdown}
+            />
             <DropItem
-                onClick={onClick}
+                onClick={onEquation}
                 leftIcon="mdi mdi-calculator"
                 text="equation ..."
             />

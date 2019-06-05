@@ -9,26 +9,31 @@ export const END_REGEX = /\)/g
 
 //input => "(rss)(players)((choices)(user))"
 //ouput => ["rss", "players", "(choices)(user)"]
-export function separateVar(prefix = "") {
+export function separateVar(value = "") {
+    if (typeof value === 'object') {
+        console.warn('object is an invalid value prop.')
+        return []
+    }
+    
     //make sure string is valid
-    const a = (prefix.match(START_REGEX)||[]).length,
-          b = (prefix.match(END_REGEX)||[]).length,
+    const a = (value.match(START_REGEX)||[]).length,
+          b = (value.match(END_REGEX)||[]).length,
           fields = [];
           
     if (a !== b) {
         console.warn('String should have the same amount of ( and )')
-        return fields;
+        return [];
     }
 
     if (a === 0) {
-        return [prefix]
+        return [value]
     }
 
     let counter = 0,
         pointer = 0;
 
-    for (var i=0; i<prefix.length; i++) {
-        const c = prefix.charAt(i)
+    for (var i=0; i<value.length; i++) {
+        const c = value.charAt(i)
         
         if (c === START_CHAR) {
             if(counter === 0) {
@@ -37,7 +42,7 @@ export function separateVar(prefix = "") {
             counter++;
         } else if (c === END_CHAR) {
             if (counter === 1) {
-                fields.push(prefix.substring(pointer, i))
+                fields.push(value.substring(pointer, i))
             }
             counter--;
         }

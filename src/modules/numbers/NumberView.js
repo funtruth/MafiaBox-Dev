@@ -37,6 +37,7 @@ export default function NumberView({path, scopedVars}){
     useEffect(() => {
         if (!mathRepo || !source) return;
         const newDisplay = parseNumber(mathRepo, source)
+        
         if (newDisplay !== display) {
             dispatch(updateGeneral({
                 path,

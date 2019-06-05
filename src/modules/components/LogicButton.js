@@ -49,11 +49,9 @@ export default function LogicButton(props) {
         >
             {icon && <Icon className={icon}></Icon>}
             {label && <Text size="s" color="whitish" before={icon ? "xxs" : ""}>{label}</Text>}
-            {text &&
-                <Text size="s" color={color || 'grey'} before={icon || label ? "xxs" : ""}>
-                    {text || placeholder}
-                </Text>
-            }
+            <Text size="s" color={(text && color) || 'grey'} before={icon || label ? "xxs" : ""}>
+                {text || placeholder}
+            </Text>
             {children}
         </Row>
     )

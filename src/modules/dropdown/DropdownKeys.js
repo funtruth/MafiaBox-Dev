@@ -47,6 +47,7 @@ import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
 import PickGlobalVar from './vars/PickGlobalVar'
+import VarItemConstant from './common/VarItemConstant'
 
 import PickBooleanAssign from './assign/PickBooleanAssign'
 import PickUidAssign from './assign/PickUidAssign'
@@ -182,6 +183,8 @@ export default function DropdownKeys(props) {
             return <PickGlobalVar {...props}/>
         case dropdownType.pickRecipient:
             return <PickRecipient {...props}/>
+        case dropdownType.varItemConstant:
+            return <VarItemConstant {...props}/>
         
         //NumberViews
         case dropdownType.pickNumValue:

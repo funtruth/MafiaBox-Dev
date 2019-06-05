@@ -45,7 +45,7 @@ export default function LogicPanels(props) {
 
                 dispatch(updateGeneral({
                     path: [...varPath, 'value'],
-                    update: [...(value || []), i[0]],
+                    update: [...(typeof value === 'object' ? value : []), i[0]],
                 }, {
                     path: repoPath,
                     update: {
@@ -82,7 +82,7 @@ export default function LogicPanels(props) {
 
                 dispatch(updateGeneral({
                     path: [...varPath, 'value'],
-                    update: [...(value || []), i[0]],
+                    update: [...(typeof value === 'object' ? value : []), i[0]],
                 }, {
                     path: repoPath,
                     update: {

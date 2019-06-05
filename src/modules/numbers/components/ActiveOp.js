@@ -38,6 +38,7 @@ export default function ActiveOp(props) {
     
     switch(parseBy) {
         case parseType.variable:
+        case parseType.constant:
             return (
                 <ValueDrop
                     {...props}
