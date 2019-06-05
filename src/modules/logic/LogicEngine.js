@@ -1,5 +1,5 @@
 import { parseType } from '../common/types'
-import { parseJS, separateVar } from './proptool'
+import { parseJS, separateVar, START_CHAR, varInStr } from './proptool'
 
 var beautify_js = require('js-beautify');
 
@@ -7,7 +7,7 @@ export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId } = data
     
-    return beautify_js(`(rss, updates, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
+    return beautify_js(`(rss, next, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
 }
 
 //lK logicKey
@@ -86,9 +86,15 @@ export function parseNumber(repo, key) {
 }
 
 export function parseUpdate(value) {
-    const parts = separateVar(value)
+    const parts = separateVar(value).slice(1)
+    
+    for (var i=0; i<parts.length; i++) {
+        if (parts[i].charAt(0) === START_CHAR) {
+            parts[i] = varInStr(parts[i])
+        }
+    }
 
-    return 'updates[\'' + parts.slice(1).join("/") + '\']'
+    return 'next.update[`' + parts.join("/") + '`]'
 }
 
 export function parseString({byId, byIndex}) {
@@ -97,7 +103,7 @@ export function parseString({byId, byIndex}) {
     const parts = byIndex.map(sK => {
         switch(byId[sK].parseBy) {
             case parseType.variable:
-                return `\${${parseJS(byId[sK].value)}}`
+                return varInStr(byId[sK].value)
             case parseType.constant:
                 return byId[sK].value
             default:

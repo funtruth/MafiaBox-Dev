@@ -1,12 +1,8 @@
 import React from 'react'
 import _ from 'lodash'
 
-import {
-    operatorType,
-} from '../../common/types'
-import {
-    DEFAULT_LOGIC,
-} from '../../common/defaults'
+import { operatorType } from '../../common/types'
+import { DEFAULT_LOGIC } from '../../common/defaults'
 
 import generatePushID from '../../common/generatePushID';
 import { generateLogic } from '../../logic/codetool';
@@ -53,11 +49,7 @@ export default function PickOperator({
         )
     }
     
-    const items = _(operatorType)
-        .filter(i => i.logicType === logicType)
-        .orderBy(i => i.index)
-        .value()
-
+    const items = _.filter(operatorType, i => i.logicType === logicType)
     return (
         <>
             <DropTitle>operator types</DropTitle>

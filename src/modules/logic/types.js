@@ -49,7 +49,6 @@ export const logicType = {
 export const operatorType = {
     if: {
         key: 'if',
-        index: 0,
         title: 'if',
         value: {
             left: "if(",
@@ -61,7 +60,6 @@ export const operatorType = {
     },
     else: {
         key: 'else',
-        index: 1,
         title: 'else',
         value: {
             left: "else",
@@ -73,7 +71,6 @@ export const operatorType = {
     },
     elseif: {
         key: 'elseif',
-        index: 2,
         title: 'else if',
         value: {
             left: "else if(",
@@ -85,7 +82,6 @@ export const operatorType = {
     },
     forin: {
         key: 'forin',
-        index: 3,
         title: 'for',
         value: {
             left: "for(var",
@@ -95,6 +91,17 @@ export const operatorType = {
         color: 'orange',
         logicType: logicType.operator.key,
     },
+    random: {
+        key: 'random',
+        title: 'random',
+        value: {
+            left: "{",
+            right: "}",
+        },
+        icon: 'mdi mdi-dice-3',
+        color: 'orange',
+        logicType: logicType.operator.key,
+    }
 }
 
 export const parseType = {

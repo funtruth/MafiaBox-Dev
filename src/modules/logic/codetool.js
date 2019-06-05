@@ -51,9 +51,9 @@ export function generateLogic(type) {
                         ...LOGIC_ITEM_VAR,
                         key: i[1],
                         disabled: true,
-                        display: 'event placeholder',
-                        parseBy: parseType.constant,
-                        value: 'event placeholder',
+                        display: 'event',
+                        parseBy: parseType.update,
+                        value: '(rss)(events)((next)(time++))',
                     },
                     [i[2]]: {
                         ...LOGIC_ITEM_VAR,

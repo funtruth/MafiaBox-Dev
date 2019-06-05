@@ -1,7 +1,4 @@
-import {
-    dropdownType,
-    variableType,
-} from '../common/types'
+import { variableType } from '../common/types'
 
 /* logicItem
     FIELD           DESCRIPTION
@@ -327,7 +324,7 @@ export const rssMap = {
         ],
         fieldLength: 5,
         variableTypes: [
-            variableType.string.key,
+            variableType.key.key,
         ],
     },
     '(rss)(players)(@)(role)(roleTeam)': {
@@ -571,7 +568,6 @@ export const rssMap = {
         fieldLength: 5,
         variableTypes: [
             variableType.uid.key,
-            variableType.key.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(second)': {
@@ -587,7 +583,6 @@ export const rssMap = {
         fieldLength: 5,
         variableTypes: [
             variableType.uid.key,
-            variableType.key.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(third)': {
@@ -603,7 +598,6 @@ export const rssMap = {
         fieldLength: 5,
         variableTypes: [
             variableType.uid.key,
-            variableType.key.key,
         ],
     },
     '(rss)(choices)(@)(value)': {

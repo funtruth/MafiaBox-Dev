@@ -75,6 +75,7 @@ export function replaceVarWithMap(newValue, oldValue, map = []) {
 
 export function concatField(a = "", b = "") {return a + START_CHAR + b + END_CHAR}
 export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CHAR + START_CHAR) + END_CHAR}
+export function varInStr(v) {return `\${${parseJS(v)}}`}
 
 //returns properties of prefix existing in rssMap
 export function getSubfields(prefix) {
