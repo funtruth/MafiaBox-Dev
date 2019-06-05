@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { useDispatch, connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import { boardType } from '../../common/types';
@@ -9,13 +9,15 @@ import { navigate } from '../../app/NavReducer'
 
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
-import SideBarTitle from '../components/SideBarTitle'
+import SideBarTitle from './SideBarTitle'
 import { Icon, Text, Row, Body } from '../../components/Common';
 
-function SideBarView(props) {
+export default function SideBarView({ location }) {
     const dispatch = useDispatch();
+    const path = useSelector(state => state.nav.path);
+    const activeProject = useSelector(state => state.firebase.activeProject);
 
-    const { location, path, activeProject } = props
+    //react-router
     const { pathname } = location
 
     let renderRedirect = () => {
@@ -47,7 +49,7 @@ function SideBarView(props) {
                 onClick={() => handleClick(item)}
             >
                 <Icon size="l" icon={item.icon} color={selected ? 'whitish' : 'grey'}></Icon>
-                <Text before="xs" color={selected ? 'whitish' : 'grey'}>{item.title}</Text>
+                <Text before="xxs" color={selected ? 'whitish' : 'grey'}>{item.title}</Text>
             </Row>
         )
     }
@@ -58,19 +60,10 @@ function SideBarView(props) {
         <Body bg="charcoal">
             <AccountDetails/>
             <SideBarTitle text="Project"/>
-            <ProjectDetails {...props}/>
+            <ProjectDetails activeProject={activeProject}/>
             <SideBarTitle text="Develop"/>
             {items.map(renderItem)}
             {renderRedirect()}
         </Body>
     )
 }
-
-export default connect(
-    state => ({
-        path: state.nav.path,
-        activeProject: state.firebase.activeProject,
-        projects: state.firebase.projects,
-        userProjects: state.firebase.userProjects,
-    }),
-)(SideBarView)

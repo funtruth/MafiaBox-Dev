@@ -188,7 +188,8 @@ export function addPageToMap(storyKey, board) {
         switch(board) {
             case boardType.modes.key:
                 dispatch(navigateStack(pageKey))
-                break
+                break;
+            case boardType.events.key:
             case boardType.phases.key:
             case boardType.roles.key:
             default:

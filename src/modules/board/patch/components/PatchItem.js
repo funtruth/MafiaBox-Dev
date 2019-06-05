@@ -7,10 +7,8 @@ import { movePageWithinMap } from '../../../page/PageReducer'
 import { PREF_KEY } from '../../../app/AppReducer'
 
 import PatchHeader from './PatchHeader';
-import RoleGrid from './RoleGrid';
-import {
-    Body,
-} from '../../../components/Common';
+import PageItemView from './PageItemView';
+import { Body } from '../../../components/Common';
 
 function PatchItem(props) {
     const { board, storyKey, pageMap, pageRepo, prefs } = props
@@ -59,7 +57,7 @@ function PatchItem(props) {
                 tabbedData={tabbedData}
             />
             <Body sizes={["xxs", "xxs"]} align="s">
-                <RoleGrid
+                <PageItemView
                     items={tabbedData[tab]}
                     board={board}
                     distance={2}

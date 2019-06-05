@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import firebase from 'firebase/app'
 import './Project.css'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 import { dropdownType } from '../../dropdown/types'
 
@@ -21,7 +21,8 @@ import ProjectItem from './ProjectItem';
 import { DropClick } from '../../components/Common';
 
 function ProjectDetails(props) {
-    const { activeProject, projects } = props
+    const projects = useSelector(state => state.firebase.projects)
+    const { activeProject } = props
 
     useEffect(() => {
         if (!activeProject) return;

@@ -27,6 +27,9 @@ export const defaultFieldMap = {
         'phaseAction',
         'phaseListener',
     ],
+    [boardType.events.key]: [
+        'eventLogic',
+    ]
 }
 
 
@@ -158,5 +161,11 @@ export const defaultFieldRepo = {
         fieldType: fieldType.logic.key,
         title: 'Phase Listener',
         boardType: boardType.phases.key,
+    },
+    eventLogic: {
+        key: 'eventLogic',
+        fieldType: fieldType.logic.key,
+        title: 'Event Logic',
+        boardType: boardType.events.key,
     },
 }

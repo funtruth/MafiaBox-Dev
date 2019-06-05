@@ -27,7 +27,11 @@ export default function DropdownConnect({item, index}) {
         }))
     }
 
-    if (!path) console.warn('this dropdown has no path.')
+    if (!path) {
+        console.warn('this dropdown has no path.')
+        return DropdownKeys({...item, ...renderProps})
+    }
+    
     renderProps.slate   = usePath(path);
     console.log('slate of Dropdown', {slate: renderProps.slate})
     renderProps.update  = (...u) => dispatch(updateGeneral(...(u.map(i => ({path, update: i})))))

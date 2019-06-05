@@ -1,12 +1,12 @@
 import React from 'react'
 import { SortableContainer } from 'react-sortable-hoc';
 
-import RoleGridItem from './RoleGridItem';
+import PageItem from './PageItem';
 
 export default SortableContainer(({items, board}) => (
     <div>
         {items.map((pageKey, index) => (
-            <RoleGridItem
+            <PageItem
                 key={pageKey}
                 pageKey={pageKey}
                 board={board}

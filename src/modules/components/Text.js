@@ -16,10 +16,10 @@ const getMarginTop = (size) => {
     switch(size) {
         case 'xs':          return -1
         case 's':           return -1
-        case 'l':           return -2
-        case 'xl':          return -3
-        case 'xxl':         return -4
-        default:            return -2 //'m'
+        case 'l':           return -1
+        case 'xl':          return -2
+        case 'xxl':         return -2
+        default:            return -1 //'m'
     }
 }
 

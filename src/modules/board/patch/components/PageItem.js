@@ -34,10 +34,6 @@ export default SortableElement(({pageKey, board}) => {
                 dispatch(navigateStack(pageKey))
                 break;
             case boardType.events.key:
-                dispatch(showModal(modalType.editLogic, {
-                    path: ['pageRepo', pageKey, 'data']
-                }))
-                break;
             case boardType.phases.key:
             case boardType.roles.key:
             default:

@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function ProjectItem(props) {
     const { project, chosen } = props
-
     if (!project) return null;
 
     const { title } = project

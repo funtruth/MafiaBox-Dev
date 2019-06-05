@@ -16,7 +16,7 @@ export const boardType = {
     },
     modes: {
         key: 'modes',
-        title: 'Game modes',
+        title: 'Modes',
         icon: 'mdi mdi-gamepad',
     },
 }
