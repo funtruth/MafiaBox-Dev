@@ -2,12 +2,17 @@
 - Unchecked items are moved over to day of completion
 
 ## WIP
-- [ ] removed current/repeat variable from results. 1 edge case may be that variables with wildcards should be allowed to repeat because they have potential to end up as different variables.
 - [ ] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
-- [ ] Save wildcards while going through PickVar/PickVarSubfields
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
+
+## 06/05/2019
+### Major
+
+### Minor
+- [x] Save wildcards while going through PickVar/PickVarSubfields
+- [x] removed current/repeat variable from results. 1 edge case may be that variables with wildcards should be allowed to repeat because they have potential to end up as different variables.
 
 ## 06/04/2019
 ### Major

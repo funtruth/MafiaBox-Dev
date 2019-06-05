@@ -161,7 +161,6 @@ export default function LogicPanels(props) {
             return <LogicPanels {...props} varKey={value.middle}/>
         case parseType.collection:
         case parseType.object:
-            console.log({props})
             dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
             return (
                 <Body x="l">
@@ -193,7 +192,7 @@ export default function LogicPanels(props) {
         case parseType.string:
         case parseType.variable:
         default:
-            if (VARTYPE_IS_STR(varItem)) modal = modalType.editString
+            if (VARTYPE_IS_STR(baseVar)) modal = modalType.editString
             else if (index === 0) dropdown = dropdownType.pickVar
             else if (index === 1) dropdown = dropdownType.pickVarWithType
 

@@ -6,13 +6,10 @@ import {
     logicType,
     operatorType,
 } from '../../common/types'
-import {
-    rssMap,
-    DEFAULT_VAR_ID,
-} from '../../common/defaults'
+import { DEFAULT_VAR_ID } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
-import { concatField } from '../../logic/proptool';
+import { concatField, getSubfields } from '../../logic/proptool';
 import { useAutofocus } from '../../hooks/Hooks'
 import { checkAlpha } from '../../common/helpers';
 
@@ -137,7 +134,6 @@ export default function PickVar({
                     showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
-                        pickVarClick,
                     }}
                     text={item.key}
                 />
@@ -156,7 +152,7 @@ export default function PickVar({
         )
     }
     
-    const rssVars = _.filter(rssMap, i => i.fieldLength === 2)
+    const rssVars = getSubfields('(rss)')
 
     return (
         <>

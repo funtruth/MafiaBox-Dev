@@ -38,6 +38,9 @@ export default function PickVarWithType(props){
     }
 
     const renderItem = (item) => {
+        //don't show same variable
+        if (item.key === baseVar.value) return null
+
         const chosen = slate.value === item.key
 
         if (VARTYPE_IS_OBJ(item)) {
@@ -48,7 +51,6 @@ export default function PickVarWithType(props){
                     showDropdown={showDropdown}
                     params={{
                         prefix: item.key,
-                        pickVarClick,
                     }}
                     text={item.key}
                 />
