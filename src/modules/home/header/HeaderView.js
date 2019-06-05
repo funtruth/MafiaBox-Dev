@@ -48,7 +48,7 @@ export default function HeaderView(props) {
             <HeaderSearch/>
             <Tag
                 onClick={handleAdd}
-                icon="mdi mdi-table-plus"
+                icon="table-plus"
                 text="New Patch"
             />
         </div>

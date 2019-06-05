@@ -40,7 +40,7 @@ export default function Header(props) {
             {children}
             {onClose &&
                 <Icon
-                    className="mdi mdi-close"
+                    icon="close"
                     style={{marginLeft: 'auto'}}
                     size="xxl" color="lightgrey"
                     hover onClick={event => onClose && onClose({ event })}

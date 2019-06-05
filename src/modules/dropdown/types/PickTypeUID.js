@@ -14,17 +14,17 @@ export default function PickTypeNumber({
             <DropTitle>advanced</DropTitle>
             <DropItem
                 onClick={handleSelect}
-                leftIcon="mdi mdi-step-backward"
+                leftIcon="step-backward"
                 text="previous player ..."
             />
             <DropItem
                 onClick={handleSelect}
-                leftIcon="mdi mdi-step-forward"
+                leftIcon="step-forward"
                 text="next player ..."
             />
             <DropItem
                 onClick={handleSelect}
-                leftIcon="mdi mdi-dice-3"
+                leftIcon="dice-3"
                 text="random player ..."
             />
         </>

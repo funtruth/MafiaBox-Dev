@@ -76,7 +76,7 @@ export default function RelatedVars(props) {
         return (
             <DropItem
                 onClick={handleCalculator}
-                leftIcon="mdi mdi-calculator"
+                leftIcon="calculator"
                 text="equation ..."
             />
         )
@@ -94,7 +94,7 @@ export default function RelatedVars(props) {
         return (
             <DropItem
                 onClick={handleString}
-                leftIcon="mdi mdi-pencil"
+                leftIcon="pencil"
                 text="equation ..."
             />
         )

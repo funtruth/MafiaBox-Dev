@@ -44,7 +44,7 @@ function ModeSetupRow(props) {
                     <Bubble
                         bg="discord"
                         onClick={() => onNewDraft(players, item.key)}
-                        icon="mdi mdi-file-document-edit-outline"
+                        icon="file-document-edit-outline"
                         style={{
                             float: 'left',
                         }}

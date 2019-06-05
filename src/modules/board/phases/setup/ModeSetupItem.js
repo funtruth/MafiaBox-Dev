@@ -15,7 +15,7 @@ export default function ModeSetupItem(props) {
         <div ref={overflowRef}>
             <Bubble
                 bg="blue"
-                icon="mdi mdi-file-document-outline"
+                icon="file-document-outline"
                 onClick={() => onDraft(row)}
                 style={{
                     float: overflowed ? 'none' : 'left',

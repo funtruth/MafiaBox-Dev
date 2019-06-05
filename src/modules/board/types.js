@@ -2,26 +2,26 @@ export const difficultyType = {
     basic: {
         key: 'basic',
         color: 'turquoise',
-        icon: 'mdi mdi-circle'
+        icon: 'circle'
     },
     normal: {
         key: 'normal',
         color: 'blue',
-        icon: 'mdi mdi-square'
+        icon: 'square'
     },
     medium: {
         key: 'medium',
         color: 'orange',
-        icon: 'mdi mdi-pentagon'
+        icon: 'pentagon'
     },
     expert: {
         key: 'expert',
         color: 'darkred',
-        icon: 'mdi mdi-star'
+        icon: 'star'
     },
     blitz: {
         key: 'blitz',
         color: 'darkpurple',
-        icon: 'mdi mdi-timer-sand-full',
+        icon: 'timer-sand-full',
     },
 }

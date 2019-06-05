@@ -54,7 +54,7 @@ export default function PickRecipient({
                     <DropItem
                         chosen={_.filter(info).length === 0}
                         onClick={pickEveryone}
-                        leftIcon="mdi mdi-earth"
+                        leftIcon="earth"
                         text="everyone"
                         rightCheck
                     />

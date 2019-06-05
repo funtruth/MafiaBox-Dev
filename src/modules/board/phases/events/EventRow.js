@@ -40,7 +40,7 @@ function EventRow(props) {
                     <Text size="s" color={title ? 'whitish' : 'grey'}>
                         {title || 'Untitled'}
                     </Text>
-                    <Icon color="darkgrey" icon="mdi mdi-pencil" style={{marginLeft: 6}}></Icon>
+                    <Icon color="darkgrey" icon="pencil" style={{marginLeft: 6}}></Icon>
                 </Row>
             </DropClick>
             <DropClick

@@ -19,7 +19,7 @@ export default function SideBarView() {
                     <Text>{firstName}</Text>
                     <Text color="grey" size="xs">{email}</Text>
                 </Body>
-                <Icon size="l" icon="mdi mdi-dots-vertical" style={{marginLeft: 'auto'}}></Icon>
+                <Icon size="l" icon="dots-vertical" style={{marginLeft: 'auto'}}></Icon>
             </Row>
         </DropClick>
     )

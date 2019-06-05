@@ -126,7 +126,7 @@ export default function RolePickerHeader(props) {
                     onChange={handleType}
                     onFocus={onSearchFocus}
                 />
-                <Icon icon="mdi mdi-magnify"/>
+                <Icon icon="magnify"/>
             </Row>
         </Row>
     )

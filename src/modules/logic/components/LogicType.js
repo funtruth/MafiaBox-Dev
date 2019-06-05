@@ -30,7 +30,7 @@ export default function LogicType(props) {
             <LogicButton
                 highlight={color}
                 color={color}
-                icon={icon || 'mdi mdi-pencil'}
+                icon={icon || 'pencil'}
                 label={title}
             />
         </DropClick>

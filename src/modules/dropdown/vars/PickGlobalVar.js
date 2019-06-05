@@ -93,7 +93,7 @@ export default connect(
             <DropParent
                 dropdown={dropdownType.createGlobalVar}
                 showDropdown={props.showDropdown}
-                leftIcon="mdi mdi-pencil"
+                leftIcon="pencil"
                 text="create ..."
             />
         </>

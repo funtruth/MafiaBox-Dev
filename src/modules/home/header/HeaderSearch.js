@@ -8,7 +8,7 @@ export default function HeaderSearch(props) {
 
     return (
         <div className="header-input-container">
-            <Icon icon="mdi-magnify"/>
+            <Icon icon="magnify"/>
             <input
                 className="header-input"
                 value={searchText}

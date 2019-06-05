@@ -22,7 +22,7 @@ export default function PickTrigger(props) {
             <DropTitle>options</DropTitle>
             <DropItem
                 onClick={handleClick}
-                leftIcon="mdi mdi-flag"
+                leftIcon="flag"
                 text="advanced"
             />
         </>

@@ -47,7 +47,7 @@ export default function DropParent({
             onMouseOver={onMouseOver}
             style={style}
         >
-            {icon && <i className={`drop-down-menu-icon ${icon}`} style={{marginRight: 5}}></i>}
+            {icon && <i className={`drop-down-menu-icon mdi mdi-${icon}`} style={{marginRight: 5}}></i>}
             {text}
             <i className="mdi mdi-play"/>
         </div>

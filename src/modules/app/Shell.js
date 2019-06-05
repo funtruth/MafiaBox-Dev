@@ -28,13 +28,13 @@ export default class Shell extends React.Component {
           <div className="window">
             <div className="shell">
               <div className="shell-button" id="min-btn" onClick={this._onMin}>
-                <i className="shell-icon ion-md-remove"></i>
+                <i className="shell-icon mdi mdi-minus"></i>
               </div>
               <div className="shell-button" id="max-btn" onClick={this._onMax}>
-                <i className="shell-icon ion-md-square-outline" style={{ fontSize: 12 }}></i>
+                <i className="shell-icon mdi mdi-crop-square" style={{ fontSize: 12 }}></i>
               </div>
               <div className="shell-button-red" id="close-btn" onClick={this._onClose}>
-                <i className="shell-icon ion-md-close"></i>
+                <i className="shell-icon mdi mdi-close"></i>
               </div>
             </div>
             {this.props.children}

@@ -30,13 +30,13 @@ export default function EditUniqueTag(props) {
             <DropItem
                 chosen={defaultValue === subfieldKey}
                 onClick={onDefault}
-                leftIcon="mdi mdi-settings-box"
+                leftIcon="settings-box"
                 rightCheck
                 text="set as default"
             />
             <DropItem
                 onClick={onDelete}
-                leftIcon="mdi mdi-trash-can"
+                leftIcon="trash-can"
                 text="delete"
             />
         </>

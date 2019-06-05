@@ -36,7 +36,7 @@ export default function Bubble(props) {
             <Text size={size}>
                 {icon &&
                     <i
-                        className={icon}
+                        className={'mdi mdi-' + icon}
                         style={{
                             fontSize: 15,
                             marginRight: children ? 3 : 0,

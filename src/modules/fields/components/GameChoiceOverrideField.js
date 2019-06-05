@@ -36,7 +36,7 @@ export default function GameChoiceOverrideField(props) {
                         highlight={gameChoice ? 'whitish' : '#767676'}
                         color={gameChoice ? 'whitish' : 'grey'}
                     >
-                        <Icon className={`${gameChoiceInfo.icon || 'mdi mdi-pencil'}`}></Icon>
+                        <Icon icon={`${gameChoiceInfo.icon || 'pencil'}`}></Icon>
                     </LogicButton>
                 </DropClick>
                 <Body>
@@ -80,7 +80,7 @@ export default function GameChoiceOverrideField(props) {
                         <LogicButton highlight="pink" color="grey">
                             choice
                         </LogicButton>
-                        <Icon className="mdi mdi-chevron-right" color="whitish" size="l"></Icon>
+                        <Icon icon="chevron-right" color="whitish" size="l"></Icon>
                         <DropClick
                             dropdown={dropdownType.pickGlobalVar}
                             params={{
@@ -105,7 +105,8 @@ export default function GameChoiceOverrideField(props) {
 
     const items = _.toArray(value)
     return (
-        <Body 
+        <Body
+            x="l"
             style = {{
                 borderLeft: '1px dashed #666',
                 paddingLeft: 2,

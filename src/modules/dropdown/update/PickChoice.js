@@ -57,7 +57,7 @@ export default function PickChoice(props) {
             <DropItem
                 chosen={chosen}
                 onClick={handleSelect}
-                leftIcon="mdi mdi-message-bulleted-off"
+                leftIcon="message-bulleted-off"
                 rightCheck
                 text="no choice"
             />

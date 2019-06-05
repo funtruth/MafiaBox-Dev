@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { modalType } from '../../modal/types'
+import { DropItem } from '../components/Common';
 
 export default function RoleItemOptions(props) {
     const { pageKey, attach } = props
@@ -15,14 +16,15 @@ export default function RoleItemOptions(props) {
 
     return (
         <>
-            <div className="drop-down-menu-option">
-                <i className="drop-down-menu-icon ion-ios-git-merge"></i>
-                Merge
-            </div>
-            <div className="drop-down-menu-option" onClick={handleDelete}>
-                <i className="drop-down-menu-icon ion-ios-trash"></i>
-                Delete
-            </div>
+            <DropItem
+                leftIcon="source-merge"
+                text="Merge"
+            />
+            <DropItem
+                leftIcon="trash-can"
+                text="Delete"
+                onClick={handleDelete}
+            />
         </>
     )
 }

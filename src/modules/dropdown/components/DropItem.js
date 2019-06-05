@@ -15,7 +15,7 @@ export default function DropItem(props) {
     
     return (
         <div className="drop-down-menu-option" onClick={handleClick} chosen={chosenToString}>
-            {leftIcon && <i className={`drop-down-menu-icon ${leftIcon}`} style={{marginRight: 5}}></i>}
+            {leftIcon && <i className={`drop-down-menu-icon mdi mdi-${leftIcon}`} style={{marginRight: 5}}></i>}
             {text}
             {rightCheck &&
                 <i

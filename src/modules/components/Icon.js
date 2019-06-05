@@ -31,7 +31,7 @@ export default function Icon(props) {
 
     const classes = [
         className,
-        icon,
+        "mdi mdi-" + icon,
         onClick ? '--onclick' : '',
     ].join(" ")
     

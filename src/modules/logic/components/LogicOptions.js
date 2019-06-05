@@ -28,7 +28,7 @@ export default function LogicOptions(props) {
     return (
         <div>
             <Icon
-                className="mdi mdi-window-close"
+                className="window-close"
                 style={{padding: 4}}
                 size="m" color="grey"
                 hover onClick={handleDelete}

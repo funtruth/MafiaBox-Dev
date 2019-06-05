@@ -24,7 +24,7 @@ export function compile(key, map) {
 */
 function addYellow(text, errors) {
     errors.push({
-        icon: 'ion-md-warning',
+        icon: 'alert',
         color: 'rgba(255,223,68)',
         fontSize: 14,
         text,
@@ -36,7 +36,7 @@ function addYellow(text, errors) {
 */
 export function addRed(text, errors) {
     errors.push({
-        icon: 'ion-md-warning',
+        icon: 'alert',
         color: '#db4757',
         fontSize: 16,
         text,

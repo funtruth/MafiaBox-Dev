@@ -22,13 +22,13 @@ export default function PickTypeNumber({
                 params={{
                     path,
                 }}
-                icon="mdi mdi-alpha-c-circle"
+                icon="alpha-c-circle"
                 text="set to ..."
                 showDropdown={showDropdown}
             />
             <DropItem
                 onClick={onEquation}
-                leftIcon="mdi mdi-calculator"
+                leftIcon="calculator"
                 text="equation ..."
             />
         </>
