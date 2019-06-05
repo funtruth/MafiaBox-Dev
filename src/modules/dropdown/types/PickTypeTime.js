@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 
-import {
-    LOGIC_ITEM_VAR,
-} from '../../common/defaults'
+import { parseType, variableType } from '../../logic/types';
+import { LOGIC_ITEM_VAR } from '../../common/defaults'
 
-import DropTitle from '../components/DropTitle';
+import { DropTitle, DropSubmit } from '../components/Common';
+import Row from '../../components/Row';
 
-export default function PickTimer(props) {
-    const { attach, subfieldKey } = props
-    const currentValue = attach[subfieldKey] || {}
-    
-    const timer = currentValue.value || 0
-
-    const [min, setMin] = useState(Math.floor(timer / 60 / 1000))
-    const [sec, setSec] = useState(timer % 60000 / 1000)
+export default function PickTypeTime({
+    slate,
+    update,
+    showDropdown,
+}){
+    const [min, setMin] = useState(slate.value ? Math.floor(slate.value / 60 / 1000) : 0)
+    const [sec, setSec] = useState(slate.value ? slate.value % 60000 / 1000 : 0)
 
     const onMin = (e) => setMin(e.target.value)
     const onSec = (e) => setSec(e.target.value)
@@ -28,18 +27,20 @@ export default function PickTimer(props) {
     const onSave = () => {
         const timer = (60 * parseInt(min) + parseInt(sec)) * 1000
         
-        props.updatePage({
+        update({
             ...LOGIC_ITEM_VAR,
             value: timer,
-            display: min + 'm' + sec + 's',
+            display: parseInt(min) + 'm' + parseInt(sec) + 's',
+            parseBy: parseType.constant,
+            variableTypes: [variableType.time.key],
         })
-        props.showDropdown()
+        showDropdown();
     }
 
     return (
         <>
             <DropTitle>set a timer</DropTitle>
-            <div className="row" style={{ justifyContent: 'center' }}>
+            <Row>
                 <input
                     className="field-time-input border-right"
                     value={min}
@@ -56,15 +57,8 @@ export default function PickTimer(props) {
                     onChange={onSec}
                     onFocus={onFocus}
                 />
-            </div>
-            <div className="-sep"/>
-            <div
-                className="drop-down-menu-option"
-                onClick={onSave}
-            >
-                <i className="drop-down-menu-icon mdi mdi-content-save"/>
-                save
-            </div>
+                <DropSubmit onClick={onSave}/>
+            </Row>
         </>
     )
 }

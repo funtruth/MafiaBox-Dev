@@ -118,7 +118,6 @@ export const choiceMap = {
             'choice',
         ],
         fieldLength: 1,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -131,7 +130,6 @@ export const choiceMap = {
             'user',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.uid.key,
         ],
@@ -144,7 +142,6 @@ export const choiceMap = {
             'target',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.uid.key,
         ],
@@ -157,7 +154,6 @@ export const choiceMap = {
             'multi',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -171,7 +167,6 @@ export const choiceMap = {
             'ordered',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -185,7 +180,6 @@ export const choiceMap = {
             'value',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.number.key,
         ],
@@ -200,7 +194,6 @@ export const rssMap = {
             'rss',
         ],
         fieldLength: 1,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object,
         ],
@@ -213,7 +206,6 @@ export const rssMap = {
             'gameState',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -227,7 +219,6 @@ export const rssMap = {
             'phase',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.pickPhase,
         variableTypes: [
             variableType.key.key,
         ],
@@ -241,7 +232,6 @@ export const rssMap = {
             'counter',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.pickNumUpdate,
         variableTypes: [
             variableType.number.key,
         ],
@@ -255,7 +245,6 @@ export const rssMap = {
             'veto',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.pickNumUpdate,
         variableTypes: [
             variableType.number.key,
         ],
@@ -269,9 +258,21 @@ export const rssMap = {
             'timer',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.pickTimer,
         variableTypes: [
             variableType.time.key,
+        ],
+    },
+    '(rss)(gameState)(captain)': {
+        key: '(rss)(gameState)(captain)',
+        subfield: 'captain',
+        fields: [
+            'rss',
+            'gameState',
+            'captain',
+        ],
+        fieldLength: 3,
+        variableTypes: [
+            variableType.uid.key,
         ],
     },
     '(rss)(players)': {
@@ -282,7 +283,6 @@ export const rssMap = {
             'players',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.showUidSubfield,
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -297,7 +297,6 @@ export const rssMap = {
             '@',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -312,7 +311,6 @@ export const rssMap = {
             'role',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.showRoleSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -328,7 +326,6 @@ export const rssMap = {
             'roleId',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickRole,
         variableTypes: [
             variableType.string.key,
         ],
@@ -344,7 +341,6 @@ export const rssMap = {
             'roleTeam',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickRoleTeam,
         variableTypes: [
             variableType.string.key,
         ],
@@ -360,7 +356,6 @@ export const rssMap = {
             'action',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickRole,
         variableTypes: [
             variableType.function.key,
         ],
@@ -376,7 +371,6 @@ export const rssMap = {
             'team',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickNumUpdate,
         variableTypes: [
             variableType.number.key,
         ],
@@ -391,7 +385,6 @@ export const rssMap = {
             'health',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickHealth,
         variableTypes: [
             variableType.object.key,
         ],
@@ -406,7 +399,6 @@ export const rssMap = {
             'dead',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickBoolean,
         variableTypes: [
             variableType.boolean.key,
         ],
@@ -421,7 +413,6 @@ export const rssMap = {
             'king',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickBoolean,
         variableTypes: [
             variableType.boolean.key,
         ],
@@ -436,7 +427,6 @@ export const rssMap = {
             'clown',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickBoolean,
         variableTypes: [
             variableType.boolean.key,
         ],
@@ -451,7 +441,6 @@ export const rssMap = {
             'trigger',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.showUidSubfield,
         variableTypes: [
             variableType.object.key,
         ],
@@ -467,7 +456,6 @@ export const rssMap = {
             '@',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickTrigger,
         variableTypes: [
             variableType.uid.key,
         ],
@@ -480,7 +468,6 @@ export const rssMap = {
             'choices',
         ],
         fieldLength: 2,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -495,7 +482,6 @@ export const rssMap = {
             '@',
         ],
         fieldLength: 3,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
             variableType.object.key,
         ],
@@ -510,7 +496,6 @@ export const rssMap = {
             'user',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.uid.key,
         ],
@@ -525,7 +510,6 @@ export const rssMap = {
             'target',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickChoice,
         variableTypes: [
             variableType.uid.key,
         ],
@@ -540,7 +524,6 @@ export const rssMap = {
             'multi',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -557,7 +540,6 @@ export const rssMap = {
             '@',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickBoolean,
         variableTypes: [
             variableType.boolean.key,
         ],
@@ -572,9 +554,8 @@ export const rssMap = {
             'ordered',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.showSubfields,
         variableTypes: [
-            variableType.array.key,
+            variableType.object.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(first)': {
@@ -588,7 +569,6 @@ export const rssMap = {
             'first',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.uid.key,
             variableType.key.key,
@@ -605,7 +585,6 @@ export const rssMap = {
             'second',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.uid.key,
             variableType.key.key,
@@ -622,7 +601,6 @@ export const rssMap = {
             'third',
         ],
         fieldLength: 5,
-        dropdown: dropdownType.pickUid,
         variableTypes: [
             variableType.uid.key,
             variableType.key.key,
@@ -638,7 +616,6 @@ export const rssMap = {
             'value',
         ],
         fieldLength: 4,
-        dropdown: dropdownType.pickGlobalValue,
         variableTypes: [
             variableType.global.key,
         ],

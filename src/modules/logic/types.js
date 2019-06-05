@@ -216,13 +216,6 @@ export const variableType = {
         supertype: 'object',
         declarable: false,
     },
-    array: {
-        key: 'array',
-        title: 'Array',
-        icon: 'mdi mdi-code-brackets',
-        supertype: '',
-        declarable: false,
-    },
     function: {
         key: 'function',
         title: 'Function',

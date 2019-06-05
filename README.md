@@ -13,6 +13,8 @@
 ### Minor
 - [x] Save wildcards while going through PickVar/PickVarSubfields
 - [x] removed current/repeat variable from results. 1 edge case may be that variables with wildcards should be allowed to repeat because they have potential to end up as different variables.
+- [x] pick types (special options): uid, time
+- [x] removed dropdowns from types & rssMap
 
 ## 06/04/2019
 ### Major

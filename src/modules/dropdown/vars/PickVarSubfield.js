@@ -43,7 +43,7 @@ export default function PickVarSubfield({
                 <DropEmpty list={tameVars} text="no variables found"></DropEmpty>
                 <DropTitle>incomplete vars</DropTitle>
                 {wildVars.map(renderWild)}
-                <DropEmpty list={tameVars} text="no variables found"></DropEmpty>
+                <DropEmpty list={wildVars} text="no variables found"></DropEmpty>
             </div>
         )
     }
