@@ -3,22 +3,11 @@ import './EditHealth.css'
 
 import StringDashboard from '../../strings/StringDashboard';
 import ModalOptions from '../components/ModalOptions'
+import Body from '../../components/Body';
 
 export default function EditHealth(props) {
-    let handleSave = () => {
-        const { isTrigger } = props
-
-        if (isTrigger) {
-            props.popModalBy(1)
-            props.onAttach()
-        } else {
-            props.onSave()
-            props.popModalBy(1)
-        }
-    }
-    
     return (
-        <div
+        <Body
             style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -27,10 +16,7 @@ export default function EditHealth(props) {
             }}
         >
             <StringDashboard {...props}/>
-            <ModalOptions
-                onSave={handleSave}
-                onClose={props.onClose}
-            />
-        </div>
+            <ModalOptions/>
+        </Body>
     )
 }

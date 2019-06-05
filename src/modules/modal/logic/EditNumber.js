@@ -1,13 +1,12 @@
 import React from 'react'
 
-import ModalOptions from '../components/ModalOptions'
+import ModalOptions from '../components/ModalOptions';
 import NumberView from '../../numbers/NumberView';
+import Body from '../../components/Body';
 
-export default function AssignNumber(props) {
-    const { path, scopedVars } = props
-    
+export default function EditNumber({ path, scopedVars }) {
     return (
-        <div
+        <Body
             style={{
                 minWidth: 600,
                 maxWidth: '90vw',
@@ -18,6 +17,6 @@ export default function AssignNumber(props) {
                 scopedVars={scopedVars}
             />
             <ModalOptions/>
-        </div>
+        </Body>
     )
 }

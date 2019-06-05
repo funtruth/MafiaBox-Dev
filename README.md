@@ -5,9 +5,9 @@
 - [ ] removed current/repeat variable from results. 1 edge case may be that variables with wildcards should be allowed to repeat because they have potential to end up as different variables.
 - [ ] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
-- [ ] replace all modal wrapper divs with <Body>
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] Save wildcards while going through PickVar/PickVarSubfields
+- [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 
 ## 06/04/2019
 ### Major
@@ -21,6 +21,7 @@
 - [x] logicType.return / logicType.event - is 8 variable objects too much? GOOD FOR NOW
 - [x] remove .nativeValue (can figure out from value itself)
 - [x] add "setTo" among "calculator" option for varType.number
+- [x] replace all modal wrapper divs with <Body>
 
 ## 06/03/2019
 ### Major

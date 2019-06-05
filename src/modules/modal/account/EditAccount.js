@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import ModalOptions from '../components/ModalOptions'
+import Body from '../../components/Body';
 
 //TODO this is copy pasted, ignore
 export default function EditAccount(props) {
@@ -25,7 +26,7 @@ export default function EditAccount(props) {
     }
     
     return (
-        <div
+        <Body
             style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -38,6 +39,6 @@ export default function EditAccount(props) {
                 onSave={handleSave}
                 onClose={props.onClose}
             />
-        </div>
+        </Body>
     )
 }

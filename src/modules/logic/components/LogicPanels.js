@@ -161,6 +161,7 @@ export default function LogicPanels(props) {
             return <LogicPanels {...props} varKey={value.middle}/>
         case parseType.collection:
         case parseType.object:
+            console.log({props})
             dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
             return (
                 <Body x="l">
@@ -170,7 +171,7 @@ export default function LogicPanels(props) {
                             params={{
                                 ...props,
                                 path: repoPath,
-                                varItem,
+                                baseVar: varItem,
                                 pickVarClick,
                             }}
                         >
@@ -207,7 +208,7 @@ export default function LogicPanels(props) {
                         rootPath,
                         pickVarClick,
                         scopedVars,
-                        variableTypes: variableTypes || (baseVar && baseVar.variableTypes),
+                        baseVar,
                         logicItem,
                     }}
                 >

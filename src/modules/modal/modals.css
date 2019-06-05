@@ -13,28 +13,6 @@
     align-items: center;
 }
 
-.modal-title {
-    padding: 8px 12px;
-    font: 600 18px Segoe UI;
-    color: #fff;
-}
-
-.modal-subtitle {
-    padding: 4px 4px;
-    line-height: 1.4;
-    letter-spacing: 0.2px;
-    font: 400 14px Segoe UI;
-    color: #d6d6d6;
-    align-items: flex-end;
-}
-
-.modal-options {
-    padding: 8px 4px;
-    align-items: center;
-    margin-top: auto;
-    background-color: rgba(47, 49, 54, 1);
-}
-
 .modal-child {
     animation: scalein 0.2s;
     -webkit-animation: scalein 0.2s;
@@ -45,9 +23,4 @@
     overflow: auto;
     box-shadow: rgba(15, 15, 15, 0.2) 0px 0px 0px 1px, rgba(15, 15, 15, 0.2) 0px 4px 6px 4px;
     max-height: 80vh;
-}
-
-.error-text {
-    color: #db4757;
-    font: 500 14px Segoe UI;
 }

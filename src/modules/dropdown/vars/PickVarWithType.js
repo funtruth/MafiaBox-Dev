@@ -21,14 +21,14 @@ import Types from '../types/index';
 export default function PickVarWithType(props){
     const {
         slate,
-        variableTypes,//passed
+        baseVar,
         scopedVars,//passed
         pickVarClick,//passed
         showDropdown,
     } = props
 
     //must have a reference variable
-    if (!variableTypes) {
+    if (!baseVar || !baseVar.variableTypes) {
         return (
             <>
                 <DropTitle>error</DropTitle>
@@ -72,6 +72,8 @@ export default function PickVarWithType(props){
                 return <Types.PickTypeNumber key={type} {...props}/>
             case variableType.boolean.key:
                 return <Types.PickTypeBool key={type} {...props}/>
+            case variableType.string.key:
+                return null;
             case variableType.object.key:
             case variableType.uidObject.key:
             case variableType.array.key:
@@ -80,13 +82,14 @@ export default function PickVarWithType(props){
             case variableType.key.key:
             case variableType.time.key:
             case variableType.uid.key:
-            case variableType.string.key:
             default:
                 return null;
         }
     }
     
+    const { variableTypes } = baseVar
     const [tameVars, wildVars] = useVarType(variableTypes, scopedVars)
+    
     return (
         <>
             <DropTitle>vars with same type</DropTitle>

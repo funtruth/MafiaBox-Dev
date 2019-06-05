@@ -16,9 +16,8 @@ import {
 } from '../components/Common';
 
 /* LOCATIONS where user can edit numbers
-    AssignNumber
     EditNumber
-    
+
 VISUALS
     parseType=value
         |[value]|

@@ -1,35 +1,28 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import './page.css'
+
+import { IS_PUBLISHED } from '../common/arrows';
 
 import PageHeader from './header/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
-import { IS_PUBLISHED } from '../common/arrows';
 
-function PageView(props) {
-    const { pageKey, pageRepo } = props
-
+export default function PageView(props) {
+    const { slate } = props
     const propsExt = {
         ...props,
-        pageInfo: pageRepo[pageKey]||{},
-        published: IS_PUBLISHED(pageKey, pageRepo),
+        pageInfo: slate,
+        published: IS_PUBLISHED(slate),
     }
-    console.log("PageView console", pageRepo[pageKey])
+    console.log("PageView console", slate)
     
     return (
-        <div className="page">
+        <>
             <PageHeader {...propsExt}/>
             <div className="page-content">
                 <PageAbstract {...propsExt}/>
                 <FieldView {...propsExt}/>
             </div>
-        </div>
+        </>
     )
 }
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    })
-)(PageView)

@@ -9,12 +9,10 @@ export const modalType = {
 
     showCode: 'modalType/show-code',
     showPage: 'modalType/show-page',
-    showFunctionPage: 'modalType/show-function-page',
 
     editLogic: 'modalType/edit-logic',
     publishWithSource: 'modalType/publish-with-source',
 
-    saveChanges: 'modalType/save-changes',
     editTrigger: 'modalType/edit-trigger',
     editPriority: 'modalType/edit-priority',
     removePriorityRow: 'modalType/remove-priority-row',
@@ -26,6 +24,5 @@ export const modalType = {
     editToast: 'modalType/edit-toast',
 
     //NumberViews
-    assignNumber: 'modalType/assign-number',
     editNumber: 'modalType/edit-number',
 }

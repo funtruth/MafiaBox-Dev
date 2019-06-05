@@ -24,9 +24,9 @@ export const VARTYPE_IS_UID_OBJ = i => i && i.variableTypes && i.variableTypes.i
 //stop DropClick propagation
 export const STOP_DROP_PROP = e => e.target.classList.contains('drop-click')
 
-export const IS_PUBLISHED = (key, repo) => {
-    if (!key || !repo) return console.warn('invalid arguments.')
-    return !!(repo[key] && repo[key].publishInfo && repo[key].publishInfo.published)
+export const IS_PUBLISHED = (slate) => {
+    if (!slate) return console.warn('invalid arguments.')
+    return !!(slate.publishInfo && slate.publishInfo.published)
 }
 
 export const isChildOf = (target, className) => {

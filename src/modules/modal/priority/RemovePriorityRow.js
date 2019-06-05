@@ -8,7 +8,7 @@ import {
     Text,
 } from '../../components/Common';
 
-export default function DialogSave(props) {
+export default function RemovePriorityRow(props) {
     const onQuit   = () => {
         props.popModalBy(1)
         props.onSave()

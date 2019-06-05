@@ -1,15 +1,14 @@
 import React from 'react'
-import './EditTrigger.css'
 
 import LogicView from '../../logic/LogicView';
 import ModalOptions from '../components/ModalOptions';
-import { Text } from '../../components/Common';
+import { Text, Body } from '../../components/Common';
 
 export default function EditTrigger(props) {
     const { path } = props
     
     return (
-        <div
+        <Body
             style={{
                 minWidth: 600,
                 width: '75vw',
@@ -19,12 +18,10 @@ export default function EditTrigger(props) {
                 <Text>NEW VARIABLES</Text>
             </div>
             <div className="-sep"/>
-            <div className="edit-trigger-board">
+            <div>
                 <LogicView path={path}/>
             </div>
-            <ModalOptions
-                onClose={props.onClose}
-            />
-        </div>
+            <ModalOptions/>
+        </Body>
     )
 }

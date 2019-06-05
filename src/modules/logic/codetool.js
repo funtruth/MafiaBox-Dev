@@ -60,6 +60,7 @@ export function generateLogic(type) {
                         key: i[2],
                         parseBy: parseType.object,
                         value: [i[3], i[6], i[9]],
+                        variableTypes: [variableType.uid.key],
                     },
                     [i[3]]: {
                         ...LOGIC_ITEM_VAR,
@@ -86,7 +87,7 @@ export function generateLogic(type) {
                         ...LOGIC_ITEM_VAR,
                         key: i[5],
                         display: true,
-                        parseBy: parseType.collection,
+                        parseBy: parseType.object,
                         variableTypes: [variableType.uid.key],
                     },
                     [i[6]]: {
@@ -114,7 +115,7 @@ export function generateLogic(type) {
                         ...LOGIC_ITEM_VAR,
                         key: i[8],
                         display: true,
-                        parseBy: parseType.collection,
+                        parseBy: parseType.object,
                         variableTypes: [variableType.uid.key],
                     },
                     [i[9]]: {
