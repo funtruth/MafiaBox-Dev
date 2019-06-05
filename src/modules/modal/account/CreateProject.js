@@ -12,10 +12,7 @@ import {
     defaultFieldRepo,
 } from '../../fields/defaults';
 
-import {
-    getMyInfo,
-    switchToProject,
-} from '../../firebase/FirebaseReducer'
+import { switchToProject } from '../../firebase/FirebaseReducer'
 import { checkAlpha } from '../../common/helpers';
 import generatePushID from '../../common/generatePushID';
 
@@ -35,7 +32,6 @@ function CreateProject(props) {
             ...DEFAULT_MEMBER_INFO,
             type: MEMBER_TYPE.OWNER,
             acceptedInvite: true,
-            ...props.getMyInfo(),
         },
     })
 
@@ -115,7 +111,6 @@ export default connect(
         uid: state.firebase.authUser.uid,
     }),
     {
-        getMyInfo,
         switchToProject,
     }
 )(CreateProject)

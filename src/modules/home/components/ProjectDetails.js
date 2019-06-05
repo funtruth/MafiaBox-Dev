@@ -66,7 +66,6 @@ function ProjectDetails(props) {
 export default connect(
     null,
     {
-        projectListener,
         receiveValue,
         receiveEvent,
         receiveDeleteEvent,

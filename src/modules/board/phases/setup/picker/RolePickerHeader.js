@@ -19,6 +19,7 @@ import {
     Icon,
 } from '../../../../components/Common';
 
+//handles role processing
 export default function RolePickerHeader(props) {
     const { storyRepo, pageRepo } = useSelector(state => state.page)
     const { path, draftInfo, tab, setTab, setResults } = props

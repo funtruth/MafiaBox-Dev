@@ -13,7 +13,7 @@ import WindowPageView from '../page/WindowPageView'
 export default function HomeView(props) {
     return (
         <div className="home-view">
-            <SideBarView {...props}/>
+            <SideBarView pathname={props.location.pathname}/>
             <div style={{ flex: 1, flexDirection: 'column', display: 'flex', overflow: 'auto' }}>
                 <HeaderView {...props}/>
                 <Switch>

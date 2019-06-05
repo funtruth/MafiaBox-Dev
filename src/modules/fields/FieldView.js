@@ -30,7 +30,6 @@ export default function FieldView(props) {
         
         const props = {
             key,
-            pageKey: slate.key,
             fieldKey: key,
             value: slate[key], //value related to the current page
             data, //data related to the field

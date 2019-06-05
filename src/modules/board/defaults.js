@@ -9,6 +9,6 @@ export const DEFAULT_ROLE_SETUP = {
 
 export const DEFAULT_EVENT_LISTENER = {
     title: '',
-    data: '',
+    eventLogic: '',
     location: '',
 }

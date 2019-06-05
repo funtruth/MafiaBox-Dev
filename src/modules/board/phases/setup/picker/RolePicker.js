@@ -13,6 +13,7 @@ export default function RolePicker(props) {
     const [tab, setTab] = useState(0)
     
     const [results, setResults] = useState([])
+    console.log("Rolepicker", results)
     
     return (
         <Body

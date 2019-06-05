@@ -46,29 +46,21 @@ export const LISTENER_TYPE = {
 }
 
 const ADD_STORY = 'story/add-story-to'
-const UPDATE_STORY = 'story/update-story'
 const REMOVE_STORY = 'story/remove-story'
 const MOVE_STORY = 'story/move-story'
 const ADD_PAGE = 'page/add-page'
-const ADD_MODE = 'page/add-mode'
-const ADD_PAGE_TO_MODE = 'page/add-page-to-mode'
 const MOVE_PAGE_WITHIN_MAP = 'page/move-page-within-map'
 const MOVE_PAGE_TO_OTHER_MAP = 'page/move-page-to-other-map'
 const CONNECT_PHASES = 'page/connect-phases'
 
 const PUBLISH_PAGE = 'page/publish-page'
 const REMOVE_PAGE = 'page/remove-page'
-const UPDATE_REPO = 'page/update-repo'
 const DIFF_PRIORITIES = 'page/diff-priorities'
 
-const RECEIVE_EVENT = 'page/receive-event'
 const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
 const RECEIVE_VALUE = 'page/receive-value'
-const RESET_REDUCER = 'page/reset-reducer'
-
-const UPDATE_FIELD = 'page/update-field'
-const UPDATE_GLOBAL = 'page/update-global'
 const UPDATE_GENERAL = 'page/update-general'
+const RESET_REDUCER = 'page/reset-reducer'
 
 export function addStory() {
     return (dispatch, getState) => {
@@ -435,23 +427,16 @@ export default (state = initialState, action) => {
     switch(action.type){
         case ADD_STORY: 
         case REMOVE_STORY:
-        case UPDATE_STORY:
         case MOVE_STORY:
         case ADD_PAGE:
-        case ADD_MODE:
-        case ADD_PAGE_TO_MODE:
         case PUBLISH_PAGE:
         case DIFF_PRIORITIES:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
         case CONNECT_PHASES:
         case REMOVE_PAGE:
-        case RECEIVE_EVENT:
         case RECEIVE_CHILD_EVENT:
         case RECEIVE_VALUE:
-        case UPDATE_REPO:
-        case UPDATE_FIELD:
-        case UPDATE_GLOBAL:
         case UPDATE_GENERAL:
             return { ...state, ...action.payload }
         case RESET_REDUCER:

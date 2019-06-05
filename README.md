@@ -6,7 +6,8 @@
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
-- [ ] project handling & publishing (with removed modeRepo)
+- [ ] project handling & publishing (with removed modeRepo).
+- [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
 
 ## 06/05/2019
 ### Major

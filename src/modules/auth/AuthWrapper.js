@@ -1,36 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import './Auth.css';
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import firebase from 'firebase/app'
 
-import { AUTH_STATE, AUTH_SCREEN } from './AuthConstants'
-
-import { userListener, userProjectsListener } from '../firebase/FirebaseReducer'
+import { userListener, userProjectsListener, projectUsersListener } from '../firebase/FirebaseReducer'
 
 import AuthLogin from './components/AuthLogin';
 import AuthRegister from './components/AuthRegister';
 
-function AuthWrapper(props) {
+const AUTH_STATE = {
+    pending: 'pending',
+    loggedIn: 'loggedIn',
+    notLoggedIn: 'notLoggedIn',
+}
+
+const AUTH_SCREEN = {
+    LOGIN: 'login',
+    REGISTER: 'register',
+}
+
+export default function AuthWrapper({children}) {
+	const dispatch = useDispatch();
+
 	let [authState, setAuthState] = useState(AUTH_STATE.pending)
 	let [authScreen, setAuthScreen] = useState(AUTH_SCREEN.LOGIN)
 
 	const AT_LOGIN = authScreen === AUTH_SCREEN.LOGIN
 
 	useEffect(() => {
-		return firebase.auth().onAuthStateChanged(user => {
+		firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				setAuthState(AUTH_STATE.loggedIn)
 				const { uid } = user
+
+				const refs = [];
 				const userRef = firebase.database().ref(`users/${uid}`)
 				const userProjectsRef = firebase.database().ref(`userProjects/${uid}`)
+				refs.push(userRef)
+				refs.push(userProjectsRef)
 
-				userRef.on('value', snap => props.userListener(snap.val()))
-				userProjectsRef.on('value', snap => props.userProjectsListener(snap.val()))
+				userRef.on('value', snap => dispatch(userListener(snap.val())))
+				userProjectsRef.on('value', snap => dispatch(userProjectsListener(snap)))
+				userProjectsRef.on('child_added', snap => {
+					const projectUsersRef = firebase.database().ref(`projectUsers/${snap.key}`)
+					projectUsersRef.on('value', snap => dispatch(projectUsersListener(snap)))
+					refs.push(projectUsersRef)
+				})
+
+				return (() => {
+					refs.forEach(ref => ref && ref.off())
+				})
 			} else {
 				setAuthState(AUTH_STATE.notLoggedIn);
 			}
 		})
-	}, [])
+	}, [dispatch])
+
+	useEffect(() => {
+
+	})
 
 	let handleScreen = () => {
 		if (AT_LOGIN) {
@@ -41,7 +69,7 @@ function AuthWrapper(props) {
 	}
 
 	if (authState === AUTH_STATE.loggedIn) {
-		return props.children
+		return children
 	}
 
 	if (authState === AUTH_STATE.notLoggedIn) {
@@ -59,11 +87,3 @@ function AuthWrapper(props) {
 	
 	return <div className="auth-wrapper"></div>
 }
-
-export default connect(
-	null,
-	{
-		userListener,
-		userProjectsListener,
-	}
-)(AuthWrapper)

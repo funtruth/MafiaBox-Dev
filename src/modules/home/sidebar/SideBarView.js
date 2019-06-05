@@ -12,21 +12,13 @@ import ProjectDetails from '../components/ProjectDetails';
 import SideBarTitle from './SideBarTitle'
 import { Icon, Text, Row, Body } from '../../components/Common';
 
-export default function SideBarView({ location }) {
+//gets pathname from react-router
+export default function SideBarView({ pathname }) {
+    const paths = pathname.split('/')
+    
     const dispatch = useDispatch();
     const path = useSelector(state => state.nav.path);
     const activeProject = useSelector(state => state.firebase.activeProject);
-
-    //react-router
-    const { pathname } = location
-
-    let renderRedirect = () => {
-        if (pathname !== path) {
-            return (
-                <Redirect to={path}/>
-            )
-        }
-    }
     
     let handleClick = (item) => {
         if (!activeProject) {
@@ -38,8 +30,7 @@ export default function SideBarView({ location }) {
     }
 
     let renderItem = (item) => {
-        let paths = pathname.split('/')
-        let selected = item.key === paths[2]
+        const selected = item.key === paths[2]
 
         return (
             <Row
@@ -48,8 +39,13 @@ export default function SideBarView({ location }) {
                 sizes={['xxs', 'm']}
                 onClick={() => handleClick(item)}
             >
-                <Icon size="l" icon={item.icon} color={selected ? 'whitish' : 'grey'}></Icon>
-                <Text before="xxs" color={selected ? 'whitish' : 'grey'}>{item.title}</Text>
+                <Icon
+                    size="l"
+                    icon={item.icon}
+                    color={selected ? 'whitish' : 'grey'}></Icon>
+                <Text before="xxs" color={selected ? 'whitish' : 'grey'}>
+                    {item.title}
+                </Text>
             </Row>
         )
     }
@@ -63,7 +59,7 @@ export default function SideBarView({ location }) {
             <ProjectDetails activeProject={activeProject}/>
             <SideBarTitle text="Develop"/>
             {items.map(renderItem)}
-            {renderRedirect()}
+            {pathname !== path &&  <Redirect to={path}/>}
         </Body>
     )
 }

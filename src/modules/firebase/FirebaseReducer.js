@@ -15,12 +15,12 @@ const initialState = {
     userOnline: false,
     activeProject: "",
     userProjects: {},
-    projects: {},
+    projectUsers: {},
 }
 
 const USER_LISTENER = 'fblistener/user-update'
 const USER_PROJECTS_LISTENER = 'fblistener/user-projects-update'
-const PROJECT_LISTENER = 'fblistener/project-update'
+const PROJECT_USERS_LISTENER = 'fblistener/project-users-update'
 const CHANGE_ACTIVE_PROJECT = ' fb/change-active-project'
 
 export function userListener(user) {
@@ -32,11 +32,11 @@ export function userListener(user) {
     }
 }
 
-export function userProjectsListener(projects) {
+export function userProjectsListener(snap) {
     return (dispatch) => {
         dispatch({
             type: USER_PROJECTS_LISTENER,
-            payload: projects || {},
+            payload: snap.val(),
         })
     }
 }
@@ -52,39 +52,19 @@ export function switchToProject(projectKey) {
     }
 }
 
-export function projectListener(snap) {
+export function projectUsersListener(snap) {
     return (dispatch, getState) => {
-        const { projects } = getState().firebase
+        const { projectUsers } = getState().firebase
         
         const mergedProjects = {
-            ...projects,
+            ...projectUsers,
             [snap.key]: snap.val(),
         }
         
         dispatch({
-            type: PROJECT_LISTENER,
+            type: PROJECT_USERS_LISTENER,
             payload: mergedProjects,
         })
-    }
-}
-
-export function getMyInfo() {
-    return (dispatch, getState) => {
-        const { authUser } = getState().firebase
-
-        return (({
-            firstName,
-            lastName,
-            email,
-            photoUrl,
-            uid
-        }) => ({
-            firstName,
-            lastName,
-            email,
-            photoUrl,
-            uid
-        }))(authUser)
     }
 }
 
@@ -94,8 +74,8 @@ export default (state = initialState, action) => {
             return { ...state, authUser: {...state.authUser, ...action.payload} }
         case USER_PROJECTS_LISTENER:
             return { ...state, userProjects: action.payload }
-        case PROJECT_LISTENER:
-            return { ...state, projects: action.payload }
+        case PROJECT_USERS_LISTENER:
+            return { ...state, projectUsers: action.payload }
         case CHANGE_ACTIVE_PROJECT:
             return { ...state, activeProject: action.payload }
         default:
