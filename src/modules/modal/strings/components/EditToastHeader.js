@@ -29,11 +29,10 @@ export default function EditToastHeader({
                 key={key}
                 onClick={() => handleSelect(key)}
                 icon={icon}
+                text={key}
                 color={chosen ? 'whitish' : 'darkgrey'}
                 bg={chosen ? 'darkgrey' : 'charcoal'}
-            >
-                {key}
-            </Tag>
+            />
         )
     }
 

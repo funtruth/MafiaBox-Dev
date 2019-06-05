@@ -2,22 +2,19 @@ import _ from 'lodash'
 import { diff } from 'deep-diff'
 import firebase from 'firebase/app'
 
-import { modalType } from '../modal/types'
+import { boardType, modalType } from '../common/types'
 
 import { showModal } from '../modal/ModalReducer';
 import { navigateStack } from '../app/NavReducer'
 import { DEFAULT_PUBLISH_INFO } from './defaults';
 import generatePushID from '../common/generatePushID';
 import { updateByPath } from '../common/helpers';
-import { boardType } from '../fields/types';
 
 const initialState = {
     pageRepo: {},
     pageMap: {},
     storyRepo: {},
     storyMap: {},
-    modeRepo: {},
-    modeMap: {},
     fieldRepo: {},
     fieldMap: {},
     globalVars: {},
@@ -28,8 +25,6 @@ export const VALID_PROPS = [
     'pageMap',
     'storyRepo',
     'storyMap',
-    'modeRepo',
-    'modeMap',
     'fieldRepo',
     'fieldMap',
     'globalVars',
@@ -40,8 +35,6 @@ export const PROP_LISTENERS = {
     pageMap: 'children',
     storyRepo: 'children',
     storyMap: 'value',
-    modeRepo: 'children',
-    modeMap: 'children',
     fieldRepo: 'children',
     fieldMap: 'children',
     globalVars: 'children',
@@ -198,55 +191,6 @@ export function addPageToMap(storyKey, board) {
                     path: ['pageRepo', pageKey],
                 }))
         }
-    }
-}
-
-//PhaseFlowHeader
-export function addPageToMode(modeKey, board) {
-    return (dispatch, getState) => {
-        const { modeRepo, pageRepo, fieldRepo, fieldMap } = getState().page
-        const { storyKey } = modeRepo[modeKey]
-
-        let modeRepoClone   = _.cloneDeep(modeRepo)
-        let pageRepoClone   = _.cloneDeep(pageRepo)
-        
-        const pageKey = generatePushID(board)
-
-        //set-up defaults
-        let defaultInfo = {}
-        fieldMap[board].forEach(field => {
-            if (fieldRepo[field] && fieldRepo[field].defaultValue) {
-                defaultInfo[field] = fieldRepo[field].defaultValue
-            }
-        })
-        
-        //set page info
-        pageRepoClone[pageKey] = {
-            pageKey,
-            board,
-            modeKey,
-            storyKey,
-            ...defaultInfo,
-        }
-
-        //set page location in modeRepo.phaseMap
-        let pointer = modeRepoClone[modeKey]
-        if (!_.isArray(pointer.phaseMap)) {
-            pointer.phaseMap = []
-        }
-        pointer.phaseMap.unshift(pageKey)
-
-        dispatch(receiveAction({
-            type: ADD_PAGE_TO_MODE,
-            payload: {
-                modeRepo: modeRepoClone,
-                pageRepo: pageRepoClone,
-            }
-        }))
-        dispatch(showModal(modalType.showPage, {
-            pageKey,
-            path: ['pageRepo', pageKey],
-        }))
     }
 }
 

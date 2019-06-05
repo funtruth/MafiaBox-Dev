@@ -1,7 +1,7 @@
 import React from 'react'
 import './page.css'
 
-import PageHeader from './header/PageHeader';
+import PageHeader from './components/PageHeader';
 import PageAbstract from './components/PageAbstract'
 import FieldView from '../fields/FieldView';
 

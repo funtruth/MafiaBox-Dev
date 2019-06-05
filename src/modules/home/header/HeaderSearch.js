@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from '../../components/Icon';
 
 export default function HeaderSearch(props) {
     let [searchText, setSearchText] = useState("")
@@ -7,7 +8,7 @@ export default function HeaderSearch(props) {
 
     return (
         <div className="header-input-container">
-            <i className="header-icon mdi mdi-magnify"></i>
+            <Icon icon="mdi-magnify"/>
             <input
                 className="header-input"
                 value={searchText}

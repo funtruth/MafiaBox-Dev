@@ -7,7 +7,7 @@ import {
 import RolePickerResult from './RolePickerResult'
 
 export default function RolePickerResultView(props) {
-    const { item, modeKey, draftInfo } = props
+    const { item, path, draftInfo } = props
     const { data, title } = item
     
     return (
@@ -17,7 +17,7 @@ export default function RolePickerResultView(props) {
                 <RolePickerResult
                     key={item.pageKey}
                     item={item}
-                    modeKey={modeKey}
+                    path={path}
                     draftInfo={draftInfo}
                 />
             ))}

@@ -54,10 +54,9 @@ function PlaygroundDrop(props) {
                 </Text>
                 <Tag
                     onClick={props.clearSlate}
-                    icon="mdi mdi-eraser"
-                >
-                    Clear
-                </Tag>
+                    icon="eraser"
+                    text="Clear"
+                />
             </Row>
             <div
                 className="playground"

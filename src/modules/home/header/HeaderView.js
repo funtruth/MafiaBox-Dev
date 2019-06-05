@@ -4,10 +4,10 @@ import '../../board/board.css'
 import { useDispatch } from 'react-redux'
 
 import { navigate } from '../../app/NavReducer'
+import { addStory } from '../../page/PageReducer'
 
 import HeaderSearch from './HeaderSearch';
-import HeaderAddStory from './HeaderAddStory';
-import { Row } from '../../components/Common'
+import { Row, Tag } from '../../components/Common'
 
 export default function HeaderView(props) {
     const dispatch = useDispatch();
@@ -20,6 +20,10 @@ export default function HeaderView(props) {
     const onPathClick = (index) => {
         let newPath = paths.slice(0, index + 1).join('/')
         dispatch(navigate(newPath))
+    }
+
+    const handleAdd = () => {
+        dispatch(addStory())
     }
 
     return (
@@ -42,7 +46,11 @@ export default function HeaderView(props) {
                 ))}
             </Row>
             <HeaderSearch/>
-            <HeaderAddStory/>
+            <Tag
+                onClick={handleAdd}
+                icon="mdi mdi-table-plus"
+                text="New Patch"
+            />
         </div>
     )
 }

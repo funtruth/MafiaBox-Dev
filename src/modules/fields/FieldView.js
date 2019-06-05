@@ -17,12 +17,13 @@ import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
 import PriorityField from './components/PriorityField'
 import { IS_PUBLISHED } from '../common/arrows';
-import Icon from '../components/Icon';
+import Tag from '../components/Tag';
+import { Separator } from '../components/Common';
 
 export default function FieldView(props) {
     const { path, slate, updatePage } = props
     const { fieldMap, fieldRepo } = useSelector(state => state.page)
-
+    
     const renderItem = (item) => {
         const fieldInfo = fieldRepo[item.key]
         const { key, data } = fieldInfo
@@ -78,16 +79,13 @@ export default function FieldView(props) {
 
                 return (
                     <React.Fragment key={index}>
-                        <div className="-sep"/>
-                        <div className="field-label">
-                            <Icon icon={icon}/>
-                            {item.title}
-                        </div>
+                        <Separator t={1} size={4}></Separator>
+                        <Tag size="l" icon={icon} text={item.title} bg="transparent" bold></Tag>
                         {renderItem(item)}
                     </React.Fragment>
                 )
             })}
-            <div style={{ height: '30vh' }}></div>
+            <div style={{height: '30vh'}}></div>
         </>
     )
 }

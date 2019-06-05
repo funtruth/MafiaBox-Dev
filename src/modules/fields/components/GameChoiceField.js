@@ -105,7 +105,8 @@ export default function GameChoiceField(props) {
 
     const items = _.toArray(value)
     return (
-        <Body 
+        <Body
+            x="l"
             style = {{
                 borderLeft: '1px dashed #666',
                 paddingLeft: 2,
@@ -120,9 +121,11 @@ export default function GameChoiceField(props) {
                     placeholder: "Name the choice ...",
                 }}
             >
-                <Tag bg="darkgrey">
-                    add choice
-                </Tag>
+                <Tag
+                    icon="map-marker"
+                    text="add choice"
+                    bg="darkgrey"
+                />
             </DropClick>
         </Body>
     )

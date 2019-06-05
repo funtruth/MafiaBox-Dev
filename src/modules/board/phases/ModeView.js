@@ -5,7 +5,6 @@ import { usePath } from '../../hooks/Hooks';
 import ModeHeader from './ModeHeader';
 import PhaseDiagram from './diagram/PhaseDiagram';
 import ModeSetupView from './setup/ModeSetupView';
-import EventView from './events/EventView';
 
 export default function ModeView({match}) {
     const { pageKey } = match.params
@@ -25,7 +24,6 @@ export default function ModeView({match}) {
             <ModeHeader {...propsExt}/>
             {tab === 0 && <PhaseDiagram {...propsExt}/>}
             {tab === 1 && <ModeSetupView {...propsExt}/>}
-            {tab === 2 && <EventView {...propsExt}/>}
         </>
     )
 }

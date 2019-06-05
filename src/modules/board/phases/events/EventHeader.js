@@ -31,7 +31,7 @@ export default function EventHeader(props) {
             <Text style={{flex: 0.5}}>Change</Text>
             <Tag
                 onClick={handleCreate}
-                icon="mdi mdi-calendar-plus"
+                icon="calendar-plus"
             >
                 Create
             </Tag>

@@ -134,17 +134,15 @@ export default function LogicView({ path }) {
         <Body>
             <Row x="r">
                 <Tag
-                    icon="mdi mdi-console-line"
+                    icon="console-line"
+                    text="run code in console"
                     onClick={runCode}
-                >
-                    run code in console
-                </Tag>
+                />
                 <Tag
-                    icon="mdi mdi-code-tags"
+                    icon="code-tags"
+                    text="view code"
                     onClick={showCode}
-                >
-                    view code
-                </Tag>
+                />
             </Row>
             <LogicDeclare {...mainProps} readOnly/>
             <LogicBlock {...mainProps}/>

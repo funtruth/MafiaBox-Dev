@@ -81,8 +81,8 @@ function ModeSetupView(props) {
                     </Row>
                     {item === draftRow &&
                         <RolePicker
-                            modeKey={slate.key}
                             draftInfo={roleSetup[draft]}
+                            path={[...path, 'roleSetup', draft]}
                         />
                     }
                 </Body>

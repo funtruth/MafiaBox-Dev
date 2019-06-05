@@ -52,9 +52,11 @@ function EventRow(props) {
                     marginLeft: 'auto',
                 }}
             >
-                <Tag icon="mdi mdi-pencil" bg="discord">
-                    Edit logic
-                </Tag>
+                <Tag
+                    icon="pencil"
+                    text="Edit logic"
+                    bg="discord"
+                />
             </DropClick>
         </Row>
     )

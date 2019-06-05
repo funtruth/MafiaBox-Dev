@@ -6,6 +6,7 @@
 - [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
+- [ ] project handling & publishing (with removed modeRepo)
 
 ## 06/05/2019
 ### Major
@@ -17,6 +18,7 @@
 - [x] pick types (special options): uid, time
 - [x] removed dropdowns from types & rssMap
 - [x] parseUpdate needs to account for variable paths (introduced varInStr to use on parseType.string as well)
+- [x] removed modeRepo/modeMap, updated Tag to not need "mdi mdi-..."
 
 ## 06/04/2019
 ### Major

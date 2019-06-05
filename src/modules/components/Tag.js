@@ -7,6 +7,8 @@ import Row from './Row';
 export default function Tag(props) {
     const {
         icon,
+        text,
+        bold,
         children,
         onClick,
         disabled,
@@ -36,17 +38,18 @@ export default function Tag(props) {
             style={buttonStyle}
             onClick={event => onClick && onClick(event)}
         >
-            <Text size={size} color={color}>
+            <Text size={size} color={color} bold={bold}>
                 <Row y="c">
                     {icon &&
                         <i
-                            className={icon}
+                            className={'mdi mdi-' + icon}
                             style={{
                                 fontSize: 15,
-                                marginRight: children ? 6 : 0,
+                                marginRight: text || children ? 6 : 0,
                             }}
                         ></i>
                     }
+                    {text}
                     {children}
                 </Row>
             </Text>

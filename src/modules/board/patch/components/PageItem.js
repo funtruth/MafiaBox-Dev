@@ -69,7 +69,7 @@ export default SortableElement(({pageKey, board}) => {
                     borderRadius: 8,    
                 }}
             >
-                <Tag icon="mdi mdi-dots-horizontal"></Tag>
+                <Tag icon="dots-horizontal"></Tag>
             </DropClick>
         </Row>
     )

@@ -120,9 +120,11 @@ export default function GameChoiceOverrideField(props) {
                     placeholder: "Name the choice ...",
                 }}
             >
-                <Tag bg="darkgrey">
-                    add choice
-                </Tag>
+                <Tag
+                    icon="map-marker"
+                    text="add choice"
+                    bg="darkgrey"
+                />
             </DropClick>
         </Body>
     )

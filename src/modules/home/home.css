@@ -6,11 +6,6 @@
     background-color: rgba(54, 57, 64);
 }
 
-.option-icon {
-    font-size: 16px;
-    color: #fff;
-}
-
 .scrollable-y {
     overflow: auto;
     transition: color 0.3s;

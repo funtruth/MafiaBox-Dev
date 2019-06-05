@@ -49,7 +49,6 @@ import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
 import PickUid from './update/PickUid'
-import PickPhase from './update/PickPhase'
 import PickRoleTeam from './update/PickRoleTeam';
 import PickGlobalValue from './update/PickGlobalValue';
 import PickRecipient from './strings/PickRecipient'
@@ -133,8 +132,6 @@ export default function DropdownKeys(props) {
             return <PickTrigger {...props}/>
         case dropdownType.pickUid:
             return <PickUid {...props}/>
-        case dropdownType.pickPhase:
-            return <PickPhase {...props}/>
         case dropdownType.pickRole:
             return <SearchBoard {...props} boardType={boardType.roles.key}/>
         case dropdownType.pickLibrary:

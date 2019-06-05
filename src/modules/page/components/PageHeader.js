@@ -1,12 +1,10 @@
 import React from 'react'
-import './PageHeader.css'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { navigate } from '../../app/NavReducer'
 import { publishFromState, updateGeneral } from '../PageReducer'
 import { showModal } from '../../modal/ModalReducer'
 
-import PageOptions from './PageOptions'
 import {
     Row,
     Tag,
@@ -37,21 +35,41 @@ export default function PageHeader(props) {
     }
 
     return (
-        <Row sizes={['xxs', 'xxs']} className="page-header" y="c" bg="discord">
-            <Tag bg="discord" icon="mdi mdi-arrow-expand" onClick={handleResize} style={{marginRight: 'auto'}}>
-                Open as Page
-            </Tag>
+        <Row
+            sizes={['xxs', 'xxs']}
+            y="c"
+            bg="discord"
+            style={{
+                position: 'sticky',
+                top: 0,
+                borderRadius: 4,
+                zIndex: 4,
+                minHeight: '1.7em',
+            }}
+        >
+            <Tag
+                bg="discord"
+                icon="arrow-expand"
+                text="Open as page"
+                onClick={handleResize}
+                style={{marginRight: 'auto'}}
+            />
             {!published &&
-                <Tag bg="discord" icon="mdi mdi-publish" onClick={handlePublish}>
-                    Publish
-                </Tag>
+                <Tag
+                    bg="discord"
+                    icon="publish"
+                    text="Publish"
+                    onClick={handlePublish}
+                />
             }
             {published &&
-                <Tag bg="discord" icon=" mdi mdi-bookmark-check">
-                    Published
-                </Tag>
+                <Tag
+                    bg="discord"
+                    text="Published"
+                    icon="bookmark-check"
+                />
             }
-            <PageOptions/>
+            <Tag icon="dots-horizontal"></Tag>
         </Row>
     )
 }

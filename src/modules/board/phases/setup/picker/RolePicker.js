@@ -8,7 +8,7 @@ import RolePickerHeader from './RolePickerHeader';
 import RolePickerResultView from './RolePickerResultView'
 
 export default function RolePicker(props) {
-    const { modeKey, draftInfo } = props
+    const { draftInfo, path } = props
 
     const [tab, setTab] = useState(0)
     
@@ -21,7 +21,7 @@ export default function RolePicker(props) {
         >
             <div style={{borderRadius: 8, overflow: 'hidden'}}>
                 <RolePickerHeader
-                    modeKey={modeKey}
+                    path={path}
                     draftInfo={draftInfo}
                     tab={tab}
                     setTab={setTab}
@@ -31,13 +31,15 @@ export default function RolePicker(props) {
                     {results.map(item => (
                         <RolePickerResultView
                             key={item.key}
-                            modeKey={modeKey}
+                            path={path}
                             draftInfo={draftInfo}
                             item={item}
                         />
                     ))}
                     {results.length === 0 &&
-                        <Text size="s" color="grey">Nothing is here yet.</Text>
+                        <Text size="s" color="grey">
+                            Nothing is here yet.
+                        </Text>
                     }
                 </Body>
             </div>

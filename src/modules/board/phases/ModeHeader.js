@@ -1,13 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import {
-    dropdownType,
-    boardType,
-} from '../../common/types'
+import { dropdownType } from '../../common/types'
 
 import {
-    addPageToMode,
     publishFromState,
     updateGeneral,
 } from '../../page/PageReducer'
@@ -26,11 +22,11 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
     const { min, max } = playerNum || {}
 
     const handleAdd = () => {
-        dispatch(addPageToMode(modeKey, boardType.phases.key))
+        return;
     }
 
     const handlePublish = () => {
-        dispatch(publishFromState('modeRepo', modeKey))
+        dispatch(publishFromState('pageRepo', slate.key))
         dispatch(updateGeneral({
             path: [...path, 'publishInfo'],
                 update: {
@@ -57,11 +53,10 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
             </DropClick>
             <Tag
                 bg={tab === 0 ? 'violet' : 'charcoal'}
+                icon="sitemap"
+                text="Phases"
                 onClick={() => setTab(0)}
-                icon="mdi mdi-sitemap"
-            >
-                Phases
-            </Tag>
+            />
             <DropClick
                 dropdown={dropdownType.editPlayerNum}
                 params={{
@@ -70,50 +65,38 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
             >
                 <Tag
                     bg="charcoal"
-                    icon="mdi mdi-account-multiple"
-                >
-                    {`${min||'x'}-${max||'x'} Players`}
-                </Tag>
+                    icon="account-multiple"
+                    text={`${min||'x'}-${max||'x'} Players`}
+                />
             </DropClick>
             <Tag
                 bg={tab === 1 ? 'violet' : 'charcoal'}
+                icon="clipboard-account-outline"
+                text="Role setup"
                 onClick={() => setTab(1)}
-                icon="mdi mdi-clipboard-account-outline"
-            >
-                Role setup
-            </Tag>
+            />
             <Tag
                 bg={tab === 2 ? 'violet' : 'charcoal'}
-                onClick={() => setTab(2)}
-                icon="mdi mdi-calendar-star"
-            >
-                Game events
-            </Tag>
-            <Tag
-                bg={tab === 3 ? 'violet' : 'charcoal'}
                 onClick={() => setTab(3)}
-                icon="mdi mdi-checkerboard"
+                icon="checkerboard"
+                text="Interface"
                 style={{
                     marginRight: 'auto',
                 }}
-            >
-                Interface
-            </Tag>
+            />
             {tab === 0 &&
                 <Tag
                     className="--slide-right"
-                    icon="mdi mdi-table-plus"
+                    icon="table-plus"
+                    text="Add"
                     onClick={handleAdd}
-                >
-                    Add
-                </Tag>
+                />
             }
             <Tag
-                icon="mdi mdi-publish"
+                icon="publish"
+                text="Publish"
                 onClick={handlePublish}
-            >
-                Publish
-            </Tag>
+            />
         </Row>
     )
 }

@@ -49,14 +49,13 @@ export default function PatchHeader(props) {
         if (tab === 1 || tab === 3) return null;
         return (
             <Tag
-                icon="mdi mdi-table-plus"
+                icon="table-plus"
+                text="Add"
                 onClick={handleAdd}
                 style={{
                     marginLeft: 'auto',
                 }}
-            >
-                Add
-            </Tag>
+            />
         )
     }
 

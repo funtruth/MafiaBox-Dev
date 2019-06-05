@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import {
@@ -16,11 +16,12 @@ import {
     Row,
     Tag,
     Text,
+    Icon,
 } from '../../../../components/Common';
 
-function RolePickerHeader(props) {
-    const { modeKey, draftInfo, pageRepo, storyRepo,
-        tab, setTab, setResults } = props
+export default function RolePickerHeader(props) {
+    const { storyRepo, pageRepo } = useSelector(state => state.page)
+    const { path, draftInfo, tab, setTab, setResults } = props
     const { key: setupKey, title, players, roles } = draftInfo
 
     const [searchText, setSearchText] = useState('')
@@ -93,7 +94,7 @@ function RolePickerHeader(props) {
             <DropClick
                 dropdown={dropdownType.dropString}
                 params={{
-                    path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'title'],
+                    path: [...path, 'title'],
                 }}
                 style={{
                     paddingRight: 10,
@@ -107,17 +108,15 @@ function RolePickerHeader(props) {
             <Tag
                 bg={tab === 0 ? 'violet' : 'charcoal'}
                 onClick={() => onTabClick(0)}
-                icon="mdi mdi-inbox"
-            >
-                {`Selected (${countRoles(roles)}/${players})`}
-            </Tag>
+                icon="inbox"
+                text={`Selected (${countRoles(roles)}/${players})`}
+            />
             <Tag
                 bg={tab === 1 ? 'violet' : 'charcoal'}
                 onClick={() => onTabClick(1)}
-                icon="mdi mdi-library"
-            >
-                View All
-            </Tag>
+                icon="library"
+                text="View all"
+            />
             <Row sizes={['z', 'xs']}>
                 <input
                     className="header-input"
@@ -127,15 +126,8 @@ function RolePickerHeader(props) {
                     onChange={handleType}
                     onFocus={onSearchFocus}
                 />
-                <i className="header-icon mdi mdi-magnify"></i>
+                <Icon icon="mdi mdi-magnify"/>
             </Row>
         </Row>
     )
 }
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-        storyRepo: state.page.storyRepo,
-    })
-)(RolePickerHeader)

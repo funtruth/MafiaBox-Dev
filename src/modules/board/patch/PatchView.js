@@ -9,7 +9,7 @@ export default function PatchView({match}) {
 
     const { board } = match.params
 
-    const items = _.toArray(storyMap)
+    const items = _.toArray(storyMap).slice().reverse()
 
     return (
         <div className="story-view" style={{flexDirection: "column"}}>

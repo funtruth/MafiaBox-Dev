@@ -15,9 +15,13 @@ export default function LogicBlock(props) {
     
     if (!logicKey && !logicMap) {
         return (
-            <Tag onClick={props.handleAdd}>
-                add logic
-            </Tag>
+            <Body x="l">
+                <Tag
+                    icon="server-plus"
+                    text="add logic"
+                    onClick={props.handleAdd}
+                />
+            </Body>
         )
     }
 

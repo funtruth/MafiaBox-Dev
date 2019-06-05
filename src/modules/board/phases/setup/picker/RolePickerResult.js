@@ -11,22 +11,22 @@ import {
 } from '../../../../components/Common';
 
 function RolePickerResult(props) {
-    const { item, modeKey, draftInfo } = props
+    const { item, path, draftInfo } = props
     const { pageKey, title } = item
-    const { key: setupKey, roles } = draftInfo
+    const { roles } = draftInfo
 
     const currentCount = (roles && roles[pageKey]) || 0
 
     const onRemove = () => {
         if (currentCount === 0) return;
         props.updateGeneral({
-            path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
+            path: [...path, 'roles', pageKey],
             update: currentCount - 1,
         })
     }
     const onAdd = () => {
         props.updateGeneral({
-            path: ['modeRepo', modeKey, 'roleSetup', setupKey, 'roles', pageKey],
+            path: [...path, 'roles', pageKey],
             update: currentCount + 1,
         })
     }
