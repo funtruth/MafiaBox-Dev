@@ -3,9 +3,7 @@ import {
     fieldType,
     phaseActionType,
 } from '../common/types'
-import {
-    choiceMap,
-} from '../common/defaults'
+import { choiceMap } from '../logic/defaults'
 
 export const defaultFieldMap = {
     [boardType.roles.key]: [

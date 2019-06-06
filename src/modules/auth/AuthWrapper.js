@@ -56,10 +56,6 @@ export default function AuthWrapper({children}) {
 		})
 	}, [dispatch])
 
-	useEffect(() => {
-
-	})
-
 	let handleScreen = () => {
 		if (AT_LOGIN) {
 			setAuthScreen(AUTH_SCREEN.REGISTER)

@@ -10,7 +10,7 @@ import { navigate } from '../../app/NavReducer'
 import AccountDetails from '../components/AccountDetails';
 import ProjectDetails from '../components/ProjectDetails';
 import SideBarTitle from './SideBarTitle'
-import { Icon, Text, Row, Body } from '../../components/Common';
+import { Body, Tag } from '../../components/Common';
 
 //gets pathname from react-router
 export default function SideBarView({ pathname }) {
@@ -18,6 +18,7 @@ export default function SideBarView({ pathname }) {
     
     const dispatch = useDispatch();
     const path = useSelector(state => state.nav.path);
+    
     const activeProject = useSelector(state => state.firebase.activeProject);
     
     let handleClick = (item) => {
@@ -33,20 +34,14 @@ export default function SideBarView({ pathname }) {
         const selected = item.key === paths[2]
 
         return (
-            <Row
+            <Tag
                 key={item.key}
-                y="c"
-                sizes={['xxs', 'm']}
+                bg="charcoal"
+                color={selected ? 'whitish' : 'grey'}
+                icon={item.icon}
+                text={item.title}
                 onClick={() => handleClick(item)}
-            >
-                <Icon
-                    size="l"
-                    icon={item.icon}
-                    color={selected ? 'whitish' : 'grey'}></Icon>
-                <Text before="xxs" color={selected ? 'whitish' : 'grey'}>
-                    {item.title}
-                </Text>
-            </Row>
+            />
         )
     }
 

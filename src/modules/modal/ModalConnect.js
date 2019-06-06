@@ -21,7 +21,11 @@ export default function ModalConnect({item, index}) {
     renderProps.setWorkspace = (value, path) => dispatch(updateTopModal(path || ['attach'], value))
     renderProps.updatePage = (path, value) => dispatch(updateGeneral({path, update: value}))
 
-    if (!path) console.warn('this dropdown has no path.')
+    if (!path) {
+        console.warn('this modal has no path.')
+        return ModalKeys({...item, ...renderProps})
+    }
+
     renderProps.slate   = usePath(path);
     renderProps.update  = (value) => dispatch(updateGeneral({path, update: value}))
 

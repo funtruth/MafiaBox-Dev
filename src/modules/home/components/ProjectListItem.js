@@ -36,7 +36,7 @@ function ProjectListItem(props) {
 
     if (!project) return null;
 
-    const { title, description, projectKey } = project
+    const { title, description, key } = project
     const firstLetter = title.charAt(0) || '*'
 
     const iconStyle = {
@@ -47,7 +47,7 @@ function ProjectListItem(props) {
     
     const handleClick = () => {
         props.showDropdown()
-        props.switchToProject(projectKey)
+        props.switchToProject(key)
     }
 
     return (
@@ -57,7 +57,9 @@ function ProjectListItem(props) {
                 <div style={styles.title}>{title}</div>
                 <div className="text-ellipsis" style={styles.subtitle}>{description}</div>
             </div>
-            <i className="mdi mdi-check" style={{ fontSize: 22 }}></i>
+            {(chosen === 'true') &&
+                <i className="mdi mdi-check" style={{ fontSize: 22 }}></i>
+            }
         </div>
     )
 }

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './CreateProject.css'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import firebase from 'firebase/app'
 
 import {
@@ -13,34 +13,22 @@ import {
 } from '../../fields/defaults';
 
 import { switchToProject } from '../../firebase/FirebaseReducer'
+import { showModal } from '../ModalReducer'
 import { checkAlpha } from '../../common/helpers';
 import generatePushID from '../../common/generatePushID';
 
 import FormInput from '../../components/FormInput'
 import ModalOptions from '../components/ModalOptions'
 
-function CreateProject(props) {
-    const { uid } = props
+export default function CreateProject(props) {
+    const { uid } = useSelector(state => state.firebase.authUser)
+    const dispatch = useDispatch();
 
     let [errors, setErrors] = useState({})
     
     //initializing project
     let [gameKey, setGameKey] = useState('')
     let [description, setDescription] = useState('')
-    let [members] = useState({
-        [uid]: {
-            ...DEFAULT_MEMBER_INFO,
-            type: MEMBER_TYPE.OWNER,
-            acceptedInvite: true,
-        },
-    })
-
-    //get existing project keys
-    let [setProjects] = useState({})
-    const projectsRef = firebase.database().ref(`projects`)
-    useEffect(() => {
-        projectsRef.once('value', snap => setProjects(snap.val()))
-    }, [])
     
     let handleSave = () => {
         //validate user inputs
@@ -65,19 +53,25 @@ function CreateProject(props) {
 
         let multiUpdate = {}
         
-        multiUpdate[`userProjects/${uid}/${projectKey}`] = true
-        multiUpdate[`projects/${projectKey}`] = {
-            projectKey,
-            title: gameKey,
-            description,
-            members,
-        }
         multiUpdate[`dev/${projectKey}/fieldMap`] = defaultFieldMap
         multiUpdate[`dev/${projectKey}/fieldRepo`] = defaultFieldRepo
+        multiUpdate[`userProjects/${uid}/${projectKey}`] = true
+        multiUpdate[`projectUsers/${projectKey}`] = {
+            key: projectKey,
+            title: gameKey,
+            description,
+            members: {
+                [uid]: {
+                    ...DEFAULT_MEMBER_INFO,
+                    type: MEMBER_TYPE.OWNER,
+                    acceptedInvite: true,
+                },
+            },
+        }
         
         firebase.database().ref().update(multiUpdate)
-        props.switchToProject(projectKey)
-        props.popModalBy(1)
+        dispatch(switchToProject(projectKey))
+        dispatch(showModal())
     }
 
     const handleGameKey = (e) => setGameKey(e.target.value)
@@ -97,20 +91,7 @@ function CreateProject(props) {
                 value={description}
                 setValue={handleDescription}
             />
-            <ModalOptions
-                error={errors.modal}
-                onSave={handleSave}
-                onClose={props.onClose}
-            />
+            <ModalOptions onFinish={handleSave}/>
         </div>
     )
 }
-
-export default connect(
-    state => ({
-        uid: state.firebase.authUser.uid,
-    }),
-    {
-        switchToProject,
-    }
-)(CreateProject)

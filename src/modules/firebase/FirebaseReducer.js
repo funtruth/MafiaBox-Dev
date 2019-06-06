@@ -42,13 +42,19 @@ export function userProjectsListener(snap) {
 }
 
 export function switchToProject(projectKey) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const { activeProject } = getState().firebase
+
+        //if switching projects, reset pageReducer
+        if (projectKey !== activeProject) {
+            dispatch(resetPageReducer())
+            dispatch({
+                type: CHANGE_ACTIVE_PROJECT,
+                payload: projectKey,
+            })
+        }
+
         dispatch(navigate("/" + projectKey))
-        dispatch(resetPageReducer())
-        dispatch({
-            type: CHANGE_ACTIVE_PROJECT,
-            payload: projectKey,
-        })
     }
 }
 

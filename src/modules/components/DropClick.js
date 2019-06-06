@@ -48,6 +48,7 @@ export default function DropClick(props) {
         }
         if (modal) {
             dispatch(showModal(modal, params))
+            dispatch(showDropdown())
             return;
         }
         if (dropdown) {
