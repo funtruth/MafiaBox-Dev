@@ -8,6 +8,15 @@
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
 
+## 06/07/2019
+### Major
+- [ ] Simple game prototyping
+
+### Minor
+- [x] Project homeview
+- [x] Common Input / TextArea components
+- [ ] for loop handling
+
 ## 06/05/2019
 ### Major
 - [x] front-end revamp, getting rid of "Patches" & splitting up "Roles/Phases/GameModes/Events"

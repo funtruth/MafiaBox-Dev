@@ -41,6 +41,7 @@ export default function GameView({match, path}) {
                 theme="title"
                 value={project.title}
                 onSubmit={handleTitle}
+                submitOnBlur
                 placeholder="Untitled"
                 type="text"
                 outerprops={{sizes: ['z', 'm']}}

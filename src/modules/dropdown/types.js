@@ -10,9 +10,8 @@ export const dropdownType = {
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
 
-    createUniqueTag: 'dropdownType/create-unique-tag',
+    createTag: 'dropdownType/create-tag',
     editUniqueTag: 'dropdownType/edit-unique-tag',
-    createGeneralTag: 'dropdownType/create-general-tag',
     editGeneralTag: 'dropdownType/edit-general-tag',
     createGameChoice: 'dropdownType/create-game-choice',
     pickGameChoiceType: 'dropdownType/pick-game-choice-type',

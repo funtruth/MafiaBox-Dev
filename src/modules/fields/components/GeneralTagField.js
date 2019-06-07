@@ -28,9 +28,11 @@ export default function GeneralTagField(props) {
                     defaultValue,
                 }}
             >
-                <Tag bg={active ? 'purple' : 'black'}>
-                    {item.title}
-                </Tag>
+                <Tag
+                    bg={active ? 'active' : 'blackish'}
+                    icon={active ? 'check-underline' : ''}
+                    text={item.title}
+                />
             </DropClick>
         )
     }
@@ -40,14 +42,13 @@ export default function GeneralTagField(props) {
         <div className="row">
             {tags.map(renderItem)}
             <DropClick
-                dropdown={dropdownType.createGeneralTag}
+                dropdown={dropdownType.createTag}
                 params={{
-                    path: [fieldKey],
-                    attach: data,
+                    path: ['fieldRepo', fieldKey],
                     placeholder: "Tag name ...",
                 }}
             >
-                <Tag bg="darkgrey">new tag</Tag>
+                <Tag bg="charcoal">new tag</Tag>
             </DropClick>
         </div>
     )

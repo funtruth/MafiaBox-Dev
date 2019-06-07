@@ -11,10 +11,11 @@ import { useRef, useEffect } from 'react'
         )
     }
 */
-export default () => {
+export default (bool) => {
     const autofocus = useRef(null)
 
     useEffect(() => {
+        if (!bool) return;
         if (!autofocus.current) return;
         const timer = setTimeout(() => {autofocus.current.focus()}, 100);
         return () => clearTimeout(timer)

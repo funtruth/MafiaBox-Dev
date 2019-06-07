@@ -1,25 +1,30 @@
 import React from 'react'
 
-export default function NumberField(props) {
-    const { value, path } = props
-
+export default function NumberField({ value, path, updateGeneral }) {
     let handleIncr = () => {
-        props.updatePage(path,
-            Math.min(1000, parseInt(value || 0) + 1)
-        )
+        updateGeneral({
+            path,
+            update: Math.min(1000, parseInt(value || 0) + 1)
+        })
     }
+
     let handleDecr = () => {
-        props.updatePage(path,
-            Math.max(0, parseInt(value || 0) - 1)
-        )
+        updateGeneral({
+            path,
+            update: Math.max(0, parseInt(value || 0) - 1)
+        })
     }
+
     let handleChange = e => {
         let number = e.target.value
 
         //set range between 0 and 1000
         number = Math.max(Math.min(number, 1000), 0)
 
-        props.updatePage(path, number)
+        updateGeneral({
+            path,
+            update: number
+        })
     }
 
     return (

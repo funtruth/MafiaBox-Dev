@@ -25,9 +25,8 @@ import PageLib from './library/PageLib';
 import PickLogic from './logic/PickLogic';
 import PickOperator from './logic/PickOperator';
 
-import CreateUniqueTag from './page/CreateUniqueTag'
+import CreateTag from './page/CreateTag'
 import EditUniqueTag from './page/EditUniqueTag'
-import CreateGeneralTag from './page/CreateGeneralTag'
 import EditGeneralTag from './page/EditGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
@@ -90,12 +89,10 @@ export default function DropdownKeys(props) {
         case dropdownType.pickOperator:
             return <PickOperator {...props}/>
 
-        case dropdownType.createUniqueTag:
-            return <CreateUniqueTag {...props}/>
+        case dropdownType.createTag:
+            return <CreateTag {...props}/>
         case dropdownType.editUniqueTag:
             return <EditUniqueTag {...props}/>
-        case dropdownType.createGeneralTag:
-            return <CreateGeneralTag {...props}/>
         case dropdownType.editGeneralTag:
             return <EditGeneralTag {...props}/>
         case dropdownType.createGameChoice:

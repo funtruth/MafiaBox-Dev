@@ -1,4 +1,5 @@
 import React from 'react';
+import './Tag.css'
 import { palette } from './Standards';
 
 import Text from './Text'

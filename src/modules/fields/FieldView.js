@@ -21,7 +21,7 @@ import Tag from '../components/Tag';
 import { Separator } from '../components/Common';
 
 export default function FieldView(props) {
-    const { path, slate, updatePage } = props
+    const { path, slate, updatePage, updateGeneral } = props
     const { fieldMap, fieldRepo } = useSelector(state => state.page)
     
     const renderItem = (item) => {
@@ -37,6 +37,7 @@ export default function FieldView(props) {
             disabled: IS_PUBLISHED(slate),
             path: [...path, key],
             updatePage,
+            updateGeneral,
         }
         
         switch(fieldInfo.fieldType) {

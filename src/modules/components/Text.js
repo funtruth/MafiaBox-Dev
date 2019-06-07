@@ -12,17 +12,6 @@ const getFontSize = (size) => {
     }
 }
 
-const getMarginTop = (size) => {
-    switch(size) {
-        case 'xs':          return -1
-        case 's':           return -1
-        case 'l':           return -2
-        case 'xl':          return -2
-        case 'xxl':         return -2
-        default:            return -1 //'m'
-    }
-}
-
 export default function Text(props) {
     const {
         children,
@@ -43,7 +32,6 @@ export default function Text(props) {
         fontFamily: 'Segoe UI',
         letterSpacing: -0.4,
         alignSelf: alignX(align),
-        marginTop: getMarginTop(size),
         marginLeft: value(before),
         marginRight: value(after),
         color: palette(color),

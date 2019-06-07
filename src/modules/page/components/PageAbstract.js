@@ -14,6 +14,7 @@ export default function PageAbstract({
             theme="title"
             value={slate.title}
             onSubmit={handleTextBlur}
+            submitOnBlur
             placeholder="Untitled"
             type="text"
         />

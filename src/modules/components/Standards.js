@@ -9,7 +9,7 @@ export const APP_PALETTE = {
     lightgrey:  '#bbb',
     whitish:    '#ddd',
     white:      '#fff',
-    active:     '#705772',
+    active:     '#7b68ee',
     blue:       '#18449b',
     fb:         '#3864ab',
     purple:     '#6279CA',

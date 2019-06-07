@@ -28,9 +28,11 @@ export default function UniqueTagField(props) {
                     defaultValue,
                 }}
             >
-                <Tag bg={active ? 'active' : 'black'}>
-                    {item.title}
-                </Tag>
+                <Tag
+                    bg={active ? 'active' : 'blackish'}
+                    icon={active ? 'check-underline' : ''}
+                    text={item.title}
+                />
             </DropClick>
         )
     }
@@ -41,14 +43,13 @@ export default function UniqueTagField(props) {
             {tags.map(renderItem)}
             {!readOnly && 
                 <DropClick
-                    dropdown={dropdownType.createUniqueTag}
+                    dropdown={dropdownType.createTag}
                     params={{
-                        path: [fieldKey],
-                        attach: data,
+                        path: ['fieldRepo', fieldKey],
                         placeholder: "Team name ...",
                     }}
                 >
-                    <Tag bg="darkgrey">add team</Tag>
+                    <Tag bg="charcoal">add team</Tag>
                 </DropClick>
             }
         </div>
