@@ -3,9 +3,9 @@ import React from 'react'
 import { dropdownType, variableType } from '../../common/types'
 
 import {
-    WILD_CHAR,
     getSubfields,
     concatField,
+    WILD_CHAR,
 } from '../../logic/proptool'
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 import { useVarType } from '../../hooks/Hooks';
@@ -24,7 +24,7 @@ two possible paths:
     ELSE, show all subfields
 Used from: PickVar, PickVarWithType
 */
-export default function PickVarSubfield({
+export default function PickVarSubfield({//WIP
     prefix,//passed
     slate,
     scopedVars,//passed
@@ -54,9 +54,9 @@ export default function PickVarSubfield({
                 dropdown={dropdownType.pickVarSubfield}
                 showDropdown={showDropdown}
                 params={{
-                    prefix: concatField(prefix, item.key),
+                    prefix: concatField(prefix, item.value),
                 }}
-                text={item.key}
+                text={item.display}
             />
         )
     }
@@ -71,22 +71,22 @@ export default function PickVarSubfield({
                     dropdown={dropdownType.pickVarSubfield}
                     showDropdown={showDropdown}
                     params={{
-                        prefix: item.key,
+                        prefix: item.value,
                     }}
-                    text={item.subfield}
+                    text={item.display}
                 />
             )
         }
         
         //if item not nested, check if item is currently selected
-        const chosen = slate.value === item.key
+        const chosen = slate.value === item.value
         return (
             <DropItem
                 key={item.key}
                 chosen={chosen}
                 onClick={() => pickVarClick(item)}
                 rightCheck
-                text={item.subfield}
+                text={item.display}
             />
         )
     }
@@ -95,7 +95,7 @@ export default function PickVarSubfield({
         <DropScroll>
             <DropTitle>subfields</DropTitle>
             {subfields.map(item => {
-                if (item.subfield === WILD_CHAR) {
+                if (item.value.substr(-3) === concatField("", WILD_CHAR)) {
                     return renderUIDs()
                 }
                 return renderItem(item)

@@ -27,8 +27,23 @@ export default function PickComparison({
         }, {
             path: [...path, 'value'],
             update: {
-                display: item.title,
                 operator: item.key,
+            }
+        })
+        showDropdown();
+    }
+
+    const handleExists = () => {
+        updateGeneral({
+            path,
+            update: {
+                display: comparisonType.exists.title,
+            }
+        }, {
+            path: [...path, 'value'],
+            update: {
+                operator: comparisonType.exists.key,
+                right: '',
             }
         })
         showDropdown();
@@ -67,6 +82,12 @@ export default function PickComparison({
         <>
             <DropTitle>pick comparison</DropTitle>
             {items.map(renderItem)}
+            <DropTitle>others</DropTitle>
+            <DropItem
+                leftIcon="lifebuoy"
+                text="exists"
+                onClick={handleExists}
+            />
         </>
     )
 }

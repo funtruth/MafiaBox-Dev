@@ -6,7 +6,7 @@ import {
     logicType,
     operatorType,
 } from '../../common/types'
-import { DEFAULT_VAR_ID } from '../../common/defaults'
+import { VAR_WITH_SCOPE } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
 import { concatField, getSubfields, parseJS } from '../../logic/proptool';
@@ -20,9 +20,8 @@ import {
     DropParent,
     DropScroll,
     DropTitle,
-    DropSubmit,
 } from '../components/Common'
-import { Row } from '../../components/Common'
+import { Input } from '../../components/Common'
 
 //Used from: LogicPanels
 export default function PickVar({
@@ -36,12 +35,8 @@ export default function PickVar({
 }){
     const type = logicItem.operatorType || logicItem.logicType
 
-    const focusRef = useAutofocus();
-    const [text, setText] = useState('')
-    const handleChange = e => setText(e.target.value)
-
     //declaring a new variable
-    const declareVar = () => {
+    const declareVar = (text) => {
         const isAlpha = checkAlpha(text)
         if (!isAlpha) {
             return
@@ -58,29 +53,15 @@ export default function PickVar({
             path: [...rootPath, 'vars'],
             update: {
                 [varKey]: {
-                    ...DEFAULT_VAR_ID,
+                    ...VAR_WITH_SCOPE,
                     key: varKey,
                     value: variableName,
                     display: parseJS(variableName),
-                    subfield: text,
-                    fields: [
-                        text,
-                    ],
-                    fieldLength: 1,
                     scope: logicItem.key,
                 },
             }
         })
         showDropdown();
-    }
-
-    const handleKeyPress = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                declareVar();
-                break
-            default:
-        }
     }
 
     const renderDeclare = () => {
@@ -89,19 +70,17 @@ export default function PickVar({
                 return (
                     <>
                         <DropTitle>declare</DropTitle>
-                        <Row sizes={['xxs', 'xs']}>
-                            <input
-                                ref={focusRef}
-                                className="tag-input"
-                                value={text}
-                                onChange={handleChange}
-                                onKeyDown={handleKeyPress}
-                                placeholder="Variable name ..."
-                                type='text'
-                                autoFocus
-                            />
-                            <DropSubmit onClick={declareVar}/>
-                        </Row>
+                        <Input
+                            theme="tag"
+                            onSubmit={declareVar}
+                            showSubmit
+                            placeholder="Variable name ..."
+                            type="text"
+                            autofocus
+                            outerprops={{
+                                sizes: ['xxs', 'xs']
+                            }}
+                        />
                     </>
                 )
             default:
@@ -138,9 +117,9 @@ export default function PickVar({
                     dropdown={dropdownType.pickVarSubfield}
                     showDropdown={showDropdown}
                     params={{
-                        prefix: item.key,
+                        prefix: item.value,
                     }}
-                    text={item.key}
+                    text={item.display}
                 />
             )
         }

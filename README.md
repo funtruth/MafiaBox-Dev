@@ -2,8 +2,6 @@
 - Unchecked items are moved over to day of completion
 
 ## WIP
-- [ ] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
-- [ ] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
@@ -15,7 +13,9 @@
 ### Minor
 - [x] Project homeview
 - [x] Common Input / TextArea components
-- [ ] for loop handling
+- [x] Declared variables no longer store their state in the logicItem, but at the top-level of the Logic itself. Therefore, a check needs to take place when deleting logicItems. This needs to be added to the LogicEngine as well.
+- [x] for loop handling
+- [x] merge DEFAULT_VAR_ID with LOGIC_ITEM_VAR
 
 ## 06/05/2019
 ### Major

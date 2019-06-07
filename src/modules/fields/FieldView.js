@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 
 import { fieldType } from './types'
 
+import { IS_PUBLISHED } from '../common/arrows';
+
 import CallField from './components/CallField'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
@@ -11,14 +13,11 @@ import ImageField from './components/ImageField'
 import UniqueTagField from './components/UniqueTagField';
 import GeneralTagField from './components/GeneralTagField'
 import LogicField from './components/LogicField';
-
 import GameChoiceField from './components/GameChoiceField'
 import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
 import PriorityField from './components/PriorityField'
-import { IS_PUBLISHED } from '../common/arrows';
-import Tag from '../components/Tag';
-import { Body } from '../components/Common';
+import { Body, Tag } from '../components/Common';
 
 export default function FieldView(props) {
     const { path, slate, updatePage, updateGeneral } = props

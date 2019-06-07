@@ -17,6 +17,7 @@ export default function PickLogic({
     logicKey,
     update,
     showDropdown,
+    deleteVariables,
 }){
     const handleSelect = (item) => {
         update({
@@ -26,6 +27,7 @@ export default function PickLogic({
             ...generateLogic(item.key),
         })
         showDropdown();
+        deleteVariables();
     }
 
     const renderItem = (item) => {

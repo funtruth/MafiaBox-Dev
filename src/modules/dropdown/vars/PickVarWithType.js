@@ -33,9 +33,9 @@ export default function PickVarWithType(props){
 
     const renderItem = (item) => {
         //don't show same variable
-        if (item.key === baseVar.value) return null
+        if (item.value === baseVar.value) return null
 
-        const chosen = slate.value === item.key
+        const chosen = slate.value === item.value
 
         return (
             <DropItem
@@ -43,7 +43,7 @@ export default function PickVarWithType(props){
                 chosen={chosen}
                 onClick={() => pickVarClick(item)}
                 rightCheck
-                text={item.key}
+                text={item.display}
             />
         )
     }

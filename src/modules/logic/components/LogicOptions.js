@@ -22,14 +22,14 @@ export default function LogicOptions(props) {
             return;
         }
 
+        //should encorporate props.deleteVariables() function as well
         props.updatePage(path, logicItem.down)*/
     }
 
     return (
         <div>
             <Icon
-                className="window-close"
-                style={{padding: 4}}
+                icon="window-close"
                 size="m" color="grey"
                 hover onClick={handleDelete}
             ></Icon>

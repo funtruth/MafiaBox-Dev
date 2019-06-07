@@ -26,6 +26,7 @@ export default function LogicType(props) {
                 logicKey,
                 path,
                 vars,
+                deleteVariables: props.deleteVariables(logicItem.key),
             }}
         >
             <LogicButton

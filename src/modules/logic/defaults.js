@@ -1,4 +1,4 @@
-import { variableType } from '../common/types'
+import { variableType, parseType } from '../common/types'
 
 /* logicItem
     FIELD           DESCRIPTION
@@ -52,7 +52,7 @@ export const LOGIC_ITEM_VAR = {
     display         REMOVED, included in LOGIC_ITEM_VAR.display
     left            logicKey for left-side
     operator        operator
-    typingDisabled  
+    typingDisabled  allows variable selection of different types in parseType.operation
     right           logicKey for right-side
 */
 export const LOGIC_ITEM_VAR_OPERATION = {
@@ -75,36 +75,29 @@ export const LOGIC_ITEM_VAR_WRAPPER = {
     right: "",
 }
 
-/* @params variable, this is different from LOGIC_ITEM_VAR as it only pertains to the structure of the variable, not the descriptor for the state of a variable. Examples are done with the object foo.bar
-    FIELD           DESCRIPTION              EXAMPLE         TYPE
+/* very similar to LOGIC_ITEM_VAR, but declared with a scope (available to perform logic with ONCE it has been declared)
+    FIELD           DESCRIPTION
     ---------------------------------------------------------------
-    key             entire variable name,    (foo)(bar)      string
-    subfield        last field of variable,  bar             string
-    fields          list of fields,          [foo, bar]      array
-    fieldLength     length of fields         2               number
-    dropdown        connected dropdown menu  dropdownType    string
-    variableTypes   list of variableTypes    [string]        array
+    key
     declare         if the variable is assigned a value at declaration
+    display         variable name in front end foo.bar form
+    scope           the logicKey where variable was declared
+    value           variable name in (foo)(bar) form
+    variableTypes   list of variableTypes
 */
-export const DEFAULT_VAR_ID = {
-    key: '',
-    value: '',
-    display: '',
-    subfield: '',
-    fields: '',
-    fieldLength: '',
-    variableTypes: '',
-    declare: '',
+export const VAR_WITH_SCOPE = {
+    declare: "",
+    display: "",
+    scope: "",
+    value: "",
+    variableTypes: "",
 }
 
 export const triggerNewVars = {
     "(visitor)": {
         key: '(visitor)',
-        subfield: 'visitor',
-        fields: [
-            'visitor',
-        ],
-        fieldLength: 1,
+        value: '(visitor)',
+        display: 'visitor',
         variableTypes: [
             variableType.uid.key,
         ],
@@ -114,47 +107,32 @@ export const triggerNewVars = {
 export const choiceMap = {
     "(choice)": {
         key: '(choice)',
-        subfield: 'choice',
-        fields: [
-            'choice',
-        ],
-        fieldLength: 1,
+        value: '(choice)',
+        display: 'choice',
         variableTypes: [
             variableType.object.key,
         ],
     },
     "(choice)(user)": {
         key: '(choice)(user)',
-        subfield: 'user',
-        fields: [
-            'choice',
-            'user',
-        ],
-        fieldLength: 2,
+        value: '(choice)(user)',
+        display: 'choice.user',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     "(choice)(target)": {
         key: '(choice)(target)',
-        subfield: 'target',
-        fields: [
-            'choice',
-            'target',
-        ],
-        fieldLength: 2,
+        value: '(choice)(target)',
+        display: 'choice.target',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     "(choice)(multi)": {
         key: '(choice)(multi)',
-        subfield: 'multi',
-        fields: [
-            'choice',
-            'multi',
-        ],
-        fieldLength: 2,
+        value: '(choice)(multi)',
+        display: 'choice.multi',
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -162,12 +140,8 @@ export const choiceMap = {
     },
     "(choice)(ordered)": {
         key: '(choice)(ordered)',
-        subfield: 'ordered',
-        fields: [
-            'choice',
-            'ordered',
-        ],
-        fieldLength: 2,
+        value: '(choice)(ordered)',
+        display: 'choice.ordered',
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -175,12 +149,8 @@ export const choiceMap = {
     },
     "(choice)(value)": {
         key: '(choice)(value)',
-        subfield: 'value',
-        fields: [
-            'choice',
-            'value',
-        ],
-        fieldLength: 2,
+        value: '(choice)(value)',
+        display: 'choice.value',
         variableTypes: [
             variableType.number.key,
         ],
@@ -188,102 +158,58 @@ export const choiceMap = {
 }
 
 export const rssMap = {
-    '(rss)': {
-        key: '(rss)',
-        subfield: 'rss',
-        fields: [
-            'rss',
-        ],
-        fieldLength: 1,
-        variableTypes: [
-            variableType.object,
-        ],
-    },
     '(rss)(gameState)': {
         key: '(rss)(gameState)',
-        subfield: 'gameState',
-        fields: [
-            'rss',
-            'gameState',
-        ],
-        fieldLength: 2,
+        value: '(rss)(gameState)',
+        display: 'rss.gameState',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(gameState)(phase)': {
         key: '(rss)(gameState)(phase)',
-        subfield: 'phase',
-        fields: [
-            'rss',
-            'gameState',
-            'phase',
-        ],
-        fieldLength: 3,
+        value: '(rss)(gameState)(phase)',
+        display: 'rss.gameState.phase',
         variableTypes: [
             variableType.key.key,
         ],
     },
     '(rss)(gameState)(counter)': {
         key: '(rss)(gameState)(counter)',
-        subfield: 'counter',
-        fields: [
-            'rss',
-            'gameState',
-            'counter',
-        ],
-        fieldLength: 3,
+        value: '(rss)(gameState)(counter)',
+        display: 'rss.gameState.counter',
         variableTypes: [
             variableType.number.key,
         ],
     },
     '(rss)(gameState)(veto)': {
         key: '(rss)(gameState)(veto)',
-        subfield: 'veto',
-        fields: [
-            'rss',
-            'gameState',
-            'veto',
-        ],
-        fieldLength: 3,
+        value: '(rss)(gameState)(veto)',
+        display: 'rss.gameState.veto',
         variableTypes: [
             variableType.number.key,
         ],
     },
     '(rss)(gameState)(timer)': {
         key: '(rss)(gameState)(timer)',
-        subfield: 'timer',
-        fields: [
-            'rss',
-            'gameState',
-            'timer',
-        ],
-        fieldLength: 3,
+        value: '(rss)(gameState)(timer)',
+        display: 'rss.gameState.timer',
         variableTypes: [
             variableType.time.key,
         ],
     },
     '(rss)(gameState)(captain)': {
         key: '(rss)(gameState)(captain)',
-        subfield: 'captain',
-        fields: [
-            'rss',
-            'gameState',
-            'captain',
-        ],
-        fieldLength: 3,
+        value: '(rss)(gameState)(captain)',
+        display: 'rss.gameState.captain',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(players)': {
         key: '(rss)(players)',
-        subfield: 'players',
-        fields: [
-            'rss',
-            'players',
-        ],
-        fieldLength: 2,
+        value: '(rss)(players)',
+        display: 'rss.players',
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -291,184 +217,104 @@ export const rssMap = {
     },
     '(rss)(players)(@)': {
         key: '(rss)(players)(@)',
-        subfield: '@',
-        fields: [
-            'rss',
-            'players',
-            '@',
-        ],
-        fieldLength: 3,
+        value: '(rss)(players)(@)',
+        display: 'rss.players.@',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(players)(@)(role)': {
         key: '(rss)(players)(@)(role)',
-        subfield: 'role',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'role',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(role)',
+        display: 'rss.players.@.role',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(players)(@)(role)(roleId)': {
         key: '(rss)(players)(@)(role)(roleId)',
-        subfield: 'roleId',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'role',
-            'roleId',
-        ],
-        fieldLength: 5,
+        value: '(rss)(players)(@)(role)(roleId)',
+        display: 'rss.players.@.role.roleId',
         variableTypes: [
             variableType.key.key,
         ],
     },
     '(rss)(players)(@)(role)(roleTeam)': {
         key: '(rss)(players)(@)(role)(roleTeam)',
-        subfield: 'roleTeam',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'role',
-            'roleTeam',
-        ],
-        fieldLength: 5,
+        value: '(rss)(players)(@)(role)(roleTeam)',
+        display: 'rss.players.@.role.roleTeam',
         variableTypes: [
             variableType.string.key,
         ],
     },
     '(rss)(players)(@)(role)(action)': {
         key: '(rss)(players)(@)(role)(action)',
-        subfield: 'action',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'role',
-            'action',
-        ],
-        fieldLength: 5,
+        value: '(rss)(players)(@)(role)(action)',
+        display: 'rss.players.@.role.action',
         variableTypes: [
             variableType.function.key,
         ],
     },
     '(rss)(players)(@)(role)(charges)': {
         key: '(rss)(players)(@)(role)(charges)',
-        subfield: 'charges',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'role',
-            'team',
-        ],
-        fieldLength: 5,
+        value: '(rss)(players)(@)(role)(charges)',
+        display: 'rss.players.@.role.charges',
         variableTypes: [
             variableType.number.key,
         ],
     },
     '(rss)(players)(@)(health)': {
         key: '(rss)(players)(@)(health)',
-        subfield: 'health',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'health',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(health)',
+        display: 'rss.players.@.health',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(players)(@)(dead)': {
         key: '(rss)(players)(@)(dead)',
-        subfield: 'dead',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'dead',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(dead)',
+        display: 'rss.players.@.dead',
         variableTypes: [
             variableType.boolean.key,
         ],
     },
     '(rss)(players)(@)(king)': {
         key: '(rss)(players)(@)(king)',
-        subfield: 'king',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'king',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(king)',
+        display: 'rss.players.@.king',
         variableTypes: [
             variableType.boolean.key,
         ],
     },
     '(rss)(players)(@)(clown)': {
         key: '(rss)(players)(@)(clown)',
-        subfield: 'clown',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'clown',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(clown)',
+        display: 'rss.players.@.clown',
         variableTypes: [
             variableType.boolean.key,
         ],
     },
     '(rss)(players)(@)(trigger)': {
         key: '(rss)(players)(@)(trigger)',
-        subfield: 'trigger',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'trigger',
-        ],
-        fieldLength: 4,
+        value: '(rss)(players)(@)(trigger)',
+        display: 'rss.players.@.trigger',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(players)(@)(trigger)(@)': {
         key: '(rss)(players)(@)(trigger)(@)',
-        subfield: '@',
-        fields: [
-            'rss',
-            'players',
-            '@',
-            'trigger',
-            '@',
-        ],
-        fieldLength: 5,
+        value: '(rss)(players)(@)(trigger)(@)',
+        display: 'rss.players.@.trigger.@',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)': {
         key: '(rss)(choices)',
-        subfield: 'choices',
-        fields: [
-            'rss',
-            'choices',
-        ],
-        fieldLength: 2,
+        value: '(rss)(choices)',
+        display: 'rss.choices',
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -476,55 +322,32 @@ export const rssMap = {
     },
     '(rss)(choices)(@)': {
         key: '(rss)(choices)(@)',
-        subfield: '@',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-        ],
-        fieldLength: 3,
+        value: '(rss)(choices)(@)',
+        display: 'rss.choices.@',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(choices)(@)(user)': {
         key: '(rss)(choices)(@)(user)',
-        subfield: 'user',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'user',
-        ],
-        fieldLength: 4,
+        value: '(rss)(choices)(@)(user)',
+        display: 'rss.choices.@.user',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)(@)(target)': {
         key: '(rss)(choices)(@)(target)',
-        subfield: 'target',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'target',
-        ],
-        fieldLength: 4,
+        value: '(rss)(choices)(@)(target)',
+        display: 'rss.choices.@.target',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)(@)(multi)': {
         key: '(rss)(choices)(@)(multi)',
-        subfield: 'multi',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'multi',
-        ],
-        fieldLength: 4,
+        value: '(rss)(choices)(@)(multi)',
+        display: 'rss.choices.@.multi',
         variableTypes: [
             variableType.object.key,
             variableType.uidObject.key,
@@ -532,88 +355,48 @@ export const rssMap = {
     },
     '(rss)(choices)(@)(multi)(@)': {
         key: '(rss)(choices)(@)(multi)(@)',
-        subfield: '@',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'multi',
-            '@',
-        ],
-        fieldLength: 5,
+        value: '(rss)(choices)(@)(multi)(@)',
+        display: 'rss.choices.@.multi.@',
         variableTypes: [
             variableType.boolean.key,
         ],
     },
     '(rss)(choices)(@)(ordered)': {
         key: '(rss)(choices)(@)(ordered)',
-        subfield: 'ordered',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'ordered',
-        ],
-        fieldLength: 4,
+        value: '(rss)(choices)(@)(ordered)',
+        display: 'rss.choices.@.ordered',
         variableTypes: [
             variableType.object.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(first)': {
         key: '(rss)(choices)(@)(ordered)(first)',
-        subfield: 'first',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'ordered',
-            'first',
-        ],
-        fieldLength: 5,
+        value: '(rss)(choices)(@)(ordered)(first)',
+        display: 'rss.choices.@.ordered.first',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(second)': {
         key: '(rss)(choices)(@)(ordered)(second)',
-        subfield: 'second',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'ordered',
-            'second',
-        ],
-        fieldLength: 5,
+        value: '(rss)(choices)(@)(ordered)(second)',
+        display: 'rss.choices.@.ordered.second',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)(@)(ordered)(third)': {
         key: '(rss)(choices)(@)(ordered)(third)',
-        subfield: 'third',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'ordered',
-            'third',
-        ],
-        fieldLength: 5,
+        value: '(rss)(choices)(@)(ordered)(third)',
+        display: 'rss.choices.@.ordered.third',
         variableTypes: [
             variableType.uid.key,
         ],
     },
     '(rss)(choices)(@)(value)': {
         key: '(rss)(choices)(@)(value)',
-        subfield: 'value',
-        fields: [
-            'rss',
-            'choices',
-            '@',
-            'value',
-        ],
-        fieldLength: 4,
+        value: '(rss)(choices)(@)(value)',
+        display: 'rss.choices.@.value',
         variableTypes: [
             variableType.global.key,
         ],

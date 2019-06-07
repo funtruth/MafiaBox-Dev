@@ -309,6 +309,12 @@ export const comparisonType = {
             variableType.number.key,
         ],
     },
+    exists: {
+        key: 'exists',
+        code: '',
+        title: 'exists',
+        icon: 'lifebuoy',
+    },
     assign: {
         key: 'assign',
         code: '=',
@@ -320,7 +326,7 @@ export const comparisonType = {
     },
     in: {
         key: 'in',
-        code: 'in',
+        code: ' in ',
         title: 'for loop',
         icon: 'sync',
         variableTypes: [

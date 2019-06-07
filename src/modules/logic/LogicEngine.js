@@ -1,4 +1,4 @@
-import { parseType } from '../common/types'
+import { parseType, comparisonType } from '../common/types'
 import { parseJS, separateVar, START_CHAR, varInStr } from './proptool'
 
 var beautify_js = require('js-beautify');
@@ -38,13 +38,12 @@ function parseVar(byVK, vK) {
 
     const {
         parseBy,
-        display,
         value,
     } = item
 
     switch(parseBy) {
         case parseType.operation:
-            return parseVar(byVK, value.left) + display + parseVar(byVK, value.right)
+            return parseVar(byVK, value.left) + comparisonType[value.operator].code + parseVar(byVK, value.right)
         case parseType.number:
             return parseNumber(value.byId, value.source)
         case parseType.variable:

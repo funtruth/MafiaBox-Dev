@@ -67,8 +67,8 @@ export default function LogicPanels(props) {
                         [i[1]]: {
                             ...LOGIC_ITEM_VAR,
                             key: i[1],
-                            display: parseJS(item.key),
-                            value: item.key,
+                            display: parseJS(item.value),
+                            value: item.value,
                             parseBy: parseType.variable, //can be update, WIP
                             variableTypes: item.variableTypes,
                         },
@@ -104,8 +104,8 @@ export default function LogicPanels(props) {
                         [i[1]]: {
                             ...LOGIC_ITEM_VAR,
                             key: i[1],
-                            display: parseJS(item.key),
-                            value: item.key,
+                            display: parseJS(item.value),
+                            value: item.value,
                             parseBy: parseType.variable, //can be update, WIP
                             variableTypes: item.variableTypes,
                         },
@@ -123,8 +123,8 @@ export default function LogicPanels(props) {
                     path: varPath,
                     update: {
                         ...LOGIC_ITEM_VAR,
-                        display: parseJS(item.key),
-                        value: item.key,
+                        display: parseJS(item.value),
+                        value: item.value,
                         parseBy: parseType.variable,
                         variableTypes: item.variableTypes,
                     }

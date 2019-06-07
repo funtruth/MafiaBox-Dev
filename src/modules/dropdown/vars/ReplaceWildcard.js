@@ -87,7 +87,9 @@ export default function ReplaceWildcard(props){
             <PickVarWithType
                 {...props}
                 pickVarClick={handleSelect}
-                variableTypes={[variableType.uid.key]}
+                baseVar={{
+                    variableTypes: [variableType.uid.key],
+                }}
             />
         </>
     )

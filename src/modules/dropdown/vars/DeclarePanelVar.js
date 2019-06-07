@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { VAR_WITH_SCOPE } from '../../logic/defaults';
+
 import { concatField } from '../../logic/proptool';
 
 import { DropTitle } from '../components/Common';
@@ -18,15 +20,10 @@ export default function DeclareVarName({
         updateGeneral({
             path,
             update: {
+                ...VAR_WITH_SCOPE,
                 ...varItem,
                 value: concatField("", text),
                 display: text,
-                subfield: text,
-                fields: [
-                    text,
-                ],
-                fieldLength: 1,
-                declare: '',
                 scope,
             },
         }, {

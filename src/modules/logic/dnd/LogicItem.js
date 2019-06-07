@@ -40,6 +40,7 @@ function LogicItem(props) {
                     dropdown={dropdownType.pickLogic}
                     params={{
                         path,
+                        deleteVariables: props.deleteVariables(logicItem.key),
                     }}
                 >
                     <LogicButton color="grey">

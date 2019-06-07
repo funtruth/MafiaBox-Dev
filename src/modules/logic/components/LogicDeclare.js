@@ -73,7 +73,7 @@ export default function LogicDeclare({
         )
     }
 
-    const declaredVars = _.filter(vars, i => i.scope === logicKey)
+    const declaredVars = _.filter(vars, i => i.key && (i.scope === logicKey))
 
     return (
         <Body>

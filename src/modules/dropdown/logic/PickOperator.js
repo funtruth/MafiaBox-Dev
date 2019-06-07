@@ -16,8 +16,9 @@ export default function PickOperator({
     hoverKey: logicType,
     logicKey,
     slate,
-    showDropdown,
     update,
+    showDropdown,
+    deleteVariables,
 }){
     const { byIndex } = slate
     
@@ -32,6 +33,7 @@ export default function PickOperator({
             operatorType: item.key,
         })
         showDropdown();
+        deleteVariables();
     }
 
     let renderItem = (item) => {

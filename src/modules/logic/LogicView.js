@@ -118,13 +118,26 @@ export default function LogicView({ path }) {
         }))
     }
 
+    //deletes variables if they were declared at given logicKey
+    const deleteVariables = (logicKey) => () => {
+        const scopedVars = _.filter(vars, i => i.scope === logicKey)
+        
+        dispatch(updateGeneral(...(
+            scopedVars.map(i => ({
+                path: [...path, 'vars', i.key],
+                update: ""
+            }))
+        )))
+    }
+
     const mainProps = {
         logicRepo,
         logicMap,
-        vars,
+        vars: _.filter(vars),
         handleAdd,
         handleAddBelow,
         moveLogic,
+        deleteVariables,
         path,
         rootPath: path,
         scope: [],

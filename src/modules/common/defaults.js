@@ -9,7 +9,6 @@ import {
 } from '../fields/defaults'
 import {
     choiceMap,
-    DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,
     DEFAULT_LOGIC,
@@ -17,6 +16,7 @@ import {
     LOGIC_ITEM_VAR,
     LOGIC_ITEM_VAR_OPERATION,
     LOGIC_ITEM_VAR_WRAPPER,
+    VAR_WITH_SCOPE,
 } from '../logic/defaults'
 
 export {
@@ -31,7 +31,7 @@ export {
     LOGIC_ITEM_VAR_OPERATION,
     LOGIC_ITEM_VAR_WRAPPER,
     DEFAULT_ROLE_SETUP,
-    DEFAULT_VAR_ID,
     rssMap,
     triggerNewVars,
+    VAR_WITH_SCOPE,
 }

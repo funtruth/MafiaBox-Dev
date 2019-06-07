@@ -29,7 +29,7 @@ export default (type, vars) => {
         const relatedVars = _.filter(vars, typeFilter)
         const groupedRSSVars = _(rssMap)
             .filter(typeFilter)
-            .groupBy(i => i.fields.includes(WILD_CHAR))
+            .groupBy(i => i.value.includes(WILD_CHAR))
             .value()
 
         setResults([

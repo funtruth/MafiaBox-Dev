@@ -77,61 +77,33 @@ export function concatField(a = "", b = "") {return a + START_CHAR + b + END_CHA
 export function combineFields(fields=[]) {return START_CHAR + fields.join(END_CHAR + START_CHAR) + END_CHAR}
 export function varInStr(v) {return `\${${parseJS(v)}}`}
 
-//returns properties of prefix existing in rssMap
+//returns properties of prefix (foo)(bar) existing in rssMap
 export function getSubfields(prefix) {
     const parts = separateVar(prefix),
           fields = [];
           
     for (var key in rssMap) {
         let match = true;
-        const fieldInfo = rssMap[key];
+        const otherParts = separateVar(rssMap[key].value)
 
         //if fieldInfo is a subfield, it's length will be 1 greater than the prefix
-        if (fieldInfo.fieldLength !== parts.length + 1) continue
+        if (otherParts.length !== parts.length + 1) continue
 
         //compare fieldInfo to the prefix parts, does not need to check the last field of fieldInfo
         for (var i=0; i<parts.length; i++) {
             //if field doesn't match, and field isn't a wildcard, it is not a match
-            if (fieldInfo.fields[i] !== parts[i] && fieldInfo.fields[i] !== WILD_CHAR) {
+            if (otherParts[i] !== parts[i] && otherParts[i] !== WILD_CHAR) {
                 match = false
                 break
             }
         }
 
         if (match) {
-            fields.push(fieldInfo)
+            fields.push(rssMap[key])
         }
     }
     
     return fields;
-}
-
-//DEPRECATED returns the proper update config to LogicExpandable using prefix
-export function getUpdateConfig(prefix) {
-    const parts = separateVar(prefix)
-
-    for (var ref in rssMap) {
-        let match = true;
-        const fieldInfo = rssMap[ref];
-
-        //if fieldInfo is a match, it's length will be equal to prefix
-        if (fieldInfo.fieldLength !== parts.length) continue
-
-        //if a field doesn't match, set match to false and leave loop
-        for (var i=0; i<parts.length; i++) {
-            if (fieldInfo.fields[i] !== parts[i] && fieldInfo.fields[i] !== WILD_CHAR) {
-                match = false
-                break
-            }
-        }
-
-        //if field is a match, return fieldInfo
-        if (match) {
-            return fieldInfo;
-        }
-    }
-
-    return {}
 }
 
 //display the variable in proper javascript
