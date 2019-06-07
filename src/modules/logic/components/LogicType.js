@@ -9,7 +9,7 @@ import {
  } from '../../components/Common';
 
 export default function LogicType(props) {
-    const { logicKey, logicItem, path } = props
+    const { logicKey, logicItem, path, vars } = props
     const {
         operatorType: selectedOperator,
         logicType: selectedLogic,
@@ -25,6 +25,7 @@ export default function LogicType(props) {
             params={{
                 logicKey,
                 path,
+                vars,
             }}
         >
             <LogicButton

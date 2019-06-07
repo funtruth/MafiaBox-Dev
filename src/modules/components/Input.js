@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Input.css'
 import { useAutofocus } from '../hooks/Hooks';
-import Body from './Body';
+import Row from './Row';
+import { DropSubmit } from '../dropdown/components/Common';
 
 const getClass = (theme) => {
     switch(theme) {
@@ -22,6 +23,7 @@ export default function Input(props) {
         value,
         onSubmit,
         submitOnBlur,
+        showSubmit,
         autofocus,
         type,
         placeholder,
@@ -55,7 +57,7 @@ export default function Input(props) {
     }
 
     return (
-        <Body {...outerprops}>
+        <Row {...outerprops}>
             <input
                 ref={focusRef}
                 className={getClass(theme)}
@@ -67,6 +69,7 @@ export default function Input(props) {
                 type={type}
                 style={style}
             />
-        </Body>
+            {showSubmit && <DropSubmit onClick={() => onSubmit(text)}></DropSubmit>}
+        </Row>
     )
 }

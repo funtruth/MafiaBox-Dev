@@ -48,6 +48,7 @@ function parseVar(byVK, vK) {
         case parseType.number:
             return parseNumber(value.byId, value.source)
         case parseType.variable:
+        case parseType.declare:
             return parseJS(value)
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right

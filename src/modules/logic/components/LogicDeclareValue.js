@@ -26,7 +26,7 @@ export default function LogicDeclareValue({
             >
                 value
                 <Text size="s" before="xxs">
-                    {item.declare.display}
+                    {item.declare && item.declare.display}
                 </Text>
             </LogicButton>
         </DropClick>

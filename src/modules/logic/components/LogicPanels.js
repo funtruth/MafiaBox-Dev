@@ -6,6 +6,7 @@ import {
     dropdownType,
     modalType,
     parseType,
+    variableType,
 } from '../../common/types'
 import { LOGIC_ITEM_VAR } from '../../common/defaults';
 
@@ -18,8 +19,10 @@ import { updateGeneral } from '../../page/PageReducer'
 import {
     Body,
     DropClick,
+    Icon,
     LogicButton,
     Row,
+    Text,
 } from '../../components/Common';
 
 export default function LogicPanels(props) {
@@ -145,15 +148,13 @@ export default function LogicPanels(props) {
                             baseVar: varRepo[value.left],
                         }}
                     >
-                        <LogicButton>
-                            {display || '...'}
-                        </LogicButton>
+                        <LogicButton>{display || '...'}</LogicButton>
                     </DropClick>
                     <LogicPanels
                         {...props}
                         index={1}
                         varKey={value.right}
-                        baseVar={varRepo[value.left]}
+                        baseVar={value.typingDisabled ? varRepo[value.right] : varRepo[value.left]}
                     />
                 </Row>
             )
@@ -187,6 +188,49 @@ export default function LogicPanels(props) {
                         />
                     ))}
                 </Body>
+            )
+        case parseType.declare:
+            return (
+                <Row>
+                    <DropClick
+                        dropdown={dropdownType.declarePanelVar}
+                        params={{
+                            varItem,
+                            varKey,
+                            scope: logicItem.key,
+                            path: [...rootPath, 'vars', varKey],
+                            parsePath: varPath,
+                        }}
+                    >
+                        <LogicButton
+                            highlight="blue"
+                            color="grey"
+                        >
+                            new variable
+                            <Text size="s" before="xxs">
+                                {display || '...'}
+                            </Text>
+                        </LogicButton>
+                    </DropClick>
+                    <DropClick
+                        dropdown={dropdownType.declareVarType}
+                        params={{
+                            variableTypeLocked: true,
+                            path: varPath,
+                        }}
+                    >
+                        <LogicButton
+                            highlight="blue" 
+                            color="whitish"
+                        >
+                            <Text size="s" color="grey" after="xxs">
+                                type
+                            </Text>
+                            {variableTypes.map(type => type && <Icon key={type} icon={variableType[type].icon}/>)}
+                            {variableTypes.length === 0 && '...'}
+                        </LogicButton>
+                    </DropClick>
+                </Row>
             )
         case parseType.number:
         case parseType.string:

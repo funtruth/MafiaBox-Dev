@@ -13,6 +13,7 @@ import { LOGIC_ITEM_VAR } from '../../logic/defaults';
 export default function DeclareVarType({
     slate,
     path,
+    variableTypeLocked,//passed
     updateGeneral,
     showDropdown,
 }){
@@ -21,6 +22,8 @@ export default function DeclareVarType({
 
     //set basic variable type, then set a parse-able variable @ item.declare
     const handleSelect = item => {
+        if (variableTypeLocked) return;
+
         updateGeneral({
             path,
             update: {
@@ -49,6 +52,17 @@ export default function DeclareVarType({
                 rightCheck
                 text={item.title}
             />
+        )
+    }
+
+    //still allows user to view locked variableTypes
+    if (variableTypeLocked) {
+        const types = variableTypes.map(vT => variableType[vT])
+        return (
+            <>
+                <DropTitle>variable types</DropTitle>
+                {types.map(renderItem)}
+            </>
         )
     }
 

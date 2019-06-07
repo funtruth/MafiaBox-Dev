@@ -4,12 +4,14 @@ import _ from 'lodash'
 import {
     dropdownType,
     variableType,
+    operatorType,
 } from '../../common/types'
 
 import LogicDeclareValue from './LogicDeclareValue'
 import {
     Body,
     DropClick,
+    Icon,
     LogicButton,
     Row,
     Text,
@@ -18,24 +20,36 @@ import {
 export default function LogicDeclare({
     vars,
     logicKey,
+    logicItem,
     readOnly,
     path,
 }){
+    if (logicKey && (logicItem.operatorType === operatorType.forin.key)) {
+        return null;
+    }
+
     const renderItem = (item) => {
         const variableTypes = item.variableTypes || []
         const varPath = [...path, 'vars', item.key]
 
         return (
             <Row key={item.key} style={{margin: 2}}>
-                <LogicButton
-                    highlight="blue"
-                    color="grey"
+                <DropClick
+                    dropdown={dropdownType.declareVarName}
+                    params={{
+                        path: varPath,
+                    }}
                 >
-                    new variable
-                    <Text size="s" before="xxs">
-                        {item.key}
-                    </Text>
-                </LogicButton>
+                    <LogicButton
+                        highlight="blue"
+                        color="grey"
+                    >
+                        new variable
+                        <Text size="s" before="xxs">
+                            {item.display}
+                        </Text>
+                    </LogicButton>
+                </DropClick>
                 <DropClick
                     dropdown={dropdownType.declareVarType}
                     disabled={readOnly}
@@ -50,7 +64,7 @@ export default function LogicDeclare({
                         <Text size="s" color="grey" after="xxs">
                             type
                         </Text>
-                        {variableTypes.map(type => type && <i key={type} className={variableType[type].icon}/>)}
+                        {variableTypes.map(type => type && <Icon key={type} icon={variableType[type].icon}/>)}
                         {variableTypes.length === 0 && '...'}
                     </LogicButton>
                 </DropClick>

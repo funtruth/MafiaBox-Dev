@@ -84,7 +84,7 @@ export const operatorType = {
         key: 'forin',
         title: 'for',
         value: {
-            left: "for(var",
+            left: "for(var ",
             right: ")",
         },
         icon: 'sync',
@@ -108,6 +108,7 @@ export const parseType = {
     boolean: 'parseType/boolean',
     constant: 'parseType/constant',
     collection: 'parseType/collection',
+    declare: 'parseType/declare',
     object: 'parseType/object',
     operation: 'parseType/operation',
     string: 'parseType/string',

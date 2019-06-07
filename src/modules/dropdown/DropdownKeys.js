@@ -36,13 +36,13 @@ import CreateGlobalVar from './page/CreateGlobalVar'
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
 import PickVarWithType from './vars/PickVarWithType';
-import PickUidObject from './vars/PickUidObject'
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
 import PickGlobalVar from './vars/PickGlobalVar'
 import VarItemConstant from './common/VarItemConstant'
-
-import DeclareVarType from './assign/DeclareVarType'
+import DeclareVarType from './vars/DeclareVarType'
+import DeclareVarName from './vars/DeclareVarName'
+import DeclarePanelVar from './vars/DeclarePanelVar'
 
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
@@ -110,8 +110,6 @@ export default function DropdownKeys(props) {
             return <PickVarSubfield {...props}/>
         case dropdownType.pickVarWithType:
             return <PickVarWithType {...props}/>
-        case dropdownType.pickUidObject:
-            return <PickUidObject {...props}/>
         case dropdownType.pickComparison:
             return <PickComparison {...props}/>
         case dropdownType.replaceWildcard:
@@ -120,6 +118,10 @@ export default function DropdownKeys(props) {
             return <PickGlobalValue {...props}/>
         case dropdownType.declareVarType:
             return <DeclareVarType {...props}/>
+        case dropdownType.declareVarName:
+            return <DeclareVarName {...props}/>
+        case dropdownType.declarePanelVar:
+            return <DeclarePanelVar {...props}/>
 
         case dropdownType.pickChoice:
             return <PickChoice {...props}/>

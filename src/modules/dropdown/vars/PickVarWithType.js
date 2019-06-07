@@ -1,11 +1,7 @@
 import React from 'react'
 
-import {
-    dropdownType,
-    variableType,
-} from '../../common/types'
+import { variableType } from '../../common/types'
 
-import { VARTYPE_IS_OBJ } from '../../common/arrows';
 import {
     useVarType,
 } from '../../hooks/Hooks'
@@ -13,7 +9,6 @@ import {
 import {
     DropEmpty,
     DropItem,
-    DropParent,
     DropTitle,
 } from '../components/Common'
 import Types from '../types/index';
@@ -24,7 +19,6 @@ export default function PickVarWithType(props){
         baseVar,
         scopedVars,//passed
         pickVarClick,//passed
-        showDropdown,
     } = props
 
     //must have a reference variable
@@ -42,20 +36,6 @@ export default function PickVarWithType(props){
         if (item.key === baseVar.value) return null
 
         const chosen = slate.value === item.key
-
-        if (VARTYPE_IS_OBJ(item)) {
-            return (
-                <DropParent
-                    key={item.key}
-                    dropdown={dropdownType.pickVarSubfield}
-                    showDropdown={showDropdown}
-                    params={{
-                        prefix: item.key,
-                    }}
-                    text={item.key}
-                />
-            )
-        }
 
         return (
             <DropItem

@@ -9,9 +9,10 @@ import {
 import { DEFAULT_VAR_ID } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
-import { concatField, getSubfields } from '../../logic/proptool';
+import { concatField, getSubfields, parseJS } from '../../logic/proptool';
 import { useAutofocus } from '../../hooks/Hooks'
 import { checkAlpha } from '../../common/helpers';
+import generatePushID from '../../common/generatePushID';
 
 import {
     DropEmpty,
@@ -51,12 +52,16 @@ export default function PickVar({
         }
 
         const variableName = concatField("", text)
+        const varKey = generatePushID('var')
+
         updateGeneral({
             path: [...rootPath, 'vars'],
             update: {
-                [variableName]: {
+                [varKey]: {
                     ...DEFAULT_VAR_ID,
-                    key: variableName,
+                    key: varKey,
+                    value: variableName,
+                    display: parseJS(variableName),
                     subfield: text,
                     fields: [
                         text,
@@ -147,7 +152,7 @@ export default function PickVar({
                 onClick={() => pickVarClick(item)}
                 leftIcon={getVarTypeIcon(item.variableTypes)}
                 rightCheck
-                text={item.key}
+                text={item.display}
             />
         )
     }

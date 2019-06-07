@@ -31,6 +31,7 @@ export const LOGIC_ITEM_DATA_SOURCE = "source"
     parseBy         parseType, how the LogicEngine should read the data
     value           payload for parseType.string, {byId, byIndex}
     "               payload for parseType.variable, value in (foo)(bar) form
+    "               payload for parseType.declare, value in (foo)(bar) form
     "               payload for parseType.collection, value is [varKey, varKey...]
     "               payload for parseType.operation, see LOGIC_ITEM_VAR_OPERATION
     "               payload for parseType.wrapper, seeLOGIC_ITEM_VAR_WRAPPER
@@ -51,11 +52,13 @@ export const LOGIC_ITEM_VAR = {
     display         REMOVED, included in LOGIC_ITEM_VAR.display
     left            logicKey for left-side
     operator        operator
+    typingDisabled  
     right           logicKey for right-side
 */
 export const LOGIC_ITEM_VAR_OPERATION = {
     left: "",
     operator: "",
+    typingDisabled: false,
     right: "",
 }
 
@@ -85,10 +88,11 @@ export const LOGIC_ITEM_VAR_WRAPPER = {
 */
 export const DEFAULT_VAR_ID = {
     key: '',
+    value: '',
+    display: '',
     subfield: '',
     fields: '',
     fieldLength: '',
-    dropdown: '',
     variableTypes: '',
     declare: '',
 }

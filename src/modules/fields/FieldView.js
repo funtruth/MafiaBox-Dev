@@ -18,7 +18,7 @@ import TimerField from './components/TimerField'
 import PriorityField from './components/PriorityField'
 import { IS_PUBLISHED } from '../common/arrows';
 import Tag from '../components/Tag';
-import { Separator } from '../components/Common';
+import { Body } from '../components/Common';
 
 export default function FieldView(props) {
     const { path, slate, updatePage, updateGeneral } = props
@@ -78,11 +78,14 @@ export default function FieldView(props) {
                 const { icon } = fieldType[item.fieldType] || ""
 
                 return (
-                    <React.Fragment key={index}>
-                        <Separator t={1} size={4}></Separator>
+                    <Body
+                        key={index}
+                        sizes={['s', 'z']}
+                        style={{borderLeft: '1px dashed #666', marginBottom: 20}}
+                    >
                         <Tag size="l" icon={icon} text={item.title} bg="transparent" bold></Tag>
                         {renderItem(item)}
-                    </React.Fragment>
+                    </Body>
                 )
             })}
             <div style={{height: '30vh'}}></div>

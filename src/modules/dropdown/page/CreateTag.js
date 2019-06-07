@@ -2,8 +2,7 @@ import React from 'react'
 
 import generatePushID from '../../common/generatePushID';
 
-import { Row, Input } from '../../components/Common';
-import { DropSubmit } from '../components/Common'
+import { Input } from '../../components/Common';
 
 export default function CreateUniqueTag({
     slate,
@@ -28,15 +27,14 @@ export default function CreateUniqueTag({
     }
 
     return (
-        <Row sizes={['z', 'xs']}>
-            <Input
-                theme="tag"
-                autofocus
-                onSubmit={onSubmit}
-                placeholder={placeholder}
-                type="text"
-            />
-            <DropSubmit onClick={onSubmit}/>
-        </Row>
+        <Input
+            theme="tag"
+            autofocus
+            onSubmit={onSubmit}
+            showSubmit
+            placeholder={placeholder}
+            outerprops={{sizes: ['z', 'xs']}}
+            type="text"
+        />
     )
 }

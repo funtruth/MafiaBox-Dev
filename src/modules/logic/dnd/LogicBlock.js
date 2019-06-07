@@ -57,7 +57,7 @@ export default function LogicBlock(props) {
                     />
                     <Row>
                         <LogicAddBelow onClick={handleAddBelow}/>
-                        <LogicDeclare {...props}/>
+                        <LogicDeclare {...props} logicItem={logicItem}/>
                     </Row>
                     <LogicUpdateThrottle logicItem={logicItem}/>
                 </div>
@@ -77,7 +77,7 @@ export default function LogicBlock(props) {
                                 index={index}
                                 logicKey={childKey}
                                 parentKey={logicKey}
-                                scope={[...scope, ...byIndex.slice(0, index)]}
+                                scope={[...scope, childKey, ...byIndex.slice(0, index)]}
                             />
                     ))}
                 </Body>
