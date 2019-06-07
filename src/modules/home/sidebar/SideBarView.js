@@ -14,25 +14,24 @@ import { Body, Tag } from '../../components/Common';
 
 //gets pathname from react-router
 export default function SideBarView({ pathname }) {
-    const paths = pathname.split('/')
-    
     const dispatch = useDispatch();
     const path = useSelector(state => state.nav.path);
     
     const activeProject = useSelector(state => state.firebase.activeProject);
     
-    let handleClick = (item) => {
+    let handleClick = (path) => {
         if (!activeProject) {
             return;
         }
 
-        dispatch(navigate("/" + activeProject + "/" + item.key))
+        dispatch(navigate(path))
         return;
     }
 
     let renderItem = (item) => {
-        const selected = item.key === paths[2]
-
+        const itemPath = `/${activeProject}/${item.key}`
+        const selected = itemPath === pathname
+        
         return (
             <Tag
                 key={item.key}
@@ -40,7 +39,7 @@ export default function SideBarView({ pathname }) {
                 color={selected ? 'whitish' : 'grey'}
                 icon={item.icon}
                 text={item.title}
-                onClick={() => handleClick(item)}
+                onClick={() => handleClick(itemPath)}
             />
         )
     }
@@ -53,6 +52,13 @@ export default function SideBarView({ pathname }) {
             <SideBarTitle text="Project"/>
             <ProjectDetails activeProject={activeProject}/>
             <SideBarTitle text="Develop"/>
+            <Tag
+                bg="charcoal"
+                color={pathname === `/${activeProject}` ? 'whitish' : 'grey'}
+                icon="home"
+                text="Home"
+                onClick={() => handleClick(`/${activeProject}`)}
+            />
             {items.map(renderItem)}
             {pathname !== path &&  <Redirect to={path}/>}
         </Body>

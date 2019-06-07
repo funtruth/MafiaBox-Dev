@@ -1,38 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import Input from '../../components/Input';
 
 export default function PageAbstract({
     slate,
     update,
 }){
-    const [title, setTitle] = useState(slate.title)
-    useEffect(() => {
-        setTitle(slate.title)
-    }, [slate.title])
-
-    const handleChange = e => {
-        setTitle(e.target.value)
-    }
-
-    const handleKeyPress = (e) => {
-        if(e.key === 'Enter') {    
-            e.target.blur() 
-        }
-    }
-
-    const handleTextBlur = () => {
+    const handleTextBlur = (title) => {
         update({title})
     }
 
     return (
-        <input
-            className="page-title-input"
-            value={title || ""}
-            onChange={handleChange}
-            onBlur={handleTextBlur}
-            onKeyPress={handleKeyPress}
+        <Input
+            theme="title"
+            value={slate.title}
+            onSubmit={handleTextBlur}
             placeholder="Untitled"
             type="text"
-            autoFocus={true}
         />
     )
 }

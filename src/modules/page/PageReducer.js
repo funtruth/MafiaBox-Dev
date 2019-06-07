@@ -437,7 +437,6 @@ export default (state = initialState, action) => {
         case REMOVE_PAGE:
         case RECEIVE_CHILD_EVENT:
         case RECEIVE_VALUE:
-        case UPDATE_GENERAL:
             return { ...state, ...action.payload }
         case RESET_REDUCER:
             return initialState;

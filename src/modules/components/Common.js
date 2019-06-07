@@ -7,6 +7,7 @@ import DropClick from './DropClick'
 import Footer from './Footer'
 import Header from './Header'
 import Icon from './Icon'
+import Input from './Input'
 import LogicButton from './LogicButton'
 import Row from './Row'
 import Separator from './Separator'
@@ -23,6 +24,7 @@ export {
     Footer,
     Header,
     Icon,
+    Input,
     LogicButton,
     Row,
     Separator,

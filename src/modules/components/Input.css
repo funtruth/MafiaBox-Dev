@@ -1,0 +1,11 @@
+.--input-title {
+    border: none;
+    background-color: rgba(54, 57, 64);
+    padding: 0px 7px;
+    font: 700 27px Segoe UI;
+    color: #f6f6f7;
+}
+
+.--input-title {
+    outline: none;
+}

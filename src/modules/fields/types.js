@@ -31,7 +31,7 @@ export const fieldType = {
     text: {
         key: 'text',
         index: 0,
-        icon: 'format-text',
+        icon: 'format-title',
         title: 'Text',
     },
     number: {

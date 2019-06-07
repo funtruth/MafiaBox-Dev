@@ -38,8 +38,8 @@ export default function Tag(props) {
             style={buttonStyle}
             onClick={event => onClick && onClick(event)}
         >
-            <Text size={size} color={color} bold={bold}>
-                <Row y="c">
+            <Text size={size} bold={bold}>
+                <Row y="c" color={color}>
                     {icon &&
                         <i
                             className={'mdi mdi-' + icon}

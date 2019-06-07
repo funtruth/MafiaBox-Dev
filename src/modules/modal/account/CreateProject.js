@@ -14,7 +14,6 @@ import {
 
 import { switchToProject } from '../../firebase/FirebaseReducer'
 import { showModal } from '../ModalReducer'
-import { checkAlpha } from '../../common/helpers';
 import generatePushID from '../../common/generatePushID';
 
 import FormInput from '../../components/FormInput'
@@ -39,20 +38,11 @@ export default function CreateProject(props) {
             })
             return;
         }
-        if (!checkAlpha(gameKey, 'A26wSPACE')) {
-            setErrors({gameKey: '*Only Alphabetic characters are allowed.'})
-            return;
-        }
-        if (!description || !checkAlpha(description, 'A26N10wDESC')) {
-            setErrors({description: '*Only Alphabetic characters are allowed.'})
-            return;
-        }
         
         //initialize a new project
-        const projectKey = generatePushID(gameKey)
+        const projectKey = generatePushID('project')
 
         let multiUpdate = {}
-        
         multiUpdate[`dev/${projectKey}/fieldMap`] = defaultFieldMap
         multiUpdate[`dev/${projectKey}/fieldRepo`] = defaultFieldRepo
         multiUpdate[`userProjects/${uid}/${projectKey}`] = true

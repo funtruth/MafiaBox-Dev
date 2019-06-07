@@ -1,7 +1,10 @@
 import './firebase'
+import firebase from 'firebase/app'
+import { diff } from 'deep-diff'
 
 import { navigate } from '../app/NavReducer'
 import { resetPageReducer } from '../page/PageReducer';
+import { updateByPath } from '../common/helpers';
 
 const initialState = {
     authUser: {
@@ -18,10 +21,16 @@ const initialState = {
     projectUsers: {},
 }
 
+const VALID_PROPS = [
+    'title',
+    'description',
+]
+
 const USER_LISTENER = 'fblistener/user-update'
 const USER_PROJECTS_LISTENER = 'fblistener/user-projects-update'
 const PROJECT_USERS_LISTENER = 'fblistener/project-users-update'
-const CHANGE_ACTIVE_PROJECT = ' fb/change-active-project'
+const CHANGE_ACTIVE_PROJECT = 'fb/change-active-project'
+const UPDATE_PROJECT = 'fb/update-project'
 
 export function userListener(user) {
     return (dispatch) => {
@@ -71,6 +80,64 @@ export function projectUsersListener(snap) {
             type: PROJECT_USERS_LISTENER,
             payload: mergedProjects,
         })
+    }
+}
+
+export function updateProject(...updates) {
+    return (dispatch, getState) => {
+        const { projectUsers, activeProject } = getState().firebase
+        
+        let reducer;
+        updates.forEach(({path, update}) => {
+            reducer = updateByPath(path, update, reducer || projectUsers[activeProject])
+        })
+        
+        dispatch(receiveAction({
+            type: UPDATE_PROJECT,
+            payload: reducer,
+        }))
+    }
+}
+
+//intercepts redux action/payload and checks diffs to properly update firebase
+//dispatches the action/payload
+export function receiveAction({type, payload}) {
+    return (dispatch, getState) => {
+        const { projectUsers, activeProject } = getState().firebase 
+
+        let batchUpdate = {},
+            pathToRepo = `projectUsers/${activeProject}/`;
+
+        const handleDiff = (item) => {
+            if (!item.path) {
+                return batchUpdate[prop] = item.rhs || ""
+            }
+
+            switch(item.kind) {
+                case "A":
+                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || ""
+                    break
+                default:
+                    batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || ""
+            }
+        }
+        
+        for (var prop in payload) {
+            if (!VALID_PROPS.includes(prop)) {
+                console.warn('This is not a valid prop', prop, 'error coming from action:', type)
+                continue
+            }
+            
+            const diffs = diff(projectUsers[prop], payload[prop])
+            if (diffs) diffs.forEach(handleDiff)
+        }
+        
+        try {
+            console.log('receiveAction', {batchUpdate})
+            firebase.database().ref(pathToRepo).update(batchUpdate)
+        } catch {
+            console.log('there was an error updating to Firebase', {batchUpdate})
+        }
     }
 }
 
