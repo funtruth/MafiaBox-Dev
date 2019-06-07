@@ -17,10 +17,10 @@ const itemSource = {
 
         return {
             ...LOGIC_ITEM_VAR,
-            display: parseJS(item.key),
+            display: parseJS(item.value),
             parseBy: parseType.variable,
             variableTypes: [variableType.number.key],
-            value: item.key,
+            value: item.value,
         }
     }
 }
@@ -29,7 +29,7 @@ function ValueDrag(props) {
     const { item, connectDragSource } = props
 
     return connectDragSource(
-        <div><Tag>{item.key}</Tag></div>
+        <div><Tag>{item.value}</Tag></div>
     );
 }
 

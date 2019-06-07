@@ -84,7 +84,7 @@ export const operatorType = {
         key: 'forin',
         title: 'for',
         value: {
-            left: "for(var ",
+            left: "for(",
             right: ")",
         },
         icon: 'sync',

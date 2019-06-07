@@ -14,6 +14,7 @@ export const VARTYPE_FILTER = (type) => i => {
     }
 }
 
+export const VARTYPE_IS_KEY = i => i && i.variableTypes && i.variableTypes.includes(variableType.key.key)
 export const VARTYPE_IS_NUM = i => i && i.variableTypes && i.variableTypes.includes(variableType.number.key)
 export const VARTYPE_IS_STR = i => i && i.variableTypes && i.variableTypes.includes(variableType.string.key)
 export const VARTYPE_IS_BOOL = i => i && i.variableTypes && i.variableTypes.includes(variableType.boolean.key)

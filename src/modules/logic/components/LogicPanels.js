@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import { useDispatch } from 'react-redux'
 
 import {
@@ -134,6 +135,21 @@ export default function LogicPanels(props) {
         dispatch(showDropdown());
     }
 
+    const deleteFromCollection = (vK) => {
+        let mapClone = _.cloneDeep(varItem.value)
+        mapClone = mapClone.filter(i => i !== vK)
+
+        if (mapClone.length === 0) mapClone = ""
+        
+        dispatch(updateGeneral({
+            path: [...path, 'byId', vK],
+            update: "",
+        }, {
+            path: [...path, 'byId', varKey, 'value'],
+            update: mapClone
+        }))
+    }
+
     let dropdown, modal;
     switch(parseBy) {
         case parseType.operation:
@@ -163,6 +179,7 @@ export default function LogicPanels(props) {
         case parseType.collection:
         case parseType.object:
             dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
+            console.log({value})
             return (
                 <Body x="l">
                     {display &&
@@ -181,11 +198,16 @@ export default function LogicPanels(props) {
                         </DropClick>
                     }
                     {value && value.map(vK => (
-                        <LogicPanels
-                            key={vK}
-                            {...props}
-                            varKey={vK}
-                        />
+                        <Row key={vK}>
+                            <LogicPanels
+                                {...props}
+                                varKey={vK}
+                            />
+                            <Icon
+                                icon="close"
+                                onClick={() => deleteFromCollection(vK)}
+                            ></Icon>
+                        </Row>
                     ))}
                 </Body>
             )

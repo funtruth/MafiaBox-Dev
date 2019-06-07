@@ -68,7 +68,7 @@ export default function ReplaceWildcard(props){
     }
 
     const handleSelect = (item) => {
-        const newValue = replaceVarWithMap(item.key, slate.value, focusMap)
+        const newValue = replaceVarWithMap(item.value, slate.value, focusMap)
         updateGeneral({
             path,
             update: {

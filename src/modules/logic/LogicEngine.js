@@ -1,17 +1,19 @@
-import { parseType, comparisonType } from '../common/types'
-import { parseJS, separateVar, START_CHAR, varInStr } from './proptool'
+import _ from 'lodash'
+import { parseType, comparisonType, variableType } from '../common/types'
+import { parseJS, separateVar, START_CHAR, varInStr, keyAsStr } from './proptool'
+import { VARTYPE_FILTER } from '../common/arrows';
 
 var beautify_js = require('js-beautify');
 
 export function getCode(data) {
     if (!data) return '';
-    const { byIndex, byId } = data
+    const { byIndex, byId, vars } = data
     
-    return beautify_js(`(rss, next, choice)=>{${byIndex.map(lK => parseLogic(byId, lK)).join(";")}}`, {brace_style: 'end-expand'})
+    return beautify_js(`(rss, next, choice)=>{${byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(";")}}`, {brace_style: 'end-expand'})
 }
 
 //lK logicKey
-function parseLogic(byLK, lK) {
+function parseLogic(byLK, lK, vars) {
     if (!lK) return ""
 
     const item = byLK[lK]
@@ -23,10 +25,12 @@ function parseLogic(byLK, lK) {
         source,
     } = item
     
+    let codeDeclare = _.filter(vars, i => i.scope === lK).map(v => 'let ' + parseJS(v.value)).join(';')
+    if (codeDeclare) codeDeclare += ';'
     let codeBody = parseVar(varRepo, source);
-    let codeRight = byIndex ? "{" + byIndex.map(lK => parseLogic(byLK, lK)).join(";") + "}" : ""
+    let codeRight = byIndex ? "{" + byIndex.map(lK => parseLogic(byLK, lK, vars)).join(";") + "}" : ""
 
-    return codeBody + codeRight
+    return codeDeclare + codeBody + codeRight
 }
 
 //vK varKey
@@ -54,12 +58,13 @@ function parseVar(byVK, vK) {
         case parseType.collection:
             return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
         case parseType.object:
-            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(",") + '}' : "{}"
+            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(";") + '}' : "{}"
         case parseType.string:
             return parseString(value)
         case parseType.update:
             return parseUpdate(value)
         case parseType.constant:
+            if (VARTYPE_FILTER([variableType.key.key, variableType.global.key])(item)) return keyAsStr(value)
         case parseType.boolean:
             return value
         default:

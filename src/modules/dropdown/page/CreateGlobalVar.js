@@ -1,74 +1,49 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 
  import generatePushID from '../../common/generatePushID';
-import {
-    useAutofocus
-} from '../../hooks/Hooks';
-import { updateGeneral } from '../../page/PageReducer'
 
-import {
-    DropTitle,
-    DropSubmit,
-} from '../components/Common'
-import { Row } from '../../components/Common';
+import { DropTitle } from '../components/Common'
+import { Input } from '../../components/Common';
 
 const KEYWORDS = []
 
 //PickGlobalVar
-export default connect(
-    state => ({
-        globalVars: state.page.globalVars,
-    }),
-    {
-        updateGeneral,
-    }
-)(function CreateGlobalVar(props) {
-    const focusRef = useAutofocus()
-
-    const [value, setValue] = useState("")
-    const handleChange = e => setValue(e.target.value)
-
-    const onKeyDown = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                onSubmit()
-                break
-            default:
-        }
-    }
-
-    const onSubmit = () => {
+export default function CreateGlobalVar({
+    updateGeneral,
+    showDropdown,
+}){
+    const onSubmit = (value) => {
         if (KEYWORDS.includes(value)) {
             return;
         }
 
         const newKey = generatePushID('global')
-        props.updateGeneral({
+        updateGeneral({
             path: ['globalVars', newKey],
             update: {
                 key: newKey,
+                value,
+                display: value,
                 title: value,
             }
         })
-        props.popDropdown();
+        showDropdown();
     }
 
     return (
         <>
             <DropTitle>create value</DropTitle>
-            <Row sizes={['z', 'xs']}>
-                <input
-                    ref={focusRef}
-                    className="tag-input"
-                    value={value}
-                    onChange={handleChange}
-                    onKeyDown={onKeyDown}
-                    placeholder="Name your value ..."
-                    type='text'
-                />
-                <DropSubmit onClick={onSubmit}/>
-            </Row>
+            <Input
+                theme="tag"
+                onSubmit={onSubmit}
+                showSubmit
+                placeholder="Variable name ..."
+                type="text"
+                autofocus
+                outerprops={{
+                    sizes: ['z', 'xs'],
+                }}
+            />
         </>
     )
-})
+}
