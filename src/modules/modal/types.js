@@ -16,7 +16,7 @@ export const modalType = {
     editTrigger: 'modalType/edit-trigger',
     editPriority: 'modalType/edit-priority',
     removePriorityRow: 'modalType/remove-priority-row',
-    pickCharacterImage: 'modalType/pick-character-image',
+    pickSprite: 'modalType/pick-sprite',
     
     //StringViews
     editString: 'modalType/edit-string',

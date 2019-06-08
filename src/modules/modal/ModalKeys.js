@@ -12,7 +12,7 @@ import DeletePage from './keys/DeletePage';
 import DeleteStory from './keys/DeleteStory';
 import ModalCodeView from './components/ModalCodeView'
 import PageModal from './keys/PageModal';
-import PickCharImage from './image/PickCharImage'
+import PickSprite from './roles/PickSprite'
 import PublishWithSource from './page/PublishWithSource';
 import RemovePriorityRow from './priority/RemovePriorityRow'
 
@@ -46,8 +46,8 @@ export default function ModalKeys(props) {
             return <EditPriority {...props}/>
         case modalType.removePriorityRow:
             return <RemovePriorityRow {...props}/>
-        case modalType.pickCharacterImage:
-            return <PickCharImage {...props}/>
+        case modalType.pickSprite:
+            return <PickSprite {...props}/>
         //LogicViews
         case modalType.editLogic:
             return <EditLogic {...props}/>

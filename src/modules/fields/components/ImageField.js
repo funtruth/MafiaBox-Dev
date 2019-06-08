@@ -1,34 +1,40 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { modalType } from '../../modal/types';
 
-import { showModal } from '../../modal/ModalReducer'
-
 import {
     Body,
-    Button,
+    Tag,
+    DropClick,
 } from '../../components/Common'
 
-function ImageField(props) {
-    const handleClick = () => {
-        props.showModal(modalType.pickCharacterImage, {
-
-        });
-    }
-
+export default function ImageField({path, value}) {
     return (
-        <Body size="s">
-            <Button size="s" onClick={handleClick}>
-                TODO
-            </Button>
+        <Body x="l">
+            {value &&
+                <div
+                    style={{
+                        width: 150,
+                        height: 200,
+                        margin: 12,
+                        backgroundImage: `url(${value})`,
+                        backgroundSize: 'contain',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                />
+            }
+            <DropClick
+                modal={modalType.pickSprite}
+                params={{
+                    path,
+                }}
+            >
+                <Tag
+                    icon="image-search"
+                    text="Select ..."
+                />
+            </DropClick>
         </Body>
     )
 }
-
-export default connect(
-    null,
-    {
-        showModal,
-    }
-)(ImageField)

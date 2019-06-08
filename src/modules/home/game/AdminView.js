@@ -3,7 +3,7 @@ import _ from 'lodash'
 import firebase from 'firebase/app'
 import { useSelector } from 'react-redux'
 
-import { Body, Tag, Row } from '../../components/Common'
+import { Body, Tag, Row, Input } from '../../components/Common'
 import { getCode } from '../../logic/LogicEngine';
 
 export default function AdminView(props) {
@@ -40,6 +40,7 @@ export default function AdminView(props) {
             key: modeKey,
             title: modeItem.title,
             startPhase: modeItem.source.value,
+            roleSetup: modeItem.roleSetup,
             playerNum: modeItem.playerNum,
         }
         try {
@@ -61,6 +62,7 @@ export default function AdminView(props) {
             title: pageItem.title,
             description: pageItem.description1,
             roleTeam: pageItem.roleTeam,
+            image: pageItem.roleImage,
             roleTargetMode: getCode(pageItem.roleTargetMode),
         }
         try {
@@ -89,6 +91,17 @@ export default function AdminView(props) {
             firebase.database().ref(path).update(update)
         } catch {
             console.log('there was an error updating to Firebase', {update})
+        }
+    }
+
+    const publishImage = (url) => {
+        if (!url) return;
+        const path = 'images'
+
+        try {
+            firebase.database().ref(path).push(url)
+        } catch {
+            console.log("there was an error", {path, url})
         }
     }
     
@@ -162,6 +175,16 @@ export default function AdminView(props) {
                     />
                 ))}
             </Row>
+            <Tag
+                icon="auto-fix"
+                text="Store ImageSrc"
+                bg="darkpurple"
+            />
+            <Input
+                theme="tag"
+                onSubmit={publishImage}
+                type="text"
+            />
         </Body>
     )
 }

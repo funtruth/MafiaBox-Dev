@@ -7,6 +7,14 @@
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
 
+## 06/08/2019
+### Major
+- [ ] playing a game (single player)
+- [x] basic website for landing (beta invite)
+
+### Minor
+- [x] image view
+
 ## 06/07/2019
 ### Major
 - [x] Simple game prototyping, rough drafts are made through AdminView without any realistic way to parse the phase paths. Events not included yet.

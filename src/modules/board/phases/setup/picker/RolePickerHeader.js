@@ -68,7 +68,7 @@ export default function RolePickerHeader(props) {
             case 1:
                 setResults(
                     _(pageRepo)
-                        .filter(i => i.boardType === boardType.roles.key)
+                        .filter(i => i.board === boardType.roles.key)
                         .groupBy(i => i.storyType)
                         .map((item, key) => ({
                             key,
