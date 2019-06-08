@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import _ from 'lodash'
 
 import {
@@ -10,7 +10,6 @@ import { VAR_WITH_SCOPE } from '../../common/defaults'
 
 import { VARTYPE_IS_OBJ, getVarTypeIcon } from '../../common/arrows';
 import { concatField, getSubfields, parseJS } from '../../logic/proptool';
-import { useAutofocus } from '../../hooks/Hooks'
 import { checkAlpha } from '../../common/helpers';
 import generatePushID from '../../common/generatePushID';
 
@@ -137,7 +136,6 @@ export default function PickVar({
     }
     
     const rssVars = getSubfields('(rss)')
-
     return (
         <>
             {renderDeclare()}

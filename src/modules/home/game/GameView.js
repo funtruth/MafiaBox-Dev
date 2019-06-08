@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateProject } from '../../firebase/FirebaseReducer';
 
 import { Body, Input, Tag, TextArea } from '../../components/Common';
+import AdminView from './AdminView'
 
 export default function GameView({match, path}) {
     const dispatch = useDispatch();
@@ -59,6 +60,7 @@ export default function GameView({match, path}) {
                 type="text"
                 outerprops={{sizes: ['z', 'm']}}
             />
+            <AdminView/>
         </Body>
     )
 }

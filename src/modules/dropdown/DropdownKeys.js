@@ -1,11 +1,7 @@
 import React from 'react'
 
-import {
-    boardType,
-    dropdownType,
-} from '../common/types';
+import { dropdownType } from '../common/types';
 
-import SearchBoard from './update/SearchBoard';
 import DropInput from './components/DropInput'
 
 import DropString from './common/DropString';
@@ -20,7 +16,6 @@ import PageHistory from './page/PageHistory'
 import PageOptions from './page/PageOptions'
 
 import InputValue from './components/InputValue'
-import PageLib from './library/PageLib';
 
 import PickLogic from './logic/PickLogic';
 import PickOperator from './logic/PickOperator';
@@ -47,7 +42,6 @@ import DeclarePanelVar from './vars/DeclarePanelVar'
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
-import PickRoleTeam from './update/PickRoleTeam';
 import PickGlobalValue from './update/PickGlobalValue';
 import PickRecipient from './strings/PickRecipient'
 
@@ -77,8 +71,6 @@ export default function DropdownKeys(props) {
 
         case dropdownType.inputValue:
             return <InputValue {...props}/>
-        case dropdownType.pageLib:
-            return <PageLib {...props}/>
 
         case dropdownType.dropInput:
             return <DropInput {...props}/>
@@ -128,12 +120,6 @@ export default function DropdownKeys(props) {
             return <PickHealth {...props}/>
         case dropdownType.pickTrigger:
             return <PickTrigger {...props}/>
-        case dropdownType.pickRole:
-            return <SearchBoard {...props} boardType={boardType.roles.key}/>
-        case dropdownType.pickLibrary:
-            return <SearchBoard {...props} boardType={boardType.library.key}/>
-        case dropdownType.pickRoleTeam:
-            return <PickRoleTeam {...props}/>
         case dropdownType.pickGlobalVar:    
             return <PickGlobalVar {...props}/>
         case dropdownType.pickRecipient:

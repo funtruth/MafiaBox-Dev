@@ -21,6 +21,7 @@ export default function Input(props) {
         theme,
         outerprops,
         value,
+        onChange,
         onSubmit,
         submitOnBlur,
         showSubmit,
@@ -39,20 +40,27 @@ export default function Input(props) {
 
     //update input
     const handleChange = (e) => {
+        if (onChange) {
+            onChange(e.target.value);
+        }
         setText(e.target.value)
     }
 
     //blur input if enter is pressed
     const handleKeyPress = (e) => {
-        if(e.key === 'Enter') {    
-            onSubmit(text);
+        if(e.key === 'Enter') {
+            if (onSubmit) {
+                onSubmit(text);
+            }
         }
     }
 
     //update on blur (and unmount)
     const handleBlur = () => {
         if (submitOnBlur) {
-            onSubmit(text);
+            if (onSubmit) {
+                onSubmit(text);
+            }
         }
     }
 

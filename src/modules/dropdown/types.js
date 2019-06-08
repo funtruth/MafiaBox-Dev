@@ -1,10 +1,7 @@
 export const dropdownType = {
     //common
     dropString: 'dropdownType/drop-string',
-
     inputValue: 'dropdownType/input-value',
-    pageLib: 'dropdownType/page-lib',
-
     dropInput: 'dropdownType/drop-input',
 
     pickLogic: 'dropdownType/show-logic',
@@ -46,10 +43,7 @@ export const dropdownType = {
     pickChoice: 'dropdownType/pick-choice',
     pickTrigger: 'dropdownType/pick-trigger',
     pickHealth: 'dropdownType/pick-health',
-    pickRole: 'dropdownType/pick-role',
-    pickLibrary: 'dropdownType/pick-library',
 
-    pickRoleTeam: 'dropdownType/pick-role-team',
     pickGlobalVar: 'dropdownType/pick-global-var',
     pickRecipient: 'dropdownType/pick-recipient',
 

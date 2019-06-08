@@ -179,7 +179,6 @@ export default function LogicPanels(props) {
         case parseType.collection:
         case parseType.object:
             dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
-            console.log({value})
             return (
                 <Body x="l">
                     {display &&

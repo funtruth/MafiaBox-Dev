@@ -60,13 +60,14 @@ export default function PickVarWithType(props){
                 return <Types.PickTypeUID key={type} {...props}/>
             case variableType.global.key:
                 return <Types.PickTypeGlobal key={type} {...props}/>
+            case variableType.key.key:
+                return <Types.PickTypeKey key={type} {...props}/>
             case variableType.string.key:
                 console.warn('this should never happen.')
                 return null;
             case variableType.object.key:
             case variableType.uidObject.key:
             case variableType.function.key:
-            case variableType.key.key:
             default:
                 return null;
         }

@@ -27,9 +27,9 @@ export const LOGIC_TESTS = [
                 },
             }
         },
-        write: {
-            updates: {},
-            ts: 123,
+        next: {
+            update: {},
+            time: 123,
         },
     }
 ]

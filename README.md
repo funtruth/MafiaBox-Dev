@@ -8,7 +8,7 @@
 
 ## 06/07/2019
 ### Major
-- [ ] Simple game prototyping
+- [x] Simple game prototyping, rough drafts are made through AdminView without any realistic way to parse the phase paths. Events not included yet.
 
 ### Minor
 - [x] Project homeview

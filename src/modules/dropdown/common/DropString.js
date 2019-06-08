@@ -1,54 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Input } from '../../components/Common';
 
-import {
-    useAutofocus,
-} from '../../hooks/Hooks'
-
-import { DropSubmit } from '../components/Common'
-import { Row } from '../../components/Common';
-
-/*
-accessed from:
-    EditEvent
-required params:
-    path -> update path of PageReducer
-*/
 export default function DropString({
     slate,
     update,
     showDropdown,
 }){
-    const focusRef = useAutofocus()
-
-    const [value, setValue] = useState(typeof slate === 'string' ? slate : "")
-    const handleChange = e => setValue(e.target.value)
-
-    const onKeyDown = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                onSubmit()
-                break
-            default:
-        }
-    }
-
-    const onSubmit = () => {
+    const onSubmit = (value) => {
         update(value)
         showDropdown();
     }
 
     return (
-        <Row sizes={['z', 'xs']}>
-            <input
-                ref={focusRef}
-                className="tag-input"
-                value={value}
-                onChange={handleChange}
-                onKeyDown={onKeyDown}
-                placeholder="name of patch ..."
-                type='text'
-            />
-            <DropSubmit onClick={onSubmit}/>
-        </Row>
+        <Input
+            theme="tag"
+            value={typeof slate === 'string' ? slate : ""}
+            onSubmit={onSubmit}
+            autofocus
+            showSubmit
+            placeholder="name of patch ..."
+            type="text"
+            outerprops={{
+                sizes: ['z', 'xs']
+            }}
+        />
     )
 }

@@ -9,7 +9,12 @@ export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId, vars } = data
     
-    return beautify_js(`(rss, next, choice)=>{${byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(";")}}`, {brace_style: 'end-expand'})
+    return beautify_js(`(rss, next, choice)=>{${byIndex ? 
+        byIndex.map(lK => parseLogic(byId, lK, vars))
+            .filter(i => i)
+            .join(";"):''}}`,
+        {brace_style: 'end-expand'}
+    )
 }
 
 //lK logicKey
@@ -64,8 +69,8 @@ function parseVar(byVK, vK) {
         case parseType.update:
             return parseUpdate(value)
         case parseType.constant:
-            if (VARTYPE_FILTER([variableType.key.key, variableType.global.key])(item)) return keyAsStr(value)
         case parseType.boolean:
+            if (VARTYPE_FILTER([variableType.key.key, variableType.global.key])(item)) return keyAsStr(value)
             return value
         default:
             return '';

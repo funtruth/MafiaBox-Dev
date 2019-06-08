@@ -44,6 +44,7 @@ export function COLLECT_DRAG(connect, monitor) {
 }
 
 export function getVarTypeIcon(types) {
+    if (!types) return 'pencil'
     return variableType[types[0]].icon;
 }
 

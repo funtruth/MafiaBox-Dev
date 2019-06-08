@@ -1,4 +1,4 @@
-import { variableType, parseType } from '../common/types'
+import { variableType } from '../common/types'
 
 /* logicItem
     FIELD           DESCRIPTION

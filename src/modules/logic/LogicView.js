@@ -1,6 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './logic.css'
 
 import { DEFAULT_LOGIC } from '../common/defaults';
@@ -12,6 +12,7 @@ import { usePath } from '../hooks/Hooks';
 import { getCode } from './LogicEngine'
 import { showModal } from '../modal/ModalReducer'
 import { updateGeneral } from '../page/PageReducer'
+import { copyContent } from './LogicReducer';
 
 import {
     Body,
@@ -23,21 +24,37 @@ import LogicDeclare from './components/LogicDeclare';
 
 export default function LogicView({ path }) {
     const dispatch = useDispatch()
+    const { clipboard } = useSelector(state => state.logic)
+    
     const {
         byId: logicRepo,
         byIndex: logicMap,
         vars,
     } = usePath(path)
 
-    let runCode = () => {
-        const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        let { rss, write } = LOGIC_TESTS[0]
-        // eslint-disable-next-line
-        Function(`return ${code}`)()(rss, write)
-        console.log('_runCode results', {rss, write})
+    const copyCode = () => {
+        console.log(JSON.stringify({byId: logicRepo, byIndex: logicMap, vars}))
+        dispatch(copyContent({byId: logicRepo, byIndex: logicMap, vars}))
     }
 
-    let showCode = () => {
+    const pasteCode = () => {
+        dispatch(updateGeneral({path, update: clipboard}))
+    }
+
+    const runCode = () => {
+        const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
+        let { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
+        
+        try {
+            // eslint-disable-next-line
+            Function(`return ${code}`)()(rss, next)
+        } catch {
+            console.log('error')
+        }
+        console.log('_runCode results', {rss, next})
+    }
+
+    const showCode = () => {
         const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
         dispatch(showModal(modalType.showCode, {
             code,
@@ -146,6 +163,16 @@ export default function LogicView({ path }) {
     return (
         <Body>
             <Row x="r">
+                <Tag
+                    icon="content-paste"
+                    text="paste"
+                    onClick={pasteCode}
+                />
+                <Tag
+                    icon="content-copy"
+                    text="copy"
+                    onClick={copyCode}
+                />
                 <Tag
                     icon="console-line"
                     text="run code in console"
