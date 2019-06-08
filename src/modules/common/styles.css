@@ -22,40 +22,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
-.common-bubble {
-    color: #d6d6d6;
-    border-radius: 4px;
-    padding: 2px 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.common-cont {
-    color: #d6d6d6;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font: 300 13px Segoe UI;
-    display: inline-block;
-}
-
-.outlined-text {
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    color: #fff;
-}
-.small-icon {
-    color: #d6d6d6;
-    font-size: 13px;
-    pointer-events: none;
-}
 .mdi-play {
     margin-left: auto;
     padding-left: 10px;
     text-align: center;
-}
-.adjust-right {
-    margin-left: auto;
 }
 .autocap {
   text-transform: capitalize;
@@ -64,41 +34,13 @@
 .border-right {
     border-right: 1px solid #464646;
 }
-.-b-r {
-    border-right: 1px solid #464646;
-}
-.-b-t {
-    border-top: 1px solid #464646;
-}
 
 .-sep {
     height: 1px;
     margin: 8px 0px;
     background-color: #464646;
 }
-.-sep-no-m {
-    height: 1px;
-    background-color: #464646;
-}
-.-x-p {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.-x-m {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-.-y-p {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.-y-m {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
+
 .-t-m {
     margin-top: 10px;
-}
-.brighten:hover {
-    filter: brightness(140%);
 }

@@ -13,10 +13,6 @@ div {
   outline-style: none;
 }
 
-div[empty] {
-  color: #666666
-}
-
 div[contentEditable] {
   border-radius: 2px;
   background-color: rgba(47, 49, 54, 1);
@@ -47,13 +43,6 @@ input[type=number] {
 
 input[type=checkbox] {
   margin-right: 8px;
-}
-
-.app-onclick {
-  cursor: pointer;
-}
-.app-onclick * {
-  pointer-events: none;
 }
 .drop-down-menu-option > i {
   pointer-events: none;

@@ -16,6 +16,27 @@
   color: #969696;
 }
 
+.path-view {
+  font: 400 15px Segoe UI;
+}
+
+.path-button {
+  animation: fadein 0.25s;
+  -webkit-animation: fadein 0.25s;
+  padding: 6px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font: 500 16px Segoe UI;
+}
+
+.path-button:hover {
+  background-color: hsla(0,0%,100%,.1);
+}
+
 .header-input-container {
   padding: 6px 4px;
   display: flex;

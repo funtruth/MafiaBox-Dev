@@ -4,7 +4,7 @@ import generatePushID from '../../common/generatePushID';
 
 import { Input } from '../../components/Common';
 
-export default function CreateUniqueTag({
+export default function CreateTag({
     slate,
     path,
     placeholder,

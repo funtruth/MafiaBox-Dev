@@ -33,7 +33,6 @@ export default function LogicView({ path }) {
     } = usePath(path)
 
     const copyCode = () => {
-        console.log(JSON.stringify({byId: logicRepo, byIndex: logicMap, vars}))
         dispatch(copyContent({byId: logicRepo, byIndex: logicMap, vars}))
     }
 

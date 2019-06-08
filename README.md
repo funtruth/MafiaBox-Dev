@@ -5,6 +5,7 @@
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
+- [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
 
 ## 06/07/2019
 ### Major

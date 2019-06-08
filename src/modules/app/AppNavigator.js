@@ -1,6 +1,4 @@
 import React from 'react'
-import '../common/colors.css'
-import '../common/buttons.css'
 import '../common/styles.css'
 import '../common/animations.css'
 import { HashRouter, Route } from 'react-router-dom'
