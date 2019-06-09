@@ -2,10 +2,19 @@
 - Unchecked items are moved over to day of completion
 
 ## WIP
+
+## Low Priority
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
+
+## 06/09/2019
+### Major
+- [x] fix parseType.update
+
+### Minor
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
+- [ ] Field view tags can be moved to global vars, check if this can call for removal of fieldMap/fieldRepo
 
 ## 06/08/2019
 ### Major

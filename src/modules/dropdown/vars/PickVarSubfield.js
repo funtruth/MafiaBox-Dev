@@ -24,7 +24,7 @@ two possible paths:
     ELSE, show all subfields
 Used from: PickVar, PickVarWithType
 */
-export default function PickVarSubfield({//WIP
+export default function PickVarSubfield({
     prefix,//passed
     slate,
     scopedVars,//passed

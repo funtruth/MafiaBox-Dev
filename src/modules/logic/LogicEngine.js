@@ -3,18 +3,11 @@ import { parseType, comparisonType, variableType } from '../common/types'
 import { parseJS, separateVar, START_CHAR, varInStr, keyAsStr } from './proptool'
 import { VARTYPE_FILTER } from '../common/arrows';
 
-var beautify_js = require('js-beautify');
-
 export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId, vars } = data
     
-    return beautify_js(`(rss, next, choice)=>{${byIndex ? 
-        byIndex.map(lK => parseLogic(byId, lK, vars))
-            .filter(i => i)
-            .join(";"):''}}`,
-        {brace_style: 'end-expand'}
-    )
+    return `(rss, next, choice)=>{${byIndex ? byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(";"):''}}`
 }
 
 //lK logicKey

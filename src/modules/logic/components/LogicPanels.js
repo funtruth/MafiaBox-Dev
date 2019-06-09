@@ -14,6 +14,7 @@ import { LOGIC_ITEM_VAR } from '../../common/defaults';
 import { VARTYPE_IS_STR } from '../../common/arrows';
 import generateIDs from '../../common/generateIDs';
 import { parseJS } from '../proptool';
+import { generateCollectionParseType } from '../codetool'
 import { showDropdown } from '../../dropdown/DropdownReducer'
 import { updateGeneral } from '../../page/PageReducer'
 
@@ -70,7 +71,7 @@ export default function LogicPanels(props) {
                             key: i[1],
                             display: parseJS(item.value),
                             value: item.value,
-                            parseBy: parseType.variable, //can be update, WIP
+                            parseBy: parseType.variable,
                             variableTypes: item.variableTypes,
                         },
                         [i[2]]: {
@@ -107,7 +108,7 @@ export default function LogicPanels(props) {
                             key: i[1],
                             display: parseJS(item.value),
                             value: item.value,
-                            parseBy: parseType.variable, //can be update, WIP
+                            parseBy: generateCollectionParseType(logicItem), //can be update, WIP
                             variableTypes: item.variableTypes,
                         },
                         [i[2]]: {
@@ -118,6 +119,7 @@ export default function LogicPanels(props) {
                     }
                 }))
                 break;
+            case parseType.update:
             case parseType.variable:
             default:
                 dispatch(updateGeneral({
@@ -126,7 +128,7 @@ export default function LogicPanels(props) {
                         ...LOGIC_ITEM_VAR,
                         display: parseJS(item.value),
                         value: item.value,
-                        parseBy: parseType.variable,
+                        parseBy: parseBy || parseType.variable,
                         variableTypes: item.variableTypes,
                     }
                 }))
@@ -255,6 +257,7 @@ export default function LogicPanels(props) {
             )
         case parseType.number:
         case parseType.string:
+        case parseType.update:
         case parseType.variable:
         default:
             if (VARTYPE_IS_STR(baseVar)) modal = modalType.editString

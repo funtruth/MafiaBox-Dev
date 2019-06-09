@@ -13,6 +13,18 @@ import {
 import generatePushID from '../common/generatePushID';
 import generateIDs from '../common/generateIDs';
 
+export function generateCollectionParseType(logicItem) {
+    const type = logicItem.operatorType || logicItem.logicType
+    switch(type) {
+        case logicType.update.key:
+            return parseType.update;
+        case logicType.variable.key:
+            return parseType.variable;
+        default:
+            console.warn('not supported. f off')
+    }
+}
+
 export function generateLogic(type) {
     let i;
     switch(type) {
