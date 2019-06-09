@@ -15,32 +15,28 @@ import {
     Tag,
 } from '../../components/Common'
 
-export default function GameChoiceField(props) {
-    const { value, path } = props
-    
+export default function GameChoiceField({ value, path }) {
     const renderItem = (item) => {
         const { title, prompt, gameChoice } = item
 
         const gameChoiceInfo = gameChoiceType[gameChoice] || {}
 
         return (
-            <Row key={item.key} y="s" style={{marginBottom: 2}}>
+            <Row key={item.key} y="t">
                 <DropClick
                     dropdown={dropdownType.pickGameChoiceType}
                     params={{
                         path: [...path, item.key],
-                        currentValue: gameChoice,
                     }}
                 >
                     <LogicButton
                         highlight={gameChoice ? 'whitish' : '#767676'}
                         color={gameChoice ? 'whitish' : 'grey'}
-                    >
-                        <Icon icon={`${gameChoiceInfo.icon || 'pencil'}`}></Icon>
-                    </LogicButton>
+                        icon={gameChoiceInfo.icon || 'pencil'}
+                    />
                 </DropClick>
                 <Body>
-                    <div className="row">
+                    <Row>
                         <DropClick
                             dropdown={dropdownType.writeGameChoice}
                             params={{
@@ -49,7 +45,7 @@ export default function GameChoiceField(props) {
                                 placeholder: 'Name your choice ...',
                             }}
                         >
-                            <LogicButton>{title}</LogicButton> 
+                            <LogicButton text={title}/> 
                         </DropClick>
                         <DropClick
                             dropdown={dropdownType.writeGameChoice}
@@ -59,11 +55,12 @@ export default function GameChoiceField(props) {
                                 placeholder: 'write a short description ...',
                             }}
                         >
-                            <LogicButton color={prompt ? 'whitish' : 'grey'}>
-                                {prompt || 'write a short description ...'}
-                            </LogicButton> 
+                            <LogicButton
+                                text={prompt}
+                                placeholder="write a short description ..."
+                            />
                         </DropClick>
-                    </div>
+                    </Row>
                     {renderDetail(item)}
                 </Body>
             </Row>
@@ -71,12 +68,13 @@ export default function GameChoiceField(props) {
     }
 
     const renderDetail = (item) => {
-        const { key, gameChoice, value, display } = item
+        const { key, gameChoice, value } = item
+        const choicePath = [...path, key, 'value']
 
         switch(gameChoice) {
             case gameChoiceType.value.key:
                 return (
-                    <Row y="c" style={{marginTop: 2}}>
+                    <Row>
                         <LogicButton highlight="pink" color="grey">
                             choice
                         </LogicButton>
@@ -84,17 +82,60 @@ export default function GameChoiceField(props) {
                         <DropClick
                             dropdown={dropdownType.pickGlobalVar}
                             params={{
-                                updateBy: 'field',
-                                path: [...path, key],
-                                currentValue: value,
+                                formatAsVariable: false,
+                                path: choicePath,
                             }}
                         >
-                            <LogicButton highlight="pink" color="grey">
-                                value
-                                <div className="logic-display" style={{color: value && "#ddd"}}>
-                                    {display || '...'}
-                                </div>
-                            </LogicButton>
+                            <LogicButton
+                                highlight="pink"
+                                label="value"
+                                text={value}
+                                placeholder="..."
+                            />
+                        </DropClick>
+                    </Row>
+                )
+            case gameChoiceType.multi.key:
+                return (
+                    <Row>
+                        <LogicButton highlight="pink" color="grey">
+                            choice
+                        </LogicButton>
+                        <Icon icon="chevron-right" color="whitish" size="l"></Icon>
+                        <DropClick
+                            dropdown={dropdownType.dropNumber}
+                            params={{
+                                path: choicePath,
+                            }}
+                        >
+                            <LogicButton
+                                highlight="pink"
+                                label="multi"
+                                text={value}
+                                placeholder="..."
+                            />
+                        </DropClick>
+                    </Row>
+                )
+            case gameChoiceType.ordered.key:
+                return (
+                    <Row>
+                        <LogicButton highlight="pink" color="grey">
+                            choice
+                        </LogicButton>
+                        <Icon icon="chevron-right" color="whitish" size="l"></Icon>
+                        <DropClick
+                            dropdown={dropdownType.gameChoiceOrdered}
+                            params={{
+                                path: choicePath,
+                            }}
+                        >
+                            <LogicButton
+                                highlight="pink"
+                                label="ordered"
+                                text={value}
+                                placeholder="..."
+                            />
                         </DropClick>
                     </Row>
                 )
@@ -117,14 +158,12 @@ export default function GameChoiceField(props) {
                 dropdown={dropdownType.createGameChoice}
                 params={{
                     path,
-                    attach: value,
                     placeholder: "Name the choice ...",
                 }}
             >
                 <Tag
                     icon="map-marker"
                     text="add choice"
-                    bg="darkgrey"
                 />
             </DropClick>
         </Body>

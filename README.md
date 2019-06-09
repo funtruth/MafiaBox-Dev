@@ -2,6 +2,7 @@
 - Unchecked items are moved over to day of completion
 
 ## WIP
+- [ ] write more advanced phases
 
 ## Low Priority
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
@@ -10,15 +11,17 @@
 
 ## 06/09/2019
 ### Major
+- [x] playing a game (single player)
 - [x] fix parseType.update
+- [x] flesh out gameChoices
 
 ### Minor
+- [x] delete logic
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
 - [ ] Field view tags can be moved to global vars, check if this can call for removal of fieldMap/fieldRepo
 
 ## 06/08/2019
 ### Major
-- [ ] playing a game (single player)
 - [x] basic website for landing (beta invite)
 
 ### Minor

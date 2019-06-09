@@ -1,6 +1,7 @@
 export const dropdownType = {
     //common
     dropString: 'dropdownType/drop-string',
+    dropNumber: 'dropdownType/drop-number',
     inputValue: 'dropdownType/input-value',
     dropInput: 'dropdownType/drop-input',
 
@@ -13,6 +14,7 @@ export const dropdownType = {
     createGameChoice: 'dropdownType/create-game-choice',
     pickGameChoiceType: 'dropdownType/pick-game-choice-type',
     writeGameChoice: 'dropdownType/write-game-choice',
+    gameChoiceOrdered: 'dropdownType/game-choice-ordered',
 
     //account
     accountOptions: 'dropdownType/account-options',
@@ -33,7 +35,6 @@ export const dropdownType = {
     pickComparison: 'dropdownType/pick-comparison',
     replaceWildcard: 'dropdownType/replace-wildcard',
     createGlobalVar: 'dropdownType/create-global-var',
-    pickGlobalValue: 'dropdownType/pick-global-value',
     varItemConstant: 'dropdownType/var-item-constant',
     declareVarType: 'dropdownType/declare-var-type',
     declareVarName: 'dropdownType/declare-var-name',

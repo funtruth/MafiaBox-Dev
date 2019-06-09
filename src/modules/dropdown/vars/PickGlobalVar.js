@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Fuse from 'fuse.js'
 
 import {
@@ -25,12 +25,13 @@ import {
     DropScroll,
 } from '../components/Common';
 
-export default connect(
-    state => ({
-        globalVars: state.page.globalVars,
-    }),
-)(function PickGlobalVar(props) {
-    const { globalVars, updateBy, currentValue } = props
+export default function PickGlobalVar({
+    slate,
+    update,
+    formatAsVariable,
+    showDropdown,
+}) {
+    const globalVars = useSelector(state => state.page.globalVars)
 
     const [text, setText] = useState("")
     const [fuse] = useState(new Fuse(_.filter(globalVars), fuseType.globalVar))
@@ -45,28 +46,28 @@ export default connect(
     const handleType = (e) => setText(e.target.value)
     
     const handleSelect = (item) => {
-        if (updateBy === 'field') {
-            props.updatePage({
-                value: item.key,
-                display: item.title,
-            })
-        } else {
-            props.updatePage({
+        if (formatAsVariable) {
+            update({
                 ...LOGIC_ITEM_VAR,
                 value: item.key,
                 display: parseJS(item.key),
                 parseBy: parseType.variable,
                 variableTypes: item.variableTypes,
             })
+        } else {
+            update(item.key)
         }
-        props.showDropdown();
+        showDropdown();
     }
 
     const renderItem = (item) => {
+        const chosen = formatAsVariable ? slate.value === item.key : slate === item.key
+
         return (
             <DropItem
                 key={item.key}
-                chosen={currentValue === item.key}
+                chosen={chosen}
+                rightCheck
                 onClick={() => handleSelect(item)}
                 text={item.title}
             />
@@ -92,10 +93,10 @@ export default connect(
             <DropTitle>options</DropTitle>
             <DropParent
                 dropdown={dropdownType.createGlobalVar}
-                showDropdown={props.showDropdown}
+                showDropdown={showDropdown}
                 leftIcon="pencil"
                 text="create ..."
             />
         </>
     )
-})
+}

@@ -5,6 +5,7 @@ import { dropdownType } from '../common/types';
 import DropInput from './components/DropInput'
 
 import DropString from './common/DropString';
+import DropNumber from './common/DropNumber';
 import AccountOptions from './account/AccountOptions'
 import PickProject from './account/PickProject'
 
@@ -26,6 +27,7 @@ import EditGeneralTag from './page/EditGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
 import WriteGameChoice from './page/WriteGameChoice'
+import GameChoiceOrdered from './page/GameChoiceOrdered'
 import CreateGlobalVar from './page/CreateGlobalVar'
 
 import PickVar from './vars/PickVar'
@@ -42,7 +44,6 @@ import DeclarePanelVar from './vars/DeclarePanelVar'
 import PickChoice from './update/PickChoice'
 import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
-import PickGlobalValue from './update/PickGlobalValue';
 import PickRecipient from './strings/PickRecipient'
 
 //NumberViews
@@ -52,6 +53,8 @@ export default function DropdownKeys(props) {
     switch(props.key) {
         case dropdownType.dropString:
             return <DropString {...props}/>
+        case dropdownType.dropNumber:
+            return <DropNumber {...props}/>
         case dropdownType.accountOptions:
             return <AccountOptions {...props}/>
         case dropdownType.pickProject:
@@ -92,6 +95,8 @@ export default function DropdownKeys(props) {
             return <PickGameChoiceType {...props}/>
         case dropdownType.writeGameChoice:
             return <WriteGameChoice {...props}/>
+        case dropdownType.gameChoiceOrdered:
+            return <GameChoiceOrdered {...props}/>
         case dropdownType.createGlobalVar:
             return <CreateGlobalVar {...props}/>
         
@@ -105,8 +110,6 @@ export default function DropdownKeys(props) {
             return <PickComparison {...props}/>
         case dropdownType.replaceWildcard:
             return <ReplaceWildcard {...props}/>
-        case dropdownType.pickGlobalValue:
-            return <PickGlobalValue {...props}/>
         case dropdownType.declareVarType:
             return <DeclareVarType {...props}/>
         case dropdownType.declareVarName:

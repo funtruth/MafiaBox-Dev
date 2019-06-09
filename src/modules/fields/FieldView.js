@@ -14,7 +14,6 @@ import UniqueTagField from './components/UniqueTagField';
 import GeneralTagField from './components/GeneralTagField'
 import LogicField from './components/LogicField';
 import GameChoiceField from './components/GameChoiceField'
-import GameChoiceOverrideField from './components/GameChoiceOverrideField'
 import TimerField from './components/TimerField'
 import PriorityField from './components/PriorityField'
 import { Body, Tag } from '../components/Common';
@@ -54,9 +53,8 @@ export default function FieldView(props) {
                 return <LogicField {...props}/>
             //TODO
             case fieldType.gameChoices.key:
-                return <GameChoiceField {...props}/>
             case fieldType.gameChoiceOverride.key:
-                return <GameChoiceOverrideField {...props}/>
+                return <GameChoiceField {...props}/>
             case fieldType.timer.key:
                 return <TimerField {...props}/>
 

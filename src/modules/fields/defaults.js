@@ -32,15 +32,18 @@ export const defaultFieldMap = {
 
 
 /* @params pageInfo.gameChoices
-    FIELD           DESCRIPTION              TYPE
-    -----------------------------------------------
-    key                                      string
-    index                                    number
-    title           main label               string
-    prompt          short description        string
-    gameChoiceType  see gameChoiceType       string
-    value           item key                 string                                 
-    display         item title               string
+    FIELD           DESCRIPTION             TYPE
+    ----------------------------------------------
+    key                                     string
+    index                                   number
+    title           main label              string
+    prompt          short description       string
+    gameChoiceType  see gameChoiceType      string
+    value
+    "               gameChoice.value        global
+    "               gameChoice.target       uid
+    "               gameChoice.multi        uidObject
+    "               gameChoice.ordered      object
 */
 export const DEFAULT_GAME_CHOICE = {
     key: '',
@@ -49,7 +52,6 @@ export const DEFAULT_GAME_CHOICE = {
     prompt: '',
     gameChoice: '',
     value: '',
-    display: '',
 }
 
 /* @params fieldInfo

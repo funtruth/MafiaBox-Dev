@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { variableType } from '../../common/types'
+import { parseType, variableType } from '../../common/types'
+import { LOGIC_ITEM_VAR } from '../../logic/defaults';
 
 import {
     useVarType,
@@ -29,6 +30,14 @@ export default function PickVarWithType(props){
                 <DropEmpty text="select a variable first ..."/>
             </>
         )
+    }
+
+    const onClear = () => {
+        pickVarClick({
+            ...LOGIC_ITEM_VAR,
+            parseBy: parseType.constant,
+            value: '""',
+        })
     }
 
     const renderItem = (item) => {
@@ -83,8 +92,14 @@ export default function PickVarWithType(props){
             <DropEmpty list={tameVars} text="no variables found"></DropEmpty>
             <DropTitle>incomplete vars</DropTitle>
             {wildVars.map(renderItem)}
+            <DropItem
+                leftIcon="eraser-variant"
+                text="clear value"
+                onClick={onClear}
+            />
             <DropEmpty list={wildVars} text="no variables found"></DropEmpty>
             {variableTypes.map(renderType)}
+
         </>
     )
 }

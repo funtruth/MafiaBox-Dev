@@ -134,6 +134,33 @@ export default function LogicView({ path }) {
         }))
     }
 
+    const deleteLogic = (logicKey, parentKey) => {
+        if (!logicKey) return;
+
+        const repoClone = _.cloneDeep(logicRepo)
+        const mapClone = _.cloneDeep(logicMap)
+
+        let pointer;
+        if (parentKey) {
+            if (repoClone[parentKey]) {
+                pointer = repoClone[parentKey].byIndex
+            }
+        } else {
+            pointer = mapClone
+        }
+
+        if (pointer) pointer.splice(pointer.indexOf(logicKey), 1)
+        
+        //TODO clean up declared variables?
+        dispatch(updateGeneral({
+            path,
+            update: {
+                byId: repoClone,
+                byIndex: mapClone,
+            },
+        }))
+    }
+
     //deletes variables if they were declared at given logicKey
     const deleteVariables = (logicKey) => () => {
         const scopedVars = _.filter(vars, i => i.scope === logicKey)
@@ -153,6 +180,7 @@ export default function LogicView({ path }) {
         handleAdd,
         handleAddBelow,
         moveLogic,
+        deleteLogic,
         deleteVariables,
         path,
         rootPath: path,

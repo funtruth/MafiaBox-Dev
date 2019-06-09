@@ -8,21 +8,24 @@ import {
     DropTitle,
 } from '../components/Common'
 
-export default function PickGameChoiceType(props) {
-    const { currentValue } = props
-
+export default function PickGameChoiceType({
+    slate,
+    update,
+    showDropdown,
+}) {
     const handleSelect = (item) => {
-        props.updatePage({
+        update({
             gameChoice: item.key,
+            value: "",
         })
-        props.showDropdown();
+        showDropdown();
     }
 
     const renderItem = (item) => {
         return (
             <DropItem
                 key={item.key}
-                chosen={item.key === currentValue}
+                chosen={item.key === slate.gameChoice}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
                 rightCheck

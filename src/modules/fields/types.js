@@ -115,6 +115,11 @@ export const gameChoiceType = {
         title: 'Single Target',
         icon: 'account',
     },
+    value: {
+        key: 'value',
+        title: 'Value',
+        icon: 'tag',
+    },
     multi: {
         key: 'multi',
         title: 'Multiple Targets',
@@ -124,10 +129,5 @@ export const gameChoiceType = {
         key: 'ordered',
         title: 'Ordered Targets',
         icon: 'sort-numeric',
-    },
-    value: {
-        key: 'value',
-        title: 'Value',
-        icon: 'tag',
     },
 }

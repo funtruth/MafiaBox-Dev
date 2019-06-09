@@ -1,64 +1,48 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { DEFAULT_GAME_CHOICE } from '../../fields/defaults';
 
 import generatePushID from '../../common/generatePushID';
 
-import {
-    useAutofocus,
-} from '../../hooks/Hooks'
+import { Input } from '../../components/Common';
 
-import {
-    DropSubmit,
-} from '../components/Common'
-import { Row } from '../../components/Common';
+const KEYWORDS = [];
 
-const KEYWORDS = []
-
-export default function CreateGameChoice(props) {
-    const { attach, placeholder } = props
-
-    const focusRef = useAutofocus()
-
-    const [value, setValue] = useState("")
-    const handleChange = e => setValue(e.target.value)
-
-    const onKeyDown = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                onSubmit()
-                break
-            default:
-        }
-    }
-
-    const onSubmit = () => {
+export default function CreateGameChoice({
+    slate,
+    path,
+    updateGeneral,
+    showDropdown,
+}) {
+    const onSubmit = (value) => {
         if (KEYWORDS.includes(value)) {
             return;
         }
 
         const newKey = generatePushID('choice')
-        props.updatePage({
-            ...DEFAULT_GAME_CHOICE,
-            key: newKey,
-            title: value,
-            index: Object.keys(attach||{}).length,
-        }, [newKey])
-        props.showDropdown()
+        updateGeneral({
+            path: [...path, newKey],
+            update: {
+                ...DEFAULT_GAME_CHOICE,
+                key: newKey,
+                title: value,
+                index: Object.keys(slate).length,
+            }
+        })
+        showDropdown();
     }
 
     return (
-        <Row sizes={['z', 'xs']}>
-            <input
-                ref={focusRef}
-                className="tag-input"
-                value={value}
-                onChange={handleChange}
-                onKeyDown={onKeyDown}
-                placeholder={placeholder}
-                type='text'
-            />
-            <DropSubmit onClick={onSubmit}/>
-        </Row>
+        <Input
+            autofocus
+            theme="tag"
+            onSubmit={onSubmit}
+            showSubmit
+            placeholder="name of choice ..."
+            type="text"
+            outerprops={{
+                sizes: ['z', 'xs'],
+            }}
+        />
     )
 }

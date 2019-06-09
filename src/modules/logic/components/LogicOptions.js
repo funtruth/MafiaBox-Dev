@@ -1,30 +1,9 @@
 import React from 'react'
 
-//import { modalType } from '../../modal/types'
+import { Icon } from '../../components/Common'
 
-import {
-    Icon
-} from '../../components/Common'
-
-export default function LogicOptions(props) {
-    //const { logicItem, path } = props
-
-    //e check is to determine the source of the click
-    //if source is a confirmation dialog, e is not passed
-    const handleDelete = (e) => {
-        console.warn('TODO')
-        return;
-
-        /*if (e && logicItem.right) {
-            props.showModal(modalType.deleteLogic, {
-                onDelete: handleDelete,
-            })
-            return;
-        }
-
-        //should encorporate props.deleteVariables() function as well
-        props.updatePage(path, logicItem.down)*/
-    }
+export default function LogicOptions({deleteLogic, logicKey, parentKey}) {
+    const handleDelete = () => deleteLogic(logicKey, parentKey)
 
     return (
         <div>
