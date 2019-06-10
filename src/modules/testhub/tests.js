@@ -4,12 +4,15 @@ export const LOGIC_TESTS = [
             players: {
                 '123': {
                     dead: false,
+                    health: 0,
                 },
                 '124': {
                     dead: false,
+                    health: 0,
                 },
                 '125': {
                     dead: false,
+                    health: 0,
                 },
             },
             gameState: {

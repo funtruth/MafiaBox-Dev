@@ -42,21 +42,17 @@ export default function LogicView({ path }) {
 
     const runCode = () => {
         const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        
+        console.time('eval test.')
         try {
-            console.time('eval test.')
             for (var i=0; i<100; i++) {
                 const { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
                 // eslint-disable-next-line
-                Function(`return ${code}`)()(rss, next)
+                Function(`return ${code}`)()(rss, next, '123')
             }
-            console.timeEnd('eval test.')
-
-            const { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
-            console.log('_runCode results', {rss, next})
         } catch {
             console.log('error')
         }
+        console.timeEnd('eval test.')
     }
 
     const showCode = () => {
@@ -169,6 +165,7 @@ export default function LogicView({ path }) {
 
     //deletes variables if they were declared at given logicKey
     const deleteVariables = (logicKey) => () => {
+        if (!logicKey) return;
         const scopedVars = _.filter(vars, i => i.scope === logicKey)
         
         dispatch(updateGeneral(...(

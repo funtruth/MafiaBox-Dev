@@ -26,7 +26,6 @@ function collect(connect, monitor) {
 function ValueDrop(props) {
     const { connectDropTarget, isOver, children,
         path, mathKey, mathItem, position } = props
-        console.log({props})
         
     const renderItem = () => {
         //empty
@@ -55,8 +54,9 @@ function ValueDrop(props) {
             return (
                 <DropClick
                     dropdown={dropdownType.pickNumValue}
+                    context={dropdownType.replaceWildcard}
                     params={{
-                        path: [...path, 'byId', mathKey, 'value'],
+                        path: [...path, 'byId', mathKey],
                         mathKey,
                         item: mathItem,
                         side: position,

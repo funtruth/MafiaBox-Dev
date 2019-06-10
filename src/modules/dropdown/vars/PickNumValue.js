@@ -78,7 +78,7 @@ export default function PickNumValue({
             <Input
                 autofocus
                 theme="tag"
-                value={mathKey ? slate : ""}
+                value={mathKey && typeof slate === 'number' ? slate : ""}
                 onSubmit={onSubmit}
                 showSubmit
                 placeholder="enter a value ..."
