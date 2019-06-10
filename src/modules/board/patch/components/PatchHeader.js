@@ -65,6 +65,7 @@ export default function PatchHeader(props) {
                 dropdown={dropdownType.dropString}
                 params={{
                     path: ['storyRepo', storyKey, 'title'],
+                    placeholder: "name of patch ..."
                 }}
                 style={{
                     paddingRight: 10,

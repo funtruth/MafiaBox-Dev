@@ -34,6 +34,7 @@ export default function AdminView(props) {
         if (!activeProject) return console.warn('no active project')
         if (!modeKey || !pageRepo[modeKey]) return console.warn('invalid modeKey', pageRepo, modeKey)
         const modeItem = pageRepo[modeKey]
+        console.log({modeItem})
 
         const path = `projectsLive/${activeProject}/modes/${modeKey}`
         const update = {
@@ -64,6 +65,7 @@ export default function AdminView(props) {
             roleTeam: pageItem.roleTeam,
             image: pageItem.roleImage,
             roleTargetMode: getCode(pageItem.roleTargetMode),
+            ...(pageItem.playerTags || {}),
         }
         try {
             firebase.database().ref(path).update(update)
@@ -82,9 +84,9 @@ export default function AdminView(props) {
         const update = {
             key: pageKey,
             title: pageItem.title,
-            description: pageItem.description2,
+            description: pageItem.description2 || "",
             phaseActionMode: pageItem.phaseActionMode,
-            phaseChoices: pageItem.phaseChoices,
+            phaseChoices: pageItem.phaseChoices || "",
             phaseListener: getCode(pageItem.phaseListener),
         }
         try {

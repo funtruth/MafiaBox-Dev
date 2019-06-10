@@ -20,12 +20,6 @@ export default function DropdownConnect({item, index}) {
     renderProps.popDropdown = () => dispatch(popDropdownTo(index - 1))
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
     renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
-    renderProps.updatePage = (value, extraPath=[]) => {
-        dispatch(updateGeneral({
-            path: [...path, ...extraPath],
-            update: value,
-        }))
-    }
 
     if (!path) {
         console.warn('this dropdown has no path.')

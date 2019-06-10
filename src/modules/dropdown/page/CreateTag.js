@@ -14,7 +14,7 @@ export default function CreateTag({
     const onSubmit = (value) => {
         if (!value) return;
 
-        const newKey = generatePushID('team')
+        const newKey = generatePushID('tag')
         updateGeneral({
             path: [...path, 'data', newKey],
             update: {
@@ -22,6 +22,9 @@ export default function CreateTag({
                 title: value,
                 index: Object.keys(slate.data||{}).length,
             }
+        }, {
+            path: [...path, 'defaultValue', newKey],
+            update: false,
         })
         showDropdown();
     }

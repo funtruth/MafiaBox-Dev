@@ -390,6 +390,12 @@ export function receiveAction({type, payload}) {
         let batchUpdate = {},
             pathToRepo = `dev/${activeProject}/`;
 
+        const filterType = (rhs) => {
+            const type = typeof rhs
+            if (type === 'undefined') return ""
+            else return rhs
+        }
+
         const handleDiff = (item) => {
             if (!item.path) {
                 return batchUpdate[prop] = item.rhs || ""
@@ -397,10 +403,10 @@ export function receiveAction({type, payload}) {
 
             switch(item.kind) {
                 case "A":
-                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = item.item.rhs || ""
+                    batchUpdate[prop + '/' + item.path.join('/') + '/' + item.index] = filterType(item.item.rhs)
                     break
                 default:
-                    batchUpdate[prop + '/' + item.path.join('/')] = item.rhs || ""
+                    batchUpdate[prop + '/' + item.path.join('/')] = filterType(item.rhs)
             }
         }
         

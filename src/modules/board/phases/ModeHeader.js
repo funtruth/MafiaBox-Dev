@@ -42,6 +42,7 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
                 dropdown={dropdownType.dropString}
                 params={{
                     path: [...path, 'title'],
+                    placeholder: "name of game mode ..."
                 }}
                 style={{
                     paddingRight: 10,

@@ -27,6 +27,7 @@ export default function EditEventHeader(props) {
                     dropdown={dropdownType.dropString}
                     params={{
                         path: [...path, 'display'],
+                        placeholder: 'event name ...'
                     }}
                 >
                     <Tag>

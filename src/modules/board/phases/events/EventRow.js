@@ -31,6 +31,7 @@ function EventRow(props) {
                 dropdown={dropdownType.dropString}
                 params={{
                     path: [...path, 'events', eventKey, 'title'],
+                    placeholder: "event name ..."
                 }}
                 style={{
                     flex: 0.3,

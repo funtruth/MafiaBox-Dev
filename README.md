@@ -2,7 +2,7 @@
 - Unchecked items are moved over to day of completion
 
 ## WIP
-- [ ] write more advanced phases
+- [ ] logicType.function
 
 ## Low Priority
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
@@ -12,6 +12,7 @@
 ## 06/09/2019
 ### Major
 - [x] playing a game (single player)
+- [x] write more advanced phases
 - [x] fix parseType.update
 - [x] flesh out gameChoices
 

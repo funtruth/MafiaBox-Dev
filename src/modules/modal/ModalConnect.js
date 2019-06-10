@@ -19,7 +19,6 @@ export default function ModalConnect({item, index}) {
     renderProps.close = () => dispatch(popModalTo(index - 1))
 
     renderProps.setWorkspace = (value, path) => dispatch(updateTopModal(path || ['attach'], value))
-    renderProps.updatePage = (path, value) => dispatch(updateGeneral({path, update: value}))
     renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
 
     if (!path) {

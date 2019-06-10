@@ -38,20 +38,18 @@ export default function GameChoiceField({ value, path }) {
                 <Body>
                     <Row>
                         <DropClick
-                            dropdown={dropdownType.writeGameChoice}
+                            dropdown={dropdownType.dropString}
                             params={{
                                 path: [...path, item.key, 'title'],
-                                currentValue: title,
                                 placeholder: 'Name your choice ...',
                             }}
                         >
                             <LogicButton text={title}/> 
                         </DropClick>
                         <DropClick
-                            dropdown={dropdownType.writeGameChoice}
+                            dropdown={dropdownType.dropString}
                             params={{
                                 path: [...path, item.key, 'prompt'],
-                                currentValue: prompt,
                                 placeholder: 'write a short description ...',
                             }}
                         >

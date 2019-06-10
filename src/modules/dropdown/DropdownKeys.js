@@ -2,8 +2,6 @@ import React from 'react'
 
 import { dropdownType } from '../common/types';
 
-import DropInput from './components/DropInput'
-
 import DropString from './common/DropString';
 import DropNumber from './common/DropNumber';
 import AccountOptions from './account/AccountOptions'
@@ -26,7 +24,6 @@ import EditUniqueTag from './page/EditUniqueTag'
 import EditGeneralTag from './page/EditGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
-import WriteGameChoice from './page/WriteGameChoice'
 import GameChoiceOrdered from './page/GameChoiceOrdered'
 import CreateGlobalVar from './page/CreateGlobalVar'
 
@@ -41,8 +38,6 @@ import DeclareVarType from './vars/DeclareVarType'
 import DeclareVarName from './vars/DeclareVarName'
 import DeclarePanelVar from './vars/DeclarePanelVar'
 
-import PickChoice from './update/PickChoice'
-import PickHealth from './update/PickHealth'
 import PickTrigger from './update/PickTrigger';
 import PickRecipient from './strings/PickRecipient'
 
@@ -75,9 +70,6 @@ export default function DropdownKeys(props) {
         case dropdownType.inputValue:
             return <InputValue {...props}/>
 
-        case dropdownType.dropInput:
-            return <DropInput {...props}/>
-
         case dropdownType.pickLogic:
             return <PickLogic {...props}/>
         case dropdownType.pickOperator:
@@ -93,8 +85,6 @@ export default function DropdownKeys(props) {
             return <CreateGameChoice {...props}/>
         case dropdownType.pickGameChoiceType:
             return <PickGameChoiceType {...props}/>
-        case dropdownType.writeGameChoice:
-            return <WriteGameChoice {...props}/>
         case dropdownType.gameChoiceOrdered:
             return <GameChoiceOrdered {...props}/>
         case dropdownType.createGlobalVar:
@@ -117,10 +107,6 @@ export default function DropdownKeys(props) {
         case dropdownType.declarePanelVar:
             return <DeclarePanelVar {...props}/>
 
-        case dropdownType.pickChoice:
-            return <PickChoice {...props}/>
-        case dropdownType.pickHealth:
-            return <PickHealth {...props}/>
         case dropdownType.pickTrigger:
             return <PickTrigger {...props}/>
         case dropdownType.pickGlobalVar:    

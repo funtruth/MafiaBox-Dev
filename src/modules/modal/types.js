@@ -4,7 +4,6 @@ export const modalType = {
     deleteLogic: 'modalType/delete-logic',
     editPhase: 'modalType/edit-phase',
 
-    editAccount: 'modalType/edit-account',
     createProject: 'modalType/create-project',
 
     showCode: 'modalType/show-code',

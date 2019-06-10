@@ -247,10 +247,10 @@ export const rssMap = {
             variableType.string.key,
         ],
     },
-    '(rss)(players)(@)(role)(action)': {
-        key: '(rss)(players)(@)(role)(action)',
-        value: '(rss)(players)(@)(role)(action)',
-        display: 'rss.players.@.role.action',
+    '(rss)(players)(@)(role)(roleAction)': {
+        key: '(rss)(players)(@)(role)(roleAction)',
+        value: '(rss)(players)(@)(role)(roleAction)',
+        display: 'rss.players.@.role.roleAction',
         variableTypes: [
             variableType.function.key,
         ],

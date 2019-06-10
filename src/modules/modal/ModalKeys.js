@@ -3,7 +3,6 @@ import React from 'react'
 import { modalType } from './types'
 
 import CreateProject from './account/CreateProject';
-import EditAccount from './account/EditAccount'
 import EditLogic from './page/EditLogic';
 import EditPriority from './priority/EditPriority'
 import EditTrigger from './logic/EditTrigger'
@@ -30,8 +29,6 @@ export default function ModalKeys(props) {
             return <DeletePage {...props}/>
         case modalType.deleteStory:
             return <DeleteStory {...props}/>
-        case modalType.editAccount:
-            return <EditAccount {...props}/>
         case modalType.createProject:
             return <CreateProject {...props}/>
         case modalType.showCode:

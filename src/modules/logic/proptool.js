@@ -109,7 +109,7 @@ export function getSubfields(prefix) {
 
 //display the variable in proper javascript
 //input => (rss)(players)((choices)(user))(dead)
-//ouput => rss.players[choices.user].dead
+//ouput => rss['players'][choices['user']]['dead']
 export function parseJS(string = "") {
     const fields = separateVar(string)
 
@@ -123,7 +123,7 @@ export function parseJS(string = "") {
         if (fields[i].charAt(0) === START_CHAR && fields[i].charAt(fields[i].length - 1) === END_CHAR) {
             str += '[' + parseJS(fields[i]) +']'
         } else {
-            str += '.' + fields[i]
+            str += "['" + fields[i] + "']"
         }
     }
        

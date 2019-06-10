@@ -96,6 +96,7 @@ export default function RolePickerHeader(props) {
                 dropdown={dropdownType.dropString}
                 params={{
                     path: [...path, 'title'],
+                    placeholder: 'setup ...'
                 }}
                 style={{
                     paddingRight: 10,

@@ -3,6 +3,7 @@ import { Input } from '../../components/Common';
 
 export default function DropString({
     slate,
+    placeholder,
     update,
     showDropdown,
 }){
@@ -18,7 +19,7 @@ export default function DropString({
             onSubmit={onSubmit}
             autofocus
             showSubmit
-            placeholder="name of patch ..."
+            placeholder={placeholder}
             type="text"
             outerprops={{
                 sizes: ['z', 'xs']

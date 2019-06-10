@@ -1,7 +1,7 @@
 /* Based on Sublime Text's Monokai theme */
 
 .cm-s-monokai.CodeMirror { margin-top: auto; background: rgba(39,40,34,0.8); color: #f8f8f2; cursor: text; z-index: 0;
-  font-weight: 100; font-size: 12px; }
+  font-weight: 100; font-size: 12px; height: 100%}
 .cm-s-monokai div.CodeMirror-selected { background: #49483E; }
 .cm-s-monokai .CodeMirror-line::selection, .cm-s-monokai .CodeMirror-line > span::selection, .cm-s-monokai .CodeMirror-line > span > span::selection { background: rgba(73, 72, 62, .99); }
 .cm-s-monokai .CodeMirror-line::-moz-selection, .cm-s-monokai .CodeMirror-line > span::-moz-selection, .cm-s-monokai .CodeMirror-line > span > span::-moz-selection { background: rgba(73, 72, 62, .99); }

@@ -12,10 +12,13 @@ export default function GeneralTagField(props) {
     const { path, fieldKey, fieldInfo, value, data } = props
     const { defaultValue } = fieldInfo
 
-    let handleClick = (item, active) => props.updatePage(path, {[item.key]: !active})
+    let handleClick = (item, active) => props.updateGeneral({
+        path,
+        update: {[item.key]: !active}
+    })
 
     const renderItem = (item) => {
-        const active = value && value[item.key]
+        const active = !!(value && value[item.key])
                 
         return (
             <DropClick
@@ -23,7 +26,7 @@ export default function GeneralTagField(props) {
                 onClick={() => handleClick(item, active)}
                 context={dropdownType.editGeneralTag}
                 params={{
-                    path: [fieldKey],
+                    path,
                     subfieldKey: item.key,
                     defaultValue,
                 }}

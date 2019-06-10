@@ -6,7 +6,6 @@ import { fieldType } from './types'
 
 import { IS_PUBLISHED } from '../common/arrows';
 
-import CallField from './components/CallField'
 import TextField from './components/TextField';
 import NumberField from './components/NumberField';
 import ImageField from './components/ImageField'
@@ -19,7 +18,7 @@ import PriorityField from './components/PriorityField'
 import { Body, Tag } from '../components/Common';
 
 export default function FieldView(props) {
-    const { path, slate, updatePage, updateGeneral } = props
+    const { path, slate, updateGeneral } = props
     const { fieldMap, fieldRepo } = useSelector(state => state.page)
     
     const renderItem = (item) => {
@@ -34,7 +33,6 @@ export default function FieldView(props) {
             fieldInfo,
             disabled: IS_PUBLISHED(slate),
             path: [...path, key],
-            updatePage,
             updateGeneral,
         }
         
@@ -58,8 +56,6 @@ export default function FieldView(props) {
             case fieldType.timer.key:
                 return <TimerField {...props}/>
 
-            case fieldType.call.key:
-                return <CallField {...props}/>
             case fieldType.image.key:
                 return <ImageField {...props}/>
             default:

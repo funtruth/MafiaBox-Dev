@@ -12,7 +12,10 @@ export default function UniqueTagField(props) {
     const { path, fieldKey, fieldInfo, value, data } = props
     const { readOnly, defaultValue } = fieldInfo
 
-    const handleClick = (item) => props.updatePage(path, item.key)
+    const handleClick = (item) => props.updateGeneral({
+        path,
+        update: item.key
+    })
 
     const renderItem = (item) => {
         const active = item.key === value
@@ -23,7 +26,7 @@ export default function UniqueTagField(props) {
                 onClick={() => handleClick(item)}
                 context={dropdownType.editUniqueTag}
                 params={{
-                    path: [fieldKey],
+                    path,
                     subfieldKey: item.key,
                     defaultValue,
                 }}

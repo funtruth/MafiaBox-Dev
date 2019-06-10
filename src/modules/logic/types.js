@@ -320,9 +320,6 @@ export const comparisonType = {
         code: '=',
         title: 'assign value',
         icon: 'equal',
-        variableTypes: [
-            variableType.function.key,
-        ]
     },
     in: {
         key: 'in',
@@ -331,6 +328,15 @@ export const comparisonType = {
         icon: 'sync',
         variableTypes: [
             variableType.uidObject.key,
+        ]
+    },
+    ":": {
+        key: ":",
+        code: ':',
+        title: ':',
+        icon: 'code-braces',
+        variableTypes: [
+            variableType.object.key,
         ]
     },
     add: {

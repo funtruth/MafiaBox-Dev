@@ -239,8 +239,28 @@ export function generateLogic(type) {
                 }
             }
         case logicType.function.key:
-            console.warn('not supported yet.')
-            return "";
+            i = generateIDs(2);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "Function(`return ${",
+                            right: "})()(rss,next)",
+                            middle: i[1],
+                        },
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.variable,
+                        variableTypes: [variableType.function.key],
+                    },
+                }
+            }
         case operatorType.if.key:
         case operatorType.elseif.key:
             i = generateIDs(4);

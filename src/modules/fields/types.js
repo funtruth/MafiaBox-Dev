@@ -22,12 +22,6 @@ export const boardType = {
 }
 
 export const fieldType = {
-    call: {
-        key: 'call',
-        index: -1,
-        icon: 'console',
-        title: 'Call',
-    },
     text: {
         key: 'text',
         index: 0,

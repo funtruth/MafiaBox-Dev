@@ -3,7 +3,6 @@ export const dropdownType = {
     dropString: 'dropdownType/drop-string',
     dropNumber: 'dropdownType/drop-number',
     inputValue: 'dropdownType/input-value',
-    dropInput: 'dropdownType/drop-input',
 
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
@@ -13,7 +12,6 @@ export const dropdownType = {
     editGeneralTag: 'dropdownType/edit-general-tag',
     createGameChoice: 'dropdownType/create-game-choice',
     pickGameChoiceType: 'dropdownType/pick-game-choice-type',
-    writeGameChoice: 'dropdownType/write-game-choice',
     gameChoiceOrdered: 'dropdownType/game-choice-ordered',
 
     //account
@@ -41,9 +39,7 @@ export const dropdownType = {
     declarePanelVar: 'dropdownType/declare-panel-var',
 
     pickUpdateValue: 'dropdownType/pick-update-value',
-    pickChoice: 'dropdownType/pick-choice',
     pickTrigger: 'dropdownType/pick-trigger',
-    pickHealth: 'dropdownType/pick-health',
 
     pickGlobalVar: 'dropdownType/pick-global-var',
     pickRecipient: 'dropdownType/pick-recipient',

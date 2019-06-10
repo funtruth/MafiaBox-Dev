@@ -56,7 +56,7 @@ function parseVar(byVK, vK) {
         case parseType.collection:
             return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
         case parseType.object:
-            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(";") + '}' : "{}"
+            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(",") + '}' : "{}"
         case parseType.string:
             return parseString(value)
         case parseType.update:
