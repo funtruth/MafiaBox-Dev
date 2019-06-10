@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import * as helpers from '../common/helpers'
 
 const initialState = {
     modalKeys: [],
@@ -28,33 +27,6 @@ export function showModal(key, params={}) {
         dispatch({
             type: UPDATE_MODAL_KEYS,
             payload: keysClone
-        })
-    }
-}
-
-export function popModalTo(index) {
-    return (dispatch, getState) => {
-        const { modalKeys } = getState().modal
-
-        const keysClone = _.cloneDeep(modalKeys).slice(0, index + 1)
-
-        dispatch({
-            type: UPDATE_MODAL_KEYS,
-            payload: keysClone,
-        })
-    }
-}
-
-export function updateTopModal(path, update, extraPath=[]) {
-    return (dispatch, getState) => {
-        const { modalKeys } = getState().modal
-
-        let keysClone = _.cloneDeep(modalKeys)
-        keysClone[keysClone.length - 1] = helpers.updateByPath(path.concat(extraPath), update, keysClone[keysClone.length - 1])
-        
-        dispatch({
-            type: UPDATE_MODAL_KEYS,
-            payload: keysClone,
         })
     }
 }

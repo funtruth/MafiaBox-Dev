@@ -36,7 +36,7 @@ export default function FieldView(props) {
             updateGeneral,
         }
         
-        switch(fieldInfo.fieldType) {
+        switch(fieldInfo.type) {
             case fieldType.text.key:
                 return <TextField {...props}/>
             case fieldType.number.key:
@@ -68,7 +68,7 @@ export default function FieldView(props) {
         <>
             {fields.map((field, index) => {
                 const item = fieldRepo[field]
-                const { icon } = fieldType[item.fieldType] || ""
+                const { icon } = fieldType[item.type] || {}
 
                 return (
                     <Body

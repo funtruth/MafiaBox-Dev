@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux'
 
 import { usePath } from '../hooks/Hooks';
 import { updateGeneral } from '../page/PageReducer'
-import { showModal, popModalTo, updateTopModal } from './ModalReducer'
+import { showModal } from './ModalReducer'
 
 import ModalKeys from './ModalKeys'
 
@@ -15,10 +15,6 @@ export default function ModalConnect({item, index}) {
     
     //some APIs
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
-    renderProps.popModalBy = (pops) => dispatch(popModalTo(index - pops))
-    renderProps.close = () => dispatch(popModalTo(index - 1))
-
-    renderProps.setWorkspace = (value, path) => dispatch(updateTopModal(path || ['attach'], value))
     renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
 
     if (!path) {

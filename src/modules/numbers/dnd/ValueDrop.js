@@ -26,6 +26,7 @@ function collect(connect, monitor) {
 function ValueDrop(props) {
     const { connectDropTarget, isOver, children,
         path, mathKey, mathItem, position } = props
+        console.log({props})
         
     const renderItem = () => {
         //empty
@@ -50,7 +51,7 @@ function ValueDrop(props) {
             )
         }
 
-        if (mathItem.parseBy === parseType.variable) {
+        if (mathItem.parseBy === parseType.variable || mathItem.parseBy === parseType.constant) {
             return (
                 <DropClick
                     dropdown={dropdownType.pickNumValue}

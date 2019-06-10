@@ -17,7 +17,6 @@ export default function DropdownConnect({item, index}) {
     //some APIs
     renderProps.showDropdown = (key, e, params) => dispatch(showDropdown(key, e, params, index, 'right'))
     renderProps.popDropdownTo = (forcedIndex) => dispatch(popDropdownTo(forcedIndex || index))
-    renderProps.popDropdown = () => dispatch(popDropdownTo(index - 1))
     renderProps.showModal = (k, p) => dispatch(showModal(k, p))
     renderProps.updateGeneral = (...u) => dispatch(updateGeneral(...u))
 

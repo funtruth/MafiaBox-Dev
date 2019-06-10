@@ -1,4 +1,4 @@
-import { variableType } from '../common/types'
+import { variableType, dropdownType } from '../common/types'
 
 /* logicItem
     FIELD           DESCRIPTION
@@ -104,15 +104,18 @@ export const triggerNewVars = {
     },
 }
 
-export const choiceMap = {
-    "(choice)": {
-        key: '(choice)',
-        value: '(choice)',
-        display: 'choice',
+export const choiceMapUID = {
+    "(player)": {
+        key: '(player)',
+        value: '(player)',
+        display: 'player',
         variableTypes: [
-            variableType.object.key,
+            variableType.uid.key,
         ],
     },
+}
+
+export const choiceMap = {
     "(choice)(user)": {
         key: '(choice)(user)',
         value: '(choice)(user)',
@@ -219,46 +222,39 @@ export const rssMap = {
         key: '(rss)(players)(@)',
         value: '(rss)(players)(@)',
         display: 'rss.players.@',
+        dropdown: dropdownType.pickVarTags,
         variableTypes: [
             variableType.object.key,
         ],
     },
-    '(rss)(players)(@)(role)': {
-        key: '(rss)(players)(@)(role)',
-        value: '(rss)(players)(@)(role)',
-        display: 'rss.players.@.role',
-        variableTypes: [
-            variableType.object.key,
-        ],
-    },
-    '(rss)(players)(@)(role)(roleId)': {
-        key: '(rss)(players)(@)(role)(roleId)',
-        value: '(rss)(players)(@)(role)(roleId)',
-        display: 'rss.players.@.role.roleId',
+    '(rss)(players)(@)(roleId)': {
+        key: '(rss)(players)(@)(roleId)',
+        value: '(rss)(players)(@)(roleId)',
+        display: 'rss.players.@.roleId',
         variableTypes: [
             variableType.key.key,
         ],
     },
-    '(rss)(players)(@)(role)(roleTeam)': {
-        key: '(rss)(players)(@)(role)(roleTeam)',
-        value: '(rss)(players)(@)(role)(roleTeam)',
-        display: 'rss.players.@.role.roleTeam',
+    '(rss)(players)(@)(roleTeam)': {
+        key: '(rss)(players)(@)(roleTeam)',
+        value: '(rss)(players)(@)(roleTeam)',
+        display: 'rss.players.@.roleTeam',
         variableTypes: [
             variableType.string.key,
         ],
     },
-    '(rss)(players)(@)(role)(roleAction)': {
-        key: '(rss)(players)(@)(role)(roleAction)',
-        value: '(rss)(players)(@)(role)(roleAction)',
-        display: 'rss.players.@.role.roleAction',
+    '(rss)(players)(@)(roleAction)': {
+        key: '(rss)(players)(@)(roleAction)',
+        value: '(rss)(players)(@)(roleAction)',
+        display: 'rss.players.@.roleAction',
         variableTypes: [
             variableType.function.key,
         ],
     },
-    '(rss)(players)(@)(role)(charges)': {
-        key: '(rss)(players)(@)(role)(charges)',
-        value: '(rss)(players)(@)(role)(charges)',
-        display: 'rss.players.@.role.charges',
+    '(rss)(players)(@)(charges)': {
+        key: '(rss)(players)(@)(charges)',
+        value: '(rss)(players)(@)(charges)',
+        display: 'rss.players.@.charges',
         variableTypes: [
             variableType.number.key,
         ],
@@ -268,15 +264,7 @@ export const rssMap = {
         value: '(rss)(players)(@)(health)',
         display: 'rss.players.@.health',
         variableTypes: [
-            variableType.object.key,
-        ],
-    },
-    '(rss)(players)(@)(dead)': {
-        key: '(rss)(players)(@)(dead)',
-        value: '(rss)(players)(@)(dead)',
-        display: 'rss.players.@.dead',
-        variableTypes: [
-            variableType.boolean.key,
+            variableType.number.key,
         ],
     },
     '(rss)(players)(@)(king)': {
@@ -293,22 +281,6 @@ export const rssMap = {
         display: 'rss.players.@.clown',
         variableTypes: [
             variableType.boolean.key,
-        ],
-    },
-    '(rss)(players)(@)(trigger)': {
-        key: '(rss)(players)(@)(trigger)',
-        value: '(rss)(players)(@)(trigger)',
-        display: 'rss.players.@.trigger',
-        variableTypes: [
-            variableType.object.key,
-        ],
-    },
-    '(rss)(players)(@)(trigger)(@)': {
-        key: '(rss)(players)(@)(trigger)(@)',
-        value: '(rss)(players)(@)(trigger)(@)',
-        display: 'rss.players.@.trigger.@',
-        variableTypes: [
-            variableType.uid.key,
         ],
     },
     '(rss)(choices)': {

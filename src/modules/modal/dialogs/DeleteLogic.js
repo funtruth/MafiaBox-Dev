@@ -9,10 +9,9 @@ import {
 } from '../../components/Common';
 
 export default function DeleteLogic(props) {
-    const onCancel = () => props.close()
+    const onCancel = () => props.showModal()
     const onDelete = () => {
         props.onDelete();
-        props.close();
     }
 
     return (

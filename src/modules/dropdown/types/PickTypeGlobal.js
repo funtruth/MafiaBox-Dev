@@ -37,7 +37,7 @@ export default function PickTypeGlobal({
     const handleSelect = (item) => {
         update({
             ...LOGIC_ITEM_VAR,
-            value: item.value,
+            value: item.key,
             display: item.display,
             parseBy: parseType.constant,
             variableTypes: [variableType.global.key],

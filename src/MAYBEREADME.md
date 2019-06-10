@@ -58,5 +58,6 @@
 - collection
 - object
 - declare
+- function
 - operation
 - update

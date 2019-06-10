@@ -14,8 +14,6 @@ import RoleItemOptions from './board/RoleItemOptions'
 import PageHistory from './page/PageHistory'
 import PageOptions from './page/PageOptions'
 
-import InputValue from './components/InputValue'
-
 import PickLogic from './logic/PickLogic';
 import PickOperator from './logic/PickOperator';
 
@@ -66,9 +64,6 @@ export default function DropdownKeys(props) {
             return <PageHistory {...props}/>
         case dropdownType.pageOptions:
             return <PageOptions {...props}/>
-
-        case dropdownType.inputValue:
-            return <InputValue {...props}/>
 
         case dropdownType.pickLogic:
             return <PickLogic {...props}/>

@@ -35,7 +35,6 @@ function EditPriority(props) {
 
     let handleSave = () => {
         props.diffPriorities(workspace)
-        props.close()
     }
 
     const onSortEnd = ({oldIndex, newIndex}) => {

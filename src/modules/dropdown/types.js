@@ -2,7 +2,6 @@ export const dropdownType = {
     //common
     dropString: 'dropdownType/drop-string',
     dropNumber: 'dropdownType/drop-number',
-    inputValue: 'dropdownType/input-value',
 
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
@@ -30,6 +29,7 @@ export const dropdownType = {
     pickVar: 'dropdownType/pick-var',
     pickVarSubfield: 'dropdownType/pick-var-subfield',
     pickVarWithType: 'dropdownType/pick-var-with-type',
+    pickVarTags: 'dropdownType/pick-var-tags',
     pickComparison: 'dropdownType/pick-comparison',
     replaceWildcard: 'dropdownType/replace-wildcard',
     createGlobalVar: 'dropdownType/create-global-var',

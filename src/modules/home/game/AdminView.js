@@ -64,6 +64,8 @@ export default function AdminView(props) {
             description: pageItem.description1,
             roleTeam: pageItem.roleTeam,
             image: pageItem.roleImage,
+            health: pageItem.roleHealth || 0,
+            charges: pageItem.roleCharges || "",
             roleTargetMode: getCode(pageItem.roleTargetMode),
             ...(pageItem.playerTags || {}),
         }

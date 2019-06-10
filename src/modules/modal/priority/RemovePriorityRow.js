@@ -10,7 +10,6 @@ import {
 
 export default function RemovePriorityRow(props) {
     const onQuit   = () => {
-        props.popModalBy(1)
         props.onSave()
     }
     const onCancel = () => props.popModalBy(1)

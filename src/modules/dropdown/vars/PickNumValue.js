@@ -1,21 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
     parseType,
     variableType,
 } from '../../common/types'
-import {
-    LOGIC_ITEM_VAR,
-} from '../../common/defaults';
+import { LOGIC_ITEM_VAR } from '../../common/defaults';
 
-import { useAutofocus } from '../../hooks/Hooks'
  import generatePushID from '../../common/generatePushID';
 
-import {
-    DropSubmit,
-    DropTitle,
-} from '../components/Common'
-import { Row } from '../../components/Common'
+import { DropTitle } from '../components/Common'
+import { Input } from '../../components/Common'
 
 /*
 LOCATION
@@ -33,13 +27,8 @@ export default function PickNumValue({
     update,
     showDropdown,
 }){
-    const focusRef = useAutofocus()
-
-    const [value, setValue] = useState(mathKey ? slate : "")//TODO
-    const handleChange = e => setValue(e.target.value)
-
     //changing value @ byId.[mathKey].value
-    const updateSlate = () => {
+    const updateSlate = (value) => {
         update({
             ...LOGIC_ITEM_VAR,
             display: value,
@@ -51,7 +40,7 @@ export default function PickNumValue({
     }
 
     //setting value to an empty ValueDrop @ byId
-    const setSlate = () => {
+    const setSlate = (value) => {
         const newKey = generatePushID('math')
         
         update({
@@ -74,39 +63,30 @@ export default function PickNumValue({
         showDropdown();
     }
 
-    const onSubmit = () => {
+    const onSubmit = (value) => {
         if (!mathKey) {
-            setSlate();
+            setSlate(value);
         } else {
-            updateSlate();
+            updateSlate(value);
         }
         showDropdown();
     }
-
-    const onKeyDown = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                onSubmit()
-                break
-            default:
-        }
-    }
-
+    
     return (
         <>
             <DropTitle>set to number</DropTitle>
-            <Row sizes={['z', 'xs']}>
-                <input
-                    ref={focusRef}
-                    className="tag-input"
-                    value={value}
-                    onChange={handleChange}
-                    onKeyDown={onKeyDown}
-                    placeholder="enter a value ..."
-                    type='number'
-                />
-                <DropSubmit onClick={onSubmit}/>
-            </Row>
+            <Input
+                autofocus
+                theme="tag"
+                value={mathKey ? slate : ""}
+                onSubmit={onSubmit}
+                showSubmit
+                placeholder="enter a value ..."
+                type='number'
+                outerprops={{
+                    sizes: ['z', 'xs'],
+                }}
+            />
         </>
     )
 }

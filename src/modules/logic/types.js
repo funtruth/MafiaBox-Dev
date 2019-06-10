@@ -109,6 +109,7 @@ export const parseType = {
     constant: 'parseType/constant',
     collection: 'parseType/collection',
     declare: 'parseType/declare',
+    function: 'parseType/function',
     object: 'parseType/object',
     operation: 'parseType/operation',
     string: 'parseType/string',
@@ -338,6 +339,12 @@ export const comparisonType = {
         variableTypes: [
             variableType.object.key,
         ]
+    },
+    "()": {
+        key: "()",
+        code: "()",
+        title: "()",
+        icon: 'code-parentheses',
     },
     add: {
         key: 'add',

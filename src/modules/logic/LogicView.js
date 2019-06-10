@@ -42,15 +42,21 @@ export default function LogicView({ path }) {
 
     const runCode = () => {
         const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        let { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
         
         try {
-            // eslint-disable-next-line
-            Function(`return ${code}`)()(rss, next)
+            console.time('eval test.')
+            for (var i=0; i<100; i++) {
+                const { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
+                // eslint-disable-next-line
+                Function(`return ${code}`)()(rss, next)
+            }
+            console.timeEnd('eval test.')
+
+            const { rss, next } = _.cloneDeep(LOGIC_TESTS[0])
+            console.log('_runCode results', {rss, next})
         } catch {
             console.log('error')
         }
-        console.log('_runCode results', {rss, next})
     }
 
     const showCode = () => {

@@ -3,14 +3,15 @@ import {
     fieldType,
     phaseActionType,
 } from '../common/types'
-import { choiceMap } from '../logic/defaults'
+import { choiceMap, choiceMapUID } from '../logic/defaults'
 
 export const defaultFieldMap = {
     [boardType.roles.key]: [
-        'description1',
+        'description',
         'roleTeam',
         'roleImage',
         'playerTags',
+        'roleHealth',
         'roleCharges',
         'priority',
         'roleGameChoice',
@@ -18,7 +19,7 @@ export const defaultFieldMap = {
         'roleAction',
     ],
     [boardType.phases.key]: [
-        'description2',
+        'description',
         'phaseActionMode',
         'phaseTimer',
         'phaseChoices',
@@ -67,105 +68,92 @@ export const DEFAULT_GAME_CHOICE = {
     data            data regarding the field
 */
 export const defaultFieldRepo = {
-    description1: {
-        key: 'description1',
-        fieldType: fieldType.text.key,
+    description: {
+        key: 'description',
+        type: fieldType.text.key,
         title: 'Description',
-        boardType: boardType.roles.key,
     },
     roleTeam: {
         key: 'roleTeam',
-        fieldType: fieldType.uniqueTag.key,
+        type: fieldType.uniqueTag.key,
         title: 'Team',
-        boardType: boardType.roles.key,
     },
     roleImage: {
         key: 'roleImage',
-        fieldType: fieldType.image.key,
+        type: fieldType.image.key,
         title: "Role Image",
-        boardType: boardType.roles.key,
     },
     playerTags: {
         key: 'playerTags',
-        fieldType: fieldType.generalTag.key,
+        type: fieldType.generalTag.key,
         title: 'Player Tags',
-        boardType: boardType.roles.key,
     },
     roleCharges: {
         key: 'roleCharges',
-        fieldType: fieldType.number.key,
+        type: fieldType.number.key,
         title: 'Charges',
-        boardType: boardType.roles.key,
+        defaultValue: 0,
     },
     priority: {
         key: 'priority',
-        fieldType: fieldType.priority.key,
+        type: fieldType.priority.key,
         title: 'Priority',
-        boardType: boardType.roles.key,
     },
     roleGameChoice: {
         key: 'roleGameChoice',
-        fieldType: fieldType.gameChoiceOverride.key,
+        type: fieldType.gameChoiceOverride.key,
         title: 'Game Choice Override',
-        boardType: boardType.roles.key,
     },
     roleTargetMode: {
         key: 'roleTargetMode',
-        fieldType: fieldType.logic.key,
+        type: fieldType.logic.key,
         title: 'Target Mode',
-        boardType: boardType.roles.key,
         defaultValue: { vars: choiceMap },
     },
     roleAction: {
         key: 'roleAction',
-        fieldType: fieldType.logic.key,
+        type: fieldType.logic.key,
         title: 'Action',
-        boardType: boardType.roles.key,
-        defaultValue: { vars: choiceMap },
+        defaultValue: { vars: choiceMapUID },
     },
-    description2: {
-        key: 'description2',
-        fieldType: fieldType.text.key,
-        title: 'Description',
-        boardType: boardType.phases.key,
+    roleHealth: {
+        key: 'roleHealth',
+        type: fieldType.number.key,
+        title: 'Health',
+        defaultValue: 0,
     },
     phaseActionMode: {
         key: 'phaseActionMode',
-        fieldType: fieldType.uniqueTag.key,
+        type: fieldType.uniqueTag.key,
         title: 'Phase Action Mode',
-        boardType: boardType.phases.key,
         data: phaseActionType,
         defaultValue: phaseActionType.all.key,
         readOnly: true,
     },
     phaseTimer: {
         key: 'phaseTimer',
-        fieldType: fieldType.timer.key,
+        type: fieldType.timer.key,
         title: 'Phase Timer',
-        boardType: boardType.phases.key,
     },
     phaseChoices: {
         key: 'phaseChoices',
-        fieldType: fieldType.gameChoices.key,
+        type: fieldType.gameChoices.key,
         title: 'Phase Choices',
-        boardType: boardType.phases.key,
     },
     phaseAction: {
         key: 'phaseAction',
-        fieldType: fieldType.logic.key,
+        type: fieldType.logic.key,
         title: 'Phase Action',
-        boardType: boardType.phases.key,
+        defaultValue: { vars: choiceMap },
     },
     phaseListener: {
         key: 'phaseListener',
-        fieldType: fieldType.logic.key,
+        type: fieldType.logic.key,
         title: 'Phase Listener',
-        boardType: boardType.phases.key,
     },
     eventLogic: {
         key: 'eventLogic',
-        fieldType: fieldType.logic.key,
+        type: fieldType.logic.key,
         title: 'Event Logic',
-        boardType: boardType.events.key,
     },
 }

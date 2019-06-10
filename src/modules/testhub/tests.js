@@ -20,10 +20,17 @@ export const LOGIC_TESTS = [
                 '123': {
                     user: '123',
                     target: '124',
+                    value: "guilty",
+                },
+                '124': {
+                    user: '124',
+                    target: '124',
+                    value: "guilty",
                 },
                 '125': {
                     user: '125',
                     target: '124',
+                    value: "guilty",
                 },
             }
         },

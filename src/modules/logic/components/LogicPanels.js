@@ -176,6 +176,14 @@ export default function LogicPanels(props) {
                     />
                 </Row>
             )
+        case parseType.function:
+            return (
+                <Row y="t">
+                    <LogicPanels {...props} index={1} varKey={value.left} baseVar={varRepo[value.left]}/>
+                    <LogicButton label="arguments"/>
+                    <LogicPanels {...props} index={1} varKey={value.right} baseVar={varRepo[value.right]}/>
+                </Row>
+            )
         case parseType.wrapper:
             return <LogicPanels {...props} varKey={value.middle}/>
         case parseType.collection:

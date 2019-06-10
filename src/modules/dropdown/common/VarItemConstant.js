@@ -1,20 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
     parseType,
     variableType,
 } from '../../common/types'
-import {
-    LOGIC_ITEM_VAR,
-} from '../../common/defaults';
+import { LOGIC_ITEM_VAR } from '../../common/defaults';
 
-import { useAutofocus } from '../../hooks/Hooks'
-
-import {
-    DropSubmit,
-    DropTitle,
-} from '../components/Common'
-import { Row } from '../../components/Common'
+import { DropTitle } from '../components/Common'
+import { Input } from '../../components/Common'
 
 /*
     PickTypeNumber
@@ -26,12 +19,7 @@ export default function VarItemConstant({
     update,
     showDropdown,
 }){
-    const focusRef = useAutofocus()
-
-    const [value, setValue] = useState(slate.value)
-    const handleChange = e => setValue(e.target.value)
-
-    const submit = () => {
+    const submit = (value) => {
         update({
             ...LOGIC_ITEM_VAR,
             display: value,
@@ -42,30 +30,20 @@ export default function VarItemConstant({
         showDropdown();
     }
 
-    const onKeyDown = e => {
-        switch(e.nativeEvent.key) {
-            case 'Enter':
-                submit()
-                break
-            default:
-        }
-    }
-
     return (
         <>
             <DropTitle>set to number</DropTitle>
-            <Row sizes={['z', 'xs']}>
-                <input
-                    ref={focusRef}
-                    className="tag-input"
-                    value={value}
-                    onChange={handleChange}
-                    onKeyDown={onKeyDown}
-                    placeholder="enter a value ..."
-                    type='number'
-                />
-                <DropSubmit onClick={submit}/>
-            </Row>
+            <Input
+                theme="tag"
+                value={slate.value}
+                onSubmit={submit}
+                showSubmit
+                placeholder="enter a value ..."
+                type="number"
+                outerprops={{
+                    sizes: ['z', 'xs'],
+                }}
+            />
         </>
     )
 }

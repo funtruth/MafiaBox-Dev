@@ -43,10 +43,20 @@ export function generateLogic(type) {
                 },
             }
         case logicType.event.key:
-            i = generateIDs(12);
+            i = generateIDs(13);
             return {
-                source: i[0],
+                source: i[12],
                 byId: {
+                    [i[12]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[12],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "",
+                            right: ";",
+                            middle: i[0],
+                        }
+                    },
                     [i[0]]: {
                         ...LOGIC_ITEM_VAR,
                         key: i[0],
@@ -65,7 +75,7 @@ export function generateLogic(type) {
                         disabled: true,
                         display: 'event',
                         parseBy: parseType.update,
-                        value: '(rss)(events)((next)(time++))',
+                        value: '(rss)(events)((next.time++))',
                     },
                     [i[2]]: {
                         ...LOGIC_ITEM_VAR,
@@ -239,25 +249,54 @@ export function generateLogic(type) {
                 }
             }
         case logicType.function.key:
-            i = generateIDs(2);
+            i = generateIDs(5);
             return {
                 source: i[0],
                 byId: {
                     [i[0]]: {
                         ...LOGIC_ITEM_VAR,
                         key: i[0],
-                        parseBy: parseType.wrapper,
+                        parseBy: parseType.function,
                         value: {
-                            left: "Function(`return ${",
-                            right: "})()(rss,next)",
-                            middle: i[1],
+                            ...LOGIC_ITEM_VAR_OPERATION,
+                            operator: "()",
+                            left: i[1],
+                            right: i[3],
                         },
                     },
                     [i[1]]: {
                         ...LOGIC_ITEM_VAR,
                         key: i[1],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "Function(`return ${",
+                            right: "}`)",
+                            middle: i[2],
+                        },
+                        variableTypes: [variableType.function.key],
+                    },
+                    [i[2]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[2],
                         parseBy: parseType.variable,
                         variableTypes: [variableType.function.key],
+                    },
+                    [i[3]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[3],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "(rss,next,",
+                            right: ")",
+                            middle: i[4],
+                        },
+                        variableTypes: [variableType.uid.key],
+                    },
+                    [i[4]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[4],
+                        parseBy: parseType.variable,
+                        variableTypes: [variableType.uid.key],
                     },
                 }
             }

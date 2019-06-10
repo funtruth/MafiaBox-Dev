@@ -7,7 +7,7 @@ export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId, vars } = data
     
-    return `(rss, next, choice)=>{${byIndex ? byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(";"):''}}`
+    return `(rss, next, choice)=>{${byIndex ? byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(""):''}}`
 }
 
 //lK logicKey
@@ -26,7 +26,7 @@ function parseLogic(byLK, lK, vars) {
     let codeDeclare = _.filter(vars, i => i.scope === lK).map(v => 'let ' + parseJS(v.value)).join(';')
     if (codeDeclare) codeDeclare += ';'
     let codeBody = parseVar(varRepo, source);
-    let codeRight = byIndex ? "{" + byIndex.map(lK => parseLogic(byLK, lK, vars)).join(";") + "}" : ""
+    let codeRight = byIndex ? "{" + byIndex.map(lK => parseLogic(byLK, lK, vars)).join("") + "}" : ""
 
     return codeDeclare + codeBody + codeRight
 }
@@ -44,6 +44,7 @@ function parseVar(byVK, vK) {
     } = item
 
     switch(parseBy) {
+        case parseType.function:
         case parseType.operation:
             return parseVar(byVK, value.left) + comparisonType[value.operator].code + parseVar(byVK, value.right)
         case parseType.number:
@@ -54,7 +55,7 @@ function parseVar(byVK, vK) {
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right
         case parseType.collection:
-            return value ? value.map(cK => parseVar(byVK, cK)).join(";") : ""
+            return value ? value.map(cK => parseVar(byVK, cK)).join(";") + ";" : ""
         case parseType.object:
             return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(",") + '}' : "{}"
         case parseType.string:

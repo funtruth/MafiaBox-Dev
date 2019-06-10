@@ -8,7 +8,6 @@ import {
     DEFAULT_GAME_CHOICE,
 } from '../fields/defaults'
 import {
-    choiceMap,
     rssMap,
     triggerNewVars,
     DEFAULT_LOGIC,
@@ -20,7 +19,6 @@ import {
 } from '../logic/defaults'
 
 export {
-    choiceMap,
     defaultFieldMap,
     defaultFieldRepo,
     DEFAULT_EVENT_LISTENER,
