@@ -66,6 +66,7 @@ export default function AdminView(props) {
             image: pageItem.roleImage,
             health: pageItem.roleHealth || 0,
             charges: pageItem.roleCharges || "",
+            roleAction: getCode(pageItem.roleAction),
             roleTargetMode: getCode(pageItem.roleTargetMode),
             ...(pageItem.playerTags || {}),
         }
@@ -140,7 +141,7 @@ export default function AdminView(props) {
             <Tag
                 icon="auto-fix"
                 text="Publish mode"
-                bg="darkpurple"
+                bg="red"
             />
             <Row>
                 {_.filter(pageRepo, i => i.board === 'modes').map(item => (

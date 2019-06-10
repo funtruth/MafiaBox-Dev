@@ -106,6 +106,14 @@ export default function PickVar({
         }
     }
 
+    const handleSelect = (item) => {
+        pickVarClick({
+            display: parseJS(item.value),
+            value: item.value,
+            variableTypes: item.variableTypes,
+        })
+    }
+
     const renderItem = (item) => {
         const chosen = slate.value === item.key
 
@@ -127,7 +135,7 @@ export default function PickVar({
             <DropItem
                 key={item.key}
                 chosen={chosen}
-                onClick={() => pickVarClick(item)}
+                onClick={() => handleSelect(item)}
                 leftIcon={getVarTypeIcon(item.variableTypes)}
                 rightCheck
                 text={item.display}

@@ -51,6 +51,17 @@ export function separateVar(value = "") {
     return fields;
 }
 
+//takes a prefix (foo)(bar) and returns the last subfield bar
+export function lastSubfield(prefix) {
+    const fields = separateVar(prefix)
+
+    if (fields.length === 0) {
+        return ""
+    }
+
+    return fields[fields.length - 1]
+}
+
 export function searchVarWithMap(value, map = []) {
     const fields = separateVar(value)
 

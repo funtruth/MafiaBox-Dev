@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { parseType, variableType } from '../../common/types'
-import { LOGIC_ITEM_VAR } from '../../logic/defaults';
+import { parseJS } from '../../logic/proptool';
 
 import {
     useVarType,
@@ -34,9 +34,18 @@ export default function PickVarWithType(props){
 
     const onClear = () => {
         pickVarClick({
-            ...LOGIC_ITEM_VAR,
-            parseBy: parseType.constant,
             value: '""',
+            display: '""',
+            variableTypes: "",
+            parseBy: parseType.constant,
+        })
+    }
+
+    const handleSelect = (item) => {
+        pickVarClick({
+            value: item.value,
+            display: parseJS(item.value),
+            variableTypes: item.variableTypes,
         })
     }
 
@@ -50,7 +59,7 @@ export default function PickVarWithType(props){
             <DropItem
                 key={item.key}
                 chosen={chosen}
-                onClick={() => pickVarClick(item)}
+                onClick={() => handleSelect(item)}
                 rightCheck
                 text={item.display}
             />
@@ -94,7 +103,7 @@ export default function PickVarWithType(props){
             {wildVars.map(renderItem)}
             <DropItem
                 leftIcon="eraser-variant"
-                text="clear value"
+                text="empty"
                 onClick={onClear}
             />
             <DropEmpty list={wildVars} text="no variables found"></DropEmpty>

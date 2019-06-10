@@ -7,6 +7,8 @@ import {
     getSubfields,
     concatField,
     WILD_CHAR,
+    parseJS,
+    lastSubfield,
 } from '../../logic/proptool'
 import { VARTYPE_IS_OBJ } from '../../common/arrows';
 import { useVarType } from '../../hooks/Hooks';
@@ -79,6 +81,16 @@ export default function PickVarSubfield({
         return null;
     }
 
+    const handleSelect = (item) => {
+        const subfield = lastSubfield(item.value)
+        
+        pickVarClick({
+            value: concatField(prefix, subfield),
+            display: subfield,
+            variableTypes: item.variableTypes,
+        })
+    }
+
     const renderItem = (item) => {
         const hasObject = VARTYPE_IS_OBJ(item)
 
@@ -102,7 +114,7 @@ export default function PickVarSubfield({
             <DropItem
                 key={item.key}
                 chosen={chosen}
-                onClick={() => pickVarClick(item)}
+                onClick={() => handleSelect(item)}
                 rightCheck
                 text={item.display}
             />

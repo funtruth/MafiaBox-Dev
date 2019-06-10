@@ -42,6 +42,8 @@ export default function LogicPanels(props) {
 
     const { display, parseBy, value, variableTypes, disabled } = varItem || {}
 
+    //receives an editted item (NOT LOGIC_ITEM_VAR, but formatted to already match LOGIC_ITEM_VAR)
+    //{value, display, variableTypes}
     const pickVarClick = (item) => {
         let i;
         switch(parseBy) {
@@ -69,10 +71,8 @@ export default function LogicPanels(props) {
                         [i[1]]: {
                             ...LOGIC_ITEM_VAR,
                             key: i[1],
-                            display: parseJS(item.value),
-                            value: item.value,
                             parseBy: parseType.variable,
-                            variableTypes: item.variableTypes,
+                            ...item,
                         },
                         [i[2]]: {
                             ...LOGIC_ITEM_VAR,
@@ -106,10 +106,8 @@ export default function LogicPanels(props) {
                         [i[1]]: {
                             ...LOGIC_ITEM_VAR,
                             key: i[1],
-                            display: parseJS(item.value),
-                            value: item.value,
-                            parseBy: generateCollectionParseType(logicItem), //can be update, WIP
-                            variableTypes: item.variableTypes,
+                            parseBy: generateCollectionParseType(logicItem),
+                            ...item,
                         },
                         [i[2]]: {
                             ...LOGIC_ITEM_VAR,
@@ -126,10 +124,8 @@ export default function LogicPanels(props) {
                     path: varPath,
                     update: {
                         ...LOGIC_ITEM_VAR,
-                        display: parseJS(item.value),
-                        value: item.value,
                         parseBy: parseBy || parseType.variable,
-                        variableTypes: item.variableTypes,
+                        ...item,
                     }
                 }))
                 break;

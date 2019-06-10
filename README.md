@@ -1,8 +1,8 @@
 # Activity log
 - better commit descriptions
+- [Useful dev notes](./src/MAYBEREADME.md)
 
 ## WIP
-- [ ] real test with roles
 
 ## Backlog
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
@@ -10,16 +10,19 @@
 ## Low Priority
 - [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
-- [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events.
+- [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
 
 ## 06/10/2019
 ### Major
 - [x] flesh out health handling
 - [x] logicType.function (using parseType.function for current front-end, needs fix though)
+- [x] real test with roles
 
 ### Minor
 - [x] NOT IMPLEMENTED: Field view tags can be moved to global vars, check if this can call for removal of fieldMap/fieldRepo. (REASON): fieldRepo tags could be removed but defaultValue is still useful.
 - [x] test out nested Function eval ... SKETCH AF
+- [x] proper tags in parseType.variable/update (e.g. player.tag-12345678 instead of player.dead)
+- [x] add new items to rssMap such as player name
 
 ## 06/09/2019
 ### Major
