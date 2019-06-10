@@ -56,7 +56,8 @@ export default function RolePickerHeader(props) {
                 setResults(
                     _(roles)
                         .map((i, k) => pageRepo[k])
-                        .groupBy(i => i.storyType)
+                        .filter()
+                        .groupBy(i => i.story)
                         .map((item, key) => ({
                             key,
                             title: (storyRepo[key] && storyRepo[key].title) || key,
@@ -69,7 +70,7 @@ export default function RolePickerHeader(props) {
                 setResults(
                     _(pageRepo)
                         .filter(i => i.board === boardType.roles.key)
-                        .groupBy(i => i.storyType)
+                        .groupBy(i => i.story)
                         .map((item, key) => ({
                             key,
                             title: (storyRepo[key] && storyRepo[key].title) || key,

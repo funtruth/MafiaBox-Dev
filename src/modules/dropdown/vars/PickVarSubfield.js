@@ -3,6 +3,7 @@ import React from 'react'
 import { dropdownType, variableType } from '../../common/types'
 
 import {
+    getSubfieldConfig,
     getSubfields,
     concatField,
     WILD_CHAR,
@@ -31,6 +32,9 @@ export default function PickVarSubfield({
     pickVarClick,//passed
     showDropdown,
 }){
+    //get config
+    const config = getSubfieldConfig(prefix)
+
     //get subfields to show
     const subfields = getSubfields(prefix)
 
@@ -59,6 +63,20 @@ export default function PickVarSubfield({
                 text={item.display}
             />
         )
+    }
+
+    const renderTags = () => {
+        if (config && config.dropdown) {
+            return (
+                <DropParent
+                    dropdown={config.dropdown}
+                    showDropdown={showDropdown}
+                    icon="tag-multiple"
+                    text="tags"
+                />
+            )
+        }
+        return null;
     }
 
     const renderItem = (item) => {
@@ -101,6 +119,7 @@ export default function PickVarSubfield({
                 return renderItem(item)
             })}
             <DropEmpty list={subfields} text="no results found"/>
+            {renderTags()}
         </DropScroll>
     )
 }

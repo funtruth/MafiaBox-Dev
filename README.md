@@ -2,7 +2,7 @@
 - better commit descriptions
 
 ## WIP
-- [ ] test out nested Function eval ... SKETCH AF
+- [ ] real test with roles
 
 ## Backlog
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
@@ -19,6 +19,7 @@
 
 ### Minor
 - [x] NOT IMPLEMENTED: Field view tags can be moved to global vars, check if this can call for removal of fieldMap/fieldRepo. (REASON): fieldRepo tags could be removed but defaultValue is still useful.
+- [x] test out nested Function eval ... SKETCH AF
 
 ## 06/09/2019
 ### Major

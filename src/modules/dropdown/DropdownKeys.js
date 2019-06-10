@@ -27,6 +27,7 @@ import CreateGlobalVar from './page/CreateGlobalVar'
 
 import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
+import PickVarTags from './vars/PickVarTags';
 import PickVarWithType from './vars/PickVarWithType';
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
@@ -89,6 +90,8 @@ export default function DropdownKeys(props) {
             return <PickVar {...props}/>
         case dropdownType.pickVarSubfield:
             return <PickVarSubfield {...props}/>
+        case dropdownType.pickVarTags:
+            return <PickVarTags {...props}/>
         case dropdownType.pickVarWithType:
             return <PickVarWithType {...props}/>
         case dropdownType.pickComparison:

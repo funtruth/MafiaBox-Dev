@@ -12,21 +12,21 @@ import {
 
 function RolePickerResult(props) {
     const { item, path, draftInfo } = props
-    const { pageKey, title } = item
+    const { key, title } = item
     const { roles } = draftInfo
 
-    const currentCount = (roles && roles[pageKey]) || 0
+    const currentCount = (roles && roles[key]) || 0
 
     const onRemove = () => {
         if (currentCount === 0) return;
         props.updateGeneral({
-            path: [...path, 'roles', pageKey],
+            path: [...path, 'roles', key],
             update: currentCount - 1,
         })
     }
     const onAdd = () => {
         props.updateGeneral({
-            path: [...path, 'roles', pageKey],
+            path: [...path, 'roles', key],
             update: currentCount + 1,
         })
     }

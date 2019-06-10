@@ -61,7 +61,7 @@ export default function AdminView(props) {
         const update = {
             key: pageKey,
             title: pageItem.title,
-            description: pageItem.description1,
+            description: pageItem.description || "",
             roleTeam: pageItem.roleTeam,
             image: pageItem.roleImage,
             health: pageItem.roleHealth || 0,

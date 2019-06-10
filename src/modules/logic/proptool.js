@@ -107,6 +107,34 @@ export function getSubfields(prefix) {
     return fields;
 }
 
+//get special dropdown for PickVarSubfield
+export function getSubfieldConfig(prefix) {
+    const parts = separateVar(prefix);
+          
+    for (var key in rssMap) {
+        let match = true;
+        const otherParts = separateVar(rssMap[key].value)
+
+        //if fieldInfo is a subfield, it's length will be 1 greater than the prefix
+        if (otherParts.length !== parts.length) continue
+
+        //compare fieldInfo to the prefix parts, does not need to check the last field of fieldInfo
+        for (var i=0; i<parts.length; i++) {
+            //if field doesn't match, and field isn't a wildcard, it is not a match
+            if (otherParts[i] !== parts[i] && otherParts[i] !== WILD_CHAR) {
+                match = false
+                break
+            }
+        }
+
+        if (match) {
+            return rssMap[key]
+        }
+    }
+    
+    return "";
+}
+
 //display the variable in proper javascript
 //input => (rss)(players)((choices)(user))(dead)
 //ouput => rss['players'][choices['user']]['dead']
