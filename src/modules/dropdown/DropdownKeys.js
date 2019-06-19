@@ -22,7 +22,6 @@ import EditUniqueTag from './page/EditUniqueTag'
 import EditGeneralTag from './page/EditGeneralTag'
 import CreateGameChoice from './page/CreateGameChoice'
 import PickGameChoiceType from './page/PickGameChoiceType'
-import GameChoiceOrdered from './page/GameChoiceOrdered'
 import CreateGlobalVar from './page/CreateGlobalVar'
 
 import PickVar from './vars/PickVar'
@@ -81,8 +80,6 @@ export default function DropdownKeys(props) {
             return <CreateGameChoice {...props}/>
         case dropdownType.pickGameChoiceType:
             return <PickGameChoiceType {...props}/>
-        case dropdownType.gameChoiceOrdered:
-            return <GameChoiceOrdered {...props}/>
         case dropdownType.createGlobalVar:
             return <CreateGlobalVar {...props}/>
         

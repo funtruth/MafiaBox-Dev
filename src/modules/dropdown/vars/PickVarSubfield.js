@@ -7,7 +7,6 @@ import {
     getSubfields,
     concatField,
     WILD_CHAR,
-    parseJS,
     lastSubfield,
 } from '../../logic/proptool'
 import { VARTYPE_IS_OBJ } from '../../common/arrows';

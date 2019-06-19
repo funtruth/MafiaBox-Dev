@@ -18,8 +18,6 @@ export const DEFAULT_LOGIC = {
     source: "",
 }
 
-export const LOGIC_ITEM_DATA_SOURCE = "source"
-
 /* logicItem.byId.[logicKey]
     FIELD           DESCRIPTION
     ---------------------------------------------------------------
@@ -93,29 +91,7 @@ export const VAR_WITH_SCOPE = {
     variableTypes: "",
 }
 
-export const triggerNewVars = {
-    "(visitor)": {
-        key: '(visitor)',
-        value: '(visitor)',
-        display: 'visitor',
-        variableTypes: [
-            variableType.uid.key,
-        ],
-    },
-}
-
-export const choiceMapUID = {
-    "(player)": {
-        key: '(player)',
-        value: '(player)',
-        display: 'player',
-        variableTypes: [
-            variableType.uid.key,
-        ],
-    },
-}
-
-export const choiceMap = {
+export const rssMap = {
     "(choice)(user)": {
         key: '(choice)(user)',
         value: '(choice)(user)',
@@ -158,9 +134,6 @@ export const choiceMap = {
             variableType.number.key,
         ],
     },
-}
-
-export const rssMap = {
     '(rss)(gameState)': {
         key: '(rss)(gameState)',
         value: '(rss)(gameState)',
@@ -235,14 +208,6 @@ export const rssMap = {
             variableType.string.key,
         ],
     },
-    '(rss)(players)(@)(roleId)': {
-        key: '(rss)(players)(@)(roleId)',
-        value: '(rss)(players)(@)(roleId)',
-        display: 'rss.players.@.roleId',
-        variableTypes: [
-            variableType.key.key,
-        ],
-    },
     '(rss)(players)(@)(roleTeam)': {
         key: '(rss)(players)(@)(roleTeam)',
         value: '(rss)(players)(@)(roleTeam)',
@@ -259,18 +224,18 @@ export const rssMap = {
             variableType.function.key,
         ],
     },
-    '(rss)(players)(@)(charges)': {
-        key: '(rss)(players)(@)(charges)',
-        value: '(rss)(players)(@)(charges)',
-        display: 'rss.players.@.charges',
+    '(rss)(players)(@)(roleCharges)': {
+        key: '(rss)(players)(@)(roleCharges)',
+        value: '(rss)(players)(@)(roleCharges)',
+        display: 'rss.players.@.roleCharges',
         variableTypes: [
             variableType.number.key,
         ],
     },
-    '(rss)(players)(@)(health)': {
-        key: '(rss)(players)(@)(health)',
-        value: '(rss)(players)(@)(health)',
-        display: 'rss.players.@.health',
+    '(rss)(players)(@)(roleHealth)': {
+        key: '(rss)(players)(@)(roleHealth)',
+        value: '(rss)(players)(@)(roleHealth)',
+        display: 'rss.players.@.roleHealth',
         variableTypes: [
             variableType.number.key,
         ],
@@ -349,26 +314,26 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(first)': {
-        key: '(rss)(choices)(@)(ordered)(first)',
-        value: '(rss)(choices)(@)(ordered)(first)',
-        display: 'rss.choices.@.ordered.first',
+    '(rss)(choices)(@)(ordered)(0)': {
+        key: '(rss)(choices)(@)(ordered)(0)',
+        value: '(rss)(choices)(@)(ordered)(0)',
+        display: 'rss.choices.@.ordered.0',
         variableTypes: [
             variableType.uid.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(second)': {
-        key: '(rss)(choices)(@)(ordered)(second)',
-        value: '(rss)(choices)(@)(ordered)(second)',
-        display: 'rss.choices.@.ordered.second',
+    '(rss)(choices)(@)(ordered)(1)': {
+        key: '(rss)(choices)(@)(ordered)(1)',
+        value: '(rss)(choices)(@)(ordered)(1)',
+        display: 'rss.choices.@.ordered.1',
         variableTypes: [
             variableType.uid.key,
         ],
     },
-    '(rss)(choices)(@)(ordered)(third)': {
-        key: '(rss)(choices)(@)(ordered)(third)',
-        value: '(rss)(choices)(@)(ordered)(third)',
-        display: 'rss.choices.@.ordered.third',
+    '(rss)(choices)(@)(ordered)(2)': {
+        key: '(rss)(choices)(@)(ordered)(2)',
+        value: '(rss)(choices)(@)(ordered)(2)',
+        display: 'rss.choices.@.ordered.2',
         variableTypes: [
             variableType.uid.key,
         ],

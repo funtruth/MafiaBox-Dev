@@ -11,7 +11,6 @@ export const dropdownType = {
     editGeneralTag: 'dropdownType/edit-general-tag',
     createGameChoice: 'dropdownType/create-game-choice',
     pickGameChoiceType: 'dropdownType/pick-game-choice-type',
-    gameChoiceOrdered: 'dropdownType/game-choice-ordered',
 
     //account
     accountOptions: 'dropdownType/account-options',

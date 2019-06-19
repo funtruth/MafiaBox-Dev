@@ -9,9 +9,7 @@ import {
 } from '../fields/defaults'
 import {
     rssMap,
-    triggerNewVars,
     DEFAULT_LOGIC,
-    LOGIC_ITEM_DATA_SOURCE,
     LOGIC_ITEM_VAR,
     LOGIC_ITEM_VAR_OPERATION,
     LOGIC_ITEM_VAR_WRAPPER,
@@ -24,12 +22,10 @@ export {
     DEFAULT_EVENT_LISTENER,
     DEFAULT_GAME_CHOICE,
     DEFAULT_LOGIC,
-    LOGIC_ITEM_DATA_SOURCE,
     LOGIC_ITEM_VAR,
     LOGIC_ITEM_VAR_OPERATION,
     LOGIC_ITEM_VAR_WRAPPER,
     DEFAULT_ROLE_SETUP,
     rssMap,
-    triggerNewVars,
     VAR_WITH_SCOPE,
 }

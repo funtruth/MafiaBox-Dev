@@ -13,7 +13,6 @@ import { LOGIC_ITEM_VAR } from '../../common/defaults';
 
 import { VARTYPE_IS_STR } from '../../common/arrows';
 import generateIDs from '../../common/generateIDs';
-import { parseJS } from '../proptool';
 import { generateCollectionParseType } from '../codetool'
 import { showDropdown } from '../../dropdown/DropdownReducer'
 import { updateGeneral } from '../../page/PageReducer'

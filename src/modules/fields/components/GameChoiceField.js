@@ -4,6 +4,7 @@ import _ from 'lodash'
 import {
     dropdownType,
     gameChoiceType,
+    variableType,
 } from '../../common/types';
 
 import {
@@ -14,12 +15,13 @@ import {
     Row,
     Tag,
 } from '../../components/Common'
+import LogicView from '../../logic/LogicView';
 
-export default function GameChoiceField({ value, path }) {
+export default function GameChoiceField({ value, path, askForPhase }) {
     const renderItem = (item) => {
-        const { title, prompt, gameChoice } = item
+        const { title, prompt, phase, type } = item
 
-        const gameChoiceInfo = gameChoiceType[gameChoice] || {}
+        const gameChoiceInfo = gameChoiceType[type] || {}
 
         return (
             <Row key={item.key} y="t">
@@ -30,46 +32,59 @@ export default function GameChoiceField({ value, path }) {
                     }}
                 >
                     <LogicButton
-                        highlight={gameChoice ? 'whitish' : '#767676'}
-                        color={gameChoice ? 'whitish' : 'grey'}
+                        highlight={type ? 'whitish' : '#767676'}
+                        color={type ? 'whitish' : 'grey'}
                         icon={gameChoiceInfo.icon || 'pencil'}
                     />
                 </DropClick>
-                <Body>
-                    <Row>
+                <Body x="l">
+                    <DropClick
+                        dropdown={dropdownType.dropString}
+                        params={{
+                            path: [...path, item.key, 'title'],
+                            placeholder: 'Name your choice ...',
+                        }}
+                    >
+                        <LogicButton text={title}/> 
+                    </DropClick>
+                    <DropClick
+                        dropdown={dropdownType.dropString}
+                        params={{
+                            path: [...path, item.key, 'prompt'],
+                            placeholder: 'write a short description ...',
+                        }}
+                    >
+                        <LogicButton
+                            text={prompt}
+                            placeholder="write a short description ..."
+                        />
+                    </DropClick>
+                    {askForPhase &&
                         <DropClick
-                            dropdown={dropdownType.dropString}
+                            dropdown={dropdownType.pickVarWithType}
                             params={{
-                                path: [...path, item.key, 'title'],
-                                placeholder: 'Name your choice ...',
-                            }}
-                        >
-                            <LogicButton text={title}/> 
-                        </DropClick>
-                        <DropClick
-                            dropdown={dropdownType.dropString}
-                            params={{
-                                path: [...path, item.key, 'prompt'],
-                                placeholder: 'write a short description ...',
+                                path: [...path, item.key, 'phase'],
+                                baseVar: {variableTypes: [variableType.key.key]}
                             }}
                         >
                             <LogicButton
-                                text={prompt}
-                                placeholder="write a short description ..."
+                                text={phase && phase.display}
+                                placeholder="pick a phase ..."
                             />
                         </DropClick>
-                    </Row>
+                    }
                     {renderDetail(item)}
+                    <LogicView path={[...path, item.key, 'logic']}/>
                 </Body>
             </Row>
         )
     }
 
     const renderDetail = (item) => {
-        const { key, gameChoice, value } = item
+        const { key, type, value } = item
         const choicePath = [...path, key, 'value']
 
-        switch(gameChoice) {
+        switch(type) {
             case gameChoiceType.value.key:
                 return (
                     <Row>
@@ -94,6 +109,7 @@ export default function GameChoiceField({ value, path }) {
                     </Row>
                 )
             case gameChoiceType.multi.key:
+            case gameChoiceType.ordered.key:
                 return (
                     <Row>
                         <LogicButton highlight="pink" color="grey">
@@ -108,29 +124,7 @@ export default function GameChoiceField({ value, path }) {
                         >
                             <LogicButton
                                 highlight="pink"
-                                label="multi"
-                                text={value}
-                                placeholder="..."
-                            />
-                        </DropClick>
-                    </Row>
-                )
-            case gameChoiceType.ordered.key:
-                return (
-                    <Row>
-                        <LogicButton highlight="pink" color="grey">
-                            choice
-                        </LogicButton>
-                        <Icon icon="chevron-right" color="whitish" size="l"></Icon>
-                        <DropClick
-                            dropdown={dropdownType.gameChoiceOrdered}
-                            params={{
-                                path: choicePath,
-                            }}
-                        >
-                            <LogicButton
-                                highlight="pink"
-                                label="ordered"
+                                label={type}
                                 text={value}
                                 placeholder="..."
                             />

@@ -3,7 +3,6 @@ import {
     fieldType,
     phaseActionType,
 } from '../common/types'
-import { choiceMap, choiceMapUID } from '../logic/defaults'
 
 export const defaultFieldMap = {
     [boardType.roles.key]: [
@@ -15,7 +14,6 @@ export const defaultFieldMap = {
         'roleCharges',
         'priority',
         'roleGameChoice',
-        'roleTargetMode',
         'roleAction',
     ],
     [boardType.phases.key]: [
@@ -23,7 +21,6 @@ export const defaultFieldMap = {
         'phaseActionMode',
         'phaseTimer',
         'phaseChoices',
-        'phaseAction',
         'phaseListener',
     ],
     [boardType.events.key]: [
@@ -39,7 +36,7 @@ export const defaultFieldMap = {
     index                                   number
     title           main label              string
     prompt          short description       string
-    gameChoiceType  see gameChoiceType      string
+    type            see gameChoiceType      string
     value
     "               gameChoice.value        global
     "               gameChoice.target       uid
@@ -51,8 +48,10 @@ export const DEFAULT_GAME_CHOICE = {
     index: '',
     title: '',
     prompt: '',
-    gameChoice: '',
+    type: '',
     value: '',
+    logic: '',
+    phase: '',
 }
 
 /* @params fieldInfo
@@ -68,6 +67,9 @@ export const DEFAULT_GAME_CHOICE = {
     data            data regarding the field
 */
 export const defaultFieldRepo = {
+    title: {
+        key: 'title',
+    },
     description: {
         key: 'description',
         type: fieldType.text.key,
@@ -96,25 +98,19 @@ export const defaultFieldRepo = {
     },
     priority: {
         key: 'priority',
-        type: fieldType.priority.key,
+        type: fieldType.number.key,
         title: 'Priority',
+        defaultValue: 0,
     },
     roleGameChoice: {
         key: 'roleGameChoice',
         type: fieldType.gameChoiceOverride.key,
         title: 'Game Choice Override',
     },
-    roleTargetMode: {
-        key: 'roleTargetMode',
-        type: fieldType.logic.key,
-        title: 'Target Mode',
-        defaultValue: { vars: choiceMap },
-    },
     roleAction: {
         key: 'roleAction',
         type: fieldType.logic.key,
         title: 'Action',
-        defaultValue: { vars: choiceMapUID },
     },
     roleHealth: {
         key: 'roleHealth',
@@ -139,12 +135,6 @@ export const defaultFieldRepo = {
         key: 'phaseChoices',
         type: fieldType.gameChoices.key,
         title: 'Phase Choices',
-    },
-    phaseAction: {
-        key: 'phaseAction',
-        type: fieldType.logic.key,
-        title: 'Phase Action',
-        defaultValue: { vars: choiceMap },
     },
     phaseListener: {
         key: 'phaseListener',

@@ -5,7 +5,6 @@ import Bubble from './Bubble'
 import Button from './Button'
 import DropClick from './DropClick'
 import Footer from './Footer'
-import Header from './Header'
 import Icon from './Icon'
 import Input from './Input'
 import LogicButton from './LogicButton'
@@ -22,7 +21,6 @@ export {
     Button,
     DropClick,
     Footer,
-    Header,
     Icon,
     Input,
     LogicButton,

@@ -101,6 +101,10 @@ export const phaseActionType = {
         key: 'none',
         title: 'None',
     },
+    gameOver: {
+        key: 'gameOver',
+        title: 'Game Over',
+    }
 }
 
 export const gameChoiceType = {

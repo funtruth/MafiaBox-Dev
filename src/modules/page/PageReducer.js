@@ -55,7 +55,6 @@ const CONNECT_PHASES = 'page/connect-phases'
 
 const PUBLISH_PAGE = 'page/publish-page'
 const REMOVE_PAGE = 'page/remove-page'
-const DIFF_PRIORITIES = 'page/diff-priorities'
 
 const RECEIVE_CHILD_EVENT = 'page/receive-child-event'
 const RECEIVE_VALUE = 'page/receive-value'
@@ -317,27 +316,6 @@ export function receiveDeleteEvent(snap, key) {
     }
 }
 
-export function diffPriorities(attach) {
-    return (dispatch, getState) => {
-        const { pageRepo } = getState().page
-
-        let pageRepoClone = _.cloneDeep(pageRepo)
-
-        for (var i=0; i<attach.length; i++) {
-            for (var j=0; j<attach[i].length; j++) {
-                pageRepoClone[attach[i][j].pageKey].priority = i + 1
-            }
-        }
-
-        dispatch(receiveAction({
-            type: DIFF_PRIORITIES,
-            payload: {
-                pageRepo: pageRepoClone,
-            }
-        }))
-    }
-}
-
 export function updateGeneral(...updates) {
     return (dispatch, getState) => {
         const { page } = getState()
@@ -436,7 +414,6 @@ export default (state = initialState, action) => {
         case MOVE_STORY:
         case ADD_PAGE:
         case PUBLISH_PAGE:
-        case DIFF_PRIORITIES:
         case MOVE_PAGE_WITHIN_MAP:
         case MOVE_PAGE_TO_OTHER_MAP:
         case CONNECT_PHASES:

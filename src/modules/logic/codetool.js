@@ -290,13 +290,13 @@ export function generateLogic(type) {
                             right: ")",
                             middle: i[4],
                         },
-                        variableTypes: [variableType.uid.key],
+                        variableTypes: [variableType.object.key],
                     },
                     [i[4]]: {
                         ...LOGIC_ITEM_VAR,
                         key: i[4],
                         parseBy: parseType.variable,
-                        variableTypes: [variableType.uid.key],
+                        variableTypes: [variableType.object.key],
                     },
                 }
             }

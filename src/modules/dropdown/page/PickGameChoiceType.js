@@ -15,7 +15,7 @@ export default function PickGameChoiceType({
 }) {
     const handleSelect = (item) => {
         update({
-            gameChoice: item.key,
+            type: item.key,
             value: "",
         })
         showDropdown();
@@ -25,7 +25,7 @@ export default function PickGameChoiceType({
         return (
             <DropItem
                 key={item.key}
-                chosen={item.key === slate.gameChoice}
+                chosen={item.key === slate.type}
                 onClick={() => handleSelect(item)}
                 leftIcon={item.icon}
                 rightCheck

@@ -49,15 +49,16 @@ export default function FieldView(props) {
                 return <GeneralTagField {...props}/>
             case fieldType.logic.key:
                 return <LogicField {...props}/>
+            case fieldType.image.key:
+                return <ImageField {...props}/>
             //TODO
             case fieldType.gameChoices.key:
-            case fieldType.gameChoiceOverride.key:
                 return <GameChoiceField {...props}/>
+            case fieldType.gameChoiceOverride.key:
+                return <GameChoiceField {...props} askForPhase/>
             case fieldType.timer.key:
                 return <TimerField {...props}/>
 
-            case fieldType.image.key:
-                return <ImageField {...props}/>
             default:
                 return null
         }

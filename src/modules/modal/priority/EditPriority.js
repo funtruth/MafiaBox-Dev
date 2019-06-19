@@ -1,46 +1,33 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import './EditPriority.css'
 import _ from 'lodash'
-import { connect } from 'react-redux'
 
-import { diffPriorities } from '../../page/PageReducer'
 import {
     setPref,
     PREF_KEY,
 } from '../../app/AppReducer'
 
 import {
-    Header,
     Switch,
     Text,
+    Body,
 } from '../../components/Common'
 
 import ModalOptions from '../components/ModalOptions'
 import PriorityList from './components/PriorityList'
+import { boardType } from '../../fields/types';
 
-function EditPriority(props) {
-    const { attach, pageKey, pageRepo, prefs } = props
-
-    //const [controlRepo] = useState(_.cloneDeep(attach))
-    const [storyKey] = useState(pageRepo[pageKey].storyType)
-    
-    const workspace = attach
-    
-    const mainProps = {
-        pageKey,
-        storyKey,
-        workspace,
-        setWorkspace: props.setWorkspace,
-    }
-
-    let handleSave = () => {
-        props.diffPriorities(workspace)
-    }
+export default function EditPriority(props) {
+    const dispatch = useDispatch()
+    const { prefs } = useSelector(state => state.app)
+    const { pageRepo } = useSelector(state => state.page)
+    const groupedRoles = _(pageRepo).filter(i => i.board === boardType.roles.key).groupBy(i => i.priority).value()
 
     const onSortEnd = ({oldIndex, newIndex}) => {
         if (oldIndex === newIndex) return;
         
-        let workspaceClone = _.cloneDeep(workspace)
+        let workspaceClone = []
 
         const [removed] = workspaceClone.splice(oldIndex, 1)
         workspaceClone.splice(newIndex, 0, removed)
@@ -52,43 +39,31 @@ function EditPriority(props) {
     const [switched, setSwitched] = useState(prefValue || false)
     const handleSwitch = () => {
         setSwitched(!switched)
-        props.setPref(PREF_KEY.EDIT_PRIO_SWITCH, !switched)
+        dispatch(setPref(PREF_KEY.EDIT_PRIO_SWITCH, !switched))
     }
-    
+
     return (
-        <div
+        <Body
             style={{
-                minWidth: 600,
+                height: 600,
                 width: '75vw',
             }}
         >
-            <Header text="Edit Priority" onClose={props.close}>
-            </Header>
+            <Text>Edit priority</Text>
             <PriorityList
-                {...mainProps}
+                groupedRoles={groupedRoles}
                 switched={switched}
                 onSortEnd={onSortEnd}
                 transitionDuration={300}
                 distance={2}
                 useDragHandle={true}
             />
-            <ModalOptions onSave={handleSave} onClose={props.close}>
+            <ModalOptions>
                 <Switch switched={switched} onChange={handleSwitch}/>
                 <Text size="m" color="grey" align="c" style={{marginLeft: 12, marginRight: 'auto'}}>
                     Show roles from all patches
                 </Text>
             </ModalOptions>
-        </div>
+        </Body>
     )
 }
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-        prefs: state.app.prefs,
-    }),
-    {
-        diffPriorities,
-        setPref,
-    }
-)(EditPriority)

@@ -1,21 +1,11 @@
 import React from 'react'
-import _ from 'lodash'
-import { connect } from 'react-redux'
 
-import {
-    modalType,
-    boardType,
-} from '../../common/types';
+import { modalType } from '../../common/types';
 
-import { showModal } from '../../modal/ModalReducer'
-
-import {
-    Body,
-    Button,
-} from '../../components/Common'
+import { Body, DropClick, Tag } from '../../components/Common'
 
 const formatNumber = (v) => {
-    if (!v)         return '...'
+    if (!v)         return 'not ordered'
     switch(v) {
         case 1:     return '1st'
         case 2:     return '2nd'
@@ -24,36 +14,17 @@ const formatNumber = (v) => {
     }
 }
 
-function PriorityField(props) {
-    const { fieldKey, value, pageRepo } = props
-
-    let handleClick = () => {
-        const sortedPriorities = _(pageRepo)
-            .filter(i => i && i.boardType === boardType.roles.key)
-            .groupBy(i => i.priority)
-            .sortBy((i, k) => k)
-            .value()
-
-        props.showModal(modalType.editPriority, {
-            fieldKey,
-            attach: sortedPriorities,
-        })
-    }
-
+export default function PriorityField({value, path}) {
     return (
-        <Body size="s">
-            <Button size="s" onClick={handleClick}>
-                {formatNumber(value)}
-            </Button>
+        <Body x="l">
+            <DropClick
+                modal={modalType.editPriority}
+                params={{
+                    path,
+                }}
+            >
+                <Tag icon="format-list-numbered" text={formatNumber(value)}/>
+            </DropClick>
         </Body>
     )
 }
-
-export default connect(
-    state => ({
-        pageRepo: state.page.pageRepo,
-    }),
-    {
-        showModal,
-    }
-)(PriorityField)

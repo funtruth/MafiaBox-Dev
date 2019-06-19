@@ -5,12 +5,13 @@ import { useSelector } from 'react-redux'
 
 import { Body, Tag, Row, Input } from '../../components/Common'
 import { getCode } from '../../logic/LogicEngine';
+import { fieldType } from '../../fields/types';
 
 export default function AdminView(props) {
     const { activeProject, projectUsers } = useSelector(state => state.firebase)
     const project = projectUsers[activeProject] || {}
 
-    const { pageRepo } = useSelector(state => state.page)
+    const { pageRepo, fieldRepo } = useSelector(state => state.page)
     var mode;
 
     const publishProject = () => {
@@ -51,46 +52,23 @@ export default function AdminView(props) {
         }
     }
 
-    const publishRole = (pageKey) => {
+    const publishPage = (pageKey) => {
         if (!activeProject) return console.warn('no active project')
         if (!mode || !pageRepo[mode]) return console.warn('invalid mode', mode)
         if (!pageKey || !pageRepo[pageKey]) return console.warn('invalid pageKey', pageKey)
         const pageItem = pageRepo[pageKey]
 
         const path = `projectsLive/${activeProject}/modes/${mode}/pageRepo/${pageKey}`
-        const update = {
-            key: pageKey,
-            title: pageItem.title,
-            description: pageItem.description || "",
-            roleTeam: pageItem.roleTeam,
-            image: pageItem.roleImage,
-            health: pageItem.roleHealth || 0,
-            charges: pageItem.roleCharges || "",
-            roleAction: getCode(pageItem.roleAction),
-            roleTargetMode: getCode(pageItem.roleTargetMode),
-            ...(pageItem.playerTags || {}),
-        }
-        try {
-            firebase.database().ref(path).update(update)
-        } catch {
-            console.log('there was an error updating to Firebase', {update})
-        }
-    }
-
-    const publishPhase = (pageKey) => {
-        if (!activeProject) return console.warn('no active project')
-        if (!mode || !pageRepo[mode]) return console.warn('invalid mode', mode)
-        if (!pageKey || !pageRepo[pageKey]) return console.warn('invalid pageKey', pageKey)
-        const pageItem = pageRepo[pageKey]
-
-        const path = `projectsLive/${activeProject}/modes/${mode}/pageRepo/${pageKey}`
-        const update = {
-            key: pageKey,
-            title: pageItem.title,
-            description: pageItem.description2 || "",
-            phaseActionMode: pageItem.phaseActionMode,
-            phaseChoices: pageItem.phaseChoices || "",
-            phaseListener: getCode(pageItem.phaseListener),
+        const update = {}
+        for (var field in pageItem) {
+            if (!fieldRepo[field]) continue
+            if (fieldRepo[field].type === fieldType.logic.key) {
+                update[field] = getCode(pageItem[field])
+            } else if (fieldRepo[field].type === fieldType.generalTag.key) {
+                Object.assign(update, pageItem[field] || {})
+            } else {
+                update[field] = pageItem[field]
+            }
         }
         try {
             firebase.database().ref(path).update(update)
@@ -162,7 +140,7 @@ export default function AdminView(props) {
                     <Tag
                         key={item.key}
                         text={item.title}
-                        onClick={() => publishRole(item.key)}
+                        onClick={() => publishPage(item.key)}
                     />
                 ))}
             </Row>
@@ -176,7 +154,7 @@ export default function AdminView(props) {
                     <Tag
                         key={item.key}
                         text={item.title}
-                        onClick={() => publishPhase(item.key)}
+                        onClick={() => publishPage(item.key)}
                     />
                 ))}
             </Row>

@@ -37,11 +37,11 @@ const PriorityListItem = SortableElement((props) => {
 })
 
 export default SortableContainer((props) => {
-    const { workspace } = props
+    const { groupedRoles } = props
     return (
         <div style={{ maxHeight: '70vh', overflow: 'auto' }}>
-            {workspace.map((list, index) => (
-                <PriorityListItem {...props} key={index} items={list} index={index}/>
+            {Object.keys(groupedRoles).map((priority, index) => (
+                <PriorityListItem {...props} key={index} items={groupedRoles[priority]} index={index}/>
             ))}
         </div>
     )
