@@ -1,18 +1,19 @@
 import React from 'react'
 import Input from '../../components/Input';
 
-export default function PageAbstract({
-    slate,
-    update,
+export default function TitleField({
+    path,
+    value,
+    updateGeneral,
 }){
     const handleTextBlur = (title) => {
-        update({title})
+        updateGeneral({path, update: title})
     }
 
     return (
         <Input
             theme="title"
-            value={slate.title}
+            value={value}
             onSubmit={handleTextBlur}
             submitOnBlur
             placeholder="Untitled"

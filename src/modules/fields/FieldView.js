@@ -12,9 +12,9 @@ import ImageField from './components/ImageField'
 import LogicField from './components/LogicField';
 import NumberField from './components/NumberField';
 import PriorityField from './components/PriorityField'
-import StringField from './components/StringField'
 import TextField from './components/TextField';
 import TimerField from './components/TimerField'
+import TitleField from './components/TitleField'
 import UniqueTagField from './components/UniqueTagField';
 import { Body, Tag } from '../components/Common';
 
@@ -38,6 +38,8 @@ export default function FieldView(props) {
         }
         
         switch(fieldInfo.type) {
+            case fieldType.title.key:
+                return <TitleField {...props}/>
             case fieldType.text.key:
                 return <TextField {...props}/>
             case fieldType.number.key:
@@ -56,8 +58,6 @@ export default function FieldView(props) {
                 return <GameChoiceField {...props}/>
             case fieldType.gameChoiceOverride.key:
                 return <GameChoiceField {...props} askForPhase/>
-            case fieldType.string.key:
-                return <StringField {...props}/>
             //TODO
             case fieldType.timer.key:
                 return <TimerField {...props}/>
@@ -80,7 +80,15 @@ export default function FieldView(props) {
                         sizes={['s', 'z']}
                         style={{borderLeft: '1px dashed #666', marginBottom: 20}}
                     >
-                        <Tag size="l" icon={icon} text={item.title} bg="transparent" bold></Tag>
+                        {item.title && 
+                            <Tag
+                                size="l"
+                                icon={icon}
+                                text={item.title}
+                                bg="transparent"
+                                bold
+                            />
+                        }
                         {renderItem(item)}
                     </Body>
                 )

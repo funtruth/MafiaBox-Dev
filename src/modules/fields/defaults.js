@@ -6,6 +6,7 @@ import {
 
 export const defaultFieldMap = {
     [boardType.roles.key]: [
+        'title',
         'description',
         'roleSecrets',
         'roleTeam',
@@ -18,6 +19,7 @@ export const defaultFieldMap = {
         'roleAction',
     ],
     [boardType.phases.key]: [
+        'title',
         'description',
         'phaseActionMode',
         'phaseTimer',
@@ -25,6 +27,7 @@ export const defaultFieldMap = {
         'phaseListener',
     ],
     [boardType.events.key]: [
+        'title',
         'eventLogic',
     ]
 }
@@ -73,6 +76,7 @@ export const defaultFieldRepo = {
     },
     title: {
         key: 'title',
+        type: fieldType.title.key,
     },
     description: {
         key: 'description',
@@ -81,7 +85,7 @@ export const defaultFieldRepo = {
     },
     roleSecrets: {
         key: 'roleSecrets',
-        type: fieldType.string.key,
+        type: fieldType.logic.key,
         title: 'Role Secrets',
     },
     roleTeam: {

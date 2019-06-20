@@ -27,10 +27,8 @@ export const fieldType = {
         icon: 'format-title',
         title: 'Text',
     },
-    string: {
-        key: 'string',
-        icon: 'format-title',
-        title: 'String',
+    title: {
+        key: 'title',
     },
     number: {
         key: 'number',
