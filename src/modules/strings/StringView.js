@@ -125,6 +125,7 @@ export default function StringView({path, scopedVars}) {
     }
     
     const mainProps = {
+        path,
         stringRepo,
         stringMap,
         activeKey,

@@ -200,6 +200,22 @@ export const rssMap = {
             variableType.object.key,
         ],
     },
+    '(rss)(players)(@)(key)': {
+        key: '(rss)(players)(@)(key)',
+        value: '(rss)(players)(@)(key)',
+        display: 'rss.players.@.key',
+        variableTypes: [
+            variableType.key.key,
+        ],
+    },
+    '(rss)(players)(@)(title)': {
+        key: '(rss)(players)(@)(title)',
+        value: '(rss)(players)(@)(title)',
+        display: 'rss.players.@.title',
+        variableTypes: [
+            variableType.string.key,
+        ],
+    },
     '(rss)(players)(@)(name)': {
         key: '(rss)(players)(@)(name)',
         value: '(rss)(players)(@)(name)',

@@ -19,7 +19,7 @@ function EventVarDrag(props) {
     return connectDragSource(
         <div>
             <Tag>
-                {item.key}
+                {item.display}
             </Tag>
         </div>
     );

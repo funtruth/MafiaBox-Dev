@@ -1,10 +1,11 @@
 import React from 'react'
 import { DragSource, DropTarget } from 'react-dnd'
 
+import { dropdownType, parseType } from '../../common/types';
+
 import { COLLECT_DRAG } from '../../modal/ModalDND';
 
-import Tag from '../../components/Tag';
-import { parseType } from '../../logic/types';
+import { DropClick, Tag } from '../../components/Common';
 
 const itemSource = {
     beginDrag(props) {
@@ -41,7 +42,7 @@ function collectDrop(connect, monitor) {
 }
   
 function StringDragDrop(props) {
-    const { item, activeKey, setActiveKey,
+    const { item, activeKey, setActiveKey, path,
         connectDragSource, connectDropTarget, canDrop, isOver } = props
     const { key: stringKey, value } = item
 
@@ -51,15 +52,20 @@ function StringDragDrop(props) {
     }
 
     const selected = stringKey === activeKey
-
+    
     return connectDragSource(connectDropTarget(
         <div>
-            <Tag
+            <DropClick
                 onClick={handleSelect}
-                bg={selected ? 'blue' : (canDrop && isOver && 'grey') || 'charcoal'}
+                context={dropdownType.replaceWildcard}
+                params={{
+                    path: [...path, 'value', 'byId', stringKey],
+                }}
             >
-                {value}
-            </Tag>
+                <Tag bg={selected ? 'blue' : (canDrop && isOver && 'grey') || 'charcoal'}>
+                    {value}
+                </Tag>
+            </DropClick>
         </div>
     ));
 }

@@ -24,61 +24,56 @@ export const boardType = {
 export const fieldType = {
     text: {
         key: 'text',
-        index: 0,
         icon: 'format-title',
         title: 'Text',
     },
+    string: {
+        key: 'string',
+        icon: 'format-title',
+        title: 'String',
+    },
     number: {
         key: 'number',
-        index: 1,
         icon: 'numeric',
         title: 'Number',
     },
     image: {
         key: 'image',
-        index: 2,
         icon: 'image',
         title: 'Image',
     },
     logic: {
         key: 'logic',
-        index: 3,
         icon: 'codepen',
         title: 'Logic',
     },
     uniqueTag: {
         key: 'uniqueTag',
-        index: 4,
         icon: 'tag',
         title: 'Tag',
     },
     gameChoices: {
         key: 'gameChoices',
-        index: 9,
         icon: 'map-marker-distance',
         title: 'Game Choices',
     },
     gameChoiceOverride: {
         key: 'gameChoiceOverride',
-        index: 10,
         icon: 'map-marker-distance',
         title: 'Game Choice Override',
     },
     generalTag: {
         key: 'generalTag',
-        index: 11,
         icon: 'tag',
         title: 'Player Tags',
     },
     priority: {
         key: 'priority',
-        index: 12,
         icon: 'priority-high',
         title: 'Priority',
     },
     timer: {
         key: 'timer',
-        index: 13,
         icon: 'timer-sand',
         title: 'Timer',
     }

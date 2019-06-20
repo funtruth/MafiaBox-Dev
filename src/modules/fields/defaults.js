@@ -7,6 +7,7 @@ import {
 export const defaultFieldMap = {
     [boardType.roles.key]: [
         'description',
+        'roleSecrets',
         'roleTeam',
         'roleImage',
         'playerTags',
@@ -67,6 +68,9 @@ export const DEFAULT_GAME_CHOICE = {
     data            data regarding the field
 */
 export const defaultFieldRepo = {
+    key: {
+        key: 'key',
+    },
     title: {
         key: 'title',
     },
@@ -74,6 +78,11 @@ export const defaultFieldRepo = {
         key: 'description',
         type: fieldType.text.key,
         title: 'Description',
+    },
+    roleSecrets: {
+        key: 'roleSecrets',
+        type: fieldType.string.key,
+        title: 'Role Secrets',
     },
     roleTeam: {
         key: 'roleTeam',

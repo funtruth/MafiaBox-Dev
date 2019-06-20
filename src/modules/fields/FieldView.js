@@ -6,15 +6,16 @@ import { fieldType } from './types'
 
 import { IS_PUBLISHED } from '../common/arrows';
 
-import TextField from './components/TextField';
-import NumberField from './components/NumberField';
-import ImageField from './components/ImageField'
-import UniqueTagField from './components/UniqueTagField';
-import GeneralTagField from './components/GeneralTagField'
-import LogicField from './components/LogicField';
 import GameChoiceField from './components/GameChoiceField'
-import TimerField from './components/TimerField'
+import GeneralTagField from './components/GeneralTagField'
+import ImageField from './components/ImageField'
+import LogicField from './components/LogicField';
+import NumberField from './components/NumberField';
 import PriorityField from './components/PriorityField'
+import StringField from './components/StringField'
+import TextField from './components/TextField';
+import TimerField from './components/TimerField'
+import UniqueTagField from './components/UniqueTagField';
 import { Body, Tag } from '../components/Common';
 
 export default function FieldView(props) {
@@ -51,11 +52,13 @@ export default function FieldView(props) {
                 return <LogicField {...props}/>
             case fieldType.image.key:
                 return <ImageField {...props}/>
-            //TODO
             case fieldType.gameChoices.key:
                 return <GameChoiceField {...props}/>
             case fieldType.gameChoiceOverride.key:
                 return <GameChoiceField {...props} askForPhase/>
+            case fieldType.string.key:
+                return <StringField {...props}/>
+            //TODO
             case fieldType.timer.key:
                 return <TimerField {...props}/>
 

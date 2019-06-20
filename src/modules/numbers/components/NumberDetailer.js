@@ -25,7 +25,7 @@ export default function NumberDetailer(props) {
         scopedVars,
     )
 
-    const operators = _.filter(comparisonType, i => i.showInStringView)
+    const operators = _.filter(comparisonType, i => i.showInNumberView)
 
     return (
         <Body style={{flex: 0.35}}>
