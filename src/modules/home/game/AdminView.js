@@ -62,12 +62,24 @@ export default function AdminView(props) {
         const update = {}
         for (var field in pageItem) {
             if (!fieldRepo[field]) continue
-            if (fieldRepo[field].type === fieldType.logic.key) {
-                update[field] = getCode(pageItem[field])
-            } else if (fieldRepo[field].type === fieldType.generalTag.key) {
-                Object.assign(update, pageItem[field] || {})
-            } else {
-                update[field] = pageItem[field]
+            switch(fieldRepo[field].type) {
+                case fieldType.logic.key:
+                    update[field] = getCode(pageItem[field])
+                    break
+                case fieldType.generalTag.key:
+                    Object.assign(update, pageItem[field] || {})
+                    break
+                case fieldType.gameChoices.key:
+                case fieldType.gameChoiceOverride.key:
+                    let choiceClone = _.cloneDeep(pageItem[field])
+                    update[field] = pageItem[field]
+                    for (var choice in choiceClone) {
+                        if (!choiceClone[choice] || !choiceClone[choice].logic) continue
+                        update[field][choice].logic = getCode(choiceClone[choice].logic)
+                    }
+                    break
+                default:
+                    update[field] = pageItem[field]
             }
         }
         try {

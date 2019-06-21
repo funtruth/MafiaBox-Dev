@@ -2,7 +2,7 @@ import React from 'react'
 
 import { DropItem, DropTitle } from '../components/Common'
 
-export default function PickTypeNumber({
+export default function PickTypeUID({
     showDropdown,
 }){
     const handleSelect = () => {

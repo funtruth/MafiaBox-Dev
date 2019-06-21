@@ -180,7 +180,7 @@ export default function LogicPanels(props) {
                 </Row>
             )
         case parseType.wrapper:
-            return <LogicPanels {...props} varKey={value.middle}/>
+            return <LogicPanels {...props} varKey={value.middle} baseVar={varRepo[value.middle]}/>
         case parseType.collection:
         case parseType.object:
             dropdown = variableTypes ? dropdownType.pickVarWithType : dropdownType.pickVar;
@@ -258,6 +258,7 @@ export default function LogicPanels(props) {
                     </DropClick>
                 </Row>
             )
+        case parseType.boolean:
         case parseType.number:
         case parseType.string:
         case parseType.update:
@@ -265,7 +266,7 @@ export default function LogicPanels(props) {
         default:
             if (VARTYPE_IS_STR(baseVar)) modal = modalType.editString
             else if (index === 0) dropdown = dropdownType.pickVar
-            else if (index === 1) dropdown = dropdownType.pickVarWithType
+            else dropdown = dropdownType.pickVarWithType
 
             return (
                 <DropClick

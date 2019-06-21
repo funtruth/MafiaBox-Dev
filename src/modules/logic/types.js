@@ -43,6 +43,7 @@ export const logicType = {
         title: 'return',
         icon: 'page-next',
         color: 'green',
+        dropdown: dropdownType.pickReturn,
     },
 }
 
@@ -56,7 +57,7 @@ export const operatorType = {
         },
         icon: 'ray-start-arrow',
         color: 'yellow',
-        logicType: logicType.operator.key,
+        logic: logicType.operator.key,
     },
     else: {
         key: 'else',
@@ -67,7 +68,7 @@ export const operatorType = {
         },
         icon: 'redo-variant',
         color: 'red',
-        logicType: logicType.operator.key,
+        logic: logicType.operator.key,
     },
     elseif: {
         key: 'elseif',
@@ -78,7 +79,7 @@ export const operatorType = {
         },
         icon: 'swap-horizontal-variant',
         color: 'fb',
-        logicType: logicType.operator.key,
+        logic: logicType.operator.key,
     },
     forin: {
         key: 'forin',
@@ -89,7 +90,7 @@ export const operatorType = {
         },
         icon: 'sync',
         color: 'orange',
-        logicType: logicType.operator.key,
+        logic: logicType.operator.key,
     },
     random: {
         key: 'random',
@@ -100,7 +101,35 @@ export const operatorType = {
         },
         icon: 'dice-3',
         color: 'orange',
-        logicType: logicType.operator.key,
+        logic: logicType.operator.key,
+    },
+    boolean: {
+        key: 'boolean',
+        title: 'boolean',
+        icon: 'ray-start-arrow',
+        color: 'fb',
+        logic: logicType.return.key,
+    },
+    number: {
+        key: 'number',
+        title: 'number',
+        icon: 'redo-variant',
+        color: 'fb',
+        logic: logicType.return.key,
+    },
+    string: {
+        key: 'string',
+        title: 'string',
+        icon: 'redo-variant',
+        color: 'fb',
+        logic: logicType.return.key,
+    },
+    message: {
+        key: 'message',
+        title: 'message',
+        icon: 'swap-horizontal-variant',
+        color: 'fb',
+        logic: logicType.return.key,
     }
 }
 
@@ -380,21 +409,6 @@ export const comparisonType = {
         icon: 'percent',
         color: 'yellow',
         showInNumberView: true,
-    },
-}
-
-export const returnType = {
-    true: {
-        key: 'true',
-        index: 0,
-        title: 'true',
-        icon: 'checkbox-marked-circle',
-    },
-    false: {
-        key: 'false',
-        index: 1,
-        title: 'false',
-        icon: 'close-circle',
     },
 }
 

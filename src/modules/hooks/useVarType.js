@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import _ from 'lodash'
-
-import {
-    rssMap,
-} from '../common/defaults'
 
 import {
     WILD_CHAR,
@@ -22,6 +19,7 @@ import {
 */
 export default (type, vars) => {
     const [results, setResults] = useState([[], []])
+    const { rssMap } = useSelector(state => state.page)
 
     useEffect(() => {
         const typeFilter = VARTYPE_FILTER(type)

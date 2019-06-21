@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash'
 
-import { returnType } from '../../../common/types'
+import { boolUpdateType } from '../../../common/types'
 
 import {
     Row,
@@ -36,7 +36,7 @@ export default function EditToastHeader({
         )
     }
 
-    const data = _.orderBy(returnType, i => i.index)
+    const data = _.orderBy(boolUpdateType, i => i.index)
 
     return (
         <Row y="c">

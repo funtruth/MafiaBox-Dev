@@ -9,7 +9,6 @@ import {
     boardType,
     fieldType,
     gameChoiceType,
-    phaseActionType,
 } from '../fields/types'
 import {
     boolUpdateType,
@@ -19,7 +18,6 @@ import {
     logicDNDType,
     operatorType,
     parseType,
-    returnType,
     variableType,
 } from '../logic/types'
 import {
@@ -41,7 +39,5 @@ export {
     modalType,
     operatorType,
     parseType,
-    phaseActionType,
-    returnType,
     variableType,
 }

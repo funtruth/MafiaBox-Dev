@@ -8,9 +8,13 @@
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
 
 ## Low Priority
-- [ ] There may be a problem with variableType matching, [uid, key] should not be matching with a rss.gameState.phase
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
+
+## 06/21/2019
+### Major
+- [x] handling better returns and gameChoices (heavier inclusion of variables), this allows for more customization for what the user is seeing, and which choices to show each player. It was seen as necessary to allow for a variable amount of multiTarget/orderedTarget. Otherwise, games such as avalon would require many many cloned phases (select 2, select 3, etc). This also seemed appropriate for descriptions, under the same logic
+- [x] moved rssMap to firebase, to allow for easier gameState manipulation (instead of a const). Allowed for creation of gameState fields in ModeView.
 
 ## 06/10/2019
 ### Major

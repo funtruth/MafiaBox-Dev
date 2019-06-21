@@ -169,85 +169,6 @@ export function generateLogic(type) {
                     },
                 }
             }
-        case logicType.return.key:
-            i = generateIDs(8);
-            return {
-                source: i[0],
-                byId: {
-                    [i[0]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[0],
-                        parseBy: parseType.wrapper,
-                        value: {
-                            left: "return",
-                            right: "",
-                            middle: i[1],
-                        }
-                    },
-                    [i[1]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[1],
-                        parseBy: parseType.object,
-                        value: [i[2], i[5]],
-                    },
-                    [i[2]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[2],
-                        display: ':',
-                        disabled: true,
-                        parseBy: parseType.operation,
-                        value: {
-                            left: i[3],
-                            right: i[4],
-                            operator: ':',
-                        }
-                    },
-                    [i[3]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[3],
-                        disabled: true,
-                        display: 'valid',
-                        parseBy: parseType.constant,
-                        value: 'valid',
-                        variableTypes: [variableType.boolean.key],
-                    },
-                    [i[4]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[4],
-                        parseBy: parseType.boolean,
-                        display: 'true',
-                        value: true,
-                        variableTypes: [variableType.boolean.key],
-                    },
-                    [i[5]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[5],
-                        display: ':',
-                        disabled: true,
-                        parseBy: parseType.operation,
-                        value: {
-                            left: i[6],
-                            right: i[7],
-                            operator: ':',
-                        }
-                    },
-                    [i[6]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[6],
-                        disabled: true,
-                        display: 'message',
-                        parseBy: parseType.constant,
-                        value: 'message',
-                        variableTypes: [variableType.string.key],
-                    },
-                    [i[7]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[7],
-                        parseBy: parseType.string,
-                        variableTypes: [variableType.string.key],
-                    },
-                }
-            }
         case logicType.function.key:
             i = generateIDs(5);
             return {
@@ -379,6 +300,154 @@ export function generateLogic(type) {
                         key: i[3],
                         parseBy: parseType.variable,
                         variableTypes: [variableType.uidObject.key],
+                    },
+                }
+            }
+        case operatorType.boolean.key:
+            i = generateIDs(2);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "return ",
+                            right: "",
+                            middle: i[1],
+                        }
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.boolean,
+                        variableTypes: [variableType.boolean.key],
+                    },
+                }
+            }
+        case operatorType.string.key:
+            i = generateIDs(2);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "return ",
+                            right: "",
+                            middle: i[1],
+                        }
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.string,
+                        variableTypes: [variableType.string.key],
+                    },
+                }
+            }
+        case operatorType.number.key:
+            i = generateIDs(2);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "return ",
+                            right: "",
+                            middle: i[1],
+                        }
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.number,
+                        variableTypes: [variableType.number.key],
+                    },
+                }
+            }
+        case operatorType.message.key:
+            i = generateIDs(8);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "return",
+                            right: "",
+                            middle: i[1],
+                        }
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.object,
+                        value: [i[2], i[5]],
+                    },
+                    [i[2]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[2],
+                        display: ':',
+                        disabled: true,
+                        parseBy: parseType.operation,
+                        value: {
+                            left: i[3],
+                            right: i[4],
+                            operator: ':',
+                        }
+                    },
+                    [i[3]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[3],
+                        disabled: true,
+                        display: 'valid',
+                        parseBy: parseType.constant,
+                        value: 'valid',
+                        variableTypes: [variableType.boolean.key],
+                    },
+                    [i[4]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[4],
+                        parseBy: parseType.boolean,
+                        display: 'true',
+                        value: true,
+                        variableTypes: [variableType.boolean.key],
+                    },
+                    [i[5]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[5],
+                        display: ':',
+                        disabled: true,
+                        parseBy: parseType.operation,
+                        value: {
+                            left: i[6],
+                            right: i[7],
+                            operator: ':',
+                        }
+                    },
+                    [i[6]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[6],
+                        disabled: true,
+                        display: 'message',
+                        parseBy: parseType.constant,
+                        value: 'message',
+                        variableTypes: [variableType.string.key],
+                    },
+                    [i[7]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[7],
+                        parseBy: parseType.string,
+                        variableTypes: [variableType.string.key],
                     },
                 }
             }

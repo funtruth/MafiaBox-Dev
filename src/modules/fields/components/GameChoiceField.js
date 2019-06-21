@@ -4,7 +4,6 @@ import _ from 'lodash'
 import {
     dropdownType,
     gameChoiceType,
-    variableType,
 } from '../../common/types';
 
 import {
@@ -14,12 +13,13 @@ import {
     LogicButton,
     Row,
     Tag,
+    Text,
 } from '../../components/Common'
 import LogicView from '../../logic/LogicView';
 
-export default function GameChoiceField({ value, path, askForPhase }) {
+export default function GameChoiceField({ value, path }) {
     const renderItem = (item) => {
-        const { title, prompt, phase, type } = item
+        const { title, prompt, type } = item
 
         const gameChoiceInfo = gameChoiceType[type] || {}
 
@@ -37,43 +37,34 @@ export default function GameChoiceField({ value, path, askForPhase }) {
                         icon={gameChoiceInfo.icon || 'pencil'}
                     />
                 </DropClick>
-                <Body x="l">
-                    <DropClick
-                        dropdown={dropdownType.dropString}
-                        params={{
-                            path: [...path, item.key, 'title'],
-                            placeholder: 'Name your choice ...',
-                        }}
-                    >
-                        <LogicButton text={title}/> 
-                    </DropClick>
-                    <DropClick
-                        dropdown={dropdownType.dropString}
-                        params={{
-                            path: [...path, item.key, 'prompt'],
-                            placeholder: 'write a short description ...',
-                        }}
-                    >
-                        <LogicButton
-                            text={prompt}
-                            placeholder="write a short description ..."
-                        />
-                    </DropClick>
-                    {askForPhase &&
+                <Body>
+                    <Row>
                         <DropClick
-                            dropdown={dropdownType.pickVarWithType}
+                            dropdown={dropdownType.dropString}
                             params={{
-                                path: [...path, item.key, 'phase'],
-                                baseVar: {variableTypes: [variableType.key.key]}
+                                path: [...path, item.key, 'title'],
+                                placeholder: 'Name your choice ...',
+                            }}
+                        >
+                            <LogicButton text={title}/> 
+                        </DropClick>
+                        <DropClick
+                            dropdown={dropdownType.dropString}
+                            params={{
+                                path: [...path, item.key, 'prompt'],
+                                placeholder: 'write a short description ...',
                             }}
                         >
                             <LogicButton
-                                text={phase && phase.display}
-                                placeholder="pick a phase ..."
+                                text={prompt}
+                                placeholder="write a short description ..."
                             />
                         </DropClick>
-                    }
+                    </Row>
                     {renderDetail(item)}
+                    <Text>choice visibility (return boolean)</Text>
+                    <LogicView path={[...path, item.key, 'visible']}/>
+                    <Text>validate on click (return message)</Text>
                     <LogicView path={[...path, item.key, 'logic']}/>
                 </Body>
             </Row>
@@ -111,25 +102,10 @@ export default function GameChoiceField({ value, path, askForPhase }) {
             case gameChoiceType.multi.key:
             case gameChoiceType.ordered.key:
                 return (
-                    <Row>
-                        <LogicButton highlight="pink" color="grey">
-                            choice
-                        </LogicButton>
-                        <Icon icon="chevron-right" color="whitish" size="l"></Icon>
-                        <DropClick
-                            dropdown={dropdownType.dropNumber}
-                            params={{
-                                path: choicePath,
-                            }}
-                        >
-                            <LogicButton
-                                highlight="pink"
-                                label={type}
-                                text={value}
-                                placeholder="..."
-                            />
-                        </DropClick>
-                    </Row>
+                    <>
+                        <Text>number of targets (return number)</Text>
+                        <LogicView path={choicePath}/>
+                    </>
                 )
             default:
                 return null;

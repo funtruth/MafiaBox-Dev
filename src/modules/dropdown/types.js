@@ -5,6 +5,7 @@ export const dropdownType = {
 
     pickLogic: 'dropdownType/show-logic',
     pickOperator: 'dropdownType/pick-operator',
+    pickReturn: 'dropdownType/pick-return',
 
     createTag: 'dropdownType/create-tag',
     editUniqueTag: 'dropdownType/edit-unique-tag',
@@ -20,6 +21,7 @@ export const dropdownType = {
     editPlayerNum: 'dropdownType/edit-player-num',
     patchItemOptions: 'dropdownType/patch-item-options',
     roleItemOptions: 'dropdownType/role-item-options',
+    addToRSSMap: 'dropdownType/add-to-rss-map',
 
     //page
     pageHistory: 'dropdownType/page-history',
@@ -28,7 +30,9 @@ export const dropdownType = {
     pickVar: 'dropdownType/pick-var',
     pickVarSubfield: 'dropdownType/pick-var-subfield',
     pickVarWithType: 'dropdownType/pick-var-with-type',
+    pickConstWithType: 'dropdownType/pick-const-with-type',
     pickVarTags: 'dropdownType/pick-var-tags',
+    pickVarType: 'dropdownType/pick-var-type',
     pickComparison: 'dropdownType/pick-comparison',
     replaceWildcard: 'dropdownType/replace-wildcard',
     createGlobalVar: 'dropdownType/create-global-var',

@@ -29,7 +29,7 @@ export default function LogicView({ path }) {
     const {
         byId: logicRepo,
         byIndex: logicMap,
-        vars,
+        vars = {},
     } = usePath(path)
 
     const copyCode = () => {

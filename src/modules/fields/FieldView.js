@@ -12,7 +12,6 @@ import ImageField from './components/ImageField'
 import LogicField from './components/LogicField';
 import NumberField from './components/NumberField';
 import PriorityField from './components/PriorityField'
-import TextField from './components/TextField';
 import TimerField from './components/TimerField'
 import TitleField from './components/TitleField'
 import UniqueTagField from './components/UniqueTagField';
@@ -40,8 +39,6 @@ export default function FieldView(props) {
         switch(fieldInfo.type) {
             case fieldType.title.key:
                 return <TitleField {...props}/>
-            case fieldType.text.key:
-                return <TextField {...props}/>
             case fieldType.number.key:
                 return <NumberField {...props}/>
             case fieldType.uniqueTag.key:
@@ -55,9 +52,8 @@ export default function FieldView(props) {
             case fieldType.image.key:
                 return <ImageField {...props}/>
             case fieldType.gameChoices.key:
-                return <GameChoiceField {...props}/>
             case fieldType.gameChoiceOverride.key:
-                return <GameChoiceField {...props} askForPhase/>
+                return <GameChoiceField {...props}/>
             //TODO
             case fieldType.timer.key:
                 return <TimerField {...props}/>

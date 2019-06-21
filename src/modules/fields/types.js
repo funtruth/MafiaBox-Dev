@@ -77,29 +77,6 @@ export const fieldType = {
     }
 }
 
-export const phaseActionType = {
-    all: {
-        key: 'all',
-        title: 'All',
-    },
-    king: {
-        key: 'king',
-        title: 'King',
-    },
-    jester: {
-        key: 'jester',
-        title: 'Jester',
-    },
-    none: {
-        key: 'none',
-        title: 'None',
-    },
-    gameOver: {
-        key: 'gameOver',
-        title: 'Game Over',
-    }
-}
-
 export const gameChoiceType = {
     target: {
         key: 'target',

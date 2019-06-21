@@ -8,7 +8,6 @@ import {
     DEFAULT_GAME_CHOICE,
 } from '../fields/defaults'
 import {
-    rssMap,
     DEFAULT_LOGIC,
     LOGIC_ITEM_VAR,
     LOGIC_ITEM_VAR_OPERATION,
@@ -26,6 +25,5 @@ export {
     LOGIC_ITEM_VAR_OPERATION,
     LOGIC_ITEM_VAR_WRAPPER,
     DEFAULT_ROLE_SETUP,
-    rssMap,
     VAR_WITH_SCOPE,
 }

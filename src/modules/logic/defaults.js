@@ -174,14 +174,6 @@ export const rssMap = {
             variableType.time.key,
         ],
     },
-    '(rss)(gameState)(captain)': {
-        key: '(rss)(gameState)(captain)',
-        value: '(rss)(gameState)(captain)',
-        display: 'rss.gameState.captain',
-        variableTypes: [
-            variableType.uid.key,
-        ],
-    },
     '(rss)(players)': {
         key: '(rss)(players)',
         value: '(rss)(players)',
@@ -256,18 +248,10 @@ export const rssMap = {
             variableType.number.key,
         ],
     },
-    '(rss)(players)(@)(king)': {
-        key: '(rss)(players)(@)(king)',
-        value: '(rss)(players)(@)(king)',
-        display: 'rss.players.@.king',
-        variableTypes: [
-            variableType.boolean.key,
-        ],
-    },
-    '(rss)(players)(@)(clown)': {
-        key: '(rss)(players)(@)(clown)',
-        value: '(rss)(players)(@)(clown)',
-        display: 'rss.players.@.clown',
+    '(rss)(players)(@)(featured)': {
+        key: '(rss)(players)(@)(featured)',
+        value: '(rss)(players)(@)(featured)',
+        display: 'rss.players.@.featured',
         variableTypes: [
             variableType.boolean.key,
         ],

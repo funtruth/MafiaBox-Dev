@@ -1,7 +1,6 @@
 import {
     boardType,
     fieldType,
-    phaseActionType,
 } from '../common/types'
 
 export const defaultFieldMap = {
@@ -21,7 +20,6 @@ export const defaultFieldMap = {
     [boardType.phases.key]: [
         'title',
         'description',
-        'phaseActionMode',
         'phaseTimer',
         'phaseChoices',
         'phaseListener',
@@ -80,13 +78,13 @@ export const defaultFieldRepo = {
     },
     description: {
         key: 'description',
-        type: fieldType.text.key,
-        title: 'Description',
+        type: fieldType.logic.key,
+        title: 'Description (return string)',
     },
     roleSecrets: {
         key: 'roleSecrets',
         type: fieldType.logic.key,
-        title: 'Role Secrets',
+        title: 'Role Secrets (return string)',
     },
     roleTeam: {
         key: 'roleTeam',
@@ -130,14 +128,6 @@ export const defaultFieldRepo = {
         type: fieldType.number.key,
         title: 'Health',
         defaultValue: 0,
-    },
-    phaseActionMode: {
-        key: 'phaseActionMode',
-        type: fieldType.uniqueTag.key,
-        title: 'Phase Action Mode',
-        data: phaseActionType,
-        defaultValue: phaseActionType.all.key,
-        readOnly: true,
     },
     phaseTimer: {
         key: 'phaseTimer',

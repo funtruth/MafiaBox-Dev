@@ -10,12 +10,14 @@ import PickProject from './account/PickProject'
 import EditPlayerNum from './board/EditPlayerNum'
 import PatchItemOptions from './board/PatchItemOptions'
 import RoleItemOptions from './board/RoleItemOptions'
+import AddToRSSMap from './board/AddToRSSMap'
 
 import PageHistory from './page/PageHistory'
 import PageOptions from './page/PageOptions'
 
 import PickLogic from './logic/PickLogic';
 import PickOperator from './logic/PickOperator';
+import PickReturn from './logic/PickReturn'
 
 import CreateTag from './page/CreateTag'
 import EditUniqueTag from './page/EditUniqueTag'
@@ -28,6 +30,7 @@ import PickVar from './vars/PickVar'
 import PickVarSubfield from './vars/PickVarSubfield'
 import PickVarTags from './vars/PickVarTags';
 import PickVarWithType from './vars/PickVarWithType';
+import PickConstWithType from './vars/PickConstWithType';
 import PickComparison from './vars/PickComparison'
 import ReplaceWildcard from './vars/ReplaceWildcard'
 import PickGlobalVar from './vars/PickGlobalVar'
@@ -41,6 +44,7 @@ import PickRecipient from './strings/PickRecipient'
 
 //NumberViews
 import PickNumValue from './vars/PickNumValue';
+import PickVarType from './vars/PickVarType';
 
 export default function DropdownKeys(props) {
     switch(props.key) {
@@ -59,6 +63,8 @@ export default function DropdownKeys(props) {
             return <PatchItemOptions {...props}/>
         case dropdownType.roleItemOptions:
             return <RoleItemOptions {...props}/>
+        case dropdownType.addToRSSMap:
+            return <AddToRSSMap {...props}/>
 
         case dropdownType.pageHistory:
             return <PageHistory {...props}/>
@@ -69,6 +75,8 @@ export default function DropdownKeys(props) {
             return <PickLogic {...props}/>
         case dropdownType.pickOperator:
             return <PickOperator {...props}/>
+        case dropdownType.pickReturn:
+            return <PickReturn {...props}/>
 
         case dropdownType.createTag:
             return <CreateTag {...props}/>
@@ -85,12 +93,16 @@ export default function DropdownKeys(props) {
         
         case dropdownType.pickVar:
             return <PickVar {...props}/>
+        case dropdownType.pickVarType:
+            return <PickVarType {...props}/>
         case dropdownType.pickVarSubfield:
             return <PickVarSubfield {...props}/>
         case dropdownType.pickVarTags:
             return <PickVarTags {...props}/>
         case dropdownType.pickVarWithType:
             return <PickVarWithType {...props}/>
+        case dropdownType.pickConstWithType:
+            return <PickConstWithType {...props}/>
         case dropdownType.pickComparison:
             return <PickComparison {...props}/>
         case dropdownType.replaceWildcard:

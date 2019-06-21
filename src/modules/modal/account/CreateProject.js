@@ -11,6 +11,7 @@ import {
     defaultFieldMap,
     defaultFieldRepo,
 } from '../../fields/defaults';
+import { rssMap } from '../../logic/defaults';
 
 import { switchToProject } from '../../firebase/FirebaseReducer'
 import { showModal } from '../ModalReducer'
@@ -45,6 +46,7 @@ export default function CreateProject(props) {
         let multiUpdate = {}
         multiUpdate[`dev/${projectKey}/fieldMap`] = defaultFieldMap
         multiUpdate[`dev/${projectKey}/fieldRepo`] = defaultFieldRepo
+        multiUpdate[`dev/${projectKey}/rssMap`] = rssMap
         multiUpdate[`userProjects/${uid}/${projectKey}`] = true
         multiUpdate[`projectUsers/${projectKey}`] = {
             key: projectKey,

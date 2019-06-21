@@ -108,7 +108,6 @@ export default function PickVarWithType(props){
             />
             <DropEmpty list={wildVars} text="no variables found"></DropEmpty>
             {variableTypes.map(renderType)}
-
         </>
     )
 }

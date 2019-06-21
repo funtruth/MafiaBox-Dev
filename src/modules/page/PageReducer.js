@@ -18,6 +18,7 @@ const initialState = {
     fieldRepo: {},
     fieldMap: {},
     globalVars: {},
+    rssMap: {},
 }
 
 export const VALID_PROPS = [
@@ -28,6 +29,7 @@ export const VALID_PROPS = [
     'fieldRepo',
     'fieldMap',
     'globalVars',
+    'rssMap',
 ]
 
 export const PROP_LISTENERS = {
@@ -38,6 +40,7 @@ export const PROP_LISTENERS = {
     fieldRepo: 'children',
     fieldMap: 'children',
     globalVars: 'children',
+    rssMap: 'value',
 }
 
 export const LISTENER_TYPE = {

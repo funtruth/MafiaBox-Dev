@@ -1,4 +1,4 @@
-import { rssMap } from '../common/defaults'
+import { useSelector } from 'react-redux'
 
 export const START_CHAR = '('
 export const END_CHAR = ')'
@@ -91,6 +91,7 @@ export function keyAsStr(k) {return `'${k}'`}
 
 //returns properties of prefix (foo)(bar) existing in rssMap
 export function getSubfields(prefix) {
+    const { rssMap } = useSelector(state => state.page)
     const parts = separateVar(prefix),
           fields = [];
           
@@ -120,6 +121,7 @@ export function getSubfields(prefix) {
 
 //get special dropdown for PickVarSubfield
 export function getSubfieldConfig(prefix) {
+    const { rssMap } = useSelector(state => state.page)
     const parts = separateVar(prefix);
           
     for (var key in rssMap) {

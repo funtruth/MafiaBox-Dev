@@ -4,7 +4,6 @@ import _ from 'lodash'
 import { operatorType } from '../../common/types'
 import { DEFAULT_LOGIC } from '../../common/defaults'
 
-import generatePushID from '../../common/generatePushID';
 import { generateLogic } from '../../logic/codetool';
 
 import {
@@ -12,7 +11,7 @@ import {
     DropTitle,
 } from '../components/Common';
 
-export default function PickOperator({
+export default function PickReturn({
     hoverKey: logicType,
     logicKey,
     slate,
@@ -20,14 +19,11 @@ export default function PickOperator({
     showDropdown,
     deleteVariables,
 }){
-    const { byIndex } = slate
-    
     //Operators have internal logic by default
     let handleSelect = (item) => {
         update({
             ...DEFAULT_LOGIC,
             key: logicKey,
-            byIndex: byIndex || [generatePushID('logic')],
             ...generateLogic(item.key),
             logicType,
             operatorType: item.key,
@@ -54,7 +50,7 @@ export default function PickOperator({
     const items = _.filter(operatorType, i => i.logic === logicType)
     return (
         <>
-            <DropTitle>operator types</DropTitle>
+            <DropTitle>return types</DropTitle>
             {items.map(renderItem)}
         </>
     )
