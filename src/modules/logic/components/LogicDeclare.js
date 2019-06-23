@@ -4,7 +4,7 @@ import _ from 'lodash'
 import {
     dropdownType,
     variableType,
-    operatorType,
+    logicType,
 } from '../../common/types'
 
 import LogicDeclareValue from './LogicDeclareValue'
@@ -24,8 +24,8 @@ export default function LogicDeclare({
     readOnly,
     path,
 }){
-    if (logicKey && (logicItem.operatorType === operatorType.forin.key)) {
-        return null;
+    if (logicKey && logicItem.logicType){
+        if (logicType[logicItem.logicType].hideDeclared) return null;
     }
 
     const renderItem = (item) => {

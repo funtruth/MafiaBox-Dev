@@ -42,7 +42,6 @@ export const dropdownType = {
     declarePanelVar: 'dropdownType/declare-panel-var',
 
     pickUpdateValue: 'dropdownType/pick-update-value',
-    pickTrigger: 'dropdownType/pick-trigger',
 
     pickGlobalVar: 'dropdownType/pick-global-var',
     pickRecipient: 'dropdownType/pick-recipient',

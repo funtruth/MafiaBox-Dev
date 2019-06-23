@@ -13,7 +13,6 @@ import {
 import {
     boolUpdateType,
     comparisonType,
-    healthUpdateType,
     logicType,
     logicDNDType,
     operatorType,
@@ -33,7 +32,6 @@ export {
     fieldType,
     fuseType,
     gameChoiceType,
-    healthUpdateType,
     logicType,
     logicDNDType,
     modalType,

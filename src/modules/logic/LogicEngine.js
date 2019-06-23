@@ -46,7 +46,7 @@ function parseVar(byVK, vK) {
     switch(parseBy) {
         case parseType.function:
         case parseType.operation:
-            return parseVar(byVK, value.left) + value.operator ? comparisonType[value.operator].code : " " + parseVar(byVK, value.right)
+            return parseVar(byVK, value.left) + (value.operator ? comparisonType[value.operator].code : " ") + parseVar(byVK, value.right)
         case parseType.number:
             return parseNumber(value.byId, value.source)
         case parseType.variable:

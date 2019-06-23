@@ -221,6 +221,48 @@ export function generateLogic(type) {
                     },
                 }
             }
+        case logicType.random.key:
+            i = generateIDs(4);
+            return {
+                source: i[0],
+                byId: {
+                    [i[0]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[0],
+                        parseBy: parseType.operation,
+                        display: comparisonType.assign.code,
+                        disabled: true,
+                        value: {
+                            ...LOGIC_ITEM_VAR_OPERATION,
+                            operator: comparisonType.assign.key,
+                            left: i[1],
+                            right: i[2],
+                        }
+                    },
+                    [i[1]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[1],
+                        parseBy: parseType.declare,
+                        variableTypes: [variableType.number.key],
+                    },
+                    [i[2]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[2],
+                        parseBy: parseType.wrapper,
+                        value: {
+                            left: "Math.floor(Math.random()*",
+                            right: ")+1",
+                            middle: i[3],
+                        },
+                    },
+                    [i[3]]: {
+                        ...LOGIC_ITEM_VAR,
+                        key: i[3],
+                        parseBy: parseType.number,
+                        variableTypes: [variableType.number.key],
+                    },
+                }
+            }
         case operatorType.if.key:
         case operatorType.elseif.key:
             i = generateIDs(4);

@@ -8,6 +8,7 @@ export const logicType = {
         icon: 'code-tags',
         color: 'violet',
         dropdown: dropdownType.pickOperator,
+        hideDeclared: true,
     },
     variable: {
         key: 'variable',
@@ -16,34 +17,42 @@ export const logicType = {
         icon: 'pen',
         color: 'violet',
     },
+    return: {
+        key: 'return',
+        index: 2,
+        title: 'return',
+        icon: 'page-next',
+        color: 'green',
+        dropdown: dropdownType.pickReturn,
+    },
     function: {
         key: 'function',
-        index: 2,
+        index: 3,
         title: 'function',
         icon: 'function-variant',
         color: 'fb',
     },
     update: {
         key: 'update',
-        index: 3,
+        index: 4,
         title: 'update',
         icon: 'code-braces',
         color: 'pink',
     },
     event: {
         key: 'event',
-        index: 4,
+        index: 5,
         title: 'event',
         icon: 'calendar',
         color: 'fb',
     },
-    return: {
-        key: 'return',
-        index: 5,
-        title: 'return',
-        icon: 'page-next',
-        color: 'green',
-        dropdown: dropdownType.pickReturn,
+    random: {
+        key: 'random',
+        index: 6,
+        title: 'random',
+        icon: 'dice-3',
+        color: 'orange',
+        hideDeclared: true,
     },
 }
 
@@ -89,17 +98,6 @@ export const operatorType = {
             right: ")",
         },
         icon: 'sync',
-        color: 'orange',
-        logic: logicType.operator.key,
-    },
-    random: {
-        key: 'random',
-        title: 'random',
-        value: {
-            left: "{",
-            right: "}",
-        },
-        icon: 'dice-3',
         color: 'orange',
         logic: logicType.operator.key,
     },
@@ -160,51 +158,6 @@ export const boolUpdateType = {
         index: 1,
         title: 'false',
         icon: 'close-box-outline',
-    },
-}
-
-export const healthUpdateType = {
-    attack1: {
-        key: 'attack1',
-        index: 0,
-        title: 'Basic Attack',
-        icon: 'sword',
-        code: () => '-1',
-    },
-    attack2: {
-        key: 'attack2',
-        index: 1,
-        title: 'Strong Attack',
-        icon: 'sword',
-        code: () => '-2',
-    },
-    attack3: {
-        key: 'attack3',
-        index: 2,
-        title: 'Superior Attack',
-        icon: 'sword',
-        code: () => '-100',
-    },
-    defend1: {
-        key: 'defend1',
-        index: 3,
-        title: 'Basic Defense',
-        icon: 'shield-half-full',
-        code: () => '1',
-    },
-    defend2: {
-        key: 'defend2',
-        index: 4,
-        title: 'Strong Defense',
-        icon: 'shield',
-        code: () => '2',
-    },
-    defend3: {
-        key: 'defend3',
-        index: 5,
-        title: 'Superior Defense',
-        icon: 'shield-plus',
-        code: () => '100',
     },
 }
 

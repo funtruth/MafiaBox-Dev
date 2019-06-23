@@ -39,7 +39,6 @@ import DeclareVarType from './vars/DeclareVarType'
 import DeclareVarName from './vars/DeclareVarName'
 import DeclarePanelVar from './vars/DeclarePanelVar'
 
-import PickTrigger from './update/PickTrigger';
 import PickRecipient from './strings/PickRecipient'
 
 //NumberViews
@@ -114,8 +113,6 @@ export default function DropdownKeys(props) {
         case dropdownType.declarePanelVar:
             return <DeclarePanelVar {...props}/>
 
-        case dropdownType.pickTrigger:
-            return <PickTrigger {...props}/>
         case dropdownType.pickGlobalVar:    
             return <PickGlobalVar {...props}/>
         case dropdownType.pickRecipient:

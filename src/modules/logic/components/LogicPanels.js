@@ -86,7 +86,7 @@ export default function LogicPanels(props) {
 
                 dispatch(updateGeneral({
                     path: [...varPath, 'value'],
-                    update: [...(typeof value === 'object' ? value : []), i[0]],
+                    update: [...(typeof value === 'object' ? _.filter(value) : []), i[0]],
                 }, {
                     path: repoPath,
                     update: {
@@ -201,7 +201,7 @@ export default function LogicPanels(props) {
                             </LogicButton>
                         </DropClick>
                     }
-                    {value && value.map(vK => (
+                    {value && value.filter(i => i).map(vK => (
                         <Row key={vK}>
                             <LogicPanels
                                 {...props}

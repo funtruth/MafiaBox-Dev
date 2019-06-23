@@ -42,22 +42,16 @@ export default function LogicView({ path }) {
 
     const runCode = () => {
         const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        console.time('eval test.')
         try {
-            const { rss, next } = _.cloneDeep(LOGIC_TESTS[1])
-            // eslint-disable-next-line
-            Function(`return ${code}`)()(rss, next, '123')
-            console.log('results', {rss, next})
-
-            for (var i=0; i<100; i++) {
-                const { rss, next } = _.cloneDeep(LOGIC_TESTS[1])
+            for (var i=2; i<22; i++) {
+                const { rss, next, expected } = _.cloneDeep(LOGIC_TESTS[i])
                 // eslint-disable-next-line
-                Function(`return ${code}`)()(rss, next, '123')
+                const returnValue = Function(`return ${code}`)()(rss, next, {})
+                if (returnValue !== expected) console.log("test failed.", {i, returnValue, expected})
             }
         } catch {
             console.log('error')
         }
-        console.timeEnd('eval test.')
     }
 
     const showCode = () => {
