@@ -261,5 +261,12 @@ export const LOGIC_TESTS = [
         index: 26,
         rss: {players: {'a':{},'b':{},'c':{},'d':{},'e':{},'f':{},'g':{},'h':{},'i':{}, 'j':{}}, gameState: {mission: 5}},
         expected: 5,
+    },
+    {
+        id: "starting game, random featured player test",
+        index: 32,
+        rss: {players:{'a':{},'b':{}}, choices:{'a':{value:"global-LhvjZfgTveYoY"},'b':{value:"global-LhvjZfgTveYoY"}}},
+        next: {update: {},time: 123},
+        expected: "",
     }
 ]

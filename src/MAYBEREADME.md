@@ -77,3 +77,16 @@
 - function
 - operation
 - update
+
+## Logic Library
+- more complex logic can be found below
+- [featureNextPlayer](./modules/logic/packets/featureNextPlayer.js)
+
+### Majority
+- (x - x%2)/2 + 1
+
+### Get random player
+- get playerCount
+- get random number from 1 - playerCount
+- set counter = 1, and target (undeclared uid)
+- loop through players while incrementing counter, if counter is equal to random number, set target to current player

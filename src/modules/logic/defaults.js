@@ -200,6 +200,14 @@ export const rssMap = {
             variableType.key.key,
         ],
     },
+    '(rss)(players)(@)(joinedAt)': {
+        key: '(rss)(players)(@)(joinedAt)',
+        value: '(rss)(players)(@)(joinedAt)',
+        display: 'rss.players.@.joinedAt',
+        variableTypes: [
+            variableType.time.key,
+        ],
+    },
     '(rss)(players)(@)(title)': {
         key: '(rss)(players)(@)(title)',
         value: '(rss)(players)(@)(title)',

@@ -101,6 +101,17 @@ export const operatorType = {
         color: 'orange',
         logic: logicType.operator.key,
     },
+    forof: {
+        key: 'forof',
+        title: 'for (array)',
+        value: {
+            left: "for(",
+            right: ")",
+        },
+        icon: 'sync',
+        color: 'orange',
+        logic: logicType.operator.key,
+    },
     boolean: {
         key: 'boolean',
         title: 'boolean',
@@ -207,6 +218,12 @@ export const variableType = {
         supertype: 'object',
         declarable: false,
     },
+    uidArr: {
+        key: 'uidArr',
+        title: 'Player List',
+        icon: 'code-brackets',
+        declarable: true,
+    },
     function: {
         key: 'function',
         title: 'Function',
@@ -233,7 +250,7 @@ export const variableType = {
         title: 'Timer',
         icon: 'timer-sand',
         supertype: '',
-        declarable: false,
+        declarable: true,
     }
 }
 
@@ -311,6 +328,15 @@ export const comparisonType = {
         icon: 'sync',
         variableTypes: [
             variableType.uidObject.key,
+        ]
+    },
+    of: {
+        key: 'of',
+        code: ' of ',
+        title: 'for loop',
+        icon: 'sync',
+        variableTypes: [
+            variableType.uidArr.key,
         ]
     },
     ":": {
