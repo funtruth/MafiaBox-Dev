@@ -80,12 +80,11 @@ export default function PickVarWithType(props){
                 return <Types.PickTypeGlobal key={type} {...props}/>
             case variableType.key.key:
                 return <Types.PickTypeKey key={type} {...props}/>
-            case variableType.uidArr.key:
-                return <Types.PickTypeUIDArr key={type} {...props}/>
+            case variableType.function.key:
+                return <Types.PickTypeFunction key={type} {...props}/>
             case variableType.string.key:
             case variableType.object.key:
             case variableType.uidObject.key:
-            case variableType.function.key:
             default:
                 return null;
         }

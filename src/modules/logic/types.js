@@ -101,14 +101,14 @@ export const operatorType = {
         color: 'orange',
         logic: logicType.operator.key,
     },
-    forof: {
-        key: 'forof',
-        title: 'for (array)',
+    while: {
+        key: 'while',
+        title: 'while',
         value: {
-            left: "for(",
+            left: "while(",
             right: ")",
         },
-        icon: 'sync',
+        icon: 'loop',
         color: 'orange',
         logic: logicType.operator.key,
     },
@@ -218,12 +218,6 @@ export const variableType = {
         supertype: 'object',
         declarable: false,
     },
-    uidArr: {
-        key: 'uidArr',
-        title: 'Player List',
-        icon: 'code-brackets',
-        declarable: true,
-    },
     function: {
         key: 'function',
         title: 'Function',
@@ -328,15 +322,6 @@ export const comparisonType = {
         icon: 'sync',
         variableTypes: [
             variableType.uidObject.key,
-        ]
-    },
-    of: {
-        key: 'of',
-        code: ' of ',
-        title: 'for loop',
-        icon: 'sync',
-        variableTypes: [
-            variableType.uidArr.key,
         ]
     },
     ":": {

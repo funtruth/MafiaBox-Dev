@@ -70,4 +70,4 @@ function next() {
 }
   
 next()
-console.log(players)
+console.log('single test results', players)

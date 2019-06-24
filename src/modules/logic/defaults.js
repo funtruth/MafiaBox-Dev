@@ -264,6 +264,14 @@ export const rssMap = {
             variableType.boolean.key,
         ],
     },
+    '(rss)(players)(@)(priority)': {
+        key: '(rss)(players)(@)(priority)',
+        value: '(rss)(players)(@)(priority)',
+        display: 'rss.players.@.priority',
+        variableTypes: [
+            variableType.number.key,
+        ],
+    },
     '(rss)(choices)': {
         key: '(rss)(choices)',
         value: '(rss)(choices)',

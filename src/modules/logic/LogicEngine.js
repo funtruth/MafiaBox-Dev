@@ -7,7 +7,7 @@ export function getCode(data) {
     if (!data) return '';
     const { byIndex, byId, vars } = data
     
-    return `(rss, next, choice)=>{${byIndex ? byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(""):''}}`
+    return `(rss,next,choice)=>{${byIndex ? byIndex.map(lK => parseLogic(byId, lK, vars)).filter(i => i).join(""):''}}`
 }
 
 //lK logicKey

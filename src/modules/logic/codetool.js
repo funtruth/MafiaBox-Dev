@@ -265,6 +265,7 @@ export function generateLogic(type) {
             }
         case operatorType.if.key:
         case operatorType.elseif.key:
+        case operatorType.while.key:
             i = generateIDs(4);
             return {
                 source: i[0],
@@ -342,48 +343,6 @@ export function generateLogic(type) {
                         key: i[3],
                         parseBy: parseType.variable,
                         variableTypes: [variableType.uidObject.key],
-                    },
-                }
-            }
-        case operatorType.forof.key:
-            i = generateIDs(4);
-            return {
-                source: i[0],
-                byId: {
-                    [i[0]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[0],
-                        parseBy: parseType.wrapper,
-                        value: {
-                            ...operatorType[type].value,
-                            middle: i[1],
-                        },
-                    },
-                    [i[1]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[1],
-                        parseBy: parseType.operation,
-                        disabled: true,
-                        display: comparisonType.of.code,
-                        value: {
-                            ...LOGIC_ITEM_VAR_OPERATION,
-                            operator: comparisonType.of.key,
-                            typingDisabled: true,
-                            left: i[2],
-                            right: i[3],
-                        }
-                    },
-                    [i[2]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[2],
-                        parseBy: parseType.declare,
-                        variableTypes: [variableType.uid.key],
-                    },
-                    [i[3]]: {
-                        ...LOGIC_ITEM_VAR,
-                        key: i[3],
-                        parseBy: parseType.variable,
-                        variableTypes: [variableType.uidArr.key],
                     },
                 }
             }
