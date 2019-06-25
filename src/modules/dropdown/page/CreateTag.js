@@ -25,6 +25,14 @@ export default function CreateTag({
         }, {
             path: [...path, 'defaultValue', newKey],
             update: false,
+        }, {
+            path: ['globalVars', newKey],
+            update: {
+                key: newKey,
+                value,
+                display: value,
+                title: value,
+            }
         })
         showDropdown();
     }

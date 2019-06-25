@@ -41,7 +41,7 @@ export default function AdminView(props) {
         const update = {
             key: modeKey,
             title: modeItem.title,
-            startPhase: modeItem.source.value,
+            gameState: _.mapValues(modeItem.gameState, i => i.value),
             roleSetup: modeItem.roleSetup,
             playerNum: modeItem.playerNum,
         }

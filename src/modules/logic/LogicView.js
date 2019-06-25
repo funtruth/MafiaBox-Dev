@@ -42,7 +42,7 @@ export default function LogicView({ path }) {
 
     const runCode = () => {
         const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        for (var i=32; i<33; i++) {
+        for (var i=33; i<35; i++) {
             const { rss, next } = _.cloneDeep(LOGIC_TESTS[i])
             console.log({rss, next})
             // eslint-disable-next-line

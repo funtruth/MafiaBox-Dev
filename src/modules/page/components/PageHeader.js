@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { navigate } from '../../app/NavReducer'
-import { publishFromState, updateGeneral } from '../PageReducer'
 import { showModal } from '../../modal/ModalReducer'
 
 import {
@@ -23,15 +22,7 @@ export default function PageHeader(props) {
     }
 
     const handlePublish = () => {
-        if (published) return;
-        dispatch(publishFromState('pageRepo', pageKey))
-        dispatch(updateGeneral({
-            path: ['pageRepo', pageKey, 'publishInfo'],
-            update: {
-                published: true,
-                publishedAt: Date.now(),
-            }
-        }))
+        console.warn('todo')
     }
 
     return (

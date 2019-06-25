@@ -115,8 +115,8 @@ export default function StringView({path, scopedVars}) {
                 [newKey]: {
                     ...LOGIC_ITEM_VAR,
                     key: newKey,
-                    value: item.key,
-                    display: item.key,
+                    value: item.value,
+                    display: item.display,
                     parseBy: parseType.variable,
                 },
             },

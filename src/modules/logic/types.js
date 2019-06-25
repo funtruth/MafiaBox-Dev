@@ -187,6 +187,7 @@ export const variableType = {
         icon: 'alpha-s-circle-outline',
         supertype: '',
         declarable: true,
+        parseBy: parseType.string,
     },
     boolean: {
         key: 'boolean',
@@ -245,6 +246,7 @@ export const variableType = {
         icon: 'timer-sand',
         supertype: '',
         declarable: true,
+        parseBy: parseType.variable,
     }
 }
 
@@ -271,6 +273,7 @@ export const comparisonType = {
         showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
+            variableType.time.key,
         ],
     },
     greaterThanOrEqualTo: {
@@ -281,6 +284,7 @@ export const comparisonType = {
         showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
+            variableType.time.key,
         ],
     },
     lessThan: {
@@ -291,6 +295,7 @@ export const comparisonType = {
         showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
+            variableType.time.key,
         ],
     },
     lessThanOrEqualTo: {
@@ -301,6 +306,7 @@ export const comparisonType = {
         showInPickComparison: true,
         variableTypes: [
             variableType.number.key,
+            variableType.time.key,
         ],
     },
     exists: {

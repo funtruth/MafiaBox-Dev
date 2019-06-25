@@ -335,32 +335,6 @@ export function updateGeneral(...updates) {
     }
 }
 
-/*promise handler for writes
-const write = (path, value) => new Promise(resolve => {
-    //https://stackoverflow.com/questions/41533993/cleancode-try-catch-in-promise
-})*/
-
-//publishes an item from redux state
-export function publishFromState(stateKey, itemKey) {
-    return (dispatch, getState) => {
-        const { page } = getState()
-        const { activeProject } = getState().firebase 
-
-        if (!page[stateKey] || !page[stateKey][itemKey]) {
-            console.warn('invalid publish.')
-            return;
-        }
-
-        let pathToRepo = `games/${activeProject}/${stateKey}/${itemKey}`;
-
-        try {
-            firebase.database().ref(pathToRepo).update(page[stateKey][itemKey])
-        } catch {
-            console.log('there was an error updating to Firebase', {update: page[stateKey][itemKey]})
-        }
-    }
-}
-
 //intercepts redux action/payload and checks diffs to properly update firebase
 //dispatches the action/payload
 export function receiveAction({type, payload}) {

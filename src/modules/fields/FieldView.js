@@ -1,4 +1,5 @@
 import React from 'react'
+import _ from 'lodash'
 import './field.css'
 import { useSelector } from 'react-redux';
 
@@ -63,7 +64,7 @@ export default function FieldView(props) {
         }
     }
     
-    const fields = fieldMap[slate.board] || []
+    const fields = _.filter(fieldMap[slate.board])
     return (
         <>
             {fields.map((field, index) => {

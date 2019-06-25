@@ -1,12 +1,6 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 
 import { dropdownType } from '../../common/types'
-
-import {
-    publishFromState,
-    updateGeneral,
-} from '../../page/PageReducer'
 
 import {
     DropClick,
@@ -16,8 +10,6 @@ import {
 } from '../../components/Common';
 
 export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
-    const dispatch = useDispatch();
-
     const { title, playerNum } = slate
     const { min, max } = playerNum || {}
 
@@ -26,14 +18,7 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
     }
 
     const handlePublish = () => {
-        dispatch(publishFromState('pageRepo', slate.key))
-        dispatch(updateGeneral({
-            path: [...path, 'publishInfo'],
-                update: {
-                published: true,
-                publishedAt: Date.now(),
-            }
-        }))
+        console.warn("TODO")
     }
 
     return (

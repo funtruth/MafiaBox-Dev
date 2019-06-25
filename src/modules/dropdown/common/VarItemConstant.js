@@ -24,7 +24,7 @@ export default function VarItemConstant({
             ...LOGIC_ITEM_VAR,
             display: value,
             parseBy: parseType.constant,
-            value,
+            value: parseInt(value),
             variableTypes: [variableType.number.key],
         })
         showDropdown();

@@ -268,5 +268,17 @@ export const LOGIC_TESTS = [
         rss: {players:{'a':{},'b':{}}, choices:{'a':{value:"global-LhvjZfgTveYoY"},'b':{value:"global-LhvjZfgTveYoY"}}},
         next: {update: {},time: 123},
         expected: "",
+    },
+    {
+        id: "morning phase tests(1)",
+        index: 33,
+        rss: {players:{'a': {featured: false, joinedAt: 1}, 'b':{featured: true, joinedAt: 2}}, choices:{'a':{user:'a'},'b':{user:'b', multi: {'a': true, 'b': true}}}},
+        next: {update: {}, time: 123},
+    },
+    {
+        id: "morning phase tests(2)",
+        index: 34,
+        rss: {players:{'a': {featured: false, joinedAt: 1}, 'b':{featured: true, joinedAt: 2}}, choices:{'a':{user:''},'b':{user:'', multi: {'a': true, 'b': true}}}},
+        next: {update: {}, time: 123},
     }
 ]

@@ -1,8 +1,17 @@
+# Welcome!
+- Tattle.gg is a mobile party game platform looking to revolutionize the game library, accessibility, and gaming experience, as people who crave new content or ways to play.
+- Games on our platform are built through intuitive drag and drop interfaces, to encourage game development based on creativity, not our technical backgrounds. Our vision is to enable a community of users that not only love board games, but want to share more of these moments with friends.
+- We will be launching our closed beta on July 27th to test the game engine, and collect feedback for the overall user experience. We are currently looking for regular board gamers who can meet in groups of 5-10 people and are excited about re-inventing the experience!
+
 # Activity log
 - better commit descriptions
 - [Useful dev notes](./src/MAYBEREADME.md)
 
 ## WIP
+- [x] Avalon core game
+- [ ] Mafia core game
+- [ ] Beta key limitations on website
+- [ ] desktop view for website
 
 ## Backlog
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
