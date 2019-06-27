@@ -74,8 +74,12 @@ export default function AdminView(props) {
                     let choiceClone = _.cloneDeep(pageItem[field])
                     update[field] = pageItem[field]
                     for (var choice in choiceClone) {
-                        if (!choiceClone[choice] || !choiceClone[choice].logic) continue
-                        update[field][choice].logic = getCode(choiceClone[choice].logic)
+                        if (!choiceClone[choice]) continue
+                        for (var property in choiceClone[choice]) {
+                            if (choiceClone[choice][property].byId && choiceClone[choice][property].byIndex) {
+                                update[field][choice][property] = getCode(choiceClone[choice][property])
+                            }
+                        }
                     }
                     break
                 default:

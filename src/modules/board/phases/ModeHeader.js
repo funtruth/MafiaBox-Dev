@@ -40,7 +40,7 @@ export default function ModeHeader({ slate, modeKey, path, tab, setTab }) {
             <Tag
                 bg={tab === 0 ? 'violet' : 'charcoal'}
                 icon="sitemap"
-                text="Phases"
+                text="Initial Game State"
                 onClick={() => setTab(0)}
             />
             <DropClick

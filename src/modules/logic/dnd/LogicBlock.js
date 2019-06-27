@@ -9,7 +9,6 @@ import LogicItem from './LogicItem'
 import LogicItemDrop from './LogicItemDrop'
 import LogicAddBelow from '../components/LogicAddBelow'
 import LogicDeclare from '../components/LogicDeclare';
-import LogicUpdateThrottle from '../components/LogicUpdateThrottle';
 
 export default function LogicBlock(props) {
     const { index, logicRepo, logicMap, logicKey, parentKey, path, scope } = props
@@ -59,7 +58,6 @@ export default function LogicBlock(props) {
                         <LogicAddBelow onClick={handleAddBelow}/>
                         <LogicDeclare {...props} logicItem={logicItem}/>
                     </Row>
-                    <LogicUpdateThrottle logicItem={logicItem}/>
                 </div>
             }
             {byIndex &&

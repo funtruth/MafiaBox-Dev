@@ -8,10 +8,7 @@
 - [Useful dev notes](./src/MAYBEREADME.md)
 
 ## WIP
-- [x] Avalon core game
 - [ ] Mafia core game
-- [ ] Beta key limitations on website
-- [ ] desktop view for website
 
 ## Backlog
 - [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
@@ -19,6 +16,12 @@
 ## Low Priority
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
+
+## 06/25/2019
+### Major
+- [x] Avalon core game
+- [x] Beta key limitations on website
+- [x] desktop view for website
 
 ## 06/21/2019
 ### Major
