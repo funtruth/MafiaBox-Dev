@@ -1,13 +1,17 @@
 import TattleOn_Classic_test from './TattleOn_Classic/TattleOn_Classic'
 
 export default async () => {
-    const errors = [];
+    const results = {
+        errors: [],
+        byId: {},
+    }
     
-    await TattleOn_Classic_test(errors);
+    await TattleOn_Classic_test(results);
 
-    if (errors.length === 0) {
-        console.log('all tests passed!')
+    if (results.errors.length === 0) {
+        console.log('all tests passed!', {tests: results.byId})
     } else {
-        errors.forEach(error => console.warn(error))
+        console.log('some tests failed.', {tests: results.byId})
+        results.errors.forEach(error => console.warn(error))
     }
 }

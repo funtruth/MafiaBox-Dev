@@ -65,10 +65,23 @@ const validate = (qty, params) => {
     return true
 }
 
-export default ({qty, playerParams = [], choiceParams = []}) => {
+export function generateString(n, m = 0) {
+    var foo = [];
+
+    if (!n) return foo;
+
+    for (var i=m; i<n+m; i++) {
+        foo.push('player-' + UIDS.charAt(i));
+    }
+    
+    return foo.join(' , ')
+}
+
+export function generateRSS({qty, playerParams = [], choiceParams = [], gameState = {}}) {
     let rss = {
         players: {},
-        choices: {}
+        choices: {},
+        gameState,
     }
 
     if (qty > UIDS.length) {
@@ -98,13 +111,15 @@ export default ({qty, playerParams = [], choiceParams = []}) => {
             multi: "",
         }
 
-        playerParams.forEach(param => {
+        for (var j=0; j<playerParams.length; j++) {
+            const param = playerParams[j]
             if (param.x.indexOf(i) !== -1) {
                 rss.players[uid][param.p] = param.v
             }
-        })
+        }
         
-        choiceParams.forEach(param => {
+        for (j=0; j<choiceParams.length; j++) {
+            const param = choiceParams[j]
             if (param.x.indexOf(i) !== -1) {
                 if (param.p === 'user') {
                     rss.choices[uid][param.p] = uid
@@ -112,7 +127,7 @@ export default ({qty, playerParams = [], choiceParams = []}) => {
                     rss.choices[uid][param.p] = param.v
                 }
             }
-        })
+        }
     }
 
     return rss
