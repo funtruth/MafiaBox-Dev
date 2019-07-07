@@ -115,5 +115,5 @@ export function parseString({byId, byIndex}) {
         }
     })
 
-    return '`' + parts.join(" ") + '`'
+    return '`' + parts.join("") + '`'
 }

@@ -7,6 +7,8 @@ import night_tests from './phases/Night'
 import assassinate_tests from './phases/Assassinate'
 
 import thug_tests from './roles/Thug'
+import prince_tests from './roles/Prince'
+import sheriff_tests from './roles/Sheriff'
 
 const PROJECT = 'project-LhvjJuQsu86vO'
 const MODE = 'modes-Lhw9BoPhZ0csT'
@@ -26,6 +28,8 @@ async function run_tests(results) {
     assassinate_tests({ss, results});
 
     thug_tests({ss, results});
+    prince_tests({ss, results});
+    sheriff_tests({ss, results});
 }
 
 export default run_tests

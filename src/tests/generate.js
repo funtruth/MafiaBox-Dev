@@ -74,7 +74,7 @@ export function generateString(n, m = 0) {
         foo.push('player-' + UIDS.charAt(i));
     }
     
-    return foo.join(' , ')
+    return foo.join(', ')
 }
 
 export function generateRSS({qty, playerParams = [], choiceParams = [], gameState = {}}) {
