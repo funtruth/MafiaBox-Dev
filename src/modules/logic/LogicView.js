@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import './logic.css'
 
 import { DEFAULT_LOGIC } from '../common/defaults';
-import { LOGIC_TESTS } from '../testhub/tests';
 import { modalType } from '../common/types';
 
 import { usePath } from '../hooks/Hooks';
@@ -38,17 +37,6 @@ export default function LogicView({ path }) {
 
     const pasteCode = () => {
         dispatch(updateGeneral({path, update: clipboard}))
-    }
-
-    const runCode = () => {
-        const code = getCode({byId: logicRepo, byIndex: logicMap, vars})
-        for (var i=33; i<35; i++) {
-            const { rss, next } = _.cloneDeep(LOGIC_TESTS[i])
-            console.log({rss, next})
-            // eslint-disable-next-line
-            Function(`return ${code}`)()(rss, next)
-            console.log("test results.", {rss, next})
-        }
     }
 
     const showCode = () => {
@@ -198,11 +186,6 @@ export default function LogicView({ path }) {
                     icon="content-copy"
                     text="copy"
                     onClick={copyCode}
-                />
-                <Tag
-                    icon="console-line"
-                    text="run code in console"
-                    onClick={runCode}
                 />
                 <Tag
                     icon="code-tags"

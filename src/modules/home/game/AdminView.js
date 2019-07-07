@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { Body, Tag, Row, Input } from '../../components/Common'
 import { getCode } from '../../logic/LogicEngine';
+import runAllTests from '../../../tests/tests'
 import { fieldType } from '../../fields/types';
 
 export default function AdminView(props) {
@@ -103,6 +104,10 @@ export default function AdminView(props) {
             console.log("there was an error", {path, url})
         }
     }
+
+    const deleteUsers = () => {
+        firebase.auth().listUsers(20, results => console.log({results}))
+    }
     
     return(
         <Body x="l" sizes={['s', 'xs']}>
@@ -116,6 +121,12 @@ export default function AdminView(props) {
                 icon="auto-fix"
                 text="Publish project"
                 onClick={publishProject}
+                bg="darkpurple"
+            />
+            <Tag
+                icon="auto-fix"
+                text="Run all tests"
+                onClick={runAllTests}
                 bg="darkpurple"
             />
             <Row>
@@ -183,6 +194,10 @@ export default function AdminView(props) {
                 theme="tag"
                 onSubmit={publishImage}
                 type="text"
+            />
+            <Tag
+                text="delete users"
+                onClick={deleteUsers}
             />
         </Body>
     )
