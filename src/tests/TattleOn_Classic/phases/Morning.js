@@ -9,6 +9,44 @@ export default (({ss, results}) => {
     const { min, max } = ss.playerNum
     const info = ss.pageRepo[PAGE]
 
+    //description tests
+
+    resolveTest({
+        key: PAGE,
+        testId: 'TattleOn.Classic.Morning: description',
+        qty: 5,
+        playerParams: [
+            {x: [0], p: GLOBAL_FEATURED, v: true},
+        ],
+        gameState: {
+            mission: 1,
+            failedMissions: 2,
+            veto: 0
+        },
+        logic: info.description,
+        expectedReturn: `Leader: player-a\nMission: 1\nFailed Missions: 2\nRejected Teams: 0`,
+        results
+    })
+    
+    resolveTest({
+        key: PAGE,
+        testId: 'TattleOn.Classic.Morning: description',
+        qty: 7,
+        playerParams: [
+            {x: [0], p: GLOBAL_FEATURED, v: true},
+        ],
+        gameState: {
+            mission: 4,
+            failedMissions: 2,
+            veto: 0
+        },
+        logic: info.description,
+        expectedReturn: `Leader: player-a\nMission: 4\nFailed Missions: 2\nRejected Teams: 0\nThis mission needs `,
+        results
+    })
+
+    //listener tests
+
     resolveTest({
         key: PAGE,
         testId: 'TattleOn.Classic.Morning: pick_team',
@@ -82,7 +120,7 @@ export default (({ss, results}) => {
                         'events/0': {
                             showTo: {},
                             hideFrom: {},
-                            message: "The current leader was forced to skip their turn by a majority vote."
+                            message: "The current leader was forced to skip their turn by popular vote."
                         }
                     },
                     time: 1

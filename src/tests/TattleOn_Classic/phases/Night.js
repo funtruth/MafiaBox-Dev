@@ -52,7 +52,7 @@ export default (({ss, results}) => {
                     'events/0': {
                         showTo: {},
                         hideFrom: {},
-                        message: `The town was guarded safely last night!`
+                        message: `The town was guarded safely last night! 0 member(s) failed to protect the town.`
                     }
                 },
                 time: 1
@@ -86,7 +86,7 @@ export default (({ss, results}) => {
                     'events/0': {
                         showTo: {},
                         hideFrom: {},
-                        message: `The town was not guarded last night. 2 members failed to protect the town.`
+                        message: `The town was not guarded last night. 2 member(s) failed to protect the town.`
                     }
                 },
                 time: 1

@@ -1,6 +1,7 @@
 import { fillArrWithIncrInt, majority } from "../../telpers";
 import resolveTest from '../../resolveTest'
 import { GLOBAL_AGREE, GLOBAL_DISAGREE, VOTING, NIGHT, MORNING, GLOBAL_ON_TEAM } from "../Constants";
+import { generateString } from "../../generate";
 
 export default (({ss, results}) => {
     const PAGE = VOTING
@@ -8,6 +9,22 @@ export default (({ss, results}) => {
 
     const { min, max } = ss.playerNum
     const info = ss.pageRepo[PAGE]
+
+    //description tests
+
+    resolveTest({
+        key: PAGE,
+        testId: 'TattleOn.Classic.Voting: description',
+        qty: 5,
+        playerParams: [
+            {x: fillArrWithIncrInt(2), p: GLOBAL_ON_TEAM, v: true},
+        ],
+        logic: info.description,
+        expectedReturn: `The leader has chosen ${generateString(2)} to guard the town.`,
+        results
+    })
+
+    //listener tests
 
     for (var i=min; i<=max; i++) {
         for (var j=0; j<i; j++) {
@@ -34,7 +51,29 @@ export default (({ss, results}) => {
         
         const mjty = majority(i)
 
-        //TODO need to add message
+        resolveTest({
+            key: PAGE,
+            testId: 'TattleOn.Classic.Voting: continue_to_night_full_agreement',
+            qty: i,
+            choiceParams: [
+                {x: fillArrWithIncrInt(i), p: 'user'},
+                {x: fillArrWithIncrInt(i), p: 'value', v: GLOBAL_AGREE},
+            ],
+            logic: info.phaseListener,
+            expectedNext: {
+                update: {
+                    'gameState/phase': NIGHT,
+                    'events/0': {
+                        showTo: {},
+                        hideFrom: {},
+                        message: `Nobody voted against the team.`
+                    }
+                },
+                time: 1
+            },
+            results
+        })
+
         resolveTest({
             key: PAGE,
             testId: 'TattleOn.Classic.Voting: continue_to_night',
@@ -48,14 +87,18 @@ export default (({ss, results}) => {
             logic: info.phaseListener,
             expectedNext: {
                 update: {
-                    'gameState/phase': NIGHT
+                    'gameState/phase': NIGHT,
+                    'events/0': {
+                        showTo: {},
+                        hideFrom: {},
+                        message: `The players ${generateString(i - mjty, mjty)} voted against the team.`
+                    }
                 },
-                time: 0
+                time: 1
             },
             results
         })
         
-        //TODO need to add message
         resolveTest({
             key: PAGE,
             testId: 'TattleOn.Classic.Voting: back_to_morning',
@@ -78,9 +121,14 @@ export default (({ss, results}) => {
                     'gameState/phase': MORNING,
                     'gameState/veto': 1,
                     [`players/a/${GLOBAL_ON_TEAM}`]: false,
-                    [`players/b/${GLOBAL_ON_TEAM}`]: false
+                    [`players/b/${GLOBAL_ON_TEAM}`]: false,
+                    'events/0': {
+                        showTo: {},
+                        hideFrom: {},
+                        message: `The players ${generateString(i - 1, 1)} voted against the team.`
+                    }
                 },
-                time: 0
+                time: 1
             },
             results
         })
