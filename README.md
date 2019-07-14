@@ -1,30 +1,23 @@
-# Welcome!
-tattle.gg
-
-Tattle.GG is a new board game platform looking to revolutionize the local gaming experience. Popular board games, such as Mafia and Avalon, are arriving directly to the smartphone to play on the go, via internet connection and a basic browser. Anyone can have immediate access to all of our games without downloading an app, no strings attached.
-
-What else makes us unique?
-
-Compared to traditional board games, our games go further in both quality and replayability. Our platform allow users to experience new content through patches and expansions without having to deal with extra costs. Tattle will soon support player-made content in a drag-and-drop environment, which means designing game modes, roles, and rules will be available to anyone that wants to get creative!
-
-We are launching the CLOSED BETA version of our application to test the game engine and collect general feedback.
-
-We are currently looking for regular gamers who meet in groups of 5-10, and want to be pioneers in re-inventing board game experiences. If you are interested in a BETA key, send me a message or email me at mike5_17@hotmail.com, and I will contact you as soon as I can! For those that simply want to take a look, simply use the room code TATTLE :)
-
 # Activity log
 - better commit descriptions
 - [Useful dev notes](./src/MAYBEREADME.md)
 
 ## WIP
-- [ ] Mafia core game
-- [ ] email/sign-up on website
+- [ ] Avalon lady of the lake, blitz, resistance
 
 ## Backlog
-- [ ] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work?
+- [ ] email/sign-up on website
+- [ ] board handling, thinking of implementing a room.board:[] property
+- [ ] deck handling, thinking of implementing a room.deck:[] property that stores pageKeys. This allows for phases, roles, and events to be drawn from a deck. Would need to add a new logic field "onDrawn"
 
 ## Low Priority
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
+- [ ] string edits cannot start with a variable
 - [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
+
+## 07/13/2019
+- [x] Mafia core game
+- [x] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work? IMPLEMENTATION: just parsed string, seems to work decently so won't change it for now.
 
 ## 07/06/2019
 ### Major
