@@ -16,10 +16,8 @@ async function run_tests(results) {
     if (!ss.pageRepo)  return results.errors.push('pageRepo not found.');
 
     preparation_test({ss, results});
-    /*;
-    lie_detector_tests({ss, results});
     night_tests({ss, results});
-    */
+    lie_detector_tests({ss, results});
 }
 
 export default run_tests

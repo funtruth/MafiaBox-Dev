@@ -3,21 +3,25 @@
 - [Useful dev notes](./src/MAYBEREADME.md)
 
 ## WIP
-- [ ] Avalon lady of the lake, blitz, resistance
+- [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
 
 ## Backlog
+- [ ] Mafia core game
 - [ ] email/sign-up on website
 - [ ] board handling, thinking of implementing a room.board:[] property
 - [ ] deck handling, thinking of implementing a room.deck:[] property that stores pageKeys. This allows for phases, roles, and events to be drawn from a deck. Would need to add a new logic field "onDrawn"
+- [ ] Avalon blitz
+- [ ] Avalon event based (deck)
 
 ## Low Priority
 - [ ] move eventEditor to a modal view to write better pseudo code. Currently not working well.
 - [ ] string edits cannot start with a variable
-- [ ] Game mode publishing, publish through pageRepo alone pretty much, use modes to publish relevant roles/phases/events. Need to automate this instead of the monstrosity that resides in [AdminView](./src/modules/home/game/AdminView.js)
 
-## 07/13/2019
-- [x] Mafia core game
-- [x] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work? IMPLEMENTATION: just parsed string, seems to work decently so won't change it for now.
+## 07/14/2019
+### Major
+- [x] Avalon core tested
+- [x] Avalon Lady of the Lake
+- [x] it's difficult to parse for phase changes, maybe I should create a marker that allows JSON.stringify to work? IMPLEMENTATION: just parsed string, seems to work decently so won't change it for now. IMPLEMENTATION 2: I realized that leftover logic still exists so now I am putting the logic through getCode and parsing for next.update.gameState.phase and finding the string. Can't go wrong with this.
 
 ## 07/06/2019
 ### Major

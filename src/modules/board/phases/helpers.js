@@ -1,35 +1,9 @@
 import _ from 'lodash'
+import { getCode } from '../../logic/LogicEngine'
 
-const PHASE_STRING  = '(rss)(gameState)(phase)'
-const START_STRING  = `"value":"`
-const END_STRING    = `"`
-
-//gets the phases of a mode & returns an array of all the phase transitions
-export function parsePhaseArrows(items, repo) {
-    const arrows = []
-    
-    for (var j=0; j<items.length; j++) {
-        const item = items[j]
-        const parts = JSON.stringify(item).split(PHASE_STRING)
-        
-        if (parts.length > 1) {
-            for (var i=1; i<parts.length; i++) {
-                const startIndex = parts[i].indexOf(START_STRING) + START_STRING.length
-                const endIndex = parts[i].substr(startIndex).indexOf(END_STRING)
-                const pageKey = parts[i].substr(startIndex, endIndex)
-
-                if (!repo[pageKey]) continue
-                
-                arrows.push({
-                    from: item,
-                    to: repo[pageKey],
-                })
-            }
-        } 
-    }
-    
-    return arrows
-}
+const PHASE_STRING  = 'next.update[`gameState/phase`]'
+const START_STRING  = `='`
+const END_STRING    = `'`
 
 //produce the array [min, min+1, ... max-1, max]
 export function minMaxArray({min, max}) {
@@ -87,7 +61,8 @@ export function getAllPhases({repo, phase, arr = []}) {
     const pageInfo = repo && repo[phase]
     if (!pageInfo) return allPhases
 
-    const results = parsePhaseListener(pageInfo.phaseListener)
+    const logicString = getCode(pageInfo.phaseListener)
+    const results = parsePhaseListener(logicString)
     let newResults = _.difference(results, arr)
     allPhases = allPhases.concat(newResults)
 
@@ -99,5 +74,20 @@ export function getAllPhases({repo, phase, arr = []}) {
         })
     }
 
+    console.log(phase + ' is connected to', results)
     return allPhases
+}
+
+// generate a list of all roles
+export function getAllRoles(roleSetup) {
+    let roles = []
+
+    for (var setup in roleSetup) {
+        if (!roleSetup[setup].roles) continue
+        for (var role in roleSetup[setup].roles) {
+            roles.push(role)
+        }
+    }
+
+    return _.uniq(roles)
 }

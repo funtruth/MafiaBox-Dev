@@ -20,6 +20,7 @@ export const GLOBAL_FAIL = "global-LhvsqqlHg8Wq_"
 
 //player properties
 export const GLOBAL_TEAM_EVIL = "tag-LiFa8MCzE5da2"
+export const GLOBAL_TEAM_TOWN = "tag-LiFa7uh-Iic0H"
 export const GLOBAL_FEATURED = "featured"
 export const GLOBAL_ON_TEAM = "tag-LhvmpZNdAzxhx"
 export const GLOBAL_FOOL = "tag-Lj8--KCWuQJpF"

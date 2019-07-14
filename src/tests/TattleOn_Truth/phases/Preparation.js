@@ -1,6 +1,6 @@
 import { fillArrWithIncrInt } from "../../telpers";
 import resolveTest from '../../resolveTest'
-import { PREPARATION, MORNING, GLOBAL_READY, GLOBAL_INVESTIGATOR } from "../Constants";
+import { PREPARATION, MORNING, GLOBAL_READY, GLOBAL_INVESTIGATOR, GLOBAL_IMMUNE_TO_INVEST } from "../Constants";
 
 export default (({ss, results}) => {
     const PAGE = PREPARATION
@@ -41,6 +41,7 @@ export default (({ss, results}) => {
                 update: {
                     'gameState/phase': MORNING,
                     [`players/a/${GLOBAL_INVESTIGATOR}`]: true,
+                    [`players/a/${GLOBAL_IMMUNE_TO_INVEST}`]: true,
                     'players/a/featured': false,
                     'players/b/featured': true
                 },

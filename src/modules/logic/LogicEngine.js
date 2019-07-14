@@ -32,7 +32,7 @@ function parseLogic(byLK, lK, vars) {
 }
 
 //vK varKey
-function parseVar(byVK, vK) {
+function parseVar(byVK, vK, isObject = false) {
     if (!vK) return ""
 
     const item = byVK[vK]
@@ -46,18 +46,18 @@ function parseVar(byVK, vK) {
     switch(parseBy) {
         case parseType.function:
         case parseType.operation:
-            return parseVar(byVK, value.left) + (value.operator ? comparisonType[value.operator].code : " ") + parseVar(byVK, value.right)
+            return parseVar(byVK, value.left, isObject) + (value.operator ? comparisonType[value.operator].code : " ") + parseVar(byVK, value.right)
         case parseType.number:
             return parseNumber(value.byId, value.source)
         case parseType.variable:
         case parseType.declare:
-            return parseJS(value)
+            return isObject ? '[' + parseJS(value) + ']' : parseJS(value)
         case parseType.wrapper:
             return value.left + parseVar(byVK, value.middle) + value.right
         case parseType.collection:
             return value ? value.map(cK => parseVar(byVK, cK)).join(";") + ";" : ""
         case parseType.object:
-            return value ? '{' + value.map(cK => parseVar(byVK, cK)).join(",") + '}' : "{}"
+            return value ? '{' + value.map(cK => parseVar(byVK, cK, true)).join(",") + '}' : "{}"
         case parseType.string:
             return parseString(value)
         case parseType.update:
