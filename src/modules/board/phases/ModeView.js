@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { usePath } from '../../hooks/Hooks';
 
 import ModeHeader from './ModeHeader';
+import ModeGeneralView from '../mode/ModeGeneralView';
 import ModeSetupView from './setup/ModeSetupView';
-import ModePhaseView from '../mode/ModePhaseView';
 
 export default function ModeView({match}) {
     const { pageKey } = match.params
@@ -22,7 +22,7 @@ export default function ModeView({match}) {
     return (
         <>
             <ModeHeader {...propsExt}/>
-            {tab === 0 && <ModePhaseView {...propsExt}/>}
+            {tab === 0 && <ModeGeneralView {...propsExt}/>}
             {tab === 1 && <ModeSetupView {...propsExt}/>}
         </>
     )

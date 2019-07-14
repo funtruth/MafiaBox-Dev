@@ -1,6 +1,7 @@
 import { fillArrWithIncrInt } from "../../telpers";
 import resolveTest from '../../resolveTest'
 import { MORNING, NIGHT, EVIL_WINS, ASSASSINATE, GLOBAL_SUCCESS, GLOBAL_FAIL, GLOBAL_ON_TEAM } from "../Constants";
+import { generateString } from "../../generate";
 
 export default (({ss, results}) => {
     const PAGE = NIGHT
@@ -8,6 +9,22 @@ export default (({ss, results}) => {
 
     const { min, max } = ss.playerNum
     const info = ss.pageRepo[PAGE]
+
+    //description tests
+
+    resolveTest({
+        key: PAGE,
+        testId: 'TattleOn.Classic.Night: description',
+        qty: 5,
+        playerParams: [
+            {x: fillArrWithIncrInt(2), p: GLOBAL_ON_TEAM, v: true},
+        ],
+        logic: info.description,
+        expectedReturn: ` ${generateString(2)} are guarding the town tonight.`,
+        results
+    })
+
+    //listener tests
 
     resolveTest({
         key: PAGE,
@@ -49,6 +66,7 @@ export default (({ss, results}) => {
                 update: {
                     'gameState/phase': MORNING,
                     'gameState/mission': 3,
+                    'gameState/veto': 0,
                     'events/0': {
                         showTo: {},
                         hideFrom: {},
@@ -83,6 +101,7 @@ export default (({ss, results}) => {
                     'gameState/phase': MORNING,
                     'gameState/mission': 3,
                     'gameState/failedMissions': 1,
+                    'gameState/veto': 0,
                     'events/0': {
                         showTo: {},
                         hideFrom: {},
@@ -97,7 +116,6 @@ export default (({ss, results}) => {
 
     //Edge cases
 
-    //TODO change message, needs to show if 1 fail
     resolveTest({
         key: PAGE,
         testId: 'TattleOn.Classic.Night: mission4_success',
@@ -120,6 +138,7 @@ export default (({ss, results}) => {
             update: {
                 'gameState/phase': MORNING,
                 'gameState/mission': 5,
+                'gameState/veto': 0,
                 'events/0': {
                     showTo: {},
                     hideFrom: {},

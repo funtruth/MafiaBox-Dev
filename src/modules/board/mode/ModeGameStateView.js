@@ -6,7 +6,7 @@ import { getSubfields, lastSubfield } from '../../logic/proptool';
 
 import { DropClick, Body, Tag, Text, Row, Icon } from '../../components/Common';
 
-export default function ModePhaseView({
+export default function ModeGameStateView({
     path,
     slate
 }){

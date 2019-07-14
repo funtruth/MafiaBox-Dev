@@ -24,7 +24,7 @@ export default (({ss, results}) => {
             veto: 0
         },
         logic: info.description,
-        expectedReturn: `Leader: player-a\nMission: 1\nFailed Missions: 2\nRejected Teams: 0`,
+        expectedReturn: `Leader: player-a\nMission: 1\nFailed Missions: 2\nRejected Teams: 0\n1 player must sabotage this mission for it to fail.`,
         results
     })
     
@@ -41,7 +41,7 @@ export default (({ss, results}) => {
             veto: 0
         },
         logic: info.description,
-        expectedReturn: `Leader: player-a\nMission: 4\nFailed Missions: 2\nRejected Teams: 0\nThis mission needs `,
+        expectedReturn: `Leader: player-a\nMission: 4\nFailed Missions: 2\nRejected Teams: 0\n2 players must sabotage this mission for it to fail.`,
         results
     })
 

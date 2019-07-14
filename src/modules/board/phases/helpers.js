@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const PHASE_STRING  = '(rss)(gameState)(phase)'
 const START_STRING  = `"value":"`
 const END_STRING    = `"`
@@ -54,4 +56,48 @@ export function countRoles(roles) {
         count += roles[key]
     }
     return count;
+}
+
+// looks for PHASE_STRING and returns an array of possible phases to transition to
+export function parsePhaseListener(listener) {
+    const phases = []
+
+    if (!listener) return phases
+
+    const parts = JSON.stringify(listener).split(PHASE_STRING)
+    
+    if (parts.length > 1) {
+        for (var i=1; i<parts.length; i++) {
+            const startIndex = parts[i].indexOf(START_STRING) + START_STRING.length
+            const endIndex = parts[i].substr(startIndex).indexOf(END_STRING)
+            const pageKey = parts[i].substr(startIndex, endIndex)
+            
+            phases.push(pageKey)
+        }
+    }
+
+    return _.uniq(phases)
+}
+
+// generate a map of all phases that can be reached FROM phase
+// does not include phases that can GO to phase
+export function getAllPhases({repo, phase, arr = []}) {
+    let allPhases = _.cloneDeep(arr)
+
+    const pageInfo = repo && repo[phase]
+    if (!pageInfo) return allPhases
+
+    const results = parsePhaseListener(pageInfo.phaseListener)
+    let newResults = _.difference(results, arr)
+    allPhases = allPhases.concat(newResults)
+
+    for (var i=0; i<newResults.length; i++) {
+        allPhases = getAllPhases({
+            repo,
+            phase: newResults[i],
+            arr: allPhases,
+        })
+    }
+
+    return allPhases
 }
